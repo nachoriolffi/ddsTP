@@ -1,8 +1,8 @@
 package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.validador.ValidadorDeContrasenia;
-import ar.edu.utn.frba.dds.validador.Validar10MilPeoresContrasenias;
-import ar.edu.utn.frba.dds.validador.ValidarLongitud;
+import ar.edu.utn.frba.dds.validador.FormaValidar10MilPeoresContrasenias;
+import ar.edu.utn.frba.dds.validador.FormaValidarLongitud;
 import org.junit.jupiter.api.Test;
 
 public class TestContrasenia {
@@ -10,10 +10,11 @@ public class TestContrasenia {
     @Test
     public void testContraseniaValida(){
         ValidadorDeContrasenia validador = new ValidadorDeContrasenia();
-        validador.agregarValidador(new ValidarLongitud());
-        validador.agregarValidador(new Validar10MilPeoresContrasenias());
+        validador.agregarValidador(new FormaValidarLongitud());
+        validador.agregarValidador(new FormaValidar10MilPeoresContrasenias());
 
-        assert validador.validarContrasenia("7824naufede");
+        Usuario pepe = new Usuario("pepe", "782jhg *+++jhg4e");
+        assert validador.validarContrasenia("782jhg *+++jhg4e",pepe);
 
     }
 

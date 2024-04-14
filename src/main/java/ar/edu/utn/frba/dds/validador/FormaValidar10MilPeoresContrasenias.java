@@ -1,14 +1,16 @@
 package ar.edu.utn.frba.dds.validador;
 
+import ar.edu.utn.frba.dds.Usuario;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Validar10MilPeoresContrasenias implements Validar{
+public class FormaValidar10MilPeoresContrasenias implements FormaValidar {
 
     private static final String path = "src/main/java/ar/edu/utn/frba/dds/10000Peores.txt";
 
-    public boolean validar(String contrasenia) {
+    public boolean validar(String contrasenia, Usuario usuario) {
         String workingDirectory = System.getProperty("user.dir");
         System.out.println("Working Directory = " + workingDirectory);
         System.out.println("WD + path = " + workingDirectory + path);
