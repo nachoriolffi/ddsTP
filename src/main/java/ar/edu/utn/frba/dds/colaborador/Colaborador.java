@@ -6,6 +6,7 @@ import ar.edu.utn.frba.dds.contacto.MedioDeComunicacion;
 import ar.edu.utn.frba.dds.cuestionario.CuestionarioRespondido;
 import ar.edu.utn.frba.dds.cuestionario.Respuesta;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -58,9 +59,9 @@ public class Colaborador {
     public void modificarColaborador(String nombre, String apellido, Date fechaDeNacimiento, CuestionarioRespondido cuestionarioRespondido, String razonSocial, String rubro, TipoPersona tipoPersona, Contacto contacto) {
         this.nombre = nombre;
         this.apellido = apellido;
-        this.medioDeComunicacion = medioDeComunicacion;
+        this.medioDeComunicacion = new ArrayList<MedioDeComunicacion>();
         this.fechaDeNacimiento = fechaDeNacimiento;
-        this.formaDeColaboracion = formaDeColaboracion;
+        this.formaDeColaboracion = new ArrayList<FormaDeColaboracion>();
         this.cuestionarioRespondido = cuestionarioRespondido;
         this.razonSocial = razonSocial;
         this.rubro = rubro;
