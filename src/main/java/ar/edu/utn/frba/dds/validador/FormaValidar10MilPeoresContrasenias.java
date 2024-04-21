@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.validador;
 
 import ar.edu.utn.frba.dds.Usuario;
-
+import resources.FormaValidar;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
