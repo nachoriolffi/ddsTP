@@ -1,17 +1,24 @@
 Justificaciones de diseño
 
-    Justificacion Colaboradores: decidimos crear una clase persona universal y dejar la distincion de "tipoPersona" a un enum, ya que 
-    en terminos de comportamiento son muy similares. Su metodo principal "colaborar", es el mismo 
-    para ambos casos, la unica diferencia esta en las formas de colaboracion.
+    Justificación Colaboradores: Decidimos crear una clase persona universal y dejar la distinción de "tipoPersona" a un enum, ya que en términos de comportamiento son muy similares.
+    Su método principal "colaborar", es el mismo para ambos casos; la única diferencia está en las formas de colaboración.
 
-    Justificacion formasDeColaboración: Pensamos que seria apropiado tener una clase por cada forma de colaborar,
-    dandoles un metodo en comun para poder aplicar polimorfismo. De esta forma estariamos aplicando el patron State, segun su 
-    formaDeColaborar(estado) cambia su colaboracion(comportamiento).
+    Justificación Formas de Colaboración: Pensamos que sería apropiado tener una clase por cada forma de colaborar, dándoles un método en común para poder aplicar polimorfismo.
+    De esta forma estaríamos aplicando el patrón State, según su forma de colaborar (estado) cambia su colaboración (comportamiento).
 
-    Justificacion Viandas: Decidimos crear una clase Vianda la cual no tendra comportamiento, solo guardara informacion importante.
+    Justificación Viandas: Decidimos crear una clase Vianda la cual no tendrá comportamiento, solo guardará información importante.
 
-    Justificacion PersonaVulnerable: Al igual que EN vianda, solo buscamos almacenar informacion importante, no agregamos comportamiento a la clase.
+    Justificación Persona Vulnerable: Al igual que en Vianda, solo buscamos almacenar información importante, no agregamos comportamiento a la clase.
 
-    Justificacion Heladera y Local: Decidimos implementar una clase PuntoEstrategico porque consdieramos que atributos como la direccion y coordenadas no eran propios de la heladera si no del local de donde pertenecen
-    En cuanto a la heladera, por ahora solo se encarga de agregarViandas.
-        
+    Justificación Heladera y Local: Decidimos implementar una clase que por ahora solo se encarga de agregar Viandas.
+    Estas heladeras serán instancias que guarden los locales para los cuales guardamos las heladeras que tiene dentro de una lista del tipo heladeras y la dirección del local.
+
+    Justificación Dirección y Coordenadas: Decidimos que sean clases separadas ya que una dirección asumimos que más adelante se puede expandir más en otras clases como Provincia, Localidad y demás.
+    Entonces, para no tener que estar usando la dirección con las coordenadas lo separamos para poder tener más GRANULARIDAD con los datos latitud y longitud en una clase aparte y sea más rápido para acceder.
+
+    Justificación Cuestionario: Para los cuestionarios hicimos varias clases para resolverlo, donde los cuestionarios contienen las preguntas que lo forman (pudiendo agregarlas, quitarlas o modificarlas).
+    Cada pregunta tiene sus opciones (en caso de que sea una pregunta de opción múltiple) y tiene el tipo de pregunta, pudiendo ser que la respuesta sea un bool, un string o de respuesta simple o múltiple.
+    Para las respuestas lo pensamos que cada respuesta debe contener las opciones elegidas y además de qué pregunta son estas opciones.
+
+    Justificación de Personas a Cargo en Persona Vulnerable: Decidimos separarlo para poder tener TRAZABILIDAD de cuando la persona vulnerable comienza o deja de tener personas a cargo, además decidimos que los datos cantidad también deberían ir en la clase RegistroPersonaACargo.
+
