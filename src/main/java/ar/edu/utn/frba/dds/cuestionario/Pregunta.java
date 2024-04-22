@@ -16,11 +16,11 @@ public class Pregunta {
 
         private Boolean esObligatoria;
 
-        private tipoPregunta tipoPregunta;
+        private TipoPregunta tipoPregunta;
 
-        public Pregunta( String nombre, List<Opcion> opciones, Boolean esObligatoria, tipoPregunta tipoPregunta) {
+        public Pregunta( String nombre, Boolean esObligatoria, TipoPregunta tipoPregunta) {
             this.nombre = nombre;
-            this.opciones = opciones;
+            this.opciones = new ArrayList<Opcion>();
             this.esObligatoria = esObligatoria;
             this.tipoPregunta = tipoPregunta;
         }

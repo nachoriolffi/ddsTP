@@ -1,5 +1,5 @@
 package ar.edu.utn.frba.dds.cuestionario;
 
-public enum tipoPregunta {
-    RESPUESTAUNICA, MULTIPLECHOICE, VERDADEROFALSO
+public enum TipoPregunta {
+    RESPUESTAUNICA, MULTIPLECHOICE, VERDADEROFALSO, STRING, FECHA
 }
