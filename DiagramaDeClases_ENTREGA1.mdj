@@ -4407,7 +4407,7 @@
 											"top": 746,
 											"width": 257.19775390625,
 											"height": 13,
-											"text": "+quitarPregunta(Prgunta pregunta): void",
+											"text": "+quitarPregunta(Pregunta pregunta): void",
 											"horizontalAlignment": 0
 										}
 									],
@@ -17912,8 +17912,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGO6EktkGmuFFM="
 									},
-									"name": "Prgunta pregunta",
-									"type": ""
+									"name": "Pregunta pregunta"
 								},
 								{
 									"_type": "UMLParameter",
@@ -19351,7 +19350,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGPArMO5XtsFrQ="
 							},
-							"name": "Gobernamental"
+							"name": "Gobernamental",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -19359,7 +19359,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGPArMO5XtsFrQ="
 							},
-							"name": "ONG"
+							"name": "ONG",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -19367,7 +19368,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGPArMO5XtsFrQ="
 							},
-							"name": "Empresa"
+							"name": "Empresa",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -19375,7 +19377,8 @@
 							"_parent": {
 								"$ref": "AAAAAAGPArMO5XtsFrQ="
 							},
-							"name": "Institucion"
+							"name": "Institucion",
+							"type": ""
 						}
 					]
 				},
