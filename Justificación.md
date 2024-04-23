@@ -27,3 +27,6 @@ Para las respuestas lo pensamos que cada respuesta debe contener las opciones el
 
 ### Justificación de Personas a Cargo en Persona Vulnerable
 Decidimos separarlo para poder tener TRAZABILIDAD de cuando la persona vulnerable comienza o deja de tener personas a cargo, además decidimos que los datos cantidad también deberían ir en la clase RegistroPersonaACargo.
+
+### Justificacion Adapter
+Decidimos usar el patron adapter para los medios de comunicacion para poder integrarlos con algun otro servicio a ver mas adelante. Para esto tambien definimos la clase mensaje que se toma como parametro en enviar mensaje para darle un foramato al mismo y ademas decimos quien es el destinatario que seria otro colaborador.
