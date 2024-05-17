@@ -19,6 +19,7 @@ import java.util.logging.SimpleFormatter;
 
 @Setter
 @Getter
+
 public class Colaborador {
     private String nombre;
 
