@@ -40,23 +40,26 @@ public class Colaborador {
 
     private Contacto contacto;
 
+    private TipoDocumento tipoDocumento;
+
+    private String numeroDocumento;
+
     public Colaborador( )
     {
         this.medioDeComunicacion = new ArrayList<MedioDeComunicacion>();
         this.formaDeColaboracion = new ArrayList<FormaDeColaboracion>();
     }
 
-    public Colaborador(String nombre, String apellido, Date fechaDeNacimiento, CuestionarioRespondido cuestionarioRespondido, String razonSocial, String rubro, TipoPersona tipoPersona, Contacto contacto) {
+    public Colaborador( TipoDocumento tipoDocumento,String numeroDocumento,String nombre, String apellido,String contacto) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.medioDeComunicacion = new ArrayList<MedioDeComunicacion>();
-        this.fechaDeNacimiento = fechaDeNacimiento;
         this.formaDeColaboracion = new ArrayList<FormaDeColaboracion>();
         this.cuestionarioRespondido = cuestionarioRespondido;
-        this.razonSocial = razonSocial;
-        this.rubro = rubro;
         this.tipoPersona = tipoPersona;
-        this.contacto = contacto;
+        this.contacto =new Contacto();
+        this.tipoDocumento = tipoDocumento;
+        this.numeroDocumento = numeroDocumento;
     }
 
 
