@@ -10,6 +10,10 @@ public class Contacto {
     @Getter
     private String descripcion;
 
+    public Contacto(String nombre, String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
     public Contacto() {
     }
 }

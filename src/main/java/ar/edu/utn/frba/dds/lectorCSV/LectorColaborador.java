@@ -29,8 +29,14 @@ public class LectorColaborador extends LectorDeCSV{
             String apellido = strings[3];
             String contacto = strings[4];
 
+            System.out.println("tipoDocumento: " + tipoDocumento);
+            System.out.println("numeroDocumento: " + numeroDocumento);
+            System.out.println("nombre: " + nombre);
+            System.out.println("apellido: " + apellido);
+            System.out.println("contacto: " + contacto);
+
             Colaborador colaborador = new Colaborador(tipoDocumento,numeroDocumento,nombre,apellido,null);
-            if (!esColaboradorCargado(numeroDocumento)) {
+            if (!esColaboradorCargado(numeroDocumento,tipoDocumento)) {
                 colaboradorLeido.add(colaborador);
             }
 
@@ -40,9 +46,9 @@ public class LectorColaborador extends LectorDeCSV{
 
     }
 
-    private boolean esColaboradorCargado(String numeroDocumento) {
+    private boolean esColaboradorCargado(String numeroDocumento, TipoDocumento tipoDocumento) {
         for (Colaborador colaborador : colaboradorLeido) {
-            if (colaborador.getNumeroDocumento().equals(numeroDocumento)) {
+            if (colaborador.getNumeroDocumento().equals(numeroDocumento) && colaborador.getTipoDocumento().equals(tipoDocumento)) {
                 return true;
             }
         }
