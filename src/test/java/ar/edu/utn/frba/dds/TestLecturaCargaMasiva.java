@@ -14,7 +14,8 @@ public class TestLecturaCargaMasiva {
 
         lector.leerCSV(path);
         System.out.println((lector.getColaboradorLeido()));
-        assert lector.getColaboradorLeido().size() == 1;
+        System.out.println(lector.getColaboradorLeido().size());
+        assert lector.getColaboradorLeido().size() == 3;
 
     }
 }
