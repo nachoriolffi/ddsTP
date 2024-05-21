@@ -1,10 +1,12 @@
 package ar.edu.utn.frba.dds.colaborador;
 
+import ar.edu.utn.frba.dds.Recomendaciones.API_RecomendacionHeladeras;
 import ar.edu.utn.frba.dds.colaborador.formas.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.contacto.Contacto;
 import ar.edu.utn.frba.dds.contacto.MedioDeComunicacion;
 import ar.edu.utn.frba.dds.cuestionario.CuestionarioRespondido;
-import ar.edu.utn.frba.dds.cuestionario.Respuesta;
+import ar.edu.utn.frba.dds.utils.Direccion;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +16,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.logging.SimpleFormatter;
 
 
 @Setter
@@ -22,91 +23,65 @@ import java.util.logging.SimpleFormatter;
 
 public class Colaborador {
     private String nombre;
-
     private String apellido;
-
-    private List<MedioDeComunicacion> medioDeComunicacion;
-
+    private List<MedioDeComunicacion> mediosDeComunicacion;
     private Date fechaDeNacimiento;
-
-    private List<FormaDeColaboracion> formaDeColaboracion;
-
+    private Direccion direccion;
+    private List<FormaDeColaboracion> formasDeColaboracion;
     private CuestionarioRespondido cuestionarioRespondido;
-
-    private String razonSocial;
-
+    private Integer razonSocial;
+    private TipoJuridisccion tipoJuridisccion;
     private String rubro;
-
     private TipoPersona tipoPersona;
-
     private Contacto contacto;
+    private API_RecomendacionHeladeras API_RecomendacionHeladeras;
+    private Integer puntosTotales;
 
-    private TipoDocumento tipoDocumento;
-
-    private String numeroDocumento;
-
-    public Colaborador( )
-    {
-        this.medioDeComunicacion = new ArrayList<MedioDeComunicacion>();
-        this.formaDeColaboracion = new ArrayList<FormaDeColaboracion>();
-    }
-
-    public Colaborador( TipoDocumento tipoDocumento,String numeroDocumento,String nombre, String apellido,String contacto) {
+    public Colaborador(String nombre, String apellido, List<MedioDeComunicacion> mediosDeComunicacion, List<FormaDeColaboracion> formasDeColaboracion, CuestionarioRespondido cuestionarioRespondido, TipoPersona tipoPersona, Contacto contacto) {
         this.nombre = nombre;
         this.apellido = apellido;
-        this.medioDeComunicacion = new ArrayList<MedioDeComunicacion>();
-        this.formaDeColaboracion = new ArrayList<FormaDeColaboracion>();
+        this.mediosDeComunicacion = mediosDeComunicacion;
+        this.formasDeColaboracion = formasDeColaboracion;
         this.cuestionarioRespondido = cuestionarioRespondido;
         this.tipoPersona = tipoPersona;
-        this.contacto =new Contacto();
-        this.tipoDocumento = tipoDocumento;
-        this.numeroDocumento = numeroDocumento;
+        this.contacto = contacto;
+        this.mediosDeComunicacion = new ArrayList<>();
+        this.formasDeColaboracion = new ArrayList<>();
     }
 
-
-
-
     public void agregarMedioDeComunicacion(MedioDeComunicacion medioDeComunicacion) {
-        this.medioDeComunicacion.add(medioDeComunicacion);
+        this.mediosDeComunicacion.add(medioDeComunicacion);
     }
 
     public void agregarFormaDeColaboracion(FormaDeColaboracion formaDeColaboracion) {
-        this.formaDeColaboracion.add(formaDeColaboracion);
+        this.formasDeColaboracion.add(formaDeColaboracion);
     }
 
-    public void modificarColaborador(String nombre, String apellido, Date fechaDeNacimiento, CuestionarioRespondido cuestionarioRespondido, String razonSocial, String rubro, TipoPersona tipoPersona, Contacto contacto) {
+    public void modificarColaborador(String nombre, String apellido, Date fechaDeNacimiento, CuestionarioRespondido cuestionarioRespondido, Integer razonSocial, String rubro, TipoPersona tipoPersona, Contacto contacto) {
         this.nombre = nombre;
         this.apellido = apellido;
-        this.medioDeComunicacion = new ArrayList<MedioDeComunicacion>();
+        this.mediosDeComunicacion = new ArrayList<>();
         this.fechaDeNacimiento = fechaDeNacimiento;
-        this.formaDeColaboracion = new ArrayList<FormaDeColaboracion>();
+        this.formasDeColaboracion = new ArrayList<>();
         this.cuestionarioRespondido = cuestionarioRespondido;
         this.razonSocial = razonSocial;
         this.rubro = rubro;
         this.tipoPersona = tipoPersona;
         this.contacto = contacto;
     }
-
-
+    
     public void cargarRespuestas(CuestionarioRespondido cuestionarioRespondido) {
         for (int i = 0; i < cuestionarioRespondido.getRespuestas().size(); i++) {
             String respuesta = cuestionarioRespondido.getRespuestas().get(i).getRespuestaAbierta();
             Class<Colaborador> claseColab = Colaborador.class;
             try {
                 Field campo = claseColab.getDeclaredField(cuestionarioRespondido.getRespuestas().get(i).getPregunta().getNombre());
-                if(cuestionarioRespondido.getRespuestas().get(i).getPregunta().getNombre()=="fechaDeNacimiento")
-                {
+                if (cuestionarioRespondido.getRespuestas().get(i).getPregunta().getNombre().equals("fechaDeNacimiento")) {
                     campo.set(this, StringToFecha(respuesta));
                     continue;
                 }
                 campo.set(this, respuesta);
-            }
-            catch (NoSuchFieldException e) {
-                throw new RuntimeException(e);
-            }
-            catch (IllegalAccessException e) {
-                throw new RuntimeException(e);
-            } catch (ParseException e) {
+            } catch (NoSuchFieldException | ParseException | IllegalAccessException e) {
                 throw new RuntimeException(e);
             }
 
@@ -115,7 +90,7 @@ public class Colaborador {
 
     public Date StringToFecha(String fecha) throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        Date fechaDate = null;
+        Date fechaDate;
         try {
             fechaDate = formato.parse(fecha);
         } catch (ParseException e) {

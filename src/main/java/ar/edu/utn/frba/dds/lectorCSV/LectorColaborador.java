@@ -1,9 +1,8 @@
 package ar.edu.utn.frba.dds.lectorCSV;
 
 import ar.edu.utn.frba.dds.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.colaborador.TipoDocumento;
+import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.List;
