@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds;
 import ar.edu.utn.frba.dds.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.heladera.Heladera;
 import ar.edu.utn.frba.dds.heladera.Vianda;
+import ar.edu.utn.frba.dds.utils.Calle;
 import ar.edu.utn.frba.dds.utils.Coordenada;
 import ar.edu.utn.frba.dds.utils.Direccion;
 import lombok.Getter;
@@ -29,9 +30,9 @@ public class TestHeladera {
 
         heladeras = new ArrayList<>();
 
-        direccion1 = new Direccion("Medrano 951");
-        direccion2 = new Direccion("Rivadavia 10400");
-        direccion3 = new Direccion("Mozart Y Saraza");
+        direccion1 = new Direccion("Medrano", 951, 1);
+        direccion2 = new Direccion("Rivadavia", 10400, 0);
+        direccion3 = new Direccion("Mozart", 10, 1);
 
         coordenada1 = new Coordenada(125.0, 410.0);
         coordenada2 = new Coordenada(200.0, 1254.0);
@@ -100,9 +101,9 @@ public class TestHeladera {
         heladeras.add(heladera3);
 
         Heladera heladeraAModificar = heladeras.get(0);
-
         heladeraAModificar.setDireccion(direccion2);
         assert heladeraAModificar.getDireccion().equals(direccion2);
+
 
     }
 }

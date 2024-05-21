@@ -7,16 +7,17 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class RegistroAlerta {
-    private  Date fecha;
+public class RegistroDeAlerta {
+    private Date fecha;
 
     private TipoAlerta tipoAlerta;
 
-    public RegistroAlerta(TipoAlerta tipoAlerta){
+    public RegistroDeAlerta(TipoAlerta tipoAlerta) {
         this.fecha = new Date();
         this.tipoAlerta = tipoAlerta;
     }
-    public RegistroAlerta(){
+
+    public RegistroDeAlerta() {
         this.fecha = new Date();
     }
 

@@ -1,4 +1,7 @@
-package ar.edu.utn.frba.dds.colaborador;
+package ar.edu.utn.frba.dds.vulnerable;
+
+import ar.edu.utn.frba.dds.colaborador.Direccion;
+import ar.edu.utn.frba.dds.colaborador.EnumTipoDocumento;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,7 +13,7 @@ public class Vulnerable {
     private Date fechaDeNacimiento;
     private Date fechaDeRegistro;
     private Boolean situacionDeCalle;
-    private Direccion Direccion;
+    private ar.edu.utn.frba.dds.colaborador.Direccion Direccion;
     private EnumTipoDocumento tipoDocumento;
     private List<RegistroDePersonaACargo> registroDePersonasACargo;
 

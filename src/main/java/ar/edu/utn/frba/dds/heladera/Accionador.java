@@ -11,7 +11,7 @@ public class Accionador {
         return instancia;
     }
     public void registrarAlerta(Heladera heladera, TipoAlerta tipoAlerta) {
-        RegistroAlerta registro = new RegistroAlerta(tipoAlerta);
+        RegistroDeAlerta registro = new RegistroDeAlerta(tipoAlerta);
         heladera.agregarRegistroDeAlerta(registro);
     }
 }

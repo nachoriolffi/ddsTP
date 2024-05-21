@@ -1,9 +1,17 @@
 package ar.edu.utn.frba.dds.utils;
 
-public class Direccion {
-    private String direccion;
+import lombok.Setter;
 
-    public Direccion(String direccion) {
-        this.direccion = direccion;
+public class Direccion {
+    @Setter
+    private Calle calle;
+    private Integer altura;
+    private Integer piso;
+    private Ubicacion ubicacion;
+
+    public Direccion(String calle, Integer altura, Integer piso) {
+        this.calle = new Calle(calle);
     }
+
+
 }
