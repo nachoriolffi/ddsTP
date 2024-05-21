@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.Recomendaciones;
+package ar.edu.utn.frba.dds.recomendaciones;
 
 import ar.edu.utn.frba.dds.utils.Coordenada;
 

@@ -8,22 +8,22 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class LectorColaborador extends LectorDeCSV{
+@Getter
+public class LectorColaborador extends LectorDeCSV {
 
-    @Getter
     private Set<Colaborador> colaboradorLeido;
+
     public LectorColaborador() {
-        this.colaboradorLeido= new HashSet<>();
+        this.colaboradorLeido = new HashSet<>();
     }
 
     @Override
     public void levantarObjetos(List<String[]> csvComoLista) {
-        for(int i =0 ; i<csvComoLista.size() ; i++){
+        for (String[] strings : csvComoLista) {
 
-            String[] strings = csvComoLista.get(i);
             // tomo la pimer lista de strings
             TipoDocumento tipoDocumento = TipoDocumento.valueOf(strings[0]);
-            String numeroDocumento = strings[1];
+            Integer numeroDocumento = Integer.valueOf(strings[1]);
             String nombre = strings[2];
             String apellido = strings[3];
             String contacto = strings[4];
@@ -34,8 +34,8 @@ public class LectorColaborador extends LectorDeCSV{
             System.out.println("apellido: " + apellido);
             System.out.println("contacto: " + contacto);
 
-            Colaborador colaborador = new Colaborador(tipoDocumento,numeroDocumento,nombre,apellido,null);
-            if (!esColaboradorCargado(numeroDocumento,tipoDocumento)) {
+            Colaborador colaborador = new Colaborador(numeroDocumento,tipoDocumento,nombre, apellido, null);
+            if (!esColaboradorCargado(numeroDocumento, tipoDocumento)) {
                 colaboradorLeido.add(colaborador);
             }
 
@@ -45,7 +45,7 @@ public class LectorColaborador extends LectorDeCSV{
 
     }
 
-    private boolean esColaboradorCargado(String numeroDocumento, TipoDocumento tipoDocumento) {
+    private boolean esColaboradorCargado(Integer numeroDocumento, TipoDocumento tipoDocumento) {
         for (Colaborador colaborador : colaboradorLeido) {
             if (colaborador.getNumeroDocumento().equals(numeroDocumento) && colaborador.getTipoDocumento().equals(tipoDocumento)) {
                 return true;

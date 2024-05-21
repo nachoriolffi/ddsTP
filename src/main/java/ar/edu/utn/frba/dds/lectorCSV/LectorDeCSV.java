@@ -17,7 +17,6 @@ import java.util.stream.Stream;
 public abstract class  LectorDeCSV {
 
     public static void realizarCargaMasivaDatos(String path) throws FileNotFoundException {
-        String archivoCarga = path;
         try (CSVReader csvReader = new CSVReader(new FileReader(path))) {
             List<String[]> records = csvReader.readAll();
 

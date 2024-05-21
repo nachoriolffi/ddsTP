@@ -1,12 +1,13 @@
 package ar.edu.utn.frba.dds.colaborador;
 
-import ar.edu.utn.frba.dds.Recomendaciones.API_RecomendacionHeladeras;
+import ar.edu.utn.frba.dds.recomendaciones.API_RecomendacionHeladeras;
 import ar.edu.utn.frba.dds.colaborador.formas.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.contacto.Contacto;
 import ar.edu.utn.frba.dds.contacto.MedioDeComunicacion;
 import ar.edu.utn.frba.dds.cuestionario.CuestionarioRespondido;
 import ar.edu.utn.frba.dds.utils.Direccion;
 
+import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,12 +37,28 @@ public class Colaborador {
     private Contacto contacto;
     private API_RecomendacionHeladeras API_RecomendacionHeladeras;
     private Integer puntosTotales;
+    private Integer numeroDocumento;
+    private TipoDocumento tipoDocumento;
+
+
+    public Colaborador() {
+
+    }
+
+    public Colaborador(Integer numeroDocumento, TipoDocumento tipoDocumento, String nombre, String apellido, List<MedioDeComunicacion> mediosDeComunicacion) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.mediosDeComunicacion = mediosDeComunicacion;
+        this.numeroDocumento = Integer.valueOf(numeroDocumento);
+        this.tipoDocumento = tipoDocumento;
+    }
 
     public Colaborador(String nombre, String apellido, List<MedioDeComunicacion> mediosDeComunicacion, List<FormaDeColaboracion> formasDeColaboracion, CuestionarioRespondido cuestionarioRespondido, TipoPersona tipoPersona, Contacto contacto) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.mediosDeComunicacion = mediosDeComunicacion;
         this.formasDeColaboracion = formasDeColaboracion;
+
         this.cuestionarioRespondido = cuestionarioRespondido;
         this.tipoPersona = tipoPersona;
         this.contacto = contacto;
