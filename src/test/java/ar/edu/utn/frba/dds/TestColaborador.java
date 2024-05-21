@@ -3,10 +3,13 @@ package ar.edu.utn.frba.dds;
 import ar.edu.utn.frba.dds.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.contacto.Contacto;
 import ar.edu.utn.frba.dds.cuestionario.*;
+import lombok.Getter;
+import lombok.Setter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.engine.support.discovery.SelectorResolver;
-
+@Getter
+@Setter
 public class TestColaborador {
 
     private Pregunta pregunta1;

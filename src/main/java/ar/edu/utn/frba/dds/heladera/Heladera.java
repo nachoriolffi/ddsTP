@@ -15,7 +15,7 @@ public class Heladera {
     private Integer capacidad;
     private Date fechaPuestaFunc;
     private List<Vianda> viandas;
-@Getter
+    @Getter
     private ModeloHeladera modelo;
 
     private List<RegistroAlerta> registrosDeAlerta;
@@ -27,12 +27,23 @@ public class Heladera {
         this.viandas = new ArrayList<Vianda>();
     }
 
-    public void agregarVianda(Vianda vianda){
+    public void agregarVianda(Vianda vianda) {
         viandas.add(vianda);
     }
 
-    public void agregarRegistroDeAlerta(RegistroAlerta registro){
+    public void agregarRegistroDeAlerta(RegistroAlerta registro) {
         registrosDeAlerta.add(registro);
     }
 
+    public List<Vianda> getViandas() {
+        return viandas;
+    }
+
+    public void setDireccion(Direccion direccion) {
+        this.direccion = direccion;
+    }
+
+    public Direccion getDireccion() {
+        return direccion;
+    }
 }
