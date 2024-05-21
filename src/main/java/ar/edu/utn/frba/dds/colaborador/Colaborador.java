@@ -69,7 +69,7 @@ public class Colaborador {
         this.tipoPersona = tipoPersona;
         this.contacto = contacto;
     }
-    
+
     public void cargarRespuestas(CuestionarioRespondido cuestionarioRespondido) {
         for (int i = 0; i < cuestionarioRespondido.getRespuestas().size(); i++) {
             String respuesta = cuestionarioRespondido.getRespuestas().get(i).getRespuestaAbierta();

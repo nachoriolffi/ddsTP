@@ -5,7 +5,6 @@ import ar.edu.utn.frba.dds.utils.Direccion;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,7 +29,7 @@ public class Heladera {
         this.direccion = direccion;
         this.coordenada = coordenada;
         this.capacidad = capacidad;
-        this.viandas = new ArrayList<>();
+        this.viandas = viandas;
     }
 
     public void agregarVianda(Vianda vianda) {

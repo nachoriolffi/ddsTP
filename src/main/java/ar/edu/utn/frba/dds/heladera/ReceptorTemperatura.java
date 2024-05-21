@@ -12,7 +12,7 @@ public class ReceptorTemperatura {
     }
 
     public ReceptorTemperatura() {
-        this.temperaturasLeidas= new ArrayList<Float>();
+        this.temperaturasLeidas= new ArrayList<>();
     }
 
     public void agregarTemperatura(float temperatura) {
