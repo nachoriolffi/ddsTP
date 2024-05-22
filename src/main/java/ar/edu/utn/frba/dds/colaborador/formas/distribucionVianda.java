@@ -11,6 +11,9 @@ public class distribucionVianda implements FormaDeColaboracion{
     private Integer cantidadViandas;
     private String motivo;
     private Date fechaDistribucion;
+    private TipoColaboracion tipoColaboracion;
+    private Date fechaColaboracion;
+
 
     @Override
     public void sumarPuntosA(Colaborador colaborador) {
