@@ -17,7 +17,7 @@ public class ServicioMail {
         Session session = Session.getDefaultInstance(props, new javax.mail.Authenticator() {
 
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("fpesce@frba.utn.edu.ar", "sgfbfrtwnmwmdzip");
+                return new PasswordAuthentication("fedenotificacion@gmail.com", "bqcr olen uway ebro");
             }
         });
 
