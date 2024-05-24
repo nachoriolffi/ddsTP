@@ -29,6 +29,7 @@ public class Colaborador {
     private Date fechaDeNacimiento;
     private Direccion direccion;
     private List<FormaDeColaboracion> formasDeColaboracion;
+    private List<FormaDeColaboracion> colaboracionesRealizadas;
     private CuestionarioRespondido cuestionarioRespondido;
     private Integer razonSocial;
     private TipoJuridisccion tipoJuridisccion;
@@ -51,6 +52,7 @@ public class Colaborador {
         this.mediosDeComunicacion = mediosDeComunicacion;
         this.numeroDocumento = Integer.valueOf(numeroDocumento);
         this.tipoDocumento = tipoDocumento;
+        this.colaboracionesRealizadas = new ArrayList<>();
     }
 
     public Colaborador(String nombre, String apellido, List<MedioDeComunicacion> mediosDeComunicacion, List<FormaDeColaboracion> formasDeColaboracion, CuestionarioRespondido cuestionarioRespondido, TipoPersona tipoPersona, Contacto contacto) {
@@ -72,6 +74,10 @@ public class Colaborador {
 
     public void agregarFormaDeColaboracion(FormaDeColaboracion formaDeColaboracion) {
         this.formasDeColaboracion.add(formaDeColaboracion);
+    }
+
+    public void agregarColaboracionRealizada(FormaDeColaboracion formaDeColaboracion) {
+        this.colaboracionesRealizadas.add(formaDeColaboracion);
     }
 
     public void modificarColaborador(String nombre, String apellido, Date fechaDeNacimiento, CuestionarioRespondido cuestionarioRespondido, Integer razonSocial, String rubro, TipoPersona tipoPersona, Contacto contacto) {

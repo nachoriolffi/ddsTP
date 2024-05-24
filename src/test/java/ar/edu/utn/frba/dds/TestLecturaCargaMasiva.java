@@ -15,6 +15,8 @@ public class TestLecturaCargaMasiva {
         lector.leerCSV(path);
         System.out.println((lector.getColaboradorLeido()));
         System.out.println(lector.getColaboradorLeido().size());
+        //imprimir la cantidad de donaciones realizadas por el colaborador
+
         assert lector.getColaboradorLeido().size() == 3;
 
     }

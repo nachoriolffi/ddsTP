@@ -1,8 +1,7 @@
 package ar.edu.utn.frba.dds.lectorCSV;
 
 import ar.edu.utn.frba.dds.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.colaborador.formas.FormaDeColaboracion;
-import ar.edu.utn.frba.dds.colaborador.formas.TipoColaboracion;
+import ar.edu.utn.frba.dds.colaborador.formas.*;
 import ar.edu.utn.frba.dds.contacto.ServicioMail;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import lombok.Getter;
@@ -11,6 +10,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import static ar.edu.utn.frba.dds.colaborador.formas.TipoColaboracion.*;
 
 @Getter
 public class LectorColaborador extends LectorDeCSV {
@@ -48,7 +49,12 @@ public class LectorColaborador extends LectorDeCSV {
             if (!esColaboradorCargado(numeroDocumento, tipoDocumento)) {
                 FormaDeColaboracion colaboracion;
                 colaboradorLeido.add(colaborador);
-                ServicioMail.getInstance().enviarCorreo("Gracias por colaborar", "Gracias por colaborar con nosotros", contacto);
+                ServicioMail.getInstance().enviarCorreo(contacto, "Gracias por colaborar con nosotros","Gracias por colaborar" );
+            }
+            else {
+                Colaborador colaboradorCargado = obtenerColaborador(numeroDocumento, tipoDocumento);
+                FormaDeColaboracion colaboracion = obtenerColaboracion(formaDeColaboracion, cantidad, fechaColaboracion);
+                colaboradorCargado.agregarColaboracionRealizada(colaboracion);
             }
 
             //una vez terminado la forma de colaboracion agrego un else que hace la logica de si ya contiene para agregarle la donacion realizada
@@ -66,43 +72,33 @@ public class LectorColaborador extends LectorDeCSV {
         return false;
     }
 
-    /*public FormaDeColaboracion obtenerColaboracion(FormaDeColaboracion formaDeColaboracion, Integer cantidad) {
+    private Colaborador obtenerColaborador(Integer numeroDocumento, TipoDocumento tipoDocumento) {
+        for (Colaborador colaborador : colaboradorLeido) {
+            if (colaborador.getNumeroDocumento().equals(numeroDocumento) && colaborador.getTipoDocumento().equals(tipoDocumento)) {
+                return colaborador;
+            }
+        }
+        return null;
+    }
+
+    public FormaDeColaboracion obtenerColaboracion(TipoColaboracion formaDeColaboracion, Integer cantidad, Date fechaColaboracion) {
         FormaDeColaboracion colaboracion = null;
         switch (formaDeColaboracion) {
             case DINERO:
-                colaboracion = new FormaDeColaboracion() {
-                    @Override
-                    public void sumarPuntosA(Colaborador colaborador) {
-                        colaborador.setPuntosTotales(colaborador.getPuntosTotales() + cantidad);
-                    }
-                };
+                colaboracion = new donacionDinero(cantidad, formaDeColaboracion, fechaColaboracion);
                 break;
             case DONACION_VIANDAS:
-                colaboracion = new FormaDeColaboracion() {
-                    @Override
-                    public void sumarPuntosA(Colaborador colaborador) {
-                        colaborador.setPuntosTotales(colaborador.getPuntosTotales() + cantidad);
-                    }
-                };
+                colaboracion = new donacionVianda(cantidad, formaDeColaboracion, fechaColaboracion);
+
                 break;
             case REDISTRIBUCION_VIANDAS:
-                colaboracion = new FormaDeColaboracion() {
-                    @Override
-                    public void sumarPuntosA(Colaborador colaborador) {
-                        colaborador.setPuntosTotales(colaborador.getPuntosTotales() + cantidad);
-                    }
-                };
+                colaboracion = new distribucionVianda(cantidad, formaDeColaboracion, fechaColaboracion);
                 break;
             case ENTREGA_TARJETAS:
-                colaboracion = new FormaDeColaboracion() {
-                    @Override
-                    public void sumarPuntosA(Colaborador colaborador) {
-                        colaborador.setPuntosTotales(colaborador.getPuntosTotales() + cantidad);
-                    }
-                };
+                colaboracion = new registroVulnerable(cantidad, formaDeColaboracion, fechaColaboracion);
                 break;
         }
         return colaboracion;
-    }*/
+    }
 
 }

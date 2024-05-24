@@ -11,6 +11,12 @@ public class donacionDinero implements FormaDeColaboracion{
     private TipoColaboracion tipoColaboracion;
     private Date fechaColaboracion;
 
+    public donacionDinero(Integer cantidad,TipoColaboracion tipoColaboracion,Date fechaColaboracion){
+        this.monto = Float.valueOf(cantidad);
+        this.fecha = fechaColaboracion;
+        this.tipoColaboracion = tipoColaboracion;
+    };
+
     @Override
     public void sumarPuntosA(Colaborador colaborador) {
 

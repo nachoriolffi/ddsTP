@@ -15,6 +15,12 @@ public class distribucionVianda implements FormaDeColaboracion{
     private Date fechaColaboracion;
 
 
+    public distribucionVianda(Integer cantidad, TipoColaboracion tipoDonacion, Date fechaColaboracion) {
+        this.tipoColaboracion = tipoDonacion;
+        this.fechaColaboracion = fechaColaboracion;
+        this.cantidadViandas = cantidad;
+    };
+
     @Override
     public void sumarPuntosA(Colaborador colaborador) {
 
