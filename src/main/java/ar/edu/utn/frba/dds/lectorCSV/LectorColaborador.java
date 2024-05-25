@@ -45,17 +45,17 @@ public class LectorColaborador extends LectorDeCSV {
             System.out.println("formaDeColaboracion: " + formaDeColaboracion);
             System.out.println("cantidad: " + cantidad);
 
-            Colaborador colaborador = new Colaborador(numeroDocumento,tipoDocumento,nombre, apellido, null);
+
             if (!esColaboradorCargado(numeroDocumento, tipoDocumento)) {
+                Colaborador colaborador = new Colaborador(numeroDocumento,tipoDocumento,nombre, apellido, null);
                 FormaDeColaboracion colaboracion;
                 colaboradorLeido.add(colaborador);
                 ServicioMail.getInstance().enviarCorreo(contacto, "Gracias por colaborar con nosotros","Gracias por colaborar" );
             }
-            else {
                 Colaborador colaboradorCargado = obtenerColaborador(numeroDocumento, tipoDocumento);
                 FormaDeColaboracion colaboracion = obtenerColaboracion(formaDeColaboracion, cantidad, fechaColaboracion);
                 colaboradorCargado.agregarColaboracionRealizada(colaboracion);
-            }
+
 
             //una vez terminado la forma de colaboracion agrego un else que hace la logica de si ya contiene para agregarle la donacion realizada
         }
@@ -79,6 +79,13 @@ public class LectorColaborador extends LectorDeCSV {
             }
         }
         return null;
+    }
+
+    public void impirmirColaboracionesRealizadas (){
+        colaboradorLeido.forEach(colaborador -> {
+            System.out.println("Colaborador: " + colaborador.getNombre() + " " + colaborador.getApellido());
+            System.out.println(colaborador.getColaboracionesRealizadas().size());
+        });
     }
 
     public FormaDeColaboracion obtenerColaboracion(TipoColaboracion formaDeColaboracion, Integer cantidad, Date fechaColaboracion) {

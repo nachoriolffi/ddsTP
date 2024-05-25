@@ -2,10 +2,14 @@ package ar.edu.utn.frba.dds.colaborador.formas;
 
 import ar.edu.utn.frba.dds.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.vulnerable.Tarjeta;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
 
+@Getter
+@Setter
 public class registroVulnerable implements FormaDeColaboracion{
 
     private TipoColaboracion tipoColaboracion;

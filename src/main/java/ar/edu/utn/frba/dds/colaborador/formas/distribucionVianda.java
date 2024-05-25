@@ -2,8 +2,13 @@ package ar.edu.utn.frba.dds.colaborador.formas;
 
 import ar.edu.utn.frba.dds.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.heladera.Heladera;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
+
+@Getter
+@Setter
 
 public class distribucionVianda implements FormaDeColaboracion{
     private Heladera heladeraOrigen;

@@ -3,8 +3,12 @@ package ar.edu.utn.frba.dds.colaborador.formas;
 import ar.edu.utn.frba.dds.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.heladera.Heladera;
 import ar.edu.utn.frba.dds.utils.Local;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Date;
+@Getter
+@Setter
 
 public class hacerseCargoDeHeladera implements FormaDeColaboracion{
     private Local local;
