@@ -11,8 +11,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static ar.edu.utn.frba.dds.colaborador.formas.TipoColaboracion.*;
-
 @Getter
 public class LectorColaborador extends LectorDeCSV {
 
@@ -92,17 +90,17 @@ public class LectorColaborador extends LectorDeCSV {
         FormaDeColaboracion colaboracion = null;
         switch (formaDeColaboracion) {
             case DINERO:
-                colaboracion = new donacionDinero(cantidad, formaDeColaboracion, fechaColaboracion);
+                colaboracion = new DonacionDinero(cantidad, formaDeColaboracion, fechaColaboracion);
                 break;
             case DONACION_VIANDAS:
-                colaboracion = new donacionVianda(cantidad, formaDeColaboracion, fechaColaboracion);
+                colaboracion = new DonacionVianda(cantidad, formaDeColaboracion, fechaColaboracion);
 
                 break;
             case REDISTRIBUCION_VIANDAS:
-                colaboracion = new distribucionVianda(cantidad, formaDeColaboracion, fechaColaboracion);
+                colaboracion = new DistribucionVianda(cantidad, formaDeColaboracion, fechaColaboracion);
                 break;
             case ENTREGA_TARJETAS:
-                colaboracion = new registroVulnerable(cantidad, formaDeColaboracion, fechaColaboracion);
+                colaboracion = new RegistroVulnerable(cantidad, formaDeColaboracion, fechaColaboracion);
                 break;
         }
         return colaboracion;

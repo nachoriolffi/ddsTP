@@ -49,7 +49,7 @@ public class TestCorreo {
         mensaje = new Mensaje("se vieeeneeee booooooooccaccccaaahhaha", "aguante bocaaaaaaaa");
         destinatario = new Colaborador("Nombre del destinatario", "Apellido del destinatario",
                 new ArrayList<>(), new ArrayList<>(), null, null,
-                new Contacto("mail","federperez@frba.utn.edu.ar"));
+                new Contacto("mail","iriolffi@gmail.com"));
     }
 
     @Test

@@ -1,0 +1,9 @@
+{
+  "configuracion": {
+    "multiplicadorViandasDistribuidas": 1,
+    "multiplicadorViandasDonadas": 0.5,
+    "multiplicadorRegistroVulnerables": 3,
+    "multiplicadorHeladeraActiva": 3,
+    "multiplicadorDinero": 1
+  }
+}

@@ -10,14 +10,15 @@ import java.util.List;
 @Getter
 @Setter
 
-public class donacionVianda implements FormaDeColaboracion{
+public class DonacionVianda implements FormaDeColaboracion{
     private List<Vianda> viandas;
 
     private Integer cantidadViandas;
     private TipoColaboracion tipoColaboracion;
     private Date fechaColaboracion;
+    private Integer multiplicador;
 
-    public donacionVianda(Integer cantidad, TipoColaboracion tipoDonacion, Date fechaColaboracion) {
+    public DonacionVianda(Integer cantidad, TipoColaboracion tipoDonacion, Date fechaColaboracion) {
         this.tipoColaboracion = tipoDonacion;
         this.fechaColaboracion = fechaColaboracion;
         this.cantidadViandas = cantidad;

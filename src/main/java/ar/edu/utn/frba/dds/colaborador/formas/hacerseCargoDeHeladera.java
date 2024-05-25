@@ -10,11 +10,12 @@ import java.util.Date;
 @Getter
 @Setter
 
-public class hacerseCargoDeHeladera implements FormaDeColaboracion{
+public class HacerseCargoDeHeladera implements FormaDeColaboracion{
     private Local local;
     private Heladera heladera;
     private TipoColaboracion tipoColaboracion;
     private Date fechaColaboracion;
+    private Integer multiplicador;
 
     @Override
     public void sumarPuntosA(Colaborador colaborador) {

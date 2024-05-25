@@ -10,7 +10,7 @@ import java.util.Date;
 @Getter
 @Setter
 
-public class distribucionVianda implements FormaDeColaboracion{
+public class DistribucionVianda implements FormaDeColaboracion{
     private Heladera heladeraOrigen;
     private Heladera heladeraDestino;
     private Integer cantidadViandas;
@@ -18,9 +18,10 @@ public class distribucionVianda implements FormaDeColaboracion{
     private Date fechaDistribucion;
     private TipoColaboracion tipoColaboracion;
     private Date fechaColaboracion;
+    private Integer multiplicador;
 
 
-    public distribucionVianda(Integer cantidad, TipoColaboracion tipoDonacion, Date fechaColaboracion) {
+    public DistribucionVianda(Integer cantidad, TipoColaboracion tipoDonacion, Date fechaColaboracion) {
         this.tipoColaboracion = tipoDonacion;
         this.fechaColaboracion = fechaColaboracion;
         this.cantidadViandas = cantidad;

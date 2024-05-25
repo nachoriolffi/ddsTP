@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class registroVulnerable implements FormaDeColaboracion{
+public class RegistroVulnerable implements FormaDeColaboracion{
 
     private TipoColaboracion tipoColaboracion;
 
@@ -20,7 +20,9 @@ public class registroVulnerable implements FormaDeColaboracion{
 
     private Date fechaColaboracion;
 
-    public registroVulnerable(Integer cantidad, TipoColaboracion tipoDonacion, Date fechaColaboracion) {
+    private Integer multiplicador;
+
+    public RegistroVulnerable(Integer cantidad, TipoColaboracion tipoDonacion, Date fechaColaboracion) {
         this.tipoColaboracion = tipoDonacion;
         this.fechaColaboracion = fechaColaboracion;
         this.cantidadTarjetas = cantidad;

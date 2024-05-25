@@ -50,6 +50,7 @@ public class TestHeladera {
         vianda6 = new Vianda("Ravioles", heladera3, new Colaborador(), true);
 
         heladera1 = new Heladera(direccion1, coordenada1, 150, viandas1);
+        heladera1.setEstaActiva(Boolean.TRUE);
         heladera2 = new Heladera(direccion2, coordenada2, 200, viandas2);
         heladera3 = new Heladera(direccion3, coordenada3, 300, viandas3);
 
@@ -102,9 +103,16 @@ public class TestHeladera {
 
         Heladera heladeraAModificar = heladeras.get(0);
         heladeraAModificar.setDireccion(direccion2);
+        heladeraAModificar.setEstaActiva(Boolean.FALSE);
         assert heladeraAModificar.getDireccion().equals(direccion2);
+        assert heladeraAModificar.getEstaActiva().equals(Boolean.FALSE);
 
+    }
 
+    @Test
+    public void TestEstadoTiempoRealHeladera(){
+
+        assert heladera1.getEstaActiva().equals(Boolean.TRUE);
     }
 }
 
