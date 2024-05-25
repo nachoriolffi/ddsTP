@@ -19,9 +19,9 @@ import java.util.Date;
 import java.util.List;
 
 
-@Setter
-@Getter
 
+@Getter
+@Setter
 public class Colaborador {
     private String nombre;
     private String apellido;
@@ -42,31 +42,33 @@ public class Colaborador {
     private TipoDocumento tipoDocumento;
 
 
-    public Colaborador() {
-
-    }
-
-    public Colaborador(Integer numeroDocumento, TipoDocumento tipoDocumento, String nombre, String apellido, List<MedioDeComunicacion> mediosDeComunicacion) {
+    public Colaborador(Integer numeroDocumento, TipoDocumento tipoDocumento, String nombre, String apellido, List<MedioDeComunicacion> mediosDeComunicacion,TipoPersona tipoPersona)
+    { //persona humana
+        //fecha de nacimiento y direccion es opcional para persona humana
         this.nombre = nombre;
         this.apellido = apellido;
-        this.mediosDeComunicacion = mediosDeComunicacion;
+        this.mediosDeComunicacion = new ArrayList<>(mediosDeComunicacion);
         this.numeroDocumento = Integer.valueOf(numeroDocumento);
         this.tipoDocumento = tipoDocumento;
+        this.formasDeColaboracion = new ArrayList<>();
         this.colaboracionesRealizadas = new ArrayList<>();
+        this.tipoPersona = tipoPersona;
     }
 
-    public Colaborador(String nombre, String apellido, List<MedioDeComunicacion> mediosDeComunicacion, List<FormaDeColaboracion> formasDeColaboracion, CuestionarioRespondido cuestionarioRespondido, TipoPersona tipoPersona, Contacto contacto) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.mediosDeComunicacion = mediosDeComunicacion;
-        this.formasDeColaboracion = formasDeColaboracion;
+    public Colaborador(List<MedioDeComunicacion> mediosDeComunicacion, CuestionarioRespondido cuestionarioRespondido, TipoJuridisccion tipoJuridisccion ,TipoPersona tipoPersona)
+    { // persona juridica
+        this.nombre = null;
+        this.apellido = null;
+        this.fechaDeNacimiento = null;
 
+        this.tipoJuridisccion = tipoJuridisccion;// Razon social
         this.cuestionarioRespondido = cuestionarioRespondido;
         this.tipoPersona = tipoPersona;
-        this.contacto = contacto;
-        this.mediosDeComunicacion = new ArrayList<>();
+        this.mediosDeComunicacion = new ArrayList<>(mediosDeComunicacion);// Es el medio de contacto
         this.formasDeColaboracion = new ArrayList<>();
+
     }
+
 
     public void agregarMedioDeComunicacion(MedioDeComunicacion medioDeComunicacion) {
         this.mediosDeComunicacion.add(medioDeComunicacion);

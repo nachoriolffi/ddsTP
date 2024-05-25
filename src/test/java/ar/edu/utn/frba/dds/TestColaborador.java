@@ -8,6 +8,9 @@ import lombok.Setter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.engine.support.discovery.SelectorResolver;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 @Getter
 @Setter
 public class TestColaborador {
@@ -79,12 +82,23 @@ public class TestColaborador {
 
         colaborador.cargarRespuestas(cuestionarioRespondido);
 
+
+
         //correcto si nombre, apellido y telefono no son null
         assert colaborador.getNombre()!=null;
         assert colaborador.getApellido()!=null;
         assert colaborador.getFechaDeNacimiento()!=null;
     }
 
+    @Test
+    public void TestColaborador2() {
+        colaborador.
+        colaborador= new Colaborador();
+
+
+        assertTrue(true);
+
+    }
 
 
 }
