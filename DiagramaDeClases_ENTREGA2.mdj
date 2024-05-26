@@ -591,6 +591,23 @@
 										},
 										{
 											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGPf6JrMiUC+/E=",
+											"_parent": {
+												"$ref": "AAAAAAGOxFc4O09xUSg="
+											},
+											"model": {
+												"$ref": "AAAAAAGPf6JrICT/Pqk="
+											},
+											"font": "Roboto;14;0",
+											"left": 677,
+											"top": 1039,
+											"width": 484.7548828125,
+											"height": 14,
+											"text": "-colaboracionesRealizadas: List<FormaColaboracion>",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
 											"_id": "AAAAAAGO2xFCYqT4Yu8=",
 											"_parent": {
 												"$ref": "AAAAAAGOxFc4O09xUSg="
@@ -600,7 +617,7 @@
 											},
 											"font": "Roboto;14;0",
 											"left": 677,
-											"top": 1039,
+											"top": 1055,
 											"width": 484.7548828125,
 											"height": 14,
 											"text": "-cuestionarioRespondido: CuestionarioRespondido",
@@ -617,7 +634,7 @@
 											},
 											"font": "Roboto;14;0",
 											"left": 677,
-											"top": 1055,
+											"top": 1071,
 											"width": 484.7548828125,
 											"height": 14,
 											"text": "-razonSocial: Integer",
@@ -634,10 +651,10 @@
 											},
 											"font": "Roboto;14;0",
 											"left": 677,
-											"top": 1071,
+											"top": 1087,
 											"width": 484.7548828125,
 											"height": 14,
-											"text": "-tipoJurisdiccion: Enum",
+											"text": "-tipoJurisdiccion: TipoJurisdiccion",
 											"horizontalAlignment": 0
 										},
 										{
@@ -651,7 +668,7 @@
 											},
 											"font": "Roboto;14;0",
 											"left": 677,
-											"top": 1087,
+											"top": 1103,
 											"width": 484.7548828125,
 											"height": 14,
 											"text": "-rubro: String",
@@ -686,10 +703,10 @@
 											},
 											"font": "Roboto;14;0",
 											"left": 677,
-											"top": 1103,
+											"top": 1119,
 											"width": 484.7548828125,
 											"height": 14,
-											"text": "-tipoPersona: Enum",
+											"text": "-tipoPersona: TipoPersona",
 											"horizontalAlignment": 0
 										},
 										{
@@ -703,7 +720,7 @@
 											},
 											"font": "Roboto;14;0",
 											"left": 677,
-											"top": 1119,
+											"top": 1135,
 											"width": 484.7548828125,
 											"height": 14,
 											"text": "-contacto: Contacto",
@@ -720,10 +737,10 @@
 											},
 											"font": "Roboto;14;0",
 											"left": 677,
-											"top": 1135,
+											"top": 1151,
 											"width": 484.7548828125,
 											"height": 14,
-											"text": "-adapter: API_RecomendacionHeladeras",
+											"text": "-recomendacionHeladeras_API: API_RecomendacionHeladeras",
 											"horizontalAlignment": 0
 										},
 										{
@@ -737,27 +754,10 @@
 											},
 											"font": "Roboto;14;0",
 											"left": 677,
-											"top": 1151,
-											"width": 484.7548828125,
-											"height": 14,
-											"text": "-puntosTotales: Integer",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAGPf6JrMiUC+/E=",
-											"_parent": {
-												"$ref": "AAAAAAGOxFc4O09xUSg="
-											},
-											"model": {
-												"$ref": "AAAAAAGPf6JrICT/Pqk="
-											},
-											"font": "Roboto;14;0",
-											"left": 677,
 											"top": 1167,
 											"width": 484.7548828125,
 											"height": 14,
-											"text": "-contribucionesHechas: List<FormaColaboracion>",
+											"text": "-puntosTotales: Integer",
 											"horizontalAlignment": 0
 										},
 										{
@@ -777,13 +777,47 @@
 											"height": 14,
 											"text": "+personasRegistradas: List<PersonaVulnerable>",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGPss07aJUQvqY=",
+											"_parent": {
+												"$ref": "AAAAAAGOxFc4O09xUSg="
+											},
+											"model": {
+												"$ref": "AAAAAAGPss07VZUNdeo="
+											},
+											"font": "Roboto;14;0",
+											"left": 677,
+											"top": 1183,
+											"width": 484.7548828125,
+											"height": 14,
+											"text": "-numeroDocumento: Integer",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAGPss1QOJuOP/Y=",
+											"_parent": {
+												"$ref": "AAAAAAGOxFc4O09xUSg="
+											},
+											"model": {
+												"$ref": "AAAAAAGPss1QK5uLfvc="
+											},
+											"font": "Roboto;14;0",
+											"left": 677,
+											"top": 1199,
+											"width": 484.7548828125,
+											"height": 14,
+											"text": "-tipoDocumento: TipoDocumento",
+											"horizontalAlignment": 0
 										}
 									],
 									"font": "Roboto;14;0",
 									"left": 672,
 									"top": 938,
 									"width": 494.7548828125,
-									"height": 248
+									"height": 280
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -842,7 +876,7 @@
 											},
 											"font": "Roboto;14;0",
 											"left": 677,
-											"top": 1193,
+											"top": 1225,
 											"width": 484.7548828125,
 											"height": 14,
 											"text": "+agregarFormaDeColaboracion(FormaDeColaboracion ...): void",
@@ -859,7 +893,7 @@
 											},
 											"font": "Roboto;14;0",
 											"left": 677,
-											"top": 1209,
+											"top": 1241,
 											"width": 484.7548828125,
 											"height": 14,
 											"text": "+agregarMedioDeComunicacion(MedioDeComunicacion ...): void",
@@ -876,7 +910,7 @@
 											},
 											"font": "Roboto;14;0",
 											"left": 677,
-											"top": 1225,
+											"top": 1257,
 											"width": 484.7548828125,
 											"height": 14,
 											"text": "+Colaborador(cuestionario: Cuestionario, Respuestas: List<Respuesta>): void",
@@ -911,7 +945,7 @@
 											},
 											"font": "Roboto;14;0",
 											"left": 677,
-											"top": 1241,
+											"top": 1273,
 											"width": 484.7548828125,
 											"height": 14,
 											"text": "+calcularPuntaje(): void",
@@ -920,7 +954,7 @@
 									],
 									"font": "Roboto;14;0",
 									"left": 672,
-									"top": 1186,
+									"top": 1218,
 									"width": 494.7548828125,
 									"height": 74
 								},
@@ -9595,7 +9629,7 @@
 											"top": 1221,
 											"width": 92.4375,
 											"height": 14,
-											"text": "tipoPersona"
+											"text": "TipoPersona"
 										},
 										{
 											"_type": "LabelView",
@@ -13173,7 +13207,7 @@
 											"font": "Roboto;14;0",
 											"left": 493,
 											"top": 957,
-											"width": 102.58203125,
+											"width": 106.5126953125,
 											"height": 14,
 											"text": "«enumeration»"
 										},
@@ -13186,9 +13220,9 @@
 											"font": "Roboto;14;1",
 											"left": 493,
 											"top": 973,
-											"width": 102.58203125,
+											"width": 106.5126953125,
 											"height": 14,
-											"text": "tipoJurisdiccion"
+											"text": "TipoJurisdiccion"
 										},
 										{
 											"_type": "LabelView",
@@ -13221,7 +13255,7 @@
 									"font": "Roboto;14;0",
 									"left": 488,
 									"top": 952,
-									"width": 112.58203125,
+									"width": 116.5126953125,
 									"height": 40,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGPArP4yruPnP4="
@@ -13358,7 +13392,7 @@
 											"font": "Roboto;14;0",
 											"left": 493,
 											"top": 997,
-											"width": 102.58203125,
+											"width": 106.5126953125,
 											"height": 14,
 											"text": "Gobernamental",
 											"horizontalAlignment": 0
@@ -13375,7 +13409,7 @@
 											"font": "Roboto;14;0",
 											"left": 493,
 											"top": 1013,
-											"width": 102.58203125,
+											"width": 106.5126953125,
 											"height": 14,
 											"text": "ONG",
 											"horizontalAlignment": 0
@@ -13392,7 +13426,7 @@
 											"font": "Roboto;14;0",
 											"left": 493,
 											"top": 1029,
-											"width": 102.58203125,
+											"width": 106.5126953125,
 											"height": 14,
 											"text": "Empresa",
 											"horizontalAlignment": 0
@@ -13409,7 +13443,7 @@
 											"font": "Roboto;14;0",
 											"left": 493,
 											"top": 1045,
-											"width": 102.58203125,
+											"width": 106.5126953125,
 											"height": 14,
 											"text": "Institucion",
 											"horizontalAlignment": 0
@@ -13418,7 +13452,7 @@
 									"font": "Roboto;14;0",
 									"left": 488,
 									"top": 992,
-									"width": 112.58203125,
+									"width": 116.5126953125,
 									"height": 72
 								}
 							],
@@ -13426,7 +13460,7 @@
 							"containerChangeable": true,
 							"left": 488,
 							"top": 952,
-							"width": 111.58203125,
+							"width": 115.5126953125,
 							"height": 112,
 							"nameCompartment": {
 								"$ref": "AAAAAAGPArP4yruO9Jo="
@@ -13470,7 +13504,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 635,
+									"left": 637,
 									"top": 1030,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -13491,7 +13525,7 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 635,
+									"left": 637,
 									"top": 1045,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -13512,7 +13546,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 636,
+									"left": 638,
 									"top": 1000,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -13596,7 +13630,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 625,
+									"left": 629,
 									"top": 1029,
 									"height": 13,
 									"alpha": -0.5235987755982988,
@@ -13616,7 +13650,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 628,
+									"left": 632,
 									"top": 1043,
 									"height": 13,
 									"alpha": -0.7853981633974483,
@@ -13636,7 +13670,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 621,
+									"left": 625,
 									"top": 1002,
 									"height": 13,
 									"alpha": 0.5235987755982988,
@@ -13685,7 +13719,7 @@
 							"tail": {
 								"$ref": "AAAAAAGOxFc4O09rkdQ="
 							},
-							"points": "672:1021;600:1021",
+							"points": "672:1021;604:1021",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGPArTZTAR5zJU="
@@ -28526,6 +28560,16 @@
 						},
 						{
 							"_type": "UMLAttribute",
+							"_id": "AAAAAAGPf6JrICT/Pqk=",
+							"_parent": {
+								"$ref": "AAAAAAGOxFc4O09pFkQ="
+							},
+							"name": "colaboracionesRealizadas",
+							"visibility": "private",
+							"type": "List<FormaColaboracion>"
+						},
+						{
+							"_type": "UMLAttribute",
 							"_id": "AAAAAAGO2xFCVqT10Ko=",
 							"_parent": {
 								"$ref": "AAAAAAGOxFc4O09pFkQ="
@@ -28554,7 +28598,9 @@
 							},
 							"name": "tipoJurisdiccion",
 							"visibility": "private",
-							"type": "Enum"
+							"type": {
+								"$ref": "AAAAAAGPArP4ybuLdLA="
+							}
 						},
 						{
 							"_type": "UMLAttribute",
@@ -28583,7 +28629,9 @@
 							},
 							"name": "tipoPersona",
 							"visibility": "private",
-							"type": "Enum"
+							"type": {
+								"$ref": "AAAAAAGO7dox0s9ANQY="
+							}
 						},
 						{
 							"_type": "UMLAttribute",
@@ -28603,7 +28651,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGOxFc4O09pFkQ="
 							},
-							"name": "adapter",
+							"name": "recomendacionHeladeras_API",
 							"visibility": "private",
 							"type": {
 								"$ref": "AAAAAAGPRany8sREmQ4="
@@ -28621,22 +28669,34 @@
 						},
 						{
 							"_type": "UMLAttribute",
-							"_id": "AAAAAAGPf6JrICT/Pqk=",
-							"_parent": {
-								"$ref": "AAAAAAGOxFc4O09pFkQ="
-							},
-							"name": "contribucionesHechas",
-							"visibility": "private",
-							"type": "List<FormaColaboracion>"
-						},
-						{
-							"_type": "UMLAttribute",
 							"_id": "AAAAAAGPf8eHwaxnGRM=",
 							"_parent": {
 								"$ref": "AAAAAAGOxFc4O09pFkQ="
 							},
 							"name": "personasRegistradas",
 							"type": "List<PersonaVulnerable>"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGPss07VZUNdeo=",
+							"_parent": {
+								"$ref": "AAAAAAGOxFc4O09pFkQ="
+							},
+							"name": "numeroDocumento",
+							"visibility": "private",
+							"type": "Integer"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAGPss1QK5uLfvc=",
+							"_parent": {
+								"$ref": "AAAAAAGOxFc4O09pFkQ="
+							},
+							"name": "tipoDocumento",
+							"visibility": "private",
+							"type": {
+								"$ref": "AAAAAAGO6ENBU/pGfQo="
+							}
 						}
 					],
 					"operations": [
@@ -31695,7 +31755,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "tipoPersona",
+					"name": "TipoPersona",
 					"literals": [
 						{
 							"_type": "UMLEnumerationLiteral",
@@ -32251,7 +32311,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "tipoJurisdiccion",
+					"name": "TipoJurisdiccion",
 					"attributes": [
 						{
 							"_type": "UMLAttribute",
