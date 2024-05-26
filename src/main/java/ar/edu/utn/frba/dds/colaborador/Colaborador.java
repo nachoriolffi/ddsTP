@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.colaborador;
 
-import ar.edu.utn.frba.dds.recomendaciones.API_RecomendacionHeladeras;
+import ar.edu.utn.frba.dds.recomendacionPuntos.adapter.APIRecomendacionHeladeras;
 import ar.edu.utn.frba.dds.colaborador.formas.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.contacto.Contacto;
 import ar.edu.utn.frba.dds.contacto.MedioDeComunicacion;
@@ -36,7 +36,7 @@ public class Colaborador {
     private String rubro;
     private TipoPersona tipoPersona;
     private Contacto contacto;
-    private API_RecomendacionHeladeras API_RecomendacionHeladeras;
+    private APIRecomendacionHeladeras APIRecomendacionHeladeras;
     private Integer puntosTotales;
     private Integer numeroDocumento;
     private TipoDocumento tipoDocumento;

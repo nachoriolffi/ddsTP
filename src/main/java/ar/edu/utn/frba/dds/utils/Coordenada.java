@@ -1,5 +1,10 @@
 package ar.edu.utn.frba.dds.utils;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Coordenada {
     private Double latitud;
     private Double longitud;
