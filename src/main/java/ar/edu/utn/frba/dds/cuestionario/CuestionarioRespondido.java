@@ -6,8 +6,8 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter
 @Setter
+@Getter
 public class CuestionarioRespondido {
     private Cuestionario cuestionario;
     private List<Respuesta> respuestas;
@@ -20,4 +20,5 @@ public class CuestionarioRespondido {
         this.cuestionario= cuestionario;
         this.respuestas= new ArrayList<Respuesta>();
     }
+
 }

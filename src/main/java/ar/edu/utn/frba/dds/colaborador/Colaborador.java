@@ -36,11 +36,10 @@ public class Colaborador {
     private String rubro;
     private TipoPersona tipoPersona;
     private Contacto contacto;
-    private APIRecomendacionHeladeras APIRecomendacionHeladeras;
+    private APIRecomendacionHeladeras apiRecomendacionHeladeras;
     private Integer puntosTotales;
-    private Integer numeroDocumento;
-    private TipoDocumento tipoDocumento;
-
+    private Integer numeroDocumento; //nuevo requerimiento para carga masiva
+    private TipoDocumento tipoDocumento; //nuevo requerimiento para carga masiva
 
     public Colaborador() {
 
@@ -66,7 +65,9 @@ public class Colaborador {
         this.contacto = contacto;
         this.mediosDeComunicacion = new ArrayList<>();
         this.formasDeColaboracion = new ArrayList<>();
+        this.colaboracionesRealizadas = new ArrayList<>();
     }
+
 
     public void agregarMedioDeComunicacion(MedioDeComunicacion medioDeComunicacion) {
         this.mediosDeComunicacion.add(medioDeComunicacion);
