@@ -1,13 +1,19 @@
 package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.colaborador.TipoJuridisccion;
+import ar.edu.utn.frba.dds.colaborador.formas.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.contacto.Contacto;
+import ar.edu.utn.frba.dds.contacto.MedioDeComunicacion;
 import ar.edu.utn.frba.dds.cuestionario.*;
+import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import lombok.Getter;
 import lombok.Setter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.engine.support.discovery.SelectorResolver;
+
+import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -91,14 +97,29 @@ public class TestColaborador {
     }
 
     @Test
-    public void TestColaborador2() {
-        colaborador.
-        colaborador= new Colaborador();
+    public void altaPersonaJurica() {
+        //Colaborador(List<MedioDeComunicacion> mediosDeComunicacion, TipoJuridisccion tipoJuridisccion ,TipoPersona tipoPersona)  -> constructor
+        //colaborador= new Colaborador();
 
-
-        assertTrue(true);
+        //assertTrue(bool);
+        //assertEquals("a result", actualResult);
 
     }
+    @Test
+    public void altaPersonaHumana() {
+        //Colaborador(Integer numeroDocumento, TipoDocumento tipoDocumento, String nombre, String apellido, List<MedioDeComunicacion> mediosDeComunicacion,TipoPersona tipoPersona) -> constructor
+        //colaborador= new Colaborador();
 
+        //assertEquals("a result", actualResult);
+
+    }
+    @Test
+    public void moficarPersonaJurica(){
+        //modificarColaborador(List<MedioDeComunicacion> mediosDeComunicacion, TipoJuridisccion tipoJuridisccion)
+    }
+    @Test
+    public void moficarPersonaHumana(){
+        //modificarColaborador(Integer numeroDocumento, TipoDocumento tipoDocumento, String nombre, String apellido, List< MedioDeComunicacion > mediosDeComunicacion, Date fechaDeNacimiento, List< FormaDeColaboracion > formasDeColaboracion)
+    }
 
 }
