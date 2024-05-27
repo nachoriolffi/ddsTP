@@ -120,7 +120,7 @@ public class Colaborador {
         this.contacto = contacto;
     }
 
-    public void sumarPuntos(double puntos) {
+    public void sumarPuntos(Double puntos) {
         this.puntosTotales += puntos;
     }
 
