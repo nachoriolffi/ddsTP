@@ -1,3 +1,5 @@
+package ar.edu.utn.frba.dds;
+
 import ar.edu.utn.frba.dds.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.colaborador.formas.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.colaborador.formas.RegistroVulnerable;
@@ -111,13 +113,13 @@ public class TestVulnerable {
         tarjeta1.sacarVianda(vianda5,heladera2);
         tarjeta1.sacarVianda(vianda6,heladera3);
 
+
         try {
             tarjeta1.sacarVianda(vianda7, heladera1);
         } catch (IOException e) {
             // La excepción esperada se lanzó, el test pasa
             Assertions.assertTrue(true); // Assert tradicional para verificar la condición
         }
-
     }
 
 

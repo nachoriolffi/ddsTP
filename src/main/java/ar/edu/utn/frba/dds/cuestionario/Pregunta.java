@@ -12,7 +12,7 @@ public class Pregunta {
 
         private String nombre;
 
-        private List<Opcion> opciones;
+        //private List<Opcion> opciones;
 
         private Boolean esObligatoria;
 
@@ -20,16 +20,12 @@ public class Pregunta {
 
         public Pregunta( String nombre, Boolean esObligatoria, TipoPregunta tipoPregunta) {
             this.nombre = nombre;
-            this.opciones = new ArrayList<Opcion>();
+            //this.opciones = new ArrayList<Opcion>();
             this.esObligatoria = esObligatoria;
             this.tipoPregunta = tipoPregunta;
         }
 
-        public Pregunta() {
-
-            this.opciones = new ArrayList<Opcion>();
-
-        }
+       // public Pregunta() {this.opciones = new ArrayList<Opcion>();}
 
         public boolean esObligatoria(){
             return esObligatoria;

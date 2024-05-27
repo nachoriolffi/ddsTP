@@ -7,14 +7,15 @@ import lombok.Setter;
 @Setter
 public class ModeloHeladera {
 
-    private Float temperaturaMaxima;
-    private Float temperaturaMinima;
+    private Double temperaturaMaxima;
+    private Double temperaturaMinima;
     private Double peso;
     private Integer cantidadMaximaDeViandas;
 
-
-    public Boolean verificarTemperatura(Double ultimaTemp) {
-        return ultimaTemp >= temperaturaMinima && ultimaTemp <= temperaturaMaxima;
+    public ModeloHeladera(Double temperaturaMaxima, Double temperaturaMinima, Double peso, Integer cantidadMaximaDeViandas) {
+        this.temperaturaMaxima = temperaturaMaxima;
+        this.temperaturaMinima = temperaturaMinima;
+        this.peso = peso;
+        this.cantidadMaximaDeViandas = cantidadMaximaDeViandas;
     }
-
 }

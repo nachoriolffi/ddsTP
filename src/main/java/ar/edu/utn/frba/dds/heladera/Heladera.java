@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.utils.Direccion;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -18,8 +19,8 @@ public class Heladera {
     private Integer capacidad;
     private Date fechaPuestaFunc;
     private List<Vianda> viandas;
-    private Sensor sensorTemp;
-    private Sensor sensorMov;
+    private ReceptorTemperatura receptorTemperatura;
+    private ReceptorMovimiento receptorMovimiento;
     private List<RegistroDeAlerta> registrosDeAlerta;
     private Boolean estaActiva;
     private ModeloHeladera modelo;
@@ -30,6 +31,8 @@ public class Heladera {
         this.coordenada = coordenada;
         this.capacidad = capacidad;
         this.viandas = viandas;
+        this.registrosDeAlerta= new ArrayList<RegistroDeAlerta>();
+
     }
 
     public Heladera(Direccion direccion, Coordenada coordenada, Integer capacidad, List<Vianda> viandas,Date fechaPuestaFunc) {
@@ -51,6 +54,7 @@ public class Heladera {
     public void configurarTemperatura(Double nuevaTemp) {
         tempActual = nuevaTemp;
     }
+
 
     public long mesesActiva (Date fechaColaboracion) {
         return ( fechaColaboracion.getTime() - fechaPuestaFunc.getTime()) / 1000 / 60 / 60 / 24 / 30;

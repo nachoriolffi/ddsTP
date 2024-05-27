@@ -12,6 +12,7 @@ import java.util.Date;
 @Setter
 
 public class DistribucionVianda implements FormaDeColaboracion{
+
     private Heladera heladeraOrigen;
     private Heladera heladeraDestino;
     private Integer cantidadViandas;

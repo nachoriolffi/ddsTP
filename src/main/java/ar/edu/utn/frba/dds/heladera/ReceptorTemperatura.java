@@ -1,7 +1,11 @@
 package ar.edu.utn.frba.dds.heladera;
 
+import lombok.Getter;
+
 import java.util.ArrayList;
 import java.util.List;
+
+@Getter
 
 public class ReceptorTemperatura {
 
@@ -21,8 +25,10 @@ public class ReceptorTemperatura {
 
     public void evaluarTemperatura(String dato,Heladera heladera) {
          if (evaluarLimitesTemperatura(Float.parseFloat(dato),heladera)){
-                Accionador.getInstancia().registrarAlerta(heladera,TipoAlerta.TEMPERATURA);
+             registrarAlerta(heladera,TipoAlerta.TEMPERATURA);
+             heladera.setEstaActiva(false);
          }
+        temperaturasLeidas.add(Float.parseFloat(dato));
     }
 
     private Boolean evaluarLimitesTemperatura(Float temperatura, Heladera heladera) {
@@ -35,5 +41,9 @@ public class ReceptorTemperatura {
 
     private boolean evaluarTemperaturaMinima(Float temperatura, Heladera heladera) {
         return temperatura < heladera.getModelo().getTemperaturaMinima();
+    }
+    public void registrarAlerta(Heladera heladera, TipoAlerta tipoAlerta) {
+        RegistroDeAlerta registro = new RegistroDeAlerta(tipoAlerta);
+        heladera.agregarRegistroDeAlerta(registro);
     }
 }

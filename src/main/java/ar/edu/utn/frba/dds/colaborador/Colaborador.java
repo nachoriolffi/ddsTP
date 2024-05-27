@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.colaborador;
 
 import ar.edu.utn.frba.dds.colaborador.formas.Rubro;
+import ar.edu.utn.frba.dds.intercambioPuntos.Oferta;
 import ar.edu.utn.frba.dds.recomendacionPuntos.adapter.APIRecomendacionHeladeras;
 import ar.edu.utn.frba.dds.colaborador.formas.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.contacto.Contacto;
@@ -24,6 +25,7 @@ import java.util.List;
 @Getter
 
 public class Colaborador {
+
     private String nombre;
     private String apellido;
     private List<MedioDeComunicacion> mediosDeComunicacion;
@@ -38,20 +40,34 @@ public class Colaborador {
     private TipoPersona tipoPersona;
     private Contacto contacto;
     private APIRecomendacionHeladeras apiRecomendacionHeladeras;
-    private double puntosTotales;
+    private Double puntosTotales;
+    private Double puntosTotalesUsados;
     private Integer numeroDocumento; //nuevo requerimiento para carga masiva
     private TipoDocumento tipoDocumento; //nuevo requerimiento para carga masiva
+    private List<Oferta> ofertasRegistradas;
+
+    // CONSTRUCTORES
 
     public Colaborador() {
         this.mediosDeComunicacion = new ArrayList<>();
         this.formasDeColaboracion = new ArrayList<>();
         this.colaboracionesRealizadas = new ArrayList<>();
+        this.puntosTotalesUsados= (double) 0;
     }
 
     public Colaborador(String nombre,String apellido,List<FormaDeColaboracion> hechas){
         this.nombre = nombre;
         this.apellido = apellido;
         this.colaboracionesRealizadas = hechas;
+        this.puntosTotalesUsados= (double) 0;
+    }
+
+    public Colaborador(String nombre,String apellido,Double puntosTotales){
+        this.nombre=nombre;
+        this.apellido=apellido;
+        this.puntosTotales=puntosTotales;
+        this.puntosTotalesUsados= (double) 0;
+        this.ofertasRegistradas = new ArrayList<Oferta>();
     }
 
     public Colaborador(Integer numeroDocumento, TipoDocumento tipoDocumento, String nombre, String apellido, List<MedioDeComunicacion> mediosDeComunicacion) {
@@ -61,6 +77,7 @@ public class Colaborador {
         this.numeroDocumento = Integer.valueOf(numeroDocumento);
         this.tipoDocumento = tipoDocumento;
         this.colaboracionesRealizadas = new ArrayList<>();
+        this.puntosTotalesUsados= (double) 0;
     }
 
     public Colaborador(String nombre, String apellido, List<MedioDeComunicacion> mediosDeComunicacion, List<FormaDeColaboracion> formasDeColaboracion, CuestionarioRespondido cuestionarioRespondido, TipoPersona tipoPersona, Contacto contacto) {
@@ -68,7 +85,7 @@ public class Colaborador {
         this.apellido = apellido;
         this.mediosDeComunicacion = mediosDeComunicacion;
         this.formasDeColaboracion = formasDeColaboracion;
-
+        this.puntosTotalesUsados= (double) 0;
         this.cuestionarioRespondido = cuestionarioRespondido;
         this.tipoPersona = tipoPersona;
         this.contacto = contacto;
@@ -98,7 +115,7 @@ public class Colaborador {
         this.formasDeColaboracion = new ArrayList<>();
         this.cuestionarioRespondido = cuestionarioRespondido;
         this.razonSocial = razonSocial;
-        this.rubro = rubro;
+        //this.rubro = rubro;
         this.tipoPersona = tipoPersona;
         this.contacto = contacto;
     }
@@ -136,5 +153,15 @@ public class Colaborador {
         return fechaDate;
     }
 
+    public void sumarPuntosUsados(Double aDouble) {
+        this.puntosTotalesUsados += aDouble;
+    }
+
+    public Double puntosActualesDisponibles(){
+        return this.puntosTotales - this.puntosTotalesUsados;
+    }
+    public void agregarOfertasCanjeadas(List<Oferta> ofertas){
+        this.ofertasRegistradas.addAll(ofertas);
+    }
 }
 

@@ -1,8 +1,7 @@
 package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.heladera.Heladera;
-import ar.edu.utn.frba.dds.heladera.Vianda;
+import ar.edu.utn.frba.dds.heladera.*;
 import ar.edu.utn.frba.dds.utils.Calle;
 import ar.edu.utn.frba.dds.utils.Coordenada;
 import ar.edu.utn.frba.dds.utils.Direccion;
@@ -24,6 +23,10 @@ public class TestHeladera {
     Vianda vianda1, vianda2, vianda3, vianda4, vianda5, vianda6;
     List<Vianda> viandas1, viandas2, viandas3;
     List<Heladera> heladeras;
+    ReceptorMovimiento receptorMovimiento;
+    ReceptorTemperatura receptorTemperatura;
+    ModeloHeladera modeloHeladera;
+
 
     @BeforeEach
     public void seteoHeladeras() {
@@ -60,6 +63,11 @@ public class TestHeladera {
         heladera2.agregarVianda(vianda5);
         heladera3.agregarVianda(vianda3);
         heladera3.agregarVianda(vianda6);
+
+        receptorMovimiento= new ReceptorMovimiento();
+        receptorTemperatura= new ReceptorTemperatura();
+
+        modeloHeladera = new ModeloHeladera(18.0,1.5,100.0,200);
 
     }
 
@@ -114,6 +122,34 @@ public class TestHeladera {
 
         assert heladera1.getEstaActiva().equals(Boolean.TRUE);
     }
+
+    @Test
+    public void TestReceptoresTemperaturaFueraRango(){
+        heladera1.setModelo(modeloHeladera);
+        System.out.println(heladera1.getEstaActiva().equals(Boolean.TRUE));
+        heladera1.setReceptorTemperatura(receptorTemperatura);
+
+        receptorTemperatura.evaluarTemperatura("19.0",heladera1);
+
+        System.out.println(heladera1.getRegistrosDeAlerta().get(0).getTipoAlerta().equals(TipoAlerta.TEMPERATURA));
+        System.out.println(receptorTemperatura.getTemperaturasLeidas().get(0));
+        System.out.println(heladera1.getEstaActiva().equals(Boolean.FALSE));
+        assert heladera1.getRegistrosDeAlerta().size() == 1;
+    }
+
+    @Test
+    public void TestReceptoresTemperaturaEntreRango(){
+
+        heladera1.setModelo(modeloHeladera);
+        System.out.println(heladera1.getEstaActiva());
+        heladera1.setReceptorTemperatura(receptorTemperatura);
+        receptorTemperatura.evaluarTemperatura("14.0",heladera1);
+        System.out.println(heladera1.getEstaActiva().equals(Boolean.TRUE));
+        System.out.println(receptorTemperatura.getTemperaturasLeidas().get(0));
+        assert heladera1.getRegistrosDeAlerta().size() == 0;
+
+    }
+
 }
 
 
