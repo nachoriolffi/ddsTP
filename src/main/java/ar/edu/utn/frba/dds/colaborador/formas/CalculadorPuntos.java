@@ -2,13 +2,13 @@ package ar.edu.utn.frba.dds.colaborador.formas;
 
 import ar.edu.utn.frba.dds.colaborador.Colaborador;
 
-public  class CalucladorPuntos {
+public  class CalculadorPuntos {
 
-    private static CalucladorPuntos instancia=null;
+    private static CalculadorPuntos instancia=null;
 
-    public static CalucladorPuntos getInstancia(){
+    public static CalculadorPuntos getInstancia(){
         if (instancia == null){
-            instancia = new CalucladorPuntos();
+            instancia = new CalculadorPuntos();
         }
         return instancia;
     }

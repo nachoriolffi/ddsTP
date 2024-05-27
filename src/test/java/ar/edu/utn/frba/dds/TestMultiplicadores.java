@@ -80,7 +80,7 @@ public class TestMultiplicadores {
     @Test
     public void testSumarPuntosA(){
         ConfiguracionMultiplicador.getInstance();
-        CalucladorPuntos calculadorPuntos = CalucladorPuntos.getInstancia();
+        CalculadorPuntos calculadorPuntos = CalculadorPuntos.getInstancia();
         calculadorPuntos.sumarPuntosA(colaborador);
 
         System.out.println("Puntos totales: "+colaborador.getPuntosTotales());

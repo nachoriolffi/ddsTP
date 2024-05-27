@@ -1,8 +1,6 @@
 package ar.edu.utn.frba.dds.intercambioPuntos;
 
 import ar.edu.utn.frba.dds.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.colaborador.formas.CalucladorPuntos;
-import ar.edu.utn.frba.dds.recomendacionPuntos.servicioAPI.ServicioRecomendacion;
 
 import java.util.List;
 
