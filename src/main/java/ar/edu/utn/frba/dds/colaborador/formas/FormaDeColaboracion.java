@@ -4,5 +4,5 @@ import ar.edu.utn.frba.dds.colaborador.Colaborador;
 
 public interface FormaDeColaboracion {
 
-    public void sumarPuntosA(Colaborador colaborador);
+    public double sumarPuntosA(Colaborador colaborador);
 }

@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.colaborador.formas;
 
 import ar.edu.utn.frba.dds.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.config.ConfiguracionMultiplicador;
 import ar.edu.utn.frba.dds.heladera.Heladera;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,7 +19,6 @@ public class DistribucionVianda implements FormaDeColaboracion{
     private Date fechaDistribucion;
     private TipoColaboracion tipoColaboracion;
     private Date fechaColaboracion;
-    private Integer multiplicador;
 
 
     public DistribucionVianda(Integer cantidad, TipoColaboracion tipoDonacion, Date fechaColaboracion) {
@@ -28,7 +28,8 @@ public class DistribucionVianda implements FormaDeColaboracion{
     };
 
     @Override
-    public void sumarPuntosA(Colaborador colaborador) {
-
+    public double sumarPuntosA(Colaborador colaborador) {
+        //colaborador.sumarPuntos(this.cantidadViandas * ConfiguracionMultiplicador.getInstance().getMultiplicadorViandasDistribuidas());
+        return cantidadViandas * ConfiguracionMultiplicador.getInstance().getMultiplicadorViandasDistribuidas();
     }
 }

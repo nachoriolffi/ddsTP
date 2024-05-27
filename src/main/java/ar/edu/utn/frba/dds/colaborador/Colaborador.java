@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.colaborador;
 
+import ar.edu.utn.frba.dds.colaborador.formas.Rubro;
 import ar.edu.utn.frba.dds.recomendacionPuntos.adapter.APIRecomendacionHeladeras;
 import ar.edu.utn.frba.dds.colaborador.formas.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.contacto.Contacto;
@@ -33,16 +34,24 @@ public class Colaborador {
     private CuestionarioRespondido cuestionarioRespondido;
     private Integer razonSocial;
     private TipoJuridisccion tipoJuridisccion;
-    private String rubro;
+    private Rubro rubro;
     private TipoPersona tipoPersona;
     private Contacto contacto;
     private APIRecomendacionHeladeras apiRecomendacionHeladeras;
-    private Integer puntosTotales;
+    private double puntosTotales;
     private Integer numeroDocumento; //nuevo requerimiento para carga masiva
     private TipoDocumento tipoDocumento; //nuevo requerimiento para carga masiva
 
     public Colaborador() {
+        this.mediosDeComunicacion = new ArrayList<>();
+        this.formasDeColaboracion = new ArrayList<>();
+        this.colaboracionesRealizadas = new ArrayList<>();
+    }
 
+    public Colaborador(String nombre,String apellido,List<FormaDeColaboracion> hechas){
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.colaboracionesRealizadas = hechas;
     }
 
     public Colaborador(Integer numeroDocumento, TipoDocumento tipoDocumento, String nombre, String apellido, List<MedioDeComunicacion> mediosDeComunicacion) {
@@ -92,6 +101,10 @@ public class Colaborador {
         this.rubro = rubro;
         this.tipoPersona = tipoPersona;
         this.contacto = contacto;
+    }
+
+    public void sumarPuntos(double puntos) {
+        this.puntosTotales += puntos;
     }
 
     public void cargarRespuestas(CuestionarioRespondido cuestionarioRespondido) {

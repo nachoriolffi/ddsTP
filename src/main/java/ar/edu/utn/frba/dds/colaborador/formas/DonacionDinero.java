@@ -38,8 +38,8 @@ public class DonacionDinero implements FormaDeColaboracion, Observer {
     };
 
     @Override
-    public void sumarPuntosA(Colaborador colaborador){
-
+    public double sumarPuntosA(Colaborador colaborador){
+        return this.monto * ConfiguracionMultiplicador.getInstance().getMultiplicadorDinero();
     }
 
     @Override

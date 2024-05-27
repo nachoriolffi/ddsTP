@@ -32,6 +32,14 @@ public class Heladera {
         this.viandas = viandas;
     }
 
+    public Heladera(Direccion direccion, Coordenada coordenada, Integer capacidad, List<Vianda> viandas,Date fechaPuestaFunc) {
+        this.direccion = direccion;
+        this.coordenada = coordenada;
+        this.capacidad = capacidad;
+        this.viandas = viandas;
+        this.fechaPuestaFunc = fechaPuestaFunc;
+    }
+
     public void agregarVianda(Vianda vianda) {
         viandas.add(vianda);
     }
@@ -42,5 +50,9 @@ public class Heladera {
 
     public void configurarTemperatura(Double nuevaTemp) {
         tempActual = nuevaTemp;
+    }
+
+    public long mesesActiva (Date fechaColaboracion) {
+        return ( fechaColaboracion.getTime() - fechaPuestaFunc.getTime()) / 1000 / 60 / 60 / 24 / 30;
     }
 }

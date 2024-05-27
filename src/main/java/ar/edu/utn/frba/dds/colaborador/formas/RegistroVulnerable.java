@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.colaborador.formas;
 
 import ar.edu.utn.frba.dds.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.config.ConfiguracionMultiplicador;
 import ar.edu.utn.frba.dds.vulnerable.Tarjeta;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +21,13 @@ public class RegistroVulnerable implements FormaDeColaboracion{
 
     private Date fechaColaboracion;
 
-    private Integer multiplicador;
+    public RegistroVulnerable(List<Tarjeta> tarjetasDonadas, TipoColaboracion tipoDonacion) {
+        this.tarjetasDonadas = tarjetasDonadas;
+        this.tipoColaboracion = tipoDonacion;
+        this.fechaColaboracion = new Date();
+        this.cantidadTarjetas = tarjetasDonadas.size();
+    }
+
 
     public RegistroVulnerable(Integer cantidad, TipoColaboracion tipoDonacion, Date fechaColaboracion) {
         this.tipoColaboracion = tipoDonacion;
@@ -28,8 +35,10 @@ public class RegistroVulnerable implements FormaDeColaboracion{
         this.cantidadTarjetas = cantidad;
     };
 
-    @Override
-    public void sumarPuntosA(Colaborador colaborador) {
 
+
+    @Override
+    public double sumarPuntosA(Colaborador colaborador) {
+        return cantidadTarjetas * ConfiguracionMultiplicador.getInstance().getMultiplicadorRegistroVulnerables();
     }
 }
