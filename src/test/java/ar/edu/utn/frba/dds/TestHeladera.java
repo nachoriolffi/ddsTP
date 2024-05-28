@@ -2,9 +2,12 @@ package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.heladera.*;
-import ar.edu.utn.frba.dds.utils.Calle;
-import ar.edu.utn.frba.dds.utils.Coordenada;
-import ar.edu.utn.frba.dds.utils.Direccion;
+import ar.edu.utn.frba.dds.heladera.alerta.TipoAlerta;
+import ar.edu.utn.frba.dds.heladera.receptor.ReceptorMovimiento;
+import ar.edu.utn.frba.dds.heladera.receptor.ReceptorTemperatura;
+import ar.edu.utn.frba.dds.ubicacionGeografica.Coordenada;
+import ar.edu.utn.frba.dds.ubicacionGeografica.Direccion;
+import ar.edu.utn.frba.dds.vianda.Vianda;
 import lombok.Getter;
 import lombok.Setter;
 import org.junit.jupiter.api.BeforeEach;

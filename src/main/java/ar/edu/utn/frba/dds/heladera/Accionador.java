@@ -1,5 +1,8 @@
 package ar.edu.utn.frba.dds.heladera;
 
+import ar.edu.utn.frba.dds.heladera.alerta.RegistroDeAlerta;
+import ar.edu.utn.frba.dds.heladera.alerta.TipoAlerta;
+
 public class Accionador {
 
     private static Accionador instancia = null;

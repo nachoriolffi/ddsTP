@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.lectorCSV;
 
 import ar.edu.utn.frba.dds.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.colaborador.formas.*;
+import ar.edu.utn.frba.dds.colaborador.formasColab.*;
 import ar.edu.utn.frba.dds.contacto.ServicioMail;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import lombok.Getter;

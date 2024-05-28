@@ -14,6 +14,10 @@ public class PuntoRecomendado {
 
     }
 
+    public PuntoRecomendado(Coordenada punto) {
+        this.punto = punto;
+    }
+
     public Double getLongitud(){
         return punto.longitud;
     }

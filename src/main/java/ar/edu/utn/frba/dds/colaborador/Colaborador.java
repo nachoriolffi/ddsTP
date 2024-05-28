@@ -1,18 +1,21 @@
 package ar.edu.utn.frba.dds.colaborador;
 
-import ar.edu.utn.frba.dds.colaborador.formas.Rubro;
+import ar.edu.utn.frba.dds.colaborador.formasColab.Rubro;
 import ar.edu.utn.frba.dds.intercambioPuntos.Oferta;
-import ar.edu.utn.frba.dds.recomendacionPuntos.adapter.APIRecomendacionHeladeras;
-import ar.edu.utn.frba.dds.colaborador.formas.FormaDeColaboracion;
+import ar.edu.utn.frba.dds.recomendacionPuntos.APIRecomendacionHeladeras;
+import ar.edu.utn.frba.dds.colaborador.formasColab.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.contacto.Contacto;
 import ar.edu.utn.frba.dds.contacto.MedioDeComunicacion;
 import ar.edu.utn.frba.dds.cuestionario.CuestionarioRespondido;
-import ar.edu.utn.frba.dds.utils.Direccion;
+import ar.edu.utn.frba.dds.recomendacionPuntos.AdapRecomendacionPuntos;
+import ar.edu.utn.frba.dds.ubicacionGeografica.Coordenada;
+import ar.edu.utn.frba.dds.ubicacionGeografica.Direccion;
 
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -53,12 +56,14 @@ public class Colaborador {
         this.formasDeColaboracion = new ArrayList<>();
         this.colaboracionesRealizadas = new ArrayList<>();
         this.puntosTotalesUsados= (double) 0;
+        this.apiRecomendacionHeladeras = new AdapRecomendacionPuntos();
     }
 
     public Colaborador(String nombre,String apellido,List<FormaDeColaboracion> hechas){
         this.nombre = nombre;
         this.apellido = apellido;
         this.colaboracionesRealizadas = hechas;
+        this.puntosTotales= (double) 0;
         this.puntosTotalesUsados= (double) 0;
     }
 
@@ -162,6 +167,10 @@ public class Colaborador {
     }
     public void agregarOfertasCanjeadas(List<Oferta> ofertas){
         this.ofertasRegistradas.addAll(ofertas);
+    }
+
+    public List<Coordenada> obtenerPuntosRecomendadosParaHeladera(Double longitud, Double latitud, Integer radio) throws IOException {
+        return apiRecomendacionHeladeras.recomendarPuntos(longitud,latitud,radio);
     }
 }
 

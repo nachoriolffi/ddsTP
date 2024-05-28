@@ -40,13 +40,11 @@ public class TestCorreo {
         // Crear mocks
         mockAdapterCorreo = Mockito.mock(AdapterCorreo.class);
 
-
-
         // Crear la instancia de CorreoElectronico usando el mock del adaptador
         correoElectronico = new CorreoElectronico(mockAdapterCorreo);
 
         // Crear instancias de Mensaje y Colaborador
-        mensaje = new Mensaje("se vieeeneeee booooooooccaccccaaahhaha", "aguante bocaaaaaaaa");
+        mensaje = new Mensaje("Titulo de Mensaje para Gaston", "Holaaa Gaston, ¿cómo va?");
         destinatario = new Colaborador("Nombre del destinatario", "Apellido del destinatario",
                 new ArrayList<>(), new ArrayList<>(), null, null,
                 new Contacto("mail","iriolffi@gmail.com"));
