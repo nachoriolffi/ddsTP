@@ -10,8 +10,6 @@ public class PuntoRecomendado {
     private class Coordenada{
         private Double latitud;
         private Double longitud;
-
-
     }
 
     public PuntoRecomendado(Coordenada punto) {
