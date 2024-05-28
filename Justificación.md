@@ -32,6 +32,8 @@ Decidimos separarlo para poder tener TRAZABILIDAD de cuando la persona vulnerabl
 ### Adapter
 Decidimos usar el patron adapter para los medios de comunicacion para poder integrarlos con algun otro servicio a ver mas adelante. Para esto tambien definimos la clase mensaje que se toma como parametro en enviar mensaje para darle un foramato al mismo y ademas decimos quien es el destinatario que seria otro colaborador.
 
+### [Presentación](https://docs.google.com/presentation/d/1jFLFnESTE-6EBGujE2pnB1lxX_4aHfvBhiC7T7vLYv4/edit?usp=sharing)
+
 # Entrega 2
 
 ### Tarjetas
@@ -53,3 +55,5 @@ Para el intercambio de puntos implementamos la clase `CanjeadorPuntos`, en el cu
 
 ### Carga masiva de colaboraciones
 Para la carga de Colaboradores implementamos una entidad llamada `LectorColaborador`, usamos la depenencia **OpenCSV** para leer el archivo y en caso de no estar cargo nuestro Colaborador lo cargamos y le enviamos un Mail avisandole a nuestro nuevo `Colaborador`, mientras que si ya lo estaba, simplemente actualizamos el mismo. Para el envio del Mail usamos `javax.mail` e implementamos la logica del envio del mail en `ServicioMail`.
+
+### [Presentación](https://docs.google.com/presentation/d/1z4QXn5mHcOKwGmgaKVZ8y6dvehzVjKBkWpwnqpgsX58/edit?usp=sharing)
