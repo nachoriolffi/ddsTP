@@ -28,13 +28,8 @@ public class Pregunta {
        // public Pregunta() {this.opciones = new ArrayList<Opcion>();}
 
         public boolean esObligatoria(){
-            return esObligatoria;
+            return this.esObligatoria;
         }
-
-
-
-
-
 
 
 }
