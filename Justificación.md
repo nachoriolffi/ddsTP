@@ -34,10 +34,11 @@ Decidimos usar el patron adapter para los medios de comunicacion para poder inte
 # Entrega 2
 
 ### Tarjetas
-Dentro de `Tarjeta` guardamos una lista de `usoTarjeta` para tener un seguimiento de las fechas en que se usó y en que heladera. Las diferenciamos con un *id*.
+Dentro de `Tarjeta` guardamos una lista de `usoTarjeta` para tener un seguimiento de las fechas en que se usó y en que heladera. Las diferenciamos con un **id**. Nos pareció la forma mas optima de poder tener un control sobre las mismas.
 
 ### Heladera
-<Justificación>
+#### Estado en tiempo real
+Mediante un `Accionador` y un `RegistroDeAlerta` desacoplamos el estado de `Heladera`. De esta forma tenemos a `ReceptorTemperatura` y `ReceptorMovimiento` que mediante *registrarAlerta* guardamos los datos sensados.
 
 ### Técnicos
 <Justificación>
