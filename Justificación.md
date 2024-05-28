@@ -52,4 +52,4 @@ En Tecnico no encontramos cosas relevantes del dominio para señalar, solo podem
 Para el intercambio de puntos implementamos la clase `CanjeadorPuntos`, en el cual aplicamos el patron Singleton para instanciarlo y le sacamos la de gestión del intercambio al `Colaborador`, la cual no le corresponde. También mencionar que implementamos la entidad `Oferta` con un enum para identificar su Rubro.
 
 ### Carga masiva de colaboraciones
-<Justificación>
+Para la carga de Colaboradores implementamos una entidad llamada `LectorColaborador`, usamos la depenencia **OpenCSV** para leer el archivo y en caso de no estar cargo nuestro Colaborador lo cargamos, mientras que si ya lo estaba, simplemente actualizamos el mismo.
