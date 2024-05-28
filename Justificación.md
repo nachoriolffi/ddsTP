@@ -39,9 +39,9 @@ Dentro de `Tarjeta` guardamos una lista de `usoTarjeta` para tener un seguimient
 
 ### Heladera
 #### Estado en tiempo real
-Mediante un `Accionador` y un `RegistroDeAlerta` desacoplamos el estado de `Heladera`. De esta forma tenemos a `ReceptorTemperatura` y `ReceptorMovimiento` que mediante *registrarAlerta* guardamos los datos sensados.
+Mediante un `RegistroDeAlerta` tenemos trazabilidad del estado de `Heladera`. De esta forma tenemos a `ReceptorTemperatura` y `ReceptorMovimiento` que mediante *registrarAlerta* guardamos los datos sensados.
 
-### Recomendación de puntos de colocación: 
+#### Recomendación de puntos de colocación: 
   
 Utilizamos una **MockAPI** para simular el servicio externo desarrollado por una consultora, donde maquetamos algunos puntos de prueba, mientras que para consumirla, utilizamos la dependencia **retrofit** de Java creando una Interfaz para el servicio. Ademas utilizamos para interactuar con la misma el Adapter "AdapRecomendacionPuntos". 
   
