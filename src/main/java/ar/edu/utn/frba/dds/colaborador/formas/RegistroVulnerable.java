@@ -11,7 +11,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class RegistroVulnerable implements FormaDeColaboracion{
+public class git RegistroVulnerable implements FormaDeColaboracion{
 
     private TipoColaboracion tipoColaboracion;
 
