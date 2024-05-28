@@ -30,7 +30,7 @@ public class ServicioRecomendacion {
         }
         return instancia;
     }
-   // Esto ya se hace en el adapter de recomendacion
+
     public List<PuntoRecomendado> puntosRecomendados(Double longitud,Double latitud, Integer radio) throws IOException {
         ExternalRecomendacionHeladeras externalRecomendacionHeladeras = this.retrofit.create(ExternalRecomendacionHeladeras.class);
         Call<List<PuntoRecomendado>> requestPuntosRecomendados = externalRecomendacionHeladeras.puntosRecomendados(longitud,latitud,radio);

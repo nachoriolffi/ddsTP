@@ -91,19 +91,25 @@ public class TestMultiplicadores {
 
     @Test
     public void testRecibirMultiplicadorDinero() throws Exception {
-        DonacionDinero donacionDinero = new DonacionDinero(1000, TipoColaboracion.DINERO, new Date());
+        DonacionDinero donacionDinero= new DonacionDinero(1000, TipoColaboracion.DINERO,new Date());
+
+        System.out.println("Multiplicador antes de modificar: "+donacionDinero.getMultiplicador());
+
         ConfiguracionMultiplicador configuracionMultiplicador = ConfiguracionMultiplicador.getInstance();
-
-        System.out.println("Multiplicador de Dinero antes de modificar: " + configuracionMultiplicador.getMultiplicadorDinero());
-
         configuracionMultiplicador.setMultiplicadorDinero(5.0);
 
-        System.out.println("Multiplicador de Dinero despues de modificar: " + configuracionMultiplicador.getMultiplicadorDinero());
 
-        assert configuracionMultiplicador.getMultiplicadorDinero() == 5.0;
+
+        // Notificar manualmente la actualización a la instancia de DonacionDinero
+        donacionDinero.update(configuracionMultiplicador, null);
+
+        System.out.println("Multiplicador despues de modificar: "+donacionDinero.getMultiplicador());
+
+        assert donacionDinero.getMultiplicador() == 5.0;
+    }
     }
 
 
-}
+
 
 
