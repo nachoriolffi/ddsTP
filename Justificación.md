@@ -34,7 +34,7 @@ Decidimos usar el patron adapter para los medios de comunicacion para poder inte
 # Entrega 2
 
 ### Tarjetas
-<Justificación>
+Dentro de `Tarjeta` guardamos una lista de `usoTarjeta` para tener un seguimiento de las fechas en que se usó y en que heladera. Las diferenciamos con un *id*.
 
 ### Heladera
 <Justificación>
