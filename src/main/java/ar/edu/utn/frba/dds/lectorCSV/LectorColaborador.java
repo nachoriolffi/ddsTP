@@ -24,7 +24,7 @@ public class LectorColaborador extends LectorDeCSV {
     public void levantarObjetos(List<String[]> csvComoLista) {
         for (String[] strings : csvComoLista) {
 
-            // tomo la pimer lista de strings
+            // tomo la primer lista de strings
             TipoDocumento tipoDocumento = TipoDocumento.valueOf(strings[0]);
             Integer numeroDocumento = Integer.valueOf(strings[1]);
             String nombre = strings[2];
