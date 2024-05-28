@@ -7,7 +7,6 @@ public class CorreoElectronico extends Mensaje implements MedioDeComunicacion{
     private IAdapterCorreo aCorreo;
 
     public CorreoElectronico() {
-       ;
     }
 
     public CorreoElectronico(AdapterCorreo aCorreo) {

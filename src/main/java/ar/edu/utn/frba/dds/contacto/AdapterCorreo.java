@@ -9,7 +9,6 @@ public class AdapterCorreo implements IAdapterCorreo{
     }
 
     public AdapterCorreo() {
-        ;
     }
 
     private ServicioMail servicioMail= ServicioMail.getInstance();
