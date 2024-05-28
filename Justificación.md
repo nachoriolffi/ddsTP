@@ -31,6 +31,7 @@ Decidimos separarlo para poder tener TRAZABILIDAD de cuando la persona vulnerabl
 
 ### Adapter
 Decidimos usar el patron adapter para los medios de comunicacion para poder integrarlos con algun otro servicio a ver mas adelante. Para esto tambien definimos la clase mensaje que se toma como parametro en enviar mensaje para darle un foramato al mismo y ademas decimos quien es el destinatario que seria otro colaborador.
+
 # Entrega 2
 
 ### Tarjetas
@@ -44,15 +45,11 @@ Mediante un `Accionador` y un `RegistroDeAlerta` desacoplamos el estado de `Hela
   
 Utilizamos una **MockAPI** para simular el servicio externo desarrollado por una consultora, donde maquetamos algunos puntos de prueba, mientras que para consumirla, utilizamos la dependencia **retrofit** de Java creando una Interfaz para el servicio. Ademas utilizamos para interactuar con la misma el Adapter "AdapRecomendacionPuntos". 
   
-
 ### Técnicos
 En Tecnico no encontramos cosas relevantes del dominio para señalar, solo podemos mencionar que tiene `nombre`, `apellido`, `tipoDocumento: (<enum>TipoDocumento)`, `dni`, `cuil`, `medioContacto (List<MedioComunicacion>)` y `areaCobertura`.
 
-### Ofrecer productos (forma de colaboración)
-<Justificación>
-
 ### Intercambiar puntos
-<Justificación>
+Para el intercambio de puntos implementamos la clase `CanjeadorPuntos`, en el cual aplicamos el patron Singleton para instanciarlo y le sacamos la de gestión del intercambio al `Colaborador`, la cual no le corresponde. También mencionar que implementamos la entidad `Oferta` con un enum para identificar su Rubro.
 
 ### Carga masiva de colaboraciones
 <Justificación>
