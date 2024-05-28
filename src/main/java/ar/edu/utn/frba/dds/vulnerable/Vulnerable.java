@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.vulnerable;
 
-import ar.edu.utn.frba.dds.utils.Direccion;
+import ar.edu.utn.frba.dds.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import lombok.Getter;
 import lombok.Setter;

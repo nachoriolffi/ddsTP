@@ -1,12 +1,13 @@
 package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.colaborador.formas.*;
-import ar.edu.utn.frba.dds.config.ConfiguracionMultiplicador;
+import ar.edu.utn.frba.dds.colaborador.calculoPuntos.CalculadorPuntos;
+import ar.edu.utn.frba.dds.colaborador.formasColab.*;
+import ar.edu.utn.frba.dds.reconocimiento.config.ConfiguracionMultiplicador;
 import ar.edu.utn.frba.dds.heladera.Heladera;
-import ar.edu.utn.frba.dds.heladera.Vianda;
-import ar.edu.utn.frba.dds.utils.Coordenada;
-import ar.edu.utn.frba.dds.utils.Direccion;
+import ar.edu.utn.frba.dds.vianda.Vianda;
+import ar.edu.utn.frba.dds.ubicacionGeografica.Coordenada;
+import ar.edu.utn.frba.dds.ubicacionGeografica.Direccion;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,7 @@ import java.util.List;
 
 public class TestMultiplicadores {
 
-    List<Heladera>heladeras = new ArrayList<>();
+    List<Heladera> heladeras = new ArrayList<>();
     Colaborador colaborador;
 
     @BeforeEach
@@ -30,13 +31,13 @@ public class TestMultiplicadores {
         Coordenada coordenada2 = new Coordenada(200.0, 1254.0);
         Coordenada coordenada3 = new Coordenada(500.0, 153.0);
 
-        Date fecha1 = new Date(2024,02,14);
-        Date fecha2 = new Date(2024,05,10);
-        Date fecha3 = new Date(2024,04,04);
+        Date fecha1 = new Date(2024, 02, 14);
+        Date fecha2 = new Date(2024, 05, 10);
+        Date fecha3 = new Date(2024, 04, 04);
 
-        Heladera heladera1 = new Heladera(direccion1, coordenada1, 150, new ArrayList<>(),fecha1);
-        Heladera heladera2 = new Heladera(direccion2, coordenada2, 200, new ArrayList<>(),fecha2);
-        Heladera heladera3 = new Heladera(direccion3, coordenada3, 300, new ArrayList<>(),fecha3);
+        Heladera heladera1 = new Heladera(direccion1, coordenada1, 150, new ArrayList<>(), fecha1);
+        Heladera heladera2 = new Heladera(direccion2, coordenada2, 200, new ArrayList<>(), fecha2);
+        Heladera heladera3 = new Heladera(direccion3, coordenada3, 300, new ArrayList<>(), fecha3);
 
         Vianda vianda1 = new Vianda("Carne", heladera1, new Colaborador(), true);
         Vianda vianda2 = new Vianda("Papas", heladera2, new Colaborador(), false);
@@ -59,53 +60,48 @@ public class TestMultiplicadores {
     }
 
     @BeforeEach
-    public void seteoColaborador(){
+    public void seteoColaborador() {
 
         List<FormaDeColaboracion> colaboracionesRalizadas = new ArrayList<>();
 
         // FORMAS DE COLABORACION
-        DonacionDinero donacionDinero = new DonacionDinero(1000, TipoColaboracion.DINERO,new Date());
-        DonacionDinero donacionDinero1 =new DonacionDinero(2000, TipoColaboracion.DINERO,new Date());
-        DonacionVianda donacionVianda = new DonacionVianda(10, TipoColaboracion.DONACION_VIANDAS,new Date());
-        HacerseCargoDeHeladera hacerseCargoDeHeladera = new HacerseCargoDeHeladera(heladeras,TipoColaboracion.HACERSE_CARGO_HELADERA);
+        DonacionDinero donacionDinero = new DonacionDinero(1000, TipoColaboracion.DINERO, new Date());
+        DonacionDinero donacionDinero1 = new DonacionDinero(2000, TipoColaboracion.DINERO, new Date());
+        DonacionVianda donacionVianda = new DonacionVianda(10, TipoColaboracion.DONACION_VIANDAS, new Date());
+        HacerseCargoDeHeladera hacerseCargoDeHeladera = new HacerseCargoDeHeladera(heladeras, TipoColaboracion.HACERSE_CARGO_HELADERA);
         // AGREGAMOS FORMAS DE COLABORAR HECHAS AL COLABORADOR
         colaboracionesRalizadas.add(donacionDinero);
         colaboracionesRalizadas.add(donacionDinero1);
         colaboracionesRalizadas.add(donacionVianda);
         colaboracionesRalizadas.add(hacerseCargoDeHeladera);
 
-        colaborador = new Colaborador("Juan","Perez",colaboracionesRalizadas);
+        colaborador = new Colaborador("Juan", "Perez", colaboracionesRalizadas);
     }
 
     @Test
-    public void testSumarPuntosA(){
+    public void testSumarPuntosA() {
         ConfiguracionMultiplicador.getInstance();
         CalculadorPuntos calculadorPuntos = CalculadorPuntos.getInstancia();
         calculadorPuntos.sumarPuntosA(colaborador);
 
-        System.out.println("Puntos totales: "+colaborador.getPuntosTotales());
+        System.out.println("Puntos totales: " + colaborador.getPuntosTotales());
         // 1000*1+2000*1+10*0.5
         assert colaborador.getPuntosTotales() == 3005.0;
     }
 
     @Test
     public void testRecibirMultiplicadorDinero() throws Exception {
-        DonacionDinero donacionDinero= new DonacionDinero(1000, TipoColaboracion.DINERO,new Date());
-
-        System.out.println("Multiplicador antes de modificar: "+donacionDinero.getMultiplicador());
-
+        DonacionDinero donacionDinero = new DonacionDinero(1000, TipoColaboracion.DINERO, new Date());
         ConfiguracionMultiplicador configuracionMultiplicador = ConfiguracionMultiplicador.getInstance();
+
+        System.out.println("Multiplicador de Dinero antes de modificar: " + configuracionMultiplicador.getMultiplicadorDinero());
+
         configuracionMultiplicador.setMultiplicadorDinero(5.0);
 
+        System.out.println("Multiplicador de Dinero despues de modificar: " + configuracionMultiplicador.getMultiplicadorDinero());
 
-
-        // Notificar manualmente la actualización a la instancia de DonacionDinero
-        donacionDinero.update(configuracionMultiplicador, null);
-
-        System.out.println("Multiplicador despues de modificar: "+donacionDinero.getMultiplicador());
-
-        assert donacionDinero.getMultiplicador() == 5.0;
-      }
+        assert configuracionMultiplicador.getMultiplicadorDinero() == 5.0;
+    }
 
 
 }

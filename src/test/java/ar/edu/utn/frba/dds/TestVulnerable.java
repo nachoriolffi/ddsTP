@@ -1,21 +1,20 @@
 package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.colaborador.formas.FormaDeColaboracion;
-import ar.edu.utn.frba.dds.colaborador.formas.RegistroVulnerable;
-import ar.edu.utn.frba.dds.colaborador.formas.TipoColaboracion;
+import ar.edu.utn.frba.dds.colaborador.formasColab.FormaDeColaboracion;
+import ar.edu.utn.frba.dds.colaborador.formasColab.RegistroVulnerable;
+import ar.edu.utn.frba.dds.colaborador.formasColab.TipoColaboracion;
 import ar.edu.utn.frba.dds.heladera.Heladera;
-import ar.edu.utn.frba.dds.heladera.Vianda;
-import ar.edu.utn.frba.dds.utils.Coordenada;
-import ar.edu.utn.frba.dds.utils.Direccion;
+import ar.edu.utn.frba.dds.vianda.Vianda;
+import ar.edu.utn.frba.dds.ubicacionGeografica.Coordenada;
+import ar.edu.utn.frba.dds.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import ar.edu.utn.frba.dds.vulnerable.RegistroDePersonaACargo;
-import ar.edu.utn.frba.dds.vulnerable.Tarjeta;
+import ar.edu.utn.frba.dds.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.vulnerable.Vulnerable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.function.Executable;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -1,7 +1,11 @@
 package ar.edu.utn.frba.dds.heladera;
 
-import ar.edu.utn.frba.dds.utils.Coordenada;
-import ar.edu.utn.frba.dds.utils.Direccion;
+import ar.edu.utn.frba.dds.heladera.alerta.RegistroDeAlerta;
+import ar.edu.utn.frba.dds.heladera.receptor.ReceptorMovimiento;
+import ar.edu.utn.frba.dds.heladera.receptor.ReceptorTemperatura;
+import ar.edu.utn.frba.dds.ubicacionGeografica.Coordenada;
+import ar.edu.utn.frba.dds.ubicacionGeografica.Direccion;
+import ar.edu.utn.frba.dds.vianda.Vianda;
 import lombok.Getter;
 import lombok.Setter;
 
