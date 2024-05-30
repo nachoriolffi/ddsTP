@@ -36,7 +36,7 @@ public class TestIntercambioPuntos
     }
     @BeforeEach
     public void seteoColaborador(){
-        colaborador= new Colaborador("Juan","Perez",75500.0);
+        colaborador= new Colaborador();
     }
     @Test
     public void TestIntercambiarPuntos(){

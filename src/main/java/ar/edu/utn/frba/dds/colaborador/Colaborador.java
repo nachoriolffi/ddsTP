@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.colaborador;
 
+import ar.edu.utn.frba.dds.colaborador.calculoPuntos.CalculadorPuntos;
 import ar.edu.utn.frba.dds.colaborador.formasColab.Rubro;
 import ar.edu.utn.frba.dds.intercambioPuntos.Oferta;
 import ar.edu.utn.frba.dds.recomendacionPuntos.APIRecomendacionHeladeras;
@@ -43,7 +44,7 @@ public class Colaborador {
     private TipoPersona tipoPersona;
     private Contacto contacto;
     private APIRecomendacionHeladeras apiRecomendacionHeladeras;
-    private Double puntosTotales;
+    //private Double puntosTotales;
     private Double puntosTotalesUsados;
     private Integer numeroDocumento; //nuevo requerimiento para carga masiva
     private TipoDocumento tipoDocumento; //nuevo requerimiento para carga masiva
@@ -63,14 +64,12 @@ public class Colaborador {
         this.nombre = nombre;
         this.apellido = apellido;
         this.colaboracionesRealizadas = hechas;
-        this.puntosTotales= (double) 0;
         this.puntosTotalesUsados= (double) 0;
     }
 
-    public Colaborador(String nombre,String apellido,Double puntosTotales){
+    public Colaborador(String nombre,String apellido){
         this.nombre=nombre;
         this.apellido=apellido;
-        this.puntosTotales=puntosTotales;
         this.puntosTotalesUsados= (double) 0;
         this.ofertasRegistradas = new ArrayList<Oferta>();
     }
@@ -125,9 +124,9 @@ public class Colaborador {
         this.contacto = contacto;
     }
 
-    public void sumarPuntos(Double puntos) {
-        this.puntosTotales += puntos;
-    }
+    //public void sumarPuntos(Double puntos) {
+    //    this.puntosTotales += puntos;
+    //}
 
     public void cargarRespuestas(CuestionarioRespondido cuestionarioRespondido) {
         for (int i = 0; i < cuestionarioRespondido.getRespuestas().size(); i++) {
@@ -163,7 +162,7 @@ public class Colaborador {
     }
 
     public Double puntosActualesDisponibles(){
-        return this.puntosTotales - this.puntosTotalesUsados;
+        return CalculadorPuntos.getInstancia().sumarPuntosA(this) - this.puntosTotalesUsados;
     }
     public void agregarOfertasCanjeadas(List<Oferta> ofertas){
         this.ofertasRegistradas.addAll(ofertas);

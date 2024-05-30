@@ -15,7 +15,7 @@ public class CalculadorPuntos {
         return instancia;
     }
     // sumamos puntos al colaborador de todas las colaboraciones realizadas
-    public void sumarPuntosA(Colaborador colaborador) {
+    public Double sumarPuntosA(Colaborador colaborador) {
 
         double puntos = 0.0;
 
@@ -23,7 +23,8 @@ public class CalculadorPuntos {
             puntos += forma.sumarPuntosA(colaborador);
         }
 
-        colaborador.sumarPuntos(puntos);
+        //colaborador.sumarPuntos(puntos);
+        return null;
     }
 
 

@@ -130,7 +130,9 @@ public class TestHeladera {
     public void TestReceptoresTemperaturaFueraRango(){
         heladera1.setModelo(modeloHeladera);
         System.out.println(heladera1.getEstaActiva().equals(Boolean.TRUE));
-        heladera1.setReceptorTemperatura(receptorTemperatura);
+
+
+        //heladera1.setReceptorTemperatura(receptorTemperatura);
 
         receptorTemperatura.evaluarTemperatura("19.0",heladera1);
 
@@ -145,7 +147,7 @@ public class TestHeladera {
 
         heladera1.setModelo(modeloHeladera);
         System.out.println(heladera1.getEstaActiva());
-        heladera1.setReceptorTemperatura(receptorTemperatura);
+        //heladera1.setReceptorTemperatura(receptorTemperatura);
         receptorTemperatura.evaluarTemperatura("14.0",heladera1);
         System.out.println(heladera1.getEstaActiva().equals(Boolean.TRUE));
         System.out.println(receptorTemperatura.getTemperaturasLeidas().get(0));

@@ -13,20 +13,19 @@ import java.util.List;
 @Setter
 public class RegistroVulnerable implements FormaDeColaboracion{
 
-    private TipoColaboracion tipoColaboracion;
     private List<Tarjeta> tarjetasDonadas;
     private Integer cantidadTarjetas;
     private Date fechaColaboracion;
 
-    public RegistroVulnerable(List<Tarjeta> tarjetasDonadas, TipoColaboracion tipoDonacion) {
+    public RegistroVulnerable(List<Tarjeta> tarjetasDonadas) {
         this.tarjetasDonadas = tarjetasDonadas;
-        this.tipoColaboracion = tipoDonacion;
+
         this.fechaColaboracion = new Date();
         this.cantidadTarjetas = tarjetasDonadas.size();
     }
 
-    public RegistroVulnerable(Integer cantidad, TipoColaboracion tipoDonacion, Date fechaColaboracion) {
-        this.tipoColaboracion = tipoDonacion;
+    public RegistroVulnerable(Integer cantidad, Date fechaColaboracion) {
+
         this.fechaColaboracion = fechaColaboracion;
         this.cantidadTarjetas = cantidad;
     };

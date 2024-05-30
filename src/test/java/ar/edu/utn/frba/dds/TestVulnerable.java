@@ -97,7 +97,7 @@ public class TestVulnerable {
     @Test
     public void testVulnerable() {
 
-        RegistroVulnerable registroVulnerable = new RegistroVulnerable(tarjetas, TipoColaboracion.ENTREGA_TARJETAS);
+        RegistroVulnerable registroVulnerable = new RegistroVulnerable(tarjetas);
         assert registroVulnerable.getCantidadTarjetas() == 2;
     }
     @Test

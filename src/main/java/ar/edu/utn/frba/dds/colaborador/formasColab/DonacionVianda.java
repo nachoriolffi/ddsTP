@@ -16,11 +16,9 @@ public class DonacionVianda implements FormaDeColaboracion {
 
     private List<Vianda> viandas;
     private Integer cantidadViandas;
-    private TipoColaboracion tipoColaboracion;
     private Date fechaColaboracion;
 
-    public DonacionVianda(Integer cantidad, TipoColaboracion tipoDonacion, Date fechaColaboracion) {
-        this.tipoColaboracion = tipoDonacion;
+    public DonacionVianda(Integer cantidad, Date fechaColaboracion) {
         this.fechaColaboracion = fechaColaboracion;
         this.cantidadViandas = cantidad;
 

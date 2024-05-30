@@ -3,12 +3,13 @@ package ar.edu.utn.frba.dds;
 import ar.edu.utn.frba.dds.lectorCSV.LectorColaborador;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
 
 
 public class TestLecturaCargaMasiva {
 
     @Test
-    public void TestCargaMasiva(){
+    public void TestCargaMasiva() throws FileNotFoundException {
         String path = "src/test/java/ar/edu/utn/frba/dds/archivo_ejemplo.csv";
         LectorColaborador lector= new LectorColaborador();
 

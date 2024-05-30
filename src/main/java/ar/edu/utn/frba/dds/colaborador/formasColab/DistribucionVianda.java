@@ -18,12 +18,10 @@ public class DistribucionVianda implements FormaDeColaboracion{
     private Integer cantidadViandas;
     private String motivo;
     private Date fechaDistribucion;
-    private TipoColaboracion tipoColaboracion;
     private Date fechaColaboracion;
 
 
-    public DistribucionVianda(Integer cantidad, TipoColaboracion tipoDonacion, Date fechaColaboracion) {
-        this.tipoColaboracion = tipoDonacion;
+    public DistribucionVianda(Integer cantidad, Date fechaColaboracion) {
         this.fechaColaboracion = fechaColaboracion;
         this.cantidadViandas = cantidad;
     };

@@ -16,22 +16,19 @@ public class DonacionDinero implements FormaDeColaboracion,Observer  {
     private Date fecha;
     private Float monto;
     private Integer frecuencia;
-    private TipoColaboracion tipoColaboracion;
     private Date fechaColaboracion;
     private Double multiplicador;
     private Observable configuracionObservable;
 
-    public DonacionDinero(Integer cantidad, TipoColaboracion tipoColaboracion, Date fechaColaboracion) {
+    public DonacionDinero(Integer cantidad, Date fechaColaboracion) {
         this.monto = Float.valueOf(cantidad);
         this.fecha = fechaColaboracion;
-        this.tipoColaboracion = tipoColaboracion;
         this.multiplicador = 3.0;
     };
 
-    public DonacionDinero(Integer cantidad, TipoColaboracion tipoColaboracion, Date fechaColaboracion,Observable configuracionObservable){
+    public DonacionDinero(Integer cantidad, Date fechaColaboracion,Observable configuracionObservable){
         this.monto = Float.valueOf(cantidad);
         this.fecha = fechaColaboracion;
-        this.tipoColaboracion = tipoColaboracion;
         this.multiplicador=3.0;
         this.configuracionObservable = configuracionObservable;
         this.configuracionObservable.addObserver(this);

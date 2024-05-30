@@ -23,8 +23,6 @@ public class Heladera {
     private Integer capacidad;
     private Date fechaPuestaFunc;
     private List<Vianda> viandas;
-    private ReceptorTemperatura receptorTemperatura;
-    private ReceptorMovimiento receptorMovimiento;
     private List<RegistroDeAlerta> registrosDeAlerta;
     private Boolean estaActiva;
     private ModeloHeladera modelo;

@@ -47,7 +47,7 @@ public class TestCorreo {
         mensaje = new Mensaje("Titulo de Mensaje para Gaston", "Holaaa Gaston, ¿cómo va?");
         destinatario = new Colaborador("Nombre del destinatario", "Apellido del destinatario",
                 new ArrayList<>(), new ArrayList<>(), null, null,
-                new Contacto("mail","iriolffi@gmail.com"));
+                new Contacto("mail","federperez@frba.utn.edu.ar"));
     }
 
     @Test

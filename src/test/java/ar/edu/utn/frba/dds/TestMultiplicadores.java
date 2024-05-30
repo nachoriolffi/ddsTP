@@ -59,15 +59,17 @@ public class TestMultiplicadores {
 
     }
 
+    // TODO
+    // tenemos que cambiar estos test al haber borrado el dato de puntos totales y chequear que mas rompe
     @BeforeEach
     public void seteoColaborador() {
 
         List<FormaDeColaboracion> colaboracionesRalizadas = new ArrayList<>();
 
         // FORMAS DE COLABORACION
-        DonacionDinero donacionDinero = new DonacionDinero(1000, TipoColaboracion.DINERO, new Date());
-        DonacionDinero donacionDinero1 = new DonacionDinero(2000, TipoColaboracion.DINERO, new Date());
-        DonacionVianda donacionVianda = new DonacionVianda(10, TipoColaboracion.DONACION_VIANDAS, new Date());
+        DonacionDinero donacionDinero = new DonacionDinero(1000, new Date());
+        DonacionDinero donacionDinero1 = new DonacionDinero(2000, new Date());
+        DonacionVianda donacionVianda = new DonacionVianda(10, new Date());
         HacerseCargoDeHeladera hacerseCargoDeHeladera = new HacerseCargoDeHeladera(heladeras, TipoColaboracion.HACERSE_CARGO_HELADERA);
         // AGREGAMOS FORMAS DE COLABORAR HECHAS AL COLABORADOR
         colaboracionesRalizadas.add(donacionDinero);
@@ -91,7 +93,7 @@ public class TestMultiplicadores {
 
     @Test
     public void testRecibirMultiplicadorDinero() throws Exception {
-        DonacionDinero donacionDinero= new DonacionDinero(1000, TipoColaboracion.DINERO,new Date());
+        DonacionDinero donacionDinero= new DonacionDinero(1000,new Date());
 
         System.out.println("Multiplicador antes de modificar: "+donacionDinero.getMultiplicador());
 

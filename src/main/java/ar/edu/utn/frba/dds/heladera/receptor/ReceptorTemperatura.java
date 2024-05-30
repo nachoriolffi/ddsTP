@@ -12,6 +12,8 @@ import java.util.List;
 
 public class ReceptorTemperatura {
 
+    private Heladera heladera;
+
     private List<Float> temperaturasLeidas;
 
     public ReceptorTemperatura(List<Float> temperaturasLeidas) {

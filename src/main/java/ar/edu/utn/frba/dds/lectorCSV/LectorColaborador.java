@@ -90,17 +90,17 @@ public class LectorColaborador extends LectorDeCSV {
         FormaDeColaboracion colaboracion = null;
         switch (formaDeColaboracion) {
             case DINERO:
-                colaboracion = new DonacionDinero(cantidad, formaDeColaboracion, fechaColaboracion);
+                colaboracion = new DonacionDinero(cantidad, fechaColaboracion);
                 break;
             case DONACION_VIANDAS:
-                colaboracion = new DonacionVianda(cantidad, formaDeColaboracion, fechaColaboracion);
+                colaboracion = new DonacionVianda(cantidad, fechaColaboracion);
 
                 break;
             case REDISTRIBUCION_VIANDAS:
-                colaboracion = new DistribucionVianda(cantidad, formaDeColaboracion, fechaColaboracion);
+                colaboracion = new DistribucionVianda(cantidad, fechaColaboracion);
                 break;
             case ENTREGA_TARJETAS:
-                colaboracion = new RegistroVulnerable(cantidad, formaDeColaboracion, fechaColaboracion);
+                colaboracion = new RegistroVulnerable(cantidad, fechaColaboracion);
                 break;
         }
         return colaboracion;
