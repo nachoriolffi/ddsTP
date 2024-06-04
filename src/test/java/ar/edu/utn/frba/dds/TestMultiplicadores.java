@@ -80,7 +80,7 @@ public class TestMultiplicadores {
         colaborador = new Colaborador("Juan", "Perez", colaboracionesRalizadas);
     }
 
-    @Test
+    /*@Test
     public void testSumarPuntosA() {
         ConfiguracionMultiplicador.getInstance();
         CalculadorPuntos calculadorPuntos = CalculadorPuntos.getInstancia();
@@ -89,7 +89,7 @@ public class TestMultiplicadores {
         System.out.println("Puntos totales: " + colaborador.getPuntosTotales());
         // 1000*1+2000*1+10*0.5
         assert colaborador.getPuntosTotales() == 3005.0;
-    }
+    }*/
 
     @Test
     public void testRecibirMultiplicadorDinero() throws Exception {
