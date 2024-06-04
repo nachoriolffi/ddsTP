@@ -88,8 +88,12 @@ public class TestMultiplicadores {
 
         System.out.println("Puntos totales: " + calculadorPuntos.sumarPuntosA(colaborador));
         // 1000*1+2000*1+10*0.5
+
         assert calculadorPuntos.sumarPuntosA(colaborador) == 3005.0;
     }
+
+
+
 
     @Test
     public void testRecibirMultiplicadorDinero() throws Exception {

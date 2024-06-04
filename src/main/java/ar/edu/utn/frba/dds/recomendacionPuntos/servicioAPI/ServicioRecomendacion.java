@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.recomendacionPuntos.servicioAPI;
 
-import ar.edu.utn.frba.dds.recomendacionPuntos.servicioAPI.entities.PuntoRecomendado;
+import ar.edu.utn.frba.dds.ubicacionGeografica.Coordenada;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -31,10 +31,10 @@ public class ServicioRecomendacion {
         return instancia;
     }
 
-    public List<PuntoRecomendado> puntosRecomendados(Double longitud,Double latitud, Integer radio) throws IOException {
+    public List<Coordenada> puntosRecomendados(Double longitud, Double latitud, Integer radio) throws IOException {
         ExternalRecomendacionHeladeras externalRecomendacionHeladeras = this.retrofit.create(ExternalRecomendacionHeladeras.class);
-        Call<List<PuntoRecomendado>> requestPuntosRecomendados = externalRecomendacionHeladeras.puntosRecomendados(longitud,latitud,radio);
-        Response<List<PuntoRecomendado>> responseListaPuntos =requestPuntosRecomendados.execute(); // aca ya se ejecuta la request
+        Call<List<Coordenada>> requestPuntosRecomendados = externalRecomendacionHeladeras.puntosRecomendados(longitud,latitud,radio);
+        Response<List<Coordenada>> responseListaPuntos =requestPuntosRecomendados.execute(); // aca ya se ejecuta la request
         return responseListaPuntos.body();
     }
 }
