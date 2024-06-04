@@ -84,11 +84,11 @@ public class TestMultiplicadores {
     public void testSumarPuntosA() {
         ConfiguracionMultiplicador.getInstance();
         CalculadorPuntos calculadorPuntos = CalculadorPuntos.getInstancia();
-        calculadorPuntos.sumarPuntosA(colaborador);
 
-        System.out.println("Puntos totales: " + colaborador.getPuntosTotales());
+
+        System.out.println("Puntos totales: " + calculadorPuntos.sumarPuntosA(colaborador));
         // 1000*1+2000*1+10*0.5
-        assert colaborador.getPuntosTotales() == 3005.0;
+        assert calculadorPuntos.sumarPuntosA(colaborador) == 3005.0;
     }
 
     @Test

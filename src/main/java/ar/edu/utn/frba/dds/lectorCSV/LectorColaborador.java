@@ -2,6 +2,8 @@ package ar.edu.utn.frba.dds.lectorCSV;
 
 import ar.edu.utn.frba.dds.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.colaborador.formasColab.*;
+import ar.edu.utn.frba.dds.colaborador.formasColab.factoryFormasDeColoaboracion.FormaDeColaboracionFactory;
+import ar.edu.utn.frba.dds.colaborador.formasColab.factoryFormasDeColoaboracion.FormaDeColaboracionFactoryProvider;
 import ar.edu.utn.frba.dds.contacto.ServicioMail;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import lombok.Getter;
@@ -87,23 +89,9 @@ public class LectorColaborador extends LectorDeCSV {
     }
 
     public FormaDeColaboracion obtenerColaboracion(TipoColaboracion formaDeColaboracion, Integer cantidad, Date fechaColaboracion) {
-        FormaDeColaboracion colaboracion = null;
-        switch (formaDeColaboracion) {
-            case DINERO:
-                colaboracion = new DonacionDinero(cantidad, fechaColaboracion);
-                break;
-            case DONACION_VIANDAS:
-                colaboracion = new DonacionVianda(cantidad, fechaColaboracion);
-
-                break;
-            case REDISTRIBUCION_VIANDAS:
-                colaboracion = new DistribucionVianda(cantidad, fechaColaboracion);
-                break;
-            case ENTREGA_TARJETAS:
-                colaboracion = new RegistroVulnerable(cantidad, fechaColaboracion);
-                break;
-        }
-        return colaboracion;
+        FormaDeColaboracionFactoryProvider factoryProvider = new FormaDeColaboracionFactoryProvider();
+        FormaDeColaboracionFactory factory = factoryProvider.getFactory(formaDeColaboracion);
+        return factory.create(cantidad, fechaColaboracion);
     }
 
 }
