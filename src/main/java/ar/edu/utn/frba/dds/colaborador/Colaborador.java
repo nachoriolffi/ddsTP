@@ -3,12 +3,12 @@ package ar.edu.utn.frba.dds.colaborador;
 import ar.edu.utn.frba.dds.colaborador.calculoPuntos.CalculadorPuntos;
 import ar.edu.utn.frba.dds.colaborador.formasColab.Rubro;
 import ar.edu.utn.frba.dds.intercambioPuntos.Oferta;
-import ar.edu.utn.frba.dds.recomendacionPuntos.APIRecomendacionHeladeras;
+import ar.edu.utn.frba.dds.recomendacionPuntos.IRecomendacionPuntos;
 import ar.edu.utn.frba.dds.colaborador.formasColab.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.contacto.Contacto;
 import ar.edu.utn.frba.dds.contacto.MedioDeComunicacion;
 import ar.edu.utn.frba.dds.cuestionario.CuestionarioRespondido;
-import ar.edu.utn.frba.dds.recomendacionPuntos.AdapRecomendacionPuntos;
+import ar.edu.utn.frba.dds.recomendacionPuntos.AServicioRecomendacionPuntos;
 import ar.edu.utn.frba.dds.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.ubicacionGeografica.Direccion;
 
@@ -43,7 +43,7 @@ public class Colaborador {
     private Rubro rubro;
     private TipoPersona tipoPersona;
     private Contacto contacto;
-    private APIRecomendacionHeladeras apiRecomendacionHeladeras;
+    private IRecomendacionPuntos iRecomendacionPuntos;
     //private Double puntosTotales;
     private Double puntosTotalesUsados;
     private Integer numeroDocumento; //nuevo requerimiento para carga masiva
@@ -57,7 +57,7 @@ public class Colaborador {
         this.formasDeColaboracion = new ArrayList<>();
         this.colaboracionesRealizadas = new ArrayList<>();
         this.puntosTotalesUsados= (double) 0;
-        this.apiRecomendacionHeladeras = new AdapRecomendacionPuntos();
+        this.iRecomendacionPuntos = new AServicioRecomendacionPuntos();
     }
 
     public Colaborador(String nombre,String apellido,List<FormaDeColaboracion> hechas){
@@ -169,7 +169,7 @@ public class Colaborador {
     }
 
     public List<Coordenada> obtenerPuntosRecomendadosParaHeladera(Double longitud, Double latitud, Integer radio) throws IOException {
-        return apiRecomendacionHeladeras.recomendarPuntos(longitud,latitud,radio);
+        return iRecomendacionPuntos.recomendarPuntos(longitud,latitud,radio);
     }
 }
 

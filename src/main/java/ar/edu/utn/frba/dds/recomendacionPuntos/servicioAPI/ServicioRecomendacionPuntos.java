@@ -10,13 +10,13 @@ import java.io.IOException;
 import java.util.List;
 
 // uso del patron singleton
-public class ServicioRecomendacion {
+public class ServicioRecomendacionPuntos {
 
-    private static  ServicioRecomendacion instancia = null;
+    private static ServicioRecomendacionPuntos instancia = null;
     private static final String APIUrl = "https://71271dbf-24f0-4063-9962-775312a601c7.mock.pstmn.io/api/"; // se debe poder sacar de un archivo de configuracion
-    private Retrofit retrofit;
+    private final Retrofit retrofit;
 
-    private ServicioRecomendacion(){
+    private ServicioRecomendacionPuntos(){
         // uso del patron builder
         this.retrofit = new Retrofit.Builder().
                 baseUrl(APIUrl).
@@ -24,16 +24,16 @@ public class ServicioRecomendacion {
                 build();
     }
 
-    public static ServicioRecomendacion getInstancia(){
+    public static ServicioRecomendacionPuntos getInstancia(){
         if (instancia == null){
-            instancia = new ServicioRecomendacion();
+            instancia = new ServicioRecomendacionPuntos();
         }
         return instancia;
     }
 
     public List<Coordenada> puntosRecomendados(Double longitud, Double latitud, Integer radio) throws IOException {
-        ExternalRecomendacionHeladeras externalRecomendacionHeladeras = this.retrofit.create(ExternalRecomendacionHeladeras.class);
-        Call<List<Coordenada>> requestPuntosRecomendados = externalRecomendacionHeladeras.puntosRecomendados(longitud,latitud,radio);
+        IServicioRecomendacionPuntos IServicioRecomendacionPuntos = this.retrofit.create(IServicioRecomendacionPuntos.class);
+        Call<List<Coordenada>> requestPuntosRecomendados = IServicioRecomendacionPuntos.puntosRecomendados(longitud,latitud,radio);
         Response<List<Coordenada>> responseListaPuntos =requestPuntosRecomendados.execute(); // aca ya se ejecuta la request
         return responseListaPuntos.body();
     }
