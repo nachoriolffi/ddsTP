@@ -7,10 +7,9 @@ import retrofit2.http.Query;
 
 import java.util.List;
 // Interfaz para API REST
-public interface ExternalRecomendacionHeladeras {
+public interface IServicioRecomendacionPuntos {
     @GET("puntosRecomendados")
     Call<List<Coordenada>> puntosRecomendados(@Query("latitud") double latitud,
                                               @Query("longitud") double longitud,
                                               @Query("radio")double radio);
-
 }

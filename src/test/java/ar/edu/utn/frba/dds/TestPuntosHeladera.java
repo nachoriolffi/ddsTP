@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.recomendacionPuntos.servicioAPI.ServicioRecomendacion;
+import ar.edu.utn.frba.dds.recomendacionPuntos.servicioAPI.ServicioRecomendacionPuntos;
 import ar.edu.utn.frba.dds.ubicacionGeografica.Coordenada;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -28,8 +28,8 @@ public class TestPuntosHeladera {
     @Test
     public void testRecomendarPuntos() throws IOException, AssertionError {
 
-        ServicioRecomendacion servicioRecomendacion = ServicioRecomendacion.getInstancia();
-        List<Coordenada> puntosRecomendados = servicioRecomendacion.puntosRecomendados(65.000, 12.04550, 2000);
+        ServicioRecomendacionPuntos servicioRecomendacionPuntos = ServicioRecomendacionPuntos.getInstancia();
+        List<Coordenada> puntosRecomendados = servicioRecomendacionPuntos.puntosRecomendados(65.000, 12.04550, 2000);
 
         assert puntosRecomendados.get(0).getLongitud().equals(coordenadas.get(0).getLongitud());
         assert puntosRecomendados.get(0).getLatitud().equals(coordenadas.get(0).getLatitud());
