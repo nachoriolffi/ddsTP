@@ -1,19 +1,27 @@
 package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.contacto.AdapterCorreo;
+import ar.edu.utn.frba.dds.recomendacionPuntos.AServicioRecomendacionPuntos;
 import ar.edu.utn.frba.dds.recomendacionPuntos.servicioAPI.ServicioRecomendacionPuntos;
 import ar.edu.utn.frba.dds.ubicacionGeografica.Coordenada;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 public class TestPuntosHeladera {
     static List<Coordenada> coordenadas;
+    AServicioRecomendacionPuntos mockAdapter;
 
+    ServicioRecomendacionPuntos servicioRecomendacionPuntos;
     @BeforeEach
     public void Declaraciones() {
         coordenadas = new ArrayList<Coordenada>();
@@ -23,17 +31,19 @@ public class TestPuntosHeladera {
         coordenadas.add(new Coordenada(41.390359, 2.173611));
         coordenadas.add(new Coordenada(41.385250, 2.180333));
         coordenadas.add(new Coordenada(41.382167, 2.175833));
+
+        mockAdapter = Mockito.mock(AServicioRecomendacionPuntos.class);
+
+        servicioRecomendacionPuntos = mockAdapter.servicioRecomendacionPuntos.getInstancia();
     }
 
     @Test
     public void testRecomendarPuntos() throws IOException, AssertionError {
 
-        ServicioRecomendacionPuntos servicioRecomendacionPuntos = ServicioRecomendacionPuntos.getInstancia();
         List<Coordenada> puntosRecomendados = servicioRecomendacionPuntos.puntosRecomendados(65.000, 12.04550, 2000);
-
+        verify(mockAdapter,times(1)).servicioRecomendacionPuntos.puntosRecomendados(65.000, 12.04550, 2000);
         assert puntosRecomendados.get(0).getLongitud().equals(coordenadas.get(0).getLongitud());
         assert puntosRecomendados.get(0).getLatitud().equals(coordenadas.get(0).getLatitud());
-
 
     }
 

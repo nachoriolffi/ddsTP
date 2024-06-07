@@ -9,7 +9,7 @@ import java.util.List;
 public class AServicioRecomendacionPuntos implements IRecomendacionPuntos {
 
    // Servicio que estoy adaptando
-    ServicioRecomendacionPuntos servicioRecomendacionPuntos = ServicioRecomendacionPuntos.getInstancia();
+   public ServicioRecomendacionPuntos servicioRecomendacionPuntos = ServicioRecomendacionPuntos.getInstancia();
 
     @Override
     public List<Coordenada> recomendarPuntos(Double longitud, Double latitud, Integer radio) throws IOException {
