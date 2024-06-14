@@ -15,7 +15,7 @@ import java.util.Map;
 public class AdapterPDF implements InterfaceAdapterPDF{
         public void Exportar(Exportable exportable) throws FileNotFoundException {
             exportToPdf("C:\\Users\\Usuario\\Desktop\\exportar.pdf", exportable.datos());
-            addTableToDocument(exportable.datos(), new Document(new PdfDocument(new PdfWriter("C:\\Users\\Usuario\\Desktop\\exportar.pdf")));
+            addTableToDocument(exportable.datos(), new Document(new PdfDocument(new PdfWriter("C:\\Users\\Usuario\\Desktop\\exportar.pdf"))));
         }
 
 
