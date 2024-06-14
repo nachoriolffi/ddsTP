@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.heladera;
 
-import ar.edu.utn.frba.dds.heladera.alerta.RegistroDeAlerta;
+import ar.edu.utn.frba.dds.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.heladera.alerta.TipoAlerta;
 
 public class Accionador {
@@ -14,7 +14,7 @@ public class Accionador {
         return instancia;
     }
     public void registrarAlerta(Heladera heladera, TipoAlerta tipoAlerta) {
-        RegistroDeAlerta registro = new RegistroDeAlerta(tipoAlerta);
+        Incidente registro = new Incidente(tipoAlerta);
         heladera.agregarRegistroDeAlerta(registro);
     }
 }
