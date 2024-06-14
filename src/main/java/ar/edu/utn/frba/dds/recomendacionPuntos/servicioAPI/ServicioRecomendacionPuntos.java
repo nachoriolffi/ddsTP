@@ -16,7 +16,7 @@ public class ServicioRecomendacionPuntos {
     private static final String APIUrl = "https://71271dbf-24f0-4063-9962-775312a601c7.mock.pstmn.io/api/"; // se debe poder sacar de un archivo de configuracion
     private final Retrofit retrofit;
 
-    private ServicioRecomendacionPuntos(){
+    public  ServicioRecomendacionPuntos(){
         // uso del patron builder
         this.retrofit = new Retrofit.Builder().
                 baseUrl(APIUrl).

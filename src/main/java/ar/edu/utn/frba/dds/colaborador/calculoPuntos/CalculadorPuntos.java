@@ -24,7 +24,7 @@ public class CalculadorPuntos {
         }
 
         //colaborador.sumarPuntos(puntos);
-        return null;
+        return puntos;
     }
 
 
