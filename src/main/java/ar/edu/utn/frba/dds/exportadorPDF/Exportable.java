@@ -5,8 +5,7 @@ import java.util.Map;
 
 public interface Exportable {
 
-    default Map<String, List<String>> datos(){
-        return null;
-    };
+    public Map<String, List<String>> datos();
+
 
 }

@@ -10,5 +10,12 @@ public class Documento implements Exportable {
     @Getter
     private Map<String, List<String>> datos;
 
+    public Documento(Map<String, List<String>> datos) {
+        this.datos = datos;
+    }
 
+    @Override
+    public Map<String, List<String>> datos() {
+        return this.getDatos();
+    }
 }
