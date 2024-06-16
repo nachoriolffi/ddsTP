@@ -14,6 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 public class Tarjeta {
+    
     private Integer idTarjeta;
     private List<UsoTarjeta> registroUsos;
     private Vulnerable personaAsociada;

@@ -33,16 +33,25 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.itextpdf</groupId>
-            <artifactId>kernel</artifactId>
-            <version>7.1.15</version>
-        </dependency>
+        <!-- iText PDF -->
 
         <dependency>
             <groupId>com.itextpdf</groupId>
-            <artifactId>layout</artifactId>
-            <version>7.1.15</version>
+            <artifactId>itext7-core</artifactId>
+            <version>8.0.4</version>
+            <type>pom</type>
+        </dependency>
+
+        <!-- BOUNCY CASTLE -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.68</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcpkix-jdk15on</artifactId>
+            <version>1.68</version>
         </dependency>
 
   <!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
