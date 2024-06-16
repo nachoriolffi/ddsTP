@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.exportadorPDF;
 
+import java.io.FileNotFoundException;
+
 public interface EstrategiaExportacion {
-    default Reporte exportar(Exportable exportable){
-        return new Reporte();
-    };
+    public Reporte exportar(Exportable exportable) throws FileNotFoundException;
 }

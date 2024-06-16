@@ -1,8 +1,12 @@
 package ar.edu.utn.frba.dds.exportadorPDF.adapterPDF;
 
+import ar.edu.utn.frba.dds.exportadorPDF.EstrategiaExportacion;
+import ar.edu.utn.frba.dds.exportadorPDF.Exportable;
 import ar.edu.utn.frba.dds.exportadorPDF.Reporte;
 
-public class ExportarAPdf {
+import java.io.FileNotFoundException;
+
+public class ExportarAPdf implements EstrategiaExportacion {
 
     private InterfaceAdapterPDF adapterPDF;
 
@@ -10,10 +14,11 @@ public class ExportarAPdf {
         this.adapterPDF = adapterPDF;
     }
 
-    public Reporte exportar() {
-        //adapterPDF.exportar();
-        return null;
-    }
+    @Override
+    public Reporte exportar(Exportable exportable) throws FileNotFoundException {
+      return  adapterPDF.exportar(exportable);
+
+   }
 
 
 }

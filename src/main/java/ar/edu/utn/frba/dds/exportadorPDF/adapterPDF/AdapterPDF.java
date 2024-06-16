@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.exportadorPDF.adapterPDF;
 
+import ar.edu.utn.frba.dds.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.exportadorPDF.Exportable;
+import ar.edu.utn.frba.dds.exportadorPDF.Reporte;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
@@ -9,14 +11,19 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.UnitValue;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 public class AdapterPDF implements InterfaceAdapterPDF{
-        public void Exportar(Exportable exportable) throws FileNotFoundException {
-            exportToPdf("C:\\Users\\Usuario\\Desktop\\exportar.pdf", exportable.datos());
+
+        private String pathDocumento="C:\\Users\\Usuario\\Desktop\\exportar.pdf";
+
+       /* public String Exportar(Exportable exportable) throws FileNotFoundException {
+            exportToPdf(pathDocumento, exportable.datos());
             addTableToDocument(exportable.datos(), new Document(new PdfDocument(new PdfWriter("C:\\Users\\Usuario\\Desktop\\exportar.pdf"))));
-        }
+            return pathDocumento;
+        }*/
 
 
     public static void exportToPdf(String dest, Map<String, List<String>>... sections) throws FileNotFoundException {
@@ -55,6 +62,14 @@ public class AdapterPDF implements InterfaceAdapterPDF{
 
         // Añadir la tabla al documento
         document.add(table);
+    }
+
+
+    @Override
+    public Reporte exportar(Exportable exportable ) throws FileNotFoundException {
+        exportToPdf(pathDocumento, exportable.datos());
+        addTableToDocument(exportable.datos(), new Document(new PdfDocument(new PdfWriter("C:\\Users\\Usuario\\Desktop\\exportar.pdf"))));
+        return new Reporte(pathDocumento);
     }
 }
 

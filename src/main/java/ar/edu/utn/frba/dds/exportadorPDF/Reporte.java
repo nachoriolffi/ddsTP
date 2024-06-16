@@ -8,9 +8,9 @@ public class Reporte {
 
     private Date fechaCreacion;
 
-    public Reporte(String pathDocumento, Date fechaCreacion) {
+    public Reporte(String pathDocumento) {
         this.pathDocumento = pathDocumento;
-        this.fechaCreacion = fechaCreacion;
+        this.fechaCreacion = new Date();
     }
 
     public Reporte() {
