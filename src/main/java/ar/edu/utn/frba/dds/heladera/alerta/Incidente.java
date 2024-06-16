@@ -11,16 +11,11 @@ import java.util.Date;
 public class Incidente {
     private Date fecha;
 
-    private TipoAlerta tipoAlerta;
-
-    private TipoIncidente tipoIncidente;
-
-    private Colaborador colaborador;
-
-    private String pathFoto;
-
     private String descripcion;
-
+    private String pathFoto;
+    private TipoIncidente tipoIncidente;
+    private TipoAlerta tipoAlerta;
+    private Colaborador colaborador;
 
     public Incidente(TipoAlerta tipoAlerta) {
         this.fecha = new Date();
@@ -29,6 +24,15 @@ public class Incidente {
 
     public Incidente() {
         this.fecha = new Date();
+    }
+
+    public Incidente(String descripcion, String pathFoto, TipoIncidente tipoIncidente, TipoAlerta tipoAlerta, Colaborador colaborador) {
+        this.fecha = new Date();
+        this.descripcion = descripcion;
+        this.pathFoto = pathFoto;
+        this.tipoIncidente = tipoIncidente;
+        this.tipoAlerta = tipoAlerta;
+        this.colaborador = colaborador;
     }
 
 }

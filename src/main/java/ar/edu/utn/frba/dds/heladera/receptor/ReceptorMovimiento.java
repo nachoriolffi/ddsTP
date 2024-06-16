@@ -10,8 +10,8 @@ public class ReceptorMovimiento {
         this.heladera = heladera;
     }
 
-    public ReceptorMovimiento() {
-    }
+   public void evaluarDatosSensor(String dato,Heladera heladera){
 
+   }
 
 }

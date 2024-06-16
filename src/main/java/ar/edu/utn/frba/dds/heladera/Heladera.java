@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.heladera;
 
 import ar.edu.utn.frba.dds.heladera.alerta.Incidente;
+import ar.edu.utn.frba.dds.heladera.receptor.ReceptorMovimiento;
+import ar.edu.utn.frba.dds.heladera.receptor.ReceptorTemperatura;
 import ar.edu.utn.frba.dds.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.vianda.Vianda;
@@ -21,7 +23,11 @@ public class Heladera {
     private Integer capacidad;
     private Date fechaPuestaFunc;
     private List<Vianda> viandas;
-    private List<Incidente> registrosDeAlerta;
+    private ReceptorMovimiento receptorMovimiento;
+    private ReceptorTemperatura receptorTemperatura;
+    private List<Incidente> incidentes;
+    private List<RegistroSolicitud>solicitudesApertura;
+    private List<RegistroSolicitud> aperturas;
     private Boolean estaActiva;
     private ModeloHeladera modelo;
     private Double tempActual;
@@ -31,7 +37,7 @@ public class Heladera {
         this.coordenada = coordenada;
         this.capacidad = capacidad;
         this.viandas = viandas;
-        this.registrosDeAlerta= new ArrayList<Incidente>();
+        this.incidentes= new ArrayList<Incidente>();
 
     }
 
@@ -48,7 +54,7 @@ public class Heladera {
     }
 
     public void agregarRegistroDeAlerta(Incidente registro) {
-        registrosDeAlerta.add(registro);
+        incidentes.add(registro);
     }
 
     public void configurarTemperatura(Double nuevaTemp) {

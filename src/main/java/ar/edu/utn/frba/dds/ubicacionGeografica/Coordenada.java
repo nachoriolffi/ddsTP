@@ -13,4 +13,6 @@ public class Coordenada {
         this.latitud = latitud;
         this.longitud = longitud;
     }
+
+
 }

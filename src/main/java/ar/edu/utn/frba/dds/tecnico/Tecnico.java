@@ -14,6 +14,8 @@ public class Tecnico {
     private List<MedioDeComunicacion> mediosDeComunicacion;
     private Integer areaCobertura;
 
+    private Boolean disponible;
+
     public Tecnico(String nombre, String apellido, TipoDocumento tipoDocumento, Integer DNI, Integer CUIL, List<MedioDeComunicacion> mediosDeComunicacion, Integer areaCobertura) {
         this.nombre = nombre;
         this.apellido = apellido;

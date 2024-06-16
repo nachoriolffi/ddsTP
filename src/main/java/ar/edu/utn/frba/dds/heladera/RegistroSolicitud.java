@@ -7,17 +7,7 @@ import java.util.Date;
 public class RegistroSolicitud {
 
     private Date fechaCreacionSolicitud;
-
     private Tarjeta tarjeta;
-
+    private TipoSolicitud solicitud;
     private Boolean realizada;
-
-    private TipoSolicitud tipoSolicitud;
-
-    public RegistroSolicitud(Tarjeta tarjeta, TipoSolicitud tipoSolicitud) {
-        this.fechaCreacionSolicitud = new Date();
-        this.tarjeta = tarjeta;
-        this.realizada = false;
-        this.tipoSolicitud = tipoSolicitud;
-    }
 }
