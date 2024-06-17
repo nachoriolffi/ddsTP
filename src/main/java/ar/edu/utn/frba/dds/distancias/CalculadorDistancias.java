@@ -6,8 +6,8 @@ public class CalculadorDistancias {
 
     private static CalculadorDistancias instancia = null;
 
-    public static CalculadorDistancias getInstance(){
-        if(instancia == null){
+    public static CalculadorDistancias getInstance() {
+        if (instancia == null) {
             instancia = new CalculadorDistancias();
         }
         return instancia;
