@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.contacto.MedioDeComunicacion;
 import ar.edu.utn.frba.dds.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
@@ -15,11 +16,11 @@ public class Tecnico {
     private Integer CUIL;
     private List<MedioDeComunicacion> mediosDeComunicacion;
     private Integer areaCobertura;
-    @Getter
+    @Getter @Setter
     private Coordenada coordenada;
     private Boolean disponible;
 
-    public Tecnico(String nombre, String apellido, TipoDocumento tipoDocumento, Integer DNI, Integer CUIL, List<MedioDeComunicacion> mediosDeComunicacion, Integer areaCobertura) {
+    public Tecnico(String nombre, String apellido, TipoDocumento tipoDocumento, Integer DNI, Integer CUIL, List<MedioDeComunicacion> mediosDeComunicacion, Integer areaCobertura ) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.tipoDocumento = tipoDocumento;
@@ -27,5 +28,16 @@ public class Tecnico {
         this.CUIL = CUIL;
         this.mediosDeComunicacion = mediosDeComunicacion;
         this.areaCobertura = areaCobertura;
+    }
+
+    public Tecnico(String nombre, String apellido, TipoDocumento tipoDocumento, Integer DNI, Integer CUIL, List<MedioDeComunicacion> mediosDeComunicacion, Integer areaCobertura, Coordenada coordenada) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.tipoDocumento = tipoDocumento;
+        this.DNI = DNI;
+        this.CUIL = CUIL;
+        this.mediosDeComunicacion = mediosDeComunicacion;
+        this.areaCobertura = areaCobertura;
+        this.coordenada = coordenada;
     }
 }

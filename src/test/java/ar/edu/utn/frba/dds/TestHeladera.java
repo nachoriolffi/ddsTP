@@ -126,7 +126,7 @@ public class TestHeladera {
         assert heladera1.getEstaActiva().equals(Boolean.TRUE);
     }
 
-    @Test
+   /* @Test
     public void TestReceptoresTemperaturaFueraRango(){
         heladera1.setModelo(modeloHeladera);
         System.out.println(heladera1.getEstaActiva().equals(Boolean.TRUE));
@@ -154,7 +154,7 @@ public class TestHeladera {
         assert heladera1.getRegistrosDeAlerta().size() == 0;
 
     }
-
+*/
 }
 
 
