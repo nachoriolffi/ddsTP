@@ -49,7 +49,7 @@ public class TestCalculadortDeDistancias {
         // ya tenemos los dos calculadores para hacer el test ahora tenemos que ver que devuelve
 
        Tecnico tecnicoMasCercano= calculadorDistanciasTecnicoHeladera.calcularTecnicoMasCercano(tecnicos, heladera);
-       System.out.println("El tecnico mas cercano es: "+tecnicoMasCercano.getCoordenada());
+       System.out.println("El tecnico mas cercano es el que tiene el DNI: "+tecnicoMasCercano.getDNI());
 
        assert tecnicoMasCercano.getCoordenada().getLatitud()==40.7128;
     }

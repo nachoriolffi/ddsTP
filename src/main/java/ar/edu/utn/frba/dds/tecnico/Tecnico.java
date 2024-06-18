@@ -12,6 +12,7 @@ public class Tecnico {
     private String nombre;
     private String apellido;
     private TipoDocumento tipoDocumento;
+    @Getter @Setter
     private Integer DNI;
     private Integer CUIL;
     private List<MedioDeComunicacion> mediosDeComunicacion;

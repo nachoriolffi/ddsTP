@@ -20,33 +20,20 @@ public class CalculadorDistanciasTecnicoHeladera {
     }
 
     // tiene que devolver el tecnico mas cercano a la heladera pero no guarda cuando sale del del for al mas cercano.
-    /*public Tecnico calcularTecnicoMasCercano(List<Tecnico> tecnicos, Heladera heladera){
+    public Tecnico calcularTecnicoMasCercano(List<Tecnico> tecnicos, Heladera heladera){
 
-        Coordenada coordenadasPrimerTecnico = tecnicos.get(0).getCoordenada();
+        if (tecnicos.isEmpty()){
+            return null;
+        }
+
+        Tecnico tecnicoMasCercano = tecnicos.get(0);
         Coordenada coordenadasHeladera = heladera.getCoordenada();
 
-        double distancia1 = instanciaCalculadorDistancias.calcularDistancia(coordenadasPrimerTecnico,coordenadasHeladera);
+        double distancia1 = instanciaCalculadorDistancias.calcularDistancia(tecnicoMasCercano.getCoordenada(),coordenadasHeladera);
         for (Tecnico tecnico : tecnicos) {
             double distancia2 = instanciaCalculadorDistancias.calcularDistancia(tecnico.getCoordenada(), heladera.getCoordenada());
             if (distancia2 < distancia1) {
                 distancia1 = distancia2;
-            }
-        }
-        return tecnico;
-    }*/
-    public Tecnico calcularTecnicoMasCercano(List<Tecnico> tecnicos, Heladera heladera) {
-        if (tecnicos == null || tecnicos.isEmpty()) {
-            throw new IllegalArgumentException("La lista de técnicos no puede estar vacía");
-        }
-
-        Coordenada coordenadasHeladera = heladera.getCoordenada();
-        Tecnico tecnicoMasCercano = tecnicos.get(0);
-        double distanciaMinima = instanciaCalculadorDistancias.calcularDistancia(tecnicoMasCercano.getCoordenada(), coordenadasHeladera);
-
-        for (Tecnico tecnico : tecnicos) {
-            double distanciaActual = instanciaCalculadorDistancias.calcularDistancia(tecnico.getCoordenada(), coordenadasHeladera);
-            if (distanciaActual < distanciaMinima) {
-                distanciaMinima = distanciaActual;
                 tecnicoMasCercano = tecnico;
             }
         }
