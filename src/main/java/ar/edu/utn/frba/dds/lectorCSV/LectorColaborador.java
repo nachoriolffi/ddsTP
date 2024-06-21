@@ -4,7 +4,7 @@ import ar.edu.utn.frba.dds.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.colaborador.formasColab.*;
 import ar.edu.utn.frba.dds.colaborador.formasColab.factoryFormasDeColoaboracion.FormaDeColaboracionFactory;
 import ar.edu.utn.frba.dds.colaborador.formasColab.factoryFormasDeColoaboracion.FormaDeColaboracionFactoryProvider;
-import ar.edu.utn.frba.dds.contacto.ServicioMail;
+import ar.edu.utn.frba.dds.contacto.correo.ServicioMail;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import lombok.Getter;
 

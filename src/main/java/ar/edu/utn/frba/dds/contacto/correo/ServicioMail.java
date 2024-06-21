@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.contacto;
+package ar.edu.utn.frba.dds.contacto.correo;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
