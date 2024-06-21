@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.tecnico;
 
-import ar.edu.utn.frba.dds.contacto.MedioDeComunicacion;
+import ar.edu.utn.frba.dds.contacto.correo.MedioDeComunicacion;
 import ar.edu.utn.frba.dds.repositorios.RepoRegistroVisita;
 import ar.edu.utn.frba.dds.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;

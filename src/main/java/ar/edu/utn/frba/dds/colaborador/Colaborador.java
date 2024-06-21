@@ -6,7 +6,7 @@ import ar.edu.utn.frba.dds.intercambioPuntos.Oferta;
 import ar.edu.utn.frba.dds.recomendacionPuntos.IRecomendacionPuntos;
 import ar.edu.utn.frba.dds.colaborador.formasColab.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.contacto.Contacto;
-import ar.edu.utn.frba.dds.contacto.MedioDeComunicacion;
+import ar.edu.utn.frba.dds.contacto.correo.MedioDeComunicacion;
 import ar.edu.utn.frba.dds.cuestionario.CuestionarioRespondido;
 import ar.edu.utn.frba.dds.recomendacionPuntos.AServicioRecomendacionPuntos;
 import ar.edu.utn.frba.dds.ubicacionGeografica.Coordenada;

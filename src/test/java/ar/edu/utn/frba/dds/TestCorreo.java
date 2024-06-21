@@ -2,20 +2,14 @@ package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.contacto.*;
+import ar.edu.utn.frba.dds.contacto.correo.AdapterCorreo;
+import ar.edu.utn.frba.dds.contacto.correo.CorreoElectronico;
+import ar.edu.utn.frba.dds.contacto.correo.ServicioMail;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
 
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
-
 import java.util.ArrayList;
-import java.util.Properties;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;

@@ -126,7 +126,7 @@ public class TestHeladera {
         assert heladera1.getEstaActiva().equals(Boolean.TRUE);
     }
 
-   /* @Test
+    @Test
     public void TestReceptoresTemperaturaFueraRango(){
         heladera1.setModelo(modeloHeladera);
         System.out.println(heladera1.getEstaActiva().equals(Boolean.TRUE));
@@ -136,10 +136,10 @@ public class TestHeladera {
 
         receptorTemperatura.evaluarTemperatura("19.0",heladera1);
 
-        System.out.println(heladera1.getRegistrosDeAlerta().get(0).getTipoAlerta().equals(TipoAlerta.TEMPERATURA));
+        System.out.println(heladera1.getIncidentes().get(0).getTipoAlerta().equals(TipoAlerta.TEMPERATURA));
         System.out.println(receptorTemperatura.getTemperaturasLeidas().get(0));
         System.out.println(heladera1.getEstaActiva().equals(Boolean.FALSE));
-        assert heladera1.getRegistrosDeAlerta().size() == 1;
+        assert heladera1.getIncidentes().size() == 1;
     }
 
     @Test
@@ -151,10 +151,10 @@ public class TestHeladera {
         receptorTemperatura.evaluarTemperatura("14.0",heladera1);
         System.out.println(heladera1.getEstaActiva().equals(Boolean.TRUE));
         System.out.println(receptorTemperatura.getTemperaturasLeidas().get(0));
-        assert heladera1.getRegistrosDeAlerta().size() == 0;
+        assert heladera1.getIncidentes().size() == 0;
 
     }
-*/
+
 }
 
 
