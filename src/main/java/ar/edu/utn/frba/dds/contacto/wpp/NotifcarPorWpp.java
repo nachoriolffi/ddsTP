@@ -18,5 +18,7 @@ public class NotifcarPorWpp implements MedioDeComunicacion {
     @Override
     public void comunicar(Mensaje mensaje, Colaborador destinatario) {
 
+        aWpp.comunicarMensaje(mensaje.getMensaje(), destinatario.getContacto().getDescripcion());
+
     }
 }
