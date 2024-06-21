@@ -1,19 +1,17 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.distancias.CalculadorDistanciasTecnicoHeladera;
-import ar.edu.utn.frba.dds.heladera.Heladera;
-import ar.edu.utn.frba.dds.repositorios.RepoRegistroVisita;
-import ar.edu.utn.frba.dds.tecnico.RegistroVisita;
-import ar.edu.utn.frba.dds.tecnico.Tecnico;
-import ar.edu.utn.frba.dds.ubicacionGeografica.Coordenada;
-import ar.edu.utn.frba.dds.ubicacionGeografica.Direccion;
-import ar.edu.utn.frba.dds.vianda.Vianda;
+import ar.edu.utn.frba.dds.models.entities.distancias.CalculadorDistanciasTecnicoHeladera;
+import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRegistrosVisita;
+import ar.edu.utn.frba.dds.models.entities.tecnico.RegistroVisita;
+import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class TestTecnico {
     Tecnico tecnico1;
@@ -22,7 +20,7 @@ public class TestTecnico {
     Tecnico tecnico4;
     Heladera heladera1;
     List<Tecnico> tecnicos = new ArrayList<>();
-    RepoRegistroVisita repoRegistroVisita = RepoRegistroVisita.getInstancia();
+    RepoRegistrosVisita repoRegistrosVisita = RepoRegistrosVisita.getInstancia();
 
     @BeforeEach
     void setUp() throws Exception {
@@ -45,6 +43,6 @@ public class TestTecnico {
         assert tecnicoMasCercano.getCoordenada().getLatitud() == -34.59857735217844;
         RegistroVisita visita = new RegistroVisita();
         tecnicoMasCercano.registrarVisita(visita);
-        assert repoRegistroVisita.getRegistrosVisita().size() == 1;
+        assert repoRegistrosVisita.getRegistrosVisita().size() == 1;
     }
 }

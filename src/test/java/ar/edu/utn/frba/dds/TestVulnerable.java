@@ -1,17 +1,16 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.colaborador.formasColab.FormaDeColaboracion;
-import ar.edu.utn.frba.dds.colaborador.formasColab.RegistroVulnerable;
-import ar.edu.utn.frba.dds.colaborador.formasColab.TipoColaboracion;
-import ar.edu.utn.frba.dds.heladera.Heladera;
-import ar.edu.utn.frba.dds.vianda.Vianda;
-import ar.edu.utn.frba.dds.ubicacionGeografica.Coordenada;
-import ar.edu.utn.frba.dds.ubicacionGeografica.Direccion;
+import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.FormaDeColaboracion;
+import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RegistroVulnerable;
+import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
+import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
-import ar.edu.utn.frba.dds.vulnerable.RegistroDePersonaACargo;
-import ar.edu.utn.frba.dds.tarjeta.Tarjeta;
-import ar.edu.utn.frba.dds.vulnerable.Vulnerable;
+import ar.edu.utn.frba.dds.models.entities.vulnerable.RegistroDePersonaACargo;
+import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
+import ar.edu.utn.frba.dds.models.entities.vulnerable.Vulnerable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

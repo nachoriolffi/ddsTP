@@ -1,13 +1,13 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.colaborador.calculoPuntos.CalculadorPuntos;
-import ar.edu.utn.frba.dds.colaborador.formasColab.*;
-import ar.edu.utn.frba.dds.reconocimiento.config.ConfiguracionMultiplicador;
-import ar.edu.utn.frba.dds.heladera.Heladera;
-import ar.edu.utn.frba.dds.vianda.Vianda;
-import ar.edu.utn.frba.dds.ubicacionGeografica.Coordenada;
-import ar.edu.utn.frba.dds.ubicacionGeografica.Direccion;
+import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.models.entities.colaborador.calculoPuntos.CalculadorPuntos;
+import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.*;
+import ar.edu.utn.frba.dds.models.entities.multiplicador.config.ConfiguracionMultiplicador;
+import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
+import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

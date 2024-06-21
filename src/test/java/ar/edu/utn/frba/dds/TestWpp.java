@@ -1,10 +1,10 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.contacto.Contacto;
-import ar.edu.utn.frba.dds.contacto.Mensaje;
-import ar.edu.utn.frba.dds.contacto.wpp.AdapterWhatsapp;
-import ar.edu.utn.frba.dds.contacto.wpp.NotifcarPorWpp;
+import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
+import ar.edu.utn.frba.dds.models.entities.contacto.Mensaje;
+import ar.edu.utn.frba.dds.models.entities.contacto.wpp.AdapterWhatsapp;
+import ar.edu.utn.frba.dds.models.entities.contacto.wpp.NotifcarPorWpp;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

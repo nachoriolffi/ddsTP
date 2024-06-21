@@ -1,9 +1,9 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.recomendacionPuntos.AServicioRecomendacionPuntos;
-import ar.edu.utn.frba.dds.recomendacionPuntos.servicioAPI.ServicioRecomendacionPuntos;
-import ar.edu.utn.frba.dds.ubicacionGeografica.Coordenada;
+import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.models.entities.recomendacionPuntos.AServicioRecomendacionPuntos;
+import ar.edu.utn.frba.dds.models.entities.recomendacionPuntos.servicioAPI.ServicioRecomendacionPuntos;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

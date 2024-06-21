@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.lectorCSV.LectorColaborador;
+import ar.edu.utn.frba.dds.models.entities.lectorCSV.LectorColaborador;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;

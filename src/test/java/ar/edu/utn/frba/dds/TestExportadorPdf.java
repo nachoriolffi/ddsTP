@@ -1,11 +1,7 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.exportadorPDF.Documento;
-import ar.edu.utn.frba.dds.exportadorPDF.Exportable;
-import ar.edu.utn.frba.dds.exportadorPDF.Exportador;
-import ar.edu.utn.frba.dds.exportadorPDF.adapterPDF.ExportarAPdf;
-import ar.edu.utn.frba.dds.heladera.Heladera;
-import ar.edu.utn.frba.dds.vianda.Vianda;
+import ar.edu.utn.frba.dds.models.entities.exportadorPDF.Documento;
+import ar.edu.utn.frba.dds.models.entities.exportadorPDF.adapterPDF.ExportarAPdf;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

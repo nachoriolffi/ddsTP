@@ -1,8 +1,8 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.validador.ValidadorDeContrasenia;
-import ar.edu.utn.frba.dds.validador.FormaValidar10MilPeoresContrasenias;
-import ar.edu.utn.frba.dds.validador.FormaValidarLongitud;
+import ar.edu.utn.frba.dds.models.entities.validador.ValidadorDeContrasenia;
+import ar.edu.utn.frba.dds.models.entities.validador.FormaValidar10MilPeoresContrasenias;
+import ar.edu.utn.frba.dds.models.entities.validador.FormaValidarLongitud;
 import org.junit.jupiter.api.Test;
 
 public class TestContrasenia {

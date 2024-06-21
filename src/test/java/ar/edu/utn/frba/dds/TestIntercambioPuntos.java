@@ -1,9 +1,9 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.intercambioPuntos.CanjeadorPuntos;
-import ar.edu.utn.frba.dds.intercambioPuntos.Oferta;
-import ar.edu.utn.frba.dds.intercambioPuntos.Rubro;
+import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.CanjeadorPuntos;
+import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
+import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Rubro;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

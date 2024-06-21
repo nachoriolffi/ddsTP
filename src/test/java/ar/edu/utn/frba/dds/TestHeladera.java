@@ -1,13 +1,15 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.heladera.*;
-import ar.edu.utn.frba.dds.heladera.alerta.TipoAlerta;
-import ar.edu.utn.frba.dds.heladera.receptor.ReceptorMovimiento;
-import ar.edu.utn.frba.dds.heladera.receptor.ReceptorTemperatura;
-import ar.edu.utn.frba.dds.ubicacionGeografica.Coordenada;
-import ar.edu.utn.frba.dds.ubicacionGeografica.Direccion;
-import ar.edu.utn.frba.dds.vianda.Vianda;
+import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
+import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
+import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoAlerta;
+import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
+import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
+import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import lombok.Getter;
 import lombok.Setter;
 import org.junit.jupiter.api.BeforeEach;

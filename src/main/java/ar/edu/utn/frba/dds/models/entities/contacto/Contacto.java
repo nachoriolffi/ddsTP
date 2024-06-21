@@ -1,0 +1,19 @@
+package ar.edu.utn.frba.dds.models.entities.contacto;
+
+import lombok.Getter;
+import lombok.Setter;
+
+public class Contacto {
+    @Setter
+    private String nombre;
+    @Setter
+    @Getter
+    private String descripcion;
+
+    public Contacto(String nombre, String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
+    public Contacto() {
+    }
+}

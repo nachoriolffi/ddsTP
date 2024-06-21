@@ -1,13 +1,13 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.distancias.CalculadorDistancias;
-import ar.edu.utn.frba.dds.distancias.CalculadorDistanciasTecnicoHeladera;
-import ar.edu.utn.frba.dds.heladera.Heladera;
-import ar.edu.utn.frba.dds.tecnico.Tecnico;
-import ar.edu.utn.frba.dds.ubicacionGeografica.Coordenada;
-import ar.edu.utn.frba.dds.ubicacionGeografica.Direccion;
+import ar.edu.utn.frba.dds.models.entities.distancias.CalculadorDistancias;
+import ar.edu.utn.frba.dds.models.entities.distancias.CalculadorDistanciasTecnicoHeladera;
+import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
+import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
-import ar.edu.utn.frba.dds.vianda.Vianda;
+import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
