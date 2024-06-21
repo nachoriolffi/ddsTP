@@ -49,7 +49,9 @@ public class TestWpp {
     /*@Test
     public void testComunicarRealNoUsarPorqNosCobranYNoHayPlata() {
 
-        colaborador.setContacto(new Contacto("wpp", "+5491125253216"));
+        colaborador.setContacto(new Contacto("wpp", "+5491125253216")); // para probar tenemos que registrar el numero de la persona
+        // por ende no funciona si no es un numero que no registre en la sandbox de twilio
+
 
        NotifcarPorWpp notificador = new NotifcarPorWpp(new AdapterWhatsapp());
 
