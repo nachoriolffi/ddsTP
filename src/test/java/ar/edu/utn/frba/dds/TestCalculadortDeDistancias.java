@@ -5,7 +5,9 @@ import ar.edu.utn.frba.dds.distancias.CalculadorDistanciasTecnicoHeladera;
 import ar.edu.utn.frba.dds.heladera.Heladera;
 import ar.edu.utn.frba.dds.tecnico.Tecnico;
 import ar.edu.utn.frba.dds.ubicacionGeografica.Coordenada;
+import ar.edu.utn.frba.dds.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
+import ar.edu.utn.frba.dds.vianda.Vianda;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +16,7 @@ import java.util.List;
 
 public class TestCalculadortDeDistancias {
 
-    private List<Tecnico> tecnicos= new ArrayList<Tecnico>();
+    private final List<Tecnico> tecnicos= new ArrayList<Tecnico>();
     private Heladera heladera;
 
     @BeforeEach
@@ -36,7 +38,7 @@ public class TestCalculadortDeDistancias {
         tecnicos.add(tecnico2);
         tecnicos.add(tecnico3);
 
-        heladera= new Heladera(null, new Coordenada(39.7128, 74.0060), 150, null); // Nueva York
+        heladera= new Heladera((Direccion) null, new Coordenada(39.7128, 74.0060), 150, (List<Vianda>) null); // Nueva York
 
     }
 
