@@ -49,6 +49,13 @@ public class Heladera {
         this.fechaPuestaFunc = fechaPuestaFunc;
     }
 
+    public Heladera(Direccion direccion, Coordenada coordenada, Integer capacidad, Boolean estaActiva) {
+        this.direccion = direccion;
+        this.coordenada = coordenada;
+        this.capacidad = capacidad;
+        this.estaActiva = estaActiva;
+    }
+
     public void agregarVianda(Vianda vianda) {
         viandas.add(vianda);
     }
