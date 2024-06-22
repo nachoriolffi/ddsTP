@@ -7,6 +7,9 @@ import java.util.Properties;
 
 public class ServicioMail {
     private static ServicioMail instancia = null;
+
+
+
     public void enviarCorreo(String destinatario, String asunto, String cuerpo) {
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
@@ -32,6 +35,7 @@ public class ServicioMail {
         } catch (MessagingException me) {
             System.out.println("Exception: " + me);
         }
+
     }
 
     public static ServicioMail getInstance() {
