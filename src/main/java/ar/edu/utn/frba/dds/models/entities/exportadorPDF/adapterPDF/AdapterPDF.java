@@ -25,7 +25,7 @@ import java.util.Map;
 
 public class AdapterPDF implements InterfaceAdapterPDF {
 
-    private String pathDocumento = "C:\\Users\\user\\Desktop\\exportar.PDF";
+    private String pathDocumento = "C:\\Users\\Nacho\\Desktop\\exportar.PDF";
 
     public void exportToPdf(String dest, List<Exportable> exportables) throws FileNotFoundException {
         File file = new File(dest);
