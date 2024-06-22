@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.models.entities.tecnico.RegistroVisita;
 import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
+import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoRegistrosVisita;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,7 +21,8 @@ public class TestTecnico {
     Tecnico tecnico4;
     Heladera heladera1;
     List<Tecnico> tecnicos = new ArrayList<>();
-    RepoRegistrosVisita repoRegistrosVisita = RepoRegistrosVisita.getInstancia();
+
+    IRepoRegistrosVisita repoRegistrosVisita = RepoRegistrosVisita.getInstancia();
 
     @BeforeEach
     void setUp() throws Exception {
@@ -43,6 +45,6 @@ public class TestTecnico {
         assert tecnicoMasCercano.getCoordenada().getLatitud() == -34.59857735217844;
         RegistroVisita visita = new RegistroVisita();
         tecnicoMasCercano.registrarVisita(visita);
-        assert repoRegistrosVisita.getRegistrosVisita().size() == 1;
+        assert repoRegistrosVisita.obtenerRegistros().size() == 1;
     }
 }
