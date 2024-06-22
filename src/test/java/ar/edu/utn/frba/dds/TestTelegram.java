@@ -7,8 +7,6 @@ import ar.edu.utn.frba.dds.models.entities.contacto.telegram.AdapterTelegram;
 import ar.edu.utn.frba.dds.models.entities.contacto.telegram.Telegram;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
@@ -18,10 +16,10 @@ import static org.mockito.Mockito.verify;
 
 public class TestTelegram {
 
-    @Mock
+    
     private AdapterTelegram mockAdapterTelegram;
 
-    @InjectMocks
+
     private Telegram telegram;
 
     private Mensaje mensaje;
