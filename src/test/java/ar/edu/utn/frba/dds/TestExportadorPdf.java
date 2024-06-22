@@ -44,7 +44,8 @@ public class TestExportadorPdf {
         // Exportar a PDF
 
         ExportarAPdf exportarAPdf = new ExportarAPdf();
-        exportarAPdf.exportar(exportable1,exportable2,exportable3);
+        exportarAPdf.exportar(exportable1, exportable2, exportable3);
+
 
     }
 }
