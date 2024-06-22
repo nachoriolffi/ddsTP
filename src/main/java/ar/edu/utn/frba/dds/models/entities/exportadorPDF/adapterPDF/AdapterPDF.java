@@ -90,8 +90,8 @@ public class AdapterPDF implements InterfaceAdapterPDF {
 
     @Override
     public Reporte exportar(Exportable... exportables) throws FileNotFoundException {
-        exportToPdf(pathDocumento, List.of(exportables));
-        return new Reporte(pathDocumento);
+        exportToPdf(pathDesktop.toString(), List.of(exportables));
+        return new Reporte(pathDesktop.toString());
     }
 }
 
