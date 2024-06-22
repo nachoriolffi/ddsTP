@@ -9,6 +9,7 @@ import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -68,8 +69,21 @@ public class Heladera {
         tempActual = nuevaTemp;
     }
 
-
     public long mesesActiva (Date fechaColaboracion) {
         return ( fechaColaboracion.getTime() - fechaPuestaFunc.getTime()) / 1000 / 60 / 60 / 24 / 30;
     }
+
+    public int capacidadActual(){
+        return this.capacidad- viandas.size();
+    }
+
+    public void agregarRegistroSolicitud(RegistroSolicitud registro) throws IOException {
+        if (this.capacidadActual() == 0) {
+            throw new IOException("No se pueden agregar más viandas ahora, intente más tarde");
+        }else{
+            this.solicitudesApertura.add(registro);
+        }
+    }
+
+
 }
