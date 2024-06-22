@@ -11,7 +11,6 @@ public class RepoRegistrosVisita implements IRepoRegistrosVisita {
 
     private static RepoRegistrosVisita instancia = null;
 
-    @Getter
     private final List<RegistroVisita> registrosVisita;
 
     private RepoRegistrosVisita() {
@@ -35,5 +34,9 @@ public class RepoRegistrosVisita implements IRepoRegistrosVisita {
 
     public void borrarRegistrosVisitas() {
         this.registrosVisita.clear();
+    }
+
+    public List<RegistroVisita> obtenerRegistros(){
+        return this.registrosVisita;
     }
 }

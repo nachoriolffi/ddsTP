@@ -10,6 +10,8 @@ import com.itextpdf.layout.properties.UnitValue;
 import java.io.File;
 
 import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +27,10 @@ import java.util.Map;
 
 public class AdapterPDF implements InterfaceAdapterPDF {
 
-    private String pathDocumento = "C:\\Users\\user\\Desktop\\exportar.PDF";
+    private String pathDocumento = "C:\\Users\\Micaela\\Desktop\\exportar.PDF";
+
+    private String userHome= System.getProperty("user.home");
+    Path pathDesktop = Paths.get(userHome, "Desktop", "exportar.PDF");
 
     public void exportToPdf(String dest, List<Exportable> exportables) throws FileNotFoundException {
         File file = new File(dest);
@@ -85,8 +90,8 @@ public class AdapterPDF implements InterfaceAdapterPDF {
 
     @Override
     public Reporte exportar(Exportable... exportables) throws FileNotFoundException {
-        exportToPdf(pathDocumento, List.of(exportables));
-        return new Reporte(pathDocumento);
+        exportToPdf(pathDesktop.toString(), List.of(exportables));
+        return new Reporte(pathDesktop.toString());
     }
 }
 
