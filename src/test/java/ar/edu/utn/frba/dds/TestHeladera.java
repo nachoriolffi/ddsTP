@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoAlerta;
+import ar.edu.utn.frba.dds.models.entities.heladera.alerta.registro.RegistroTemperatura;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
@@ -153,9 +154,43 @@ public class TestHeladera {
         System.out.println(heladera1.getEstaActiva().equals(Boolean.TRUE));
         System.out.println(receptorTemperatura.getTemperaturasLeidas().get(0));
         assert heladera1.getIncidentes().size() == 0;
-
     }
+    @Test
 
+    public void UltimaTemp(){
+        Direccion direccion = new Direccion("Medrano", 951, 1);
+        Coordenada coordenada = new Coordenada(125.0, 410.0);
+
+        Vianda vianda = new Vianda("Carne", heladera1, new Colaborador(), true);
+        List<Vianda> viandas = new ArrayList<>();
+        viandas.add(vianda);
+        Heladera heladera = new Heladera(direccion, coordenada, 150, viandas);
+
+        ModeloHeladera modelo = new ModeloHeladera(18.0, 1.5, 100.0, 200);
+
+        heladera.setModelo(modelo);
+
+        ReceptorTemperatura receptorTemp = new ReceptorTemperatura(); // se tiene un receptor por cada heladera
+        receptorTemp.evaluarTemperatura("18.0", heladera);
+
+
+        //assert heladera.getReceptorTemperatura().getTemperaturasLeidas().get(0) == 18.0;
+
+        heladera.setReceptorTemperatura(receptorTemp);
+
+        System.out.println("La temperatura leida es: " + heladera.getReceptorTemperatura().getTemperaturasLeidas().get(0).getLectura());
+
+        List<RegistroTemperatura> temperaturas = new ArrayList<>(heladera.getReceptorTemperatura().getTemperaturasLeidas());
+
+        assert temperaturas.get(0).getLectura() == 18;
+
+
+        // crear receptor de temperatura, crear modelo
+    }
 }
+/*
+Tengo una lista con varias heladeras y dentro está el sensor y dentro
+receptorTemperatura. Dentro del receptor está la lista de temperaturas leídas.
+Lo que importa es el horario. es decir, obtener un elemento y controlar el horario.
 
-
+*/

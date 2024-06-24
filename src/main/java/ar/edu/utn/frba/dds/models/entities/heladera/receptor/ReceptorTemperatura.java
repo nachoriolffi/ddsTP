@@ -3,9 +3,11 @@ package ar.edu.utn.frba.dds.models.entities.heladera.receptor;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoAlerta;
+import ar.edu.utn.frba.dds.models.entities.heladera.alerta.registro.RegistroTemperatura;
 import lombok.Getter;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -14,9 +16,9 @@ public class ReceptorTemperatura {
 
     private Heladera heladera;
 
-    private List<Float> temperaturasLeidas;
+    private List<RegistroTemperatura> temperaturasLeidas;
 
-    public ReceptorTemperatura(List<Float> temperaturasLeidas) {
+    public ReceptorTemperatura(List<RegistroTemperatura> temperaturasLeidas) {
         this.temperaturasLeidas = temperaturasLeidas;
     }
 
@@ -24,16 +26,19 @@ public class ReceptorTemperatura {
         this.temperaturasLeidas= new ArrayList<>();
     }
 
-    public void agregarTemperatura(float temperatura) {
-        this.temperaturasLeidas.add(temperatura);
+    public void agregarTemperatura(float temperatura) {//preguntar para que lo usa
+        //this.temperaturasLeidas.add(temperatura);
     }
 
     public void evaluarTemperatura(String dato, Heladera heladera) {
-         if (evaluarLimitesTemperatura(Float.parseFloat(dato),heladera)){
-             registrarAlerta(heladera, TipoAlerta.TEMPERATURA);
-             heladera.setEstaActiva(false);
-         }
-        temperaturasLeidas.add(Float.parseFloat(dato));
+        if (evaluarLimitesTemperatura(Float.parseFloat(dato),heladera)){
+            registrarAlerta(heladera, TipoAlerta.TEMPERATURA);
+            heladera.setEstaActiva(false);
+        }
+        //hay que hacer un RegistroTemperatura y despues agregarlo
+        RegistroTemperatura registro = new RegistroTemperatura( Float.parseFloat(dato), new Date());
+
+        temperaturasLeidas.add(registro);
     }
 
     private Boolean evaluarLimitesTemperatura(Float temperatura, Heladera heladera) {
