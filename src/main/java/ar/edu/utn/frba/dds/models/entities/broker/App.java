@@ -3,17 +3,37 @@ package ar.edu.utn.frba.dds.models.entities.broker;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 public class App {
-
     public static void main(String[] args) {
+        Broker broker = new Broker();
+        Broker broker2 = new Broker();
+        Broker heladera = new Broker();
 
-        String topic        = "dds2024/heladeras/almagro/medrano";
+        broker.connect("tuki");
+        heladera.connect("heladera");
+        broker2.connect("alerta");
+
+        broker.subscribe("ayudame/loco");
+        broker2.subscribe("ayudame/loco/por/favor");
+
+        heladera.publish("ayudame/loco","funciona?");
+        heladera.publish("ayudame/loco/por/favor","si");
+
+        broker.disconnect();
+        broker2.disconnect();
+        heladera.disconnect();
+
+    }
+
+}
+
+/*
+        String topic        = "ayuda/no/entiendo/nada";
         /*
         Tengo que suscribir a cada sensor de heladera a un topic distinto
-         */
+
         //String content      = "Message from MqttPublishSample"; POR SI QUIERO PUBLICAR
         //int qos             = 2;
         String broker       = "tcp://broker.hivemq.com:1883";
@@ -37,7 +57,7 @@ public class App {
 
             System.out.println("Right! We are subscribed");
 
-            //sampleClient.disconnect(); PARA DESCONECTAR EL HILO
+            //sampleClient.disconnect(); //PARA DESCONECTAR EL HILO
         } catch(MqttException me) {
             System.out.println("reason " + me.getReasonCode());
             System.out.println("msg " + me.getMessage());
@@ -47,4 +67,4 @@ public class App {
             me.printStackTrace();
         }
     }
-}
+    */

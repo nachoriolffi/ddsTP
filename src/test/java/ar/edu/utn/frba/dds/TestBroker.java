@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds;
 
+import ar.edu.utn.frba.dds.models.entities.broker.Broker;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
@@ -18,12 +19,16 @@ public class TestBroker {
     //Agregar lo de Autorizacion
     private ModeloHeladera modeloHeladera;
 
+    private Broker broker;
+
     @BeforeEach
     public void setUp(){
         receptorMovimiento= new ReceptorMovimiento();
         receptorTemperatura= new ReceptorTemperatura();
 
         modeloHeladera = new ModeloHeladera(12.5,0.0,90.0,15);
+
+        broker = new Broker();
     }
 
     @Test
