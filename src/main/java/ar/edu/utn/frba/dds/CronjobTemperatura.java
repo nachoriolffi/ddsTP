@@ -20,11 +20,13 @@ import java.util.concurrent.TimeUnit;
 
 public class CronjobTemperatura {
     public static void main(String[] args) {
-        Heladera heladera;
+
         Direccion direccion = new Direccion("Medrano", 951, 1);
         Coordenada coordenada = new Coordenada(125.0, 410.0);
 
         List<Vianda> viandas = new ArrayList<>();
+
+        Heladera heladera;
         heladera = new Heladera(direccion, coordenada, 150, viandas);
 
         Vianda vianda = new Vianda("Carne", heladera, new Colaborador(), true);
@@ -48,13 +50,39 @@ public class CronjobTemperatura {
         //-----------------------------------------------------------------------------------
 
         heladera.setReceptorTemperatura(receptorTemp);
-
+        heladera.setEstaActiva(true);
         RepoHeladeras repoHeladeras = RepoHeladeras.getInstancia();
         repoHeladeras.agregarHeladera(heladera);
+
+        Heladera heladera2;
+        heladera2 = new Heladera(direccion, coordenada, 150, viandas);
+        heladera2.agregarVianda(vianda);
+        heladera2.setModelo(modelo);
+        ReceptorTemperatura receptorTemp2 = new ReceptorTemperatura();
+        receptorTemp2.evaluarTemperatura("18.0", heladera);
+        heladera2.setReceptorTemperatura(receptorTemp2);
+        heladera2.setEstaActiva(true);
+        repoHeladeras.agregarHeladera(heladera2);
+
+
         List<Heladera> todasLasHeladeras = repoHeladeras.traerHeladeras();
 
         controlarUltimasLecturasHeladeras(todasLasHeladeras, 5);
 
+
+        if(heladera.getEstaActiva()){
+            System.out.println("La heladera está activa");
+        }
+        else{
+            System.out.println("La heladera no está activa");
+        }
+
+        if(heladera2.getEstaActiva()){
+            System.out.println("La heladera2 está activa");
+        }
+        else{
+            System.out.println("La heladera2 no está activa");
+        }
     }
     static void controlarUltimaLectura(Heladera heladera, long tiempoEnMinutos){
         List<RegistroTemperatura> temperaturas = new ArrayList<>(heladera.getReceptorTemperatura().getTemperaturasLeidas());
