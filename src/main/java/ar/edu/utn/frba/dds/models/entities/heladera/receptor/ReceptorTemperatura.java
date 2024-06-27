@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoAlerta;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.registro.RegistroTemperatura;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,6 +17,7 @@ public class ReceptorTemperatura {
 
     private Heladera heladera;
 
+    @Setter
     private List<RegistroTemperatura> temperaturasLeidas;
 
     public ReceptorTemperatura(List<RegistroTemperatura> temperaturasLeidas) {

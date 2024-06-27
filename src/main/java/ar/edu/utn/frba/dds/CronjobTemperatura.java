@@ -12,6 +12,7 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import java.util.Date;
@@ -34,7 +35,17 @@ public class CronjobTemperatura {
         heladera.setModelo(modelo);
 
         ReceptorTemperatura receptorTemp = new ReceptorTemperatura(); // se tiene un receptor por cada heladera
-        receptorTemp.evaluarTemperatura("18.0", heladera);
+        //receptorTemp.evaluarTemperatura("18.0", heladera);
+
+        // Se simula una lectura de temperatura con tiempo mayor a 5 minutos---------------
+        Date fechaActual = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fechaActual);
+        calendar.add(Calendar.MINUTE, -6);
+        Date fechaUltimaLectura = calendar.getTime();
+        RegistroTemperatura registro = new RegistroTemperatura( Float.parseFloat("18.0"), fechaUltimaLectura);
+        receptorTemp.getTemperaturasLeidas().add(registro);
+        //-----------------------------------------------------------------------------------
 
         heladera.setReceptorTemperatura(receptorTemp);
 
@@ -42,7 +53,7 @@ public class CronjobTemperatura {
         repoHeladeras.agregarHeladera(heladera);
         List<Heladera> todasLasHeladeras = repoHeladeras.traerHeladeras();
 
-        controlarUltimasLecturasHeladeras(todasLasHeladeras, 0);
+        controlarUltimasLecturasHeladeras(todasLasHeladeras, 5);
 
     }
     static void controlarUltimaLectura(Heladera heladera, long tiempoEnMinutos){
