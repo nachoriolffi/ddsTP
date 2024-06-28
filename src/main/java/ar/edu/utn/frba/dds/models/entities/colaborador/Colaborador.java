@@ -42,7 +42,7 @@ public class Colaborador {
     private TipoJuridisccion tipoJuridisccion;
     private Rubro rubro;
     private TipoPersona tipoPersona;
-    private Contacto contacto;
+    private List<Contacto> contacto;
     private IRecomendacionPuntos iRecomendacionPuntos;
     //private Double puntosTotales;
     private Double puntosTotalesUsados;
@@ -58,6 +58,7 @@ public class Colaborador {
         this.colaboracionesRealizadas = new ArrayList<>();
         this.puntosTotalesUsados= (double) 0;
         this.iRecomendacionPuntos = new AServicioRecomendacionPuntos();
+        this.contacto = new ArrayList<>();
     }
 
     public Colaborador(String nombre,String apellido,List<FormaDeColaboracion> hechas){
@@ -84,7 +85,7 @@ public class Colaborador {
         this.puntosTotalesUsados= (double) 0;
     }
 
-    public Colaborador(String nombre, String apellido, List<MedioDeComunicacion> mediosDeComunicacion, List<FormaDeColaboracion> formasDeColaboracion, CuestionarioRespondido cuestionarioRespondido, TipoPersona tipoPersona, Contacto contacto) {
+    public Colaborador(String nombre, String apellido, List<MedioDeComunicacion> mediosDeComunicacion, List<FormaDeColaboracion> formasDeColaboracion, CuestionarioRespondido cuestionarioRespondido, TipoPersona tipoPersona) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.mediosDeComunicacion = mediosDeComunicacion;
@@ -92,7 +93,7 @@ public class Colaborador {
         this.puntosTotalesUsados= (double) 0;
         this.cuestionarioRespondido = cuestionarioRespondido;
         this.tipoPersona = tipoPersona;
-        this.contacto = contacto;
+        this.contacto = new ArrayList<>();
         this.mediosDeComunicacion = new ArrayList<>();
         this.formasDeColaboracion = new ArrayList<>();
         this.colaboracionesRealizadas = new ArrayList<>();
@@ -111,7 +112,7 @@ public class Colaborador {
         this.colaboracionesRealizadas.add(formaDeColaboracion);
     }
 
-    public void modificarColaborador(String nombre, String apellido, Date fechaDeNacimiento, CuestionarioRespondido cuestionarioRespondido, Integer razonSocial, String rubro, TipoPersona tipoPersona, Contacto contacto) {
+    public void modificarColaborador(String nombre, String apellido, Date fechaDeNacimiento, CuestionarioRespondido cuestionarioRespondido, Integer razonSocial, String rubro, TipoPersona tipoPersona) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.mediosDeComunicacion = new ArrayList<>();
@@ -121,7 +122,7 @@ public class Colaborador {
         this.razonSocial = razonSocial;
         //this.rubro = rubro;
         this.tipoPersona = tipoPersona;
-        this.contacto = contacto;
+        this.contacto = new ArrayList<>();
     }
 
     //public void sumarPuntos(Double puntos) {

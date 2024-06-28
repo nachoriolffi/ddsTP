@@ -2,6 +2,8 @@ package ar.edu.utn.frba.dds.models.entities.contacto.correo;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.contacto.Mensaje;
+import ar.edu.utn.frba.dds.models.entities.contacto.Notificacion;
+import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
 
 public class CorreoElectronico extends Mensaje implements MedioDeComunicacion{
 
@@ -15,8 +17,8 @@ public class CorreoElectronico extends Mensaje implements MedioDeComunicacion{
     }
 
     @Override
-    public void comunicar(Mensaje mensaje, Colaborador destinatario) {
-        aCorreo.comunicarMensaje(mensaje, destinatario);
+    public void comunicar(Notificacion notificacion) {
+        aCorreo.comunicarMensaje(notificacion.getMensaje(), notificacion.filtrarContacto(TipoContacto.MAIL));
     }
 
 }
