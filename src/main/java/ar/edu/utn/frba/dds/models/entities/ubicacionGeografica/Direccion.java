@@ -12,6 +12,12 @@ public class Direccion {
     public Direccion(String calle, Integer altura, Integer piso) {
         this.calle = new Calle(calle);
     }
+    public Direccion(String calle, Integer altura, Integer piso, Ubicacion ubicacion) {
+        this.calle = new Calle(calle);
+        this.altura = altura;
+        this.piso = piso;
+        this.ubicacion = ubicacion;
+    }
 
 
 }

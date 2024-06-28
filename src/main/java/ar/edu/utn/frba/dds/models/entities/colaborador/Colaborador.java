@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,7 +34,7 @@ public class Colaborador {
     private String nombre;
     private String apellido;
     private List<MedioDeComunicacion> mediosDeComunicacion;
-    private Date fechaDeNacimiento;
+    private LocalDate fechaDeNacimiento;
     private Direccion direccion;
     private List<FormaDeColaboracion> formasDeColaboracion;
     private List<FormaDeColaboracion> colaboracionesRealizadas;
@@ -111,7 +112,7 @@ public class Colaborador {
         this.colaboracionesRealizadas.add(formaDeColaboracion);
     }
 
-    public void modificarColaborador(String nombre, String apellido, Date fechaDeNacimiento, CuestionarioRespondido cuestionarioRespondido, Integer razonSocial, String rubro, TipoPersona tipoPersona, Contacto contacto) {
+    public void modificarColaborador(String nombre, String apellido, LocalDate fechaDeNacimiento, CuestionarioRespondido cuestionarioRespondido, Integer razonSocial, String rubro, TipoPersona tipoPersona, Contacto contacto) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.mediosDeComunicacion = new ArrayList<>();

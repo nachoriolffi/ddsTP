@@ -29,6 +29,7 @@ public class RepoRegistroSolicitud implements IRepoRegistroSolicitud {
     @Override
     public void agregarRegistroSolicitud(RegistroSolicitud registroSolicitud) {
         this.registrosSolicitud.add(registroSolicitud);
+
     }
 
     @Override
@@ -41,9 +42,4 @@ public class RepoRegistroSolicitud implements IRepoRegistroSolicitud {
         return this.registrosSolicitud;
     }
 
-    @Override
-    public RegistroSolicitud buscarRegistroSolicitud(RegistroSolicitud registroSolicitud) {
-        int index = this.registrosSolicitud.indexOf(registroSolicitud);
-        return this.registrosSolicitud.get(index);
-    }
 }

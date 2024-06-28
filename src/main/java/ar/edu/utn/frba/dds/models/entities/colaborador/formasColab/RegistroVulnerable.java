@@ -11,7 +11,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class RegistroVulnerable implements FormaDeColaboracion{
+public class RegistroVulnerable implements FormaDeColaboracion {
 
     private List<Tarjeta> tarjetasDonadas;
     private Integer cantidadTarjetas;
@@ -19,16 +19,14 @@ public class RegistroVulnerable implements FormaDeColaboracion{
 
     public RegistroVulnerable(List<Tarjeta> tarjetasDonadas) {
         this.tarjetasDonadas = tarjetasDonadas;
-
         this.fechaColaboracion = new Date();
         this.cantidadTarjetas = tarjetasDonadas.size();
     }
 
     public RegistroVulnerable(Integer cantidad, Date fechaColaboracion) {
-
         this.fechaColaboracion = fechaColaboracion;
         this.cantidadTarjetas = cantidad;
-    };
+    }
 
     @Override
     public double sumarPuntosA(Colaborador colaborador) {

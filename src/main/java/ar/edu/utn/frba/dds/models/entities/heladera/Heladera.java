@@ -76,7 +76,7 @@ public class Heladera {
     public int capacidadActual(){
         return this.capacidad- viandas.size();
     }
-
+    // le llega a la heladera una solicitud de apertura del sistema
     public void agregarRegistroSolicitud(RegistroSolicitud registro) throws IOException {
         if (this.capacidadActual() == 0) {
             throw new IOException("No se pueden agregar más viandas ahora, intente más tarde");
@@ -84,6 +84,9 @@ public class Heladera {
             this.solicitudesApertura.add(registro);
         }
     }
-
+    public void agregarApertura() throws IOException {
+        // cuando un colaborador intenta abrir la heladera, si este puede hacerlo, entonces
+        // la solicitud hecha debe actualizarse y ponerse true
+    }
 
 }

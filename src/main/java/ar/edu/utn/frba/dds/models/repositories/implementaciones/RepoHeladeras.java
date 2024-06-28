@@ -37,10 +37,4 @@ public class RepoHeladeras implements IRepoHeladeras {
     public List<Heladera> traerHeladeras() {
         return this.heladeras;
     }
-
-    @Override
-    public Heladera buscarHeladera(Heladera heladera) {
-        int index = this.heladeras.indexOf(heladera);
-        return this.heladeras.get(index);
-    }
 }

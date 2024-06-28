@@ -8,5 +8,4 @@ public interface IRepoHeladeras {
     void agregarHeladera(Heladera heladera);
     void eliminarHeladera(Heladera heladera);
     List<Heladera> traerHeladeras();
-    Heladera buscarHeladera(Heladera heladera);
 }

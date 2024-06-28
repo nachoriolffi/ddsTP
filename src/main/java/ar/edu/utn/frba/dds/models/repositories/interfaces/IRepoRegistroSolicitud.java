@@ -9,5 +9,4 @@ public interface IRepoRegistroSolicitud {
     void agregarRegistroSolicitud(RegistroSolicitud registroSolicitud);
     void eliminarRegistroSolicitud(RegistroSolicitud registroSolicitud);
     List<RegistroSolicitud> traerRegistroSolicitud();
-    RegistroSolicitud buscarRegistroSolicitud(RegistroSolicitud registroSolicitud);
 }

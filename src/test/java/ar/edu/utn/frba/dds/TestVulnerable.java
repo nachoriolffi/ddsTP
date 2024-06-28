@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RegistroVulnerable;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Local;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
@@ -16,6 +17,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -75,9 +77,9 @@ public class TestVulnerable {
 
     @BeforeEach
     public void setUpVulnerable() {
-        Date fecha = new Date(1970,10,12);
-        Date fecha2 = new Date(1980,01,27);
-        Date fechaRegistro = new Date(2024,04,10);
+        LocalDate fecha = LocalDate.of(1970, 10, 12);
+        LocalDate fecha2 =  LocalDate.of(1980,01,27);
+        LocalDate fechaRegistro =  LocalDate.of(2024,04,10);
         Vulnerable personaVulnerable1 = new Vulnerable("Carlos","Perez",fecha,fechaRegistro,true,null, TipoDocumento.DNI,22732987);
         Vulnerable personaVulnerable2 = new Vulnerable("Maria","",fecha2,fechaRegistro,true,null, TipoDocumento.DNI,34654987);
 
@@ -89,7 +91,7 @@ public class TestVulnerable {
         tarjetas.add(tarjeta1);
         tarjetas.add(tarjeta2);
 
-        RegistroDePersonaACargo registroDePersonaACargo = new RegistroDePersonaACargo(true,new Date(),1);
+        RegistroDePersonaACargo registroDePersonaACargo = new RegistroDePersonaACargo(true, LocalDate.now(),1);
 
         personaVulnerable1.agregarregistroDePersonasACargo(registroDePersonaACargo);
     }
