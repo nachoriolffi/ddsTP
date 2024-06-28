@@ -3,11 +3,16 @@ package ar.edu.utn.frba.dds;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.Mensaje;
+import ar.edu.utn.frba.dds.models.entities.contacto.Notificacion;
+import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.wpp.AdapterWhatsapp;
 import ar.edu.utn.frba.dds.models.entities.contacto.wpp.NotifcarPorWpp;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestWpp {
 
@@ -19,6 +24,9 @@ public class TestWpp {
 
     private Mensaje mensaje;
 
+    private List<Contacto> contacto;
+
+    private Notificacion notificacion;
     @BeforeEach
     public void setUp() {
 
@@ -30,33 +38,37 @@ public class TestWpp {
 
         mensaje = new Mensaje("Hola", "Hola");
 
+        contacto = new ArrayList<Contacto>();
+
+        contacto.add(new Contacto(TipoContacto.WPP, "+5491125253216"));
+
+        colaborador.setContacto(contacto);
+
+        notificacion = new Notificacion(contacto,mensaje);
+
     }
 
     @Test
     public void testComunicar() {
 
-        colaborador.setContacto(new Contacto("wpp", "1125253216"));
+        //colaborador.setContacto(new Contacto("wpp", "1125253216"));
 
-        notifcarPorWpp.comunicar(mensaje, colaborador);
+        notifcarPorWpp.comunicar(notificacion);
 
-        Mockito.verify(mokceoAdapterWpp, Mockito.times(1)).comunicarMensaje(mensaje.getMensaje(), colaborador.getContacto().getDescripcion());
+        Mockito.verify(mokceoAdapterWpp, Mockito.times(1)).comunicarMensaje(mensaje.getMensaje(), colaborador.getContacto().get(0).getDescripcion());
 
     }
 
     // NO LO DESCOMENTEN, NO HAY PLATA PARA PAGAR EL WPP
     // GASTA PLATA DE LA PRUEBA PARA PROBARLO
     // ALERTA DE NO TOCAR, SINO LES PEGO HACHAZO EN LA HELADERA
-    /*@Test
+    @Test
     public void testComunicarRealNoUsarPorqNosCobranYNoHayPlata() {
-
-        colaborador.setContacto(new Contacto("wpp", "+5491125253216")); // para probar tenemos que registrar el numero de la persona
-        // por ende no funciona si no es un numero que no registre en la sandbox de twilio
-
 
        NotifcarPorWpp notificador = new NotifcarPorWpp(new AdapterWhatsapp());
 
-        notificador.comunicar(mensaje, colaborador);
+        notificador.comunicar(notificacion);
 
-    }*/
+    }
 
 }

@@ -15,6 +15,9 @@ import lombok.Setter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -155,6 +158,27 @@ public class TestHeladera {
         System.out.println(heladera1.getEstaActiva().equals(Boolean.TRUE));
         System.out.println(receptorTemperatura.getTemperaturasLeidas().get(0));
         assert heladera1.getIncidentes().size() == 0;
+    }
+
+    @Test
+    public void testCronjobTemperaturaSensorFalla() throws IOException, InterruptedException {
+        String pathToJar = "";
+
+        ProcessBuilder processBuilder = new ProcessBuilder("java", "-jar", pathToJar);
+
+        Process process = processBuilder.start();
+
+        // Leer y mostrar la salida del proceso
+        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            System.out.println(line);
+        }
+
+        // Esperar a que el proceso termine
+        int exitCode = process.waitFor();
+        System.out.println("Exited with code: " + exitCode);
+
     }
 
 }
