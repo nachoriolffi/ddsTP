@@ -22,6 +22,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
@@ -147,7 +148,7 @@ public class Colaborador {
         }
     }
 
-    public Date StringToFecha(String fecha) throws ParseException {
+    public Object StringToFecha(String fecha) throws ParseException {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         Date fechaDate;
         try {

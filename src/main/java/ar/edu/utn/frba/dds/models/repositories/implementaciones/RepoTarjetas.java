@@ -1,6 +1,4 @@
 package ar.edu.utn.frba.dds.models.repositories.implementaciones;
-
-import ar.edu.utn.frba.dds.models.entities.exportadorPDF.Reporte;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoTarjetas;
 import lombok.Getter;
