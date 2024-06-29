@@ -6,6 +6,7 @@ import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class RepoColaborador implements IRepoColaborador {
 
@@ -23,9 +24,20 @@ public class RepoColaborador implements IRepoColaborador {
         return instancia;
     }
 
+
+    @Override
+    public java.util.Optional<Colaborador> buscar(Long id) {
+        return colaboradores
+            .stream()
+            .filter(c -> c.getId().equals(id))
+            .findFirst();
+    }
+
     public void agregarColaborador(Colaborador colaborador) {
         this.colaboradores.add(colaborador);
     }
+
+
 
     public void eliminarColaborador(Colaborador colaborador) {
         this.colaboradores.remove(colaborador);
