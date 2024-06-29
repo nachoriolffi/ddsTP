@@ -1,8 +1,6 @@
-package ar.edu.utn.frba.dds;
-
+package ar.edu.utn.frba.dds.models.entities.heladera;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
-import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
+
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.registro.RegistroTemperatura;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
