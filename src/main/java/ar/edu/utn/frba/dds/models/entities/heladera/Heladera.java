@@ -39,7 +39,6 @@ public class Heladera {
         this.capacidad = capacidad;
         this.viandas = viandas;
         this.incidentes= new ArrayList<Incidente>();
-
     }
 
     public Heladera(Direccion direccion, Coordenada coordenada, Integer capacidad, List<Vianda> viandas,Date fechaPuestaFunc) {

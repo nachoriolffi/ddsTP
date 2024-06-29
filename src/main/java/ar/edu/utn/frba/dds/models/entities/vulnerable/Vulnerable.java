@@ -14,6 +14,7 @@ import java.util.List;
 @Setter
 public class Vulnerable {
 
+    private Long id;
     private String nombre;
     private String apellido;
     private LocalDate fechaDeNacimiento;

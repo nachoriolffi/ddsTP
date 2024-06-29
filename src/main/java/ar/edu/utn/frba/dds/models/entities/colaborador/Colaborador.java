@@ -13,6 +13,7 @@ import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,12 +26,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-
+@Data
 @Setter
 @Getter
 
 public class Colaborador {
 
+    private Long id;
     private String nombre;
     private String apellido;
     private List<MedioDeComunicacion> mediosDeComunicacion;
