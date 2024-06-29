@@ -12,6 +12,8 @@ import java.util.List;
 
 public class Tecnico {
     @Getter @Setter
+    private Long id;
+    @Getter @Setter
     private String nombre;
     @Getter @Setter
     private String apellido;
@@ -30,7 +32,8 @@ public class Tecnico {
     private List<Contacto> contactos;
 
 
-    public Tecnico(String nombre, String apellido, TipoDocumento tipoDocumento, Integer DNI, Integer CUIL, List<MedioDeComunicacion> mediosDeComunicacion, Integer areaCobertura ) {
+    public Tecnico(Long id, String nombre, String apellido, TipoDocumento tipoDocumento, Integer DNI, Integer CUIL, List<MedioDeComunicacion> mediosDeComunicacion, Integer areaCobertura ) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.tipoDocumento = tipoDocumento;
@@ -40,7 +43,7 @@ public class Tecnico {
         this.areaCobertura = areaCobertura;
     }
 
-    public Tecnico(String nombre, String apellido, Coordenada coordenada, Boolean disponible, Integer areaCobertura) {
+    public Tecnico(Long id, String nombre, String apellido, Coordenada coordenada, Boolean disponible, Integer areaCobertura) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.coordenada = coordenada;
@@ -48,7 +51,7 @@ public class Tecnico {
         this.areaCobertura = areaCobertura;
     }
 
-    public Tecnico(String nombre, String apellido, TipoDocumento tipoDocumento, Integer DNI, Integer CUIL, List<MedioDeComunicacion> mediosDeComunicacion, Integer areaCobertura, Coordenada coordenada) {
+    public Tecnico(Long id, String nombre, String apellido, TipoDocumento tipoDocumento, Integer DNI, Integer CUIL, List<MedioDeComunicacion> mediosDeComunicacion, Integer areaCobertura, Coordenada coordenada) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.tipoDocumento = tipoDocumento;

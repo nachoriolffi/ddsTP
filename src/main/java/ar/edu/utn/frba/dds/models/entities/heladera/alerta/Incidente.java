@@ -15,8 +15,8 @@ import java.util.Date;
 @Getter
 @Setter
 public class Incidente {
+    Long id;
     private Date fecha;
-
     private String descripcion;
     private String pathFoto;
     private TipoIncidente tipoIncidente;
@@ -32,7 +32,8 @@ public class Incidente {
         this.fecha = new Date();
     }
 
-    public Incidente(String descripcion, String pathFoto, TipoIncidente tipoIncidente, TipoAlerta tipoAlerta, Colaborador colaborador) {
+    public Incidente(Long id, String descripcion, String pathFoto, TipoIncidente tipoIncidente, TipoAlerta tipoAlerta, Colaborador colaborador) {
+        this.id = id;
         this.fecha = new Date();
         this.descripcion = descripcion;
         this.pathFoto = pathFoto;

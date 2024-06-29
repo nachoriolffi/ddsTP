@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
 import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoTecnico;
 
 import java.util.List;
+import java.util.Optional;
 
 public class RepoTecnico implements IRepoTecnico {
 
@@ -25,11 +26,16 @@ public class RepoTecnico implements IRepoTecnico {
         this.tecnicos.remove(tecnico);
     }
 
+    @Override
+    public Optional<Tecnico> buscarTecnico(Long id) {
+        return tecnicos
+                .stream()
+                .filter(t -> t.getId().equals(id))
+                .findFirst();
+    }
+
     public List<Tecnico> getTecnicos() {
         return tecnicos;
     }
 
-    public Tecnico buscarTecnico(Tecnico tecnico) {
-        return tecnicos.stream().filter(t -> t.equals(tecnico)).findFirst().orElse(null);
-    }
 }

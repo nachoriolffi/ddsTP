@@ -19,4 +19,6 @@ public class TarjetaOutputDTO {
     private List<Long> idRegistroUsos;
     private Long idPersonaAsociada;
     private Long idColaboradorAsociado;
+
+
 }

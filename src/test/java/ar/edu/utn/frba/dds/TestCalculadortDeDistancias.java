@@ -22,15 +22,15 @@ public class TestCalculadortDeDistancias {
     @BeforeEach
     public void setUp() {
 
-        Tecnico tecnico1 = new Tecnico("Juan", "Perez", TipoDocumento.DNI, 123456, 123456, null, 100);
+        Tecnico tecnico1 = new Tecnico(1L,"Juan", "Perez", TipoDocumento.DNI, 123456, 123456, null, 100);
         Coordenada coordenada1= new Coordenada(40.7128, 74.0060);
         tecnico1.setCoordenada(coordenada1); // Nueva York
 
-        Tecnico tecnico2 = new Tecnico("Pedro", "Gomez", TipoDocumento.DNI, 234567, 234567, null, 100);
+        Tecnico tecnico2 = new Tecnico(2L,"Pedro", "Gomez", TipoDocumento.DNI, 234567, 234567, null, 100);
         Coordenada coordenada2 = new Coordenada(34.0522, 118.2437);
         tecnico2.setCoordenada(coordenada2); // Los Angeles
 
-        Tecnico tecnico3 = new Tecnico("Carlos", "Rodriguez", TipoDocumento.DNI, 345678, 345678, null, 100);
+        Tecnico tecnico3 = new Tecnico(3L,"Carlos", "Rodriguez", TipoDocumento.DNI, 345678, 345678, null, 100);
         Coordenada coordenada3 = new Coordenada(41.8781, 87.6298);
         tecnico3.setCoordenada(coordenada3); // Chicago
 
