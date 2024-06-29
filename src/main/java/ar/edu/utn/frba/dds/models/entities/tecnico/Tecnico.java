@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.models.entities.tecnico;
 
+import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRegistrosVisita;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
@@ -18,12 +19,16 @@ public class Tecnico {
     @Getter @Setter
     private Integer DNI;
     private Integer CUIL;
+    @Getter
     private List<MedioDeComunicacion> mediosDeComunicacion;
     private Integer areaCobertura;
     @Getter @Setter
     private Coordenada coordenada;
     @Getter @Setter
     private Boolean disponible;
+    @Getter @Setter
+    private List<Contacto> contactos;
+
 
     public Tecnico(String nombre, String apellido, TipoDocumento tipoDocumento, Integer DNI, Integer CUIL, List<MedioDeComunicacion> mediosDeComunicacion, Integer areaCobertura ) {
         this.nombre = nombre;

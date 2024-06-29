@@ -3,6 +3,8 @@ package ar.edu.utn.frba.dds;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.Mensaje;
+import ar.edu.utn.frba.dds.models.entities.contacto.Notificacion;
+import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.AdapterCorreo;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.CorreoElectronico;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.ServicioMail;
@@ -29,6 +31,8 @@ public class TestCorreo {
     private Mensaje mensaje;
     private Colaborador destinatario;
 
+    private Notificacion notificacion;
+
     @BeforeEach
     public void setUp() {
         // Crear mocks
@@ -40,17 +44,19 @@ public class TestCorreo {
         // Crear instancias de Mensaje y Colaborador
         mensaje = new Mensaje("Titulo de Mensaje para Gaston", "Holaaa Gaston, ¿cómo va?");
         destinatario = new Colaborador("Nombre del destinatario", "Apellido del destinatario",
-                new ArrayList<>(), new ArrayList<>(), null, null,
-                new Contacto("mail","federperez@frba.utn.edu.ar"));
+                new ArrayList<>(), new ArrayList<>(), null, null);
+
+        destinatario.getContacto().add(new Contacto(TipoContacto.MAIL,"federperez@frba.utn.edu.ar"));
+        notificacion= new Notificacion( destinatario.getContacto(), mensaje);
     }
 
     @Test
     public void testComunicar() {
         // Llamar al método comunicar
-        correoElectronico.comunicar(mensaje, destinatario);
+        correoElectronico.comunicar(notificacion);
 
         // Verificar que el método comunicarMensaje del adaptador fue llamado una vez con los parámetros correctos
-        verify(mockAdapterCorreo, times(1)).comunicarMensaje(mensaje, destinatario);
+        verify(mockAdapterCorreo, times(1)).comunicarMensaje(mensaje, destinatario.getContacto().get(0));
     }
 
     @Test
@@ -62,10 +68,10 @@ public class TestCorreo {
         correoElectronico = new CorreoElectronico(new AdapterCorreo());
 
         // Llamar al método comunicar
-        correoElectronico.comunicar(mensaje, destinatario);
+        correoElectronico.comunicar(notificacion);
 
         // Verificar que el método enviarCorreo del servicio de mail fue llamado una vez con los parámetros correctos
-        verify(mockServicioMail, times(1)).enviarCorreo(destinatario.getContacto().getDescripcion(), mensaje.getTitulo(), mensaje.getMensaje());
+        verify(mockServicioMail, times(1)).enviarCorreo(destinatario.getContacto().get(0).getDescripcion(), mensaje.getTitulo(), mensaje.getMensaje());
     }
 
 }

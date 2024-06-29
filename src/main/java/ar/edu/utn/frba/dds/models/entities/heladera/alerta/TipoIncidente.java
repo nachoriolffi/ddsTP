@@ -1,5 +1,5 @@
 package ar.edu.utn.frba.dds.models.entities.heladera.alerta;
 
 public enum TipoIncidente {
-    INCIDENTE,ALERTA
+    FALLA,ALERTA
 }

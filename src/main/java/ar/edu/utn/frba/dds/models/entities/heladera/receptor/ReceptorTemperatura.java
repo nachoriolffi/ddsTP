@@ -34,8 +34,7 @@ public class ReceptorTemperatura {
 
     public void evaluarTemperatura(String dato, Heladera heladera) {
         if (evaluarLimitesTemperatura(Float.parseFloat(dato),heladera)){
-            registrarAlerta(heladera, TipoAlerta.TEMPERATURA);
-            heladera.setEstaActiva(false);
+            registrarIncidente(heladera, TipoAlerta.TEMPERATURA);
         }
         //hay que hacer un RegistroTemperatura y despues agregarlo
         RegistroTemperatura registro = new RegistroTemperatura( Float.parseFloat(dato), new Date());
@@ -54,8 +53,10 @@ public class ReceptorTemperatura {
     private boolean evaluarTemperaturaMinima(Float temperatura, Heladera heladera) {
         return temperatura < heladera.getModelo().getTemperaturaMinima();
     }
-    public void registrarAlerta(Heladera heladera, TipoAlerta tipoAlerta) {
+    public void registrarIncidente(Heladera heladera, TipoAlerta tipoAlerta) {
         Incidente registro = new Incidente(tipoAlerta);
+        registro.notificarTecnicoMasCercano(heladera);
         heladera.agregarRegistroDeAlerta(registro);
+        heladera.setEstaActiva(false);
     }
 }
