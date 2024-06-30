@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.models.entities.heladera.CronjobTemperatura;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoAlerta;
@@ -10,6 +11,7 @@ import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import lombok.Getter;
 import lombok.Setter;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,22 +22,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Getter
 @Setter
 public class TestHeladera {
 
-    Heladera heladera1, heladera2, heladera3;
+    Heladera heladera,heladera1, heladera2, heladera3;
     Direccion direccion1, direccion2, direccion3;
     Coordenada coordenada1, coordenada2, coordenada3;
-    Vianda vianda1, vianda2, vianda3, vianda4, vianda5, vianda6;
-    List<Vianda> viandas1, viandas2, viandas3;
+    Vianda vianda, vianda1, vianda2, vianda3, vianda4, vianda5, vianda6;
+    List<Vianda> viandas1, viandas2, viandas3,viandas;
     List<Heladera> heladeras;
     ReceptorMovimiento receptorMovimiento;
     ReceptorTemperatura receptorTemperatura;
     ModeloHeladera modeloHeladera;
 
+    RepoHeladeras repoHeladeras;
 
     @BeforeEach
     public void seteoHeladeras() {
@@ -50,10 +55,13 @@ public class TestHeladera {
         coordenada2 = new Coordenada(200.0, 1254.0);
         coordenada3 = new Coordenada(500.0, 153.0);
 
+
         viandas1 = new ArrayList<>();
         viandas2 = new ArrayList<>();
         viandas3 = new ArrayList<>();
+        viandas = new ArrayList<>();
 
+        vianda = new Vianda("Sopa", heladera, new Colaborador(), true);
         vianda1 = new Vianda("Carne", heladera1, new Colaborador(), true);
         vianda2 = new Vianda("Papas", heladera2, new Colaborador(), false);
         vianda3 = new Vianda("Milanesa", heladera3, new Colaborador(), true);
@@ -61,11 +69,13 @@ public class TestHeladera {
         vianda5 = new Vianda("Fideos", heladera2, new Colaborador(), true);
         vianda6 = new Vianda("Ravioles", heladera3, new Colaborador(), true);
 
+        heladera = new Heladera(direccion1, coordenada1, 150, viandas);
         heladera1 = new Heladera(direccion1, coordenada1, 150, viandas1);
         heladera1.setEstaActiva(Boolean.TRUE);
         heladera2 = new Heladera(direccion2, coordenada2, 200, viandas2);
         heladera3 = new Heladera(direccion3, coordenada3, 300, viandas3);
 
+        heladera.agregarVianda(vianda);
         heladera1.agregarVianda(vianda1);
         heladera1.agregarVianda(vianda4);
         heladera2.agregarVianda(vianda2);
@@ -78,6 +88,9 @@ public class TestHeladera {
 
         modeloHeladera = new ModeloHeladera(18.0,1.5,100.0,200);
 
+        heladera.setModelo(modeloHeladera);
+
+        repoHeladeras = RepoHeladeras.getInstancia();
     }
 
     @Test
@@ -161,24 +174,38 @@ public class TestHeladera {
     }
 
     @Test
-    public void testCronjobTemperaturaSensorFalla() throws IOException, InterruptedException {
-        String pathToJar = "";
+    public void testCronjobTemperaturaSensorFalla(){
+        // Se simula una lectura de temperatura con tiempo mayor a 5 minutos
+        Date fechaActual = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fechaActual);
+        calendar.add(Calendar.MINUTE, -6);
+        Date fechaUltimaLectura = calendar.getTime();
+        RegistroTemperatura registro = new RegistroTemperatura( Float.parseFloat("18.0"), fechaUltimaLectura);
+        receptorTemperatura.getTemperaturasLeidas().add(registro);
 
-        ProcessBuilder processBuilder = new ProcessBuilder("java", "-jar", pathToJar);
+        heladera.setReceptorTemperatura(receptorTemperatura);
+        heladera.setEstaActiva(true);
 
-        Process process = processBuilder.start();
+        heladera.setNombre("Heladera1");
 
-        // Leer y mostrar la salida del proceso
-        BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        String line;
-        while ((line = reader.readLine()) != null) {
-            System.out.println(line);
-        }
+        repoHeladeras.agregarHeladera(heladera);
 
-        // Esperar a que el proceso termine
-        int exitCode = process.waitFor();
-        System.out.println("Exited with code: " + exitCode);
+        CronjobTemperatura.main();
 
+        assert heladera.getEstaActiva().equals(Boolean.FALSE);
+    }
+    @Test
+    public void testCronjobTemperaturaSensorFunciona(){
+        receptorTemperatura.evaluarTemperatura("18.0", heladera);
+        heladera.setReceptorTemperatura(receptorTemperatura);
+        heladera.setEstaActiva(true);
+        heladera.setNombre("Heladera2");
+
+        repoHeladeras.agregarHeladera(heladera);
+        CronjobTemperatura.main();
+
+        assert heladera.getEstaActiva().equals(Boolean.TRUE);
     }
 
 }
