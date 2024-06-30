@@ -1,12 +1,12 @@
 package ar.edu.utn.frba.dds.services.imp;
 
-import ar.edu.utn.frba.dds.dtos.IncidenteInputDTO;
-import ar.edu.utn.frba.dds.dtos.IncidenteOutputDTO;
+import ar.edu.utn.frba.dds.dtos.inputs.IncidenteInputDTO;
+import ar.edu.utn.frba.dds.dtos.outputs.IncidenteOutputDTO;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoIncidente;
 import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoIncidente;
 
-import ar.edu.utn.frba.dds.services.IIncidenteService;
+import ar.edu.utn.frba.dds.services.interfaces.IIncidenteService;
 
 import static ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoIncidente.*;
 

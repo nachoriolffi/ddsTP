@@ -1,45 +1,52 @@
 package ar.edu.utn.frba.dds.services.imp;
 
-import ar.edu.utn.frba.dds.dtos.HeladeraInputDTO;
-import ar.edu.utn.frba.dds.dtos.HeladeraOutputDTO;
+import ar.edu.utn.frba.dds.dtos.inputs.HeladeraInputDTO;
+import ar.edu.utn.frba.dds.dtos.outputs.HeladeraOutputDTO;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
+import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
+import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
+import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoHeladeras;
-import ar.edu.utn.frba.dds.services.IHeladeraService;
+import ar.edu.utn.frba.dds.services.interfaces.IHeladeraService;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 public class HeladeraService implements IHeladeraService {
     private IRepoHeladeras heladeraRepository;
-
 
     public HeladeraService(IRepoHeladeras heladeraRepository) {
         this.heladeraRepository = heladeraRepository;
     }
 
+    private Coordenada coordenada;
+
     @Override
-    public HeladeraOutputDTO crear(HeladeraInputDTO dtoHeladera) {
-        Heladera nuevaHeladera = new Heladera(
-                dtoHeladera.getDireccion(),
-                dtoHeladera.getCoordenada(),
-                dtoHeladera.getCapacidad(),
-                dtoHeladera.getEstaActiva()
-                //dtoHeladera.getIdViandas(), Ver como buscamos en el repo por id, deberia tener un Repo Viandas?? o como??
-        );
+    public Heladera crear(HeladeraInputDTO dtoHeladera) {
 
+        Heladera nuevaHeladera = new Heladera();
+        nuevaHeladera.setNombre(dtoHeladera.getNombre());
+        nuevaHeladera.setDireccion(dtoHeladera.getDireccion());
+        nuevaHeladera.setCapacidad(dtoHeladera.getCapacidad());
+        nuevaHeladera.setFechaPuestaFunc(new Date());
+        nuevaHeladera.setViandas(new ArrayList<>());
+        nuevaHeladera.setIncidentes(new ArrayList<>());
+        nuevaHeladera.setAperturas(new ArrayList<>());
+        nuevaHeladera.setAperturas(new ArrayList<>());
+        nuevaHeladera.setEstaActiva(Boolean.TRUE);
+        nuevaHeladera.setTempActual(dtoHeladera.getTempActual());
+        nuevaHeladera.setReceptorMovimiento( new ReceptorMovimiento());
+        nuevaHeladera.setReceptorTemperatura( new ReceptorTemperatura());
+        ModeloHeladera modelo =null;
+        nuevaHeladera.setModelo(modelo);
+        nuevaHeladera.setCoordenada(dtoHeladera.getCoordenada());
         this.heladeraRepository.agregarHeladera(nuevaHeladera);
-
-        HeladeraOutputDTO output = new HeladeraOutputDTO();
-
-        //tiene sentido esto??
-        output.setDireccion(nuevaHeladera.getDireccion());
-        output.setCoordenada(nuevaHeladera.getCoordenada());
-        output.setCapacidad(nuevaHeladera.getCapacidad());
-        output.setEstaActiva(nuevaHeladera.getEstaActiva());
-
-
-        return output;
+        return nuevaHeladera;
     }
 
     @Override
-    public HeladeraOutputDTO modificar(HeladeraInputDTO dto) {
+    public Heladera modificar(Integer id,HeladeraInputDTO dto) {
 
         //Optional <Heladera> posibleHeladera = this.heladeraRepository.buscarHeladera(id) pasar todos los buscar a buscar por id
 //        if(posibleHeladera.isEmpty()) {
@@ -65,7 +72,7 @@ public class HeladeraService implements IHeladeraService {
 }
 
     @Override
-    public void eliminar(HeladeraInputDTO dtoHeladera) { //long id
+    public void eliminar(Integer id) { //long id
         Heladera nuevaHeladera = new Heladera(
                 dtoHeladera.getDireccion(),
                 dtoHeladera.getCoordenada(),

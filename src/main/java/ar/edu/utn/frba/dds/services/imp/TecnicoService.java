@@ -1,11 +1,10 @@
 package ar.edu.utn.frba.dds.services.imp;
 
-import ar.edu.utn.frba.dds.dtos.TecnicoInputDTO;
-import ar.edu.utn.frba.dds.dtos.TecnicoOutputDTO;
-import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
+import ar.edu.utn.frba.dds.dtos.inputs.TecnicoInputDTO;
+import ar.edu.utn.frba.dds.dtos.outputs.TecnicoOutputDTO;
 import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
 import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoTecnico;
-import ar.edu.utn.frba.dds.services.ITecnicoService;
+import ar.edu.utn.frba.dds.services.interfaces.ITecnicoService;
 
 public class TecnicoService implements ITecnicoService {
     private IRepoTecnico repoTecnico;

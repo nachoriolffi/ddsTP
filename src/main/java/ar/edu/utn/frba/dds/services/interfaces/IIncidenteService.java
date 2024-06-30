@@ -1,7 +1,7 @@
-package ar.edu.utn.frba.dds.services;
+package ar.edu.utn.frba.dds.services.interfaces;
 
-import ar.edu.utn.frba.dds.dtos.IncidenteInputDTO;
-import ar.edu.utn.frba.dds.dtos.IncidenteOutputDTO;
+import ar.edu.utn.frba.dds.dtos.inputs.IncidenteInputDTO;
+import ar.edu.utn.frba.dds.dtos.outputs.IncidenteOutputDTO;
 
 
 public interface IIncidenteService {

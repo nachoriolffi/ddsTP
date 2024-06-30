@@ -1,16 +1,10 @@
-package ar.edu.utn.frba.dds.dtos;
+package ar.edu.utn.frba.dds.dtos.inputs;
 
 
-import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
-import ar.edu.utn.frba.dds.models.entities.heladera.RegistroSolicitud;
-import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
-import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
-import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 
 
-import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

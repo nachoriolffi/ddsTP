@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface IRepoVulnerable {
     void agregarVulnerable(Vulnerable vulnerable );
     void eliminarVulnerable(Vulnerable vulnerable);
-    Optional<Vulnerable> buscarVulnerable(Long id);
+    Vulnerable buscarVulnerable(Integer id);
 }

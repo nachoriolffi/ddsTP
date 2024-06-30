@@ -12,9 +12,9 @@ public class ColaboradorDTO {
     private String calle;
     private Integer altura;
     private Integer piso;
-    private String provincia; // falta setear en el factory
-    private String municipio; // falta setear en el factory
-    private String localidad; // falta setear en el factory
+    //private String provincia; // falta setear en el factory
+    //private String municipio; // falta setear en el factory
+    //private String localidad; // falta setear en el factory
     private String tipoDocumento;
     private Integer numeroDocumento;
     private Integer razonSocial;
@@ -22,9 +22,7 @@ public class ColaboradorDTO {
     private String tipoPersona;
     private String tipoJuridisccion;
     private List<String> formasDeColaboracion; // son los enums
-
-
-   /* private List<MedioDeComunicacion> mediosDeComunicacion;
-    private CuestionarioRespondido cuestionarioRespondido;
-    private Contacto contacto;*/
+    //private List<String> mediosDeComunicacion;
+    //private CuestionarioRespondido cuestionarioRespondido;
+    //private Contacto contacto;
 }

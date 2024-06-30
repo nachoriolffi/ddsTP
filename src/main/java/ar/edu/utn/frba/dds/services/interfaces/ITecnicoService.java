@@ -1,8 +1,8 @@
-package ar.edu.utn.frba.dds.services;
+package ar.edu.utn.frba.dds.services.interfaces;
 
 
-import ar.edu.utn.frba.dds.dtos.TecnicoInputDTO;
-import ar.edu.utn.frba.dds.dtos.TecnicoOutputDTO;
+import ar.edu.utn.frba.dds.dtos.inputs.TecnicoInputDTO;
+import ar.edu.utn.frba.dds.dtos.outputs.TecnicoOutputDTO;
 
 public interface ITecnicoService {
     public TecnicoOutputDTO crear(TecnicoInputDTO dto);

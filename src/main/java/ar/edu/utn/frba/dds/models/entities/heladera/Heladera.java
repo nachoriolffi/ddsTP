@@ -33,6 +33,10 @@ public class Heladera {
     private ModeloHeladera modelo;
     private Double tempActual;
 
+    public Heladera(){
+
+    }
+
     public Heladera(Direccion direccion, Coordenada coordenada, Integer capacidad, List<Vianda> viandas) {
         this.direccion = direccion;
         this.coordenada = coordenada;

@@ -1,16 +1,13 @@
-package ar.edu.utn.frba.dds.dtos;
+package ar.edu.utn.frba.dds.dtos.inputs;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-
-public class IncidenteOutputDTO {
+public class IncidenteInputDTO {
     private Long id;
     private Integer tipoIncidente;
     private Integer tipoAlerta;

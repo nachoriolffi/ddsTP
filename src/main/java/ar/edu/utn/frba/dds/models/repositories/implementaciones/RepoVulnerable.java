@@ -32,11 +32,8 @@ public class RepoVulnerable implements IRepoVulnerable {
     }
 
     @Override
-    public Optional<Vulnerable> buscarVulnerable(Long id) {
-        return vulnerables
-                .stream()
-                .filter(c -> c.getId().equals(id))
-                .findFirst();
+    public Vulnerable buscarVulnerable(Integer id) {
+        return this.getVulnerables().get(id);
     }
 
 }

@@ -17,19 +17,7 @@ public class RepoTarjetas implements IRepoTarjetas {
         }
         return instancia;
     }
-
-    @Override
-    public void agregarTarjeta(Tarjeta tarjeta) {
-        tarjetas.add(tarjeta);
-    }
-
-    @Override
-    public void eliminarTarjeta(Tarjeta tarjeta) {
-        tarjetas.remove(tarjeta);
-    }
-
-    @Override
-    public List<Tarjeta> listarTarjetas() {
-        return tarjetas;
-    }
+    public void agregarTarjeta(Tarjeta tarjeta) {tarjetas.add(tarjeta);}
+    public void eliminarTarjeta(Tarjeta tarjeta) {tarjetas.remove(tarjeta);}
+    public List<Tarjeta> listarTarjetas() {return tarjetas;}
 }

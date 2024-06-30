@@ -7,7 +7,7 @@ import java.util.Optional;
 public interface IRepoColaborador {
 
      void agregarColaborador(Colaborador colaborador);
-     Optional<Colaborador> buscar(Long id);
+     Colaborador buscar(Integer id);
      void eliminarColaborador(Colaborador colaborador);
      void borrarColaboradores();
 

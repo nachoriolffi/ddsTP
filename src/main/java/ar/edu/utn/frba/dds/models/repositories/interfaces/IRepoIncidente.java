@@ -9,5 +9,5 @@ public interface IRepoIncidente {
     void agregarIncidente(Incidente incidente);
     void eliminarIncidente(Incidente incidente);
     List<Incidente> traerIncidentes();
-    Incidente buscarIncidente(Incidente incidente);
+    Incidente buscarIncidente(Integer id);
 }

@@ -1,8 +1,8 @@
-package ar.edu.utn.frba.dds.services;
+package ar.edu.utn.frba.dds.services.interfaces;
 
 
-import ar.edu.utn.frba.dds.dtos.TarjetaInputDTO;
-import ar.edu.utn.frba.dds.dtos.TarjetaOutputDTO;
+import ar.edu.utn.frba.dds.dtos.inputs.TarjetaInputDTO;
+import ar.edu.utn.frba.dds.dtos.outputs.TarjetaOutputDTO;
 
 public interface ITarjetaService {
     public TarjetaOutputDTO crear(TarjetaInputDTO dto);

@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.dtos;
+package ar.edu.utn.frba.dds.dtos.outputs;
 
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;

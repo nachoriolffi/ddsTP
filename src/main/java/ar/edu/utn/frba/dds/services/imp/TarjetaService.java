@@ -1,13 +1,10 @@
 package ar.edu.utn.frba.dds.services.imp;
 
-import ar.edu.utn.frba.dds.dtos.TarjetaInputDTO;
-import ar.edu.utn.frba.dds.dtos.TarjetaOutputDTO;
-import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
-import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
+import ar.edu.utn.frba.dds.dtos.inputs.TarjetaInputDTO;
+import ar.edu.utn.frba.dds.dtos.outputs.TarjetaOutputDTO;
 import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoTarjeta;
-import ar.edu.utn.frba.dds.services.ITarjetaService;
+import ar.edu.utn.frba.dds.services.interfaces.ITarjetaService;
 
 public class TarjetaService implements ITarjetaService {
 
