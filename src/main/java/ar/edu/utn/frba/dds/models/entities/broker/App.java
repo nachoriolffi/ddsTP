@@ -1,5 +1,10 @@
 package ar.edu.utn.frba.dds.models.entities.broker;
 
+import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
+import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
+import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
+import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -7,23 +12,35 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 public class App {
     public static void main(String[] args) {
+        Broker escucha = new Broker();
+        ReceptorMovimiento receptorMovimiento = new ReceptorMovimiento();
+        Heladera heladera = new Heladera();
+        heladera.setNombre("medrano");
+        RepoHeladeras repoHeladeras = RepoHeladeras.getInstancia();
+
+        escucha.connect("escucha");
+        //escucha.subscribe("dds2024/heladera" + heladera.getId());
+        escucha.subscribe("dds2024/heladera/medrano/alerta");
+        receptorMovimiento.evaluarDatosSensor("activado",heladera);
+        escucha.disconnect();
+
         Broker broker = new Broker();
         Broker broker2 = new Broker();
-        Broker heladera = new Broker();
+        Broker heladera1 = new Broker();
 
         broker.connect("tuki");
-        heladera.connect("heladera");
+        heladera1.connect("heladera");
         broker2.connect("alerta");
 
         broker.subscribe("ayudame/loco");
         broker2.subscribe("ayudame/loco/por/favor");
 
-        heladera.publish("ayudame/loco","funciona?");
-        heladera.publish("ayudame/loco/por/favor","si");
+        heladera1.publish("ayudame/loco","funciona?");
+        heladera1.publish("ayudame/loco/por/favor","si");
 
         broker.disconnect();
         broker2.disconnect();
-        heladera.disconnect();
+        heladera1.disconnect();
 
     }
 
