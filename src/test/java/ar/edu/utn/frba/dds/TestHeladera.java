@@ -8,10 +8,12 @@ import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoAlerta;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.registro.RegistroTemperatura;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
+import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoTecnico;
 import lombok.Getter;
 import lombok.Setter;
 import org.junit.jupiter.api.BeforeEach;
@@ -91,6 +93,19 @@ public class TestHeladera {
         heladera.setModelo(modeloHeladera);
 
         repoHeladeras = RepoHeladeras.getInstancia();
+
+        // uno que este en la coordenada de la heladera y esteocupad
+        Tecnico tecnico1 = new Tecnico("Juan","");
+        // este en la coordenada pero este desocupado
+        Tecnico tecnico2 = new Tecnico();
+       // uno que este libre pero esta mas lejos de la helada, no esta en la misma coord
+        Tecnico tecnico3 = new Tecnico();
+
+
+        RepoTecnico repoTec = RepoTecnico.getInstancia();
+        repoTec.agregarTecnico(tecnico1);
+        repoTec.agregarTecnico(tecnico2);
+        repoTec.agregarTecnico(tecnico3);
     }
 
     @Test

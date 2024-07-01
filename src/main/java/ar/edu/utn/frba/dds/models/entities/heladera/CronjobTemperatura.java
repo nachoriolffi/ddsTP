@@ -48,7 +48,7 @@ public class CronjobTemperatura {
                 Incidente incidente = new Incidente(6L,"CronjobTemeratura","",FALLA,null,null);
 
                 heladera.agregarRegistroDeAlerta(incidente);
-                //incidente.notificarTecnicoMasCercano(heladera);
+                incidente.notificarTecnicoMasCercano(heladera);
 
             }
             else {
