@@ -1,5 +1,9 @@
 package ar.edu.utn.frba.dds.models.entities.heladera;
 
+import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
+import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoAlerta;
+import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoIncidente;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.registro.RegistroTemperatura;
 
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
@@ -10,6 +14,8 @@ import java.util.List;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+
+import static ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoIncidente.FALLA;
 
 public class CronjobTemperatura {
     public static void main() {
@@ -41,10 +47,12 @@ public class CronjobTemperatura {
             if (diferenciaMinutos > tiempoEnMinutos) {
                 System.out.println("La diferencia entre la hora de la ultima lectura y la hora actual es mayor a " + tiempoEnMinutos + " minutos");
                 heladera.setEstaActiva(false);
-                /*
-                   reportar el incidente indicando la fecha y hora del mismo, en qué heladera ocurrió
-                   y el tipo. En caso de que sea una alerta indicar cuál fue.
-                */
+
+                Incidente incidente = new Incidente(6L,"CronjobTemeratura","",FALLA,null,null);
+
+                heladera.agregarRegistroDeAlerta(incidente);
+                //incidente.notificarTecnicoMasCercano(heladera);
+
             }
             else {
                 System.out.println("La diferencia entre la hora de la ultima lectura y la hora actual no es mayor a " + tiempoEnMinutos + " minutos");
