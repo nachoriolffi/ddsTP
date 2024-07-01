@@ -10,13 +10,14 @@ import lombok.Setter;
 import java.util.Date;
 import java.util.List;
 
-@Getter
-@Setter
+
 
 public class HacerseCargoDeHeladera implements FormaDeColaboracion {
     private Local local;
     private List<Heladera> heladeras;
     private Integer cantidadHeladeras;
+    @Getter
+    @Setter
     private TipoColaboracion tipoColaboracion;
     private Date fechaColaboracion;
 

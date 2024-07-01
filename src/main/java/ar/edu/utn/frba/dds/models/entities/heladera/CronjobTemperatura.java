@@ -12,8 +12,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class CronjobTemperatura {
-    public static void main() {
-
+    public static void main(String[] args) {
 
         RepoHeladeras repoHeladeras = RepoHeladeras.getInstancia();
 

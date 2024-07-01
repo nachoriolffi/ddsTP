@@ -7,5 +7,6 @@ public interface Exportable {
 
     public Map<String, List<String>> datos();
 
+    public void generarDocumento();
 
 }

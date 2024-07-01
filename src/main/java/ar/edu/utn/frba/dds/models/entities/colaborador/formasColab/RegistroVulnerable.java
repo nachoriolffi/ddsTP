@@ -17,6 +17,8 @@ public class RegistroVulnerable implements FormaDeColaboracion {
     private Integer cantidadTarjetas;
     private Date fechaColaboracion;
 
+    private TipoColaboracion tipoColaboracion = TipoColaboracion.ENTREGA_TARJETAS;
+
     public RegistroVulnerable(List<Tarjeta> tarjetasDonadas) {
         this.tarjetasDonadas = tarjetasDonadas;
         this.fechaColaboracion = new Date();

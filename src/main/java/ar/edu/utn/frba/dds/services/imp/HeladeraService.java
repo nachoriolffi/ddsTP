@@ -73,7 +73,7 @@ public class HeladeraService implements IHeladeraService {
 
     @Override
     public void eliminar(Integer id) { //long id
-        Heladera nuevaHeladera = new Heladera(
+       /* Heladera nuevaHeladera = new Heladera(
                 dtoHeladera.getDireccion(),
                 dtoHeladera.getCoordenada(),
                 dtoHeladera.getCapacidad(),
@@ -81,7 +81,7 @@ public class HeladeraService implements IHeladeraService {
                 //dtoHeladera.getIdViandas(), Ver como buscamos en el repo por id, deberia tener un Repo Viandas?? o como??
         );
 
-        this.heladeraRepository.eliminarHeladera(nuevaHeladera);
+        this.heladeraRepository.eliminarHeladera(nuevaHeladera);*/
 
 
     }
