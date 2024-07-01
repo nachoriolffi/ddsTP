@@ -22,6 +22,7 @@ public class HacerseCargoDeHeladera implements FormaDeColaboracion {
     private Date fechaColaboracion;
 
 
+
     public HacerseCargoDeHeladera(List<Heladera> heladeras, TipoColaboracion tipoColaboracion) {
         this.heladeras = heladeras;
         this.tipoColaboracion = tipoColaboracion;
@@ -32,6 +33,11 @@ public class HacerseCargoDeHeladera implements FormaDeColaboracion {
     @Override
     public double sumarPuntosA(Colaborador colaborador) {
         return cantidadHeladeras * this.sumarMesesActivas() * ConfiguracionMultiplicador.getInstance().getMultiplicadorHeladeraActiva();
+    }
+
+    @Override
+    public Integer getCantidadViandas() {
+        return null;
     }
 
     public long sumarMesesActivas() {

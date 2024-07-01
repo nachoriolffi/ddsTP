@@ -63,9 +63,11 @@ public class AdapterPDF implements InterfaceAdapterPDF {
 
     public static void addTableToDocument(Map<String, List<String>> data, Document document) {
         if (data == null || data.isEmpty()) {
+            System.out.println("No hay datos para exportar");
             return; // No hacer nada si los datos son nulos o vacíos
-        }
 
+        }
+        System.out.println("Exportando datos a PDF");
         // Crear una tabla con tantas columnas como llaves en el mapa
         Table table = new Table(UnitValue.createPercentArray(data.keySet().size()));
         table.setWidth(UnitValue.createPercentValue(100));
@@ -81,10 +83,14 @@ public class AdapterPDF implements InterfaceAdapterPDF {
         // Añadir los datos
         for (int i = 0; i < numRows; i++) {
             for (String key : data.keySet()) {
-                table.addCell(data.get(key).get(i));
+                String cellValue = data.get(key).get(i);
+                if (cellValue != null) {
+                    table.addCell(cellValue);
+                } else {
+                    table.addCell("N/A"); // or whatever you want to represent null values
+                }
             }
         }
-
         document.add(table); // Agregar la tabla al documento después de llenar todas las filas
     }
 

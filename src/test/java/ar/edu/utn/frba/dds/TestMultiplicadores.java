@@ -39,12 +39,12 @@ public class TestMultiplicadores {
         Heladera heladera2 = new Heladera(direccion2, coordenada2, 200, new ArrayList<>(), fecha2);
         Heladera heladera3 = new Heladera(direccion3, coordenada3, 300, new ArrayList<>(), fecha3);
 
-        Vianda vianda1 = new Vianda("Carne", heladera1, new Colaborador(), true);
-        Vianda vianda2 = new Vianda("Papas", heladera2, new Colaborador(), false);
-        Vianda vianda3 = new Vianda("Milanesa", heladera3, new Colaborador(), true);
-        Vianda vianda4 = new Vianda("Pizza", heladera1, new Colaborador(), false);
-        Vianda vianda5 = new Vianda("Fideos", heladera2, new Colaborador(), true);
-        Vianda vianda6 = new Vianda("Ravioles", heladera3, new Colaborador(), true);
+        Vianda vianda1 = new Vianda("Carne", new Colaborador(), true);
+        Vianda vianda2 = new Vianda("Papas", new Colaborador(), false);
+        Vianda vianda3 = new Vianda("Milanesa", new Colaborador(), true);
+        Vianda vianda4 = new Vianda("Pizza", new Colaborador(), false);
+        Vianda vianda5 = new Vianda("Fideos", new Colaborador(), true);
+        Vianda vianda6 = new Vianda("Ravioles", new Colaborador(), true);
 
         heladera1.agregarVianda(vianda1);
         heladera1.agregarVianda(vianda4);

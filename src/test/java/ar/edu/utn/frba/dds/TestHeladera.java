@@ -61,13 +61,13 @@ public class TestHeladera {
         viandas3 = new ArrayList<>();
         viandas = new ArrayList<>();
 
-        vianda = new Vianda("Sopa", heladera, new Colaborador(), true);
-        vianda1 = new Vianda("Carne", heladera1, new Colaborador(), true);
-        vianda2 = new Vianda("Papas", heladera2, new Colaborador(), false);
-        vianda3 = new Vianda("Milanesa", heladera3, new Colaborador(), true);
-        vianda4 = new Vianda("Pizza", heladera1, new Colaborador(), false);
-        vianda5 = new Vianda("Fideos", heladera2, new Colaborador(), true);
-        vianda6 = new Vianda("Ravioles", heladera3, new Colaborador(), true);
+        vianda = new Vianda("Sopa", new Colaborador(), true);
+        vianda1 = new Vianda("Carne", new Colaborador(), true);
+        vianda2 = new Vianda("Papas", new Colaborador(), false);
+        vianda3 = new Vianda("Milanesa", new Colaborador(), true);
+        vianda4 = new Vianda("Pizza", new Colaborador(), false);
+        vianda5 = new Vianda("Fideos", new Colaborador(), true);
+        vianda6 = new Vianda("Ravioles", new Colaborador(), true);
 
         heladera = new Heladera(direccion1, coordenada1, 150, viandas);
         heladera1 = new Heladera(direccion1, coordenada1, 150, viandas1);

@@ -25,7 +25,7 @@ public class DocumentoViandasInOut implements Exportable {
 
     @Override
     public Map<String, List<String>> datos() {
-        return null;
+        return this.datos;
     }
 
     public void generarDocumento() {
@@ -40,7 +40,7 @@ public class DocumentoViandasInOut implements Exportable {
             if(!heladera.getAperturas().isEmpty()) {
                 heladerasNombre.add(heladera.getNombre());
                 ingresos.add(contarIngresos(heladera));
-                retiros.add(contadorRetiros(heladera));
+                 retiros.add(contadorRetiros(heladera));
             }
         }
 
@@ -51,8 +51,9 @@ public class DocumentoViandasInOut implements Exportable {
     public String contarIngresos (Heladera heladera){
         int contador_Ingresos = 0;
         for(RegistroApertura registro : heladera.getAperturas()){
-            if(registro.getSolicitud() == TipoSolicitud.DONACION_VIANDA || registro.getRetiroVianda()){
-                contador_Ingresos=+registro.getViandas().size();
+            if(registro.getSolicitud() == TipoSolicitud.DONACION_VIANDA ||
+                    (registro.getSolicitud() ==TipoSolicitud.REDISTRIBUCION_VIANDAS && (registro.getRetiroVianda()== Boolean.FALSE))){
+                contador_Ingresos+=registro.getViandas().size();
             }
         }
         return String.valueOf(contador_Ingresos);

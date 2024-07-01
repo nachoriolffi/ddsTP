@@ -9,13 +9,13 @@ public class Exportador {
 
     public void exportar(List<Exportable> exportables, EstrategiaExportacion estrategia) throws FileNotFoundException {
 
-        RepoReporte repo= RepoReporte.getInstancia();
+        RepoReporte repo= new RepoReporte();
 
-        for (Exportable exportable: exportables) {
-            Reporte reporte = estrategia.exportar(exportable);
+
+        Reporte reporte = estrategia.exportar(exportables.toArray(new Exportable[0]));
             // Agregamos el reporte al repoReporte
-            RepoReporte.getInstancia().agregarReporte(reporte);
-        }
+        repo.agregarReporte(reporte);
+
 
 
     }

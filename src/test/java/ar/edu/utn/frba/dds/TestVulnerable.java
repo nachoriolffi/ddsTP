@@ -53,13 +53,13 @@ public class TestVulnerable {
         viandas2 = new ArrayList<>();
         viandas3 = new ArrayList<>();
 
-        vianda1 = new Vianda("Carne", heladera1, new Colaborador(), true);
-        vianda2 = new Vianda("Papas", heladera2, new Colaborador(), false);
-        vianda3 = new Vianda("Milanesa", heladera3, new Colaborador(), true);
-        vianda4 = new Vianda("Pizza", heladera1, new Colaborador(), false);
-        vianda5 = new Vianda("Fideos", heladera2, new Colaborador(), true);
-        vianda6 = new Vianda("Ravioles", heladera3, new Colaborador(), true);
-        vianda7 = new Vianda("asdasd", heladera1, new Colaborador(), true);
+        vianda1 = new Vianda("Carne", new Colaborador(), true);
+        vianda2 = new Vianda("Papas", new Colaborador(), false);
+        vianda3 = new Vianda("Milanesa", new Colaborador(), true);
+        vianda4 = new Vianda("Pizza", new Colaborador(), false);
+        vianda5 = new Vianda("Fideos", new Colaborador(), true);
+        vianda6 = new Vianda("Ravioles", new Colaborador(), true);
+        vianda7 = new Vianda("asdasd", new Colaborador(), true);
 
         heladera1 = new Heladera(direccion1, coordenada1, 150, viandas1);
         heladera1.setEstaActiva(Boolean.TRUE);

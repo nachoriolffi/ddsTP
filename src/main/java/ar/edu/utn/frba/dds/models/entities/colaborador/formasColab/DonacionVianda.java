@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.models.entities.colaborador.formasColab;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.multiplicador.config.ConfiguracionMultiplicador;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,12 +21,19 @@ public class DonacionVianda implements FormaDeColaboracion {
     private Date fechaColaboracion;
     @Getter
     @Setter
-    private TipoColaboracion tipoColaboracion = TipoColaboracion.DONACION_VIANDAS;
+    private TipoColaboracion tipoColaboracion;
 
     public DonacionVianda(Integer cantidad, Date fechaColaboracion) {
         this.fechaColaboracion = fechaColaboracion;
         this.cantidadViandas = cantidad;
 
+    }
+
+    public DonacionVianda(List<Vianda> viandas, Date fechaColaboracion) {
+        this.viandas = viandas;
+        this.fechaColaboracion = fechaColaboracion;
+        this.cantidadViandas = viandas.size();
+        this.tipoColaboracion  = TipoColaboracion.DONACION_VIANDAS;
     }
 
     @Override

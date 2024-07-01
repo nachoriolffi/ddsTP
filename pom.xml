@@ -301,7 +301,7 @@
                             </filters>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>ar.edu.utn.frba.dds.cronJobReporte</mainClass>
+                                    <mainClass>ar.edu.utn.frba.dds.models.entities.exportadorPDF.CronJobReporte</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>

@@ -26,6 +26,7 @@ public class DocumentoFallasHeladera implements Exportable {
     public DocumentoFallasHeladera() {
         this.repoHeladeras = RepoHeladeras.getInstancia();
         this.datos = new HashMap<String, List<String>>();
+        generarDocumento();
     }
 
     @Override
@@ -35,27 +36,29 @@ public class DocumentoFallasHeladera implements Exportable {
 
     @Override
     public void generarDocumento() {
-        for(Heladera heladera : repoHeladeras.traerHeladeras()){
-            if(!heladera.getIncidentes().isEmpty()) {
+
+        List<String> heladerasNombre = new ArrayList<String>(); // guarda nombre de healderas
+        List<String> fallas = new ArrayList<String>(); // guarda cantidad de falla por heladera
+
+        for(Heladera heladera : repoHeladeras.traerHeladeras()) // SE RECIBEN TODAS LAS HELADERAS Y SE TOMA UNA A LA VEZ
+        {
+            if(!heladera.getIncidentes().isEmpty()) // SI TIENE INCIDENTES
+            {
+                heladerasNombre.add(heladera.getNombre()); // AGREGO EL NOMBRE DE LA HELADERA
                 List<Incidente> incidentes = new ArrayList<Incidente>();
-                for (Incidente incidente : heladera.getIncidentes()) {
+                for (Incidente incidente : heladera.getIncidentes()) // AGARRO LOS INCIDENTES DE LA HELADERA
+                {
                     if(incidente.getTipoIncidente().equals(TipoIncidente.FALLA)){
                         incidentes.add(incidente);
                     }
                 }
-                List<String> list = new ArrayList<>();
-                list.add(String.valueOf(incidentes.size()));
-                datos.put(heladera.getNombre(), list);
+               fallas.add(String.valueOf(incidentes.size())); // AGREGO LA CANTIDAD DE FALLAS
+
             }
         }
 
-        Map<String, List<String>> fallasHeladeras = new HashMap<>();
-        List<String> heladeras = new ArrayList<>(datos.keySet());
-        List<String> cantidades = datos.values().stream()
-                .map(list -> list.get(0)) // asumiendo que cada lista tiene al menos un elemento
-                .collect(Collectors.toList());
+        this.datos.put("HELADERA", heladerasNombre);
+        this.datos.put("CANTIDAD", fallas);
 
-        fallasHeladeras.put("HELADERA", heladeras);
-        fallasHeladeras.put("CANTIDAD", cantidades);
     }
 }

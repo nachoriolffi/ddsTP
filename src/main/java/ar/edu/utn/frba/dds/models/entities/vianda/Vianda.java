@@ -10,7 +10,7 @@ public class Vianda {
     private Date fechaCaducidad;
     private Date fechaDonacion;
     private Colaborador colaborador;
-    private Heladera heladera;
+    //private Heladera heladera;
     private Double calorias;
     private Double peso;
     private Boolean fueEntregada;
@@ -20,9 +20,8 @@ public class Vianda {
         this.fechaDonacion = fechaDonacion;
     }
 
-    public Vianda(String comida, Heladera heladera, Colaborador colaborador, Boolean fueEntregada) {
+    public Vianda(String comida,  Colaborador colaborador, Boolean fueEntregada) {
         this.comida = comida;
-        this.heladera = heladera;
         this.colaborador = colaborador;
         this.fueEntregada = fueEntregada;
     }

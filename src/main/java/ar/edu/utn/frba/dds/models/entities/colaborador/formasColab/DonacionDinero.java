@@ -33,5 +33,10 @@ public class DonacionDinero implements FormaDeColaboracion {
         return this.monto * ConfiguracionMultiplicador.getInstance().getMultiplicadorDinero();
     }
 
+    @Override
+    public Integer getCantidadViandas() {
+        return null;
+    }
+
 
 }
