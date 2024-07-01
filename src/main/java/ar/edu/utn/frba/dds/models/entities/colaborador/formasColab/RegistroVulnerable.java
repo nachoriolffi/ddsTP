@@ -17,6 +17,8 @@ public class RegistroVulnerable implements FormaDeColaboracion {
     private Integer cantidadTarjetas;
     private Date fechaColaboracion;
 
+    private TipoColaboracion tipoColaboracion = TipoColaboracion.ENTREGA_TARJETAS;
+
     public RegistroVulnerable(List<Tarjeta> tarjetasDonadas) {
         this.tarjetasDonadas = tarjetasDonadas;
         this.fechaColaboracion = new Date();
@@ -31,5 +33,10 @@ public class RegistroVulnerable implements FormaDeColaboracion {
     @Override
     public double sumarPuntosA(Colaborador colaborador) {
         return cantidadTarjetas * ConfiguracionMultiplicador.getInstance().getMultiplicadorRegistroVulnerables();
+    }
+
+    @Override//generado solo para evitar error en consola
+    public Integer getCantidadViandas() {
+        return 0;
     }
 }

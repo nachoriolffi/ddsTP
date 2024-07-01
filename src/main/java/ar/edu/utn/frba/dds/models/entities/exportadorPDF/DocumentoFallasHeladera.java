@@ -5,7 +5,6 @@ import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoIncidente;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import lombok.Getter;
-import org.glassfish.grizzly.utils.StringFilter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,23 +12,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static org.apache.commons.collections4.IteratorUtils.forEach;
-
-public class Documento implements Exportable {
+public class DocumentoFallasHeladera implements Exportable {
 
     @Getter
     private Map<String, List<String>> datos;
 
     private RepoHeladeras repoHeladeras ;
 
-
-
-    public Documento(Map<String, List<String>> datos) {
+    public DocumentoFallasHeladera(Map<String, List<String>> datos) {
         this.datos = datos;
     }
 
-    public Documento(RepoHeladeras repoHeladeras) {
-        this.repoHeladeras = repoHeladeras;
+    public DocumentoFallasHeladera() {
+        this.repoHeladeras = RepoHeladeras.getInstancia();
         this.datos = new HashMap<String, List<String>>();
     }
 
@@ -38,8 +33,8 @@ public class Documento implements Exportable {
         return this.getDatos();
     }
 
-
-    public Map<String, List<String>> formarDocumento() {
+    @Override
+    public void generarDocumento() {
         for(Heladera heladera : repoHeladeras.traerHeladeras()){
             if(!heladera.getIncidentes().isEmpty()) {
                 List<Incidente> incidentes = new ArrayList<Incidente>();
@@ -62,7 +57,5 @@ public class Documento implements Exportable {
 
         fallasHeladeras.put("HELADERA", heladeras);
         fallasHeladeras.put("CANTIDAD", cantidades);
-
-        return fallasHeladeras;
     }
 }

@@ -30,4 +30,6 @@ public class RepoColaborador implements IRepoColaborador {
         this.colaboradores.clear();
     }
 
+    public List<Colaborador> buscarTodosColaboradors(){return this.colaboradores;}
+
 }

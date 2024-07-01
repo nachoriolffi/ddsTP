@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.models.entities.exportadorPDF.Documento;
+import ar.edu.utn.frba.dds.models.entities.exportadorPDF.DocumentoFallasHeladera;
 import ar.edu.utn.frba.dds.models.entities.exportadorPDF.adapterPDF.ExportarAPdf;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,9 +11,9 @@ import java.util.Map;
 
 public class TestExportadorPdf {
 
-    private Documento exportable1;
-    private Documento exportable2;
-    private Documento exportable3;
+    private DocumentoFallasHeladera exportable1;
+    private DocumentoFallasHeladera exportable2;
+    private DocumentoFallasHeladera exportable3;
     Map<String, List<String>> fallasHeladeras;
     Map<String, List<String>> viandasRetCol;
     Map<String, List<String>> viandasColaborador;
@@ -34,9 +34,9 @@ public class TestExportadorPdf {
                 "COLABORADOR", List.of("COLABORADOR1"),
                 "CANTIDAD", List.of("100")
         );
-        exportable1 = new Documento(fallasHeladeras);
-        exportable2= new Documento(viandasRetCol);
-        exportable3 = new Documento(viandasColaborador);
+        exportable1 = new DocumentoFallasHeladera(fallasHeladeras);
+        exportable2= new DocumentoFallasHeladera(viandasRetCol);
+        exportable3 = new DocumentoFallasHeladera(viandasColaborador);
     }
 
     @Test

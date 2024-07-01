@@ -10,13 +10,14 @@ import lombok.Setter;
 import java.util.Date;
 import java.util.List;
 
-@Getter
-@Setter
+
 
 public class HacerseCargoDeHeladera implements FormaDeColaboracion {
     private Local local;
     private List<Heladera> heladeras;
     private Integer cantidadHeladeras;
+    @Getter
+    @Setter
     private TipoColaboracion tipoColaboracion;
     private Date fechaColaboracion;
 
@@ -31,6 +32,11 @@ public class HacerseCargoDeHeladera implements FormaDeColaboracion {
     @Override
     public double sumarPuntosA(Colaborador colaborador) {
         return cantidadHeladeras * this.sumarMesesActivas() * ConfiguracionMultiplicador.getInstance().getMultiplicadorHeladeraActiva();
+    }
+
+    @Override//generado solo para evitar error en consola
+    public Integer getCantidadViandas() {
+        return 0;
     }
 
     public long sumarMesesActivas() {

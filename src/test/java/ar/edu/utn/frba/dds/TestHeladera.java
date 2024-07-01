@@ -191,7 +191,7 @@ public class TestHeladera {
 
         repoHeladeras.agregarHeladera(heladera);
 
-        CronjobTemperatura.main();
+        CronjobTemperatura.main(null);
 
         assert heladera.getEstaActiva().equals(Boolean.FALSE);
     }
@@ -203,7 +203,7 @@ public class TestHeladera {
         heladera.setNombre("Heladera2");
 
         repoHeladeras.agregarHeladera(heladera);
-        CronjobTemperatura.main();
+        CronjobTemperatura.main(null);
 
         assert heladera.getEstaActiva().equals(Boolean.TRUE);
     }

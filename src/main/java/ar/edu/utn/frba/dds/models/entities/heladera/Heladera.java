@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.models.entities.heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
+import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
@@ -27,8 +28,8 @@ public class Heladera {
     private ReceptorMovimiento receptorMovimiento;
     private ReceptorTemperatura receptorTemperatura;
     private List<Incidente> incidentes;
-    private List<RegistroSolicitud>solicitudesApertura;
-    private List<RegistroSolicitud> aperturas;
+    private List<RegistroSolicitud>solicitudesApertura; // es una lista de avisos a la heladera para que se abra
+    private List<RegistroApertura> aperturas; // es una lista de registros de aperturas que se hicieron
     private Boolean estaActiva;
     private ModeloHeladera modelo;
     private Double tempActual;
@@ -91,5 +92,9 @@ public class Heladera {
         // cuando un colaborador intenta abrir la heladera, si este puede hacerlo, entonces
         // la solicitud hecha debe actualizarse y ponerse true
     }
+    public void verificarRetiroVIanda(Tarjeta tarjeta){
 
+        //necesito mirar todas las solicitudes y si es que cumple con las tres Horas
+
+    }
 }

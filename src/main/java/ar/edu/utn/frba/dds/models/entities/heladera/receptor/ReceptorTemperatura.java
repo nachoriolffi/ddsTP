@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.models.entities.heladera.receptor;
 
+import ar.edu.utn.frba.dds.models.entities.broker.Broker;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoAlerta;
@@ -58,5 +59,12 @@ public class ReceptorTemperatura {
         registro.notificarTecnicoMasCercano(heladera);
         heladera.agregarRegistroDeAlerta(registro);
         heladera.setEstaActiva(false);
+    }
+
+    public void reportarAlerta(Heladera heladera){
+        Broker broker = new Broker();
+        broker.publish("dds2024/heladera" + heladera.getNombre() + "/alerta", TipoAlerta.TEMPERATURA.toString());
+        //En consola se veria: dds2024/heladera/medrano/alerta: temperatura
+        broker.disconnect();
     }
 }

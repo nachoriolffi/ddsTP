@@ -1,9 +1,7 @@
 package ar.edu.utn.frba.dds.models.entities.heladera;
 
-import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
-import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoAlerta;
-import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoIncidente;
+
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.registro.RegistroTemperatura;
 
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
@@ -18,8 +16,7 @@ import java.util.concurrent.TimeUnit;
 import static ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoIncidente.FALLA;
 
 public class CronjobTemperatura {
-    public static void main() {
-
+    public static void main(String[] args) {
 
         RepoHeladeras repoHeladeras = RepoHeladeras.getInstancia();
 

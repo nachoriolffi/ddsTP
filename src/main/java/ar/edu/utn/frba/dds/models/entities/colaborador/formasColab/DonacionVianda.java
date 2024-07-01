@@ -9,14 +9,18 @@ import lombok.Setter;
 import java.util.Date;
 import java.util.List;
 
-@Getter
-@Setter
+
 
 public class DonacionVianda implements FormaDeColaboracion {
 
     private List<Vianda> viandas;
+    @Getter
+    @Setter
     private Integer cantidadViandas;
     private Date fechaColaboracion;
+    @Getter
+    @Setter
+    private TipoColaboracion tipoColaboracion = TipoColaboracion.DONACION_VIANDAS;
 
     public DonacionVianda(Integer cantidad, Date fechaColaboracion) {
         this.fechaColaboracion = fechaColaboracion;
