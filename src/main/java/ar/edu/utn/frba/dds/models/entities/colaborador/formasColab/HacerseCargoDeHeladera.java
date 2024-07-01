@@ -34,6 +34,11 @@ public class HacerseCargoDeHeladera implements FormaDeColaboracion {
         return cantidadHeladeras * this.sumarMesesActivas() * ConfiguracionMultiplicador.getInstance().getMultiplicadorHeladeraActiva();
     }
 
+    @Override//generado solo para evitar error en consola
+    public Integer getCantidadViandas() {
+        return 0;
+    }
+
     public long sumarMesesActivas() {
 
         long mesesActivas = 0;

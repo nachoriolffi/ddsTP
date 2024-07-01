@@ -54,6 +54,8 @@ public class Broker {
     }
 }
 
+//USAR EL CATCH DE ACA ABAJO PARA ERRORES MAS ESPECIFICOS
+
 /*
 catch(MqttException me) {
             System.out.println("reason " + me.getReasonCode());

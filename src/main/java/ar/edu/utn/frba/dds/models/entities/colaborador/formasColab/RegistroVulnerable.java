@@ -34,4 +34,9 @@ public class RegistroVulnerable implements FormaDeColaboracion {
     public double sumarPuntosA(Colaborador colaborador) {
         return cantidadTarjetas * ConfiguracionMultiplicador.getInstance().getMultiplicadorRegistroVulnerables();
     }
+
+    @Override//generado solo para evitar error en consola
+    public Integer getCantidadViandas() {
+        return 0;
+    }
 }
