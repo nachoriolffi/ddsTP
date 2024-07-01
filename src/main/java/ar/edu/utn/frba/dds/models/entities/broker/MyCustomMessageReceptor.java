@@ -31,11 +31,11 @@ public class MyCustomMessageReceptor implements IMqttMessageListener {
         //dds2024/heladera/medrano/sensor/temperatura
         //dds2024/heladera/campus/alerta
         String[] topicEnPartes = topic.split("/");
-        if (topicEnPartes[1].equals("heladera") && topicEnPartes[3].equals("alerta")){
+        if (/*topicEnPartes[1].equals("heladera") &&*/ topicEnPartes[3].equals("alerta")){
             String nombreHeladera = topicEnPartes[2];
             System.out.println(nombreHeladera);
             Heladera heladera = buscarHeladeraPorNombre(nombreHeladera); //estoy agarrando un null??
-            System.out.println(heladera);
+            System.out.println(heladera.getNombre());
             String mensaje = new String(mqttMessage.getPayload());
             //String mensaje = mqttMessage.toString();
 
@@ -44,8 +44,14 @@ public class MyCustomMessageReceptor implements IMqttMessageListener {
                 receptorMovimiento.registrarAlerta(heladera, TipoAlerta.ROBO);
             } else if (mensaje.equalsIgnoreCase(TipoAlerta.TEMPERATURA.toString())) {
                 ReceptorTemperatura receptorTemperatura = heladera.getReceptorTemperatura();
-                receptorTemperatura.registrarIncidente(heladera,TipoAlerta.TEMPERATURA);
+                //receptorTemperatura.registrarIncidente(heladera,TipoAlerta.TEMPERATURA);
+                // NO VA ESTE, USAR EVALUAR TEMPERATURA
             }
+        }
+        //dds2024/heladera/campus/autorizacion/aceptada
+        //dds2024/heladera/campus/autorizacion/denegada
+        if(topicEnPartes[3].equals("autorizacion")){
+
         }
 
 

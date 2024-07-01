@@ -28,11 +28,11 @@
           <configLocation>google_checks.xml</configLocation>
           <violationSeverity>warning</violationSeverity>
           <violationIgnore>MissingJavadocMethod,
-                        MissingJavadocPackage,
-                        MissingJavadocType,
-                        NonEmptyAtclauseDescription,
-                        JavadocParagraph,
-                        SummaryJavadoc</violationIgnore>
+            MissingJavadocPackage,
+            MissingJavadocType,
+            NonEmptyAtclauseDescription,
+            JavadocParagraph,
+            SummaryJavadoc</violationIgnore>
         </configuration>
       </plugin>
       <plugin>

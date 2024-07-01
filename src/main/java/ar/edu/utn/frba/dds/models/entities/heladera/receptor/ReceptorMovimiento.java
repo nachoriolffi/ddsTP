@@ -33,6 +33,7 @@ public class ReceptorMovimiento {
     }
 
     public void reportarAlerta(Heladera heladera, TipoAlerta tipoAlerta){
+
         Broker broker = new Broker();
         broker.connect(heladera.getNombre());
         broker.publish("dds2024/heladera/" + heladera.getNombre() + "/alerta", tipoAlerta.toString());

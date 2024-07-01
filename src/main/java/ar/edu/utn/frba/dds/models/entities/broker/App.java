@@ -12,15 +12,16 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 public class App {
     public static void main(String[] args) {
-        Broker escucha = new Broker();
-        ReceptorMovimiento receptorMovimiento = new ReceptorMovimiento();
-        Heladera heladera = new Heladera();
-        heladera.setNombre("medrano");
         RepoHeladeras repoHeladeras = RepoHeladeras.getInstancia();
+        Broker escucha = new Broker();
+        Heladera heladera = new Heladera();
+        ReceptorMovimiento receptorMovimiento = new ReceptorMovimiento();
+        repoHeladeras.agregarHeladera(heladera);
+        heladera.setNombre("campus");
 
         escucha.connect("escucha");
         //escucha.subscribe("dds2024/heladera" + heladera.getId());
-        escucha.subscribe("dds2024/heladera/medrano/alerta");
+        escucha.subscribe("dds2024/heladera/campus/alerta");
         receptorMovimiento.evaluarDatosSensor("activado",heladera);
         escucha.disconnect();
 

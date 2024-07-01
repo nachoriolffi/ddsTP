@@ -35,6 +35,7 @@ public class TestBroker {
         heladera.setModelo(modeloHeladera);
 
         repoHeladeras = RepoHeladeras.getInstancia();
+        repoHeladeras.agregarHeladera(heladera);
 
         broker = new Broker();
     }

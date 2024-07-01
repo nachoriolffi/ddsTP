@@ -35,6 +35,7 @@ public class RegistroVulnerable implements FormaDeColaboracion {
         return cantidadTarjetas * ConfiguracionMultiplicador.getInstance().getMultiplicadorRegistroVulnerables();
     }
 
+
     @Override
     public Integer getCantidadViandas() {
         return null;
