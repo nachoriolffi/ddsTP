@@ -57,3 +57,17 @@ Para el intercambio de puntos implementamos la clase `CanjeadorPuntos`, en el cu
 Para la carga de Colaboradores implementamos una entidad llamada `LectorColaborador`, usamos la depenencia **OpenCSV** para leer el archivo y en caso de no estar cargo nuestro Colaborador lo cargamos y le enviamos un Mail avisandole a nuestro nuevo `Colaborador`, mientras que si ya lo estaba, simplemente actualizamos el mismo. Para el envio del Mail usamos `javax.mail` e implementamos la logica del envio del mail en `ServicioMail`.
 
 ### [Presentación](https://docs.google.com/presentation/d/1z4QXn5mHcOKwGmgaKVZ8y6dvehzVjKBkWpwnqpgsX58/edit?usp=sharing)
+
+# Entrega 3
+### Tarjetas
+Se utiliza la misma clase creada para las tarjetas de las personas vulnerables, dejando el atributo `personaAsociada` como `null`. Se agregó el atributo `colaboradorAsociado`, donde se guardará al colaborador. 
+
+### Incidentes
+Para guardar los inicidentes se utiliza la clase `Incidente`, en la que hay un atributo `tipoInicidente` y `tipoAlerta`, los cuales serán útilizados para distinguir entre una alerta y falla ténica. Con `tipoAlerta` se tiene trazabilidad de la alerta generada por el sensor de temperatura o moviemiento y con `tipoInicidente` de las fallas reportadas por los colaboradores o la falla del sensor de temperatura. Ambos atributos son excluyente al generar un incidente, por lo que si uno se usa el otro es `null`.
+
+### Técnicos
+
+
+
+### [Presentación](https://docs.google.com/presentation/d/17NP5en2xz6xWgHBH0dix2jR77S3u4nxxsPVAz0DYJ7E/edit?usp=sharing)
+
