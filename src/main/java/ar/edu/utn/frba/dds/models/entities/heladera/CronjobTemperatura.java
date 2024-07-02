@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.models.entities.heladera;
 
+import ar.edu.utn.frba.dds.models.entities.broker.Broker;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.registro.RegistroTemperatura;
@@ -62,6 +63,8 @@ public class CronjobTemperatura {
             SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
             String fechaFormateada = formato.format(ultimaLectura.getFechaHora());
             System.out.println("La temperatura leida es: " + ultimaLectura.getLectura() + " y la fecha y hora es: " + fechaFormateada);
+            //Broker broker = Broker.getInstance();
+            //broker.publish("dds2024/heladera/"+heladera.getNombre()+"/sensor/temperatura",ultimaLectura.getLectura().toString());
         }
         else {
             System.out.println("La lista de temperaturas esta vacia.");

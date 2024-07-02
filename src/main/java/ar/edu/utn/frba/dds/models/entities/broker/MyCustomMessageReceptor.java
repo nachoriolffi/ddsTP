@@ -29,6 +29,7 @@ public class MyCustomMessageReceptor implements IMqttMessageListener {
     private void evaluarMensaje(String topic, MqttMessage mqttMessage) {
         //dds2024/heladera/medrano/sensor/temperatura
         //dds2024/heladera/campus/alerta
+
         String[] topicEnPartes = topic.split("/");
 
         if(topicEnPartes[1].equals("heladera")){
