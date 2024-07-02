@@ -29,8 +29,9 @@ public class ReceptorTemperatura {
         this.temperaturasLeidas= new ArrayList<>();
     }
 
-    public void agregarTemperatura(float temperatura) {//preguntar para que lo usa
-        //this.temperaturasLeidas.add(temperatura);
+    public void agregarTemperatura(float temperatura) {
+        RegistroTemperatura registro = new RegistroTemperatura(temperatura, new Date());
+        temperaturasLeidas.add(registro);
     }
 
     public void evaluarTemperatura(String dato, Heladera heladera) {
@@ -38,7 +39,7 @@ public class ReceptorTemperatura {
             registrarIncidente(heladera, TipoAlerta.TEMPERATURA);
         }
         //hay que hacer un RegistroTemperatura y despues agregarlo
-        RegistroTemperatura registro = new RegistroTemperatura( Float.parseFloat(dato), new Date());
+        RegistroTemperatura registro = new RegistroTemperatura(Float.parseFloat(dato), new Date());
 
         temperaturasLeidas.add(registro);
     }

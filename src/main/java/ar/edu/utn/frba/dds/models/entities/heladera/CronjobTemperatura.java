@@ -24,11 +24,15 @@ public class CronjobTemperatura {
 
         controlarUltimasLecturasHeladeras(todasLasHeladeras, 5);
 
-        todasLasHeladeras.forEach(heladera3 -> { if(heladera3.getEstaActiva()){System.out.println("La "+heladera3.getNombre()+" esta activa");}
-        else{System.out.println("La "+heladera3.getNombre()+ " no esta activa");}}
+        todasLasHeladeras.forEach(heladera ->
+        {
+        if(heladera.getEstaActiva())System.out.println("La "+heladera.getNombre()+" esta activa");
+        else System.out.println("La "+heladera.getNombre()+ " no esta activa");
+        }
         );
-
     }
+
+
     static void controlarUltimaLectura(Heladera heladera, long tiempoEnMinutos){
         List<RegistroTemperatura> temperaturas = new ArrayList<>(heladera.getReceptorTemperatura().getTemperaturasLeidas());
         RegistroTemperatura ultimaLectura = null;
