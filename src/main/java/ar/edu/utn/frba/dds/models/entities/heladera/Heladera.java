@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.models.entities.heladera;
 
+import ar.edu.utn.frba.dds.models.entities.broker.Broker;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
@@ -85,14 +86,19 @@ public class Heladera {
         if (this.capacidadActual() == 0) {
             throw new IOException("No se pueden agregar más viandas ahora, intente más tarde");
         }else{
-            this.solicitudesApertura.add(registro);
+            Broker broker = new Broker();
+            //dds2024/heladera/medrano/apertura/solicitud: (ID de tarjeta)
+            broker.publish("dds/heladera/"+ this.nombre + "/apertura/solicitud", registro.getTarjeta().getIdTarjeta().toString());
+           this.solicitudesApertura.add(registro);
         }
     }
+
+    //del broker llamo agregarApertura
     public void agregarApertura() throws IOException {
         // cuando un colaborador intenta abrir la heladera, si este puede hacerlo, entonces
         // la solicitud hecha debe actualizarse y ponerse true
     }
-    public void verificarRetiroVIanda(Tarjeta tarjeta){
+    public void verificarRetiroVianda(Tarjeta tarjeta){
 
         //necesito mirar todas las solicitudes y si es que cumple con las tres Horas
 

@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.models.entities.colaborador.formasColab;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.multiplicador.config.ConfiguracionMultiplicador;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import lombok.AllArgsConstructor;
@@ -40,4 +41,9 @@ public class DonacionVianda implements FormaDeColaboracion {
     public double sumarPuntosA(Colaborador colaborador) {
         return cantidadViandas * ConfiguracionMultiplicador.getInstance().getMultiplicadorViandasDonadas();
     }
+
+    public void solicitarAutorizacion(Heladera heladera){
+
+    }
+
 }

@@ -22,4 +22,7 @@ public class RegistroSolicitud {
         this.cantidadViandas = new ArrayList<Vianda>();
     }
 
+    public Tarjeta getTarjeta() {
+        return tarjeta;
+    }
 }

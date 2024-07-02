@@ -8,6 +8,7 @@ import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoAlerta;
 public class ReceptorMovimiento {
 
     private Heladera heladera;
+    private Broker broker;
 
     public ReceptorMovimiento(Heladera heladera) {
         this.heladera = heladera;
@@ -30,14 +31,15 @@ public class ReceptorMovimiento {
     public void registrarAlerta(Heladera heladera, TipoAlerta tipoAlerta) {
         Incidente registro = new Incidente(tipoAlerta);
         heladera.agregarRegistroDeAlerta(registro);
+        heladera.setEstaActiva(false);
     }
 
     public void reportarAlerta(Heladera heladera, TipoAlerta tipoAlerta){
 
-        Broker broker = new Broker();
+        broker = Broker.getInstance();
         broker.connect(heladera.getNombre());
         broker.publish("dds2024/heladera/" + heladera.getNombre() + "/alerta", tipoAlerta.toString());
-        //En consola se veria: dds2024/heladera/medrano/alerta: robo
+        //En consola se veria: dds2024/heladera/medrano/alerta: ROBO
         broker.disconnect();
     }
 

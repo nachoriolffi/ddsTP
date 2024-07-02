@@ -5,11 +5,17 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 public class Broker {
 
-    private String topic;
-    private String content;
     private String broker = "tcp://broker.hivemq.com:1883";
-    private  String clientId;
     IMqttClient client;
+
+    private static Broker instancia = null;
+
+    public static Broker getInstance(){
+        if(instancia==null){
+            instancia = new Broker();
+        }
+        return instancia;
+    }
 
     public void connect(String clientId) {
         try {
