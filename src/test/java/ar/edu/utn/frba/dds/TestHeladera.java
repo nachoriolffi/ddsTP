@@ -1,6 +1,14 @@
 package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
+import ar.edu.utn.frba.dds.models.entities.contacto.Mensaje;
+import ar.edu.utn.frba.dds.models.entities.contacto.Notificacion;
+import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.AdapterCorreo;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.CorreoElectronico;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.ServicioMail;
 import ar.edu.utn.frba.dds.models.entities.heladera.CronjobTemperatura;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
@@ -18,6 +26,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -41,8 +50,9 @@ public class TestHeladera {
     ReceptorMovimiento receptorMovimiento;
     ReceptorTemperatura receptorTemperatura;
     ModeloHeladera modeloHeladera;
-
     RepoHeladeras repoHeladeras;
+    Tecnico tecnico1;
+    RepoTecnico repoTec;
 
     @BeforeEach
     public void seteoHeladeras() {
@@ -94,18 +104,24 @@ public class TestHeladera {
 
         repoHeladeras = RepoHeladeras.getInstancia();
 
-        // uno que este en la coordenada de la heladera y esteocupad
-        Tecnico tecnico1 = new Tecnico("Juan","");
-        // este en la coordenada pero este desocupado
-        Tecnico tecnico2 = new Tecnico();
-       // uno que este libre pero esta mas lejos de la helada, no esta en la misma coord
-        Tecnico tecnico3 = new Tecnico();
+        //--------------------------------------- Noticacion tecnico --------------------------------------------
+        tecnico1 = new Tecnico(6L,"Juan","Cracio",coordenada1,Boolean.TRUE,1000);
+        Contacto contacto = new Contacto(TipoContacto.MAIL,"clazarte@frba.utn.edu.ar");
+        tecnico1.setContactos(new ArrayList<>());
+        tecnico1.getContactos().add(contacto);
 
+        ServicioMail servicioMail= ServicioMail.getInstance();
+        AdapterCorreo AdapterCorreo = new AdapterCorreo(servicioMail);
 
-        RepoTecnico repoTec = RepoTecnico.getInstancia();
+        CorreoElectronico correoElectronico = new CorreoElectronico(AdapterCorreo);
+
+        List<MedioDeComunicacion> mediosDeComunicacion = new ArrayList<>();
+        mediosDeComunicacion.add(correoElectronico);
+
+        tecnico1.setMediosDeComunicacion(mediosDeComunicacion);
+
+        repoTec = RepoTecnico.getInstancia();
         repoTec.agregarTecnico(tecnico1);
-        repoTec.agregarTecnico(tecnico2);
-        repoTec.agregarTecnico(tecnico3);
     }
 
     @Test

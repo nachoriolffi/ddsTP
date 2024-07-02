@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.models.repositories.implementaciones;
 import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
 import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoTecnico;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,11 +12,16 @@ public class RepoTecnico implements IRepoTecnico {
     private static RepoTecnico instancia = null;
     private List<Tecnico> tecnicos;
 
+
     public static RepoTecnico getInstancia() {
         if( instancia == null ) {
             instancia = new RepoTecnico();
         }
         return instancia;
+    }
+
+    public RepoTecnico(){
+        this.tecnicos = new ArrayList<>();
     }
 
     public void agregarTecnico(Tecnico tecnico) {

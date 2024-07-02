@@ -21,7 +21,7 @@ public class Tecnico {
     @Getter @Setter
     private Integer DNI;
     private Integer CUIL;
-    @Getter
+    @Getter @Setter
     private List<MedioDeComunicacion> mediosDeComunicacion;
     private Integer areaCobertura;
     @Getter @Setter
