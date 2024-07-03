@@ -60,14 +60,18 @@ Para la carga de Colaboradores implementamos una entidad llamada `LectorColabora
 
 # Entrega 3
 ### Tarjetas
-Se utiliza la misma clase creada para las tarjetas de las personas vulnerables, dejando el atributo `personaAsociada` como `null`. Se agregó el atributo `colaboradorAsociado`, donde se guardará al colaborador. 
+Se utiliza la misma clase creada para las tarjetas de las personas vulnerables, dejando el atributo `personaAsociada` como `null`. Se agregó el atributo `colaboradorAsociado`, donde se guardará al colaborador. Se creó un repositorio de tarjetas para la persistencia, que será guardado en memoria a través de una lista. 
 
 ### Incidentes
 Para guardar los inicidentes se utiliza la clase `Incidente`, en la que hay un atributo `tipoInicidente` y `tipoAlerta`, los cuales serán útilizados para distinguir entre una alerta y falla ténica. Con `tipoAlerta` se tiene trazabilidad de la alerta generada por el sensor de temperatura o moviemiento y con `tipoInicidente` de las fallas reportadas por los colaboradores o la falla del sensor de temperatura. Ambos atributos son excluyente al generar un incidente, por lo que si uno se usa el otro es `null`.
 
-### Técnicos
+### Aviso a Técnicos y Registro de visitas
 
+### Suscripciones
 
+### Reporte
+
+### Patron Broker
 
 ### [Presentación](https://docs.google.com/presentation/d/17NP5en2xz6xWgHBH0dix2jR77S3u4nxxsPVAz0DYJ7E/edit?usp=sharing)
 
