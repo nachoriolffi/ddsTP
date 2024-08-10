@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crea una cuenta</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="flex justify-center items-center h-screen bg-gray-100">
+
+<div class="flex space-x-8">
+    <div class="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
+        <h1 class="text-2xl font-bold mb-4">Crea una cuenta</h1>
+        <p class="mb-6 text-sm">
+            ¿Ya tienes una cuenta? <a href="/login" class="text-blue-500 hover:underline">Inicia Sesión</a>
+        </p>
+        <div class="mb-6">
+            <p class="mb-2 text-sm">Seleccione que tipo de colaborador desea ser</p>
+            <div class="flex justify-around">
+                <button class="bg-gray-300 px-4 py-2 rounded-md text-black">Humano</button>
+                <button class="bg-gray-300 px-4 py-2 rounded-md text-black">Jurídico</button>
+            </div>
+        </div>
+        <form action="/register" method="POST">
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-700">Correo electrónico</label>
+                <input type="email" id="email" name="email" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+            <div class="flex space-x-4">
+                <div class="mb-4 w-1/2">
+                    <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
+                    <input type="password" id="password" name="password" required
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div class="mb-4 w-1/2">
+                    <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirma contraseña</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+            </div>
+            <button type="submit" class="w-full bg-gray-300 text-black py-2 rounded-md shadow-sm hover:bg-gray-400">
+                Crear Cuenta
+            </button>
+        </form>
+    </div>
+    <div class="w-64 h-64 border border-gray-300 flex items-center justify-center">
+        <!-- Aquí se podría colocar una imagen o ilustración -->
+    </div>
+</div>
+
+</body>
+</html>

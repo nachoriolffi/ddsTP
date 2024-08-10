@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carga de Archivo CSV</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="flex justify-center items-center h-screen bg-gray-100">
+
+<div class="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
+    <h1 class="text-2xl font-bold mb-6">Carga de Archivo CSV</h1>
+
+    <h2 class="text-lg font-semibold mb-4">Ejemplo de Formato:</h2>
+    <a href="/path/to/example.csv" class="text-indigo-600 hover:underline mb-6" download>Descargar ejemplo de formato CSV</a>
+
+    <form action="/upload-csv" method="POST" enctype="multipart/form-data">
+        <label for="csv-file" class="file-button">
+            Examinar archivo
+        </label>
+        <input type="file" id="csv-file" name="csv-file" accept=".csv" required class="hidden">
+        <div class="dropzone mb-6" id="dropzone">
+            Arrastra y suelta tu archivo CSV aquí, o haz clic para seleccionar uno.
+        </div>
+        <button type="submit" class="w-full bg-gray-300 text-black py-2 rounded-md shadow-sm hover:bg-gray-400">
+            Cargar
+        </button>
+    </form>
+</div>
+
+<script>
+    const dropzone = document.getElementById('dropzone');
+
+    dropzone.addEventListener('click', () => {
+        document.getElementById('csv-file').click();
+    });
+
+    dropzone.addEventListener('dragover', (event) => {
+        event.preventDefault();
+        dropzone.classList.add('dragover');
+    });
+
+    dropzone.addEventListener('dragleave', () => {
+        dropzone.classList.remove('dragover');
+    });
+
+    dropzone.addEventListener('drop', (event) => {
+        event.preventDefault();
+        dropzone.classList.remove('dragover');
+        const files = event.dataTransfer.files;
+        if (files.length > 0) {
+            document.getElementById('csv-file').files = files;
+        }
+    });
+</script>
+
+</body>
+</html>

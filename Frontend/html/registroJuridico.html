@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Colaborador Juridico</title>
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="flex justify-center items-center h-screen bg-gray-100">
+
+<div class="flex space-x-8">
+    <div class="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
+        <h1 class="text-2xl font-bold mb-6">Registro Colaborador Juridico</h1>
+        <form action="/register" method="POST">
+            <div class="mb-6">
+                <label for="razon-social" class="block text-sm font-medium text-gray-700">Razón Social</label>
+                <input type="text" id="razon-social" name="razon-social" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+            <div class="mb-6">
+                <label for="tipo-razon-social" class="block text-sm font-medium text-gray-700">Tipo Razón Social</label>
+                <select id="tipo-razon-social" name="tipo-razon-social" required
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <option value="gubernamental">Gubernamental</option>
+                    <option value="gubernamental">ONG</option>
+                    <option value="gubernamental">Empresa</option>
+                    <option value="gubernamental">Instituto</option>
+                </select>
+            </div>
+            <div class="mb-6">
+                <label for="direccion" class="block text-sm font-medium text-gray-700">Dirección</label>
+                <input type="text" id="direccion" name="direccion" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+        </form>
+    </div>
+    <div class="max-w-md w-full bg-white p-8 rounded-lg shadow-md">
+        <form action="/register-contact" method="POST">
+            <div class="mb-6">
+                <h2 class="text-lg font-bold mb-4">Ingrese al menos un medio de contacto</h2>
+                <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
+                <div class="flex space-x-2 mb-4">
+                    <input type="text" value="+54" readonly
+                           class="mt-1 block w-14 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <input type="text" id="telefono" name="telefono" required
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+            </div>
+            <div class="mb-6">
+                <label for="correo" class="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+                <input type="email" id="correo" name="correo" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+            <div class="mb-6">
+                <label for="whatsapp" class="block text-sm font-medium text-gray-700">WhatsApp</label>
+                <div class="flex space-x-2">
+                    <input type="text" value="+54" readonly
+                           class="mt-1 block w-14 px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    <input type="text" id="whatsapp" name="whatsapp" required
+                           class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+            </div>
+            <button type="submit" class="w-full bg-gray-300 text-black py-2 rounded-md shadow-sm hover:bg-gray-400">
+                ¡Registrarse!
+            </button>
+        </form>
+    </div>
+    <div class="w-64 h-64 border border-gray-300 flex items-center justify-center">
+        <img src="" alt="">
+    </div>
+</div>
+
+</body>
+</html>
