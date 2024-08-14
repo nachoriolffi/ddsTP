@@ -1,0 +1,55 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+.card-container {
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    margin-top: 10%;
+    padding: 15px;
+}
+.heladera-card {
+    background-color: #8B0000;
+    border-radius: 10px;
+    height: 100px;
+    margin-bottom: 15px;
+}
+h1, h2 {
+    font-weight: 900; /* Black weight */
+}
+
+h2 {
+    align-self: center;
+}
+
+.solApertura{
+    padding-left: 20%;
+    margin-top: 5%;
+}
+
+.apertura{
+    padding-left: 35%;
+    margin-top: 5%;
+}
+
+.card-container {
+    background-color: #f0f0f0;
+    border-radius: 5vh;
+    padding: 1.5vh;
+}
+
+.heladera-card {
+    background-color: #772626;
+    border-radius: 5vh;
+    height: 18vh;
+    width: 20vh;
+    margin-bottom: 1.5%;
+    align-self: center;
+}
+
+
+.centrar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+

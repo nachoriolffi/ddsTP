@@ -1,7 +1,6 @@
-body, html {
+html {
     margin: 0;
     padding: 0;
-    font-family: Arial, sans-serif;
     height: 100%;
     width: 100%;
     display: flex;
@@ -22,7 +21,7 @@ body, html {
 }
 .login-form {
     flex: 1;
-    padding: 40px;
+    padding: 4vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -34,8 +33,11 @@ body, html {
     justify-content: center;
     align-items: center;
     position: relative;
+    border-radius: 5%;
 }
 h1 {
+    font-family: Roboto, sans-serif;
+    font-weight: bold;
     font-size: 3em;
     color: #333;
     margin-bottom: 30px;
@@ -81,17 +83,66 @@ button {
     max-height: 80%;
 }
 
-.envelope {
+
+
+
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background-color: #FFE4B5; /* Color de fondo similar al de la imagen */
+  }
+  
+body::before, body::after {
+    content: '';
     position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 40px;
-    height: 30px;
-    background-color: #ff6600;
-    border-radius: 4px;
+    background-color: #FFA500; /* Color naranja similar al de la imagen */
+    z-index: 1;
 }
 
+body::before {
+    width: 30vh;
+    height: 30vh;
+    top: -150px;
+    left: -150px;
+    border-radius: 76% 24% 33% 67% / 68% 55% 45% 32%;
+}
+
+body::after {
+    width: 250px;
+    height: 250px;
+    bottom: -125px;
+    right: -125px;
+    border-radius: 42% 58% 70% 30% / 45% 45% 55% 55%;
+}
 
 .centrar {
     align-self: center;
 }
+
+
+button {
+    padding: 1vh 2vh;
+    font-size: 2vh;
+    border: none;
+    color: white;
+    cursor: pointer;
+    border-radius: 5vh;
+}
+
+button:hover {
+    transition: transform 0.3s ease;
+    background-color: #FF4500;
+    transform: scale(1.05);
+}
+
+
