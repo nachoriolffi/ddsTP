@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donaciones</title>
+</head>
+<body>
+<aside class="formasContribuir">
+    <!--Las primer dos son para todos los tipos de colaboradores-->
+    <div class="formaContribuir">
+        <i class="icono"></i>
+        <button class="botonDonacion">Donar Dinero</button>
+    </div>
+    <div class="formaContribuir">
+        <i class="icono"></i>
+        <button class="botonDonacion">Encargarse de Heladera</button>
+    </div>
+    <div class="formaContribuir">
+        <i class="icono"></i>
+        <button class="botonDonacion">Donar Viandas</button>
+    </div>
+    <div class="formaContribuir">
+        <i class="icono"></i>
+        <button class="botonDonacion">Distribuir Viandas</button>
+    </div>
+    <div class="formaContribuir">
+        <i class="icono"></i>
+        <button class="botonDonacion">Registrar Personas Vulnerables</button>
+    </div>
+    <div class="formaContribuir">
+        <i class="icono"></i>
+        <button class="botonDonacion">Mis Heladeras</button>
+    </div>
+</aside>
+<section>
+    <h1>Donar Dinero</h1>
+    <button class="botonDonacion">Contribuir</button>
+    <button class="botonDonacion">Dejar de contribuir</button>
+    <button class="botonDonacion">Empezar a contribuir</button>
+    <section class="estadisticasDonacion">
+        <table>
+            <thead>
+            <tr>
+                <th>Fecha de donación</th>
+                <th>Monto</th>
+                <th>Donación periódica</th>
+                <th>Fecha de la próxima donación</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>2024-08-15</td>
+                <td>$100</td>
+                <td>Sí</td>
+                <td>2024-09-15</td>
+            </tr>
+            <tr>
+                <td>2024-08-01</td>
+                <td>$50</td>
+                <td>No</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td>2024-07-20</td>
+                <td>$200</td>
+                <td>Sí</td>
+                <td>2024-08-20</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+    <!--Aca aparece la pantalla de carga de datos-->
+    <div class="pantallaCarga">
+        <h3>Realizar Donacion de dinero</h3>
+        <div class="input">
+            <h4>Fecha de donacion</h4>
+            <input type="date" name="" id="" />
+        </div>
+        <div class="input">
+            <h4>Monto</h4>
+            <input type="number" name="" id="" step="0.01" />
+        </div>
+        <div class="input">
+            <input type="checkbox" id="miCheckbox" name="miCheckbox" />
+            <label for="miCheckbox">Donar de forma periodica</label>
+        </div>
+        <div class="input">
+            <h4>Frecuencia (en dias)</h4>
+            <input type="number" name="" id="" />
+        </div>
+    </div>
+</section>
+</body>
+</html>

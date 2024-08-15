@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donaciones</title>
+</head>
+<body>
+<aside class="formasContribuir">
+    <div class="formaContribuir">
+        <i class="icono"></i>
+        <button class="botonDonacion">Donar Dinero</button>
+    </div>
+    <div class="formaContribuir">
+        <i class="icono"></i>
+        <button class="botonDonacion">Donar Viandas</button>
+    </div>
+    <div class="formaContribuir">
+        <i class="icono"></i>
+        <button class="botonDonacion">Distribuir Viandas</button>
+    </div>
+    <div class="formaContribuir">
+        <i class="icono"></i>
+        <button class="botonDonacion">Registrar Personas Vulnerables</button>
+    </div>
+    <div class="formaContribuir">
+        <i class="icono"></i>
+        <button class="botonDonacion">Mis Heladeras</button>
+    </div>
+</aside>
+<section>
+    <h1>Distribuir Viandas</h1>
+    <button class="botonDonacion">Contribuir</button>
+    <button class="botonDonacion">Dejar de contribuir</button>
+    <button class="botonDonacion">Empezar a contribuir</button>
+    <section class="estadisticasDonacion">
+        <table>
+            <thead>
+            <tr>
+                <th>Heladera de origen</th>
+                <th>Heladera destino</th>
+                <th>Cantidad de viandas a mover</th>
+                <th>Motivo</th>
+                <th>Fecha de distribución</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Heladera A</td>
+                <td>Heladera B</td>
+                <td>15</td>
+                <td>Desperfecto en la heladera</td>
+                <td>2024-08-12</td>
+            </tr>
+            <tr>
+                <td>Heladera C</td>
+                <td>Heladera A</td>
+                <td>20</td>
+                <td>Falta de viandas en la heladera destino</td>
+                <td>2024-08-10</td>
+            </tr>
+            <tr>
+                <td>Heladera B</td>
+                <td>Heladera C</td>
+                <td>10</td>
+                <td>Desperfecto en la heladera</td>
+                <td>2024-08-08</td>
+            </tr>
+            <tr>
+                <td>Heladera A</td>
+                <td>Heladera C</td>
+                <td>25</td>
+                <td>Falta de viandas en la heladera destino</td>
+                <td>2024-08-15</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+    <!--Aca aparece la pantalla de carga de datos-->
+    <div class="pantallaCarga">
+        <h3>Realizar Distribucion de viandas</h3>
+
+        <div class="input">
+            <h4>Heladera Origen</h4>
+            <input type="text" name="" id="" step="0.01" />
+        </div>
+        <div class="input">
+            <h4>Heladera Destino</h4>
+            <input type="text" name="" id="" step="0.01" />
+        </div>
+        <div class="input">
+            <h4>Cantidad de viandas a mover</h4>
+            <input type="number" name="" id="" step="0.01" />
+        </div>
+        <div class="input">
+            <h4>Motivo distribucion</h4>
+            <select id="motivos" name="motivos">
+                <option value="desperfecto">Desperfecto</option>
+                <option value="faltaViandas">Falta de viandas</option>
+            </select>
+        </div>
+        <div class="input">
+            <h4>Fecha de distribucion</h4>
+            <input type="date" name="" id="" />
+        </div>
+    </div>
+</section>
+</body>
+</html>
