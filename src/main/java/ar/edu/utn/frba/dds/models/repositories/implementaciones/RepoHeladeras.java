@@ -29,4 +29,13 @@ public class RepoHeladeras implements IRepoHeladeras {
     public List<Heladera> traerHeladeras() {
         return this.heladeras;
     }
+
+    public Heladera buscarHeladeraPorNombre(String nombre) {
+        for (Heladera heladera : this.heladeras) {
+            if (heladera.getNombre().equals(nombre)) {
+                return heladera;
+            }
+        }
+        return null;
+    }
 }

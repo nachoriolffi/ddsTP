@@ -8,13 +8,22 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class MyCustomMessageReceptor implements IMqttMessageListener {
 
-    private RepoHeladeras repoHeladeras = RepoHeladeras.getInstancia();
-    private List<Heladera> heladeras = repoHeladeras.traerHeladeras();
+    private Map<String, AccionTopico> topicActions = new HashMap<>();
+
+    public MyCustomMessageReceptor() {
+        topicActions.put("temperatura", new TemperaturaAccion());
+        topicActions.put("alerta", new AlertaAccion());
+    }
+
+   // private RepoHeladeras repoHeladeras = RepoHeladeras.getInstancia();
+   // private List<Heladera> heladeras = repoHeladeras.traerHeladeras();
 
     @Override
     public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
@@ -25,10 +34,28 @@ public class MyCustomMessageReceptor implements IMqttMessageListener {
     private void evaluarMensaje(String topic, MqttMessage mqttMessage) {
         //dds2024/heladera/medrano/sensor/temperatura
         //dds2024/heladera/campus/alerta
+        //heladeras/heladeraCasa/temperatura
+        //"heladeras/heladeraCasa/alerta"
+
 
         String[] topicEnPartes = topic.split("/");
 
-        if(topicEnPartes[1].equals("heladera")){
+        String Id = topicEnPartes[1];
+        String subTopic = topicEnPartes[2];
+        String content = new String(mqttMessage.getPayload());
+
+
+        AccionTopico action = topicActions.get(subTopic);
+
+        if (action != null) {
+            action.evaluarMensaje(Id,content);
+        }
+
+
+
+
+
+       /* if(topicEnPartes[1].equals("heladera")){
                 String nombreHeladera = topicEnPartes[2];
                 Heladera heladera = buscarHeladeraPorNombre(nombreHeladera);
 
@@ -52,14 +79,14 @@ public class MyCustomMessageReceptor implements IMqttMessageListener {
                     throw new RuntimeException(e);
                 }
             }
-        }
+        }*/
     }
-    private Heladera buscarHeladeraPorNombre(String nombre) {
+    /*private Heladera buscarHeladeraPorNombre(String nombre) {
         for (Heladera heladera : heladeras) {
             if (heladera.getNombre().equals(nombre)) {
                 return heladera;
             }
         }
         return null;
-    }
+    }*/
 }

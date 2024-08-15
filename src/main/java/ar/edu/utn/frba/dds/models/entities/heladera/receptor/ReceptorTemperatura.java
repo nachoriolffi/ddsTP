@@ -57,7 +57,7 @@ public class ReceptorTemperatura {
     }
     public void registrarIncidente(Heladera heladera, TipoAlerta tipoAlerta) {
         Incidente registro = new Incidente(tipoAlerta);
-        registro.notificarTecnicoMasCercano(heladera);
+        //registro.notificarTecnicoMasCercano(heladera); DESCOMENTAR NO SEAMOS SALAMES QUE DESPUES NO ANDA LO DEL TECNICO
         heladera.agregarRegistroDeAlerta(registro);
         heladera.setEstaActiva(false);
     }

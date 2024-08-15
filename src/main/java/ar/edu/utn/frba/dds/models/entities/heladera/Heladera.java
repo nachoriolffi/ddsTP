@@ -36,7 +36,10 @@ public class Heladera {
     private Double tempActual;
 
     public Heladera(){
-
+        this.viandas = new ArrayList<>();
+        this.incidentes = new ArrayList<>();
+        this.solicitudesApertura = new ArrayList<>();
+        this.aperturas = new ArrayList<>();
     }
 
     public Heladera(Direccion direccion, Coordenada coordenada, Integer capacidad, List<Vianda> viandas) {

@@ -19,8 +19,8 @@ public class ReceptorMovimiento {
 
    public void evaluarDatosSensor(String dato,Heladera heladera){
 
-        //registrarAlerta(heladera, TipoAlerta.ROBO);
-       reportarAlerta(heladera, TipoAlerta.ROBO);
+        registrarAlerta(heladera, TipoAlerta.ROBO);
+       //reportarAlerta(heladera, TipoAlerta.ROBO);
 
         //throw new RuntimeException("Se detecto movimiento en la heladera");
         // tengo mis dudas de que esto se maneja en otr p[arte y noa aca en una clase de exptions
