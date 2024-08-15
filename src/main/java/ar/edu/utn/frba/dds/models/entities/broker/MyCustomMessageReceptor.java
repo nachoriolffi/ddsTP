@@ -1,16 +1,12 @@
 package ar.edu.utn.frba.dds.models.entities.broker;
 
-import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoAlerta;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
-import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoHeladeras;
 import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
-
 import java.io.IOException;
 import java.util.List;
 
@@ -45,7 +41,6 @@ public class MyCustomMessageReceptor implements IMqttMessageListener {
                     receptorMovimiento.registrarAlerta(heladera, TipoAlerta.ROBO);
                 } else if (mensaje.equalsIgnoreCase(TipoAlerta.TEMPERATURA.toString())) {
                     ReceptorTemperatura receptorTemperatura = heladera.getReceptorTemperatura();
-                    //receptorTemperatura.registrarIncidente(heladera,TipoAlerta.TEMPERATURA);
                     receptorTemperatura.evaluarTemperatura(heladera.getTempActual().toString(),heladera);
                 }
             }

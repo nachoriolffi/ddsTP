@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canjear producto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fff3e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .image-container {
+            border: 2px dashed #ccc;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            overflow: hidden;
+        }
+        .product-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        .points-needed {
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .product-description {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            min-height: 100px;
+            resize: vertical;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #ff5722;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #e64a19;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Canjear producto</h1>
+    <div class="image-container">
+        <img id="productImage" class="product-image" src="placeholder.jpg" alt="Imagen del producto">
+    </div>
+    <p class="points-needed" id="pointsNeeded">Puntos necesarios: --</p>
+    <div class="product-description" id="productDescription">
+        Descripción del producto se cargará aquí...
+    </div>
+    <button onclick="canjearProducto()">canjear</button>
+</div>
+
+<script>
+        // Función para cargar los datos del producto desde el backend
+        function cargarDatosProducto() {
+            // Aquí deberías hacer una llamada a tu API para obtener los datos del producto
+            // Por ahora, simularemos esta llamada con datos de ejemplo
+            setTimeout(() => {
+                document.getElementById('productImage').src = 'url_de_la_imagen_del_backend';
+                document.getElementById('pointsNeeded').textContent = 'Puntos necesarios: 1000';
+                document.getElementById('productDescription').textContent = 'Descripción del producto cargada desde el backend.';
+            }, 1000); // Simulamos un retraso de 1 segundo
+        }
+
+        // Función para canjear el producto
+        function canjearProducto() {
+            // Aquí implementarías la lógica para canjear el producto
+            alert('Producto canjeado');
+        }
+
+        // Cargar los datos del producto cuando la página se cargue
+        window.onload = cargarDatosProducto;
+    </script>
+</body>
+</html>
