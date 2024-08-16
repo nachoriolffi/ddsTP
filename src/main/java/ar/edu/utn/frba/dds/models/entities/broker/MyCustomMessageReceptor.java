@@ -35,6 +35,7 @@ public class MyCustomMessageReceptor implements IMqttMessageListener {
         //dds2024/heladera/medrano/sensor/temperatura
         //dds2024/heladera/campus/alerta
         //heladeras/heladeraCasa/temperatura
+        //heladeras/+/temperatura
         //"heladeras/heladeraCasa/alerta"
 
 

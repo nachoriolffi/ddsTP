@@ -15,25 +15,36 @@ public class App {
         RepoHeladeras repoHeladeras = RepoHeladeras.getInstancia();
         Broker broker = new Broker();
         Heladera heladera = new Heladera();
+        Heladera heladera2 = new Heladera();
         ReceptorMovimiento receptorMovimiento = new ReceptorMovimiento();
         ReceptorTemperatura receptorTemperatura = new ReceptorTemperatura();
+        ReceptorMovimiento receptorMovimiento2 = new ReceptorMovimiento();
+        ReceptorTemperatura receptorTemperatura2 = new ReceptorTemperatura();
         heladera.setReceptorMovimiento(receptorMovimiento);
         heladera.setReceptorTemperatura(receptorTemperatura);
+        heladera2.setReceptorMovimiento(receptorMovimiento2);
+        heladera2.setReceptorTemperatura(receptorTemperatura2);
 
         ModeloHeladera modelo = new ModeloHeladera( 18.0, 10.0,80.0,100 );
         heladera.setModelo(modelo);
+        heladera2.setModelo(modelo);
+
+
+        heladera.setNombre("campus");
+        heladera2.setNombre("casa");
 
         repoHeladeras.agregarHeladera(heladera);
-        heladera.setNombre("campus");
+        repoHeladeras.agregarHeladera(heladera2);
 
         broker.connect("escucha");
         //escucha.subscribe("dds2024/heladera" + heladera.getId());
         //broker.subscribe("dds2024/heladera/campus/alerta");
-        broker.subscribe("heladeras/campus/temperatura");
+        broker.subscribe("heladeras/+/temperatura");
         //receptorMovimiento.evaluarDatosSensor("activado",heladera);
 
         //necesito publicar una termperatura para campus
         broker.publish("heladeras/campus/temperatura", "30");
+        broker.publish("heladeras/casa/temperatura", "30");
 
 
         try {
@@ -42,6 +53,7 @@ public class App {
             e.printStackTrace();
         }
         System.out.println(heladera.getIncidentes().size());
+        System.out.println(heladera2.getIncidentes().size());
         broker.disconnect();
 
     }
