@@ -34,13 +34,6 @@ public class ReceptorMovimiento {
         heladera.setEstaActiva(false);
     }
 
-    public void reportarAlerta(Heladera heladera, TipoAlerta tipoAlerta){
 
-        broker = Broker.getInstance();
-        broker.connect(heladera.getNombre());
-        broker.publish("dds2024/heladera/" + heladera.getNombre() + "/alerta", tipoAlerta.toString());
-        //En consola se veria: dds2024/heladera/medrano/alerta: ROBO
-        broker.disconnect();
-    }
 
 }

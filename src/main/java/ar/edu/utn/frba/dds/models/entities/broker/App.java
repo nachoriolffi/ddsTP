@@ -40,11 +40,14 @@ public class App {
         //escucha.subscribe("dds2024/heladera" + heladera.getId());
         //broker.subscribe("dds2024/heladera/campus/alerta");
         broker.subscribe("heladeras/+/temperatura");
+        broker.subscribe("heladeras/+/alerta");
         //receptorMovimiento.evaluarDatosSensor("activado",heladera);
 
         //necesito publicar una termperatura para campus
-        broker.publish("heladeras/campus/temperatura", "30");
-        broker.publish("heladeras/casa/temperatura", "30");
+        //broker.publish("heladeras/campus/temperatura", "30");
+        //broker.publish("heladeras/casa/temperatura", "30");
+        //broker.publish("heladeras/casa/temperatura", "12");
+        broker.publish("heladeras/casa/alerta", "");
 
 
         try {

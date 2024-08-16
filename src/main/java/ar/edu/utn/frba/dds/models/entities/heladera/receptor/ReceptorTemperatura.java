@@ -61,11 +61,4 @@ public class ReceptorTemperatura {
         heladera.agregarRegistroDeAlerta(registro);
         heladera.setEstaActiva(false);
     }
-
-    public void reportarAlerta(Heladera heladera){
-        Broker broker = new Broker();
-        broker.publish("dds2024/heladera" + heladera.getNombre() + "/alerta", TipoAlerta.TEMPERATURA.toString());
-        //En consola se veria: dds2024/heladera/medrano/alerta: temperatura
-        broker.disconnect();
-    }
 }
