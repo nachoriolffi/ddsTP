@@ -20,6 +20,7 @@ public class MyCustomMessageReceptor implements IMqttMessageListener {
     public MyCustomMessageReceptor() {
         topicActions.put("temperatura", new TemperaturaAccion());
         topicActions.put("alerta", new AlertaAccion());
+        topicActions.put("colaborador", new ColaboradorAccion());
     }
 
    // private RepoHeladeras repoHeladeras = RepoHeladeras.getInstancia();

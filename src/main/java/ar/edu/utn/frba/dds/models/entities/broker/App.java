@@ -16,10 +16,12 @@ public class App {
         Broker broker = new Broker();
         Heladera heladera = new Heladera();
         Heladera heladera2 = new Heladera();
+
         ReceptorMovimiento receptorMovimiento = new ReceptorMovimiento();
         ReceptorTemperatura receptorTemperatura = new ReceptorTemperatura();
         ReceptorMovimiento receptorMovimiento2 = new ReceptorMovimiento();
         ReceptorTemperatura receptorTemperatura2 = new ReceptorTemperatura();
+
         heladera.setReceptorMovimiento(receptorMovimiento);
         heladera.setReceptorTemperatura(receptorTemperatura);
         heladera2.setReceptorMovimiento(receptorMovimiento2);
@@ -48,6 +50,9 @@ public class App {
         //broker.publish("heladeras/casa/temperatura", "30");
         //broker.publish("heladeras/casa/temperatura", "12");
         broker.publish("heladeras/casa/alerta", "");
+
+        //tengo q instanciar a la tarjeta
+        broker.publish("heladeras/campus/","1");
 
 
         try {
