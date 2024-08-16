@@ -6,6 +6,7 @@ body {
     border-radius: 10px;
     margin-top: 10%;
     padding: 15px;
+    height: 65vh;
 }
 .heladera-card {
     background-color: #8B0000;
@@ -14,7 +15,23 @@ body {
     margin-bottom: 15px;
 }
 h1, h2 {
-    font-weight: 900; /* Black weight */
+    font-weight: 90vh; /* Black weight */
+    font-size: 2em;
+}
+
+
+/* Media query para pantallas más pequeñas */
+@media screen and (max-width: 1024px) {
+    h2 {
+        font-size: 1.4em;
+    }
+}
+
+/* Media query para pantallas aún más pequeñas */
+@media screen and (max-width: 480px) {
+    h2 {
+        font-size: 1.2em;
+    }
 }
 
 h2 {

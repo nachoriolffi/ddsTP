@@ -43,10 +43,10 @@ public class Incidente {
     }
 
     public void notificarTecnicoMasCercano(Heladera heladera){
-     CalculadorDistanciasTecnicoHeladera calculador = CalculadorDistanciasTecnicoHeladera.getInstance();
-    Tecnico tecnicoMasCercano = calculador.calcularTecnicoMasCercano(RepoTecnico.getInstancia().getTecnicos(),heladera);
-    Notificacion notificaion = new Notificacion(tecnicoMasCercano.getContactos(), new Mensaje("Alerta de incidente", "Se ha detectado un incidente en la heladera"));
-    tecnicoMasCercano.getMediosDeComunicacion().forEach(medioDeComunicacion -> medioDeComunicacion.comunicar(notificaion));
+        CalculadorDistanciasTecnicoHeladera calculador = CalculadorDistanciasTecnicoHeladera.getInstance();
+        Tecnico tecnicoMasCercano = calculador.calcularTecnicoMasCercano(RepoTecnico.getInstancia().getTecnicos(),heladera);
+        Notificacion notificaion = new Notificacion(tecnicoMasCercano.getContactos(), new Mensaje("Alerta de incidente", "Se ha detectado un incidente en la heladera"));
+        tecnicoMasCercano.getMediosDeComunicacion().forEach(medioDeComunicacion -> medioDeComunicacion.comunicar(notificaion));
     }
 
 }

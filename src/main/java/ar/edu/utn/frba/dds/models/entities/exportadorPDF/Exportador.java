@@ -16,8 +16,6 @@ public class Exportador {
             // Agregamos el reporte al repoReporte
         repo.agregarReporte(reporte);
 
-
-
     }
 
 
