@@ -1,12 +1,14 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9c28e;
+    font-family: 'Inter', sans-serif;
+    background-color: #ffffff;
     margin: 0;
     padding: 0;
 }
 
 .container {
+    font-family: 'Inter', sans-serif;
     display: flex;
+    margin-top: 7em;
     justify-content: space-between;
     padding: 20px;
 }
@@ -14,21 +16,24 @@ body {
 .sidebar {
     width: 20%;
     background-color: #ddd;
-    border-radius: 8px;
+    border-radius: 1em;
     padding: 10px;
+    height: 30em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .heladera-item {
-    background-color: #8b4a3a;
-    height: 100px;
-    border-radius: 8px;
-    margin-bottom: 15px;
+    background-color: #8B0000;
+    border-radius: 2em;
+    height: 5em;
+    margin-bottom: 1.5em;
 }
+
 
 .content {
     width: 50%;
     background-color: #f4f4f4;
-    border-radius: 8px;
+    border-radius: 1em;
     padding: 20px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -37,6 +42,7 @@ body {
     text-align: center;
     margin-bottom: 20px;
     font-size: 18px;
+    display: flex;
 }
 
 .form-group {
@@ -52,7 +58,7 @@ body {
 .form-group input, .form-group select {
     width: calc(100% - 40px);
     padding: 10px;
-    border-radius: 8px;
+    border-radius: 2em;
     border: 1px solid #ccc;
     margin-right: 10px;
     float: left;
@@ -61,10 +67,11 @@ body {
 .form-group button {
     width: 30px;
     height: 30px;
-    border-radius: 50%;
+    border-radius: 4em;
     background-color: #ccc;
     border: none;
     cursor: pointer;
+    margin-top: 0.5em;
 }
 
 .button-group {
@@ -76,7 +83,7 @@ body {
 .button-group button {
     width: 30%;
     padding: 10px;
-    border-radius: 8px;
+    border-radius: 1em;
     border: none;
     background-color: #d9d9d9;
     cursor: pointer;
@@ -86,11 +93,51 @@ body {
 .map {
     width: 25%;
     background-color: #eee;
-    border-radius: 8px;
+    border-radius: 2em;
     overflow: hidden;
 }
 
 .map img {
     width: 100%;
     height: auto;
+}
+
+
+.heladera-card {
+    background-color: #8B0000;
+    border-radius: 1em;
+    height: 100px;
+    margin-bottom: 15px;
+}
+
+@media (max-width: 1024px) {
+    .container h3 {
+        font-size: 1.4em;
+    }
+}
+
+/* Media query para pantallas aún más pequeñas */
+@media (max-width: 480px) {
+    .container  h3 {
+        font-size: 0.8em;
+    }
+}
+
+
+.container h3 {
+    margin-bottom: 2em;
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+.dropdown-menu.show {
+    display: block;
 }
