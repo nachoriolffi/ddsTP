@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Subir Producto</title>
+    <link rel="stylesheet" href="../css/subirProducto.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Subir producto</h1>
+        <form>
+            <div class="input-group">
+                <select id="tipo-producto">
+                    <option value="">Tipo de Producto</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <input type="text" id="nombre-beneficio" placeholder="Nombre Beneficio">
+            </div>
+
+            <div class="input-group" class=".input-modif">
+                <input type="number" id="puntos-necesarios" placeholder="Puntos Necesarios">
+            </div>
+
+            <div class="image-upload">
+                <label for="imagenes-beneficio">Imágenes beneficio:</label>
+                <div class="file-upload">
+                    <input type="file" id="imagenes-beneficio">
+                    <img src="upload.svg" alt="Upload Icon">
+                </div>
+            </div>
+
+
+            <button type="submit">importar</button>
+        </form>
+
+    </div>
+</body>
+
+</html>
