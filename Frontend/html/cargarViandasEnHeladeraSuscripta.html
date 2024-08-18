@@ -3,9 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href= "../css/cargarViandaEnHeladeraSuscripta.css" >
-    <title>Datos Heladera Suscriptas</title>
-    
+    <link rel="stylesheet" href="../css/cargarViandaEnHeladeraSuscripta.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@900&display=swap" rel="stylesheet">
+    <title>Datos Heladera Suscriptas</title>  
+    <style>
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            background-color: white;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-menu.show {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -16,36 +29,76 @@
             <div class="heladera-item"></div>
         </div>
         <div class="content">
-            <h2>Datos Heladera elegida en suscriptas</h2>
-            <div class="form-group">
+            <h3>Heladera Suscripta Elegida</h3>
+            <div class="form-group position-relative">
                 <label for="ventas">Ventas Disponibles</label>
-                <input type="text" id="ventas">
-                <button>▾</button>
+                <input type="text" id="ventas" class="form-control">
+                <button type="button" class="btn btn-secondary dropdown-toggle" onclick="toggleDropdown('ventasDropdown')">▾</button>
+                <ul class="dropdown-menu" id="ventasDropdown">
+                    <li><a class="dropdown-item" href="#">Opción 1</a></li>
+                    <li><a class="dropdown-item" href="#">Opción 2</a></li>
+                    <li><a class="dropdown-item" href="#">Opción 3</a></li>
+                </ul>
             </div>
-            <div class="form-group">
+            <div class="form-group position-relative">
                 <label for="solicitud">Solicitud Apertura</label>
-                <input type="text" id="solicitud">
-                <button>▾</button>
+                <input type="text" id="solicitud" class="form-control">
+                <button type="button" class="btn btn-secondary dropdown-toggle" onclick="toggleDropdown('solicitudDropdown')">▾</button>
+                <ul class="dropdown-menu" id="solicitudDropdown">
+                    <li><a class="dropdown-item" href="#">Opción 1</a></li>
+                    <li><a class="dropdown-item" href="#">Opción 2</a></li>
+                    <li><a class="dropdown-item" href="#">Opción 3</a></li>
+                </ul>
             </div>
-            <div class="form-group">
+            <div class="form-group position-relative">
                 <label for="registro">Registro de Aperturas</label>
-                <input type="text" id="registro">
-                <button>▾</button>
+                <input type="text" id="registro" class="form-control">
+                <button type="button" class="btn btn-secondary dropdown-toggle" onclick="toggleDropdown('registroDropdown')">▾</button>
+                <ul class="dropdown-menu" id="registroDropdown">
+                    <li><a class="dropdown-item" href="#">Opción 1</a></li>
+                    <li><a class="dropdown-item" href="#">Opción 2</a></li>
+                    <li><a class="dropdown-item" href="#">Opción 3</a></li>
+                </ul>
             </div>
-            <div class="form-group">
+            <div class="form-group position-relative">
                 <label for="faltas">Faltas</label>
-                <input type="text" id="faltas">
-                <button>▾</button>
+                <input type="text" id="faltas" class="form-control">
+                <button type="button" class="btn btn-secondary dropdown-toggle" onclick="toggleDropdown('faltasDropdown')">▾</button>
+                <ul class="dropdown-menu" id="faltasDropdown">
+                    <li><a class="dropdown-item" href="#">Opción 1</a></li>
+                    <li><a class="dropdown-item" href="#">Opción 2</a></li>
+                    <li><a class="dropdown-item" href="#">Opción 3</a></li>
+                </ul>
             </div>
             <div class="button-group">
-                <button>Agregar</button>
-                <button>Cargar Falla</button>
-                <button>Cargar Solicitud</button>
+                <button class="btn btn-primary">Agregar</button>
+                <button class="btn btn-warning">Cargar Falla</button>
+                <button class="btn btn-success">Cargar Solicitud</button>
             </div>
         </div>
         <div class="map">
             <img src="https://via.placeholder.com/300x400" alt="Map">
         </div>
     </div>
+
+    <script>
+        function toggleDropdown(id) {
+            const dropdown = document.getElementById(id);
+            dropdown.classList.toggle('show');
+        }
+
+        // Cierra el dropdown si se hace clic fuera de él
+        window.onclick = function(event) {
+            if (!event.target.matches('.dropdown-toggle')) {
+                const dropdowns = document.getElementsByClassName("dropdown-menu");
+                for (let i = 0; i < dropdowns.length; i++) {
+                    const openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
 </body>
 </html>
