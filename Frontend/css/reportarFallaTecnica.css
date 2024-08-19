@@ -1,0 +1,47 @@
+body {
+    background-color: #FFF5E6;
+}
+
+.container {
+    background-color: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #FA6900;
+}
+
+.upload-area {
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.upload-area:hover {
+    background-color: #f8f9fa;
+}
+
+.upload-placeholder i {
+    font-size: 48px;
+    color: #ccc;
+}
+
+.btn-naranja {
+    background-color: #FA6900;
+    border-color: #e55d00;
+    color: white;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.btn-naranja:hover {
+    background-color: #e55d00;
+    border-color: #FA6900;
+    color: white;
+    transform: scale(1.05);
+    transition: transform 0.2s;
+}
