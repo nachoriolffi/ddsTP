@@ -7,10 +7,10 @@ body {
     min-height: 100vh;
     background-image: url('../assets/fondo2.svg');
     background-repeat: no-repeat;
-    background-size: 50%;
     background-position: top left;
     position: relative;
     overflow: hidden;
+    background-size: 50%;
 }
 
 .container {
@@ -39,12 +39,12 @@ select {
 .image-upload {
     width: 100%;
     height: 150px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    border: 1px solid #000000;
+    border-radius: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f9f9f9;
+    background-color: #FFFFFF;
     position: relative;
     overflow: hidden;
 }
@@ -52,7 +52,6 @@ select {
 .image-upload img {
     width: 50px;
     height: auto;
-    opacity: 0.5;
 }
 
 button {
@@ -60,7 +59,7 @@ button {
     color: #000000;
     border: none;
     padding: 15px 20px;
-    border-radius: 25px;
+    border-radius: 20px;
     cursor: pointer;
     font-size: 18px;
     width: 100%;
@@ -82,8 +81,8 @@ input[type="text"],
 select {
     width: 100%;
     padding: 12px;
-    border: 2px solid #FF6B00;
-    border-radius: 25px;
+    border: 1px solid #FA6900;
+    border-radius: 20px;
     box-sizing: border-box;
     font-size: 16px;
     background-color: #EFEFEF;
@@ -92,9 +91,31 @@ select {
 input[type="number"]{
     width: 100%;
     padding: 12px;
-    border: 2px solid #FF6B00;
-    border-radius: 25px;
+    border: 1px solid #FA6900;
+    border-radius: 20px;
     box-sizing: border-box;
     font-size: 16px;
     background-color: #EFEFEF;
 }
+
+.file-upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.custom-file-upload {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: black;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.custom-file-upload img {
+    margin-right: 10px;
+}
+

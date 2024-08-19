@@ -1,3 +1,4 @@
+
 body {
     font-family: Arial, sans-serif;
     display: flex;
@@ -13,7 +14,13 @@ body {
 }
 h1 {
     text-align: center;
-    margin-bottom: 20px;
+    margin-top: 0px;
+    margin-bottom: 60px;
+    
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700; 
+    font-style: normal;
 }
 
 .form-container {
@@ -21,27 +28,49 @@ h1 {
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 32%; 
+    max-width: 320px; 
+    height: 450px; 
+    max-height: 80vh; 
+    box-sizing: border-box; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribuye equitativamente los elementos */
 }
 
 .form-container input,
 .form-container select,
 .form-container button {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
+    padding: 7px;
+    border-radius: 10px;
     border: 1px solid #ccc;
     font-size: 16px;
+    box-sizing: border-box;
+    flex-grow: 1; /* Permite que los elementos crezcan para ocupar el espacio disponible */
+    margin: 15px 0; /* Añade un pequeño margen vertical entre los elementos */
+    font-family: 'Inter', Helvetica, sans-serif;
 }
 
 .form-container button {
+    width: 55%;
     background-color: #00c2ff;
     color: white;
     border: none;
     cursor: pointer;
     font-size: 16px;
+    margin: 13px 60px; /* Centra el botón horizontalmente */
+    font-family: 'Inter', Helvetica, sans-serif;
+    
 }
 
 .form-container button:hover {
     background-color: #00a5e0;
+}
+
+.inter-unique {
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700; 
+    font-style: normal;
 }
