@@ -4,7 +4,101 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Heladera (nombre/id)</title>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      grid-template-rows: auto;
+      grid-gap: 20px;
+    }
+
+    .direccion,
+    .viandas,
+    .incidentes,
+    .solicitudes,
+    .aperturas,
+    .ubicacion {
+      background-color: #e9ecef;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .direccion {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+    }
+
+    .viandas {
+      grid-column: 2 / 3;
+      grid-row: 1 / 2;
+    }
+
+    .ubicacion {
+      grid-column: 1 / 2;
+      grid-row: 2 / 3;
+    }
+
+    .incidentes {
+      grid-column: 2 / 3;
+      grid-row: 2 / 3;
+    }
+
+    .solicitudes {
+      grid-column: 1 / 2;
+      grid-row: 3 / 4;
+    }
+
+    .aperturas {
+      grid-column: 2 / 3;
+      grid-row: 3 / 4;
+    }
+
+    .viandas .card {
+      background-color: #f2f2f2;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    .solicitudes-list,
+    .aperturas-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .solicitudes-list li,
+    .aperturas-list li {
+      background-color: #f2f2f2;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+
+    iframe {
+      width: 100%;
+      height: 200px;
+      border: none;
+      border-radius: 8px;
+    }
+  </style>
 </head>
 <body>
 <div class="container">
@@ -12,24 +106,24 @@
   <div class="grid">
     <div class="direccion">
       <h2>Dirección</h2>
-      <p>Calle:</p>
-      <p>Piso:</p>
-      <p>Altura:</p>
+      <p>Calle: Av. Corrientes 1234</p>
+      <p>Piso: 5</p>
+      <p>Altura: 1234</p>
     </div>
     <div class="viandas">
       <h2>Viandas</h2>
-      <!-- Aquí se puede agregar una lista o detalles de viandas -->
+      <div class="card">
+        <h3>Vianda 1</h3>
+        <p>Descripción de la vianda 1</p>
+      </div>
+      <div class="card">
+        <h3>Vianda 2</h3>
+        <p>Descripción de la vianda 2</p>
+      </div>
     </div>
     <div class="ubicacion">
       <h2>Ubicación</h2>
-      <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13136.066899185547!2d-58.43358005!3d-34.5885755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb58b85a93c35%3A0x89b570ec39dc7d88!2sPalermo%2C%20CABA%2C%20Argentina!5e0!3m2!1sen!2sus!4v1628710418777!5m2!1sen!2sus"
-              width="100%"
-              height="200"
-              style="border:0;"
-              allowfullscreen=""
-              loading="lazy">
-      </iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13136.066899185547!2d-58.43358005!3d-34.5885755!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcb58b85a93c35%3A0x89b570ec39dc7d88!2sPalermo%2C%20CABA%2C%20Argentina!5e0!3m2!1sen!2sus!4v1628710418777!5m2!1sen!2sus" allowfullscreen="" loading="lazy"></iframe>
     </div>
     <div class="incidentes">
       <h2>Incidentes</h2>
@@ -37,11 +131,19 @@
     </div>
     <div class="solicitudes">
       <h2>Solicitudes de Apertura</h2>
-      <!-- Aquí se pueden agregar detalles de solicitudes -->
+      <ul class="solicitudes-list">
+        <li>Solicitud de apertura 1</li>
+        <li>Solicitud de apertura 2</li>
+        <li>Solicitud de apertura 3</li>
+      </ul>
     </div>
     <div class="aperturas">
       <h2>Aperturas</h2>
-      <!-- Aquí se pueden agregar detalles de aperturas -->
+      <ul class="aperturas-list">
+        <li>Apertura 1</li>
+        <li>Apertura 2</li>
+        <li>Apertura 3</li>
+      </ul>
     </div>
   </div>
 </div>
