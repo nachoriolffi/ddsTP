@@ -86,24 +86,24 @@ public class Heladera {
     }
 
     // le llega a la heladera una solicitud de apertura del sistema
-    public void agregarRegistroSolicitud(RegistroSolicitud registro) throws IOException {
+    /*public void agregarRegistroSolicitud(RegistroSolicitud registro) throws IOException {
         if (this.capacidadActual() == 0) {
             throw new IOException("No se pueden agregar más viandas ahora, intente más tarde");
         }else{
            this.solicitudesApertura.add(registro);
         }
-    }
-/*
+    }*/
+
     public void agregarRegistroSolicitud(RegistroSolicitud registro, Broker broker) throws IOException {
         if (this.capacidadActual() == 0) {
             throw new IOException("No se pueden agregar más viandas ahora, intente más tarde");
         }else{
-            //dds2024/heladera/medrano/apertura/solicitud: (ID de tarjeta)
-            broker.publish("dds/heladera/"+ this.nombre + "/aperturaSolicitud", registro.getTarjeta().getIdTarjeta().toString());
+            //heladeras/medrano/autorizacion: (ID de tarjeta)
+            broker.publish("heladeras/"+ this.nombre + "/autorizacion", registro.getTarjeta().getIdTarjeta().toString());
             this.solicitudesApertura.add(registro);
         }
     }
-*/
+
     //del broker llamo agregarApertura
     public void agregarApertura() throws IOException {
         // cuando un colaborador intenta abrir la heladera, si este puede hacerlo, entonces

@@ -20,7 +20,6 @@ public class MyCustomMessageReceptor implements IMqttMessageListener {
     public MyCustomMessageReceptor() {
         topicActions.put("temperatura", new TemperaturaAccion());
         topicActions.put("alerta", new AlertaAccion());
-        topicActions.put("colaborador", new ColaboradorAccion());
     }
 
    // private RepoHeladeras repoHeladeras = RepoHeladeras.getInstancia();
@@ -33,8 +32,7 @@ public class MyCustomMessageReceptor implements IMqttMessageListener {
     }
 
     private void evaluarMensaje(String topic, MqttMessage mqttMessage) {
-        //dds2024/heladera/medrano/sensor/temperatura
-        //dds2024/heladera/campus/alerta
+
         //heladeras/heladeraCasa/temperatura
         //heladeras/+/temperatura
         //"heladeras/heladeraCasa/alerta"

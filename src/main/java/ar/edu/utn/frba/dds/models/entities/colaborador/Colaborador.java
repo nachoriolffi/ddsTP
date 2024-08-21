@@ -101,8 +101,7 @@ public class Colaborador {
         this.formasDeColaboracion = new ArrayList<>();
         this.colaboracionesRealizadas = new ArrayList<>();
     }
-
-
+//--
     public void agregarMedioDeComunicacion(MedioDeComunicacion medioDeComunicacion) {
         this.mediosDeComunicacion.add(medioDeComunicacion);
     }
@@ -176,4 +175,3 @@ public class Colaborador {
         return iRecomendacionPuntos.recomendarPuntos(longitud,latitud,radio);
     }
 }
-
