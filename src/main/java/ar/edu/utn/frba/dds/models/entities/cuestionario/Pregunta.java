@@ -3,18 +3,25 @@ package ar.edu.utn.frba.dds.models.entities.cuestionario;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
+
 @Setter
 @Getter
+@Entity
+@Table(name="pregunta")
 public class Pregunta {
 
-
-        private String nombre;
+    @Id
+    @GeneratedValue
+    private Integer idPregunta;
+    @Column(name = "nombrePregunta", columnDefinition = "VARCHAR(250)")
+    private String nombre;
 
         //private List<Opcion> opciones;
-
-        private Boolean esObligatoria;
-
-        private TipoPregunta tipoPregunta;
+    @Column(name = "esObligatoria",columnDefinition = "TINYINT(1)")
+    private Boolean esObligatoria;
+    @Column(name = "tipoPregunta")
+    private TipoPregunta tipoPregunta;
 
         public Pregunta( String nombre, Boolean esObligatoria, TipoPregunta tipoPregunta) {
             this.nombre = nombre;

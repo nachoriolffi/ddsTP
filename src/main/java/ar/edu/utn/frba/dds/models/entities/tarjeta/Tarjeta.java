@@ -7,18 +7,24 @@ import ar.edu.utn.frba.dds.models.entities.vulnerable.Vulnerable;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @Getter
 @Setter
+//@Table(name = "tarjeta")
+//@Entity
 public class Tarjeta {
     
+    //@Id
+    //@GeneratedValue
     private Integer idTarjeta;
     private List<UsoTarjeta> registroUsos;
     private Vulnerable personaAsociada;
     private Colaborador colaboradorAsociado;
+    //@Column(name="fechaRegistro",columnDefinition = "Date")
     private Date fechaRegistro;
 
     public Vianda sacarVianda(Vianda viandaQuitada, Heladera heladera)throws IOException {
