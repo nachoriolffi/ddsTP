@@ -165,6 +165,8 @@ public class TestHeladera {
         Heladera heladeraAModificar = heladeras.get(0);
         heladeraAModificar.setDireccion(direccion2);
         heladeraAModificar.setEstaActiva(Boolean.FALSE);
+
+
         assert heladeraAModificar.getDireccion().equals(direccion2);
         assert heladeraAModificar.getEstaActiva().equals(Boolean.FALSE);
 

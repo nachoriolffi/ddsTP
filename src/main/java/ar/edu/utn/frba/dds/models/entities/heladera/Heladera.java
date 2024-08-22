@@ -11,6 +11,7 @@ import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,6 +20,8 @@ import java.util.List;
 @Getter
 @Setter
 public class Heladera {
+
+    private Long id;
 
     private Direccion direccion;
     private Coordenada coordenada;
