@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Table;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 import static javax.persistence.GenerationType.*;
 
@@ -17,19 +14,25 @@ public class Contacto {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private int id;
+    private int id_Contacto;
     @Getter
     @Setter
-    private TipoContacto nombre;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipoContacto",nullable = false)
+    private TipoContacto tipoContacto;
     @Setter
     @Getter
+    @Column(name = "nombreContacto",columnDefinition = "VARCHAR (250)")
     private String descripcion;
 
     public Contacto(TipoContacto nombre, String descripcion) {
-        this.nombre = nombre;
+        this.tipoContacto = nombre;
         this.descripcion = descripcion;
     }
     public Contacto() {
     }
 
+  public String getNombre() {
+    return null;
+  }
 }

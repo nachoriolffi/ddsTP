@@ -18,11 +18,11 @@ public class TestIntercambioPuntos
     List<Oferta> ofertasACanjear3 = new ArrayList<>();
     @BeforeEach
     public void seteoOfertas(){
-        Oferta oferta1 = new Oferta("Televisor",4500.0, Rubro.TECNOLOGIA,14);
-        Oferta oferta2 = new Oferta("Cortinas",500.0, Rubro.INTERIOR,100);
-        Oferta oferta3 = new Oferta("Cortinas",500.0, Rubro.INTERIOR,100);
-        Oferta oferta4 = new Oferta("Cama",10000.0, Rubro.HOGAR,3);
-        Oferta oferta5 = new Oferta("PC Gamer",50000.0, Rubro.TECNOLOGIA,1);
+        Oferta oferta1 = new Oferta("Televisor",4500, Rubro.TECNOLOGIA,14);
+        Oferta oferta2 = new Oferta("Cortinas",500, Rubro.INTERIOR,100);
+        Oferta oferta3 = new Oferta("Cortinas",500, Rubro.INTERIOR,100);
+        Oferta oferta4 = new Oferta("Cama",10000, Rubro.HOGAR,3);
+        Oferta oferta5 = new Oferta("PC Gamer",50000, Rubro.TECNOLOGIA,1);
 
         ofertasACanjear1.add(oferta1);
         ofertasACanjear1.add(oferta2);

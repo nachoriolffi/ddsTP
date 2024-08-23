@@ -16,23 +16,20 @@ public class Pregunta {
     private Integer idPregunta;
     @Column(name = "nombrePregunta", columnDefinition = "VARCHAR(250)")
     private String nombre;
-
-        //private List<Opcion> opciones;
+    //private List<Opcion> opciones;
     @Column(name = "esObligatoria",columnDefinition = "TINYINT(1)")
     private Boolean esObligatoria;
-    @Column(name = "tipoPregunta")
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipoPregunta", nullable = false)
     private TipoPregunta tipoPregunta;
 
-        public Pregunta( String nombre, Boolean esObligatoria, TipoPregunta tipoPregunta) {
-            this.nombre = nombre;
-            //this.opciones = new ArrayList<Opcion>();
-            this.esObligatoria = esObligatoria;
-            this.tipoPregunta = tipoPregunta;
-        }
+    public Pregunta( String nombre, Boolean esObligatoria, TipoPregunta tipoPregunta) {
+        this.nombre = nombre;
+        this.esObligatoria = esObligatoria;
+        this.tipoPregunta = tipoPregunta;
+    }
 
-       // public Pregunta() {this.opciones = new ArrayList<Opcion>();}
-
-        public boolean esObligatoria(){
+    public boolean esObligatoria(){
             return this.esObligatoria;
         }
 
