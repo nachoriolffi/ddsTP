@@ -6,17 +6,27 @@ import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Getter
 @Setter
+@Entity
+@Table(name="registro_vulnerable")
 public class RegistroVulnerable implements FormaDeColaboracion {
-
+    @Id
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    private Long id;
+    @OneToMany
+    @JoinColumn(name = "id_tarjeta")
     private List<Tarjeta> tarjetasDonadas;
+    @Column(name="cantidadTarjetas", columnDefinition = "INT")
     private Integer cantidadTarjetas;
+    @Column(name="fechaColaboracion", columnDefinition = "DATE")
     private Date fechaColaboracion;
 
+    @Enumerated(EnumType.STRING)
     private TipoColaboracion tipoColaboracion = TipoColaboracion.ENTREGA_TARJETAS;
 
     public RegistroVulnerable(List<Tarjeta> tarjetasDonadas) {

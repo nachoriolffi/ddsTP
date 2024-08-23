@@ -19,23 +19,44 @@ import java.util.List;
 
 @Getter
 @Setter
+
+@Entity
+@Table (name = "heladera")
 public class Heladera {
-
+    @Id
+    @GeneratedValue ( strategy = GenerationType.IDENTITY)
     private Long id;
-
+    @Transient
     private Direccion direccion;
+    @Transient
     private Coordenada coordenada;
+    @Column(name = "nombre", nullable = false, columnDefinition="varchar(50)")
     private String nombre;
+    @Column(name = "capacidad")
     private Integer capacidad;
+    @Column (name = "fechaPuestaFunc", columnDefinition = "Date")
     private Date fechaPuestaFunc;
+    @OneToMany
+    @JoinColumn (name = "id_Vianda")
     private List<Vianda> viandas;
+    @Transient
     private ReceptorMovimiento receptorMovimiento;
+    @Transient
     private ReceptorTemperatura receptorTemperatura;
+
+    @OneToMany
+    @JoinColumn(name = "id_Incidente")
     private List<Incidente> incidentes;
+    @OneToMany
+    @JoinColumn(name = "id_solicitudesApertura")
     private List<RegistroSolicitud>solicitudesApertura; // es una lista de avisos a la heladera para que se abra
+    @Transient
     private List<RegistroApertura> aperturas; // es una lista de registros de aperturas que se hicieron
+    @Column (name = "estaActiva")
     private Boolean estaActiva;
+    @Transient
     private ModeloHeladera modelo;
+    @Column (name = "tempActual")
     private Double tempActual;
 
     public Heladera(){
@@ -102,7 +123,7 @@ public class Heladera {
             throw new IOException("No se pueden agregar más viandas ahora, intente más tarde");
         }else{
             //heladeras/medrano/autorizacion: (ID de tarjeta)
-            broker.publish("heladeras/"+ this.nombre + "/autorizacion", registro.getTarjeta().getIdTarjeta().toString());
+            broker.publish("heladeras/"+ this.nombre + "/autorizacion", registro.getTarjeta().getId_Tarjeta().toString());
             this.solicitudesApertura.add(registro);
         }
     }

@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRegistrosVisita;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,6 +36,7 @@ public class Tecnico {
     @Column (name = "CUIL", columnDefinition = "INT")
     private Integer CUIL;
 
+    @Transient
     private List<MedioDeComunicacion> mediosDeComunicacion;
     @Column (name = "areaCobertura", columnDefinition = "INT")
     private Integer areaCobertura;

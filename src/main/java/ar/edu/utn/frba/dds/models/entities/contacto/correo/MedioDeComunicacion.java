@@ -5,5 +5,6 @@ import ar.edu.utn.frba.dds.models.entities.contacto.Mensaje;
 import ar.edu.utn.frba.dds.models.entities.contacto.Notificacion;
 
 public interface MedioDeComunicacion{
+
     public void comunicar (Notificacion notificacion);
 }

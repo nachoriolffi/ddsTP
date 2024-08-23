@@ -16,7 +16,10 @@ import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import org.checkerframework.checker.units.qual.C;
+import org.glassfish.jersey.server.ManagedAsyncExecutor;
 
+import javax.persistence.*;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.text.ParseException;
@@ -30,27 +33,54 @@ import java.util.List;
 @Setter
 @Getter
 
+@Entity
+@Table(name = "colaborador")
 public class Colaborador {
 
-    private Long id;
+    @Id
+    @GeneratedValue (strategy = javax.persistence.GenerationType.IDENTITY)
+    private Integer id_Colaborador;
+    @Column(name = "nombre", columnDefinition = "VARCHAR(25)")
     private String nombre;
+    @Column(name="apellido", columnDefinition = "VARCHAR(25)")
     private String apellido;
+    @Transient
     private List<MedioDeComunicacion> mediosDeComunicacion;
+    @Column(name="fechaDeNacimiento", columnDefinition = "DATE")
     private LocalDate fechaDeNacimiento;
+    @ManyToOne
+    @JoinColumn(name = "direccion_id")
     private Direccion direccion;
+    @Transient
     private List<FormaDeColaboracion> formasDeColaboracion;
+    @Transient
     private List<FormaDeColaboracion> colaboracionesRealizadas;
+    @ManyToOne
+    @JoinColumn(name = "cuestionario_id")
     private CuestionarioRespondido cuestionarioRespondido;
+    @Column(name = "razonSocial", columnDefinition = "INT")
     private Integer razonSocial;
+    @Enumerated(EnumType.STRING)
     private TipoJuridisccion tipoJuridisccion;
+    @OneToOne
+    @JoinColumn(name = "rubro_id")
     private Rubro rubro;
+    @Enumerated(EnumType.STRING)
     private TipoPersona tipoPersona;
+    @OneToMany
+    @JoinColumn (name = "id_contacto")
     private List<Contacto> contacto;
+    @Transient
     private IRecomendacionPuntos iRecomendacionPuntos;
     //private Double puntosTotales;
+    @Column(name = "puntosTotalesUsados", columnDefinition = "DOUBLE")
     private Double puntosTotalesUsados;
+    @Column(name = "numeroDocumento", columnDefinition = "INT")
     private Integer numeroDocumento; //nuevo requerimiento para carga masiva
+    @Enumerated(EnumType.STRING)
     private TipoDocumento tipoDocumento; //nuevo requerimiento para carga masiva
+    @OneToMany //Ver de cambiar a ManyToMany
+    @JoinColumn (name = "id_ofertasRegistradas")
     private List<Oferta> ofertasRegistradas;
 
     // CONSTRUCTORES

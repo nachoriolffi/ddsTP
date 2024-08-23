@@ -14,7 +14,7 @@ public class Respuesta {
 
     @Id
     @GeneratedValue ( strategy = javax.persistence.GenerationType.IDENTITY)
-    private Integer idRespuesta;
+    private Integer id_Respuesta;
     @ManyToOne
     @JoinColumn(name = "id_pregunta")
     private Pregunta pregunta;

@@ -29,7 +29,7 @@ public class RepoTarjetas implements IRepoTarjetas {
 
     public Tarjeta buscarTarjetaPorId(String id) {
         for (Tarjeta tarjeta : this.tarjetas) {
-            if (tarjeta.getIdTarjeta().toString().equals(id)) {
+            if (tarjeta.getId_Tarjeta().toString().equals(id)) {
                 return tarjeta;
             }
         }

@@ -5,20 +5,33 @@ import ar.edu.utn.frba.dds.models.entities.multiplicador.config.ConfiguracionMul
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Observable;
 import java.util.Observer;
 
 
+@Entity
+@Table(name="doancion_dinero")
 public class DonacionDinero implements FormaDeColaboracion {
 
+    @Id
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name= "fecha", columnDefinition = "DATE")
     private Date fecha;
+    @Column(name="monto", columnDefinition = "DOUBLE")
     private Float monto;
+    @Column(name="frecuencia", columnDefinition = "INT")
     private Integer frecuencia;
+    @Column(name="fechaColaboracion", columnDefinition = "DATE")
     private Date fechaColaboracion;
+    @Column(name="multiplicador", columnDefinition = "DOUBLE")
     private Double multiplicador;
     @Getter
     @Setter
+    @Enumerated(EnumType.STRING)
     private TipoColaboracion tipoColaboracion = TipoColaboracion.DINERO;
 
 

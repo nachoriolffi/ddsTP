@@ -16,7 +16,7 @@ public class Cuestionario {
 
          @Id
          @GeneratedValue ( strategy = GenerationType.IDENTITY)
-        private Integer idCuestionario;
+        private Integer id_Cuestionario;
 
          @Column(name = "nombre_cuestionario", columnDefinition = "VARCHAR(250)")
         private String nombreCuestionario;
