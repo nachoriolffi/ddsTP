@@ -7,13 +7,21 @@ import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 import java.util.List;
 
 @Getter
 @Setter
-
+//@Entity
+//@Table (name = "DistribucionVianda")
 public class DistribucionVianda implements FormaDeColaboracion{
+    //@Id
+    // @GeneratedValue (strategy = javax.persistence.GenerationType.IDENTITY)
+    private Integer id_DistribucionVianda;
 
     private Heladera heladeraOrigen;
     private Heladera heladeraDestino;

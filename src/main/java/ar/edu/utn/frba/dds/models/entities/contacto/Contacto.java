@@ -33,6 +33,6 @@ public class Contacto {
     }
 
   public String getNombre() {
-    return null;
+    return descripcion;
   }
 }
