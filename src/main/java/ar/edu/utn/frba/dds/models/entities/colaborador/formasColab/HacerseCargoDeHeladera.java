@@ -7,18 +7,29 @@ import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Local;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-
-
+@Entity
+@Table(name="hacerse_cargo_de_heladera")
 public class HacerseCargoDeHeladera implements FormaDeColaboracion {
-    private Local local;
+    @Id
+    @GeneratedValue( strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Transient
+    private Local local; // TODO LOCAL
+    //@OneToMany
+    //@JoinColumn (name = "id_heladera")
+    @Transient
     private List<Heladera> heladeras;
+    @Column(name="cantidadHeladeras", columnDefinition = "INT")
     private Integer cantidadHeladeras;
     @Getter
     @Setter
+    @Enumerated(EnumType.STRING)
     private TipoColaboracion tipoColaboracion;
+    @Column(name="fechaColaboracion", columnDefinition = "DATE")
     private Date fechaColaboracion;
 
 

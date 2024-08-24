@@ -7,18 +7,30 @@ import ar.edu.utn.frba.dds.models.entities.vulnerable.Vulnerable;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @Getter
 @Setter
+@Table(name = "tarjeta")
+@Entity
 public class Tarjeta {
     
-    private Integer idTarjeta;
+    @Id
+    @GeneratedValue ( strategy = GenerationType.IDENTITY)
+    private Integer id_Tarjeta;
+    @OneToMany
+    @JoinColumn(name = "id_UsoTarjeta")
     private List<UsoTarjeta> registroUsos;
+    @OneToOne
+    @JoinColumn(name = "id_Vulnerable")
     private Vulnerable personaAsociada;
+    @ManyToOne
+    @JoinColumn(name = "id_Colaborador",nullable = false)
     private Colaborador colaboradorAsociado;
+    @Column(name="fechaRegistro",columnDefinition = "Date")
     private Date fechaRegistro;
 
     public Vianda sacarVianda(Vianda viandaQuitada, Heladera heladera)throws IOException {
@@ -32,7 +44,7 @@ public class Tarjeta {
     }
 
     public Tarjeta(Integer idTarjeta, Vulnerable personaAsociada, Colaborador colaboradorAsociado) {
-        this.idTarjeta = idTarjeta;
+        this.id_Tarjeta = idTarjeta;
         this.personaAsociada = personaAsociada;
         this.colaboradorAsociado = colaboradorAsociado;
         this.fechaRegistro = new Date();

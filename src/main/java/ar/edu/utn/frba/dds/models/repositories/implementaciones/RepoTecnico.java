@@ -36,7 +36,7 @@ public class RepoTecnico implements IRepoTecnico {
     public Optional<Tecnico> buscarTecnico(Long id) {
         return tecnicos
                 .stream()
-                .filter(t -> t.getId().equals(id))
+                .filter(t -> t.getId_Tecnico().equals(id))
                 .findFirst();
     }
 

@@ -6,8 +6,6 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 public class TemperaturaAccion implements AccionTopico {
 
-
-
     @Override
     public void evaluarMensaje (String id , String messageContent) {
         System.out.println("Temperatura: " + messageContent);

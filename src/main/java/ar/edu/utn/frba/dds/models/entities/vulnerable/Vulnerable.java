@@ -6,24 +6,38 @@ import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 @Getter
 @Setter
+@Entity
+@Table(name = "vulnerable")
 public class Vulnerable {
-
+    @Id
+    @GeneratedValue (strategy = javax.persistence.GenerationType.IDENTITY)
     private Long id;
+    @Column (name = "nombre", columnDefinition = "VARCHAR(25)")
     private String nombre;
+    @Column (name = "apellido", columnDefinition = "VARCHAR(25)")
     private String apellido;
+    @Column (name = "fechaDeNacimiento", columnDefinition = "DATE")
     private LocalDate fechaDeNacimiento;
+    @Column (name = "fechaDeRegistro", columnDefinition = "DATE")
     private LocalDate fechaDeRegistro;
+    @Column (name = "situacionDeCalle", columnDefinition = "BOOLEAN")
     private Boolean situacionDeCalle;
+    @Transient
     private Direccion direccion;
+    @Enumerated(EnumType.STRING)
     private TipoDocumento tipoDocumento;
+    @Column(name = "numeroDocumento", columnDefinition = "INT")
     private Integer numeroDocumento;
+    @Transient
     private List<RegistroDePersonaACargo> registroDePersonasACargo;
+
 
     public Vulnerable(){
 

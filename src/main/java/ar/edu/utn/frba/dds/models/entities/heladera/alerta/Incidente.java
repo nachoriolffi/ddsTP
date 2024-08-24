@@ -10,17 +10,32 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoTecnico;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
+
 import java.util.Date;
 
 @Getter
 @Setter
+@Entity
+@Table(name = "incidente")
 public class Incidente {
-    Long id;
+    @Id
+    @GeneratedValue ( strategy = GenerationType.IDENTITY)
+    private Integer id_Incidente;
+    @Column(name = "fecha", columnDefinition = "DATE")
     private Date fecha;
+    @Column(name = "descripcion", columnDefinition = "TEXT")
     private String descripcion;
+    @Column(name = "pathFoto", columnDefinition = "TEXT")
     private String pathFoto;
+
+    @Transient
     private TipoIncidente tipoIncidente;
+    @Transient
     private TipoAlerta tipoAlerta;
+
+    @OneToOne
+    @JoinColumn(name = "id_colaborador")
     private Colaborador colaborador;
 
     public Incidente(TipoAlerta tipoAlerta) {
@@ -32,8 +47,8 @@ public class Incidente {
         this.fecha = new Date();
     }
 
-    public Incidente(Long id, String descripcion, String pathFoto, TipoIncidente tipoIncidente, TipoAlerta tipoAlerta, Colaborador colaborador) {
-        this.id = id;
+    public Incidente(Integer id, String descripcion, String pathFoto, TipoIncidente tipoIncidente, TipoAlerta tipoAlerta, Colaborador colaborador) {
+        this.id_Incidente = id;
         this.fecha = new Date();
         this.descripcion = descripcion;
         this.pathFoto = pathFoto;
