@@ -13,88 +13,120 @@
     <script src="https://kit.fontawesome.com/115c7ea5e6.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<nav class="container text-center">
-    <ul class="nav nav-pills nav-fill">
-        <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Donaciones</a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="donacionDinero.html">Donar Dinero</a></li>
-                <li><a class="dropdown-item" href="encargarseDeHeladera.html">Encargarse de Heladera</a></li>
-                <li><a class="dropdown-item" href="donacionViandas.html">Donar Viandas</a></li>
-                <li><a class="dropdown-item" href="distribuirViandas.html">Distribuir Viandas</a></li>
-                <li><a class="dropdown-item" href="registroVulnerable.html">Registrar Personas Vulnerables</a></li>
-                <li>
-                    <hr class="dropdown-divider">
-                </li>
-                <li><a class="dropdown-item" href="misHeladeras.html">Mis Heladeras</a></li>
-            </ul>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="canjeProductos.html">Tienda</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Perfil</a>
-        </li>
-    </ul>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <ul class="nav nav-pills justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                   aria-expanded="false">Donaciones</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="donacionDinero.html">Donar Dinero</a></li>
+                    <li><a class="dropdown-item" href="encargarseDeHeladera.html">Encargarse de Heladera</a></li>
+                    <li><a class="dropdown-item" href="donacionViandas.html">Donar Viandas</a></li>
+                    <li><a class="dropdown-item" href="distribuirViandas.html">Distribuir Viandas</a></li>
+                    <li><a class="dropdown-item" href="registroVulnerable.html">Registrar Personas Vulnerables</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="misHeladeras.html">Mis Heladeras</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="canjeProductos.html">Tienda</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Perfil</a>
+            </li>
+        </ul>
+    </div>
+
 </nav>
-<div>
-    <div>
-        <h1>Registro Colaborador Juridico</h1>
-        <form>
-            <div class="mb-3">
-                <label class="form-label" for="razon-social">Razón Social</label>
-                <input class="form-control" type="text" id="razon-social" name="razon-social" required>
-            </div>
-            <div class="mb-3">
-                <label class="form-label" for="tipo-razon-social">Tipo Razón Social</label>
-                <select class="form-select" id="tipo-razon-social" name="tipo-razon-social" required>
-                    <option value="gubernamental">Gubernamental</option>
-                    <option value="gubernamental">ONG</option>
-                    <option value="gubernamental">Empresa</option>
-                    <option value="gubernamental">Instituto</option>
-                </select>
-            </div>
-            <div class="mb-3">
-                <label for="direccion">Calle</label>
-                <input type="text" id="direccion" name="direccion" required>
-                <label for="altura">Altura</label>
-                <input type="text" id="altura" name="altura" required>
-                <label for="piso">Piso</label>
-                <input type="text" id="piso" name="piso">
-            </div>
-            <div class="mb-3">
-                <div>
-                    <h2>Ingrese al menos un medio de contacto</h2>
-                    <label for="telefono">Teléfono</label>
-                    <div>
-                        <input type="text" value="+54" readonly>
-                        <input type="text" id="telefono" name="telefono" required>
-                    </div>
+<div class="container">
+    <hr class="my-3 border-0">
+    <div class="row">
+        <figure class="col-md-5 figure">
+            <img class="figure-img img-fluid rounded mx-auto d-none d-md-block" src="../assets/team_juridico.svg" alt="">
+        </figure>
+        <div class="col-md-7">
+            <h1 class="h1">Registro Colaborador Juridico</h1>
+            <hr class="border-1">
+            <form class="row g-3 needs-validation" novalidate>
+                <div class="col-lg-8 col-md-12">
+                    <label class="form-label" for="validationCustom01">Razón Social</label>
+                    <input class="form-control" type="text" id="validationCustom01" required>
                 </div>
-                <div>
-                    <label for="correo">Correo Electrónico</label>
-                    <input type="email" id="correo" name="correo" required>
+                <div class="col-lg-4 col-md-12">
+                    <label class="form-label" for="tipo-razon-social">Tipo Razón Social</label>
+                    <select class="form-select" id="tipo-razon-social" name="tipo-razon-social" required>
+                        <option value="gubernamental">Gubernamental</option>
+                        <option value="gubernamental">ONG</option>
+                        <option value="gubernamental">Empresa</option>
+                        <option value="gubernamental">Instituto</option>
+                    </select>
                 </div>
-                <div>
-                    <label for="whatsapp">WhatsApp</label>
-                    <div>
-                        <input type="text" value="+54" readonly>
-                        <input type="text" id="whatsapp" name="whatsapp" required>
-                    </div>
+                <div class="col-lg-4 col-md-12">
+                    <label class="form-label" for="direccion">Calle</label>
+                    <input class="form-control" type="text" id="direccion" name="direccion" required>
                 </div>
-                <button type="submit">
-                    ¡Registrarse!
-                </button>
-            </div>
-        </form>
+                <div class="col-lg-4 col-md-12">
+                    <label class="form-label" for="altura">Altura</label>
+                    <input class="form-control" type="text" id="altura" name="altura" required>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <label class="form-label" for="piso">Piso</label>
+                    <input class="form-control" type="text" id="piso" name="piso">
+                </div>
+                <h4 class="h4">Ingrese al menos un Medio de Contacto</h4>
+                <hr class="d-none d-md-block">
+                <div class="col-lg-6 col-md-12">
+                    <label class="form-label" for="telefono">Número de Teléfono</label>
+                    <input class="form-control" type="text" id="telefono" name="telefono">
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <label class="form-label" for="correo">Correo Electrónico</label>
+                    <input class="form-control" type="email" id="correo" name="correo">
+                </div>
+                <hr class="my-3 border-0">
+                <div class="col-12 text-end">
+                    <button class="btn btn-primary" type="submit">¡Registrarse!</button>
+                </div>
+            </form>
+
+
+        </div>
     </div>
-    <div>
-        <img src="../assets/team_juridico.svg" alt="">
-    </div>
-</div>
+
+    <script>
+
+        // Ejemplo de JavaScript inicial para deshabilitar el envío de formularios si hay campos no válidos
+        (function () {
+            'use strict'
+
+            // Obtener todos los formularios a los que queremos aplicar estilos de validación de Bootstrap personalizados
+            var forms = document.querySelectorAll('.needs-validation')
+
+            // Bucle sobre ellos y evitar el envío si no son válidos
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+
+                    form.addEventListener('submit', function (event) {
+
+                        if (!form.checkValidity()) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+
+                        form.classList.add('was-validated');
+                    }, false)
+                })
+        })()
+
+
+    </script>
+</div class="container-lg">
 
 </body>
 </html>
