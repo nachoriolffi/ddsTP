@@ -3,116 +3,173 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+            crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/115c7ea5e6.js" crossorigin="anonymous"></script>
     <title>Donaciones</title>
 </head>
 <body>
-<aside class="formasContribuir">
-    <div class="formaContribuir">
-        <i class="icono"></i>
-        <button class="botonDonacion">Donar Dinero</button>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <ul class="nav nav-pills justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                   aria-expanded="false">Donaciones</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="donacionDinero.html">Donar Dinero</a></li>
+                    <li><a class="dropdown-item" href="encargarseDeHeladera.html">Encargarse de Heladera</a></li>
+                    <li><a class="dropdown-item" href="donacionViandas.html">Donar Viandas</a></li>
+                    <li><a class="dropdown-item" href="distribuirViandas.html">Distribuir Viandas</a></li>
+                    <li><a class="dropdown-item" href="registroVulnerable.html">Registrar Personas Vulnerables</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="misHeladeras.html">Mis Heladeras</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="canjeProductos.html">Tienda</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Perfil</a>
+            </li>
+        </ul>
     </div>
-    <div class="formaContribuir">
-        <i class="icono"></i>
-        <button class="botonDonacion">Donar Viandas</button>
+</nav>
+<hr class="my-3 border-0">
+<section  class="container mt-1">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="h1">Donar Viandas</h1>
+        </div>
+        <div class="col-md-4 text-md-end">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#donationModal">
+               Donar Vianda
+            </button>
+        </div>
     </div>
-    <div class="formaContribuir">
-        <i class="icono"></i>
-        <button class="botonDonacion">Distribuir Viandas</button>
+    <div class="row">
+        <div class="col-md-12 table-responsive">
+            <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                <caption>Viandas Donadas</caption>
+                <thead>
+                <tr>
+                    <th scope="col">Comida</th>
+                    <th scope="col">Calorias</th>
+                    <th scope="col">Peso (en gramos)</th>
+                    <th scope="col">Fecha de donacion</th>
+                    <th scope="col">Fecha de caducidad</th>
+                    <th scope="col">Heladera</th>
+                    <th scope="col">Fue Entregada</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                <tr>
+                    <td>Manzanas</td>
+                    <td>52</td>
+                    <td>1000g</td>
+                    <td>2024-08-01</td>
+                    <td>2024-09-01</td>
+                    <td>Heladera A</td>
+                    <td>Sí</td>
+                </tr>
+                <tr>
+                    <td>Papas</td>
+                    <td>-</td>
+                    <td>2000g</td>
+                    <td>2024-08-05</td>
+                    <td>2024-10-05</td>
+                    <td>Heladera B</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <td>Leche</td>
+                    <td>42</td>
+                    <td>-</td>
+                    <td>2024-08-10</td>
+                    <td>2024-08-20</td>
+                    <td>Heladera C</td>
+                    <td>Sí</td>
+                </tr>
+                <tr>
+                    <td>Pan</td>
+                    <td>-</td>
+                    <td>500g</td>
+                    <td>2024-08-12</td>
+                    <td>2024-08-18</td>
+                    <td>Heladera A</td>
+                    <td>No</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="formaContribuir">
-        <i class="icono"></i>
-        <button class="botonDonacion">Registrar Personas Vulnerables</button>
+    <!-- Modal de Donación -->
+    <div class="modal fade" id="donationModal" tabindex="-1" aria-labelledby="donationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="donationModalLabel">Encargarse De Heladera</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulario de Donación -->
+                    <form class="row g-3 needs-validation">
+                        <div class="col-md-6">
+                            <label class="form-label" for="input1">Comida</label>
+                            <input class="form-control" type="text" id="input1" name="input1" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="input3">Fecha Caducidad</label>
+                            <input class="form-control" type="date" id="input3" name="input1" required>
+                        </div>
+                        <div class="col-md-12">
+                            <label class="form-label" for="input4">Heladera</label>
+                            <input class="form-control" type="text" id="input4" name="input4" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="input5">Calorias</label>
+                            <input class="form-control" type="text" id="input5" name="input5" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="input6">Peso (En Gramos)</label>
+                            <input class="form-control" type="text" id="input6" name="input6">
+                        </div>
+                        <div class="modal-footer col-md-12">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal">¡Realizar Donación!</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="formaContribuir">
-        <i class="icono"></i>
-        <button class="botonDonacion">Mis Heladeras</button>
-    </div>
-</aside>
-<section>
-    <h1>Donar Viandas</h1>
-    <button class="botonDonacion">Contribuir</button>
-    <button class="botonDonacion">Dejar de contribuir</button>
-    <button class="botonDonacion">Empezar a contribuir</button>
-    <section class="estadisticasDonacion">
-        <table>
-            <thead>
-            <tr>
-                <th>Comida</th>
-                <th>Calorias</th>
-                <th>Peso (en gramos)</th>
-                <th>Fecha de donacion</th>
-                <th>Fecha de caducidad</th>
-                <th>Heladera</th>
-                <th>Fue Entregada</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>Manzanas</td>
-                <td>52</td>
-                <td>1000g</td>
-                <td>2024-08-01</td>
-                <td>2024-09-01</td>
-                <td>Heladera A</td>
-                <td>Sí</td>
-            </tr>
-            <tr>
-                <td>Papas</td>
-                <td>-</td>
-                <td>2000g</td>
-                <td>2024-08-05</td>
-                <td>2024-10-05</td>
-                <td>Heladera B</td>
-                <td>No</td>
-            </tr>
-            <tr>
-                <td>Leche</td>
-                <td>42</td>
-                <td>-</td>
-                <td>2024-08-10</td>
-                <td>2024-08-20</td>
-                <td>Heladera C</td>
-                <td>Sí</td>
-            </tr>
-            <tr>
-                <td>Pan</td>
-                <td>-</td>
-                <td>500g</td>
-                <td>2024-08-12</td>
-                <td>2024-08-18</td>
-                <td>Heladera A</td>
-                <td>No</td>
-            </tr>
-            </tbody>
-        </table>
-    </section>
-    <!--Aca aparece la pantalla de carga de datos-->
-    <div class="pantallaCarga">
-        <h3>Realizar Donacion de viandas</h3>
 
-        <div class="input">
-            <h4>Comida</h4>
-            <input type="text" name="" id="" step="0.01" />
-        </div>
-        <div class="input">
-            <h4>Fecha de Caducidad</h4>
-            <input type="date" name="" id="" />
-        </div>
-        <div class="input">
-            <h4>Fecha de Donacion</h4>
-            <input type="date" name="" id="" />
-        </div>
-        <div class="input">
-            <h4>Heladera</h4>
-            <input type="text" name="" id="" step="0.01" />
-        </div>
-        <div class="input">
-            <h4>Calorias</h4>
-            <input type="number" name="" id="" step="0.01" />
-        </div>
-        <div class="input">
-            <h4>Peso (en gramos)</h4>
-            <input type="number" name="" id="" step="0.01" />
+    <!-- Modal de Confirmación Donacion-->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Confirmación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Está seguro de que desea realizar esta donación?
+                </div>
+                <div class="modal-footer">
+                    <!-- Botón de Cancelar que cierra el modal de confirmación y vuelve al modal de donación -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#donationModal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Sí, realizar donación</button>
+                </div>
+            </div>
         </div>
     </div>
 </section>

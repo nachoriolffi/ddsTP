@@ -169,7 +169,7 @@
                             </div>
                             <div class="modal-footer col-md-12">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button class="btn btn-primary" type="submit">¡Realizar Donación!</button>
+                                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#confirmModalDonation">¡Realizar Donación!</button>
                             </div>
                         </form>
                     </div>
@@ -177,7 +177,26 @@
                 </div>
             </div>
         </div>
-        <!-- Modal de Confirmación -->
+        <!-- Modal de Confirmación Donacion-->
+        <div class="modal fade" id="confirmModalDonation" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmModalLabel1">Confirmación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Está seguro de que desea realizar esta donación?
+                    </div>
+                    <div class="modal-footer">
+                        <!-- Botón de Cancelar que cierra el modal de confirmación y vuelve al modal de donación -->
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#donationModal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Sí, realizar donación</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal de Confirmación Dar de Baja Donacion-->
         <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -195,6 +214,7 @@
                 </div>
             </div>
         </div>
+
     </div>
 </section>
 </body>
