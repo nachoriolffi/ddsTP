@@ -42,4 +42,13 @@ public class RepoRegistroSolicitud implements IRepoRegistroSolicitud {
         return this.registrosSolicitud;
     }
 
+
+    public RegistroSolicitud buscarRegistroSolicitudPorId(int idSolicitud) {
+        for (RegistroSolicitud registroSolicitud : this.registrosSolicitud) {
+            if (registroSolicitud.getId_RegistroSolicitud() == idSolicitud) {
+                return registroSolicitud;
+            }
+        }
+        return null;
+    }
 }

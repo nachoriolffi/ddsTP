@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.models.entities.heladera;
 import ar.edu.utn.frba.dds.models.entities.broker.Broker;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
+import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -14,6 +15,7 @@ import java.util.List;
 @Table (name = "registro_solicitud")
 public class RegistroSolicitud {
 
+    @Getter
     @Id
     @GeneratedValue ( strategy = javax.persistence.GenerationType.IDENTITY)
     private Integer id_RegistroSolicitud;
@@ -24,15 +26,23 @@ public class RegistroSolicitud {
     @JoinColumn(name = "id_tarjeta")
     @Setter
     private Tarjeta tarjeta;
+
     @Enumerated(EnumType.STRING)
+    @Getter
+    @Setter
     private TipoSolicitud solicitud;
     @Column ( name = "realizada", columnDefinition = "BOOLEAN")
     private Boolean realizada;
 
+
     @OneToMany
+    @Setter
+    @Getter
     private List<Vianda> cantidadViandas;
 
     @Column ( name = "retiroVianda", columnDefinition = "BOOLEAN")
+    @Getter
+    @Setter
     private Boolean retiroVianda;
 
     @ManyToOne (cascade = CascadeType.ALL)
@@ -55,4 +65,6 @@ public class RegistroSolicitud {
     public Tarjeta getTarjeta() {
         return tarjeta;
     }
+
+
 }
