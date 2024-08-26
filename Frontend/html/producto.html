@@ -4,21 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Canjear producto</title>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+            crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/115c7ea5e6.js" crossorigin="anonymous"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #fff3e0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
             margin: 0;
         }
-        .container {
+        .container-custom {
             background-color: white;
             border-radius: 10px;
             padding: 20px;
-            width: 300px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
         h1 {
@@ -69,38 +72,42 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>Canjear producto</h1>
-    <div class="image-container">
-        <img id="productImage" class="product-image" src="placeholder.jpg" alt="Imagen del producto">
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6 container-custom">
+            <h1>Canjear producto</h1>
+            <div class="image-container">
+                <img id="productImage" class="product-image" src="placeholder.jpg" alt="Imagen del producto">
+            </div>
+            <p class="points-needed" id="pointsNeeded">Puntos necesarios: --</p>
+            <div class="product-description" id="productDescription">
+                Descripción del producto se cargará aquí...
+            </div>
+            <button onclick="canjearProducto()">Canjear</button>
+        </div>
     </div>
-    <p class="points-needed" id="pointsNeeded">Puntos necesarios: --</p>
-    <div class="product-description" id="productDescription">
-        Descripción del producto se cargará aquí...
-    </div>
-    <button onclick="canjearProducto()">canjear</button>
 </div>
 
 <script>
-        // Función para cargar los datos del producto desde el backend
-        function cargarDatosProducto() {
-            // Aquí deberías hacer una llamada a tu API para obtener los datos del producto
-            // Por ahora, simularemos esta llamada con datos de ejemplo
-            setTimeout(() => {
-                document.getElementById('productImage').src = 'url_de_la_imagen_del_backend';
-                document.getElementById('pointsNeeded').textContent = 'Puntos necesarios: 1000';
-                document.getElementById('productDescription').textContent = 'Descripción del producto cargada desde el backend.';
-            }, 1000); // Simulamos un retraso de 1 segundo
-        }
+    // Función para cargar los datos del producto desde el backend
+    function cargarDatosProducto() {
+        // Aquí deberías hacer una llamada a tu API para obtener los datos del producto
+        // Por ahora, simularemos esta llamada con datos de ejemplo
+        setTimeout(() => {
+            document.getElementById('productImage').src = 'url_de_la_imagen_del_backend';
+            document.getElementById('pointsNeeded').textContent = 'Puntos necesarios: 1000';
+            document.getElementById('productDescription').textContent = 'Descripción del producto cargada desde el backend.';
+        }, 1000); // Simulamos un retraso de 1 segundo
+    }
 
-        // Función para canjear el producto
-        function canjearProducto() {
-            // Aquí implementarías la lógica para canjear el producto
-            alert('Producto canjeado');
-        }
+    // Función para canjear el producto
+    function canjearProducto() {
+        // Aquí implementarías la lógica para canjear el producto
+        alert('Producto canjeado');
+    }
 
-        // Cargar los datos del producto cuando la página se cargue
-        window.onload = cargarDatosProducto;
-    </script>
+    // Cargar los datos del producto cuando la página se cargue
+    window.onload = cargarDatosProducto;
+</script>
 </body>
 </html>
