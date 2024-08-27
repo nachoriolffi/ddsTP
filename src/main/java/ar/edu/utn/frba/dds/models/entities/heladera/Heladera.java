@@ -129,7 +129,8 @@ public class Heladera {
     }
 
     //del broker llamo agregarApertura
-    public void agregarApertura() throws IOException {
+    public void agregarApertura(RegistroApertura registro) throws IOException {
+        aperturas.add(registro);
         // cuando un colaborador intenta abrir la heladera, si este puede hacerlo, entonces
         // la solicitud hecha debe actualizarse y ponerse true
     }
@@ -137,5 +138,14 @@ public class Heladera {
 
         //necesito mirar todas las solicitudes y si es que cumple con las tres Horas
 
+    }
+
+    public RegistroSolicitud obtenerSolicitudApertura(int idSolicitud) {
+        for (RegistroSolicitud solicitud : solicitudesApertura) {
+            if (solicitud.getId_RegistroSolicitud().equals(idSolicitud)) {
+                return solicitud;
+            }
+        }
+        return null;
     }
 }
