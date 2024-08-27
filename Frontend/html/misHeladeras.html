@@ -3,63 +3,97 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Donaciones</title>
+    <!--<link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">-->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://kit.fontawesome.com/115c7ea5e6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../scss/style.css">
+    <title>Mis Heladeras</title>
 </head>
 <body>
-<aside class="formasContribuir">
-    <div class="formaContribuir">
-        <i class="icono"></i>
-        <button class="botonDonacion">Donar Dinero</button>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <ul class="nav nav-pills justify-content-center">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                   aria-expanded="false">Donaciones</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="donacionDinero.html">Donar Dinero</a></li>
+                    <li><a class="dropdown-item" href="encargarseDeHeladera.html">Encargarse de Heladera</a></li>
+                    <li><a class="dropdown-item" href="donacionViandas.html">Donar Viandas</a></li>
+                    <li><a class="dropdown-item" href="distribuirViandas.html">Distribuir Viandas</a></li>
+                    <li><a class="dropdown-item" href="registroVulnerable.html">Registrar Personas Vulnerables</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="misHeladeras.html">Mis Heladeras</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="canjeProductos.html">Tienda</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Perfil</a>
+            </li>
+        </ul>
     </div>
-    <div class="formaContribuir">
-        <i class="icono"></i>
-        <button class="botonDonacion">Donar Viandas</button>
+</nav>
+<section class="container">
+    <hr class="my-3 border-0">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="h1">Mis Heladeras</h1>
+        </div>
+        <div class="col-md-4 text-md-end">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#donationModal">
+                Suscribirse a Heladera
+            </button>
+        </div>
     </div>
-    <div class="formaContribuir">
-        <i class="icono"></i>
-        <button class="botonDonacion">Distribuir Viandas</button>
+    <div class="row">
+        <div class="col-md-12 table-responsive">
+            <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                <caption>Heladeras Suscriptas</caption>
+                <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Cantidad Máx. de Viandas</th>
+                    <th scope="col">Cantidad de Viandas Restantes</th>
+                    <th scope="col">Desuscribirme</th>
+                </tr>
+                </thead>
+                <tr>
+                    <td>Heladera del Centro</td>
+                    <td>Calle Falsa 123</td>
+                    <td>100</td>
+                    <td>50</td>
+                    <td><button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                        <i class="fa-solid fa-xmark fa-lg"></i>
+                    </button></td>
+                </tr>
+                <tr>
+                    <td>Heladera del Norte</td>
+                    <td>Avenida Principal 456</td>
+                    <td>80</td>
+                    <td>30</td>
+                    <td>
+                        <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                            <i class="fa-solid fa-xmark fa-lg"></i>
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
-    <div class="formaContribuir">
-        <i class="icono"></i>
-        <button class="botonDonacion">Registrar Personas Vulnerables</button>
-    </div>
-    <div class="formaContribuir">
-        <i class="icono"></i>
-        <button class="botonDonacion">Mis Heladeras</button>
-    </div>
-</aside>
-<section>
-    <h1>Distribuir Viandas</h1>
-    <button class="botonDonacion">Contribuir</button>
-    <button class="botonDonacion">Dejar de contribuir</button>
-    <button class="botonDonacion">Empezar a contribuir</button>
-    <section class="estadisticasDonacion">
-        <h2>Mis Heladeras</h2>
-
-        <table>
-            <tr>
-                <th>Nombre</th>
-                <th>Dirección</th>
-                <th>Cantidad Máx. de Viandas</th>
-                <th>Cantidad de Viandas Restantes</th>
-                <th>Desuscribir</th>
-            </tr>
-            <tr>
-                <td>Heladera del Centro</td>
-                <td>Calle Falsa 123</td>
-                <td>100</td>
-                <td>50</td>
-                <td><button class="button">Desuscribir</button></td>
-            </tr>
-            <tr>
-                <td>Heladera del Norte</td>
-                <td>Avenida Principal 456</td>
-                <td>80</td>
-                <td>30</td>
-                <td><button class="button">Desuscribir</button></td>
-            </tr>
-        </table>
-    </section>
 </section>
 </body>
 </html>
