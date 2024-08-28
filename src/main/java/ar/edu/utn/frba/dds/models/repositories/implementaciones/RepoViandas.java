@@ -2,9 +2,10 @@ package ar.edu.utn.frba.dds.models.repositories.implementaciones;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoViandas;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class RepoViandas implements IRepoViandas {
+public class RepoViandas extends RepoGenerico<Vianda> implements IRepoViandas {
 
     private static RepoViandas instancia = null;
     private List<Vianda> viandas;
@@ -14,6 +15,11 @@ public class RepoViandas implements IRepoViandas {
             instancia = new RepoViandas();
         }
         return instancia;
+    }
+
+    public RepoViandas() {
+        super(Vianda.class);
+        this.viandas = new ArrayList<>();
     }
 
     @Override

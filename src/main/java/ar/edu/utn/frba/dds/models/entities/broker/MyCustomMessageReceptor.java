@@ -31,7 +31,7 @@ public class MyCustomMessageReceptor implements IMqttMessageListener {
         evaluarMensaje(topic, mqttMessage);
     }
 
-    private void evaluarMensaje(String topic, MqttMessage mqttMessage) {
+    private void evaluarMensaje(String topic, MqttMessage mqttMessage) throws IOException {
 
         //heladeras/heladeraCasa/temperatura
         //heladeras/+/temperatura

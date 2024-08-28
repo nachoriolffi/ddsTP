@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.models.repositories.implementaciones;
 
-import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.RegistroSolicitud;
 import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoRegistroSolicitud;
 import lombok.Getter;
@@ -8,14 +7,15 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RepoRegistroSolicitud implements IRepoRegistroSolicitud {
+public class RepoRegistroSolicitud extends RepoGenerico<RegistroSolicitud> implements IRepoRegistroSolicitud {
 
     private static RepoRegistroSolicitud instancia = null;
     @Getter
     private List<RegistroSolicitud> registrosSolicitud;
 
-    private RepoRegistroSolicitud() {
-        this.registrosSolicitud = new ArrayList<RegistroSolicitud>();
+    public RepoRegistroSolicitud() {
+        super(RegistroSolicitud.class);
+        this.registrosSolicitud = new ArrayList<>();
     }
 
     public static RepoRegistroSolicitud getInstancia() {

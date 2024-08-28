@@ -4,10 +4,11 @@ import ar.edu.utn.frba.dds.models.entities.vulnerable.Vulnerable;
 import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoVulnerable;
 import lombok.Getter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class RepoVulnerable implements IRepoVulnerable {
+public class RepoVulnerable extends RepoGenerico<Vulnerable> implements IRepoVulnerable {
     private static RepoVulnerable instancia = null;
 
     @Getter
@@ -20,6 +21,10 @@ public class RepoVulnerable implements IRepoVulnerable {
         return instancia;
     }
 
+    public RepoVulnerable() {
+        super(Vulnerable.class);
+        this.vulnerables = new ArrayList<Vulnerable>();
+    }
 
     @Override
     public void agregarVulnerable(Vulnerable vulnerable) {

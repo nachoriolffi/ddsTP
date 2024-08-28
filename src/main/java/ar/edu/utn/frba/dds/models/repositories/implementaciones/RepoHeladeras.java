@@ -1,16 +1,16 @@
 package ar.edu.utn.frba.dds.models.repositories.implementaciones;
-import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoHeladeras;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RepoHeladeras implements IRepoHeladeras {
+public class RepoHeladeras extends RepoGenerico<Heladera> implements IRepoHeladeras {
 
     private static RepoHeladeras instancia = null;
     private List<Heladera> heladeras;
 
-    private RepoHeladeras() {
+    public RepoHeladeras () {
+        super(Heladera.class);
         this.heladeras = new ArrayList<Heladera>();
     }
 

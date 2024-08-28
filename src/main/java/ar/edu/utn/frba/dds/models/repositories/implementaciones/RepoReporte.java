@@ -7,7 +7,7 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RepoReporte implements IRepoReporte {
+public class RepoReporte extends RepoGenerico<Reporte> implements IRepoReporte {
 
     //@Getter
     //private static RepoReporte instancia = null;
@@ -22,8 +22,11 @@ public class RepoReporte implements IRepoReporte {
    // }
 
     public RepoReporte() {
+        super(Reporte.class);
         this.reportes = new ArrayList<Reporte>();
     }
+
+
     public void agregarReporte(Reporte reporte) {
         this.reportes.add(reporte);    }
 

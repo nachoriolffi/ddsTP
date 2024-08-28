@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class RepoTecnico implements IRepoTecnico {
+public class RepoTecnico extends RepoGenerico<Tecnico> implements IRepoTecnico {
 
     private static RepoTecnico instancia = null;
     private List<Tecnico> tecnicos;
@@ -20,9 +20,12 @@ public class RepoTecnico implements IRepoTecnico {
         return instancia;
     }
 
-    public RepoTecnico(){
+    public RepoTecnico() {
+        super(Tecnico.class);
         this.tecnicos = new ArrayList<>();
     }
+
+
 
     public void agregarTecnico(Tecnico tecnico) {
         this.tecnicos.add(tecnico);
