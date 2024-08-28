@@ -2,19 +2,19 @@ package ar.edu.utn.frba.dds.models.repositories.implementaciones;
 
 import ar.edu.utn.frba.dds.models.entities.tecnico.RegistroVisita;
 import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoRegistrosVisita;
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RepoRegistrosVisita implements IRepoRegistrosVisita {
+public class RepoRegistrosVisita extends RepoGenerico<RegistroVisita> implements IRepoRegistrosVisita {
 
     private static RepoRegistrosVisita instancia = null;
 
     private final List<RegistroVisita> registrosVisita;
 
-    private RepoRegistrosVisita() {
-        this.registrosVisita = new ArrayList<RegistroVisita>();
+    public RepoRegistrosVisita () {
+        super(RegistroVisita.class);
+        this.registrosVisita = new ArrayList<>();
     }
 
     public static RepoRegistrosVisita getInstancia() {

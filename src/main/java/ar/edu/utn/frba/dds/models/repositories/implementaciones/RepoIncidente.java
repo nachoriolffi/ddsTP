@@ -6,7 +6,7 @@ import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoIncidente;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RepoIncidente implements IRepoIncidente {
+public class RepoIncidente extends RepoGenerico<Incidente> implements IRepoIncidente {
     private static RepoIncidente instancia = null;
     private List<Incidente> incidentes;
     private RepoIncidente getInstancia(){
@@ -15,6 +15,12 @@ public class RepoIncidente implements IRepoIncidente {
         }
         return instancia;
     }
+
+    public RepoIncidente() {
+        super(Incidente.class);
+        this.incidentes = new ArrayList<Incidente>();
+    }
+
     public void agregarIncidente(Incidente incidente) {
         this.incidentes.add(incidente);
     }

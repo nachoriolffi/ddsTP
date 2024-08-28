@@ -4,12 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crea una cuenta</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet" 
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="../css/crearCuenta.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <base href="../assets/">
+    <link rel="stylesheet" href="../scss/style.css">
+    <link rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <ul class="nav nav-pills justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Donaciones</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="donacionDinero.html">Donar Dinero</a></li>
+                        <li><a class="dropdown-item" href="encargarseDeHeladera.html">Encargarse de Heladera</a></li>
+                        <li><a class="dropdown-item" href="donacionViandas.html">Donar Viandas</a></li>
+                        <li><a class="dropdown-item" href="distribuirViandas.html">Distribuir Viandas</a></li>
+                        <li><a class="dropdown-item" href="registroVulnerable.html">Registrar Personas Vulnerables</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="misHeladeras.html">Mis Heladeras</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="canjeProductos.html">Tienda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Perfil</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 <div class="container mt-5">
     <h1 class="text-orange mb-3">Crea una cuenta</h1>
     <p>¿Ya tienes una cuenta? <a href="#" class="text-info">Inicia Sesión</a></p>
@@ -17,16 +54,16 @@
     <div class="card p-4">
         <div class="row">
             <div class="col-md-4 mb-3">
-                <div class="card card-option" onclick="selectOption('humano')">
-                    <img src="humano.svg" class="card-img-top" alt="Humano">
+                <div class="card card-option" id="option-humano">
+                    <img src="../assets/humano.svg" class="card-img-top" alt="Humano">
                     <div class="card-body">
                         <h5 class="card-title text-center">Humano</h5>
                     </div>
                 </div>
             </div>
             <div class="col-md-4 mb-3">
-                <div class="card card-option" onclick="selectOption('juridico')">
-                    <img src="juridico.svg" class="card-img-top" alt="Jurídico">
+                <div class="card card-option" id="option-juridico">
+                    <img src="../assets/juridico.svg" class="card-img-top" alt="Jurídico">
                     <div class="card-body">
                         <h5 class="card-title text-center">Jurídico</h5>
                     </div>
@@ -35,12 +72,14 @@
             <div class="col-md-4">
                 <form>
                     <div class="mb-3">
-                        <input type="email" class="form-control" placeholder="Correo Electrónico">
+                        <label for="correo">Correo Electrónico</label>
+                        <input type="email" class="form-control" placeholder="ejemplo@frba.utn.edu.ar">
                     </div>
                     <div class="mb-3">
+                        <label for="password">Contraseña</label>
                         <div class="input-group">
                             <input type="password" class="form-control" placeholder="Contraseña" id="password">
-                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('password')">
+                            <button class="btn btn-outline-dark" type="button" onclick="togglePassword('password')">
                                 <i class="bi bi-eye"></i>
                             </button>
                         </div>
@@ -48,12 +87,12 @@
                     <div class="mb-3">
                         <div class="input-group">
                             <input type="password" class="form-control" placeholder="Confirmar Contraseña" id="confirmPassword">
-                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('confirmPassword')">
+                            <button class="btn btn-outline-dark" type="button" onclick="togglePassword('confirmPassword')">
                                 <i class="bi bi-eye"></i>
                             </button>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-naranja w-100">Siguiente</button>
+                    <button type="submit" class="btn btn-primary w-100">Siguiente</button>
                 </form>
             </div>
         </div>
@@ -62,9 +101,6 @@
 
 <script>
     //Agregar a un JS
-    function selectOption(option) {
-        console.log('Opción seleccionada:', option);
-    }
 
     function togglePassword(inputId) {
         const input = document.getElementById(inputId);
@@ -74,6 +110,17 @@
             input.type = "password";
         }
     }
+
+    document.getElementById('option-juridico').addEventListener('click', function() {
+        this.style.border = '2px solid #f38630';
+        document.getElementById('option-humano').style.border = 'none';
+    });
+
+    document.getElementById('option-humano').addEventListener('click', function() {
+        this.style.border = '2px solid #31a4d7';
+        document.getElementById('option-juridico').style.border = 'none';
+    });
 </script>
 </body>
 </html>
+       
