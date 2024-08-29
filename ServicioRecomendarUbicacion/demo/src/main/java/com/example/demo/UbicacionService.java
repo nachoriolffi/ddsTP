@@ -7,10 +7,11 @@ import java.util.List;
 
 @Service
 public class UbicacionService {
+
     @Autowired
     private UbicacionRepository ubicacionRepository;
 
-    public List<Coordenada> obtenerUbicacionesCercanas(double latitud, double longitud, double radio) {
+    public List<Coordenada> obtenerCercanas(double latitud, double longitud, double radio) {
         return ubicacionRepository.encontrarCercanas(latitud, longitud, radio);
     }
 }

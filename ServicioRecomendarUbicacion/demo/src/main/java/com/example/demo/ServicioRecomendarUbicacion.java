@@ -1,7 +1,9 @@
 package com.example.demo;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -9,13 +11,10 @@ import java.util.List;
 public class ServicioRecomendarUbicacion {
 
     @Autowired
-    private UbicacionRepository ubicacionRepository;
+    private UbicacionService ubicacionService;
 
     @GetMapping("/nearby")
     public List<Coordenada> getNearbyLocations(@RequestParam double lat, @RequestParam double lon, @RequestParam int radius) {
-        return ubicacionRepository.encontrarCercanas(lat, lon, radius);
+        return ubicacionService.obtenerCercanas(lat, lon, radius);
     }
 }
-
-
-
