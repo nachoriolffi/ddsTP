@@ -28,7 +28,8 @@ public class Heladera {
     private Long id;
     @Transient
     private Direccion direccion;
-    @Transient
+    @OneToOne
+    @JoinColumn (name = "id_Coordenada")
     private Coordenada coordenada;
     @Column(name = "nombre", nullable = false, columnDefinition="varchar(50)")
     private String nombre;

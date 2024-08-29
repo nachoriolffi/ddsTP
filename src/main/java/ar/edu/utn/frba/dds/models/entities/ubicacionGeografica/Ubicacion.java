@@ -1,15 +1,26 @@
 package ar.edu.utn.frba.dds.models.entities.ubicacionGeografica;
 
-public class Ubicacion {
-    private Provincia provincia;
-    private Municipio municipio;
-    private Localidad localidad;
-    private Coordenada coordenada;
+import javax.persistence.*;
 
-    public Ubicacion(Provincia provincia, Municipio municipio, Localidad localidad, Coordenada coordenada) {
+
+public class Ubicacion {
+
+
+
+    private Long id_Ubicacion;
+
+    private Provincia provincia;
+
+    private Municipio municipio;
+
+    private Localidad localidad;
+    //@ManyToOne
+    //private Coordenada coordenada;
+
+    public Ubicacion(Provincia provincia, Municipio municipio, Localidad localidad) {
         this.provincia = provincia;
         this.municipio = municipio;
         this.localidad = localidad;
-        this.coordenada = coordenada;
+
     }
 }
