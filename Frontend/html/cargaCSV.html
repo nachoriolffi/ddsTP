@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carga de Archivo CSV</title>
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../scss/style.css">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
             integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
             crossorigin="anonymous"></script>
@@ -14,9 +13,65 @@
             crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/115c7ea5e6.js" crossorigin="anonymous"></script>
 </head>
-<body class="d-flex justify-content-center align-items-center vh-100 bg-light">
-
-<div class="container">
+<body>
+<!-- NavBar -->
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">ONG</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">Inicio</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Donaciones</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="donacionDinero.html">Donar Dinero</a></li>
+                        <li><a class="dropdown-item" href="encargarseDeHeladera.html">Encargarse de Heladera</a></li>
+                        <li><a class="dropdown-item" href="donacionViandas.html">Donar Viandas</a></li>
+                        <li><a class="dropdown-item" href="distribuirViandas.html">Distribuir Viandas</a></li>
+                        <li><a class="dropdown-item" href="registroVulnerable.html">Registrar Personas Vulnerables</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="misHeladeras.html">Mis Heladeras</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="canjeProductos.html">Tienda</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Perfil</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Modificar/Ver Perfil</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="iniciarSesion.html">Iniciar Sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="crearCuenta.html">Registrarse</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="reportarFallaTecnica.html">Reportar Incidentes</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<hr class="my-3 border-0">
+<div class="container mt-1">
     <div class="row justify-content-center">
         <div class="col-12 col-md-8 col-lg-6 bg-white p-5 rounded-lg shadow-md">
             <h1 class="text-center mb-4">Carga de Archivo CSV</h1>

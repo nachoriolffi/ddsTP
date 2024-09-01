@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds;
 
+import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.entities.validador.ValidadorDeContrasenia;
 import ar.edu.utn.frba.dds.models.entities.validador.FormaValidar10MilPeoresContrasenias;
 import ar.edu.utn.frba.dds.models.entities.validador.FormaValidarLongitud;
