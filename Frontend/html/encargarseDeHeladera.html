@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../scss/style.css">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
             integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
             crossorigin="anonymous"></script>
@@ -11,37 +11,57 @@
             integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
             crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/115c7ea5e6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
     <title>Donaciones</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <ul class="nav nav-pills justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                   aria-expanded="false">Donaciones</a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="donacionDinero.html">Donar Dinero</a></li>
-                    <li><a class="dropdown-item" href="encargarseDeHeladera.html">Encargarse de Heladera</a></li>
-                    <li><a class="dropdown-item" href="donacionViandas.html">Donar Viandas</a></li>
-                    <li><a class="dropdown-item" href="distribuirViandas.html">Distribuir Viandas</a></li>
-                    <li><a class="dropdown-item" href="registroVulnerable.html">Registrar Personas Vulnerables</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="misHeladeras.html">Mis Heladeras</a></li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="canjeProductos.html">Tienda</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Perfil</a>
-            </li>
-        </ul>
+        <a class="navbar-brand" href="#">ONG</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="#">Inicio</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Donaciones</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="donacionDinero.html">Donar Dinero</a></li>
+                        <li><a class="dropdown-item" href="encargarseDeHeladera.html">Encargarse de Heladera</a></li>
+                        <li><a class="dropdown-item" href="donacionViandas.html">Donar Viandas</a></li>
+                        <li><a class="dropdown-item" href="distribuirViandas.html">Distribuir Viandas</a></li>
+                        <li><a class="dropdown-item" href="registroVulnerable.html">Registrar Personas Vulnerables</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="misHeladeras.html">Mis Heladeras</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="canjeProductos.html">Tienda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Perfil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="iniciarSesion.html">Iniciar Sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="crearCuenta.html">Registrarse</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 <hr class="my-3 border-0">
@@ -51,7 +71,8 @@
             <h1 class="h1">Encargarse De Heladera/s</h1>
         </div>
         <div class="col-md-4 text-md-end">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#donationModal">
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                    data-bs-target="#donationModal">
                 Agregar Heladera
             </button>
         </div>
@@ -96,7 +117,7 @@
                 </div>
                 <div class="modal-body">
                     <!-- Formulario de Donación -->
-                    <form class="row g-3 needs-validation">
+                    <form id="donationForm" class="row g-3 needs-validation" novalidate>
                         <div class="col-md-6">
                             <label class="form-label" for="nombreHeladera">Nombre Heladera</label>
                             <input class="form-control" type="text" id="nombreHeladera" name="nombreHeladera" required>
@@ -104,6 +125,7 @@
                         <div class="col-md-6">
                             <label class="form-label" for="modelo">Modelo Heladera</label>
                             <select class="form-select" id="modelo" name="heladera" required>
+                                <option value="" disabled selected>Seleccione un Modelo</option>
                                 <option>Modelo 1</option>
                                 <option>Modelo 2</option>
                                 <option>Modelo 3</option>
@@ -111,7 +133,10 @@
                             </select>
                         </div>
                         <div class="col-md-12">
-                            <a class="btn btn-secondary" href="puntosRecomendacion.html" target="_blank">Solicitar Puntos de Colocacion</a>
+                            <button type="button" id="submitPoints" data-bs-toggle="modal" data-bs-target="#pointsModal"
+                                    class="btn btn-outline-primary">
+                                Solicitar Puntos de Colocación
+                            </button>
                         </div>
                         <div class="col-md-12">
                             <label class="form-label" for="direccion">Calle</label>
@@ -127,20 +152,126 @@
                         </div>
                         <div class="modal-footer col-md-12">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal">¡Realizar Donación!</button>
+                            <button type="button" id="submitDonation" class="btn btn-primary">¡Realizar Donación!
+                            </button>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Modal de Confirmación Donacion-->
-    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
+    <!-- Modal Puntos de Recomendacion-->
+    <div class="modal fade" id="pointsModal" tabindex="-1" aria-labelledby="pointsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="confirmModalLabel">Confirmación</h5>
+                    <h5 class="modal-title" id="pointsModalLabel">Puntos De Recomendación De Heladera</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row" style="height: 500px; width: 100%;">
+                        <div class="col-md-5">
+                            <div class="row mb-4">
+                                <div class="col-md-4">
+                                    <label class="form-label" for="direccion-1">Direccion</label>
+                                    <input class="form-control" type="text" id="direccion-1" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label" for="altura-1">Altura</label>
+                                    <input class="form-control" type="text" id="altura-1" required>
+                                </div>
+                                <div class="col-md-5">
+                                    <button class=" btn btn-outline-primary"> Buscar Puntos</button>
+                                </div>
+                            </div>
+                            <div class="row overflow-auto" style="height: 300px;">
+                                <ul class="list-group">
+                                    <li class="list-group-item">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Medrano 951</h5>
+                                            </div>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Latitud:</li>
+                                                <li class="list-group-item">Longitud:</li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Medrano 951</h5>
+                                            </div>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Latitud:</li>
+                                                <li class="list-group-item">Longitud:</li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Medrano 951</h5>
+                                            </div>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Latitud:</li>
+                                                <li class="list-group-item">Longitud:</li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Medrano 951</h5>
+                                            </div>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Latitud:</li>
+                                                <li class="list-group-item">Longitud:</li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Medrano 951</h5>
+                                            </div>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Latitud:</li>
+                                                <li class="list-group-item">Longitud:</li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Medrano 951</h5>
+                                            </div>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Latitud:</li>
+                                                <li class="list-group-item">Longitud:</li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                        <div class="col-md-7 rounded" id="map">
+                            <!--ACA DENTRO APARECE EL MAPA CON LOS PUNTOS A RECOMENDAR-->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal de Confirmación Donacion-->
+    <div class="modal fade" data-bs-keyboard="false" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-5" id="confirmModalLabel">Confirmación</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -148,12 +279,57 @@
                 </div>
                 <div class="modal-footer">
                     <!-- Botón de Cancelar que cierra el modal de confirmación y vuelve al modal de donación -->
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#donationModal">Cancelar</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal"
+                            data-bs-target="#donationModal">Cancelar
+                    </button>
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Sí, realizar donación</button>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let map;
+
+            const initMap = () => {
+                map = L.map('map').setView([-34.6037, -58.3816], 12); // Ubicación inicial (Buenos Aires)
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
+
+                // Hacer una solicitud a la API de georreferenciación del Gobierno de Buenos Aires
+                fetch('https://apis.datos.gob.ar/georef/api/direcciones?direccion=Avenida Medrano 951, CABA&max=1')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Obtener las coordenadas de longitud y latitud de la respuesta
+                        var lat = data.direcciones[0].ubicacion.lat;
+                        var lon = data.direcciones[0].ubicacion.lon;
+
+                        // Agregar marcador al mapa con las coordenadas obtenidas
+                        L.marker([lat, lon]).addTo(map)
+                            .bindPopup('Avenida Medrano 951, CABA');
+                    })
+                    .catch(error => {
+                        console.error('Error al obtener la ubicación:', error);
+                    });
+            };
+
+            // Detectar cuando el modal está completamente visible
+            const pointsModal = document.getElementById('pointsModal');
+            pointsModal.addEventListener('shown.bs.modal', function () {
+                if (!map) {
+                    initMap();
+                } else {
+                    setTimeout(() => {
+                        map.invalidateSize(); // Solucionar posibles problemas de redimensionamiento
+                    }, 300); // Espera 300 ms para asegurarte de que el modal esté completamente visible
+                }
+            });
+        });
+
+    </script>
 </section>
+
 </body>
 </html>
