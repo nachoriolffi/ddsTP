@@ -71,53 +71,67 @@
     </div>
 </nav>
 <hr class="my-3 border-0">
-<div class="container mt-1">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-8 col-lg-6 bg-white p-5 rounded-lg shadow-md">
-            <h1 class="text-center mb-4">Carga de Archivo CSV</h1>
-
-            <h2 class="text-center h5 mb-3">Ejemplo de Formato:</h2>
-            <a href="/path/to/example.csv" class="text-primary d-block text-center mb-4" download>Descargar ejemplo de formato CSV</a>
-
-            <form action="/upload-csv" method="POST" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="csv-file" class="btn btn-primary w-100 mb-3">Examinar archivo</label>
-                    <input type="file" id="csv-file" name="csv-file" accept=".csv" required class="d-none">
+<div class="container mt-5 pt-5 full-height">
+    <div class="row justify-content-center text-center">
+        <div class="col-12 col-md-8 col-lg-6">
+            <div class="row mb-3">
+                <div class="col-md-12 text-center">
+                    <h1 class="h1">Carga de Archivos CSV</h1>
                 </div>
-                <div class="dropzone p-3 text-center border border-primary rounded mb-4" id="dropzone" style="background-color: #f8f9fa;">
-                    Arrastra y suelta tu archivo CSV aquí, o haz clic para seleccionar uno.
+            </div>
+            <div class="row  mb-3">
+                <h5 class="text-center"><a
+                        href="../../src/main/java/ar/edu/utn/frba/dds/models/entities/lectorCSV/archivo_ejemplo.csv"
+                        class=" text-center" download>Descargar Ejemplo de Archivo CSV</a></h5>
+
+                <div class="container mt-5">
+                    <form class="row g-3 needs-validation" action="/upload-csv" method="POST" enctype="multipart/form-data" novalidate>
+                        <div class="text-center mb-5">
+                            <label for="csv-file" class="form-label">Arrastre o Seleccione el Archivo CSV que desea subir</label>
+                            <input type="file" id="csv-file" name="csv-file" accept=".csv" required class="form-control">
+                            <div class="invalid-feedback">
+                                Por favor, seleccione un archivo CSV válido.
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" class="btn btn-outline-primary">Subir Archivo</button>
+                        </div>
+                    </form>
                 </div>
-                <button type="submit" class="btn btn-secondary w-100">Cargar</button>
-            </form>
+            </div>
+
         </div>
     </div>
 </div>
 
 <script>
-    const dropzone = document.getElementById('dropzone');
+    (function () {
+        'use strict';
 
-    dropzone.addEventListener('click', () => {
-        document.getElementById('csv-file').click();
-    });
+        var forms = document.querySelectorAll('.needs-validation');
 
-    dropzone.addEventListener('dragover', (event) => {
-        event.preventDefault();
-        dropzone.classList.add('dragover');
-    });
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    var fileInput = document.getElementById('csv-file');
+                    var file = fileInput.files[0];
+                    var fileIsValid = file && file.name.endsWith('.csv');
 
-    dropzone.addEventListener('dragleave', () => {
-        dropzone.classList.remove('dragover');
-    });
+                    if (!fileIsValid) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        fileInput.classList.add('is-invalid');
+                        fileInput.classList.remove('is-valid');
+                    } else {
+                        fileInput.classList.remove('is-invalid');
+                        fileInput.classList.add('is-valid');
+                        form.classList.add('was-validated');
+                    }
 
-    dropzone.addEventListener('drop', (event) => {
-        event.preventDefault();
-        dropzone.classList.remove('dragover');
-        const files = event.dataTransfer.files;
-        if (files.length > 0) {
-            document.getElementById('csv-file').files = files;
-        }
-    });
+
+                }, false);
+            });
+    })();
 </script>
-
 </body>
 </html>
