@@ -57,19 +57,17 @@
         </div>
     </div>
 </nav>
-<div class="container mt-5">
+<div class="container mt-5 pt-5 full-height">
     <div class="card p-4">
         <div class="row">
-            <div class="col-md-4 mb-3">
-                <div class="card card-option" id="option-humano" onclick="selectOption('humano')">
+            <div class="card-group col-md-8">
+                <div class="card card-clickable" id="option-humano" data-page="registroHumano.html">
                     <img src="../assets/humano.svg" class="card-img-top" alt="Humano">
                     <div class="card-body">
                         <h5 class="card-title text-center">Humano</h5>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 mb-3">
-                <div class="card card-option" id="option-juridico" onclick="selectOption('juridico')">
+                <div class="card card-clickable" id="option-juridico" data-page="registroJuridico.html">
                     <img src="../assets/juridico.svg" class="card-img-top" alt="Jurídico">
                     <div class="card-body">
                         <h5 class="card-title text-center">Jurídico</h5>
@@ -77,36 +75,73 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <form>
-                    <div class="mb-3">
-                        <label for="correo">Correo Electrónico</label>
-                        <input id="correo" type="email" class="form-control" placeholder="ejemplo@frba.utn.edu.ar">
+                <form class="row g-3 needs-validation" novalidate>
+                    <div>
+                        <label class="form-label" for="validationCustom01">Correo Electrónico</label>
+                        <input id="validationCustom01" type="email" class="form-control" placeholder="ejemplo@frba.utn.edu.ar" required>
                     </div>
-                    <div class="mb-3">
-                        <label for="password">Contraseña</label>
+                    <div>
+                        <label class="form-label" for="password">Contraseña</label>
                         <div class="input-group">
-                            <input type="password" class="form-control" placeholder="Contraseña" id="password">
+                            <input type="password" class="form-control" id="password" required>
                             <button class="btn btn-outline-dark" type="button" onclick="togglePassword('password')">
                                 <i class="bi bi-eye"></i>
                             </button>
                         </div>
                     </div>
                     <div class="mb-3">
+                        <label class="form-label" for="confirmPassword">Confirmar Contraseña</label>
                         <div class="input-group">
-                            <input type="password" class="form-control" placeholder="Confirmar Contraseña"
-                                   id="confirmPassword">
-                            <button class="btn btn-dark" type="button"
-                                    onclick="togglePassword('confirmPassword')">
+                            <input type="password" class="form-control" id="confirmPassword" required>
+                            <button class="btn btn-dark" type="button" onclick="togglePassword('confirmPassword')">
                                 <i class="bi bi-eye"></i>
                             </button>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">Siguiente</button>
+                    <button type="button" onclick="redirectToSelectedPage()" class="btn btn-outline-primary w-100">Siguiente</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    // Variable global para almacenar la URL de la tarjeta seleccionada
+    let selectedPage = '';
+
+    // Manejador de clic para las tarjetas
+    document.querySelectorAll('.card-clickable').forEach(function(card) {
+        card.addEventListener('click', function() {
+            // Actualiza la URL seleccionada
+            selectedPage = card.getAttribute('data-page');
+            // Opcionalmente, puedes agregar una clase activa para destacar la tarjeta seleccionada
+            document.querySelectorAll('.card-clickable').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+        });
+    });
+
+    // Función para redirigir a la página seleccionada
+    function redirectToSelectedPage() {
+        if (selectedPage) {
+            window.location.href = selectedPage;
+        } else {
+            alert('Por favor, seleccione una opción.');
+        }
+    }
+
+    // Función para alternar la visibilidad de la contraseña
+    function togglePassword(id) {
+        const passwordField = document.getElementById(id);
+        const button = passwordField.nextElementSibling;
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            button.innerHTML = '<i class="bi bi-eye-slash"></i>';
+        } else {
+            passwordField.type = 'password';
+            button.innerHTML = '<i class="bi bi-eye"></i>';
+        }
+    }
+</script>
 
 <script>
     //Agregar a un JS
@@ -140,6 +175,7 @@
         document.getElementById('option-juridico').style.border = 'none';
     });
 </script>
+<script src="../js/validacionDatos.js"></script>
 </body>
 </html>
        
