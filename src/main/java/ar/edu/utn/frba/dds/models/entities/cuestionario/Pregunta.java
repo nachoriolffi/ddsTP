@@ -12,12 +12,12 @@ import javax.persistence.*;
 public class Pregunta {
 
     @Id
-    @GeneratedValue
-    private Integer idPregunta;
+    @GeneratedValue ( strategy = GenerationType.IDENTITY)
+    private Integer id_Pregunta;
     @Column(name = "nombrePregunta", columnDefinition = "VARCHAR(250)")
     private String nombre;
     //private List<Opcion> opciones;
-    @Column(name = "esObligatoria",columnDefinition = "TINYINT(1)")
+    @Column(name = "esObligatoria",columnDefinition = "BOOLEAN")
     private Boolean esObligatoria;
     @Enumerated(EnumType.STRING)
     @Column(name = "tipoPregunta", nullable = false)
@@ -27,6 +27,10 @@ public class Pregunta {
         this.nombre = nombre;
         this.esObligatoria = esObligatoria;
         this.tipoPregunta = tipoPregunta;
+    }
+
+    public Pregunta() {
+
     }
 
     public boolean esObligatoria(){
