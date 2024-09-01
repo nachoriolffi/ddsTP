@@ -25,7 +25,7 @@ public class Cuestionario {
         private String descripcion;
 
          @OneToMany(cascade = CascadeType.ALL)
-         @JoinColumn(name = "id_pregunta")
+         @JoinColumn(name = "id_Cuestionario")
         private List<Pregunta> preguntas;
 
         public Cuestionario(String nombreCuestionario,String descripcion) {
@@ -34,13 +34,15 @@ public class Cuestionario {
             this.preguntas = new ArrayList<Pregunta>();
         }
 
-        public void agregarPregunta(Pregunta pregunta) {
-            preguntas.add(pregunta);
+    public Cuestionario() {
+        this.preguntas = new ArrayList<Pregunta>();
+    }
 
+    public void agregarPregunta(Pregunta pregunta) {
+            preguntas.add(pregunta);
         }
 
         public void quitarPregunta(Pregunta pregunta) {
             preguntas.remove(pregunta);
-
         }
 }
