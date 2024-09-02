@@ -8,6 +8,7 @@ import javax.persistence.*;
 
 @Table(name = "usuario")
 @Entity
+
 public class Usuario {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
@@ -18,4 +19,6 @@ public class Usuario {
     private String contrasenia;
     @OneToOne
     private Rol rol;
+
+
 }
