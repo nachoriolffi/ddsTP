@@ -1,13 +1,12 @@
 package ar.edu.utn.frba.dds.models.repositories.implementaciones;
 
 import ar.edu.utn.frba.dds.models.entities.heladera.RegistroSolicitud;
-import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoRegistroSolicitud;
 import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RepoRegistroSolicitud extends RepoGenerico<RegistroSolicitud> implements IRepoRegistroSolicitud {
+public class RepoRegistroSolicitud extends RepoGenerico<RegistroSolicitud>  {
 
     private static RepoRegistroSolicitud instancia = null;
     @Getter
@@ -26,19 +25,19 @@ public class RepoRegistroSolicitud extends RepoGenerico<RegistroSolicitud> imple
     }
 
 
-    @Override
-    public void agregarRegistroSolicitud(RegistroSolicitud registroSolicitud) {
+
+    public void agregar(RegistroSolicitud registroSolicitud) {
         this.registrosSolicitud.add(registroSolicitud);
 
     }
 
-    @Override
-    public void eliminarRegistroSolicitud(RegistroSolicitud registroSolicitud) {
+
+    public void eliminar(RegistroSolicitud registroSolicitud) {
         this.registrosSolicitud.remove(registroSolicitud);
     }
 
-    @Override
-    public List<RegistroSolicitud> traerRegistroSolicitud() {
+
+    public List<RegistroSolicitud> buscar() {
         return this.registrosSolicitud;
     }
 

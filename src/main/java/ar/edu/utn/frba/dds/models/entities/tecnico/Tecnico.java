@@ -24,7 +24,6 @@ public class Tecnico {
     @Column (name = "nombre", columnDefinition = "VARCHAR(250)")
     private String nombre;
     @Column (name = "apellido", columnDefinition = "VARCHAR(250)")
-
     private String apellido;
 
     @Enumerated(EnumType.STRING)
@@ -42,7 +41,7 @@ public class Tecnico {
     private Integer areaCobertura;
 
     @OneToOne
-    @JoinColumn(name = "id_Coordenada")
+    @JoinColumn(name = "id_Coordenada",nullable = false)
     private Coordenada coordenada;
 
     @Column (name = "disponible", columnDefinition = "BOOLEAN")
@@ -52,6 +51,9 @@ public class Tecnico {
     @JoinColumn(name = "id_Contacto", referencedColumnName = "id_Tecnico")
     private List<Contacto> contactos;
 
+    public Tecnico(){
+
+    }
 
     public Tecnico(Long id_Tecnico, String nombre, String apellido, TipoDocumento tipoDocumento, Integer DNI, Integer CUIL, List<MedioDeComunicacion> mediosDeComunicacion, Integer areaCobertura ) {
         this.id_Tecnico = id_Tecnico;
@@ -84,7 +86,7 @@ public class Tecnico {
     }
 
     public void registrarVisita(RegistroVisita registro){
-        RepoRegistrosVisita.getInstancia().agregarRegistroVisita(registro);
+        RepoRegistrosVisita.INSTANCE.agregar(registro);
     }
 
 }

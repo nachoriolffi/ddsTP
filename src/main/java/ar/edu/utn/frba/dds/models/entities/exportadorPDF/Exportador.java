@@ -14,7 +14,7 @@ public class Exportador {
 
         Reporte reporte = estrategia.exportar(exportables.toArray(new Exportable[0]));
             // Agregamos el reporte al repoReporte
-        repo.agregarReporte(reporte);
+        repo.agregar(reporte);
 
     }
 

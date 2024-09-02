@@ -18,4 +18,8 @@ public class Usuario {
     private String contrasenia;
     @OneToOne
     private Rol rol;
+
+    public Usuario() {
+
+    }
 }

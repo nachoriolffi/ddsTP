@@ -35,7 +35,12 @@ public class RegistroSolicitud {
     private Boolean realizada;
 
 
-    @OneToMany
+    @ManyToMany (cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "registro_solicitud_vianda",
+            joinColumns = @JoinColumn(name = "id_RegistroSolicitud"),
+            inverseJoinColumns = @JoinColumn(name = "id_Vianda")
+    )
     @Setter
     @Getter
     private List<Vianda> cantidadViandas;

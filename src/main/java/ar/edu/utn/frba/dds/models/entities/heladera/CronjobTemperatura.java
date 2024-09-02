@@ -19,9 +19,9 @@ import static ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoIncidente.
 public class CronjobTemperatura {
     public static void main(String[] args) {
 
-        RepoHeladeras repoHeladeras = RepoHeladeras.getInstancia();
+        RepoHeladeras repoHeladeras = RepoHeladeras.INSTANCE;
 
-        List<Heladera> todasLasHeladeras = repoHeladeras.traerHeladeras();
+        List<Heladera> todasLasHeladeras = repoHeladeras.INSTANCE.buscarTodos();
 
         controlarUltimasLecturasHeladeras(todasLasHeladeras, 5);
 

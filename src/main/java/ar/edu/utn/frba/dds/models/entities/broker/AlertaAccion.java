@@ -8,8 +8,7 @@ public class AlertaAccion implements AccionTopico {
     @Override
     public void evaluarMensaje(String id, String messageContent) {
         System.out.println("Alerta: " + messageContent);
-
-        Heladera heladera = RepoHeladeras.getInstancia().buscarHeladeraPorNombre(id);
+        Heladera heladera = RepoHeladeras.INSTANCE.buscar(Long.parseLong(id));
         heladera.getReceptorMovimiento().evaluarDatosSensor(messageContent, heladera);
     }
 }

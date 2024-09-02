@@ -25,12 +25,12 @@ public class Tarjeta {
     @JoinColumn(name = "id_UsoTarjeta")
     private List<UsoTarjeta> registroUsos;
     @OneToOne
-    @JoinColumn(name = "id_Vulnerable")
+    @JoinColumn(name = "id_Vulnerable") // puede ser nullable ya que por ejemplo puede ser la tarjeta asociada a unc olaborador
     private Vulnerable personaAsociada;
     @ManyToOne
     @JoinColumn(name = "id_Colaborador",nullable = false)
     private Colaborador colaboradorAsociado;
-    @Column(name="fechaRegistro",columnDefinition = "Date")
+    @Column(name="fechaRegistro",columnDefinition = "Date",nullable = false)
     private Date fechaRegistro;
 
     public Vianda sacarVianda(Vianda viandaQuitada, Heladera heladera)throws IOException {
@@ -40,6 +40,10 @@ public class Tarjeta {
         return viandaQuitada;
         }
         throw new IOException("No se puede sacar mas viandas alcanza su limite permitido");
+
+    }
+
+    public Tarjeta(){
 
     }
 

@@ -9,20 +9,15 @@ import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoTarjetas;
-import org.checkerframework.checker.units.qual.C;
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoTarjeta;
 
 import java.io.IOException;
 
 public class App {
     public static void main(String[] args) {
-        RepoHeladeras repoHeladeras = RepoHeladeras.getInstancia();
-        RepoTarjetas repoTarjetas = RepoTarjetas.getInstancia(); //Hay dos repos de tarjeta, preguntar
-        RepoColaborador repoColaborador = RepoColaborador.getInstancia();
+        RepoHeladeras repoHeladeras = new RepoHeladeras();
+        RepoTarjeta repoTarjeta = new RepoTarjeta(); //Hay dos repos de tarjeta, preguntar
+        RepoColaborador repoColaborador = new RepoColaborador();
 
         Broker broker = new Broker();
         Heladera heladera = new Heladera();
@@ -50,11 +45,11 @@ public class App {
         heladera.setNombre("campus");
         heladera2.setNombre("casa");
 
-        repoHeladeras.agregarHeladera(heladera);
-        repoHeladeras.agregarHeladera(heladera2);
+        repoHeladeras.agregar(heladera);
+        repoHeladeras.agregar(heladera2);
 
-        repoColaborador.agregarColaborador(colaborador);
-        repoTarjetas.agregarTarjeta(tarjeta);
+        repoColaborador.agregar(colaborador);
+        repoTarjeta.agregar(tarjeta);
 
         broker.connect("escucha");
         //escucha.subscribe("dds2024/heladera" + heladera.getId());
@@ -71,7 +66,7 @@ public class App {
 
         RegistroSolicitud registro= new RegistroSolicitud();
         registro.setTarjeta(tarjeta);
-        RepoTarjetas.getInstancia().agregarTarjeta(tarjeta);
+        RepoTarjeta.INSTANCE.agregar(tarjeta);
 
         try {
             heladera.agregarRegistroSolicitud(registro, broker);

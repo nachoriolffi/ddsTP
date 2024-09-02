@@ -21,7 +21,7 @@ public class AperturaAccion implements AccionTopico{
         long fechaAperturaMillis = Long.parseLong(parts[2]);
         Date fechaApertura = new Date(fechaAperturaMillis);
 
-        Heladera heladera = RepoHeladeras.getInstancia().buscarHeladeraPorNombre(id);
+        Heladera heladera = RepoHeladeras.INSTANCE.buscar(Long.parseLong(id));
 
         RegistroSolicitud registroSolicitud = RepoRegistroSolicitud.getInstancia().buscarRegistroSolicitudPorId(idSolicitud);
 

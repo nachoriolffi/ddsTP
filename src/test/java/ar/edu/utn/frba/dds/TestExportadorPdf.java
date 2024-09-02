@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DonacionDinero;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DonacionVianda;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.models.entities.exportadorPDF.CronJobReporte;
@@ -19,10 +18,7 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,7 +36,7 @@ public class TestExportadorPdf {
     @BeforeEach
      public void setUp() {
 
-        RepoHeladeras repoHeladeras = RepoHeladeras.getInstancia();
+        RepoHeladeras repoHeladeras = RepoHeladeras.INSTANCE;
 
         fallasHeladeras = Map.of(
                 "HELADERA", List.of("HELADERA1", "HELADERA2"),
@@ -170,11 +166,11 @@ public class TestExportadorPdf {
         FormaDeColaboracion formaDeColaboracion1 = new DonacionVianda(viandas, new Date());
 
         colaborador1.agregarColaboracionRealizada(formaDeColaboracion1);
-        RepoColaborador.getInstancia().agregarColaborador(colaborador1);
+        RepoColaborador.INSTANCE.agregar(colaborador1);
         // ya tengo el colaborador cargado en el repo
 
-        repoHeladeras.agregarHeladera(heladera1);
-        repoHeladeras.agregarHeladera(heladera2);
+        repoHeladeras.agregar(heladera1);
+        repoHeladeras.agregar(heladera2);
     }
 
     @Test

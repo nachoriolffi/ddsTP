@@ -2,9 +2,13 @@ package ar.edu.utn.frba.dds.models.entities.vianda;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+@Getter
+@Setter
 @Entity
 @Table(name = "vianda")
 public class Vianda {

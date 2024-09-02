@@ -2,16 +2,16 @@ package ar.edu.utn.frba.dds.services.imp;
 
 import ar.edu.utn.frba.dds.dtos.inputs.TarjetaInputDTO;
 import ar.edu.utn.frba.dds.dtos.outputs.TarjetaOutputDTO;
-import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoColaborador;
-import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoTarjeta;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoTarjeta;
 import ar.edu.utn.frba.dds.services.interfaces.ITarjetaService;
 
 public class TarjetaService implements ITarjetaService {
 
-    private IRepoTarjeta tarjetaRepository;
-    private IRepoColaborador colaboradorRepository;
+    private RepoTarjeta tarjetaRepository;
+    private RepoColaborador colaboradorRepository;
 
-    public TarjetaService(IRepoTarjeta tarjetaRepository, IRepoColaborador colaboradorRepository) {//IRepoVulnerable vulnerableRepository
+    public TarjetaService(RepoTarjeta tarjetaRepository, RepoColaborador colaboradorRepository) {//IRepoVulnerable vulnerableRepository
         this.tarjetaRepository = tarjetaRepository;
         this.colaboradorRepository = colaboradorRepository;
     }

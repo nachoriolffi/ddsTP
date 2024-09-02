@@ -14,7 +14,7 @@ public class DocumentoViandasDonadas implements Exportable {
 
     public DocumentoViandasDonadas() {
         this.datos = new HashMap<String, List<String>>();
-        this.repoColaborador = RepoColaborador.getInstancia();
+        this.repoColaborador = RepoColaborador.INSTANCE;
         generarDocumento();
     }
 
@@ -29,7 +29,7 @@ public class DocumentoViandasDonadas implements Exportable {
         List<String> colaboradoresNombre = new ArrayList<String>();
         List<String> cantidades = new ArrayList<String>();
 
-        for(Colaborador colaborador : repoColaborador.buscarTodosColaboradors()){
+        for(Colaborador colaborador : repoColaborador.INSTANCE.buscarTodos()){
             if(!colaborador.getColaboracionesRealizadas().isEmpty()) {
                 List<FormaDeColaboracion> colaboraciones = colaborador.getColaboracionesRealizadas();
                 colaboradoresNombre.add(colaborador.getNombre());

@@ -2,8 +2,6 @@ package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
-import ar.edu.utn.frba.dds.models.entities.contacto.Mensaje;
-import ar.edu.utn.frba.dds.models.entities.contacto.Notificacion;
 import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.AdapterCorreo;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.CorreoElectronico;
@@ -26,12 +24,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -102,7 +95,7 @@ public class TestHeladera {
 
         heladera.setModelo(modeloHeladera);
 
-        repoHeladeras = RepoHeladeras.getInstancia();
+        repoHeladeras = RepoHeladeras.INSTANCE;
 
         //--------------------------------------- Noticacion tecnico --------------------------------------------
         tecnico1 = new Tecnico(6L,"Juan","Cracio",coordenada1,Boolean.TRUE,1000);
@@ -120,8 +113,8 @@ public class TestHeladera {
 
         tecnico1.setMediosDeComunicacion(mediosDeComunicacion);
 
-        repoTec = RepoTecnico.getInstancia();
-        repoTec.agregarTecnico(tecnico1);
+        repoTec = RepoTecnico.INSTANCE;
+        repoTec.agregar(tecnico1);
     }
 
     @Test
@@ -222,7 +215,7 @@ public class TestHeladera {
 
         heladera.setNombre("Heladera1");
 
-        repoHeladeras.agregarHeladera(heladera);
+        repoHeladeras.agregar(heladera);
 
         CronjobTemperatura.main(null);
 
@@ -235,7 +228,7 @@ public class TestHeladera {
         heladera.setEstaActiva(true);
         heladera.setNombre("Heladera2");
 
-        repoHeladeras.agregarHeladera(heladera);
+        repoHeladeras.agregar(heladera);
         CronjobTemperatura.main(null);
 
         assert heladera.getEstaActiva().equals(Boolean.TRUE);

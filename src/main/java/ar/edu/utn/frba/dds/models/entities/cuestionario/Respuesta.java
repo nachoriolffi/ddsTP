@@ -7,17 +7,22 @@ import javax.persistence.*;
 
 @Getter
 @Setter
-
 @Entity
 @Table (name = "respuesta")
 public class Respuesta {
 
     @Id
-    @GeneratedValue ( strategy = javax.persistence.GenerationType.IDENTITY)
+    @GeneratedValue ( strategy = GenerationType.IDENTITY)
     private Integer id_Respuesta;
     @ManyToOne
-    @JoinColumn(name = "id_pregunta")
+    @JoinColumn(name = "id_Pregunta")
     private Pregunta pregunta;
+
+
+    @ManyToOne
+    @JoinColumn(name = "id_CuestionarioRespondido")
+    private CuestionarioRespondido cuestionarioRespondido;
+
     //private List<Opcion> opcion;
     @Column(name = "respuestaAbierta", columnDefinition = "TEXT")
     private String respuestaAbierta;
@@ -27,6 +32,8 @@ public class Respuesta {
         //this.opcion = new ArrayList<Opcion>();
         this.respuestaAbierta = respuestaAbierta;
     }
+
+    public Respuesta(){}
 
     public boolean esObligatoria(){
         return pregunta.esObligatoria();

@@ -10,10 +10,10 @@ public class UsoTarjeta {
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
     private Integer id_UsoTarjeta;
-    @Column(name = "fechaUso",columnDefinition = "Date")
+    @Column(name = "fechaUso",columnDefinition = "Date",nullable = false)
     private Date fechaUso;
     @OneToOne
-    @JoinColumn(name = "id_Heladera")
+    @JoinColumn(name = "id_Heladera",nullable = false)
     private Heladera heladera;
 
     public UsoTarjeta(Date fechaUso, Heladera heladera) {

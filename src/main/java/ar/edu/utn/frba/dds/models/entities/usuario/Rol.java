@@ -12,7 +12,7 @@ public class Rol {
     private int id;
     @Column(name = "nombre",columnDefinition = "VARCHAR(255)")
     private String nombre;
-
+    @Transient
     private List<Permiso> permisos;
 
     public Rol() {
