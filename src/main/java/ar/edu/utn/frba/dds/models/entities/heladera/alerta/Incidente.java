@@ -22,20 +22,22 @@ public class Incidente {
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
     private Integer id_Incidente;
-    @Column(name = "fecha", columnDefinition = "DATE")
+    @Column(name = "fecha", columnDefinition = "DATE",nullable = false)
     private Date fecha;
     @Column(name = "descripcion", columnDefinition = "TEXT")
     private String descripcion;
     @Column(name = "pathFoto", columnDefinition = "TEXT")
     private String pathFoto;
 
-    @Transient
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private TipoIncidente tipoIncidente;
-    @Transient
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private TipoAlerta tipoAlerta;
 
     @OneToOne
-    @JoinColumn(name = "id_colaborador")
+    @JoinColumn(name = "id_Incidente",nullable = false)
     private Colaborador colaborador;
 
     public Incidente(TipoAlerta tipoAlerta) {
@@ -59,7 +61,7 @@ public class Incidente {
 
     public void notificarTecnicoMasCercano(Heladera heladera){
         CalculadorDistanciasTecnicoHeladera calculador = CalculadorDistanciasTecnicoHeladera.getInstance();
-        Tecnico tecnicoMasCercano = calculador.calcularTecnicoMasCercano(RepoTecnico.getInstancia().getTecnicos(),heladera);
+        Tecnico tecnicoMasCercano = calculador.calcularTecnicoMasCercano(RepoTecnico.INSTANCE.buscarTodos(), heladera);
         Notificacion notificaion = new Notificacion(tecnicoMasCercano.getContactos(), new Mensaje("Alerta de incidente", "Se ha detectado un incidente en la heladera"));
         tecnicoMasCercano.getMediosDeComunicacion().forEach(medioDeComunicacion -> medioDeComunicacion.comunicar(notificaion));
     }

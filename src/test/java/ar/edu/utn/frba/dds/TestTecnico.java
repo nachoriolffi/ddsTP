@@ -1,13 +1,7 @@
 package ar.edu.utn.frba.dds;
 
-import ar.edu.utn.frba.dds.models.entities.distancias.CalculadorDistanciasTecnicoHeladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRegistrosVisita;
-import ar.edu.utn.frba.dds.models.entities.tecnico.RegistroVisita;
 import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
-import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoRegistrosVisita;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -22,7 +16,6 @@ public class TestTecnico {
     Heladera heladera1;
     List<Tecnico> tecnicos = new ArrayList<>();
 
-    IRepoRegistrosVisita repoRegistrosVisita = RepoRegistrosVisita.getInstancia();
 
     @BeforeEach
     void setUp() throws Exception {

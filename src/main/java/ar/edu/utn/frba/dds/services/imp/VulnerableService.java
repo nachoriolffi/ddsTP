@@ -3,7 +3,7 @@ import ar.edu.utn.frba.dds.dtos.VulnerableDTO;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.models.entities.vulnerable.RegistroDePersonaACargo;
 import ar.edu.utn.frba.dds.models.entities.vulnerable.Vulnerable;
-import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoVulnerable;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoVulnerable;
 import ar.edu.utn.frba.dds.services.interfaces.IVulnerableService;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import java.time.LocalDate;
@@ -12,9 +12,9 @@ import java.util.List;
 
 public class VulnerableService implements IVulnerableService {
 
-    private final IRepoVulnerable vulnerableRepository;
+    private final RepoVulnerable vulnerableRepository;
 
-    public VulnerableService(IRepoVulnerable vulnerableRepository) {
+    public VulnerableService(RepoVulnerable vulnerableRepository) {
         this.vulnerableRepository = vulnerableRepository;
     }
 
@@ -44,7 +44,7 @@ public class VulnerableService implements IVulnerableService {
 
     @Override
     public Vulnerable modificar(Integer id, VulnerableDTO dto) {
-        Vulnerable vulnerableAModificar = this.vulnerableRepository.buscarVulnerable(id);
+        Vulnerable vulnerableAModificar = this.vulnerableRepository.buscar(Long.valueOf(id));
         vulnerableAModificar.setNombre(dto.getNombre());
         vulnerableAModificar.setApellido(dto.getApellido());
         vulnerableAModificar.setFechaDeNacimiento(LocalDate.parse(dto.getFechaDeNacimiento()));
@@ -56,8 +56,8 @@ public class VulnerableService implements IVulnerableService {
 
     @Override
     public void eliminar(Integer id) {
-        Vulnerable vulnerableAEliminar = this.vulnerableRepository.buscarVulnerable(id);
-        this.vulnerableRepository.eliminarVulnerable(vulnerableAEliminar);
+        Vulnerable vulnerableAEliminar = this.vulnerableRepository.buscar(Long.valueOf(id));
+        this.vulnerableRepository.eliminar(vulnerableAEliminar);
     }
 
 }

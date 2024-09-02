@@ -14,7 +14,9 @@ public class TestContrasenia {
         validador.agregarValidador(new FormaValidarLongitud());
         validador.agregarValidador(new FormaValidar10MilPeoresContrasenias());
 
-        Usuario pepe = new Usuario("pepe", "782jhg *+++jhg4e");
+        Usuario pepe = new Usuario();
+        pepe.setNombre("pepe");
+        pepe.setContrasenia("782jhg *+++jhg4e");
         assert validador.validarContrasenia("782jhg *+++jhg4e",pepe);
 
     }

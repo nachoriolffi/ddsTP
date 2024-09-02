@@ -1,22 +1,21 @@
 package ar.edu.utn.frba.dds.services.imp;
 
 import ar.edu.utn.frba.dds.dtos.inputs.HeladeraInputDTO;
-import ar.edu.utn.frba.dds.dtos.outputs.HeladeraOutputDTO;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
-import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoHeladeras;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import ar.edu.utn.frba.dds.services.interfaces.IHeladeraService;
 
 import java.util.ArrayList;
 import java.util.Date;
 
 public class HeladeraService implements IHeladeraService {
-    private IRepoHeladeras heladeraRepository;
+    private RepoHeladeras heladeraRepository;
 
-    public HeladeraService(IRepoHeladeras heladeraRepository) {
+    public HeladeraService(RepoHeladeras heladeraRepository) {
         this.heladeraRepository = heladeraRepository;
     }
 
@@ -41,7 +40,7 @@ public class HeladeraService implements IHeladeraService {
         ModeloHeladera modelo =null;
         nuevaHeladera.setModelo(modelo);
         nuevaHeladera.setCoordenada(dtoHeladera.getCoordenada());
-        this.heladeraRepository.agregarHeladera(nuevaHeladera);
+        this.heladeraRepository.agregar(nuevaHeladera);
         return nuevaHeladera;
     }
 

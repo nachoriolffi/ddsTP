@@ -13,16 +13,19 @@ import java.util.List;
 @Table(name = "cuestionario_respondido")
 public class CuestionarioRespondido {
     @Id
-    @GeneratedValue ( strategy = javax.persistence.GenerationType.IDENTITY)
-    private Integer id_CuestionarioRespondido;
+    @GeneratedValue ( strategy = GenerationType.IDENTITY)
+    private Long id_CuestionarioRespondido;
 
     @ManyToOne
-    @JoinColumn(name = "id_cuestionario")
+    @JoinColumn(name = "id_Cuestionario")
     private Cuestionario cuestionario;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_respuesta")
+    @OneToMany(mappedBy = "cuestionarioRespondido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Respuesta> respuestas;
+
+    public CuestionarioRespondido() {
+        this.respuestas = new ArrayList<Respuesta>();
+    }
 
     public void agregarRespuesta(Respuesta respuesta) {
         respuestas.add(respuesta);

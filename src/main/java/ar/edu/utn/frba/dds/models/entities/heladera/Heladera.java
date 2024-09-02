@@ -40,9 +40,9 @@ public class Heladera {
     @OneToMany
     @JoinColumn (name = "id_Vianda")
     private List<Vianda> viandas;
-    @Transient
+    @Transient // no creemos necesario persistir los receptores
     private ReceptorMovimiento receptorMovimiento;
-    @Transient
+    @Transient  // no creemos necesario persistir los receptores
     private ReceptorTemperatura receptorTemperatura;
 
     @OneToMany
@@ -51,11 +51,13 @@ public class Heladera {
     @OneToMany
     @JoinColumn(name = "id_solicitudesApertura")
     private List<RegistroSolicitud>solicitudesApertura; // es una lista de avisos a la heladera para que se abra
-    @Transient
+    @OneToMany
+    @JoinColumn(name = "id_RegistroApertura")
     private List<RegistroApertura> aperturas; // es una lista de registros de aperturas que se hicieron
     @Column (name = "estaActiva")
     private Boolean estaActiva;
-    @Transient
+    @ManyToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name="id_ModeloHeladera")
     private ModeloHeladera modelo;
     @Column (name = "tempActual")
     private Double tempActual;

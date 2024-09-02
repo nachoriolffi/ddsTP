@@ -8,7 +8,6 @@ import javax.persistence.*;
 
 @Table(name = "usuario")
 @Entity
-
 public class Usuario {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
@@ -20,5 +19,7 @@ public class Usuario {
     @OneToOne
     private Rol rol;
 
+    public Usuario() {
 
+    }
 }
