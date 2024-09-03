@@ -21,15 +21,19 @@ public class Tarjeta {
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
     private Integer id_Tarjeta;
+
     @OneToMany
-    @JoinColumn(name = "id_UsoTarjeta")
+    @JoinColumn(name = "id_UsoTarjeta") // arranca en cero, ya que no tiene usos
     private List<UsoTarjeta> registroUsos;
+
     @OneToOne
     @JoinColumn(name = "id_Vulnerable") // puede ser nullable ya que por ejemplo puede ser la tarjeta asociada a unc olaborador
     private Vulnerable personaAsociada;
+
     @ManyToOne
     @JoinColumn(name = "id_Colaborador",nullable = false)
     private Colaborador colaboradorAsociado;
+
     @Column(name="fechaRegistro",columnDefinition = "Date",nullable = false)
     private Date fechaRegistro;
 
