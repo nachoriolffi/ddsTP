@@ -15,7 +15,7 @@ public class RegistroVisita {
 
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
-    private Integer id_RegistroVisita;
+    private Long id_RegistroVisita;
     @Column(name = "fechaVisita",columnDefinition = "Date",nullable = false)
     private Date fechaVisita;
     @ManyToOne

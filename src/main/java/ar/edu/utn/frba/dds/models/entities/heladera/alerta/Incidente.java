@@ -29,10 +29,11 @@ public class Incidente {
     @Column(name = "pathFoto", columnDefinition = "TEXT")
     private String pathFoto;
 
-    @Column(nullable = false)
+    @Column(name = "tipoIncidente",nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoIncidente tipoIncidente;
-    @Column(nullable = false)
+
+    @Column(name = "tipoAlerta")
     @Enumerated(EnumType.STRING)
     private TipoAlerta tipoAlerta;
 
