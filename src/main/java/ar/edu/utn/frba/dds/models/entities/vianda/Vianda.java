@@ -15,21 +15,25 @@ public class Vianda {
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
     private Integer id_Vianda;
-    @Column(name = "comida",columnDefinition = "VARCHAR (250)")
+    @Column(name = "comida",columnDefinition = "VARCHAR (250)",nullable = false)
     private String comida;
     @Column(name = "fechaCaducidad",columnDefinition = "Date",nullable = false)
     private Date fechaCaducidad;
     @Column(name = "fechaDonacion",columnDefinition = "Date",nullable = false)
     private Date fechaDonacion;
     @ManyToOne()
-    @JoinColumn(name = "id_Colaborador")
+    @JoinColumn(name = "id_Colaborador",nullable = false)
     private Colaborador colaborador;
     @Column(name = "calorias")
     private Double calorias;
     @Column(name = "peso")
     private Double peso;
-    @Column(name = "fueEntregada",columnDefinition = "Boolean")
+    @Column(name = "fueEntregada",columnDefinition = "Boolean",nullable = false)
     private Boolean fueEntregada;
+
+    public Vianda(){
+
+    }
 
     public Vianda(Date fechaCaducidad, Date fechaDonacion) {
         this.fechaCaducidad = fechaCaducidad;
