@@ -1,17 +1,22 @@
 package ar.edu.utn.frba.dds.models.entities.ubicacionGeografica;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.util.List;
+import lombok.Setter;
 
+import javax.persistence.*;
+import java.util.List;
+@Entity
+@Table(name = "municipio")
 public class Municipio {
 
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private Long id_Municipio;
 
-
-
+    @Column(name = "municipio")
     private String municipio;
 
-    private List<Localidad> localidades;
+    @Setter
+    @ManyToOne (cascade = CascadeType.ALL)
+    @JoinColumn(name = "id_Provincia", referencedColumnName = "id_Provincia")
+    private Provincia localidades;
 }

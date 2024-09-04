@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.models.entities.colaborador;
 
+import ar.edu.utn.frba.dds.models.converters.MedioComunicacionAtributeConvertere;
 import ar.edu.utn.frba.dds.models.entities.colaborador.calculoPuntos.CalculadorPuntos;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.Rubro;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
@@ -44,7 +45,8 @@ public class Colaborador {
     private String nombre;
     @Column(name="apellido", columnDefinition = "VARCHAR(25)")
     private String apellido;
-    @Transient
+    @Convert( converter = MedioComunicacionAtributeConvertere.class)
+    @ElementCollection ( targetClass = String.class)
     private List<MedioDeComunicacion> mediosDeComunicacion;
     @Column(name="fechaDeNacimiento", columnDefinition = "DATE")
     private LocalDate fechaDeNacimiento;
