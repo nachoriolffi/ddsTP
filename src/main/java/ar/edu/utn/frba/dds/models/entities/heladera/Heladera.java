@@ -16,11 +16,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+@Entity
 @Getter
 @Setter
-
-@Entity
 @Table (name = "heladera")
 public class Heladera {
     @Id
@@ -29,13 +27,13 @@ public class Heladera {
     @Transient
     private Direccion direccion;
     @OneToOne
-    @JoinColumn (name = "id_Coordenada")
+    @JoinColumn (name = "id_Coordenada",nullable = false)
     private Coordenada coordenada;
     @Column(name = "nombre", nullable = false, columnDefinition="varchar(50)")
     private String nombre;
-    @Column(name = "capacidad")
+    @Transient // borrar la capacidad luego, ya se guarda en el modelo esta info
     private Integer capacidad;
-    @Column (name = "fechaPuestaFunc", columnDefinition = "Date")
+    @Column (name = "fechaPuestaFunc", columnDefinition = "Date",nullable = false)
     private Date fechaPuestaFunc;
     @OneToMany
     @JoinColumn (name = "id_Vianda")
@@ -54,10 +52,10 @@ public class Heladera {
     @OneToMany
     @JoinColumn(name = "id_RegistroApertura")
     private List<RegistroApertura> aperturas; // es una lista de registros de aperturas que se hicieron
-    @Column (name = "estaActiva")
+    @Column (name = "estaActiva",nullable = false)
     private Boolean estaActiva;
     @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name="id_ModeloHeladera")
+    @JoinColumn(name="id_ModeloHeladera",nullable = false)
     private ModeloHeladera modelo;
     @Column (name = "tempActual")
     private Double tempActual;
@@ -96,6 +94,11 @@ public class Heladera {
         viandas.add(vianda);
     }
 
+    public void quitarVianda(Vianda vianda) {
+        viandas.remove(vianda);
+    }
+
+
     public void agregarRegistroDeAlerta(Incidente registro) {
         incidentes.add(registro);
     }
@@ -112,14 +115,6 @@ public class Heladera {
         return this.capacidad- viandas.size();
     }
 
-    // le llega a la heladera una solicitud de apertura del sistema
-    /*public void agregarRegistroSolicitud(RegistroSolicitud registro) throws IOException {
-        if (this.capacidadActual() == 0) {
-            throw new IOException("No se pueden agregar más viandas ahora, intente más tarde");
-        }else{
-           this.solicitudesApertura.add(registro);
-        }
-    }*/
 
     public void agregarRegistroSolicitud(RegistroSolicitud registro, Broker broker) throws IOException {
         if (this.capacidadActual() == 0) {

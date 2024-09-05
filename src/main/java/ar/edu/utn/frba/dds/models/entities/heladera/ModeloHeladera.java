@@ -24,6 +24,10 @@ public class ModeloHeladera {
     @Column(name = "cantidadMaximaDeViandas", columnDefinition = "INT")
     private Integer cantidadMaximaDeViandas;
 
+    public ModeloHeladera(){
+
+    }
+
     public ModeloHeladera(Double temperaturaMaxima, Double temperaturaMinima, Double peso, Integer cantidadMaximaDeViandas) {
         this.temperaturaMaxima = temperaturaMaxima;
         this.temperaturaMinima = temperaturaMinima;

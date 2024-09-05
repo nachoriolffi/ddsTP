@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Localidad {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    //@GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id_Localidad;
     @Column(name = "localidad")
     private String localidad;
@@ -18,7 +18,6 @@ public class Localidad {
     @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "id_Provincia", referencedColumnName = "id_Provincia")
     private Provincia provincia;
-
-    @Column(name = "codigoPostal")
-    private Integer codigoPostal;
+    //@Column(name = "codigoPostal")
+   // private Integer codigoPostal;
 }

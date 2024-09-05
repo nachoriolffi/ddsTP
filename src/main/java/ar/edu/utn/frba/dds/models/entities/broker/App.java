@@ -35,7 +35,7 @@ public class App {
         heladera2.setReceptorMovimiento(receptorMovimiento2);
         heladera2.setReceptorTemperatura(receptorTemperatura2);
 
-        heladera.setCapacidad(4);
+        //heladera.setCapacidad(4);
 
         ModeloHeladera modelo = new ModeloHeladera( 18.0, 10.0,80.0,100 );
         heladera.setModelo(modelo);

@@ -9,7 +9,7 @@ import java.util.List;
 public class Municipio {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    //@GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id_Municipio;
 
     @Column(name = "municipio")
@@ -18,5 +18,5 @@ public class Municipio {
     @Setter
     @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "id_Provincia", referencedColumnName = "id_Provincia")
-    private Provincia localidades;
+    private Provincia provincia;
 }

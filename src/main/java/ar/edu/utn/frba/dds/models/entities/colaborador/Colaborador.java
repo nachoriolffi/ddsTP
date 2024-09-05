@@ -61,12 +61,13 @@ public class Colaborador {
     @JoinColumn(name = "cuestionario_id")
     private CuestionarioRespondido cuestionarioRespondido;
     @Column(name = "razonSocial", columnDefinition = "INT")
-    private Integer razonSocial;
+    private String razonSocial;
     @Enumerated(EnumType.STRING)
     private TipoJuridisccion tipoJuridisccion;
     @OneToOne
     @JoinColumn(name = "rubro_id")
     private Rubro rubro;
+    @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoPersona tipoPersona;
     @OneToMany
@@ -81,7 +82,7 @@ public class Colaborador {
     private Integer numeroDocumento; //nuevo requerimiento para carga masiva
     @Enumerated(EnumType.STRING)
     private TipoDocumento tipoDocumento; //nuevo requerimiento para carga masiva
-    @OneToMany //Ver de cambiar a ManyToMany
+    @ManyToMany
     @JoinColumn (name = "id_ofertasRegistradas")
     private List<Oferta> ofertasRegistradas;
 
@@ -146,7 +147,7 @@ public class Colaborador {
         this.colaboracionesRealizadas.add(formaDeColaboracion);
     }
 
-    public void modificarColaborador(String nombre, String apellido, LocalDate fechaDeNacimiento, CuestionarioRespondido cuestionarioRespondido, Integer razonSocial, String rubro, TipoPersona tipoPersona, Contacto contacto) {
+    public void modificarColaborador(String nombre, String apellido, LocalDate fechaDeNacimiento, CuestionarioRespondido cuestionarioRespondido, String razonSocial, String rubro, TipoPersona tipoPersona, Contacto contacto) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.mediosDeComunicacion = new ArrayList<>();
