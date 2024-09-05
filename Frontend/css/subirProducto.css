@@ -1,123 +1,40 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-repeat: no-repeat;
-    background-position: top left;
-    position: relative;
-    overflow: hidden;
-    background-size: 50%;
+.navbar {
+    padding: 2rem;
 }
 
-.container {
-    background-color: transparent;
+form {
+    border: 1px solid rgb(222, 226, 230);
+    border-radius: 15px;
     padding: 20px;
-    border-radius: 10px;
-    max-width: 450px;
-    width: 100%;
-    text-align: center;
+    background-color: rgb(248, 249, 250);
+
 }
 
-h1 {
-    text-align: center;
-    color: black;
+.upload {
+    border: 1px solid rgb(222, 226, 230);
 }
 
-input,
-select {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-}
-
-.image-upload {
-    width: 100%;
-    height: 150px;
-    border: 1px solid #000000;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #FFFFFF;
-    position: relative;
-    overflow: hidden;
-}
-
-
-
-button {
-    background-color: #FF6B00;
-    color: #000000;
-    border: none;
-    padding: 15px 20px;
-    border-radius: 20px;
-    cursor: pointer;
-    font-size: 18px;
-    width: 100%;
-    margin-top: 20px;
-}
-
-button:hover {
-    background-color: #FF8C22;
-}
-
-.input-group {
-    margin-bottom: 15px;
-    text-align: left;
-    font-size: 16px;
-}
-
-
-input[type="text"],
-select {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #FA6900;
-    border-radius: 20px;
-    box-sizing: border-box;
-    font-size: 16px;
-    background-color: #EFEFEF;
-}
-
-input[type="number"]{
-    width: 100%;
-    padding: 12px;
-    border: 1px solid #FA6900;
-    border-radius: 20px;
-    box-sizing: border-box;
-    font-size: 16px;
-    background-color: #EFEFEF;
-}
-
-
-
-.custom-file-upload {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    cursor: pointer;
-    color: black;
-    border-radius: 5px;
-    font-size: 16px;
-    text-align: center;
-}
-
-.custom-file-upload img {
-    margin-right: 10px;
-}
-
-.custom-bg-color {
-    background-color: #FFDEAF; 
-    border-radius: 5px;
-}
-
-.file-upload-container {
+/*
+section{
     display: flex;
     flex-direction: column;
     align-items: center;
-}
+    justify-content: center;
+} 
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
