@@ -106,7 +106,7 @@
                             Ver Más
                         </button>
                         <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#buy">
+                                data-bs-target="#confirmCanje">
                             Canjear
                         </button>
                     </div>
@@ -129,7 +129,7 @@
                             Ver Más
                         </button>
                         <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#moreInfoProduct">
+                                data-bs-target="#confirmCanje">
                             Canjear
                         </button>
                     </div>
@@ -151,7 +151,7 @@
                             Ver Más
                         </button>
                         <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#moreInfoProduct">
+                                data-bs-target="#confirmCanje">
                             Canjear
                         </button>
                     </div>
@@ -173,7 +173,7 @@
                             Ver Más
                         </button>
                         <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#moreInfoProduct">
+                                data-bs-target="#confirmCanje">
                             Canjear
                         </button>
                     </div>
@@ -195,7 +195,7 @@
                             Ver Más
                         </button>
                         <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#moreInfoProduct">
+                                data-bs-target="#confirmCanje">
                             Canjear
                         </button>
                     </div>
@@ -217,7 +217,7 @@
                             Ver Más
                         </button>
                         <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                                data-bs-target="#moreInfoProduct">
+                                data-bs-target="#confirmCanje">
                             Canjear
                         </button>
                     </div>
@@ -290,7 +290,26 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Agregar al carrito</button>
+                <button type="button" data-bs-target="#confirmCanje" data-bs-toggle="modal" class="btn btn-primary">Canjear</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Canjear Producto-->
+<div class="modal fade" id="confirmCanje" tabindex="-1" aria-labelledby="confirmCanje" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel1">Confirmación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Está seguro de que desea canjear X puntos por este producto?
+            </div>
+            <div class="modal-footer">
+                <!-- Botón de Cancelar que cierra el modal de confirmación y vuelve al modal de donación -->
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#donationModal">Cancelar</button>
+                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Sí, canjear puntos</button>
             </div>
         </div>
     </div>
