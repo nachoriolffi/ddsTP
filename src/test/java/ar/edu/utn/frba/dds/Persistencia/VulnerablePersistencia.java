@@ -1,6 +1,4 @@
 package ar.edu.utn.frba.dds.Persistencia;
 
-
-public class UbicacionPersistencia {
-
+public class VulnerablePersistencia {
 }

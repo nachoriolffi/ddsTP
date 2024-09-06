@@ -14,20 +14,22 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name="registro_vulnerable")
-public class RegistroVulnerable implements FormaDeColaboracion {
-    @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private Long id;
+public class RegistroVulnerable extends FormaDeColaboracion {
+
     @OneToMany
-    @JoinColumn(name = "id_tarjeta")
+    @JoinColumn(name = "id_tarjeta",nullable = false)
     private List<Tarjeta> tarjetasDonadas;
-    @Column(name="cantidadTarjetas", columnDefinition = "INT")
+    @Column(name="cantidadTarjetas", columnDefinition = "INT",nullable = false)
     private Integer cantidadTarjetas;
-    @Column(name="fechaColaboracion", columnDefinition = "DATE")
+    @Column(name="fechaColaboracion", columnDefinition = "DATE",nullable = false)
     private Date fechaColaboracion;
 
     @Enumerated(EnumType.STRING)
     private TipoColaboracion tipoColaboracion = TipoColaboracion.ENTREGA_TARJETAS;
+
+    public RegistroVulnerable(){
+
+    }
 
     public RegistroVulnerable(List<Tarjeta> tarjetasDonadas) {
         this.tarjetasDonadas = tarjetasDonadas;

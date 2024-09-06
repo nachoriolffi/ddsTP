@@ -12,38 +12,37 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name="hacerse_cargo_de_heladera")
-public class HacerseCargoDeHeladera implements FormaDeColaboracion {
-    @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Transient
-    private Local local; // TODO LOCAL
-    //@OneToMany
-    //@JoinColumn (name = "id_heladera")
-    @Transient
-    private List<Heladera> heladeras;
-    @Column(name="cantidadHeladeras", columnDefinition = "INT")
-    private Integer cantidadHeladeras;
+@Table(name = "hacerse_cargo_de_heladera")
+public class HacerseCargoDeHeladera extends FormaDeColaboracion {
+
+    @ManyToOne
+    @JoinColumn(name = "id",referencedColumnName = "id_Local",nullable = false)
+    private Local local;
+    @OneToOne
+    @JoinColumn (name = "id",referencedColumnName = "id_Heladera",nullable = false)
+    private Heladera heladera;
     @Getter
     @Setter
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TipoColaboracion tipoColaboracion;
-    @Column(name="fechaColaboracion", columnDefinition = "DATE")
+    @Column(name = "fechaColaboracion", columnDefinition = "DATE", nullable = false)
     private Date fechaColaboracion;
 
 
+    public HacerseCargoDeHeladera() {
 
-    public HacerseCargoDeHeladera(List<Heladera> heladeras, TipoColaboracion tipoColaboracion) {
-        this.heladeras = heladeras;
+    }
+
+    public HacerseCargoDeHeladera(Heladera heladera, TipoColaboracion tipoColaboracion) {
+        this.heladera = heladera;
         this.tipoColaboracion = tipoColaboracion;
         this.fechaColaboracion = new Date();
-        this.cantidadHeladeras = heladeras.size();
     }
 
     @Override
     public double sumarPuntosA(Colaborador colaborador) {
-        return cantidadHeladeras * this.sumarMesesActivas() * ConfiguracionMultiplicador.getInstance().getMultiplicadorHeladeraActiva();
+        return this.sumarMesesActivas() * ConfiguracionMultiplicador.getInstance().getMultiplicadorHeladeraActiva();
     }
 
 
@@ -55,10 +54,7 @@ public class HacerseCargoDeHeladera implements FormaDeColaboracion {
     public long sumarMesesActivas() {
 
         long mesesActivas = 0;
-
-        for (Heladera heladera : heladeras) {
-            mesesActivas += heladera.mesesActiva(fechaColaboracion);
-        }
+        mesesActivas += heladera.mesesActiva(fechaColaboracion);
         return mesesActivas;
 
     }

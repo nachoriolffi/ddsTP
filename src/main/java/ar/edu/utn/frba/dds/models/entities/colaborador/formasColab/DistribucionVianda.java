@@ -16,29 +16,40 @@ import java.util.List;
 @Setter
 @Entity
 @Table (name = "distribucion_vianda")
-public class DistribucionVianda implements FormaDeColaboracion{
-    @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private Integer id_DistribucionVianda;
+public class DistribucionVianda extends FormaDeColaboracion{
+
     @ManyToOne
-    @JoinColumn(name = "id_heladeraOrigen" )
+    @JoinColumn(name = "id_heladeraOrigen",nullable = false)
     private Heladera heladeraOrigen;
+
     @ManyToOne
-    @JoinColumn(name = "id_heladeraDestino" )
+    @JoinColumn(name = "id_heladeraDestino",nullable = false)
     private Heladera heladeraDestino;
-    @Column(name= "cantidadViandas", columnDefinition = "INT")
+
+    @Column(name= "cantidadViandas", columnDefinition = "INT",nullable = false)
     private Integer cantidadViandas;
+
     @OneToMany
-    @JoinColumn(name = "id_viandas")
+    @JoinColumn(name = "id_viandas",nullable = false)
     private List<Vianda> viandasMovidas;// por ahora es opcional
-    @Column(name= "motivo", columnDefinition = "TEXT")
-    private String motivo;
-    @Column(name= "fechaDistribucion", columnDefinition = "DATE")
-    private Date fechaDistribucion;
-    @Column(name= "fechaColaboracion", columnDefinition = "DATE")
-    private Date fechaColaboracion;
+
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private MotivoDistribucion motivo;
+
+    @Column(name= "fechaDistribucion", columnDefinition = "DATE",nullable = false)
+    private Date fechaDistribucion;
+
+    @Column(name= "fechaColaboracion", columnDefinition = "DATE",nullable = false)
+    private Date fechaColaboracion;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TipoColaboracion tipoColaboracion = TipoColaboracion.REDISTRIBUCION_VIANDAS;
+
+    public DistribucionVianda(){
+
+    }
 
 
     public DistribucionVianda(Integer cantidad, Date fechaColaboracion) {

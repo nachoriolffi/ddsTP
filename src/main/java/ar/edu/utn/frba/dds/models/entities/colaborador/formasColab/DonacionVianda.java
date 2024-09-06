@@ -18,23 +18,26 @@ import java.util.List;
 
 @Entity
 @Table(name="donacion_vianda")
-public class DonacionVianda implements FormaDeColaboracion {
-    @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private Long id;
+public class DonacionVianda extends FormaDeColaboracion {
+
     @OneToMany
-    @JoinColumn(name = "id_vianda")
+    @JoinColumn(name = "id_vianda",nullable = false)
     private List<Vianda> viandas;
     @Getter
     @Setter
-    @Column(name ="cantidadViandas", columnDefinition = "INT")
+    @Column(name ="cantidadViandas", columnDefinition = "INT",nullable = false)
     private Integer cantidadViandas;
-    @Column(name ="fechaColaboracion", columnDefinition = "DATE")
+    @Column(name ="fechaColaboracion", columnDefinition = "DATE",nullable = false)
     private Date fechaColaboracion;
     @Getter
     @Setter
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TipoColaboracion tipoColaboracion;
+
+    public DonacionVianda(){
+
+    }
 
     public DonacionVianda(Integer cantidad, Date fechaColaboracion) {
         this.fechaColaboracion = fechaColaboracion;

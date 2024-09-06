@@ -19,7 +19,7 @@ public class TestMultiplicadores {
 
     List<Heladera> heladeras = new ArrayList<>();
     Colaborador colaborador;
-
+    Heladera heladera1;
     @BeforeEach
     public void seteoHeladeras() {
 
@@ -70,7 +70,7 @@ public class TestMultiplicadores {
         DonacionDinero donacionDinero = new DonacionDinero(1000, new Date());
         DonacionDinero donacionDinero1 = new DonacionDinero(2000, new Date());
         DonacionVianda donacionVianda = new DonacionVianda(10, new Date());
-        HacerseCargoDeHeladera hacerseCargoDeHeladera = new HacerseCargoDeHeladera(heladeras, TipoColaboracion.HACERSE_CARGO_HELADERA);
+        HacerseCargoDeHeladera hacerseCargoDeHeladera = new HacerseCargoDeHeladera(heladera1, TipoColaboracion.HACERSE_CARGO_HELADERA);
         // AGREGAMOS FORMAS DE COLABORAR HECHAS AL COLABORADOR
         colaboracionesRalizadas.add(donacionDinero);
         colaboracionesRalizadas.add(donacionDinero1);

@@ -13,26 +13,27 @@ import java.util.Observer;
 
 @Entity
 @Table(name="doancion_dinero")
-public class DonacionDinero implements FormaDeColaboracion {
+public class DonacionDinero extends FormaDeColaboracion {
 
-    @Id
-    @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name= "fecha", columnDefinition = "DATE")
+    @Column(name= "fecha", columnDefinition = "DATE",nullable = false)
     private Date fecha;
-    @Column(name="monto", columnDefinition = "DOUBLE")
+    @Column(name="monto", columnDefinition = "DOUBLE",nullable = false)
     private Float monto;
-    @Column(name="frecuencia", columnDefinition = "INT")
-    private Integer frecuencia;
-    @Column(name="fechaColaboracion", columnDefinition = "DATE")
+    @Column(name="frecuencia", columnDefinition = "INT",nullable = false)
+    private Integer frecuencia; // en dias
+    @Column(name="fechaColaboracion", columnDefinition = "DATE",nullable = false)
     private Date fechaColaboracion;
-    @Column(name="multiplicador", columnDefinition = "DOUBLE")
+    @Column(name="multiplicador", columnDefinition = "DOUBLE",nullable = false)
     private Double multiplicador;
     @Getter
     @Setter
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TipoColaboracion tipoColaboracion = TipoColaboracion.DINERO;
+
+    public DonacionDinero(){
+
+    }
 
 
     public DonacionDinero(Integer cantidad, Date fechaColaboracion) {
