@@ -14,9 +14,9 @@ public class Provincia {
 
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_Provincia;
-    @Getter
-    @Column(name = "provincia")
-    private String provincia;
+    @Column (name = "id_Provincia")
+    private Long id;
+    @Column(name = "nombre")
+    private String nombre;
 
 }
