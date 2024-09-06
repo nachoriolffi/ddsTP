@@ -68,12 +68,12 @@ public class TestRapidoDeGeoRef {
         System.out.println(result.cantidad);
 
         for(int i=0;i<24; i++){
-            System.out.println("PROVINCIA: " + result.provincias.get(i).getProvincia());
+            System.out.println("PROVINCIA: " + result.provincias.get(i).getNombre());
 
         }
         // Verify the result
         assertNotNull(result);
-        System.out.println("Number of provinces: " + result.getProvincias().size());
+        System.out.println("Number of provinces: " + result.cantidad);
 
     }
 }

@@ -20,7 +20,8 @@ public class Georef extends ApiCaller {
     }
 
     public ListadoProvincias listadoProvincias() {
-        Call<ListadoProvincias> requestProvinciasArg = georefService.provincias();
+        String campos = "id,nombre";
+        Call<ListadoProvincias> requestProvinciasArg = georefService.provincias(campos);
         try {
             Response<ListadoProvincias> responseProvinciasArg = requestProvinciasArg.execute();
             ListadoProvincias listadoProvincias = responseProvinciasArg.body();
@@ -28,8 +29,8 @@ public class Georef extends ApiCaller {
             if (listadoProvincias != null) {
                 listadoProvincias.getProvincias().forEach(provincia -> {
                     Provincia entity = new Provincia();
-                    entity.setId_Provincia(provincia.getId_Provincia());
-                    entity.setProvincia(provincia.getProvincia());
+                    entity.setId(provincia.getId());
+                    entity.setNombre(provincia.getNombre());
                     RepoProvincia.INSTANCE.agregar(entity);
                 });
             }

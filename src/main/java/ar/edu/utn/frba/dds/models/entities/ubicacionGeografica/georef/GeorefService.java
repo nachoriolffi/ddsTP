@@ -10,7 +10,8 @@ import retrofit2.http.Query;
 public interface GeorefService {
     @GET("provincias")
     Call<ListadoProvincias> provincias();
-
+    @GET("provincias")
+    Call<ListadoProvincias> provincias(@Query("campos") String campos);
     @GET("provincias")
     Call<ListadoProvincias> provincias(@Query("id") int id, @Query("campos") String campos);
 
