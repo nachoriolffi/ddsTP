@@ -39,7 +39,7 @@ public class Tarjeta {
 
     public Vianda sacarVianda(Vianda viandaQuitada, Heladera heladera)throws IOException {
         if(!alcanzaUsosLimite()){
-        heladera.getViandas().remove(viandaQuitada);
+        heladera.quitarVianda(viandaQuitada);
         registroUsos.add(new UsoTarjeta(new Date(), heladera));
         return viandaQuitada;
         }

@@ -30,7 +30,7 @@ public class ColaboradorService implements IColaboradorService {
         colaborador.setDireccion(direccion);
         colaborador.setTipoDocumento(TipoDocumento.valueOf(colaboradorDTO.getTipoDocumento()));
         colaborador.setNumeroDocumento(colaboradorDTO.getNumeroDocumento());
-        colaborador.setRazonSocial(colaboradorDTO.getRazonSocial());
+        colaborador.setRazonSocial(colaboradorDTO.getRazonSocial().toString());
         colaborador.setRubro(new Rubro(colaboradorDTO.getRubro()));
         colaborador.setTipoPersona(TipoPersona.valueOf(colaboradorDTO.getTipoPersona()));
         colaborador.setTipoJuridisccion(TipoJuridisccion.valueOf(colaboradorDTO.getTipoJuridisccion()));
