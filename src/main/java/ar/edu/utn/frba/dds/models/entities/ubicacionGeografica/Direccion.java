@@ -10,14 +10,16 @@ import javax.persistence.*;
 public class Direccion {
 
     @Id
-    @GeneratedValue ( strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", columnDefinition = "INT(11)")
     private Integer id_Direccion;
     @Setter
-    @Transient
+    @OneToOne// saco el @Transient porque es necesario para el alta del colaborador
+    @JoinColumn(name = "calle_id", nullable = false)
     private Calle calle;
-    @Column(name = "altura")
+    @Column(name = "altura", columnDefinition = "INT(11)", nullable = false)
     private Integer altura;
-    @Column(name = "piso")
+    @Column(name = "piso", columnDefinition = "INT(11)")
     private Integer piso;
     @Transient
     private Ubicacion ubicacion;

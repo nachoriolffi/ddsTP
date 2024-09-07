@@ -6,6 +6,6 @@ public class ColaboracionesPersistencia {
 
     @Test
     public void persistirColaboraciones(){
-        
+
     }
 }

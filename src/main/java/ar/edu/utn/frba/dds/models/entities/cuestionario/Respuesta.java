@@ -27,7 +27,7 @@ public class Respuesta {
     @Column(name = "respuestaAbierta", columnDefinition = "TEXT")
     private String respuestaAbierta;
 
-    public Respuesta(Pregunta pregunta,String respuestaAbierta){
+    public Respuesta(Pregunta pregunta,String r123espuestaAbierta){
         this.pregunta = pregunta;
         //this.opcion = new ArrayList<Opcion>();
         this.respuestaAbierta = respuestaAbierta;

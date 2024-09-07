@@ -2,18 +2,17 @@ package ar.edu.utn.frba.dds.models.entities.contacto;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Table;
 
 import javax.persistence.*;
 
-import static javax.persistence.GenerationType.*;
 
 @Entity
-@Table(appliesTo = "Contacto")
+@Table(name = "contacto")
 public class Contacto {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", columnDefinition = "INT(11)")
     private int id_Contacto;
     @Getter
     @Setter
@@ -22,7 +21,7 @@ public class Contacto {
     private TipoContacto tipoContacto;
     @Setter
     @Getter
-    @Column(name = "nombreContacto",columnDefinition = "VARCHAR (250)")
+    @Column(name = "nombreContacto",columnDefinition = "VARCHAR (255)")
     private String descripcion;
 
     public Contacto(TipoContacto nombre, String descripcion) {

@@ -42,6 +42,10 @@ public class DonacionDinero extends FormaDeColaboracion {
         this.multiplicador = 3.0;
     };
 
+    public DonacionDinero() {
+
+    }
+
     @Override
     public double sumarPuntosA(Colaborador colaborador) {
         return this.monto * ConfiguracionMultiplicador.getInstance().getMultiplicadorDinero();
