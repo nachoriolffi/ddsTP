@@ -64,7 +64,7 @@ public class Tarjeta {
     }
 
     public Integer cantidadMaximaUsos(){
-        return 4 + this.personaAsociada.getRegistroDePersonasACargo().size()*2;
+        return 4 + this.personaAsociada.getMenoresACargo().size()*2;
     }
 
 }

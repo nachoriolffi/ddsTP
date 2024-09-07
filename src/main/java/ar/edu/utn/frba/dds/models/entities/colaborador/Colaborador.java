@@ -51,10 +51,10 @@ public class Colaborador {
     @JoinColumn(name = "direccion_id")
     private Direccion direccion;
     @OneToMany
-    @JoinColumn(name = "id", referencedColumnName = "id_FormaColaboracion")
+    @JoinColumn(name = "id_FormasColaboracion", referencedColumnName = "if")
     private List<FormaDeColaboracion> formasDeColaboracion;
     @OneToMany
-    @JoinColumn(name = "id", referencedColumnName = "id_FormaColaboracion")
+    @JoinColumn(name = "id_ColaboracionesHechas", referencedColumnName = "id")
     private List<FormaDeColaboracion> colaboracionesRealizadas;
     @ManyToOne
     @JoinColumn(name = "cuestionario_id")

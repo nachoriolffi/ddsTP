@@ -15,8 +15,9 @@ import java.util.List;
 @Table(name = "hacerse_cargo_de_heladera")
 public class HacerseCargoDeHeladera extends FormaDeColaboracion {
 
-    @ManyToOne
-    @JoinColumn(name = "id",referencedColumnName = "id_Local",nullable = false)
+    //@ManyToOne
+    //@JoinColumn(name = "id",referencedColumnName = "id_Local",nullable = false)
+    @Transient
     private Local local;
     @OneToOne
     @JoinColumn (name = "id",referencedColumnName = "id_Heladera",nullable = false)
