@@ -20,4 +20,8 @@ public class UsoTarjeta {
         this.fechaUso = fechaUso;
         this.heladera = heladera;
     }
+
+    public UsoTarjeta() {
+
+    }
 }

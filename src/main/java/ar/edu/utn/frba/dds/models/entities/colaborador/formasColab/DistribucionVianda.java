@@ -46,6 +46,10 @@ public class DistribucionVianda implements FormaDeColaboracion{
         this.cantidadViandas = cantidad;
     };
 
+    public DistribucionVianda() {
+
+    }
+
     @Override
     public double sumarPuntosA(Colaborador colaborador) {
         return cantidadViandas * ConfiguracionMultiplicador.getInstance().getMultiplicadorViandasDistribuidas();

@@ -16,4 +16,8 @@ public class Rubro {
     public Rubro(String nombre) {
         this.nombre = nombre;
     }
+
+    public Rubro() {
+
+    }
 }

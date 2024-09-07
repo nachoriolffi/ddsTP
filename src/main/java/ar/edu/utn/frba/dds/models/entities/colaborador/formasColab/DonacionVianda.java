@@ -50,6 +50,10 @@ public class DonacionVianda implements FormaDeColaboracion {
         this.tipoColaboracion  = TipoColaboracion.DONACION_VIANDAS;
     }
 
+    public DonacionVianda() {
+
+    }
+
     @Override
     public double sumarPuntosA(Colaborador colaborador) {
         return cantidadViandas * ConfiguracionMultiplicador.getInstance().getMultiplicadorViandasDonadas();

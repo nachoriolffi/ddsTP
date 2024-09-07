@@ -54,15 +54,14 @@ a:hover {
     gap: 1.5rem;
 }
 
-.fuente-bonita {
+
+
+.nav-link {
+    transition: color 0.3s ease;
     font-family: 'Arial', sans-serif;
     font-weight: 500;
     font-weight: bold;
     letter-spacing: 0.05em;
-}
-
-.nav-link {
-    transition: color 0.3s ease;
 }
 
 .nav-link:hover {

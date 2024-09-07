@@ -41,6 +41,10 @@ public class HacerseCargoDeHeladera implements FormaDeColaboracion {
         this.cantidadHeladeras = heladeras.size();
     }
 
+    public HacerseCargoDeHeladera() {
+
+    }
+
     @Override
     public double sumarPuntosA(Colaborador colaborador) {
         return cantidadHeladeras * this.sumarMesesActivas() * ConfiguracionMultiplicador.getInstance().getMultiplicadorHeladeraActiva();

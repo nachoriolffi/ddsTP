@@ -41,7 +41,6 @@ public class Colaborador {
     @Id
     @GeneratedValue (strategy = javax.persistence.GenerationType.IDENTITY)
     private Integer id_Colaborador;
-    @Column(name = "nombre", columnDefinition = "VARCHAR(25)")
     private String nombre;
     @Column(name="apellido", columnDefinition = "VARCHAR(25)")
     private String apellido;
@@ -56,6 +55,7 @@ public class Colaborador {
     @Transient
     private List<FormaDeColaboracion> formasDeColaboracion;
     @Transient
+    @Column(name = "nombre", columnDefinition = "VARCHAR(25)")
     private List<FormaDeColaboracion> colaboracionesRealizadas;
     @ManyToOne
     @JoinColumn(name = "cuestionario_id")

@@ -23,4 +23,8 @@ public class RegistroTemperatura {
         this.lectura = lectura;
         this.fechaHora = fechaHora;
     }
+
+    public RegistroTemperatura() {
+
+    }
 }

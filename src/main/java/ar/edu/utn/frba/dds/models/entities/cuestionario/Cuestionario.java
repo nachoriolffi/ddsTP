@@ -42,7 +42,6 @@ public class Cuestionario {
     public void agregarPregunta(Pregunta pregunta) {
             preguntas.add(pregunta);
         }
-
         public void quitarPregunta(Pregunta pregunta) {
             preguntas.remove(pregunta);
         }
