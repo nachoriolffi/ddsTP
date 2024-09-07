@@ -22,8 +22,4 @@ public class RubroColaborador {
     public RubroColaborador(String nombre) {
         this.nombre = nombre;
     }
-
-    public Rubro() {
-
-    }
 }

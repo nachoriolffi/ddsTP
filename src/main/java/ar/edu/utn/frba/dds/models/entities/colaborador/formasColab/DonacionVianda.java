@@ -53,9 +53,6 @@ public class DonacionVianda extends FormaDeColaboracion {
         this.tipoColaboracion  = TipoColaboracion.DONACION_VIANDAS;
     }
 
-    public DonacionVianda() {
-
-    }
 
     @Override
     public double sumarPuntosA(Colaborador colaborador) {

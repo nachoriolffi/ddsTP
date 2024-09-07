@@ -41,10 +41,6 @@ public class HacerseCargoDeHeladera extends FormaDeColaboracion {
         this.fechaColaboracion = new Date();
     }
 
-    public HacerseCargoDeHeladera() {
-
-    }
-
     @Override
     public double sumarPuntosA(Colaborador colaborador) {
         return this.sumarMesesActivas() * ConfiguracionMultiplicador.getInstance().getMultiplicadorHeladeraActiva();

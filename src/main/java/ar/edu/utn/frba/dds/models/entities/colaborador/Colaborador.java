@@ -36,54 +36,30 @@ import java.util.List;
 public class Colaborador {
 
     @Id
-<<<<<<< HEAD
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-=======
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", columnDefinition = "INT(11)")
->>>>>>> ed7271b05ddaca1f501ec0b9e5b94f6fe5191aa9
     private Integer id_Colaborador;
-    @Column(name="nombre", columnDefinition = "VARCHAR(25)")// es nullable porque el colaborador puede ser una persona jurídica
+    @Column(name = "nombre", columnDefinition = "VARCHAR(25)")
     private String nombre;
-<<<<<<< HEAD
     @Column(name = "apellido", columnDefinition = "VARCHAR(25)")
     private String apellido;
     @Convert(converter = MedioComunicacionAtributeConvertere.class)
     @ElementCollection(targetClass = String.class)
     private List<MedioDeComunicacion> mediosDeComunicacion;
     @Column(name = "fechaDeNacimiento", columnDefinition = "DATE")
-=======
-    @Column(name="apellido", columnDefinition = "VARCHAR(25)")// idem anterior
-    private String apellido;
-    @Convert( converter = MedioComunicacionAtributeConvertere.class)
-    @ElementCollection ( targetClass = String.class)
-    //@JoinColumn(name = "mediosDeComunicacion", nullable = false) -> chequear, creo que es así para que no sea nullable. Tiene que quedar como no nullable acá
-    private List<MedioDeComunicacion> mediosDeComunicacion;
-    @Column(name="fechaDeNacimiento", columnDefinition = "DATE") // el enunciado dice que la fecha de nacimiento  es opcional, por eso es nullable
->>>>>>> ed7271b05ddaca1f501ec0b9e5b94f6fe5191aa9
     private LocalDate fechaDeNacimiento;
     @ManyToOne
-    @JoinColumn(name = "direccion_id") // el enunciado dice que la direccion  es opcional, por eso es nullable
+    @JoinColumn(name = "direccion_id")
     private Direccion direccion;
     @OneToMany
     @JoinColumn(name = "id_FormasColaboracion", referencedColumnName = "if")
     private List<FormaDeColaboracion> formasDeColaboracion;
-<<<<<<< HEAD
     @OneToMany
     @JoinColumn(name = "id_ColaboracionesHechas", referencedColumnName = "id")
-=======
-    @Transient // revisar
-    @Column(name = "nombre", columnDefinition = "VARCHAR(25)")
->>>>>>> ed7271b05ddaca1f501ec0b9e5b94f6fe5191aa9
     private List<FormaDeColaboracion> colaboracionesRealizadas;
     @ManyToOne
     @JoinColumn(name = "cuestionario_id")
     private CuestionarioRespondido cuestionarioRespondido;
-<<<<<<< HEAD
     @Column(name = "razonSocial", columnDefinition = "VARCHAR(255)")
-=======
-    @Column(name = "razonSocial", columnDefinition = "INT(11)")
->>>>>>> ed7271b05ddaca1f501ec0b9e5b94f6fe5191aa9
     private String razonSocial;
     @Enumerated(EnumType.STRING)
     private TipoJuridisccion tipoJuridisccion;
@@ -94,17 +70,13 @@ public class Colaborador {
     @Enumerated(EnumType.STRING)
     private TipoPersona tipoPersona;
     @OneToMany
-<<<<<<< HEAD
     @JoinColumn(name = "id_contacto")
-=======
-    @JoinColumn (name = "colaborador_id")
->>>>>>> ed7271b05ddaca1f501ec0b9e5b94f6fe5191aa9
     private List<Contacto> contacto;
     @Transient
     private IRecomendacionPuntos iRecomendacionPuntos;
     @Column(name = "puntosTotalesUsados", columnDefinition = "DOUBLE")
     private Double puntosTotalesUsados;
-    @Column(name = "numeroDocumento", columnDefinition = "INT(11)")
+    @Column(name = "numeroDocumento", columnDefinition = "INT")
     private Integer numeroDocumento; //nuevo requerimiento para carga masiva
     @Enumerated(EnumType.STRING)
     private TipoDocumento tipoDocumento; //nuevo requerimiento para carga masiva
