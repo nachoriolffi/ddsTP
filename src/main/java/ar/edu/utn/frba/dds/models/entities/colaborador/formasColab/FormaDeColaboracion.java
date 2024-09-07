@@ -11,7 +11,7 @@ import javax.persistence.*;
 public abstract class  FormaDeColaboracion {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     public double sumarPuntosA(Colaborador colaborador){

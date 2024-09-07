@@ -16,7 +16,7 @@ import java.util.List;
 public class Vulnerable {
     @Id
     @GeneratedValue (strategy = javax.persistence.GenerationType.IDENTITY)
-    private Long id;
+    private Long id_Vulnerable;
     @Column (name = "nombre", columnDefinition = "VARCHAR(25)",nullable = false)
     private String nombre;
     @Column (name = "apellido", columnDefinition = "VARCHAR(25)",nullable = false)
@@ -33,9 +33,9 @@ public class Vulnerable {
     private TipoDocumento tipoDocumento;
     @Column(name = "numeroDocumento", columnDefinition = "INT")
     private Integer numeroDocumento;
-    @OneToMany
-    @JoinColumn(name = "id",referencedColumnName = "id_RegistroPersonasACargo",nullable = false)
-    private List<RegistroMenorACargo> menoresACargo;
+
+    @OneToMany(mappedBy = "vulnerable", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<RegistroMenorACargo> menoresACargo = new ArrayList<>();
 
 
     public Vulnerable(){

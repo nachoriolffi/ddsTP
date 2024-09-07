@@ -11,13 +11,17 @@ import java.util.Date;
 public class RegistroMenorACargo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(name = "tienePersonaACargo",nullable = false)
+    private Long id_RegistroPersonaACargo;
+    @Column(name = "tienePersonaACargo")
     private Boolean tienePersonaACargo;
-    @Column(name = "fechaRegistro",columnDefinition = "Date")
+    @Column(name = "fechaRegistro")
     private Date fechaRegistro;
-    @Column(name = "personasACargo",columnDefinition = "INT")
+    @Column(name = "personasACargo")
     private Integer cantidadDePersonasACargo;
+
+    @ManyToOne
+    @JoinColumn(name = "vulnerable_id", nullable = false)
+    private Vulnerable vulnerable;
 
     public RegistroMenorACargo(){
 

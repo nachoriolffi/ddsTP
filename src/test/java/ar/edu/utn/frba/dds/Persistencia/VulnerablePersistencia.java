@@ -14,14 +14,6 @@ public class VulnerablePersistencia {
     @Test
     public void persistirPersonaVulnerable(){
 
-        RepoRegistroPersonaACargo repoRegistroPersonaACargo = new RepoRegistroPersonaACargo();
-        RegistroMenorACargo registro = new RegistroMenorACargo();
-        registro.setFechaRegistro(new Date());
-        registro.setTienePersonaACargo(Boolean.TRUE);
-        registro.setCantidadDePersonasACargo(3);
-        repoRegistroPersonaACargo.agregar(registro);
-
-
         Vulnerable vulnerable = new Vulnerable();
         vulnerable.setNombre("Mateo");
         vulnerable.setApellido("Perez");
@@ -30,6 +22,13 @@ public class VulnerablePersistencia {
         vulnerable.setSituacionDeCalle(Boolean.TRUE);
         vulnerable.setTipoDocumento(TipoDocumento.DNI);
         vulnerable.setNumeroDocumento(40845654);
+
+        RegistroMenorACargo registro = new RegistroMenorACargo();
+        registro.setFechaRegistro(new Date());
+        registro.setTienePersonaACargo(Boolean.TRUE);
+        registro.setCantidadDePersonasACargo(3);
+        registro.setVulnerable(vulnerable);
+
         vulnerable.getMenoresACargo().add(registro);
 
         RepoVulnerable repoVulnerable = new RepoVulnerable();
