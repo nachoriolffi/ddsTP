@@ -39,28 +39,31 @@ import java.util.List;
 public class Colaborador {
 
     @Id
-    @GeneratedValue (strategy = javax.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", columnDefinition = "INT(11)")
     private Integer id_Colaborador;
+    @Column(name="nombre", columnDefinition = "VARCHAR(25)")// es nullable porque el colaborador puede ser una persona jurídica
     private String nombre;
-    @Column(name="apellido", columnDefinition = "VARCHAR(25)")
+    @Column(name="apellido", columnDefinition = "VARCHAR(25)")// idem anterior
     private String apellido;
     @Convert( converter = MedioComunicacionAtributeConvertere.class)
     @ElementCollection ( targetClass = String.class)
+    //@JoinColumn(name = "mediosDeComunicacion", nullable = false) -> chequear, creo que es así para que no sea nullable. Tiene que quedar como no nullable acá
     private List<MedioDeComunicacion> mediosDeComunicacion;
-    @Column(name="fechaDeNacimiento", columnDefinition = "DATE")
+    @Column(name="fechaDeNacimiento", columnDefinition = "DATE") // el enunciado dice que la fecha de nacimiento  es opcional, por eso es nullable
     private LocalDate fechaDeNacimiento;
     @ManyToOne
-    @JoinColumn(name = "direccion_id")
+    @JoinColumn(name = "direccion_id") // el enunciado dice que la direccion  es opcional, por eso es nullable
     private Direccion direccion;
     @Transient
     private List<FormaDeColaboracion> formasDeColaboracion;
-    @Transient
+    @Transient // revisar
     @Column(name = "nombre", columnDefinition = "VARCHAR(25)")
     private List<FormaDeColaboracion> colaboracionesRealizadas;
     @ManyToOne
     @JoinColumn(name = "cuestionario_id")
     private CuestionarioRespondido cuestionarioRespondido;
-    @Column(name = "razonSocial", columnDefinition = "INT")
+    @Column(name = "razonSocial", columnDefinition = "INT(11)")
     private String razonSocial;
     @Enumerated(EnumType.STRING)
     private TipoJuridisccion tipoJuridisccion;
@@ -71,14 +74,14 @@ public class Colaborador {
     @Enumerated(EnumType.STRING)
     private TipoPersona tipoPersona;
     @OneToMany
-    @JoinColumn (name = "id_contacto")
+    @JoinColumn (name = "colaborador_id")
     private List<Contacto> contacto;
     @Transient
     private IRecomendacionPuntos iRecomendacionPuntos;
     //private Double puntosTotales;
     @Column(name = "puntosTotalesUsados", columnDefinition = "DOUBLE")
     private Double puntosTotalesUsados;
-    @Column(name = "numeroDocumento", columnDefinition = "INT")
+    @Column(name = "numeroDocumento", columnDefinition = "INT(11)")
     private Integer numeroDocumento; //nuevo requerimiento para carga masiva
     @Enumerated(EnumType.STRING)
     private TipoDocumento tipoDocumento; //nuevo requerimiento para carga masiva
