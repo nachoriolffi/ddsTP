@@ -54,8 +54,7 @@ public class Colaborador {
     //@JoinColumn(name = "id_FormasColaboracion")
     @Transient
     private List<FormaDeColaboracion> formasDeColaboracion;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "colaborador_id")
+    @OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FormaDeColaboracion> colaboracionesRealizadas;
     @ManyToOne
     @JoinColumn(name = "cuestionario_id")
@@ -144,6 +143,7 @@ public class Colaborador {
 
     public void agregarColaboracionRealizada(FormaDeColaboracion formaDeColaboracion) {
         this.colaboracionesRealizadas.add(formaDeColaboracion);
+        formaDeColaboracion.setColaborador(this);
     }
 
     public void modificarColaborador(String nombre, String apellido, LocalDate fechaDeNacimiento, CuestionarioRespondido cuestionarioRespondido, String razonSocial, String rubro, TipoPersona tipoPersona, Contacto contacto) {

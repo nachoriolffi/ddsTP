@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.models.entities.colaborador.formasColab;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
+import lombok.Setter;
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
 import javax.persistence.*;
@@ -11,8 +12,13 @@ import javax.persistence.*;
 public abstract class  FormaDeColaboracion {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @Setter
+    @ManyToOne
+    @JoinColumn(name = "id_colaborador")
+    Colaborador colaborador;
 
     public double sumarPuntosA(Colaborador colaborador){
         return 0;

@@ -55,9 +55,11 @@ public class ColaboradorPersistencia {
         colaborador.setTipoPersona(TipoPersona.HUMANA);
 
         DonacionDinero donacionDinero = new DonacionDinero(500, null);
-        repoDonacionDinero.agregar(donacionDinero);
+
+        // Agregar la colaboración y asegurar la relación bidireccional
         colaborador.agregarColaboracionRealizada(donacionDinero);
 
+        // Persistir colaborador y donación
         repoColaborador.agregar(colaborador);
     }
 }
