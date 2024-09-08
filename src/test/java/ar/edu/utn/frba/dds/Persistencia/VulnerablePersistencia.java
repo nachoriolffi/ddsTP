@@ -14,6 +14,8 @@ public class VulnerablePersistencia {
     @Test
     public void persistirPersonaVulnerable(){
 
+        RepoRegistroPersonaACargo repoRegistroPersonaACargo = new RepoRegistroPersonaACargo();
+
         Vulnerable vulnerable = new Vulnerable();
         vulnerable.setNombre("Mateo");
         vulnerable.setApellido("Perez");
@@ -28,11 +30,31 @@ public class VulnerablePersistencia {
         registro.setTienePersonaACargo(Boolean.TRUE);
         registro.setCantidadDePersonasACargo(3);
         registro.setVulnerable(vulnerable);
-
+        repoRegistroPersonaACargo.agregar(registro);
         vulnerable.getMenoresACargo().add(registro);
 
         RepoVulnerable repoVulnerable = new RepoVulnerable();
         repoVulnerable.agregar(vulnerable);
     }
+    @Test
+    public void modificarVulnerable(){
 
+        RepoRegistroPersonaACargo repoRegistroPersonaACargo = new RepoRegistroPersonaACargo();
+
+        RepoVulnerable repoVulnerable = new RepoVulnerable();
+        Vulnerable vulnerable = repoVulnerable.buscar(3L);
+        vulnerable.setSituacionDeCalle(Boolean.FALSE);
+
+        RegistroMenorACargo registro2 = new RegistroMenorACargo();
+        registro2.setFechaRegistro(new Date(2025,4,14));
+        registro2.setTienePersonaACargo(Boolean.FALSE);
+        registro2.setCantidadDePersonasACargo(0);
+        registro2.setVulnerable(vulnerable);
+
+        repoRegistroPersonaACargo.agregar(registro2);
+        vulnerable.getMenoresACargo().add(registro2);
+
+        repoVulnerable.modificar(vulnerable);
+
+    }
 }

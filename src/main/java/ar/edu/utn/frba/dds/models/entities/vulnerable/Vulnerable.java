@@ -34,7 +34,7 @@ public class Vulnerable {
     @Column(name = "numeroDocumento", columnDefinition = "INT")
     private Integer numeroDocumento;
 
-    @OneToMany(mappedBy = "vulnerable", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "vulnerable", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<RegistroMenorACargo> menoresACargo = new ArrayList<>();
 
 

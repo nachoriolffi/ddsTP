@@ -42,7 +42,6 @@ public class Heladera {
     private ReceptorMovimiento receptorMovimiento;
     @Transient  // no creemos necesario persistir los receptores
     private ReceptorTemperatura receptorTemperatura;
-
     @OneToMany
     @JoinColumn(name = "id_Incidente")
     private List<Incidente> incidentes;

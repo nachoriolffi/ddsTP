@@ -99,7 +99,7 @@ public class TestHeladera {
 
         //--------------------------------------- Noticacion tecnico --------------------------------------------
         tecnico1 = new Tecnico(6L,"Juan","Cracio",coordenada1,Boolean.TRUE,1000);
-        Contacto contacto = new Contacto(TipoContacto.MAIL,"clazarte@frba.utn.edu.ar");
+        Contacto contacto = new Contacto(TipoContacto.MAIL,"iriolffi@frba.utn.edu.ar");
         tecnico1.setContactos(new ArrayList<>());
         tecnico1.getContactos().add(contacto);
 
