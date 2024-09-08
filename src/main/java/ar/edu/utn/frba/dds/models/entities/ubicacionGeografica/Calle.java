@@ -15,4 +15,8 @@ public class Calle {
     public Calle(String calle) {
         this.calle = calle;
     }
+
+    public Calle() {
+
+    }
 }
