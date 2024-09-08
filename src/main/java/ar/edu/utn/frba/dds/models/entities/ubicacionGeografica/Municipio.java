@@ -12,7 +12,7 @@ public class Municipio {
     //@GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id_Municipio;
 
-    @Column(name = "municipio")
+    @Column(name = "municipio", columnDefinition="VARCHAR(50)", nullable = false)
     private String municipio;
 
     @Setter

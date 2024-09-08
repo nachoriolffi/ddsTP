@@ -66,12 +66,14 @@ public class TestMultiplicadores {
 
         List<FormaDeColaboracion> colaboracionesRalizadas = new ArrayList<>();
 
-        // FORMAS DE COLABORACION
         DonacionDinero donacionDinero = new DonacionDinero(1000, new Date());
         DonacionDinero donacionDinero1 = new DonacionDinero(2000, new Date());
         DonacionVianda donacionVianda = new DonacionVianda(10, new Date());
+        Direccion direccion1 = new Direccion("Medrano", 951, 1);
+        Coordenada coordenada1 = new Coordenada(125.0, 410.0);
+        Heladera heladera1 = new Heladera(direccion1, coordenada1, 150, new ArrayList<>(), new Date());
         HacerseCargoDeHeladera hacerseCargoDeHeladera = new HacerseCargoDeHeladera(heladera1, TipoColaboracion.HACERSE_CARGO_HELADERA);
-        // AGREGAMOS FORMAS DE COLABORAR HECHAS AL COLABORADOR
+
         colaboracionesRalizadas.add(donacionDinero);
         colaboracionesRalizadas.add(donacionDinero1);
         colaboracionesRalizadas.add(donacionVianda);

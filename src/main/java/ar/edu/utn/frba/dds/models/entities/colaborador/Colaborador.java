@@ -50,11 +50,11 @@ public class Colaborador {
     @ManyToOne
     @JoinColumn(name = "direccion_id")
     private Direccion direccion;
-    @OneToMany
-    @JoinColumn(name = "id_FormasColaboracion")
+    //@OneToMany
+    //@JoinColumn(name = "id_FormasColaboracion")
+    @Transient
     private List<FormaDeColaboracion> formasDeColaboracion;
-    @OneToMany
-    @JoinColumn(name = "id_ColaboracionesHechas")
+    @OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FormaDeColaboracion> colaboracionesRealizadas;
     @ManyToOne
     @JoinColumn(name = "cuestionario_id")
@@ -143,6 +143,7 @@ public class Colaborador {
 
     public void agregarColaboracionRealizada(FormaDeColaboracion formaDeColaboracion) {
         this.colaboracionesRealizadas.add(formaDeColaboracion);
+        formaDeColaboracion.setColaborador(this);
     }
 
     public void modificarColaborador(String nombre, String apellido, LocalDate fechaDeNacimiento, CuestionarioRespondido cuestionarioRespondido, String razonSocial, String rubro, TipoPersona tipoPersona, Contacto contacto) {

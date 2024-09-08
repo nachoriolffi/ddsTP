@@ -18,33 +18,33 @@ import java.util.List;
 @Table (name = "distribucion_vianda")
 public class DistribucionVianda extends FormaDeColaboracion{
 
+   // @Id@GeneratedValue//private Long id;
+
     @ManyToOne
-    @JoinColumn(name = "id_heladeraOrigen",nullable = false)
+    @JoinColumn(name = "id_heladeraOrigen")
     private Heladera heladeraOrigen;
 
     @ManyToOne
-    @JoinColumn(name = "id_heladeraDestino",nullable = false)
+    @JoinColumn(name = "id_heladeraDestino")
     private Heladera heladeraDestino;
 
-    @Column(name= "cantidadViandas", columnDefinition = "INT",nullable = false)
+    @Column(name= "cantidadViandas", columnDefinition = "INT")
     private Integer cantidadViandas;
 
     @OneToMany
-    @JoinColumn(name = "id_viandas",nullable = false)
+    @JoinColumn(name = "id_viandas")
     private List<Vianda> viandasMovidas;// por ahora es opcional
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private MotivoDistribucion motivo;
 
-    @Column(name= "fechaDistribucion", columnDefinition = "DATE",nullable = false)
+    @Column(name= "fechaDistribucion", columnDefinition = "DATE")
     private Date fechaDistribucion;
 
     @Column(name= "fechaColaboracion", columnDefinition = "DATE",nullable = false)
     private Date fechaColaboracion;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private TipoColaboracion tipoColaboracion = TipoColaboracion.REDISTRIBUCION_VIANDAS;
 
     public DistribucionVianda(){
@@ -54,6 +54,7 @@ public class DistribucionVianda extends FormaDeColaboracion{
 
     public DistribucionVianda(Integer cantidad, Date fechaColaboracion) {
         this.fechaColaboracion = fechaColaboracion;
+        this.fechaDistribucion = new Date();
         this.cantidadViandas = cantidad;
     };
 
