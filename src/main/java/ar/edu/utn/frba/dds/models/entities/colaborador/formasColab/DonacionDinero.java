@@ -16,9 +16,9 @@ import java.util.Observer;
 @Table(name="doancion_dinero")
 public class DonacionDinero extends FormaDeColaboracion {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //private Long id;
     @Column(name= "fecha", columnDefinition = "DATE",nullable = false)
     private Date fecha;
     @Column(name="monto", columnDefinition = "DOUBLE")

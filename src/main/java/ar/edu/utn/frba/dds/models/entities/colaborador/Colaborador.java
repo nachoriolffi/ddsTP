@@ -50,11 +50,12 @@ public class Colaborador {
     @ManyToOne
     @JoinColumn(name = "direccion_id")
     private Direccion direccion;
-    @OneToMany
-    @JoinColumn(name = "id_FormasColaboracion")
+    //@OneToMany
+    //@JoinColumn(name = "id_FormasColaboracion")
+    @Transient
     private List<FormaDeColaboracion> formasDeColaboracion;
-    @OneToMany
-    @JoinColumn(name = "id_ColaboracionesHechas")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "colaborador_id")
     private List<FormaDeColaboracion> colaboracionesRealizadas;
     @ManyToOne
     @JoinColumn(name = "cuestionario_id")

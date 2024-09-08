@@ -16,8 +16,8 @@ import java.util.List;
 @Table(name="registro_vulnerable")
 public class RegistroVulnerable extends FormaDeColaboracion {
 
-    @Id@GeneratedValue
-    private Long id;
+    //@Id@GeneratedValue
+    //private Long id;
     @OneToMany
     @JoinColumn(name = "id_tarjeta")
     private List<Tarjeta> tarjetasDonadas;

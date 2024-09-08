@@ -18,8 +18,7 @@ import java.util.List;
 @Table (name = "distribucion_vianda")
 public class DistribucionVianda extends FormaDeColaboracion{
 
-    @Id@GeneratedValue
-    private Long id;
+   // @Id@GeneratedValue//private Long id;
 
     @ManyToOne
     @JoinColumn(name = "id_heladeraOrigen")

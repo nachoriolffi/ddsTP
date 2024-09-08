@@ -13,6 +13,6 @@ public class DonacionViandaFactory implements FormaDeColaboracionFactory{
     public FormaDeColaboracion create(Integer cantidad, Date fechaColaboracion) {
         DonacionVianda donacion = new DonacionVianda(cantidad, fechaColaboracion);
         RepoDonacionVianda.INSTANCE.agregar(donacion);
-        return donacion ;
+        return (FormaDeColaboracion) donacion ;
     }
 }

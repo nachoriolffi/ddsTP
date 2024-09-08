@@ -20,9 +20,9 @@ import java.util.List;
 @Table(name="donacion_vianda")
 public class DonacionVianda extends FormaDeColaboracion {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    //private Long id;
     @OneToMany
     @JoinColumn(name = "id_vianda")
     private List<Vianda> viandas;

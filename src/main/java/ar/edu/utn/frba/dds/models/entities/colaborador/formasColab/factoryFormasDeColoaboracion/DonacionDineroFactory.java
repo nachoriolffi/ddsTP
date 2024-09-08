@@ -11,6 +11,6 @@ public class DonacionDineroFactory implements FormaDeColaboracionFactory{
     public FormaDeColaboracion create(Integer cantidad, Date fechaColaboracion) {
         DonacionDinero donacion = new DonacionDinero(cantidad, fechaColaboracion);
         RepoDonacionDinero.INSTANCE.agregar(donacion);
-        return donacion;
+        return (FormaDeColaboracion) donacion;
     }
 }

@@ -11,6 +11,6 @@ public class RegistroVulnerableFactory implements FormaDeColaboracionFactory{
     public FormaDeColaboracion create(Integer cantidad, Date fechaColaboracion) {
         RegistroVulnerable donacion=  new RegistroVulnerable(cantidad, fechaColaboracion);
         RepoRegistroVulnerable.INSTANCE.agregar(donacion);
-        return donacion;
+        return (FormaDeColaboracion) donacion;
     }
 }
