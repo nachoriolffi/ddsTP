@@ -18,32 +18,60 @@
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
-        <ul class="nav nav-pills justify-content-center">
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                   aria-expanded="false">Donaciones</a>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="donacionDinero.html">Donar Dinero</a></li>
-                    <li><a class="dropdown-item" href="encargarseDeHeladera.html">Encargarse de Heladera</a></li>
-                    <li><a class="dropdown-item" href="donacionViandas.html">Donar Viandas</a></li>
-                    <li><a class="dropdown-item" href="distribuirViandas.html">Distribuir Viandas</a></li>
-                    <li><a class="dropdown-item" href="registroVulnerable.html">Registrar Personas Vulnerables</a></li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li><a class="dropdown-item" href="misHeladeras.html">Mis Heladeras</a></li>
-                </ul>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="canjeProductos.html">Tienda</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Perfil</a>
-            </li>
-        </ul>
+        <a class="navbar-brand" href="#">ONG</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Donaciones</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="../html/donacionDinero.html">Donar Dinero</a></li>
+                        <li><a class="dropdown-item" href="../html/encargarseDeHeladera.html">Encargarse de Heladera</a></li>
+                        <li><a class="dropdown-item" href="../html/donacionViandas.html">Donar Viandas</a></li>
+                        <li><a class="dropdown-item" href="../html/distribuirViandas.html">Distribuir Viandas</a></li>
+                        <li><a class="dropdown-item" href="../html/registroVulnerable.html">Registrar Personas Vulnerables</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="../html/misHeladeras.html">Mis Heladeras</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/canjeProductos.html">Tienda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/heladeras.html">Ver Heladeras</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Herramientas</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="../html/reportarFallaTecnica.html">Reportar Incidente</a>
+                        </li>
+                        <li><a class="dropdown-item" href="../html/cargaCSV.html">Cargar Archivo CSV</a></li>
+                        <li><a class="dropdown-item" href="../html/visualizacionReportes.html">Ver Reportes PDF</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Mi Perfil</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="../html/iniciarSesion.html">Iniciar Sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="../html/crearCuenta.html">Registrarse</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
 <section class="container">
@@ -53,7 +81,7 @@
             <h1 class="h1">Mis Heladeras</h1>
         </div>
         <div class="col-md-4 text-md-end">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#donationModal">
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#donationModal">
                 Suscribirse a Heladera
             </button>
         </div>
@@ -61,9 +89,8 @@
     <div class="row">
         <div class="col-md-12 table-responsive">
             <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
-                <caption>Heladeras Suscriptas</caption>
                 <thead>
-                <tr>
+                <tr class="align-middle">
                     <th scope="col">Nombre</th>
                     <th scope="col">Dirección</th>
                     <th scope="col">Cantidad Máx. de Viandas</th>
@@ -71,8 +98,9 @@
                     <th scope="col">Desuscribirme</th>
                 </tr>
                 </thead>
+                <tbody class="table-group-divider">
                 <tr>
-                    <td>Heladera del Centro</td>
+                    <td><a href="">Heladera del Centro</a></td>
                     <td>Calle Falsa 123</td>
                     <td>100</td>
                     <td>50</td>
@@ -81,7 +109,7 @@
                     </button></td>
                 </tr>
                 <tr>
-                    <td>Heladera del Norte</td>
+                    <td><a href="">Heladera del Norte</a></td>
                     <td>Avenida Principal 456</td>
                     <td>80</td>
                     <td>30</td>
@@ -91,9 +119,16 @@
                         </button>
                     </td>
                 </tr>
+                </tbody>
+
             </table>
         </div>
     </div>
+
+    <!--Modal Suscribirse-->
+
+    <!--Modal Desuscribirse-->
+
 </section>
 </body>
 </html>

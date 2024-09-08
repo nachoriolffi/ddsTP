@@ -11,10 +11,9 @@
             integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
             crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/115c7ea5e6.js" crossorigin="anonymous"></script>
-    <title>Donaciones</title>
+    <title>Distribucion de Viandas</title>
 </head>
 <body>
-<!-- NavBar -->
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">ONG</a>
@@ -24,9 +23,6 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Inicio</a>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                        aria-expanded="false">Donaciones</a>
@@ -46,15 +42,24 @@
                 <li class="nav-item">
                     <a class="nav-link" href="../html/canjeProductos.html">Tienda</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/heladeras.html">Ver Heladeras</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                       aria-expanded="false">Perfil</a>
+                       aria-expanded="false">Herramientas</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Modificar/Ver Perfil</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
+                        <li><a class="dropdown-item" href="../html/reportarFallaTecnica.html">Reportar Incidente</a>
                         </li>
-                        <li><a class="dropdown-item" href="../html/iniciarSesion.html">Cerrar Sesión</a></li>
+                        <li><a class="dropdown-item" href="../html/cargaCSV.html">Cargar Archivo CSV</a></li>
+                        <li><a class="dropdown-item" href="../html/visualizacionReportes.html">Ver Reportes PDF</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Mi Perfil</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -62,9 +67,6 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="../html/crearCuenta.html">Registrarse</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="../html/reportarFallaTecnica.html">Reportar Incidentes</a>
                 </li>
             </ul>
         </div>
@@ -77,25 +79,24 @@
             <h1 class="h1">Distribucion de Viandas</h1>
         </div>
         <div class="col-md-4 text-md-end">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#donationModal">
-                Distribuir Vianda
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#donationModal">
+                Distribuir Vianda/s
             </button>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 table-responsive">
-            <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
-                <caption>Viandas Movidas o Distribuidas</caption>
+        <div class="col-12 table-responsive">
+            <table  class="table caption-top table-hover table-bordered table-sm align-middle text-center">
                 <thead>
-                <tr>
+                <tr class="align-middle">
                     <th>Heladera de origen</th>
                     <th>Heladera destino</th>
-                    <th>Cantidad de viandas a mover</th>
+                    <th>Cantidad de Viandas Movidas</th>
                     <th>Motivo</th>
-                    <th>Fecha de distribución</th>
+                    <th>Fecha de Distribución</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-group-divider">
                 <tr>
                     <td>Heladera A</td>
                     <td>Heladera B</td>
@@ -138,7 +139,7 @@
                 </div>
                 <div class="modal-body">
                     <!-- Formulario de Donación -->
-                    <form class="row g-3 needs-validation">
+                    <form class="row g-3 needs-validation" novalidate>
                         <div class="col-md-6">
                             <label class="form-label" for="input1">Heladera Origen</label>
                             <input class="form-control" type="text" id="input1" name="input1" required>
@@ -192,5 +193,6 @@
         </div>
     </div>
 </section>
+<script src="../js/validacionDatos.js"></script>
 </body>
 </html>

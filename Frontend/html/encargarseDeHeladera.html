@@ -17,7 +17,7 @@
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
             crossorigin=""></script>
-    <title>Donaciones</title>
+    <title>Hacerse Cargo de Heladera</title>
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -29,36 +29,50 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="#">Inicio</a>
-                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                        aria-expanded="false">Donaciones</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="donacionDinero.html">Donar Dinero</a></li>
-                        <li><a class="dropdown-item" href="encargarseDeHeladera.html">Encargarse de Heladera</a></li>
-                        <li><a class="dropdown-item" href="donacionViandas.html">Donar Viandas</a></li>
-                        <li><a class="dropdown-item" href="distribuirViandas.html">Distribuir Viandas</a></li>
-                        <li><a class="dropdown-item" href="registroVulnerable.html">Registrar Personas Vulnerables</a>
+                        <li><a class="dropdown-item" href="../html/donacionDinero.html">Donar Dinero</a></li>
+                        <li><a class="dropdown-item" href="../html/encargarseDeHeladera.html">Encargarse de Heladera</a></li>
+                        <li><a class="dropdown-item" href="../html/donacionViandas.html">Donar Viandas</a></li>
+                        <li><a class="dropdown-item" href="../html/distribuirViandas.html">Distribuir Viandas</a></li>
+                        <li><a class="dropdown-item" href="../html/registroVulnerable.html">Registrar Personas Vulnerables</a>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="misHeladeras.html">Mis Heladeras</a></li>
+                        <li><a class="dropdown-item" href="../html/misHeladeras.html">Mis Heladeras</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="canjeProductos.html">Tienda</a>
+                    <a class="nav-link" href="../html/canjeProductos.html">Tienda</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Perfil</a>
+                    <a class="nav-link" href="../html/heladeras.html">Ver Heladeras</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Herramientas</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="../html/reportarFallaTecnica.html">Reportar Incidente</a>
+                        </li>
+                        <li><a class="dropdown-item" href="../html/cargaCSV.html">Cargar Archivo CSV</a></li>
+                        <li><a class="dropdown-item" href="../html/visualizacionReportes.html">Ver Reportes PDF</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Mi Perfil</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                    </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="iniciarSesion.html">Iniciar Sesión</a>
+                    <a class="nav-link" aria-current="page" href="../html/iniciarSesion.html">Iniciar Sesión</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="crearCuenta.html">Registrarse</a>
+                    <a class="nav-link" aria-current="page" href="../html/crearCuenta.html">Registrarse</a>
                 </li>
             </ul>
         </div>
@@ -80,16 +94,15 @@
     <div class="row">
         <div class="col-md-12 table-responsive">
             <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
-                <caption>Heladeras a Cargo</caption>
                 <thead>
-                <tr>
+                <tr class="align-middle">
                     <th scope="col">Heladera</th>
                     <th scope="col">Dirección</th>
                     <th scope="col">Capacidad (viandas)</th>
                     <th scope="col">Inicio de Operaciones</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class="table-group-divider">
                 <tr>
                     <td>Heladera del Parque</td>
                     <td>Av. Siempreviva 123</td>
@@ -132,9 +145,9 @@
                                 <option>Modelo 4</option>
                             </select>
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-12 flex-fill">
                             <button type="button" id="submitPoints" data-bs-toggle="modal" data-bs-target="#pointsModal"
-                                    class="btn btn-outline-primary">
+                                    class="w-100 btn btn-outline-primary">
                                 Solicitar Puntos de Colocación
                             </button>
                         </div>
@@ -152,7 +165,7 @@
                         </div>
                         <div class="modal-footer col-md-12">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="button" id="submitDonation" class="btn btn-primary">¡Realizar Donación!
+                            <button type="button" id="submitDonation" class="btn btn-outline-primary">¡Realizar Donación!
                             </button>
                         </div>
                     </form>
@@ -171,20 +184,20 @@
                 <div class="modal-body">
                     <div class="row" style="height: 500px; width: 100%;">
                         <div class="col-md-5">
-                            <div class="row mb-4">
-                                <div class="col-md-4">
-                                    <label class="form-label" for="direccion-1">Direccion</label>
-                                    <input class="form-control" type="text" id="direccion-1" required>
+                            <div class="row align-items-center justify-content-center">
+                                <div class="col-md-4 mb-3 mb-sm-4">
+                                    <input class="form-control" type="text" id="direccion-1" placeholder="Direccion" required>
                                 </div>
-                                <div class="col-md-3">
-                                    <label class="form-label" for="altura-1">Altura</label>
-                                    <input class="form-control" type="text" id="altura-1" required>
+                                <div class="col-md-3 mb-3 mb-sm-4">
+                                    <input class="form-control" type="text" id="altura-1" placeholder="Altura" required>
                                 </div>
-                                <div class="col-md-5">
-                                    <button class=" btn btn-outline-primary"> Buscar Puntos</button>
+                                <div class="col-md-5 mb-sm-4">
+                                    <button class="btn btn-outline-primary w-100">Buscar Puntos</button>
                                 </div>
                             </div>
-                            <div class="row overflow-auto" style="height: 300px;">
+
+
+                            <div class="row overflow-auto" style="height: 400px;">
                                 <ul class="list-group">
                                     <li class="list-group-item">
                                         <div class="card">

@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.models.entities.vulnerable;
 
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,6 +22,7 @@ public class RegistroMenorACargo {
 
     @ManyToOne
     @JoinColumn(name = "vulnerable_id", nullable = false)
+    @Cascade(org.hibernate.annotations.CascadeType.PERSIST)
     private Vulnerable vulnerable;
 
     public RegistroMenorACargo(){
