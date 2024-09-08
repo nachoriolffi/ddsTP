@@ -16,8 +16,12 @@ import org.junit.jupiter.api.Test;
 public class ColaboradorPersistencia {
 
     @Test
-    public void persistirColaborador(){
+    public void persistirColaborador() {
+        // Crear repositorios
         RepoColaborador repoColaborador = new RepoColaborador();
+        RepoRubroColaborador repoRubro = new RepoRubroColaborador();
+
+        // Crear y persistir colaborador humano
         Colaborador colaborador1 = new Colaborador();
         colaborador1.setNombre("Pepito");
         colaborador1.setApellido("Perez");
@@ -26,20 +30,31 @@ public class ColaboradorPersistencia {
         colaborador1.setTipoPersona(TipoPersona.HUMANA);
 
         repoColaborador.agregar(colaborador1);
-        Colaborador colaborador2 =  new Colaborador();
+
+        // Crear y persistir colaborador jurídico
+        Colaborador colaborador2 = new Colaborador();
         colaborador2.setRazonSocial("Accenture");
         colaborador2.setTipoPersona(TipoPersona.JURIDICA);
         colaborador2.setTipoJuridisccion(TipoJuridisccion.EMPRESA);
 
-        RepoRubroColaborador repoRubro = new RepoRubroColaborador();
+        // Crear y persistir rubro
         RubroColaborador rubro = new RubroColaborador();
         rubro.setNombre("Consultora");
         repoRubro.agregar(rubro);
         colaborador2.setRubroColaborador(rubro);
-        DonacionDinero donacionDinero = new DonacionDinero(1000, null);
+
+        // Crear y persistir donación de dinero
+        DonacionDinero donacionDinero = new DonacionDinero(1000, null); // puedes quitar el null aquí
         RepoDonacionDinero.INSTANCE.agregar(donacionDinero);
+
+        // Establecer relación bidireccional
         colaborador2.agregarFormaDeColaboracion(donacionDinero);
+        donacionDinero.setColaborador(colaborador2); // Asegurarse de que la relación sea bidireccional
+
+        // Persistir colaborador2 con su donación y rubro
         repoColaborador.agregar(colaborador2);
+
+        // Opcional: Agregar asserts para verificar que las entidades se hayan guardado correctamente
     }
 
     @Test

@@ -23,13 +23,9 @@ public class DonacionVianda extends FormaDeColaboracion {
     //@Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     //private Long id;
-    @OneToMany
-    @JoinColumn(name = "id_vianda")
-    private List<Vianda> viandas;
-    @Getter
-    @Setter
-    @Column(name ="cantidadViandas", columnDefinition = "INT",nullable = false)
-    private Integer cantidadViandas;
+    @OneToOne
+    @JoinColumn(name = "id_Vianda")
+    private Vianda vianda;
     @Column(name ="fechaColaboracion", columnDefinition = "DATE",nullable = false)
     private Date fechaColaboracion;
     @Getter
@@ -43,22 +39,19 @@ public class DonacionVianda extends FormaDeColaboracion {
 
     public DonacionVianda(Integer cantidad, Date fechaColaboracion) {
         this.fechaColaboracion = fechaColaboracion;
-        this.cantidadViandas = cantidad;
-
     }
 
 
-    public DonacionVianda(List<Vianda> viandas, Date fechaColaboracion) {
-        this.viandas = viandas;
+    public DonacionVianda(Vianda vianda, Date fechaColaboracion) {
+        this.vianda = vianda;
         this.fechaColaboracion = fechaColaboracion;
-        this.cantidadViandas = viandas.size();
         this.tipoColaboracion  = TipoColaboracion.DONACION_VIANDAS;
     }
 
 
     @Override
     public double sumarPuntosA(Colaborador colaborador) {
-        return cantidadViandas * ConfiguracionMultiplicador.getInstance().getMultiplicadorViandasDonadas();
+        return ConfiguracionMultiplicador.getInstance().getMultiplicadorViandasDonadas();
     }
 
     public void solicitarAutorizacion(Heladera heladera, Tarjeta tarjeta){

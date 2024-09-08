@@ -25,7 +25,7 @@ public class Cuestionario {
          @Column(name = "descripcion", columnDefinition = "VARCHAR(250)")
         private String descripcion;
 
-         @OneToMany(cascade = CascadeType.ALL)
+         @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
          @JoinColumn(name = "id_Cuestionario")
         private List<Pregunta> preguntas;
 

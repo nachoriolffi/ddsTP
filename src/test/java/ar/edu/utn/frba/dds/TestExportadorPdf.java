@@ -56,9 +56,9 @@ public class TestExportadorPdf {
         exportable3 = new DocumentoFallasHeladera(viandasColaborador);
 
         // necesitamos cargar los datos dentro de los repor para los documentos
-        ModeloHeladera modelo = new ModeloHeladera(18.0,5.0,70.0,200);
+        //ModeloHeladera modelo = new ModeloHeladera(18.0,5.0,70.0,200);
         // fallas de heladeras
-        Heladera heladera1 = new Heladera();
+        /*Heladera heladera1 = new Heladera();
         heladera1.setNombre("HELADERA 1");
         heladera1.setModelo(modelo);
         heladera1.setIncidentes(new ArrayList<>());
@@ -158,19 +158,19 @@ public class TestExportadorPdf {
 
         heladera1.setAperturas(aperturas1);
         heladera2.setAperturas(aperturas2);
-        // esto significa que un colaborador entro a la heladera y saco o agrego heladeras
+        // esto significa que un colaborador entro a la heladera y saco o agrego heladeras*/
 
     // COLABORADORES
-        Colaborador colaborador1 = new Colaborador();
+     /*   Colaborador colaborador1 = new Colaborador();
 
-        FormaDeColaboracion formaDeColaboracion1 = new DonacionVianda(viandas, new Date());
+        FormaDeColaboracion formaDeColaboracion1 = new DonacionVianda(vianda, new Date());
 
         colaborador1.agregarColaboracionRealizada(formaDeColaboracion1);
         RepoColaborador.INSTANCE.agregar(colaborador1);
         // ya tengo el colaborador cargado en el repo
 
         repoHeladeras.agregar(heladera1);
-        repoHeladeras.agregar(heladera2);
+        repoHeladeras.agregar(heladera2);*/
     }
 
     @Test

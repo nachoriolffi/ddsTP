@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 
 public class CuestionarioPersistencia {
 
-
     @Test
     public void persistirCuestionario() {
         Cuestionario cuestionario = new Cuestionario();
@@ -45,15 +44,10 @@ public class CuestionarioPersistencia {
         cuestionarioRespondido.setCuestionario(cuestionario);
         cuestionarioRespondido.agregarRespuesta(respuesta1);
 
-
-
-
-
         RepoCuestionarioRespondido repoCuestionarioRespondido = new RepoCuestionarioRespondido();
         repoCuestionarioRespondido.agregar(cuestionarioRespondido);
 
         // Create responses
-
 
         RepoRespuesta repoRespuesta = new RepoRespuesta();
         repoRespuesta.agregar(respuesta1);
@@ -62,14 +56,15 @@ public class CuestionarioPersistencia {
     @Test
     public void borroCuestionarioYsusPreguntas(){
         RepoCuestionario repoCuestionario = new RepoCuestionario();
-        repoCuestionario.eliminar(repoCuestionario.buscar(1L));
+        Cuestionario cuestionario = repoCuestionario.buscar(1L);
+        repoCuestionario.eliminar(cuestionario);
 
     }
 
     @Test
     public void modificarCuestionario(){
         RepoCuestionario repoCuestionario = new RepoCuestionario();
-        Cuestionario cuestionario = repoCuestionario.buscar(2L);
+        Cuestionario cuestionario = repoCuestionario.buscar(1L);
         cuestionario.setNombreCuestionario("Cuestionario Modificado");
         repoCuestionario.modificar(cuestionario);
     }
@@ -79,10 +74,6 @@ public class CuestionarioPersistencia {
 
         RepoCuestionarioRespondido repoCuestionarioRespondido = new RepoCuestionarioRespondido();
         repoCuestionarioRespondido.eliminar(repoCuestionarioRespondido.buscar(1L));
-
-
-
-
     }
 
 

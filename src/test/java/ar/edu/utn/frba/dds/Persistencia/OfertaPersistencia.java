@@ -25,7 +25,7 @@ public class OfertaPersistencia {
     @Test
     public void modificarOferta(){
         RepoOferta repoOferta= new RepoOferta();
-        Oferta oferta = repoOferta.buscar(Long.valueOf(2));
+        Oferta oferta = repoOferta.buscar(2L);
         oferta.setPuntosNecesarios(4500);
         repoOferta.modificar(oferta);
     }

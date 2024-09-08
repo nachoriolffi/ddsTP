@@ -37,7 +37,7 @@ public class Colaborador {
 
     @Id
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-    private Integer id_Colaborador;
+    private Long id_Colaborador;
     @Column(name = "nombre", columnDefinition = "VARCHAR(25)")
     private String nombre;
     @Column(name = "apellido", columnDefinition = "VARCHAR(25)")

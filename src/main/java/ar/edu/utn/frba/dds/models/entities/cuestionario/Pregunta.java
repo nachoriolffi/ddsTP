@@ -13,10 +13,9 @@ public class Pregunta {
 
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
-    private Integer id_Pregunta;
+    private Long id_Pregunta;
     @Column(name = "nombrePregunta", columnDefinition = "VARCHAR(250)")
     private String nombre;
-    //private List<Opcion> opciones;
     @Column(name = "esObligatoria",columnDefinition = "BOOLEAN")
     private Boolean esObligatoria;
     @Enumerated(EnumType.STRING)

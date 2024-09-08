@@ -14,7 +14,7 @@ import java.util.Date;
 public class Vianda {
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
-    private Integer id_Vianda;
+    private Long id_Vianda;
     @Column(name = "comida",columnDefinition = "VARCHAR (250)",nullable = false)
     private String comida;
     @Column(name = "fechaCaducidad",columnDefinition = "Date",nullable = false)
@@ -30,6 +30,9 @@ public class Vianda {
     private Double peso;
     @Column(name = "fueEntregada",columnDefinition = "Boolean",nullable = false)
     private Boolean fueEntregada;
+    @ManyToOne
+    @JoinColumn(name = "id_Heladera", nullable = false)
+    private Heladera heladera;
 
     public Vianda(){
 

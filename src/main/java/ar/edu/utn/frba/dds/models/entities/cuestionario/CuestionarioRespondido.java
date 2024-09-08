@@ -20,7 +20,7 @@ public class CuestionarioRespondido {
     @JoinColumn(name = "id_Cuestionario")
     private Cuestionario cuestionario;
 
-    @OneToMany(mappedBy = "cuestionarioRespondido", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cuestionarioRespondido")
     private List<Respuesta> respuestas;
 
     public CuestionarioRespondido() {
@@ -29,6 +29,12 @@ public class CuestionarioRespondido {
 
     public void agregarRespuesta(Respuesta respuesta) {
         respuestas.add(respuesta);
+        respuesta.setCuestionarioRespondido(this);
+    }
+
+    public void quitarRespuesta(Respuesta respuesta) {
+        respuestas.remove(respuesta);
+        respuesta.setCuestionarioRespondido(null);
     }
 
     public CuestionarioRespondido(Cuestionario cuestionario){
