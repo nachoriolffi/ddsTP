@@ -20,8 +20,11 @@ import java.util.List;
 @Table(name="donacion_vianda")
 public class DonacionVianda extends FormaDeColaboracion {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @OneToMany
-    @JoinColumn(name = "id_vianda",nullable = false)
+    @JoinColumn(name = "id_vianda")
     private List<Vianda> viandas;
     @Getter
     @Setter
@@ -32,7 +35,6 @@ public class DonacionVianda extends FormaDeColaboracion {
     @Getter
     @Setter
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private TipoColaboracion tipoColaboracion;
 
     public DonacionVianda(){

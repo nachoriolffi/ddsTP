@@ -4,12 +4,13 @@ import ar.edu.utn.frba.dds.models.entities.lectorCSV.LectorColaborador;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
+import java.text.ParseException;
 
 
 public class TestLecturaCargaMasiva {
 
     @Test
-    public void TestCargaMasiva() throws FileNotFoundException {
+    public void TestCargaMasiva() throws FileNotFoundException, ParseException {
         String path = "src/test/java/ar/edu/utn/frba/dds/archivo_ejemplo.csv";
         LectorColaborador lector= new LectorColaborador();
 

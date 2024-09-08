@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.models.entities.colaborador.formasColab;
 
+import ar.edu.utn.frba.dds.models.converters.DateConverter;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.multiplicador.config.ConfiguracionMultiplicador;
 import lombok.Getter;
@@ -15,13 +16,18 @@ import java.util.Observer;
 @Table(name="doancion_dinero")
 public class DonacionDinero extends FormaDeColaboracion {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @Column(name= "fecha", columnDefinition = "DATE",nullable = false)
     private Date fecha;
-    @Column(name="monto", columnDefinition = "DOUBLE",nullable = false)
+    @Column(name="monto", columnDefinition = "DOUBLE")
     private Float monto;
-    @Column(name="frecuencia", columnDefinition = "INT",nullable = false)
+    @Column(name="frecuencia", columnDefinition = "INT")
     private Integer frecuencia; // en dias
-    @Column(name="fechaColaboracion", columnDefinition = "DATE",nullable = false)
+    @Setter
+    @Column(name="fechaColaboracion")
+    @Convert(converter = DateConverter.class)
     private Date fechaColaboracion;
     @Column(name="multiplicador", columnDefinition = "DOUBLE",nullable = false)
     private Double multiplicador;
@@ -38,7 +44,8 @@ public class DonacionDinero extends FormaDeColaboracion {
 
     public DonacionDinero(Integer cantidad, Date fechaColaboracion) {
         this.monto = Float.valueOf(cantidad);
-        this.fecha = fechaColaboracion;
+        this.fechaColaboracion= fechaColaboracion;
+        this.fecha= new Date();
         this.multiplicador = 3.0;
     };
 

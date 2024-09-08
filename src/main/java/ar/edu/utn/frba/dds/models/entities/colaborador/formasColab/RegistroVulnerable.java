@@ -16,10 +16,12 @@ import java.util.List;
 @Table(name="registro_vulnerable")
 public class RegistroVulnerable extends FormaDeColaboracion {
 
+    @Id@GeneratedValue
+    private Long id;
     @OneToMany
-    @JoinColumn(name = "id_tarjeta",nullable = false)
+    @JoinColumn(name = "id_tarjeta")
     private List<Tarjeta> tarjetasDonadas;
-    @Column(name="cantidadTarjetas", columnDefinition = "INT",nullable = false)
+    @Column(name="cantidadTarjetas", columnDefinition = "INT")
     private Integer cantidadTarjetas;
     @Column(name="fechaColaboracion", columnDefinition = "DATE",nullable = false)
     private Date fechaColaboracion;
