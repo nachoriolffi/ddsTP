@@ -74,7 +74,11 @@ Para guardar los inicidentes se utiliza la clase `Incidente`, en la que hay un a
 ### Patron Broker
 
 ### [Presentación](https://docs.google.com/presentation/d/17NP5en2xz6xWgHBH0dix2jR77S3u4nxxsPVAz0DYJ7E/edit?usp=sharing)
-# Entrega 4 - 5
-
-
+# Entrega 4
 ### [Presentación]() [Wireframes](https://app.moqups.com/JOnC0Tk1QV3leyiaqQHYWGxyAOppiB44/view/page/ad64222d5) [Maquetado](https://www.figma.com/design/9iGr1u9mtqBejxZXqxjzbW/TP-DDS---25?node-id=3-3&node-type=FRAME&t=xiAM6yjYsDu2cdEj-0) 
+
+
+# Entrega 5
+### [Presentación]() [Modelo de Datos](https://lucid.app/lucidchart/c71dc760-df83-45bd-8925-75efca959b4f/edit?viewport_loc=-2079%2C-1076%2C2246%2C1208%2C0_0&invitationId=inv_bda4ced6-2b4d-4678-be20-9340fc1a5a1d)
+
+
