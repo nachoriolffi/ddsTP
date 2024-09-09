@@ -48,15 +48,17 @@ public class TestRapidoDeGeoRef {
         ListadoProvincias listadoProvincias = new ListadoProvincias();
         Call<ListadoProvincias> call = mock(Call.class); // Mock Call
         Response<ListadoProvincias> response = Response.success(listadoProvincias);
+
+        // Configura el comportamiento del mock
         when(call.execute()).thenReturn(response);
-        when(georefService.provincias()).thenReturn(call);
+        when(georefService.provincias(anyString())).thenReturn(call);
 
         // Call the method
         ListadoProvincias result = georef.listadoProvincias();
 
         // Verify the result
         assertNotNull(result);
-        verify(georefService, times(1)).provincias();
+        verify(georefService, times(1)).provincias(anyString());
     }
 
     @Test

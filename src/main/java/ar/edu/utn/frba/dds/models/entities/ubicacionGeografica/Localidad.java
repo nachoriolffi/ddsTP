@@ -9,7 +9,7 @@ public class Localidad {
     @Id
     //@GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id_Localidad;
-    @Column(name = "localidad", columnDefinition="VARCHAR(50)", nullable = false)
+    @Column(name = "localidad")
     private String localidad;
     @ManyToOne (cascade = CascadeType.ALL)
     @JoinColumn(name = "id_Municipio", referencedColumnName = "id_Municipio")

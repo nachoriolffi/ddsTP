@@ -25,14 +25,14 @@ public class OfertaPersistencia {
     @Test
     public void modificarOferta(){
         RepoOferta repoOferta= new RepoOferta();
-        Oferta oferta = repoOferta.buscar(2L);
+        Oferta oferta = repoOferta.buscar(1L);
         oferta.setPuntosNecesarios(4500);
         repoOferta.modificar(oferta);
     }
     @Test
     public void eliminarOferta(){
         RepoOferta repoOferta= new RepoOferta();
-        Oferta oferta = repoOferta.buscar(Long.valueOf(2));
+        Oferta oferta = repoOferta.buscar(Long.valueOf(1));
         repoOferta.eliminar(oferta);
         assert repoOferta.buscarTodos().size()==0;
     }

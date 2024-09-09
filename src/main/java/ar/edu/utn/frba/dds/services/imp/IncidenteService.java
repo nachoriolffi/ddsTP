@@ -17,7 +17,6 @@ public class IncidenteService implements IIncidenteService {
     @Override
     public IncidenteOutputDTO crear(IncidenteInputDTO dto) {
         Incidente incidente = new Incidente(
-                dto.getId(),
                 dto.getDescripcion(),
                 dto.getPathFoto(),
                 obtenerTipoIncidente(dto.getTipoIncidente()),
@@ -51,7 +50,6 @@ public class IncidenteService implements IIncidenteService {
     @Override
     public void eliminar(IncidenteInputDTO dto) {
         Incidente incidente = new Incidente(
-                dto.getId(),
                 dto.getDescripcion(),
                 dto.getPathFoto(),
                 obtenerTipoIncidente(dto.getTipoIncidente()),

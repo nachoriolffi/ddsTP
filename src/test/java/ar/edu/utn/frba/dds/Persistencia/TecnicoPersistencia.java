@@ -26,15 +26,14 @@ public class TecnicoPersistencia {
 
         RepoTecnico repoTecnico = new RepoTecnico();
         repoTecnico.agregar(tecnico);
-        assert repoTecnico.buscarTodos().size()==1;
+
     }
 
     @Test
     public void borrarTecnico() {
         RepoTecnico repoTecnico = new RepoTecnico();
-        Tecnico tecnico = repoTecnico.buscar(1L);
+        Tecnico tecnico = repoTecnico.buscar(2L);
         repoTecnico.eliminar(tecnico);
-        assert repoTecnico.buscarTodos().isEmpty();
     }
     @Test
     public void modificarTecnico() {

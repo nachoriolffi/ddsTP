@@ -23,7 +23,7 @@ public class App {
         Heladera heladera = new Heladera();
         Heladera heladera2 = new Heladera();
         Colaborador colaborador = new Colaborador();
-        Tarjeta tarjeta = new Tarjeta(21, null, colaborador);
+        Tarjeta tarjeta = new Tarjeta(null, colaborador);
 
         ReceptorMovimiento receptorMovimiento = new ReceptorMovimiento();
         ReceptorTemperatura receptorTemperatura = new ReceptorTemperatura();

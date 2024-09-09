@@ -84,8 +84,8 @@ public class TestVulnerable {
 
         Colaborador colaborador1 = new Colaborador("Juan","Perez",new ArrayList<FormaDeColaboracion>());
 
-        tarjeta1 = new Tarjeta(1, personaVulnerable1, colaborador1);
-        tarjeta2 = new Tarjeta(2, personaVulnerable2, colaborador1);
+        tarjeta1 = new Tarjeta(personaVulnerable1, colaborador1);
+        tarjeta2 = new Tarjeta(personaVulnerable2, colaborador1);
         tarjetas= new ArrayList<Tarjeta>();
         tarjetas.add(tarjeta1);
         tarjetas.add(tarjeta2);

@@ -20,7 +20,7 @@ public class Tarjeta {
     
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
-    private Integer id_Tarjeta;
+    private Long id_Tarjeta;
 
     @OneToMany
     @JoinColumn(name = "id_UsoTarjeta") // arranca en cero, ya que no tiene usos
@@ -51,8 +51,7 @@ public class Tarjeta {
 
     }
 
-    public Tarjeta(Integer idTarjeta, Vulnerable personaAsociada, Colaborador colaboradorAsociado) {
-        this.id_Tarjeta = idTarjeta;
+    public Tarjeta(Vulnerable personaAsociada, Colaborador colaboradorAsociado) {
         this.personaAsociada = personaAsociada;
         this.colaboradorAsociado = colaboradorAsociado;
         this.fechaRegistro = new Date();

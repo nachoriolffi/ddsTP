@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Coordenada {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private Integer id_Coordenada;
+    private Long id_Coordenada;
     @Column(name = "latitud",columnDefinition = "DOUBLE")
     private Double latitud;
     @Column(name = "longitud",columnDefinition = "DOUBLE")

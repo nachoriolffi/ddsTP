@@ -42,7 +42,7 @@ public class VulnerablePersistencia {
         RepoRegistroPersonaACargo repoRegistroPersonaACargo = new RepoRegistroPersonaACargo();
 
         RepoVulnerable repoVulnerable = new RepoVulnerable();
-        Vulnerable vulnerable = repoVulnerable.buscar(3L);
+        Vulnerable vulnerable = repoVulnerable.buscar(1L);
         vulnerable.setSituacionDeCalle(Boolean.FALSE);
 
         RegistroMenorACargo registro2 = new RegistroMenorACargo();

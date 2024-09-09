@@ -35,7 +35,7 @@ public class Heladera {
     private Integer capacidad;
     @Column (name = "fechaPuestaFunc", columnDefinition = "Date",nullable = false)
     private Date fechaPuestaFunc;
-    @OneToMany(mappedBy = "heladera", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "heladera")
     private List<Vianda> viandas = new ArrayList<>();
     @Transient // no creemos necesario persistir los receptores
     private ReceptorMovimiento receptorMovimiento;
@@ -48,6 +48,7 @@ public class Heladera {
     @JoinColumn(name = "id_solicitudesApertura")
     private List<RegistroSolicitud>solicitudesApertura; // es una lista de avisos a la heladera para que se abra
     @OneToMany
+
     @JoinColumn(name = "id_RegistroApertura")
     private List<RegistroApertura> aperturas; // es una lista de registros de aperturas que se hicieron
     @Column (name = "estaActiva",nullable = false)

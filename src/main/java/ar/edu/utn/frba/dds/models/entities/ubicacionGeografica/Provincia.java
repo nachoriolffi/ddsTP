@@ -16,7 +16,7 @@ public class Provincia {
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id_Provincia")
     private Long id;
-    @Column(name = "nombre", columnDefinition="VARCHAR(50)", nullable = false)
+    @Column(name = "nombre")
     private String nombre;
 
 }

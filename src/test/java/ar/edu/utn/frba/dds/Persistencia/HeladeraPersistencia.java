@@ -42,7 +42,7 @@ public class HeladeraPersistencia {
     public void modificarHeladera(){
 
         RepoHeladeras repoHeladeras = new RepoHeladeras();
-        Heladera heladera = repoHeladeras.buscar(4L);
+        Heladera heladera = repoHeladeras.buscar(1L);
         heladera.setEstaActiva(Boolean.FALSE);
         repoHeladeras.modificar(heladera);
 
@@ -94,13 +94,13 @@ public class HeladeraPersistencia {
         RepoViandas repoViandas = RepoViandas.INSTANCE;
         RepoColaborador repoColaborador = RepoColaborador.INSTANCE;
 
-        Heladera heladera = repoHeladeras.buscar(2L);
+        Heladera heladera = repoHeladeras.buscar(1L);
         if (heladera == null) {
             System.err.println("Heladera con id 1 no encontrada.");
             return;
         }
 
-        Colaborador colaborador = repoColaborador.buscar(2L);
+        Colaborador colaborador = repoColaborador.buscar(1L);
         if (colaborador == null) {
             System.err.println("Colaborador con id 1 no encontrado.");
             return;

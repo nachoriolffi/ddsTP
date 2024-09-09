@@ -50,7 +50,7 @@ public class CronjobTemperatura {
                 System.out.println("La diferencia entre la hora de la ultima lectura y la hora actual es mayor a " + tiempoEnMinutos + " minutos");
                 heladera.setEstaActiva(false);
 
-                Incidente incidente = new Incidente(6,"CronjobTemeratura","",FALLA,null,null);
+                Incidente incidente = new Incidente("CronjobTemeratura","",FALLA,null,null);
 
                 heladera.agregarRegistroDeAlerta(incidente);
                 incidente.notificarTecnicoMasCercano(heladera);

@@ -21,7 +21,7 @@ import java.util.Date;
 public class Incidente {
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
-    private Integer id_Incidente;
+    private Long id_Incidente;
     @Column(name = "fecha", columnDefinition = "DATE",nullable = false)
     private Date fecha;
     @Column(name = "descripcion", columnDefinition = "TEXT")
@@ -50,8 +50,7 @@ public class Incidente {
         this.fecha = new Date();
     }
 
-    public Incidente(Integer id, String descripcion, String pathFoto, TipoIncidente tipoIncidente, TipoAlerta tipoAlerta, Colaborador colaborador) {
-        this.id_Incidente = id;
+    public Incidente(String descripcion, String pathFoto, TipoIncidente tipoIncidente, TipoAlerta tipoAlerta, Colaborador colaborador) {
         this.fecha = new Date();
         this.descripcion = descripcion;
         this.pathFoto = pathFoto;
