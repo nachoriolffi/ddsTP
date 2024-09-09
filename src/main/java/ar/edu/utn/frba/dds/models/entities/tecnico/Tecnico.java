@@ -21,23 +21,25 @@ public class Tecnico {
     @GeneratedValue (strategy = javax.persistence.GenerationType.IDENTITY)
     private Long id_Tecnico;
 
-    @Column (name = "nombre", columnDefinition = "VARCHAR(250)")
+    @Column (name = "nombre", columnDefinition = "VARCHAR(250)", nullable = false)
     private String nombre;
-    @Column (name = "apellido", columnDefinition = "VARCHAR(250)")
+    @Column (name = "apellido", columnDefinition = "VARCHAR(250)", nullable = false)
     private String apellido;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TipoDocumento tipoDocumento;
 
-    @Column (name = "DNI", columnDefinition = "INT")
+    @Column (name = "DNI", columnDefinition = "INT", nullable = false)
     private Integer DNI;
 
-    @Column (name = "CUIL", columnDefinition = "INT")
+    @Column (name = "CUIL", columnDefinition = "INT", nullable = false)
     private Integer CUIL;
 
     @Transient
     private List<MedioDeComunicacion> mediosDeComunicacion;
-    @Column (name = "areaCobertura", columnDefinition = "INT")
+
+    @Column (name = "areaCobertura", columnDefinition = "INT", nullable = false)
     private Integer areaCobertura;
 
     @OneToOne
