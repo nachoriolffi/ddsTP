@@ -9,7 +9,7 @@ import java.util.Date;
 public class UsoTarjeta {
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
-    private Integer id_UsoTarjeta;
+    private Long id_UsoTarjeta;
     @Column(name = "fechaUso",columnDefinition = "Date",nullable = false)
     private Date fechaUso;
     @OneToOne

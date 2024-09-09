@@ -20,7 +20,7 @@ public class Contacto {
     private TipoContacto tipoContacto;
     @Setter
     @Getter
-    @Column(name = "nombreContacto",columnDefinition = "VARCHAR (255)")
+    @Column(name = "descripcion", nullable = false)
     private String descripcion;
 
     public Contacto(TipoContacto nombre, String descripcion) {

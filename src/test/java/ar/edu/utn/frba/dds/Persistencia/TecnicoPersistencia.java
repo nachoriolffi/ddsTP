@@ -18,7 +18,9 @@ public class TecnicoPersistencia {
         tecnico.setApellido("Perez");
         tecnico.setTipoDocumento(TipoDocumento.DNI);
         tecnico.setDNI(35142987);
+        tecnico.setCUIL(35142999);
         tecnico.setDisponible(Boolean.TRUE);
+        tecnico.setAreaCobertura(111);
 
         Coordenada coordenada = new Coordenada(14.45,45.12);
         RepoCoordenada repoCoordenada = new RepoCoordenada();
