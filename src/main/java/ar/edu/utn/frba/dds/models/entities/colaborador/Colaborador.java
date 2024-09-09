@@ -38,53 +38,69 @@ public class Colaborador {
     @Id
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
     private Long id_Colaborador;
+
     @Column(name = "nombre", columnDefinition = "VARCHAR(25)")
     private String nombre;
+
     @Column(name = "apellido", columnDefinition = "VARCHAR(25)")
     private String apellido;
+
     @Convert(converter = MedioComunicacionAtributeConvertere.class)
     @ElementCollection(targetClass = String.class)
     private List<MedioDeComunicacion> mediosDeComunicacion;
+
     @Column(name = "fechaDeNacimiento", columnDefinition = "DATE")
     private LocalDate fechaDeNacimiento;
+
     @ManyToOne
     @JoinColumn(name = "direccion_id")
     private Direccion direccion;
+
     //@OneToMany
     //@JoinColumn(name = "id_FormasColaboracion")
     @Transient
     private List<FormaDeColaboracion> formasDeColaboracion;
+
     @OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FormaDeColaboracion> colaboracionesRealizadas;
+
     @ManyToOne
     @JoinColumn(name = "cuestionario_id")
     private CuestionarioRespondido cuestionarioRespondido;
+
     @Column(name = "razonSocial", columnDefinition = "VARCHAR(255)")
     private String razonSocial;
+
     @Enumerated(EnumType.STRING)
     private TipoJuridisccion tipoJuridisccion;
+
     @OneToOne
     @JoinColumn(name = "rubro_id")
     private RubroColaborador rubroColaborador;
+
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private TipoPersona tipoPersona;
+
     @OneToMany
     @JoinColumn(name = "id_contacto")
     private List<Contacto> contacto;
+
     @Transient
     private IRecomendacionPuntos iRecomendacionPuntos;
+
     @Column(name = "puntosTotalesUsados", columnDefinition = "DOUBLE")
     private Double puntosTotalesUsados;
+
     @Column(name = "numeroDocumento", columnDefinition = "INT")
     private Integer numeroDocumento; //nuevo requerimiento para carga masiva
+
     @Enumerated(EnumType.STRING)
     private TipoDocumento tipoDocumento; //nuevo requerimiento para carga masiva
+
     @ManyToMany
     @JoinColumn(name = "id_ofertasRegistradas")
     private List<Oferta> ofertasRegistradas;
-
-    // CONSTRUCTORES
 
     public Colaborador() {
         this.mediosDeComunicacion = new ArrayList<>();

@@ -15,26 +15,25 @@ import java.util.List;
 @Table(name = "hacerse_cargo_de_heladera")
 public class HacerseCargoDeHeladera extends FormaDeColaboracion {
 
-    //@Id@GeneratedValue
-    //private Long id;
     //@ManyToOne
     //@JoinColumn(name = "id",referencedColumnName = "id_Local",nullable = false)
     @Transient
     private Local local;
+
     @OneToOne
-    @JoinColumn (name = "id",referencedColumnName = "id_Heladera",nullable = false)
+    @JoinColumn(name = "id", referencedColumnName = "id_Heladera", nullable = false)
     private Heladera heladera;
+
     @Getter
     @Setter
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TipoColaboracion tipoColaboracion;
+
     @Column(name = "fechaColaboracion", columnDefinition = "DATE", nullable = false)
     private Date fechaColaboracion;
 
-
     public HacerseCargoDeHeladera() {
-
     }
 
     public HacerseCargoDeHeladera(Heladera heladera, TipoColaboracion tipoColaboracion) {
@@ -48,18 +47,10 @@ public class HacerseCargoDeHeladera extends FormaDeColaboracion {
         return this.sumarMesesActivas() * ConfiguracionMultiplicador.getInstance().getMultiplicadorHeladeraActiva();
     }
 
-
-    @Override
-    public Integer getCantidadViandas() {
-        return null;
-    }
-
     public long sumarMesesActivas() {
-
         long mesesActivas = 0;
         mesesActivas += heladera.mesesActiva(fechaColaboracion);
         return mesesActivas;
-
     }
 
 }

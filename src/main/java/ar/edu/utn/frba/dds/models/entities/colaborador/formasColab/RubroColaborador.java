@@ -9,10 +9,12 @@ import javax.persistence.*;
 @Entity
 @Table(name = "rubroColaborador")
 public class RubroColaborador extends FormaDeColaboracion {
+
     @Column(name = "nombre", columnDefinition = "VARCHAR(25)")
     String nombre;
 
-    public RubroColaborador() {}
+    public RubroColaborador() {
+    }
 
     public RubroColaborador(String nombre) {
         this.nombre = nombre;
