@@ -15,7 +15,7 @@ import java.util.List;
 public class RegistroApertura {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_RegistroApertura;
+    private Long id_RegistroApertura;
 
     @Column(name = "fechaApertura", columnDefinition = "Date")
     private Date fechaApertura;

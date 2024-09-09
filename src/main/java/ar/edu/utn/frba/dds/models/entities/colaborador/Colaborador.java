@@ -83,7 +83,7 @@ public class Colaborador {
     private TipoPersona tipoPersona;
 
     @OneToMany
-    @JoinColumn(name = "id_contacto")
+    @JoinColumn(name = "colaborador_id")
     private List<Contacto> contacto;
 
     @Transient

@@ -18,7 +18,7 @@ public class Cuestionario {
          @GeneratedValue ( strategy = GenerationType.IDENTITY)
         private Long id_Cuestionario;
 
-         @Column(name = "nombre_cuestionario", columnDefinition = "VARCHAR(250)")
+         @Column(name = "nombreCuestionario", columnDefinition = "VARCHAR(250)")
          @Setter
         private String nombreCuestionario;
 
