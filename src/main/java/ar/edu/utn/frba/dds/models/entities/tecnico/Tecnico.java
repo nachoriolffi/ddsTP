@@ -52,7 +52,7 @@ public class Tecnico {
     private Boolean disponible;
 
     @OneToMany
-    @JoinColumn(name = "id_Contacto", referencedColumnName = "id_Tecnico")
+    @JoinColumn(name = "tecnico_id")
     private List<Contacto> contactos;
 
     public Tecnico(){

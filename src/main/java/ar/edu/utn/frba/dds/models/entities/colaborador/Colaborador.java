@@ -42,9 +42,11 @@ public class Colaborador {
     private String nombre;
     @Column(name = "apellido", columnDefinition = "VARCHAR(25)")
     private String apellido;
+
     @Convert(converter = MedioComunicacionAtributeConvertere.class)
     @ElementCollection(targetClass = String.class)
     private List<MedioDeComunicacion> mediosDeComunicacion;
+
     @Column(name = "fechaDeNacimiento", columnDefinition = "DATE")
     private LocalDate fechaDeNacimiento;
     @ManyToOne
@@ -70,7 +72,7 @@ public class Colaborador {
     @Enumerated(EnumType.STRING)
     private TipoPersona tipoPersona;
     @OneToMany
-    @JoinColumn(name = "id_contacto")
+    @JoinColumn(name = "colaborador_id")
     private List<Contacto> contacto;
     @Transient
     private IRecomendacionPuntos iRecomendacionPuntos;
