@@ -12,8 +12,7 @@ public class Contacto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", columnDefinition = "INT(11)")
-    private int id_Contacto;
+    private Long id;
     @Getter
     @Setter
     @Enumerated(EnumType.STRING)

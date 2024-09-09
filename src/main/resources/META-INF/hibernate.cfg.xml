@@ -5,7 +5,7 @@
         <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/tp?createDatabaseIfNotExist=true&amp;useSSL=false&amp;serverTimezone=America/Argentina/Buenos_Aires</property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">dds2023</property>
+        <property name="hibernate.connection.password">1234</property>
 
         <!-- JDBC connection pool settings -->
         <property name="hibernate.c3p0.min_size">5</property>
