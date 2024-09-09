@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,13 +17,13 @@ import java.util.List;
 @Table(name="registro_vulnerable")
 public class RegistroVulnerable extends FormaDeColaboracion {
 
-    //@Id@GeneratedValue
-    //private Long id;
     @OneToMany
-    @JoinColumn(name = "id_tarjeta")
+    @JoinColumn(name = "id")
     private List<Tarjeta> tarjetasDonadas;
+
     @Column(name="cantidadTarjetas", columnDefinition = "INT")
     private Integer cantidadTarjetas;
+
     @Column(name="fechaColaboracion", columnDefinition = "DATE",nullable = false)
     private Date fechaColaboracion;
 
@@ -30,7 +31,7 @@ public class RegistroVulnerable extends FormaDeColaboracion {
     private TipoColaboracion tipoColaboracion = TipoColaboracion.ENTREGA_TARJETAS;
 
     public RegistroVulnerable(){
-
+        tarjetasDonadas = new ArrayList<>();
     }
 
     public RegistroVulnerable(List<Tarjeta> tarjetasDonadas) {
@@ -44,15 +45,8 @@ public class RegistroVulnerable extends FormaDeColaboracion {
         this.cantidadTarjetas = cantidad;
     }
 
-
     @Override
     public double sumarPuntosA(Colaborador colaborador) {
         return cantidadTarjetas * ConfiguracionMultiplicador.getInstance().getMultiplicadorRegistroVulnerables();
-    }
-
-
-    @Override
-    public Integer getCantidadViandas() {
-        return null;
     }
 }

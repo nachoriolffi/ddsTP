@@ -74,19 +74,19 @@ public class TestHeladera {
         vianda5 = new Vianda("Fideos", new Colaborador(), true);
         vianda6 = new Vianda("Ravioles", new Colaborador(), true);
 
-        heladera = new Heladera(direccion1, coordenada1, 150, viandas);
-        heladera1 = new Heladera(direccion1, coordenada1, 150, viandas1);
+        heladera = new Heladera(direccion1, coordenada1);
+        heladera1 = new Heladera(direccion1, coordenada1);
         heladera1.setEstaActiva(Boolean.TRUE);
-        heladera2 = new Heladera(direccion2, coordenada2, 200, viandas2);
-        heladera3 = new Heladera(direccion3, coordenada3, 300, viandas3);
+        heladera2 = new Heladera(direccion2, coordenada2);
+        heladera3 = new Heladera(direccion3, coordenada3);
 
-        heladera.agregarVianda(vianda);
-        heladera1.agregarVianda(vianda1);
-        heladera1.agregarVianda(vianda4);
-        heladera2.agregarVianda(vianda2);
-        heladera2.agregarVianda(vianda5);
-        heladera3.agregarVianda(vianda3);
-        heladera3.agregarVianda(vianda6);
+        heladera.agregarVianda();
+        heladera1.agregarVianda();
+        heladera1.agregarVianda();
+        heladera2.agregarVianda();
+        heladera2.agregarVianda();
+        heladera3.agregarVianda();
+        heladera3.agregarVianda();
 
         receptorMovimiento= new ReceptorMovimiento();
         receptorTemperatura= new ReceptorTemperatura();
@@ -98,7 +98,7 @@ public class TestHeladera {
         repoHeladeras = RepoHeladeras.INSTANCE;
 
         //--------------------------------------- Noticacion tecnico --------------------------------------------
-        tecnico1 = new Tecnico(6L,"Juan","Cracio",coordenada1,Boolean.TRUE,1000);
+        tecnico1 = new Tecnico("Juan","Cracio",coordenada1,Boolean.TRUE,1000);
         Contacto contacto = new Contacto(TipoContacto.MAIL,"iriolffi@frba.utn.edu.ar");
         tecnico1.setContactos(new ArrayList<>());
         tecnico1.getContactos().add(contacto);
@@ -138,11 +138,6 @@ public class TestHeladera {
 
         Heladera heladeraQuitada1 = heladeras.remove(0);
         Heladera heladeraQuitada2 = heladeras.remove(1);
-
-        System.out.println(heladeraQuitada1.getViandas());
-        System.out.println(heladeraQuitada2.getViandas());
-
-        System.out.println("Cantidad de heladeras despues: " + heladeras.size());
 
         assert heladeras.size() == 1;
 

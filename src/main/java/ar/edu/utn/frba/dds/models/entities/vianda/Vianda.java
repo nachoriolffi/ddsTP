@@ -12,24 +12,33 @@ import java.util.Date;
 @Entity
 @Table(name = "vianda")
 public class Vianda {
+
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
     private Long id_Vianda;
+
     @Column(name = "comida",columnDefinition = "VARCHAR (250)",nullable = false)
     private String comida;
+
     @Column(name = "fechaCaducidad",columnDefinition = "Date",nullable = false)
     private Date fechaCaducidad;
+
     @Column(name = "fechaDonacion",columnDefinition = "Date",nullable = false)
     private Date fechaDonacion;
-    @ManyToOne()
+
+    @ManyToOne
     @JoinColumn(name = "id_Colaborador",nullable = false)
     private Colaborador colaborador;
+
     @Column(name = "calorias")
     private Double calorias;
+
     @Column(name = "peso")
     private Double peso;
+
     @Column(name = "fueEntregada",columnDefinition = "Boolean",nullable = false)
     private Boolean fueEntregada;
+
     @ManyToOne
     @JoinColumn(name = "id_Heladera", nullable = false)
     private Heladera heladera;

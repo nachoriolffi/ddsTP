@@ -10,13 +10,17 @@ import java.util.Date;
 @Table(name = "registroPersonaACargo")
 @Setter
 public class RegistroMenorACargo {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_RegistroPersonaACargo;
+
     @Column(name = "tienePersonaACargo")
     private Boolean tienePersonaACargo;
+
     @Column(name = "fechaRegistro")
     private Date fechaRegistro;
+
     @Column(name = "personasACargo")
     private Integer cantidadDePersonasACargo;
 
@@ -25,9 +29,7 @@ public class RegistroMenorACargo {
     @Cascade(org.hibernate.annotations.CascadeType.PERSIST)
     private Vulnerable vulnerable;
 
-    public RegistroMenorACargo(){
-
-    }
+    public RegistroMenorACargo() {}
 
     public RegistroMenorACargo(Boolean tienePersonaACargo, Date fecaRegistro, Integer cantidadDePersonasACargo) {
         this.tienePersonaACargo = tienePersonaACargo;

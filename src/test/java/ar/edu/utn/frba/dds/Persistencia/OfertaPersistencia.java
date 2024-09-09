@@ -32,9 +32,9 @@ public class OfertaPersistencia {
     @Test
     public void eliminarOferta(){
         RepoOferta repoOferta= new RepoOferta();
-        Oferta oferta = repoOferta.buscar(Long.valueOf(1));
+        Oferta oferta = repoOferta.buscar(1L);
         repoOferta.eliminar(oferta);
-        assert repoOferta.buscarTodos().size()==0;
+        assert repoOferta.buscarTodos().isEmpty();
     }
 
 }

@@ -29,7 +29,6 @@ public class HeladeraService implements IHeladeraService {
         nuevaHeladera.setDireccion(dtoHeladera.getDireccion());
         //nuevaHeladera.setCapacidad(dtoHeladera.getCapacidad());
         nuevaHeladera.setFechaPuestaFunc(new Date());
-        nuevaHeladera.setViandas(new ArrayList<>());
         nuevaHeladera.setIncidentes(new ArrayList<>());
         nuevaHeladera.setAperturas(new ArrayList<>());
         nuevaHeladera.setAperturas(new ArrayList<>());
