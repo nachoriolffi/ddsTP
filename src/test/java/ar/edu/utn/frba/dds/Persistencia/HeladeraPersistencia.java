@@ -1,4 +1,5 @@
 package ar.edu.utn.frba.dds.Persistencia;
+
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
@@ -17,9 +18,9 @@ import java.util.List;
 public class HeladeraPersistencia {
 
     @Test
-    public void persistirHeladera(){
-        RepoCoordenada repoCoordenada= new RepoCoordenada();
-        Coordenada coordenada = new Coordenada(	-34.598630, -58.419962);
+    public void persistirHeladera() {
+        RepoCoordenada repoCoordenada = new RepoCoordenada();
+        Coordenada coordenada = new Coordenada(-34.598630, -58.419962);
         repoCoordenada.agregar(coordenada);
         RepoModelo repoModelo = new RepoModelo();
         ModeloHeladera modelo = new ModeloHeladera();
@@ -38,8 +39,9 @@ public class HeladeraPersistencia {
         repoHeladeras.agregar(heladera);
 
     }
+
     @Test
-    public void modificarHeladera(){
+    public void modificarHeladera() {
 
         RepoHeladeras repoHeladeras = new RepoHeladeras();
         Heladera heladera = repoHeladeras.buscar(1L);
@@ -49,9 +51,9 @@ public class HeladeraPersistencia {
     }
 
     @Test
-    public void eliminarHeladedera(){
+    public void eliminarHeladedera() {
         RepoHeladeras repoHeladeras = new RepoHeladeras();
-        Heladera heladera = repoHeladeras.buscar(1L);
+        Heladera heladera = repoHeladeras.buscar(3L);
         repoHeladeras.eliminar(heladera);
     }
 
@@ -94,7 +96,11 @@ public class HeladeraPersistencia {
         RepoViandas repoViandas = RepoViandas.INSTANCE;
         RepoColaborador repoColaborador = RepoColaborador.INSTANCE;
 
-        Heladera heladera = repoHeladeras.buscar(1L);
+        Colaborador colaboradornuevo = new Colaborador();
+        colaboradornuevo.setTipoPersona(TipoPersona.JURIDICA);
+        repoColaborador.agregar(colaboradornuevo);
+
+        Heladera heladera = repoHeladeras.buscar(2L);
         if (heladera == null) {
             System.err.println("Heladera con id 1 no encontrada.");
             return;
@@ -105,7 +111,6 @@ public class HeladeraPersistencia {
             System.err.println("Colaborador con id 1 no encontrado.");
             return;
         }
-
         Vianda vianda = new Vianda();
         vianda.setComida("Milanesa");
         vianda.setFechaDonacion(new Date());
@@ -114,6 +119,7 @@ public class HeladeraPersistencia {
         vianda.setFueEntregada(Boolean.FALSE);
         vianda.setColaborador(colaborador);
         vianda.setHeladera(heladera); // Set the foreign key relationship
+        heladera.agregarVianda();
         repoHeladeras.modificar(heladera);
         repoViandas.agregar(vianda);
     }

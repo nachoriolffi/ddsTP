@@ -32,14 +32,14 @@ public class TecnicoPersistencia {
     @Test
     public void borrarTecnico() {
         RepoTecnico repoTecnico = new RepoTecnico();
-        Tecnico tecnico = repoTecnico.buscar(2L);
+        Tecnico tecnico = repoTecnico.buscar(1L);
         repoTecnico.eliminar(tecnico);
     }
     @Test
     public void modificarTecnico() {
         RepoTecnico repoTecnico = new RepoTecnico();
-        Tecnico tecnico = repoTecnico.buscar(3L);
-        tecnico.setCUIL(22 - 35142987 - 5);
+        Tecnico tecnico = repoTecnico.buscar(1L);
+        tecnico.setCUIL(22 - 35142987 - 5); // cambiar esto por un string luego
         tecnico.setNombre("Juancito II");
         repoTecnico.modificar(tecnico);
     }

@@ -75,6 +75,7 @@ public class ViandaPersisitencia {
         RepoViandas repoViandas=new RepoViandas();
         Vianda vianda= repoViandas.buscar(1L);
         vianda.setFueEntregada(Boolean.TRUE);
+        repoViandas.modificar(vianda);
     }
     @Test
     public void eliminarVianda(){

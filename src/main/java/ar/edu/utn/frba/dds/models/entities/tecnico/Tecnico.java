@@ -33,7 +33,7 @@ public class Tecnico {
     private Integer DNI;
 
     @Column (name = "CUIL", columnDefinition = "INT")
-    private Integer CUIL;
+    private Integer CUIL; // cambiar por string luego
 
     @Transient
     private List<MedioDeComunicacion> mediosDeComunicacion;
@@ -66,7 +66,7 @@ public class Tecnico {
         this.areaCobertura = areaCobertura;
     }
 
-    public Tecnico(Long id_Tecnico, String nombre, String apellido, Coordenada coordenada, Boolean disponible, Integer areaCobertura) {
+    public Tecnico(String nombre, String apellido, Coordenada coordenada, Boolean disponible, Integer areaCobertura) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.coordenada = coordenada;
