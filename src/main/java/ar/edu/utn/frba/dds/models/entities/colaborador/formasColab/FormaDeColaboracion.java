@@ -9,7 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class  FormaDeColaboracion {
+public abstract class FormaDeColaboracion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -20,13 +20,15 @@ public abstract class  FormaDeColaboracion {
     @JoinColumn(name = "id_colaborador")
     Colaborador colaborador;
 
-    public double sumarPuntosA(Colaborador colaborador){
+    public double sumarPuntosA(Colaborador colaborador) {
         return 0;
     }
-    public TipoColaboracion getTipoColaboracion(){
+
+    public TipoColaboracion getTipoColaboracion() {
         return null;
     }
-    public Integer getCantidadViandas(){
+
+    public Integer getCantidadViandas() {
         return null;
     }
 }

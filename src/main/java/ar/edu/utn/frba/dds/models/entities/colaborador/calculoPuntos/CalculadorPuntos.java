@@ -14,6 +14,7 @@ public class CalculadorPuntos {
         }
         return instancia;
     }
+
     // sumamos puntos al colaborador de todas las colaboraciones realizadas
     public Double sumarPuntosA(Colaborador colaborador) {
 

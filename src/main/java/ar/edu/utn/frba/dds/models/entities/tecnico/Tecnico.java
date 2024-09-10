@@ -16,7 +16,6 @@ import java.util.List;
 @Getter @Setter
 public class Tecnico {
 
-
     @Id
     @GeneratedValue (strategy = javax.persistence.GenerationType.IDENTITY)
     private Long id_Tecnico;
