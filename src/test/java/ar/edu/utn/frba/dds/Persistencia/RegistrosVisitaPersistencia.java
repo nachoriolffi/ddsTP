@@ -54,6 +54,8 @@ public class RegistrosVisitaPersistencia {
         tecnico.setApellido("Perez");
         tecnico.setTipoDocumento(TipoDocumento.DNI);
         tecnico.setDNI(35142987);
+        tecnico.setCUIL(2035142987);
+        tecnico.setAreaCobertura(12);
         tecnico.setDisponible(Boolean.TRUE);
         tecnico.setCoordenada(coordenada);
 

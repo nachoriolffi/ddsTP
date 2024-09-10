@@ -14,11 +14,8 @@
       <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
       <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/tp?createDatabaseIfNotExist=true" />
       <property name="hibernate.connection.username" value="root" />
-      <property name="hibernate.connection.password" value="1234" />
-<<<<<<< HEAD
-=======
+      <property name="hibernate.connection.password" value="Nacho2004_MySQL!" />
 
->>>>>>> 44e2aed80265355248f9fd9dcf3b33b4bfc7519d
 
       <!-- <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver"/>
       <property name="hibernate.connection.url" value="jdbc:hsqldb:mem:app-db"/>
