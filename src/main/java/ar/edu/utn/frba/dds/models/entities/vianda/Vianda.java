@@ -40,7 +40,7 @@ public class Vianda {
     private Boolean fueEntregada;
 
     @ManyToOne
-    @JoinColumn(name = "id_Heladera", nullable = false)
+    @JoinColumn(name = "id_Heladera")
     private Heladera heladera;
 
     public Vianda(){

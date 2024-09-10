@@ -80,7 +80,7 @@ public class ViandaPersisitencia {
     @Test
     public void eliminarVianda(){
         RepoViandas repoViandas=new RepoViandas();
-        Vianda vianda= repoViandas.buscar(1L);
+        Vianda vianda= repoViandas.buscar(2L);
         repoViandas.eliminar(vianda);
     }
 }

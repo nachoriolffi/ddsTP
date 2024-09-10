@@ -101,7 +101,7 @@ public class HeladeraPersistencia {
         colaboradornuevo.setTipoPersona(TipoPersona.JURIDICA);
         repoColaborador.agregar(colaboradornuevo);
 
-        Heladera heladera = repoHeladeras.buscar(1L);
+        Heladera heladera = repoHeladeras.buscar(2L);
         if (heladera == null) {
             System.err.println("Heladera con id 1 no encontrada.");
             return;

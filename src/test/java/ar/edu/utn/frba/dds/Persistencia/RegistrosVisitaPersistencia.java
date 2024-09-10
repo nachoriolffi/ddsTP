@@ -73,7 +73,7 @@ public class RegistrosVisitaPersistencia {
         incidente.setTipoIncidente(TipoIncidente.FALLA);
         incidente.setFecha(new Date());
         incidente.setDescripcion("Fue a dejar viandas a la heladera y tenia un hacha en la puerta, me asuste");
-        incidente.setColaborador(colaborador);
+        incidente.setColaborador(RepoColaborador.INSTANCE.buscar(9L));
         repoIncidente.agregar(incidente);
 
         RegistroVisita registroVisita = new RegistroVisita();
