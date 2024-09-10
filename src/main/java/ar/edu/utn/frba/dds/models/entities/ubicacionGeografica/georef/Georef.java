@@ -5,7 +5,6 @@ import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseCl
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.ListadoMunicipios;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.ListadoProvincias;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoProvincia;
-import lombok.AllArgsConstructor;
 import retrofit2.Call;
 import retrofit2.Response;
 import java.io.IOException;

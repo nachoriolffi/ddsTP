@@ -15,10 +15,8 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table (name = "distribucion_vianda")
-public class DistribucionVianda extends FormaDeColaboracion{
-
-   // @Id@GeneratedValue//private Long id;
+@Table(name = "distribucion_vianda")
+public class DistribucionVianda extends FormaDeColaboracion {
 
     @ManyToOne
     @JoinColumn(name = "id_heladeraOrigen")
@@ -28,7 +26,7 @@ public class DistribucionVianda extends FormaDeColaboracion{
     @JoinColumn(name = "id_heladeraDestino")
     private Heladera heladeraDestino;
 
-    @Column(name= "cantidadViandas", columnDefinition = "INT")
+    @Column(name = "cantidadViandas", columnDefinition = "INT")
     private Integer cantidadViandas;
 
     @OneToMany
@@ -38,27 +36,24 @@ public class DistribucionVianda extends FormaDeColaboracion{
     @Enumerated(EnumType.STRING)
     private MotivoDistribucion motivo;
 
-    @Column(name= "fechaDistribucion", columnDefinition = "DATE")
+    @Column(name = "fechaDistribucion", columnDefinition = "DATE")
     private Date fechaDistribucion;
 
-    @Column(name= "fechaColaboracion", columnDefinition = "DATE",nullable = false)
+    @Column(name = "fechaColaboracion", columnDefinition = "DATE", nullable = false)
     private Date fechaColaboracion;
 
     @Enumerated(EnumType.STRING)
     private TipoColaboracion tipoColaboracion = TipoColaboracion.REDISTRIBUCION_VIANDAS;
 
-    public DistribucionVianda(){
+    public DistribucionVianda() {
 
     }
-
 
     public DistribucionVianda(Integer cantidad, Date fechaColaboracion) {
         this.fechaColaboracion = fechaColaboracion;
         this.fechaDistribucion = new Date();
         this.cantidadViandas = cantidad;
-    };
-
-
+    }
 
     @Override
     public double sumarPuntosA(Colaborador colaborador) {

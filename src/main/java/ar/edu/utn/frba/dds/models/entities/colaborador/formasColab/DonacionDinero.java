@@ -16,6 +16,7 @@ import java.util.Observer;
 @Table(name="doancion_dinero")
 public class DonacionDinero extends FormaDeColaboracion {
 
+    @Setter
     @Column(name= "fecha", columnDefinition = "DATE",nullable = false)
     private Date fecha;
 
