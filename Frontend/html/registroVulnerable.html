@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../scss/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+    <script src="https://kit.fontawesome.com/115c7ea5e6.js" crossorigin="anonymous"></script>
+    <title>Registrar Persona Vulnerable</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">ONG</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Donaciones</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="../html/donacionDinero.html">Donar Dinero</a></li>
+                        <li><a class="dropdown-item" href="../html/encargarseDeHeladera.html">Encargarse de Heladera</a></li>
+                        <li><a class="dropdown-item" href="../html/donacionViandas.html">Donar Viandas</a></li>
+                        <li><a class="dropdown-item" href="../html/distribuirViandas.html">Distribuir Viandas</a></li>
+                        <li><a class="dropdown-item" href="../html/registroVulnerable.html">Registrar Personas Vulnerables</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="../html/misHeladeras.html">Mis Heladeras</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/canjeProductos.html">Tienda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/heladeras.html">Ver Heladeras</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Herramientas</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="../html/reportarFallaTecnica.html">Reportar Incidente</a>
+                        </li>
+                        <li><a class="dropdown-item" href="../html/cargaCSV.html">Cargar Archivo CSV</a></li>
+                        <li><a class="dropdown-item" href="../html/visualizacionReportes.html">Ver Reportes PDF</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Mi Perfil</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="../html/iniciarSesion.html">Iniciar Sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="../html/crearCuenta.html">Registrarse</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<section class="container mt-1 pt-1">
+    <hr class="my-3 border-0">
+    <div class="row">
+        <figure class="col-md-5 figure">
+            <img class="figure-img img-fluid rounded mx-auto d-none d-md-block" src="../assets/registroVulnerable.png"
+                 alt="">
+        </figure>
+        <div class="col-md-7">
+            <h1 class="h1">Registrar Persona Vulnerable</h1>
+            <hr class="border-1">
+            <form class="row g-3 needs-validation" novalidate>
+                <div class="col-lg-4 col-md-12">
+                    <label class="form-label" for="validationCustom01">Nombre/s</label>
+                    <input class="form-control" type="text" id="validationCustom01" required>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <label class="form-label" for="validationCustom02">Apellido/s</label>
+                    <input class="form-control" type="text" id="validationCustom02" required>
+                </div>
+                <div class="col-lg-4 col-md-12">
+                    <label class="form-label" for="validationCustom03">Fecha de Nacimiento</label>
+                    <input class="form-control" type="date" id="validationCustom03" name="validationCustom03" required>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <label class="form-label" for="provincia">Provincia</label>
+                    <select class="form-select" id="provincia" required>
+                        <option value="" disabled selected>Seleccion una opcion</option>
+                    </select>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <label class="form-label" for="localidad">Localidad</label>
+                    <select class="form-select" id="localidad" required>
+                        <option value="" disabled selected>Seleccion una opcion</option>
+                    </select>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <label class="form-label" for="validationCustom06">Direccion</label>
+                    <input class="form-control" type="text" id="validationCustom06" required>
+                </div>
+                <div class="col-lg-3 col-md-12">
+                    <label class="form-label" for="validationCustom07">Altura</label>
+                    <input class="form-control" type="text" id="validationCustom07" required>
+                </div>
+                <div class="col-lg-3 col-md-12">
+                    <label class="form-label" for="validationCustom08">Piso</label>
+                    <input class="form-control" type="text" id="validationCustom08">
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <label class="form-label" for="validationCustom09">Tiene Menores a Cargo</label>
+                    <select class="form-select" id="validationCustom09" required>
+                        <option value="" disabled selected>Seleccion una opcion</option>
+                        <option>Si</option>
+                        <option>No</option>
+                    </select>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <label class="form-label" for="validationCustom10">Cantidad de Menores a Cargo</label>
+                    <input class="form-control" type="text" id="validationCustom10">
+                </div>
+                <hr class="my-3 border-0">
+                <div class="col-12 text-end">
+                    <button class="btn btn-outline-primary" type="submit">¡Registrar Persona!</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script src="../js/ubicacion.js"></script>
+<script src="../js/validacionDatos.js"></script>
+</body>
+</html>

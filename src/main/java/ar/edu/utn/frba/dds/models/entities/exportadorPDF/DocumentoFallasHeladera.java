@@ -24,7 +24,7 @@ public class DocumentoFallasHeladera implements Exportable {
     }
 
     public DocumentoFallasHeladera() {
-        this.repoHeladeras = RepoHeladeras.getInstancia();
+        this.repoHeladeras = RepoHeladeras.INSTANCE;
         this.datos = new HashMap<String, List<String>>();
         generarDocumento();
     }
@@ -40,7 +40,7 @@ public class DocumentoFallasHeladera implements Exportable {
         List<String> heladerasNombre = new ArrayList<String>(); // guarda nombre de healderas
         List<String> fallas = new ArrayList<String>(); // guarda cantidad de falla por heladera
 
-        for(Heladera heladera : repoHeladeras.traerHeladeras()) // SE RECIBEN TODAS LAS HELADERAS Y SE TOMA UNA A LA VEZ
+        for(Heladera heladera : repoHeladeras.INSTANCE.buscarTodos()) // SE RECIBEN TODAS LAS HELADERAS Y SE TOMA UNA A LA VEZ
         {
             if(!heladera.getIncidentes().isEmpty()) // SI TIENE INCIDENTES
             {

@@ -1,0 +1,37 @@
+
+.card {
+    border-radius: 20px;
+    background-color: #F0F0F0;
+}
+.card-option {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+.card-option:hover {
+    transform: scale(1.05);
+}
+
+.card-option:target {
+    border-color: #f38630;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: contain;
+}
+
+.btn-naranja {
+    background-color: #f38630;
+    border-color: #FA6900;
+    color: white;
+    border-radius: 20px;
+    font-weight: bold;
+}
+
+.btn-naranja:hover {
+    background-color: #FA6900;
+    border-color: #f38630;
+    color: white;
+    transform: scale(1.05);
+    transition: transform 0.2s;
+}

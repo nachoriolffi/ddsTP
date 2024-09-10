@@ -1,35 +1,58 @@
 package ar.edu.utn.frba.dds.models.entities.vulnerable;
 
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Local;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 @Getter
 @Setter
+@Entity
+@Table(name = "vulnerable")
 public class Vulnerable {
 
-    private Long id;
-    private String nombre;
-    private String apellido;
-    private LocalDate fechaDeNacimiento;
-    private LocalDate fechaDeRegistro;
-    private Boolean situacionDeCalle;
-    private Direccion direccion;
-    private TipoDocumento tipoDocumento;
-    private Integer numeroDocumento;
-    private List<RegistroDePersonaACargo> registroDePersonasACargo;
+    @Id
+    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+    private Long id_Vulnerable;
 
-    public Vulnerable(){
+    @Column(name = "nombre", columnDefinition = "VARCHAR(250)", nullable = false)
+    private String nombre;
+
+    @Column(name = "apellido", columnDefinition = "VARCHAR(250)", nullable = false)
+    private String apellido;
+
+    @Column(name = "fechaDeNacimiento", columnDefinition = "DATE", nullable = false)
+    private Date fechaDeNacimiento;
+
+    @Column(name = "fechaDeRegistro", columnDefinition = "DATE", nullable = false)
+    private Date fechaDeRegistro;
+
+    @Column(name = "situacionDeCalle", columnDefinition = "BOOLEAN", nullable = false)
+    private Boolean situacionDeCalle;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "direccion_id")
+    private Direccion direccion;
+
+    @Enumerated(EnumType.STRING)
+    private TipoDocumento tipoDocumento;
+
+    @Column(name = "numeroDocumento", columnDefinition = "INT")
+    private Integer numeroDocumento;
+
+    @OneToMany(mappedBy = "vulnerable", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<RegistroMenorACargo> menoresACargo = new ArrayList<>();
+
+    public Vulnerable() {
 
     }
 
-    public Vulnerable(String nombre, String apellido, LocalDate fechaDeNacimiento, LocalDate fechaDeRegistro, Boolean situacionDeCalle, Direccion direccion, TipoDocumento tipoDocumento,Integer numeroDoc) {
+    public Vulnerable(String nombre, String apellido, Date fechaDeNacimiento, Date fechaDeRegistro, Boolean situacionDeCalle, Direccion direccion, TipoDocumento tipoDocumento, Integer numeroDoc) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechaDeNacimiento = fechaDeNacimiento;
@@ -38,11 +61,11 @@ public class Vulnerable {
         this.direccion = direccion;
         this.tipoDocumento = tipoDocumento;
         this.numeroDocumento = numeroDoc;
-        this.registroDePersonasACargo = new ArrayList<RegistroDePersonaACargo>();
+        this.menoresACargo = new ArrayList<>();
     }
 
-    public void agregarregistroDePersonasACargo(RegistroDePersonaACargo registro) {
-        registroDePersonasACargo.add(registro);
+    public void agregarregistroDePersonasACargo(RegistroMenorACargo registro) {
+        menoresACargo.add(registro);
     }
 
 }

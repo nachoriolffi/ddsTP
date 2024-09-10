@@ -19,9 +19,9 @@ import static ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoIncidente.
 public class CronjobTemperatura {
     public static void main(String[] args) {
 
-        RepoHeladeras repoHeladeras = RepoHeladeras.getInstancia();
+        RepoHeladeras repoHeladeras = RepoHeladeras.INSTANCE;
 
-        List<Heladera> todasLasHeladeras = repoHeladeras.traerHeladeras();
+        List<Heladera> todasLasHeladeras = repoHeladeras.INSTANCE.buscarTodos();
 
         controlarUltimasLecturasHeladeras(todasLasHeladeras, 5);
 
@@ -50,7 +50,7 @@ public class CronjobTemperatura {
                 System.out.println("La diferencia entre la hora de la ultima lectura y la hora actual es mayor a " + tiempoEnMinutos + " minutos");
                 heladera.setEstaActiva(false);
 
-                Incidente incidente = new Incidente(6L,"CronjobTemeratura","",FALLA,null,null);
+                Incidente incidente = new Incidente("CronjobTemeratura","",FALLA,null,null);
 
                 heladera.agregarRegistroDeAlerta(incidente);
                 incidente.notificarTecnicoMasCercano(heladera);

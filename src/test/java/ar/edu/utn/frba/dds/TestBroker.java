@@ -1,12 +1,10 @@
 package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.models.entities.broker.Broker;
-import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.RegistroSolicitud;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
-import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoAlerta;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
@@ -16,7 +14,6 @@ import lombok.Setter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
 import java.util.List;
 
 @Getter
@@ -46,8 +43,8 @@ public class TestBroker {
         heladera.setNombre("medrano");
         heladera.setModelo(modeloHeladera);
 
-        repoHeladeras = RepoHeladeras.getInstancia();
-        repoHeladeras.agregarHeladera(heladera);
+        repoHeladeras = RepoHeladeras.INSTANCE;
+        repoHeladeras.agregar(heladera);
 
         broker = new Broker();
         broker.connect("escuchadno");

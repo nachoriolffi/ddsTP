@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportar Falla Técnica</title>
+    <link rel="stylesheet" href="../scss/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+            crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/115c7ea5e6.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://kit.fontawesome.com/115c7ea5e6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">ONG</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Donaciones</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="../html/donacionDinero.html">Donar Dinero</a></li>
+                        <li><a class="dropdown-item" href="../html/encargarseDeHeladera.html">Encargarse de Heladera</a></li>
+                        <li><a class="dropdown-item" href="../html/donacionViandas.html">Donar Viandas</a></li>
+                        <li><a class="dropdown-item" href="../html/distribuirViandas.html">Distribuir Viandas</a></li>
+                        <li><a class="dropdown-item" href="../html/registroVulnerable.html">Registrar Personas Vulnerables</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="../html/misHeladeras.html">Mis Heladeras</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/canjeProductos.html">Tienda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/heladeras.html">Ver Heladeras</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Herramientas</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="../html/reportarFallaTecnica.html">Reportar Incidente</a>
+                        </li>
+                        <li><a class="dropdown-item" href="../html/cargaCSV.html">Cargar Archivo CSV</a></li>
+                        <li><a class="dropdown-item" href="../html/visualizacionReportes.html">Ver Reportes PDF</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Mi Perfil</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="../html/iniciarSesion.html">Iniciar Sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="../html/crearCuenta.html">Registrarse</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container mt-5 pt-5 full-height text-center">
+    <h1>Reportar Falla Técnica</h1>
+    <p>¿Encontraste una falla en nuestras heladeras? ¡Reportalo acá!</p>
+    <form class="row needs-validation" novalidate>
+        <div class="row">
+            <div class="col-md-12 col-lg-6">
+                <div class="mb-3 d-flex justify-content-center">
+                    <div class="w-100">
+                        <label for="heladera-averiada" class="form-label">Seleccione la Heladera Averiada</label>
+                        <select class="form-select" id="heladera-averiada" name="heladera-averiada" required>
+                            <option value="" disabled selected>Seleccione una Heladera</option>
+                            <option value="campus">Campus</option>
+                            <option value="medrano">Medrano</option>
+                            <option value="casa">Casa</option>
+                            <option value="Kiosco">Kiosco</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 d-flex justify-content-center">
+                    <div class="w-100">
+                        <label for="dia-horario" class="form-label">Dia y Horario en el que visito la heladera</label>
+                        <input id="dia-horario" type="datetime-local" class="form-control" required>
+                    </div>
+                </div>
+                <div class="mb-3 d-flex justify-content-center">
+                    <div class="w-100">
+                        <label class="form-label">¿Tenés una foto? ¡Subila!</label>
+                        <input type="file" id="fotoFalla" class="form-control" accept="image/*">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-6">
+                <div class="mb-3 d-flex justify-content-center">
+                    <div class="w-100">
+                        <label for="descripcion" class="form-label">Describa el estado en el que encontró la heladera</label>
+                        <textarea id="descripcion" class="form-control" rows="6" required style="resize: none"></textarea>
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-outline-primary w-50">Enviar Reporte</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script src="../js/validacionDatos.js"></script>
+</body>
+</html>

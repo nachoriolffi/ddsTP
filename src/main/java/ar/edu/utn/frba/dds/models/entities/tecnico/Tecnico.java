@@ -5,35 +5,61 @@ import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRegistrosVisita;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
+
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.List;
-
+@Entity
+@Table(name = "Tecnico")
+@Getter @Setter
 public class Tecnico {
-    @Getter @Setter
-    private Long id;
-    @Getter @Setter
+
+    @Id
+    @GeneratedValue (strategy = javax.persistence.GenerationType.IDENTITY)
+    private Long id_Tecnico;
+
+    @Column (name = "nombre", columnDefinition = "VARCHAR(250)", nullable = false)
     private String nombre;
-    @Getter @Setter
+    @Column (name = "apellido", columnDefinition = "VARCHAR(250)", nullable = false)
     private String apellido;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TipoDocumento tipoDocumento;
-    @Getter @Setter
+
+    @Column (name = "DNI", columnDefinition = "INT", nullable = false)
     private Integer DNI;
-    private Integer CUIL;
-    @Getter @Setter
+
+
+    @Column (name = "CUIL", columnDefinition = "INT", nullable = false)
+    private Integer CUIL; // cambiar por string luego
+
+
+    @Transient
     private List<MedioDeComunicacion> mediosDeComunicacion;
+
+    @Column (name = "areaCobertura", columnDefinition = "INT", nullable = false)
     private Integer areaCobertura;
-    @Getter @Setter
+
+    @OneToOne
+    @JoinColumn(name = "id_Coordenada",nullable = false)
     private Coordenada coordenada;
-    @Getter @Setter
+
+    @Column (name = "disponible", columnDefinition = "BOOLEAN")
     private Boolean disponible;
-    @Getter @Setter
+
+    @OneToMany
+    @JoinColumn(name = "tecnico_id")
     private List<Contacto> contactos;
 
+    public Tecnico(){
 
-    public Tecnico(Long id, String nombre, String apellido, TipoDocumento tipoDocumento, Integer DNI, Integer CUIL, List<MedioDeComunicacion> mediosDeComunicacion, Integer areaCobertura ) {
-        this.id = id;
+    }
+
+    public Tecnico(Long id_Tecnico, String nombre, String apellido, TipoDocumento tipoDocumento, Integer DNI, Integer CUIL, List<MedioDeComunicacion> mediosDeComunicacion, Integer areaCobertura ) {
+        this.id_Tecnico = id_Tecnico;
         this.nombre = nombre;
         this.apellido = apellido;
         this.tipoDocumento = tipoDocumento;
@@ -43,7 +69,7 @@ public class Tecnico {
         this.areaCobertura = areaCobertura;
     }
 
-    public Tecnico(Long id, String nombre, String apellido, Coordenada coordenada, Boolean disponible, Integer areaCobertura) {
+    public Tecnico(String nombre, String apellido, Coordenada coordenada, Boolean disponible, Integer areaCobertura) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.coordenada = coordenada;
@@ -51,7 +77,7 @@ public class Tecnico {
         this.areaCobertura = areaCobertura;
     }
 
-    public Tecnico(Long id, String nombre, String apellido, TipoDocumento tipoDocumento, Integer DNI, Integer CUIL, List<MedioDeComunicacion> mediosDeComunicacion, Integer areaCobertura, Coordenada coordenada) {
+    public Tecnico(Long id_Tecnico, String nombre, String apellido, TipoDocumento tipoDocumento, Integer DNI, Integer CUIL, List<MedioDeComunicacion> mediosDeComunicacion, Integer areaCobertura, Coordenada coordenada) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.tipoDocumento = tipoDocumento;
@@ -63,7 +89,7 @@ public class Tecnico {
     }
 
     public void registrarVisita(RegistroVisita registro){
-        RepoRegistrosVisita.getInstancia().agregarRegistroVisita(registro);
+        RepoRegistrosVisita.INSTANCE.agregar(registro);
     }
 
 }

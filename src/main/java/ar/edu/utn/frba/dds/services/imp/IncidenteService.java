@@ -4,20 +4,19 @@ import ar.edu.utn.frba.dds.dtos.inputs.IncidenteInputDTO;
 import ar.edu.utn.frba.dds.dtos.outputs.IncidenteOutputDTO;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoIncidente;
-import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoIncidente;
 
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoIncidente;
 import ar.edu.utn.frba.dds.services.interfaces.IIncidenteService;
 
 import static ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoIncidente.*;
 
 
 public class IncidenteService implements IIncidenteService {
-    private IRepoIncidente repoIncidente;
+    private RepoIncidente repoIncidente;
 
     @Override
     public IncidenteOutputDTO crear(IncidenteInputDTO dto) {
         Incidente incidente = new Incidente(
-                dto.getId(),
                 dto.getDescripcion(),
                 dto.getPathFoto(),
                 obtenerTipoIncidente(dto.getTipoIncidente()),
@@ -25,7 +24,7 @@ public class IncidenteService implements IIncidenteService {
                 null
         );
 
-        repoIncidente.agregarIncidente(incidente);
+        repoIncidente.agregar(incidente);
 
 
 
@@ -51,7 +50,6 @@ public class IncidenteService implements IIncidenteService {
     @Override
     public void eliminar(IncidenteInputDTO dto) {
         Incidente incidente = new Incidente(
-                dto.getId(),
                 dto.getDescripcion(),
                 dto.getPathFoto(),
                 obtenerTipoIncidente(dto.getTipoIncidente()),
@@ -59,6 +57,6 @@ public class IncidenteService implements IIncidenteService {
                 null
         );
 
-        repoIncidente.eliminarIncidente(incidente);
+        repoIncidente.eliminar(incidente);
     }
 }

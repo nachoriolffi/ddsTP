@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    <link rel="stylesheet" href="../scss/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+            crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/115c7ea5e6.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">ONG</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Donaciones</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="../html/donacionDinero.html">Donar Dinero</a></li>
+                        <li><a class="dropdown-item" href="../html/encargarseDeHeladera.html">Encargarse de Heladera</a></li>
+                        <li><a class="dropdown-item" href="../html/donacionViandas.html">Donar Viandas</a></li>
+                        <li><a class="dropdown-item" href="../html/distribuirViandas.html">Distribuir Viandas</a></li>
+                        <li><a class="dropdown-item" href="../html/registroVulnerable.html">Registrar Personas Vulnerables</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="../html/misHeladeras.html">Mis Heladeras</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/canjeProductos.html">Tienda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/heladeras.html">Ver Heladeras</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Herramientas</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="../html/reportarFallaTecnica.html">Reportar Incidente</a>
+                        </li>
+                        <li><a class="dropdown-item" href="../html/cargaCSV.html">Cargar Archivo CSV</a></li>
+                        <li><a class="dropdown-item" href="../html/visualizacionReportes.html">Ver Reportes PDF</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Mi Perfil</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="../html/iniciarSesion.html">Iniciar Sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="../html/crearCuenta.html">Registrarse</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<hr class="my-3 border-0">
+<div class="container mt-1">
+    <div class="row">
+        <div class="col-md-9 col-6 justify-content-center">
+            <div class="">
+                <div class="btn btn-outline-primary align-items-center">
+                    <strong>Puntos:</strong> 5000
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-6 justify-content-center">
+            <div class="text-end">
+                <button type="button" class="btn btn-outline-primary align-items-center" data-bs-toggle="modal"
+                        data-bs-target="#uploadProdServ">
+                    Subir Producto/Servicio
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr class="my-2 border-0">
+    <div class="row row-cols-1 row-cols-md-5 g-4">
+        <div class="col-md-3">
+            <div class="card h-100">
+                <div class="d-flex justify-content-center align-items-center" style="height: 200px; overflow: hidden;">
+                    <img src="../assets/silla_ejemplo.jpg" class="card-img-top" alt="...">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Producto</h5>
+                    <p class="card-text">Descripción Producto</p>
+                    <p class="card-text">Puntos Necesarios: 500</p>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                data-bs-target="#moreInfoProduct">
+                            Ver Más
+                        </button>
+                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                data-bs-target="#confirmCanje">
+                            Canjear
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card h-100">
+                <div class="d-flex justify-content-center align-items-center" style="height: 200px; overflow: hidden;">
+                    <img src="../assets/image_not_available.png" class="card-img-top" alt="...">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Producto</h5>
+                    <p class="card-text">Descripción Producto</p>
+                    <p class="card-text">Puntos Necesarios: 500</p>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                data-bs-target="#moreInfoProduct">
+                            Ver Más
+                        </button>
+                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                data-bs-target="#confirmCanje">
+                            Canjear
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card h-100">
+                <div class="d-flex justify-content-center align-items-center" style="height: 200px; overflow: hidden;">
+                    <img src="../assets/image_not_available.png" class="card-img-top" alt="...">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Producto</h5>
+                    <p class="card-text">Descripción Producto</p>
+                    <p class="card-text">Puntos Necesarios: 500</p>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                data-bs-target="#moreInfoProduct">
+                            Ver Más
+                        </button>
+                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                data-bs-target="#confirmCanje">
+                            Canjear
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card h-100">
+                <div class="d-flex justify-content-center align-items-center" style="height: 200px; overflow: hidden;">
+                    <img src="../assets/image_not_available.png" class="card-img-top" alt="...">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Producto</h5>
+                    <p class="card-text">Descripción Producto</p>
+                    <p class="card-text">Puntos Necesarios: 500</p>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                data-bs-target="#moreInfoProduct">
+                            Ver Más
+                        </button>
+                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                data-bs-target="#confirmCanje">
+                            Canjear
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card h-100">
+                <div class="d-flex justify-content-center align-items-center" style="height: 200px; overflow: hidden;">
+                    <img src="../assets/image_not_available.png" class="card-img-top" alt="...">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Producto</h5>
+                    <p class="card-text">Descripción Producto</p>
+                    <p class="card-text">Puntos Necesarios: 500</p>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                data-bs-target="#moreInfoProduct">
+                            Ver Más
+                        </button>
+                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                data-bs-target="#confirmCanje">
+                            Canjear
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card h-100">
+                <div class="d-flex justify-content-center align-items-center" style="height: 200px; overflow: hidden;">
+                    <img src="../assets/image_not_available.png" class="card-img-top" alt="...">
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Producto</h5>
+                    <p class="card-text">Descripción Producto</p>
+                    <p class="card-text">Puntos Necesarios: 500</p>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                data-bs-target="#moreInfoProduct">
+                            Ver Más
+                        </button>
+                        <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                data-bs-target="#confirmCanje">
+                            Canjear
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal Subir Producto/Servicio-->
+<div class="modal fade" id="uploadProdServ" tabindex="-1" aria-labelledby="uploadProdServLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="uploadProdServLabel">Subir Producto/Servicio</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form class="row g-3 needs-validation">
+                    <div class="col-md-6">
+                        <label for="validationCustom01" class="form-label">Tipo del Producto</label>
+                        <select class="form-select" id="validationCustom01" name="validationCustom01" required>
+                            <option value="" disabled selected>Seleccion una opcion</option>
+                            <option>Electronico</option>
+                            <option>Ropa</option>
+                            <option>Muebles</option>
+                            <option>Servicios</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="validationCustom02" class="form-label">Nombre Producto</label>
+                        <input type="text" class="form-control" id="validationCustom02"
+                               required>
+                    </div>
+                    <div class="col-md-12">
+                        <label for="validationCustom03" class="form-label">Puntos Necesarios</label>
+                        <input type="text" class="form-control" id="validationCustom03" required>
+                    </div>
+                    <div>
+                        <label for="validationCustom04" class="form-label">Cargar Imagen</label>
+                        <input type="file" class="form-control" id="validationCustom04">
+                    </div>
+                    <div class="modal-footer col-md-12">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal"
+                                data-bs-target="#confirmUpload">Cargar Producto/Servicio
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Ver mas-->
+<div class="modal fade" id="moreInfoProduct" tabindex="-1" aria-labelledby="moreInfoProductLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="moreInfoProductLabel">Más Información del Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Contenido detallado del producto -->
+                <p>Aquí puedes añadir más detalles sobre el producto, como sus características, especificaciones, o
+                    cualquier otra información relevante.</p>
+                <img src="../assets/image_not_available.png" class="img-fluid" alt="Imagen del Producto">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" data-bs-target="#confirmCanje" data-bs-toggle="modal" class="btn btn-primary">Canjear</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Canjear Producto-->
+<div class="modal fade" id="confirmCanje" tabindex="-1" aria-labelledby="confirmCanje" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalLabel1">Confirmación</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ¿Está seguro de que desea canjear X puntos por este producto?
+            </div>
+            <div class="modal-footer">
+                <!-- Botón de Cancelar que cierra el modal de confirmación y vuelve al modal de donación -->
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#donationModal">Cancelar</button>
+                <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Sí, canjear puntos</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

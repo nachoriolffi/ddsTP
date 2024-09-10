@@ -2,18 +2,50 @@ package ar.edu.utn.frba.dds.models.entities.vianda;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
+import lombok.Getter;
+import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.Date;
-
+@Getter
+@Setter
+@Entity
+@Table(name = "vianda")
 public class Vianda {
+
+    @Id
+    @GeneratedValue ( strategy = GenerationType.IDENTITY)
+    private Long id_Vianda;
+
+    @Column(name = "comida",columnDefinition = "VARCHAR (250)",nullable = false)
     private String comida;
+
+    @Column(name = "fechaCaducidad",columnDefinition = "Date",nullable = false)
     private Date fechaCaducidad;
+
+    @Column(name = "fechaDonacion",columnDefinition = "Date",nullable = false)
     private Date fechaDonacion;
+
+    @ManyToOne
+    @JoinColumn(name = "id_Colaborador",nullable = false)
     private Colaborador colaborador;
-    //private Heladera heladera;
+
+    @Column(name = "calorias")
     private Double calorias;
+
+    @Column(name = "peso")
     private Double peso;
+
+    @Column(name = "fueEntregada",columnDefinition = "Boolean",nullable = false)
     private Boolean fueEntregada;
+
+    @ManyToOne
+    @JoinColumn(name = "id_Heladera")
+    private Heladera heladera;
+
+    public Vianda(){
+
+    }
 
     public Vianda(Date fechaCaducidad, Date fechaDonacion) {
         this.fechaCaducidad = fechaCaducidad;

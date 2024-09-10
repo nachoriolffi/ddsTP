@@ -19,6 +19,7 @@ public class Broker {
 
     public void connect(String clientId) {
         try {
+
             MemoryPersistence persistence = new MemoryPersistence();
 
             client = new MqttClient(broker, clientId, persistence);
@@ -27,6 +28,7 @@ public class Broker {
             connectOptions.setCleanSession(true);
 
             client.connect(connectOptions);
+            System.out.println("Conectando al broker " + broker);
         } catch (MqttException e) {
             e.printStackTrace();
         }
@@ -45,6 +47,7 @@ public class Broker {
             MqttMessage message = new MqttMessage(content.getBytes());
             message.setQos(1); // Garantiza que el mensaje se entrego una vez como minimo
             client.publish(topic, message);
+            System.out.println("Message published to topic " + topic + ": " + content);
         } catch (MqttException e) {
             e.printStackTrace();
         }
@@ -54,6 +57,7 @@ public class Broker {
         try {
             MyCustomMessageReceptor receptor = new MyCustomMessageReceptor();
             client.subscribe(topic, receptor);
+            System.out.println("Subscribiendo al topico " + topic);
         } catch (MqttException e) {
             e.printStackTrace();
         }

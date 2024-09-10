@@ -1,7 +1,8 @@
 package ar.edu.utn.frba.dds.models.entities.colaborador;
 
+import ar.edu.utn.frba.dds.models.converters.MedioComunicacionAtributeConvertere;
 import ar.edu.utn.frba.dds.models.entities.colaborador.calculoPuntos.CalculadorPuntos;
-import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.Rubro;
+import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.models.entities.recomendacionPuntos.IRecomendacionPuntos;
@@ -17,6 +18,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.text.ParseException;
@@ -29,52 +31,97 @@ import java.util.List;
 @Data
 @Setter
 @Getter
-
+@Entity
+@Table(name = "colaborador")
 public class Colaborador {
 
-    private Long id;
-    private String nombre;
-    private String apellido;
-    private List<MedioDeComunicacion> mediosDeComunicacion;
-    private LocalDate fechaDeNacimiento;
-    private Direccion direccion;
-    private List<FormaDeColaboracion> formasDeColaboracion;
-    private List<FormaDeColaboracion> colaboracionesRealizadas;
-    private CuestionarioRespondido cuestionarioRespondido;
-    private Integer razonSocial;
-    private TipoJuridisccion tipoJuridisccion;
-    private Rubro rubro;
-    private TipoPersona tipoPersona;
-    private List<Contacto> contacto;
-    private IRecomendacionPuntos iRecomendacionPuntos;
-    //private Double puntosTotales;
-    private Double puntosTotalesUsados;
-    private Integer numeroDocumento; //nuevo requerimiento para carga masiva
-    private TipoDocumento tipoDocumento; //nuevo requerimiento para carga masiva
-    private List<Oferta> ofertasRegistradas;
+    @Id
+    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+    private Long id_Colaborador;
 
-    // CONSTRUCTORES
+    @Column(name = "nombre", columnDefinition = "VARCHAR(25)")
+    private String nombre;
+
+    @Column(name = "apellido", columnDefinition = "VARCHAR(25)")
+    private String apellido;
+
+    @Convert(converter = MedioComunicacionAtributeConvertere.class)
+    @ElementCollection(targetClass = String.class)
+    private List<MedioDeComunicacion> mediosDeComunicacion;
+
+    @Column(name = "fechaDeNacimiento", columnDefinition = "DATE")
+    private LocalDate fechaDeNacimiento;
+
+    @ManyToOne
+    @JoinColumn(name = "direccion_id")
+    private Direccion direccion;
+
+    //@OneToMany
+    //@JoinColumn(name = "id_FormasColaboracion")
+    @Transient
+    private List<FormaDeColaboracion> formasDeColaboracion;
+
+    @OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<FormaDeColaboracion> colaboracionesRealizadas;
+
+    @ManyToOne
+    @JoinColumn(name = "cuestionario_id")
+    private CuestionarioRespondido cuestionarioRespondido;
+
+    @Column(name = "razonSocial", columnDefinition = "VARCHAR(255)")
+    private String razonSocial;
+
+    @Enumerated(EnumType.STRING)
+    private TipoJuridisccion tipoJuridisccion;
+
+    @OneToOne
+    @JoinColumn(name = "rubro_id")
+    private RubroColaborador rubroColaborador;
+
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private TipoPersona tipoPersona;
+
+    @OneToMany
+    @JoinColumn(name = "colaborador_id")
+    private List<Contacto> contacto;
+
+    @Transient
+    private IRecomendacionPuntos iRecomendacionPuntos;
+
+    @Column(name = "puntosTotalesUsados", columnDefinition = "DOUBLE")
+    private Double puntosTotalesUsados;
+
+    @Column(name = "numeroDocumento", columnDefinition = "INT")
+    private Integer numeroDocumento; //nuevo requerimiento para carga masiva
+
+    @Enumerated(EnumType.STRING)
+    private TipoDocumento tipoDocumento; //nuevo requerimiento para carga masiva
+
+    @ManyToMany
+    @JoinColumn(name = "id_ofertasRegistradas")
+    private List<Oferta> ofertasRegistradas;
 
     public Colaborador() {
         this.mediosDeComunicacion = new ArrayList<>();
         this.formasDeColaboracion = new ArrayList<>();
         this.colaboracionesRealizadas = new ArrayList<>();
-        this.puntosTotalesUsados= (double) 0;
+        this.puntosTotalesUsados = (double) 0;
         this.iRecomendacionPuntos = new AServicioRecomendacionPuntos();
         this.contacto = new ArrayList<>();
     }
 
-    public Colaborador(String nombre,String apellido,List<FormaDeColaboracion> hechas){
+    public Colaborador(String nombre, String apellido, List<FormaDeColaboracion> hechas) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.colaboracionesRealizadas = hechas;
-        this.puntosTotalesUsados= (double) 0;
+        this.puntosTotalesUsados = (double) 0;
     }
 
-    public Colaborador(String nombre,String apellido){
-        this.nombre=nombre;
-        this.apellido=apellido;
-        this.puntosTotalesUsados= (double) 0;
+    public Colaborador(String nombre, String apellido) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.puntosTotalesUsados = (double) 0;
         this.ofertasRegistradas = new ArrayList<Oferta>();
     }
 
@@ -82,10 +129,10 @@ public class Colaborador {
         this.nombre = nombre;
         this.apellido = apellido;
         this.mediosDeComunicacion = mediosDeComunicacion;
-        this.numeroDocumento = Integer.valueOf(numeroDocumento);
+        this.numeroDocumento = numeroDocumento;
         this.tipoDocumento = tipoDocumento;
         this.colaboracionesRealizadas = new ArrayList<>();
-        this.puntosTotalesUsados= (double) 0;
+        this.puntosTotalesUsados = (double) 0;
     }
 
     public Colaborador(String nombre, String apellido, List<MedioDeComunicacion> mediosDeComunicacion, List<FormaDeColaboracion> formasDeColaboracion, CuestionarioRespondido cuestionarioRespondido, TipoPersona tipoPersona) {
@@ -93,7 +140,7 @@ public class Colaborador {
         this.apellido = apellido;
         this.mediosDeComunicacion = mediosDeComunicacion;
         this.formasDeColaboracion = formasDeColaboracion;
-        this.puntosTotalesUsados= (double) 0;
+        this.puntosTotalesUsados = (double) 0;
         this.cuestionarioRespondido = cuestionarioRespondido;
         this.tipoPersona = tipoPersona;
         this.contacto = new ArrayList<>();
@@ -101,7 +148,6 @@ public class Colaborador {
         this.formasDeColaboracion = new ArrayList<>();
         this.colaboracionesRealizadas = new ArrayList<>();
     }
-
 
     public void agregarMedioDeComunicacion(MedioDeComunicacion medioDeComunicacion) {
         this.mediosDeComunicacion.add(medioDeComunicacion);
@@ -113,9 +159,10 @@ public class Colaborador {
 
     public void agregarColaboracionRealizada(FormaDeColaboracion formaDeColaboracion) {
         this.colaboracionesRealizadas.add(formaDeColaboracion);
+        formaDeColaboracion.setColaborador(this);
     }
 
-    public void modificarColaborador(String nombre, String apellido, LocalDate fechaDeNacimiento, CuestionarioRespondido cuestionarioRespondido, Integer razonSocial, String rubro, TipoPersona tipoPersona, Contacto contacto) {
+    public void modificarColaborador(String nombre, String apellido, LocalDate fechaDeNacimiento, CuestionarioRespondido cuestionarioRespondido, String razonSocial, String rubro, TipoPersona tipoPersona, Contacto contacto) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.mediosDeComunicacion = new ArrayList<>();
@@ -123,14 +170,9 @@ public class Colaborador {
         this.formasDeColaboracion = new ArrayList<>();
         this.cuestionarioRespondido = cuestionarioRespondido;
         this.razonSocial = razonSocial;
-        //this.rubro = rubro;
         this.tipoPersona = tipoPersona;
         this.contacto = new ArrayList<>();
     }
-
-    //public void sumarPuntos(Double puntos) {
-    //    this.puntosTotales += puntos;
-    //}
 
     public void cargarRespuestas(CuestionarioRespondido cuestionarioRespondido) {
         for (int i = 0; i < cuestionarioRespondido.getRespuestas().size(); i++) {
@@ -165,15 +207,15 @@ public class Colaborador {
         this.puntosTotalesUsados += aDouble;
     }
 
-    public Double puntosActualesDisponibles(){
+    public Double puntosActualesDisponibles() {
         return CalculadorPuntos.getInstancia().sumarPuntosA(this) - this.puntosTotalesUsados;
     }
-    public void agregarOfertasCanjeadas(List<Oferta> ofertas){
+
+    public void agregarOfertasCanjeadas(List<Oferta> ofertas) {
         this.ofertasRegistradas.addAll(ofertas);
     }
 
     public List<Coordenada> obtenerPuntosRecomendadosParaHeladera(Double longitud, Double latitud, Integer radio) throws IOException {
-        return iRecomendacionPuntos.recomendarPuntos(longitud,latitud,radio);
+        return iRecomendacionPuntos.recomendarPuntos(longitud, latitud, radio);
     }
 }
-

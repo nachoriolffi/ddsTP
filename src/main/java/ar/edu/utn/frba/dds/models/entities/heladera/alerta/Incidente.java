@@ -10,17 +10,35 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoTecnico;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
+
 import java.util.Date;
 
 @Getter
 @Setter
+@Entity
+@Table(name = "incidente")
 public class Incidente {
-    Long id;
+    @Id
+    @GeneratedValue ( strategy = GenerationType.IDENTITY)
+    private Long id_Incidente;
+    @Column(name = "fecha", columnDefinition = "DATE",nullable = false)
     private Date fecha;
+    @Column(name = "descripcion", columnDefinition = "TEXT")
     private String descripcion;
+    @Column(name = "pathFoto", columnDefinition = "TEXT")
     private String pathFoto;
+
+    @Column(name = "tipoIncidente",nullable = false)
+    @Enumerated(EnumType.STRING)
     private TipoIncidente tipoIncidente;
+
+    @Column(name = "tipoAlerta")
+    @Enumerated(EnumType.STRING)
     private TipoAlerta tipoAlerta;
+
+    @OneToOne
+    @JoinColumn(name = "id_Incidente",nullable = false)
     private Colaborador colaborador;
 
     public Incidente(TipoAlerta tipoAlerta) {
@@ -32,8 +50,7 @@ public class Incidente {
         this.fecha = new Date();
     }
 
-    public Incidente(Long id, String descripcion, String pathFoto, TipoIncidente tipoIncidente, TipoAlerta tipoAlerta, Colaborador colaborador) {
-        this.id = id;
+    public Incidente(String descripcion, String pathFoto, TipoIncidente tipoIncidente, TipoAlerta tipoAlerta, Colaborador colaborador) {
         this.fecha = new Date();
         this.descripcion = descripcion;
         this.pathFoto = pathFoto;
@@ -43,10 +60,10 @@ public class Incidente {
     }
 
     public void notificarTecnicoMasCercano(Heladera heladera){
-     CalculadorDistanciasTecnicoHeladera calculador = CalculadorDistanciasTecnicoHeladera.getInstance();
-    Tecnico tecnicoMasCercano = calculador.calcularTecnicoMasCercano(RepoTecnico.getInstancia().getTecnicos(),heladera);
-    Notificacion notificaion = new Notificacion(tecnicoMasCercano.getContactos(), new Mensaje("Alerta de incidente", "Se ha detectado un incidente en la heladera"));
-    tecnicoMasCercano.getMediosDeComunicacion().forEach(medioDeComunicacion -> medioDeComunicacion.comunicar(notificaion));
+        CalculadorDistanciasTecnicoHeladera calculador = CalculadorDistanciasTecnicoHeladera.getInstance();
+        Tecnico tecnicoMasCercano = calculador.calcularTecnicoMasCercano(RepoTecnico.INSTANCE.buscarTodos(), heladera);
+        Notificacion notificaion = new Notificacion(tecnicoMasCercano.getContactos(), new Mensaje("Alerta de incidente", "Se ha detectado un incidente en la heladera"));
+        tecnicoMasCercano.getMediosDeComunicacion().forEach(medioDeComunicacion -> medioDeComunicacion.comunicar(notificaion));
     }
 
 }

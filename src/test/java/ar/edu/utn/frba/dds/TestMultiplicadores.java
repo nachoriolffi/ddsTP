@@ -19,7 +19,7 @@ public class TestMultiplicadores {
 
     List<Heladera> heladeras = new ArrayList<>();
     Colaborador colaborador;
-
+    Heladera heladera1;
     @BeforeEach
     public void seteoHeladeras() {
 
@@ -35,9 +35,9 @@ public class TestMultiplicadores {
         Date fecha2 = new Date(2024, 05, 10);
         Date fecha3 = new Date(2024, 04, 04);
 
-        Heladera heladera1 = new Heladera(direccion1, coordenada1, 150, new ArrayList<>(), fecha1);
-        Heladera heladera2 = new Heladera(direccion2, coordenada2, 200, new ArrayList<>(), fecha2);
-        Heladera heladera3 = new Heladera(direccion3, coordenada3, 300, new ArrayList<>(), fecha3);
+        Heladera heladera1 = new Heladera(direccion1, coordenada1,fecha1);
+        Heladera heladera2 = new Heladera(direccion2, coordenada2, fecha2);
+        Heladera heladera3 = new Heladera(direccion3, coordenada3, fecha3);
 
         Vianda vianda1 = new Vianda("Carne", new Colaborador(), true);
         Vianda vianda2 = new Vianda("Papas", new Colaborador(), false);
@@ -46,12 +46,12 @@ public class TestMultiplicadores {
         Vianda vianda5 = new Vianda("Fideos", new Colaborador(), true);
         Vianda vianda6 = new Vianda("Ravioles", new Colaborador(), true);
 
-        heladera1.agregarVianda(vianda1);
-        heladera1.agregarVianda(vianda4);
-        heladera2.agregarVianda(vianda2);
-        heladera2.agregarVianda(vianda5);
-        heladera3.agregarVianda(vianda3);
-        heladera3.agregarVianda(vianda6);
+        heladera1.agregarVianda();
+        heladera1.agregarVianda();
+        heladera2.agregarVianda();
+        heladera2.agregarVianda();
+        heladera3.agregarVianda();
+        heladera3.agregarVianda();
 
         heladeras.add(heladera1);
         heladeras.add(heladera2);
@@ -66,12 +66,14 @@ public class TestMultiplicadores {
 
         List<FormaDeColaboracion> colaboracionesRalizadas = new ArrayList<>();
 
-        // FORMAS DE COLABORACION
         DonacionDinero donacionDinero = new DonacionDinero(1000, new Date());
         DonacionDinero donacionDinero1 = new DonacionDinero(2000, new Date());
         DonacionVianda donacionVianda = new DonacionVianda(10, new Date());
-        HacerseCargoDeHeladera hacerseCargoDeHeladera = new HacerseCargoDeHeladera(heladeras, TipoColaboracion.HACERSE_CARGO_HELADERA);
-        // AGREGAMOS FORMAS DE COLABORAR HECHAS AL COLABORADOR
+        Direccion direccion1 = new Direccion("Medrano", 951, 1);
+        Coordenada coordenada1 = new Coordenada(125.0, 410.0);
+        Heladera heladera1 = new Heladera(direccion1, coordenada1, new Date());
+        HacerseCargoDeHeladera hacerseCargoDeHeladera = new HacerseCargoDeHeladera(heladera1, TipoColaboracion.HACERSE_CARGO_HELADERA);
+
         colaboracionesRalizadas.add(donacionDinero);
         colaboracionesRalizadas.add(donacionDinero1);
         colaboracionesRalizadas.add(donacionVianda);

@@ -3,13 +3,12 @@ package ar.edu.utn.frba.dds.services.imp;
 import ar.edu.utn.frba.dds.dtos.inputs.TecnicoInputDTO;
 import ar.edu.utn.frba.dds.dtos.outputs.TecnicoOutputDTO;
 import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
-import ar.edu.utn.frba.dds.models.repositories.interfaces.IRepoTecnico;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoTecnico;
 import ar.edu.utn.frba.dds.services.interfaces.ITecnicoService;
 
 public class TecnicoService implements ITecnicoService {
-    private IRepoTecnico repoTecnico;
 
-
+    private RepoTecnico repoTecnico;
     @Override
     public TecnicoOutputDTO crear(TecnicoInputDTO dto) {
         Tecnico tecnico = new Tecnico(
@@ -22,7 +21,7 @@ public class TecnicoService implements ITecnicoService {
                 null,
                 dto.getAreaCobertura()
         );
-        repoTecnico.agregarTecnico(tecnico);
+        repoTecnico.agregar(tecnico);
 
         TecnicoOutputDTO result = new TecnicoOutputDTO(
                 dto.getId(),
@@ -55,6 +54,6 @@ public class TecnicoService implements ITecnicoService {
                 dto.getAreaCobertura()
         );
 
-        this.repoTecnico.eliminarTecnico(tecnico);
+        this.repoTecnico.eliminar(tecnico);
     }
 }

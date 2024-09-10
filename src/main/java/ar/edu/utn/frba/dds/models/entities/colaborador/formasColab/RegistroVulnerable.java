@@ -6,18 +6,33 @@ import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Getter
 @Setter
-public class RegistroVulnerable implements FormaDeColaboracion {
+@Entity
+@Table(name="registro_vulnerable")
+public class RegistroVulnerable extends FormaDeColaboracion {
 
+    @OneToMany
+    @JoinColumn(name = "id")
     private List<Tarjeta> tarjetasDonadas;
+
+    @Column(name="cantidadTarjetas", columnDefinition = "INT")
     private Integer cantidadTarjetas;
+
+    @Column(name="fechaColaboracion", columnDefinition = "DATE",nullable = false)
     private Date fechaColaboracion;
 
+    @Enumerated(EnumType.STRING)
     private TipoColaboracion tipoColaboracion = TipoColaboracion.ENTREGA_TARJETAS;
+
+    public RegistroVulnerable(){
+        tarjetasDonadas = new ArrayList<>();
+    }
 
     public RegistroVulnerable(List<Tarjeta> tarjetasDonadas) {
         this.tarjetasDonadas = tarjetasDonadas;
@@ -33,11 +48,5 @@ public class RegistroVulnerable implements FormaDeColaboracion {
     @Override
     public double sumarPuntosA(Colaborador colaborador) {
         return cantidadTarjetas * ConfiguracionMultiplicador.getInstance().getMultiplicadorRegistroVulnerables();
-    }
-
-
-    @Override
-    public Integer getCantidadViandas() {
-        return null;
     }
 }

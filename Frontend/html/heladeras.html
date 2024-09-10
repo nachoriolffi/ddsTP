@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://kit.fontawesome.com/115c7ea5e6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../scss/style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+    <title>Heladeras</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">ONG</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Donaciones</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="../html/donacionDinero.html">Donar Dinero</a></li>
+                        <li><a class="dropdown-item" href="../html/encargarseDeHeladera.html">Encargarse de Heladera</a></li>
+                        <li><a class="dropdown-item" href="../html/donacionViandas.html">Donar Viandas</a></li>
+                        <li><a class="dropdown-item" href="../html/distribuirViandas.html">Distribuir Viandas</a></li>
+                        <li><a class="dropdown-item" href="../html/registroVulnerable.html">Registrar Personas Vulnerables</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="../html/misHeladeras.html">Mis Heladeras</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/canjeProductos.html">Tienda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/heladeras.html">Ver Heladeras</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Herramientas</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="../html/reportarFallaTecnica.html">Reportar Incidente</a>
+                        </li>
+                        <li><a class="dropdown-item" href="../html/cargaCSV.html">Cargar Archivo CSV</a></li>
+                        <li><a class="dropdown-item" href="../html/visualizacionReportes.html">Ver Reportes PDF</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Mi Perfil</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="../html/iniciarSesion.html">Iniciar Sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="../html/crearCuenta.html">Registrarse</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<section class="container">
+    <hr class="my-3 border-0">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="h1">Heladeras</h1>
+        </div>
+        <div class="col-md-4 text-md-end">
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                    data-bs-target="#cargarHeladeraModal">
+                Cargar Heladera
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 table-responsive">
+            <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Cantidad Máx. de Viandas</th>
+                    <th scope="col">Cantidad de Viandas Restantes</th>
+                    <th scope="col">Suscribirme</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                <tr>
+                    <td><a href="#" data-bs-toggle="modal" data-bs-target="#heladeraModal">Heladera del Centro</a></td>
+                    <td>Calle Falsa 123</td>
+                    <td>100</td>
+                    <td>50</td>
+                    <td>
+                        <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                            <i class="fa-solid fa-check-circle fa-lg"></i>
+                        </button>
+                    </td>
+                </tr>
+                <!-- Repite las filas según sea necesario -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="modal fade" id="cargarHeladeraModal" tabindex="-1" aria-labelledby="cargarHeladeraLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cargarHeladeraLabel">Cargar Heladera</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulario de Cargar Heladera -->
+                    <form class="row g-3 needs-validation" novalidate>
+                        <div class="col-7">
+                            <label for="validationCustom01" class="form-label">Nombre Heladera</label>
+                            <input type="text" class="form-control" id="validationCustom01" required>
+                        </div>
+                        <div class="col-5">
+                            <label for="validationCustom05" class="form-label">Modelo</label>
+                            <select class="form-select" id="validationCustom05" required>
+                                <option value="" disabled selected>Modelo</option>
+                                <option value="modelo1">Modelo 1</option>
+                                <option value="modelo2">Modelo 2</option>
+                                <option value="modelo3">Modelo 3</option>
+                            </select>
+                        </div>
+                        <div class="col-7">
+                            <label for="validationCustom02" class="form-label">Calle</label>
+                            <input type="text" class="form-control" id="validationCustom02" required>
+                        </div>
+                        <div class="col-3">
+                            <label for="validationCustom03" class="form-label">Altura</label>
+                            <input type="text" class="form-control" id="validationCustom03" required>
+                        </div>
+                        <div class="col-2">
+                            <label for="validationCustom04" class="form-label">Piso</label>
+                            <input type="text" class="form-control" id="validationCustom04">
+                        </div>
+                        <div class="modal-footer col-md-12">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button class="btn btn-outline-primary" type="submit" data-bs-toggle="modal"
+                                    data-bs-target="#confirmModalHeladera">Cargar Heladera
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="heladeraModal" tabindex="-1" aria-labelledby="heladeraModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="heladeraModalLabel">Información de la Heladera</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <h4>Heladera UTN Medrano</h4>
+                        <div class="col-md-6 col-sm-12">
+                            <p>Avenida Medrano 951, Piso: 5</p>
+                            <div class="rounded" id="map" style="height: 400px;"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                                <caption>Viandas de la Heladera</caption>
+                                <thead>
+                                <tr>
+                                    <th scope="col">Vianda</th>
+                                    <th scope="col">Calorías</th>
+                                    <th scope="col">Peso (En Gramos)</th>
+                                    <th scope="col">Fecha de Caducidad</th>
+                                </tr>
+                                </thead>
+                                <tbody class="table-group-divider">
+                                <tr>
+                                    <td>Manzanas</td>
+                                    <td>52</td>
+                                    <td>1000g</td>
+                                    <td>2024-09-01</td>
+                                </tr>
+                                <tr>
+                                    <td>Papas</td>
+                                    <td>-</td>
+                                    <td>2000g</td>
+                                    <td>2024-10-05</td>
+                                </tr>
+                                <tr>
+                                    <td>Leche</td>
+                                    <td>42</td>
+                                    <td>-</td>
+                                    <td>2024-08-20</td>
+                                </tr>
+                                <tr>
+                                    <td>Pan</td>
+                                    <td>-</td>
+                                    <td>500g</td>
+                                    <td>2024-08-18</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                                <caption>Solicitudes de Apertura</caption>
+                                <thead>
+                                <tr>
+                                    <th scope="col">Fecha Solicitud de Apertura</th>
+                                    <th scope="col">Fecha Límite</th>
+                                    <th scope="col">Tiempo Restante</th>
+                                </tr>
+                                </thead>
+                                <tbody class="table-group-divider">
+                                <tr>
+                                    <td>2024-08-30</td>
+                                    <td>2024-09-01</td>
+                                    <td>2 días</td>
+                                </tr>
+                                <tr>
+                                    <td>2024-09-25</td>
+                                    <td>2024-10-05</td>
+                                    <td>1 mes</td>
+                                </tr>
+                                <tr>
+                                    <td>2024-08-10</td>
+                                    <td>2024-08-20</td>
+                                    <td>5 días</td>
+                                </tr>
+                                <tr>
+                                    <td>2024-08-15</td>
+                                    <td>2024-08-18</td>
+                                    <td>3 días</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                                <caption>Aperturas Realizadas</caption>
+                                <thead>
+                                <tr>
+                                    <th scope="col">Fecha Apertura</th>
+                                    <th scope="col">Colaborador</th>
+                                </tr>
+                                </thead>
+                                <tbody class="table-group-divider">
+                                <tr>
+                                    <td>2024-08-30</td>
+                                    <td>Juan Pérez</td>
+                                </tr>
+                                <tr>
+                                    <td>2024-09-25</td>
+                                    <td>María López</td>
+                                </tr>
+                                <tr>
+                                    <td>2024-08-10</td>
+                                    <td>Carlos García</td>
+                                </tr>
+                                <tr>
+                                    <td>2024-08-15</td>
+                                    <td>Laura Fernández</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let map;
+
+            const initMap = () => {
+                // Inicializar el mapa con la vista centrada en Buenos Aires
+                map = L.map('map', {
+                    center: [-34.598630, -58.419962],
+                    zoom: 12,
+                    scrollWheelZoom: false, // Desactiva el zoom con la rueda del ratón
+                    dragging: false, // Desactiva el arrastre del mapa
+                    touchZoom: false, // Desactiva el zoom táctil
+                    doubleClickZoom: false, // Desactiva el zoom por doble clic
+                    boxZoom: false, // Desactiva el zoom por selección de área
+                    keyboard: false, // Desactiva el control del mapa con teclado
+                    zoomControl: false, // Desactiva los controles de zoom del mapa
+                }).setView([-34.598630, -58.419962], 18); // Ubicación inicial (Buenos Aires)
+
+                // Cargar los tiles de OpenStreetMap
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
+
+                // Hacer una solicitud a la API de georreferenciación del Gobierno de Buenos Aires
+                fetch('https://apis.datos.gob.ar/georef/api/direcciones?direccion=Avenida Medrano 951, CABA&max=1')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Obtener las coordenadas de latitud y longitud de la respuesta
+                        var lat = data.direcciones[0].ubicacion.lat;
+                        var lon = data.direcciones[0].ubicacion.lon;
+
+                        // Agregar un marcador al mapa con las coordenadas obtenidas
+                        L.marker([lat, lon]).addTo(map)
+                            .bindPopup('Avenida Medrano 951, CABA');
+                    })
+                    .catch(error => {
+                        console.error('Error al obtener la ubicación:', error);
+                    });
+            };
+
+            // Detectar cuando el modal 'heladeraModal' está completamente visible
+            const heladeraModal = document.getElementById('heladeraModal');
+            heladeraModal.addEventListener('shown.bs.modal', function () {
+                if (!map) {
+                    initMap(); // Inicializar el mapa la primera vez que el modal se muestra
+                } else {
+                    setTimeout(() => {
+                        map.invalidateSize(); // Ajustar el tamaño del mapa cuando el modal esté visible
+                    }, 300); // Esperar 300 ms para asegurarse de que el modal esté completamente renderizado
+                }
+            });
+        });
+
+    </script>
+    <script src="../js/validacionDatos.js"></script>
+</section>
+</body>
+</html>

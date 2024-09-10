@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class IncidenteInputDTO {
-    private Long id;
+    private Integer id;
     private Integer tipoIncidente;
     private Integer tipoAlerta;
     private String descripcion;

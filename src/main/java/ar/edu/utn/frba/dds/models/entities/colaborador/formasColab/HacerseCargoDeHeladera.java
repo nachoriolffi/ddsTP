@@ -7,49 +7,50 @@ import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Local;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+@Entity
+@Table(name = "hacerse_cargo_de_heladera")
+public class HacerseCargoDeHeladera extends FormaDeColaboracion {
 
-
-public class HacerseCargoDeHeladera implements FormaDeColaboracion {
+    //@ManyToOne
+    //@JoinColumn(name = "id",referencedColumnName = "id_Local",nullable = false)
+    @Transient
     private Local local;
-    private List<Heladera> heladeras;
-    private Integer cantidadHeladeras;
+
+    @OneToOne
+    @JoinColumn(name = "id", referencedColumnName = "id_Heladera", nullable = false)
+    private Heladera heladera;
+
     @Getter
     @Setter
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TipoColaboracion tipoColaboracion;
+
+    @Column(name = "fechaColaboracion", columnDefinition = "DATE", nullable = false)
     private Date fechaColaboracion;
 
+    public HacerseCargoDeHeladera() {
+    }
 
-
-    public HacerseCargoDeHeladera(List<Heladera> heladeras, TipoColaboracion tipoColaboracion) {
-        this.heladeras = heladeras;
+    public HacerseCargoDeHeladera(Heladera heladera, TipoColaboracion tipoColaboracion) {
+        this.heladera = heladera;
         this.tipoColaboracion = tipoColaboracion;
         this.fechaColaboracion = new Date();
-        this.cantidadHeladeras = heladeras.size();
     }
 
     @Override
     public double sumarPuntosA(Colaborador colaborador) {
-        return cantidadHeladeras * this.sumarMesesActivas() * ConfiguracionMultiplicador.getInstance().getMultiplicadorHeladeraActiva();
-    }
-
-
-    @Override
-    public Integer getCantidadViandas() {
-        return null;
+        return this.sumarMesesActivas() * ConfiguracionMultiplicador.getInstance().getMultiplicadorHeladeraActiva();
     }
 
     public long sumarMesesActivas() {
-
         long mesesActivas = 0;
-
-        for (Heladera heladera : heladeras) {
-            mesesActivas += heladera.mesesActiva(fechaColaboracion);
-        }
+        mesesActivas += heladera.mesesActiva(fechaColaboracion);
         return mesesActivas;
-
     }
 
 }

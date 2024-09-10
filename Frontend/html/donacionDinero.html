@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="../scss/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+            crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/115c7ea5e6.js" crossorigin="anonymous"></script>
+    <title>Donacion de Dinero</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">ONG</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Donaciones</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="../html/donacionDinero.html">Donar Dinero</a></li>
+                        <li><a class="dropdown-item" href="../html/encargarseDeHeladera.html">Encargarse de Heladera</a></li>
+                        <li><a class="dropdown-item" href="../html/donacionViandas.html">Donar Viandas</a></li>
+                        <li><a class="dropdown-item" href="../html/distribuirViandas.html">Distribuir Viandas</a></li>
+                        <li><a class="dropdown-item" href="../html/registroVulnerable.html">Registrar Personas Vulnerables</a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item" href="../html/misHeladeras.html">Mis Heladeras</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/canjeProductos.html">Tienda</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/heladeras.html">Ver Heladeras</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Herramientas</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="../html/reportarFallaTecnica.html">Reportar Incidente</a>
+                        </li>
+                        <li><a class="dropdown-item" href="../html/cargaCSV.html">Cargar Archivo CSV</a></li>
+                        <li><a class="dropdown-item" href="../html/visualizacionReportes.html">Ver Reportes PDF</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-expanded="false">Mi Perfil</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="../html/iniciarSesion.html">Iniciar Sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="../html/crearCuenta.html">Registrarse</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<hr class="my-3 border-0">
+<section class="container mt-1">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="h1">Donar Dinero</h1>
+        </div>
+        <div class="col-md-4 text-md-end">
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#donationModal">
+                Donar Dinero
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 table-responsive">
+            <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                <thead>
+                <tr class="align-middle">
+                    <th scope="col">Fecha de donación</th>
+                    <th scope="col">Monto</th>
+                    <th scope="col">Donación periódica</th>
+                    <th scope="col">Frecuencia Donacion (En Dias)</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                <tr>
+                    <td>2024-08-15</td>
+                    <td>$100</td>
+                    <td>Sí</td>
+                    <td>30</td>
+                </tr>
+                <tr>
+                    <td>2024-08-01</td>
+                    <td>$50</td>
+                    <td>No</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>2024-07-20</td>
+                    <td>$200</td>
+                    <td>Sí</td>
+                    <td>15</td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                <caption>
+                    Donaciones Periodicas Activas
+                </caption>
+                <thead>
+                <tr class="align-middle">
+                    <th>Monto</th>
+                    <th>Frecuencia Donación (En Días)</th>
+                    <th>Cancelar Donacion</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                <tr>
+                    <td>$50</td>
+                    <td>30</td>
+                    <td>
+                        <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                            <i class="fa-solid fa-xmark fa-lg"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>$100</td>
+                    <td>60</td>
+                    <td>
+                        <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                            <i class="fa-solid fa-xmark fa-lg"></i>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>$25</td>
+                    <td>15</td>
+                    <td>
+                        <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                            <i class="fa-solid fa-xmark fa-lg"></i>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <!--Aca aparece la pantalla de carga de datos-->
+        <div class="modal fade" id="donationModal" tabindex="-1" aria-labelledby="donationModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="donationModalLabel">Donar Dinero</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Formulario de Donación -->
+                        <form class="row g-3 needs-validation">
+                            <div class="col-md-6">
+                                <label for="validationCustom01" class="form-label">Fecha De Donación</label>
+                                <input type="date" class="form-control" id="validationCustom01" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="validationCustom02" class="form-label">Monto</label>
+                                <input type="number" min="0" step="0.01" class="form-control" id="validationCustom02"
+                                       required>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="validationCustom03" class="form-label">Frecuencia (En Días)</label>
+                                <input type="number" min="0" class="form-control" id="validationCustom03" required>
+                            </div>
+                            <div class="col-md-6 d-flex justify-content-center align-items-center">
+                                <div class="form-check d-flex align-items-center">
+                                    <input class="form-check-input" type="checkbox" value="" id="invalidCheck">
+                                    <label class="form-check-label ms-2" for="invalidCheck">
+                                        Donar de Forma Periódica
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="modal-footer col-md-12">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#confirmModalDonation">¡Realizar Donación!</button>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Modal de Confirmación Donacion-->
+        <div class="modal fade" id="confirmModalDonation" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmModalLabel1">Confirmación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Está seguro de que desea realizar esta donación?
+                    </div>
+                    <div class="modal-footer">
+                        <!-- Botón de Cancelar que cierra el modal de confirmación y vuelve al modal de donación -->
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#donationModal">Cancelar</button>
+                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Sí, realizar donación</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal de Confirmación Dar de Baja Donacion-->
+        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmModalLabel">Confirmación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Está seguro de que desea cancelar esta donación periódica?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                        <button type="button" class="btn btn-primary">Sí</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+</body>
+</html>

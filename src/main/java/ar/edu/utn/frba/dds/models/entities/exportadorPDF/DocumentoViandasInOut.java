@@ -20,7 +20,7 @@ public class DocumentoViandasInOut implements Exportable {
 
     public DocumentoViandasInOut() {
         this.datos = new HashMap<String, List<String>>();
-        this.repoHeladeras = RepoHeladeras.getInstancia();
+        this.repoHeladeras = RepoHeladeras.INSTANCE;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class DocumentoViandasInOut implements Exportable {
         List<String> ingresos = new ArrayList<String>();
         List<String> retiros = new ArrayList<String>();
 
-        List<Heladera> heladeras = repoHeladeras.traerHeladeras();
+        List<Heladera> heladeras = repoHeladeras.INSTANCE.buscarTodos();
         // ya tengo las heladeras necesito los registros de aperturas
         for(Heladera heladera : heladeras){
             if(!heladera.getAperturas().isEmpty()) {

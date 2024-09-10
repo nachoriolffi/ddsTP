@@ -22,7 +22,8 @@ public class ConfiguracionMultiplicador extends Observable {
     private Double multiplicadorHeladeraActiva;
     private Double multiplicadorDinero;
     private static ConfiguracionMultiplicador instancia = null;
-    private String path = "src/main/java/ar/edu/utn/frba/dds/reconocimiento/config/configuracionMultiplicadores.json";
+
+    private String path = "src/main/java/ar/edu/utn/frba/dds/models/entities/multiplicador/config/configuracionMultiplicadores.json";
 
     public ConfiguracionMultiplicador() {
         // Constructor privado para el patrón Singleton

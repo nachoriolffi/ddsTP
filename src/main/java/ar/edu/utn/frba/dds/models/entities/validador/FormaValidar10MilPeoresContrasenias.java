@@ -1,6 +1,6 @@
 package ar.edu.utn.frba.dds.models.entities.validador;
 
-import ar.edu.utn.frba.dds.Usuario;
+import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;

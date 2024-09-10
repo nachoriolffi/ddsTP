@@ -7,44 +7,61 @@ import ar.edu.utn.frba.dds.models.entities.vulnerable.Vulnerable;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 @Getter
 @Setter
+@Table(name = "tarjeta")
+@Entity
 public class Tarjeta {
-    
-    private Integer idTarjeta;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id_Tarjeta;
+
+    @OneToMany
+    @JoinColumn(name = "id_UsoTarjeta")
     private List<UsoTarjeta> registroUsos;
+
+    @OneToOne
+    @JoinColumn(name = "id_Vulnerable")
     private Vulnerable personaAsociada;
+
+    @ManyToOne
+    @JoinColumn(name = "id_Colaborador", nullable = false)
     private Colaborador colaboradorAsociado;
+
+    @Column(name = "fechaRegistro", columnDefinition = "Date", nullable = false)
     private Date fechaRegistro;
 
-    public Vianda sacarVianda(Vianda viandaQuitada, Heladera heladera)throws IOException {
-        if(!alcanzaUsosLimite()){
-        heladera.getViandas().remove(viandaQuitada);
-        registroUsos.add(new UsoTarjeta(new Date(), heladera));
-        return viandaQuitada;
+    public void sacarVianda(Heladera heladera) throws IOException {
+        if (!alcanzaUsosLimite()) {
+            heladera.quitarVianda();
+            registroUsos.add(new UsoTarjeta(new Date(), heladera));
         }
         throw new IOException("No se puede sacar mas viandas alcanza su limite permitido");
-
     }
 
-    public Tarjeta(Integer idTarjeta, Vulnerable personaAsociada, Colaborador colaboradorAsociado) {
-        this.idTarjeta = idTarjeta;
+    public Tarjeta() {
+    }
+
+    public Tarjeta(Vulnerable personaAsociada, Colaborador colaboradorAsociado) {
         this.personaAsociada = personaAsociada;
         this.colaboradorAsociado = colaboradorAsociado;
         this.fechaRegistro = new Date();
-        this.registroUsos= new ArrayList<UsoTarjeta>();
+        this.registroUsos = new ArrayList<UsoTarjeta>();
     }
 
-    public Boolean alcanzaUsosLimite(){
-        return registroUsos.size()==this.cantidadMaximaUsos();
+    public Boolean alcanzaUsosLimite() {
+        return registroUsos.size() == this.cantidadMaximaUsos();
     }
 
-    public Integer cantidadMaximaUsos(){
-        return 4 + this.personaAsociada.getRegistroDePersonasACargo().size()*2;
+    public Integer cantidadMaximaUsos() {
+        return 4 + this.personaAsociada.getMenoresACargo().size() * 2;
     }
 
 }

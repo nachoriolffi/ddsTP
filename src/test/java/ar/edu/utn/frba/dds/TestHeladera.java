@@ -2,8 +2,6 @@ package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
-import ar.edu.utn.frba.dds.models.entities.contacto.Mensaje;
-import ar.edu.utn.frba.dds.models.entities.contacto.Notificacion;
 import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.AdapterCorreo;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.CorreoElectronico;
@@ -26,12 +24,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -81,19 +74,19 @@ public class TestHeladera {
         vianda5 = new Vianda("Fideos", new Colaborador(), true);
         vianda6 = new Vianda("Ravioles", new Colaborador(), true);
 
-        heladera = new Heladera(direccion1, coordenada1, 150, viandas);
-        heladera1 = new Heladera(direccion1, coordenada1, 150, viandas1);
+        heladera = new Heladera(direccion1, coordenada1);
+        heladera1 = new Heladera(direccion1, coordenada1);
         heladera1.setEstaActiva(Boolean.TRUE);
-        heladera2 = new Heladera(direccion2, coordenada2, 200, viandas2);
-        heladera3 = new Heladera(direccion3, coordenada3, 300, viandas3);
+        heladera2 = new Heladera(direccion2, coordenada2);
+        heladera3 = new Heladera(direccion3, coordenada3);
 
-        heladera.agregarVianda(vianda);
-        heladera1.agregarVianda(vianda1);
-        heladera1.agregarVianda(vianda4);
-        heladera2.agregarVianda(vianda2);
-        heladera2.agregarVianda(vianda5);
-        heladera3.agregarVianda(vianda3);
-        heladera3.agregarVianda(vianda6);
+        heladera.agregarVianda();
+        heladera1.agregarVianda();
+        heladera1.agregarVianda();
+        heladera2.agregarVianda();
+        heladera2.agregarVianda();
+        heladera3.agregarVianda();
+        heladera3.agregarVianda();
 
         receptorMovimiento= new ReceptorMovimiento();
         receptorTemperatura= new ReceptorTemperatura();
@@ -102,11 +95,11 @@ public class TestHeladera {
 
         heladera.setModelo(modeloHeladera);
 
-        repoHeladeras = RepoHeladeras.getInstancia();
+        repoHeladeras = RepoHeladeras.INSTANCE;
 
         //--------------------------------------- Noticacion tecnico --------------------------------------------
-        tecnico1 = new Tecnico(6L,"Juan","Cracio",coordenada1,Boolean.TRUE,1000);
-        Contacto contacto = new Contacto(TipoContacto.MAIL,"clazarte@frba.utn.edu.ar");
+        tecnico1 = new Tecnico("Juan","Cracio",coordenada1,Boolean.TRUE,1000);
+        Contacto contacto = new Contacto(TipoContacto.MAIL,"iriolffi@frba.utn.edu.ar");
         tecnico1.setContactos(new ArrayList<>());
         tecnico1.getContactos().add(contacto);
 
@@ -120,8 +113,8 @@ public class TestHeladera {
 
         tecnico1.setMediosDeComunicacion(mediosDeComunicacion);
 
-        repoTec = RepoTecnico.getInstancia();
-        repoTec.agregarTecnico(tecnico1);
+        repoTec = RepoTecnico.INSTANCE;
+        repoTec.agregar(tecnico1);
     }
 
     @Test
@@ -146,11 +139,6 @@ public class TestHeladera {
         Heladera heladeraQuitada1 = heladeras.remove(0);
         Heladera heladeraQuitada2 = heladeras.remove(1);
 
-        System.out.println(heladeraQuitada1.getViandas());
-        System.out.println(heladeraQuitada2.getViandas());
-
-        System.out.println("Cantidad de heladeras despues: " + heladeras.size());
-
         assert heladeras.size() == 1;
 
     }
@@ -165,6 +153,8 @@ public class TestHeladera {
         Heladera heladeraAModificar = heladeras.get(0);
         heladeraAModificar.setDireccion(direccion2);
         heladeraAModificar.setEstaActiva(Boolean.FALSE);
+
+
         assert heladeraAModificar.getDireccion().equals(direccion2);
         assert heladeraAModificar.getEstaActiva().equals(Boolean.FALSE);
 
@@ -220,7 +210,7 @@ public class TestHeladera {
 
         heladera.setNombre("Heladera1");
 
-        repoHeladeras.agregarHeladera(heladera);
+        repoHeladeras.agregar(heladera);
 
         CronjobTemperatura.main(null);
 
@@ -233,7 +223,7 @@ public class TestHeladera {
         heladera.setEstaActiva(true);
         heladera.setNombre("Heladera2");
 
-        repoHeladeras.agregarHeladera(heladera);
+        repoHeladeras.agregar(heladera);
         CronjobTemperatura.main(null);
 
         assert heladera.getEstaActiva().equals(Boolean.TRUE);

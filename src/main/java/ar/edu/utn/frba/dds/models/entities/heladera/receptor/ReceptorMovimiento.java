@@ -19,8 +19,8 @@ public class ReceptorMovimiento {
 
    public void evaluarDatosSensor(String dato,Heladera heladera){
 
-        //registrarAlerta(heladera, TipoAlerta.ROBO);
-       reportarAlerta(heladera, TipoAlerta.ROBO);
+        registrarAlerta(heladera, TipoAlerta.ROBO);
+       //reportarAlerta(heladera, TipoAlerta.ROBO);
 
         //throw new RuntimeException("Se detecto movimiento en la heladera");
         // tengo mis dudas de que esto se maneja en otr p[arte y noa aca en una clase de exptions
@@ -34,13 +34,6 @@ public class ReceptorMovimiento {
         heladera.setEstaActiva(false);
     }
 
-    public void reportarAlerta(Heladera heladera, TipoAlerta tipoAlerta){
 
-        broker = Broker.getInstance();
-        broker.connect(heladera.getNombre());
-        broker.publish("dds2024/heladera/" + heladera.getNombre() + "/alerta", tipoAlerta.toString());
-        //En consola se veria: dds2024/heladera/medrano/alerta: ROBO
-        broker.disconnect();
-    }
 
 }
