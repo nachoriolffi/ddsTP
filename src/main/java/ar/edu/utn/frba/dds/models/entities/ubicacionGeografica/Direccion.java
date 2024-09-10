@@ -15,13 +15,15 @@ public class Direccion {
     private Integer id_Direccion;
     @Setter
     @OneToOne// saco el @Transient porque es necesario para el alta del colaborador
-    @JoinColumn(name = "calle_id", nullable = false)
+    @JoinColumn(name = "calle_id")
     private Calle calle;
-    @Column(name = "altura", columnDefinition = "INT(11)", nullable = false)
+    @Column(name = "altura", columnDefinition = "INT(11)")
+    @Setter
     private Integer altura;
     @Column(name = "piso", columnDefinition = "INT(11)")
+    @Setter
     private Integer piso;
-    @Transient
+    @Embedded
     private Ubicacion ubicacion;
 
     public Direccion(String calle, Integer altura, Integer piso) {

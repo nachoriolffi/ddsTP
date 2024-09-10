@@ -1,7 +1,11 @@
 package ar.edu.utn.frba.dds.Persistencia;
 
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Calle;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Ubicacion;
 import ar.edu.utn.frba.dds.models.entities.vulnerable.RegistroMenorACargo;
 import ar.edu.utn.frba.dds.models.entities.vulnerable.Vulnerable;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoDireccion;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRegistroPersonaACargo;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoVulnerable;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
@@ -25,6 +29,15 @@ public class VulnerablePersistencia {
         vulnerable.setTipoDocumento(TipoDocumento.DNI);
         vulnerable.setNumeroDocumento(40845654);
 
+        //direccion del vulnerable
+
+        Direccion direccion = new Direccion();
+        direccion.setAltura(1234);
+        direccion.setPiso(2);
+        Ubicacion ubicacion = new Ubicacion();
+        RepoDireccion.INSTANCE.agregar(direccion);
+
+        //menor a cargo
         RegistroMenorACargo registro = new RegistroMenorACargo();
         registro.setFechaRegistro(new Date());
         registro.setTienePersonaACargo(Boolean.TRUE);
@@ -33,8 +46,8 @@ public class VulnerablePersistencia {
         repoRegistroPersonaACargo.agregar(registro);
         vulnerable.getMenoresACargo().add(registro);
 
-        RepoVulnerable repoVulnerable = new RepoVulnerable();
-        repoVulnerable.agregar(vulnerable);
+
+        RepoVulnerable.INSTANCE.agregar(vulnerable);
     }
     @Test
     public void modificarVulnerable(){

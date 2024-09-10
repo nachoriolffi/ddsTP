@@ -35,7 +35,8 @@ public class Vulnerable {
     @Column(name = "situacionDeCalle", columnDefinition = "BOOLEAN", nullable = false)
     private Boolean situacionDeCalle;
 
-    @Transient
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "direccion_id")
     private Direccion direccion;
 
     @Enumerated(EnumType.STRING)
