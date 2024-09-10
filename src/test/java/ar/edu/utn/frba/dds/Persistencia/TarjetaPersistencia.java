@@ -35,7 +35,7 @@ public class TarjetaPersistencia {
     @Test
     public void eliminarTarjeta(){
         RepoTarjeta repoTarjeta = new RepoTarjeta();
-        Tarjeta tarjeta = repoTarjeta.buscar(3L);
+        Tarjeta tarjeta = repoTarjeta.buscar(1L);
         repoTarjeta.eliminar(tarjeta);
     }
 

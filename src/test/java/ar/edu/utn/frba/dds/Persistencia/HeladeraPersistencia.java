@@ -9,7 +9,8 @@ import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -53,7 +54,7 @@ public class HeladeraPersistencia {
     @Test
     public void eliminarHeladedera() {
         RepoHeladeras repoHeladeras = new RepoHeladeras();
-        Heladera heladera = repoHeladeras.buscar(3L);
+        Heladera heladera = repoHeladeras.buscar(1L);
         repoHeladeras.eliminar(heladera);
     }
 
@@ -100,7 +101,7 @@ public class HeladeraPersistencia {
         colaboradornuevo.setTipoPersona(TipoPersona.JURIDICA);
         repoColaborador.agregar(colaboradornuevo);
 
-        Heladera heladera = repoHeladeras.buscar(2L);
+        Heladera heladera = repoHeladeras.buscar(1L);
         if (heladera == null) {
             System.err.println("Heladera con id 1 no encontrada.");
             return;
