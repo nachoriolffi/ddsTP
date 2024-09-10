@@ -9,6 +9,7 @@ import lombok.Setter;
 import org.checkerframework.checker.units.qual.C;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,8 +30,12 @@ public class DistribucionVianda extends FormaDeColaboracion {
     @Column(name = "cantidadViandas", columnDefinition = "INT")
     private Integer cantidadViandas;
 
-    @OneToMany
-    @JoinColumn(name = "id_viandas")
+    @ManyToMany
+    @JoinTable(
+            name = "viandas_movidas",
+            joinColumns = @JoinColumn(name = "id_distribucion_vianda"),
+            inverseJoinColumns = @JoinColumn(name = "id_vianda")
+    )
     private List<Vianda> viandasMovidas;// por ahora es opcional
 
     @Enumerated(EnumType.STRING)
@@ -46,7 +51,7 @@ public class DistribucionVianda extends FormaDeColaboracion {
     private TipoColaboracion tipoColaboracion = TipoColaboracion.REDISTRIBUCION_VIANDAS;
 
     public DistribucionVianda() {
-
+    this.viandasMovidas= new ArrayList<>();
     }
 
     public DistribucionVianda(Integer cantidad, Date fechaColaboracion) {
@@ -58,5 +63,9 @@ public class DistribucionVianda extends FormaDeColaboracion {
     @Override
     public double sumarPuntosA(Colaborador colaborador) {
         return cantidadViandas * ConfiguracionMultiplicador.getInstance().getMultiplicadorViandasDistribuidas();
+    }
+
+    public void agregarVianda(Vianda vianda) {
+        viandasMovidas.add(vianda);
     }
 }

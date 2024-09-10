@@ -6,6 +6,8 @@ import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DonacionDinero;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
+import ar.edu.utn.frba.dds.models.entities.contacto.telegram.Telegram;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Rubro;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoDonacionDinero;
@@ -75,6 +77,21 @@ public class ColaboradorPersistencia {
         colaborador.agregarColaboracionRealizada(donacionDinero);
 
         // Persistir colaborador y donación
+        repoColaborador.agregar(colaborador);
+    }
+
+    @Test
+    public void cargadaDeMedioDEcomuinicacion(){
+        RepoColaborador repoColaborador = RepoColaborador.INSTANCE;
+        Colaborador colaborador = new Colaborador();
+        colaborador.setNombre("Juan");
+        colaborador.setApellido("Gomez");
+        colaborador.setTipoDocumento(TipoDocumento.DNI);
+        colaborador.setNumeroDocumento(12345678);
+        colaborador.setTipoPersona(TipoPersona.HUMANA);
+        MedioDeComunicacion medioDeComunicacion = new Telegram();
+        colaborador.agregarMedioDeComunicacion(medioDeComunicacion);
+
         repoColaborador.agregar(colaborador);
     }
 }
