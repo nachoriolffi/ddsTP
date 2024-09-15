@@ -34,10 +34,12 @@
                        aria-expanded="false">Donaciones</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="../html/donacionDinero.html">Donar Dinero</a></li>
-                        <li><a class="dropdown-item" href="../html/encargarseDeHeladera.html">Encargarse de Heladera</a></li>
+                        <li><a class="dropdown-item" href="../html/encargarseDeHeladera.html">Encargarse de Heladera</a>
+                        </li>
                         <li><a class="dropdown-item" href="../html/donacionViandas.html">Donar Viandas</a></li>
                         <li><a class="dropdown-item" href="../html/distribuirViandas.html">Distribuir Viandas</a></li>
-                        <li><a class="dropdown-item" href="../html/registroVulnerable.html">Registrar Personas Vulnerables</a>
+                        <li><a class="dropdown-item" href="../html/registroVulnerable.html">Registrar Personas
+                            Vulnerables</a>
                         </li>
                         <li>
                             <hr class="dropdown-divider">
@@ -165,7 +167,8 @@
                         </div>
                         <div class="modal-footer col-md-12">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="button" id="submitDonation" class="btn btn-outline-primary">¡Realizar Donación!
+                            <button type="button" id="submitDonation" class="btn btn-outline-primary">¡Realizar
+                                Donación!
                             </button>
                         </div>
                     </form>
@@ -175,105 +178,88 @@
     </div>
     <!-- Modal Puntos de Recomendacion-->
     <div class="modal fade" id="pointsModal" tabindex="-1" aria-labelledby="pointsModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="pointsModalLabel">Puntos De Recomendación De Heladera</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="row" style="height: 500px; width: 100%;">
-                        <div class="col-md-5">
-                            <div class="row align-items-center justify-content-center">
-                                <div class="col-md-4 mb-3 mb-sm-4">
-                                    <input class="form-control" type="text" id="direccion-1" placeholder="Direccion" required>
+                    <div class="row" style="height: 100%;">
+                        <div class="col-md-5" style="height: 100%">
+                            <div class="container">
+                                <div class="row align-items-center justify-content-center">
+                                    <div class="col-md-4 mb-3 mb-sm-4">
+                                        <input class="form-control" type="text" id="direccion-1" placeholder="Direccion"
+                                               required>
+                                    </div>
+                                    <div class="col-md-3 mb-3 mb-sm-4">
+                                        <input class="form-control" type="text" id="altura-1" placeholder="Altura"
+                                               required>
+                                    </div>
+                                    <div class="col-md-5 mb-sm-4">
+                                        <button class="btn btn-outline-primary w-100">Buscar Puntos</button>
+                                    </div>
                                 </div>
-                                <div class="col-md-3 mb-3 mb-sm-4">
-                                    <input class="form-control" type="text" id="altura-1" placeholder="Altura" required>
+                                <div class="row flex-grow-1 overflow-auto">
+                                    <div class="container">
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <p>Medrano 951</p>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Medrano 951</h5>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Medrano 951</h5>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Medrano 951</h5>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Medrano 951</h5>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <h5 class="card-title">Medrano 951</h5>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+
+                                    </div>
                                 </div>
-                                <div class="col-md-5 mb-sm-4">
-                                    <button class="btn btn-outline-primary w-100">Buscar Puntos</button>
-                                </div>
-                            </div>
-
-
-                            <div class="row overflow-auto" style="height: 400px;">
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Medrano 951</h5>
-                                            </div>
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">Latitud:</li>
-                                                <li class="list-group-item">Longitud:</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Medrano 951</h5>
-                                            </div>
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">Latitud:</li>
-                                                <li class="list-group-item">Longitud:</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Medrano 951</h5>
-                                            </div>
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">Latitud:</li>
-                                                <li class="list-group-item">Longitud:</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Medrano 951</h5>
-                                            </div>
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">Latitud:</li>
-                                                <li class="list-group-item">Longitud:</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Medrano 951</h5>
-                                            </div>
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">Latitud:</li>
-                                                <li class="list-group-item">Longitud:</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Medrano 951</h5>
-                                            </div>
-                                            <ul class="list-group list-group-flush">
-                                                <li class="list-group-item">Latitud:</li>
-                                                <li class="list-group-item">Longitud:</li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-
                             </div>
                         </div>
-                        <div class="col-md-7 rounded" id="map">
+                        <div class="col-md-7 ">
+                            <div class="container rounded" id="map" style="height: 100%"></div>
                             <!--ACA DENTRO APARECE EL MAPA CON LOS PUNTOS A RECOMENDAR-->
                         </div>
                     </div>
-
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-primary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>

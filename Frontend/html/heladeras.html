@@ -171,7 +171,7 @@
     </div>
 
     <div class="modal fade" id="heladeraModal" tabindex="-1" aria-labelledby="heladeraModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
+        <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="heladeraModalLabel">Información de la Heladera</h5>
@@ -257,7 +257,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-12">
+                        <div class="col-6">
                             <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
                                 <caption>Aperturas Realizadas</caption>
                                 <thead>
@@ -286,8 +286,44 @@
                                 </tbody>
                             </table>
                         </div>
-
+                        <div class="col-6">
+                            <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                                <caption>Alertas</caption>
+                                <thead>
+                                <tr>
+                                    <th scope="col">Fecha</th>
+                                    <th scope="col">Horario</th>
+                                    <th scope="col">Alerta</th>
+                                </tr>
+                                </thead>
+                                <tbody class="table-group-divider">
+                                <tr>
+                                    <td>2024-08-30</td>
+                                    <td>08:15</td>
+                                    <td>Temperatura</td>
+                                </tr>
+                                <tr>
+                                    <td>2024-09-25</td>
+                                    <td>08:15</td>
+                                    <td>Fraude</td>
+                                </tr>
+                                <tr>
+                                    <td>2024-08-10</td>
+                                    <td>08:15</td>
+                                    <td>Falla Conexion</td>
+                                </tr>
+                                <tr>
+                                    <td>2024-08-15</td>
+                                    <td>08:15</td>
+                                    <td>Temperatura</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-primary" data-bs-dismiss="modal">Cerrar</button>
                 </div>
             </div>
         </div>
