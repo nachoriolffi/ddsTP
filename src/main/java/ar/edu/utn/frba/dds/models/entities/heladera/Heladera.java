@@ -7,7 +7,6 @@ import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
-import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,10 +29,10 @@ public class Heladera {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "id_Coordenada", nullable = false)
+    @JoinColumn(name = "coordenada_id", nullable = false)
     private Coordenada coordenada;
 
-    @Column(name = "nombre", nullable = false, columnDefinition = "varchar(50)")
+    @Column(name = "nombre", nullable = false, columnDefinition = "VARCHAR(255)")
     private String nombre;
 
     @Transient
@@ -42,7 +41,7 @@ public class Heladera {
     @Column(name = "viandasDisponibles")
     private Integer viandasDisponibles;
 
-    @Column(name = "fechaPuestaFunc", columnDefinition = "Date", nullable = false)
+    @Column(name = "fechaPuestaFunc", nullable = false)
     private Date fechaPuestaFunc;
 
     @Transient // no creemos necesario persistir los receptores
@@ -52,22 +51,22 @@ public class Heladera {
     private ReceptorTemperatura receptorTemperatura;
 
     @OneToMany
-    @JoinColumn(name = "id_Incidente")
+    @JoinColumn(name = "incidente_id")
     private List<Incidente> incidentes;
 
     @OneToMany
-    @JoinColumn(name = "id_solicitudesApertura")
+    @JoinColumn(name = "solApertura_id")
     private List<RegistroSolicitud> solicitudesApertura; // es una lista de avisos a la heladera para que se abra
 
     @OneToMany
-    @JoinColumn(name = "id_RegistroApertura")
+    @JoinColumn(name = "regApertura_id")
     private List<RegistroApertura> aperturas; // es una lista de registros de aperturas que se hicieron
 
-    @Column(name = "estaActiva", nullable = false)
+    @Column(name = "activa", nullable = false)
     private Boolean estaActiva;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_ModeloHeladera", nullable = false)
+    @JoinColumn(name = "modelo_id", nullable = false)
     private ModeloHeladera modelo;
 
     @Column(name = "tempActual")
@@ -130,7 +129,7 @@ public class Heladera {
             throw new IOException("No se pueden agregar más viandas ahora, intente más tarde");
         } else {
             //heladeras/medrano/autorizacion: (ID de tarjeta)
-            broker.publish("heladeras/" + this.nombre + "/autorizacion", registro.getTarjeta().getId_Tarjeta().toString());
+            broker.publish("heladeras/" + this.nombre + "/autorizacion", registro.getTarjeta().getId().toString());
             this.solicitudesApertura.add(registro);
         }
     }
@@ -151,7 +150,7 @@ public class Heladera {
 
     public RegistroSolicitud obtenerSolicitudApertura(int idSolicitud) {
         for (RegistroSolicitud solicitud : solicitudesApertura) {
-            if (solicitud.getId_RegistroSolicitud().equals(idSolicitud)) {
+            if (solicitud.getId().equals(idSolicitud)) {
                 return solicitud;
             }
         }

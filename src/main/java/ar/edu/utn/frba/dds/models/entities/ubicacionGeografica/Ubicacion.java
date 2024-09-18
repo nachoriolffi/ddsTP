@@ -11,15 +11,15 @@ import javax.persistence.*;
 public class Ubicacion {
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_Provincia", referencedColumnName = "id_Provincia")
+    @JoinColumn(name = "provincia_id")
     private Provincia provincia;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_Municipio", referencedColumnName = "id_Municipio")
+    @JoinColumn(name = "municipio_id")
     private Municipio municipio;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_Localidad", referencedColumnName = "id_Localidad")
+    @JoinColumn(name = "localidad_id")
     private Localidad localidad;
 
     public Ubicacion(Provincia provincia, Municipio municipio, Localidad localidad) {

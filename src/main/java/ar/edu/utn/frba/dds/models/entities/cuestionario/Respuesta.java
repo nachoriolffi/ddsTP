@@ -13,13 +13,13 @@ public class Respuesta {
 
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
-    private Long id_Respuesta;
+    private Long id;
     @ManyToOne
-    @JoinColumn(name = "id_Pregunta")
+    @JoinColumn(name = "pregunta_id")
     private Pregunta pregunta;
 
     @ManyToOne
-    @JoinColumn(name = "id_CuestionarioRespondido")
+    @JoinColumn(name = "cuestionarioRespondido_id")
     private CuestionarioRespondido cuestionarioRespondido;
 
     @Column(name = "respuestaAbierta", columnDefinition = "TEXT")

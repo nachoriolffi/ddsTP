@@ -7,17 +7,17 @@ import javax.persistence.*;
 public class Localidad {
 
     @Id
-    //@GeneratedValue (strategy = GenerationType.IDENTITY)
-    private Long id_Localidad;
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name = "localidad")
     private String localidad;
+
     @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_Municipio", referencedColumnName = "id_Municipio")
+    @JoinColumn(name = "municipio_id")
     private Municipio municipio;
 
     @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_Provincia", referencedColumnName = "id_Provincia")
+    @JoinColumn(name = "provincia_id")
     private Provincia provincia;
-    //@Column(name = "codigoPostal")
-   // private Integer codigoPostal;
 }

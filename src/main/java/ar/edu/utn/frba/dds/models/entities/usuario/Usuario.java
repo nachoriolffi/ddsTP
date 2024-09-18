@@ -14,7 +14,7 @@ public class Usuario {
     private int id;
     @Column(name = "nombreUsuario",columnDefinition = "TEXT")
     private String nombre;
-    @Column(name = "contrasenia",columnDefinition = "TEXT")
+    @Column(name = "clave",columnDefinition = "TEXT")
     private String contrasenia;
     @OneToOne
     private Rol rol;

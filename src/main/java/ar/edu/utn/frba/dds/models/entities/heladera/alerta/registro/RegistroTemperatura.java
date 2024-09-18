@@ -8,16 +8,16 @@ import java.util.Date;
 @Setter
 @Getter
 @Entity
-@Table(name = "registrosTemperatira")
+@Table(name = "registro_temperatura")
 public class RegistroTemperatura {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_RegistroTemperatura;
+    private Integer id;
     @Column(name = "lectura")
-    Float lectura;
-    @Column(name = "fechaHora",columnDefinition = "Date")
-    Date fechaHora;
+    private Float lectura;
+    @Column(name = "fechaHora")
+    private Date fechaHora;
 
     public RegistroTemperatura(Float lectura, Date fechaHora) {
         this.lectura = lectura;

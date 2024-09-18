@@ -7,7 +7,6 @@ import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
-import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -54,7 +53,7 @@ public class TestCalculadortDeDistancias {
         // ya tenemos los dos calculadores para hacer el test ahora tenemos que ver que devuelve
 
        Tecnico tecnicoMasCercano= calculadorDistanciasTecnicoHeladera.calcularTecnicoMasCercano(tecnicos, heladera);
-       System.out.println("El tecnico mas cercano es el que tiene el DNI: "+tecnicoMasCercano.getDNI());
+       System.out.println("El tecnico mas cercano es el que tiene el DNI: "+tecnicoMasCercano.getDni());
 
        assert tecnicoMasCercano.getCoordenada().getLatitud()==40.7128;
     }

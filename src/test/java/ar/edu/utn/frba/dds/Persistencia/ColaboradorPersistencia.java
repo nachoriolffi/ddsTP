@@ -1,14 +1,12 @@
 package ar.edu.utn.frba.dds.Persistencia;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.models.entities.colaborador.TipoJuridisccion;
+import ar.edu.utn.frba.dds.models.entities.colaborador.TipoJuridiccion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DonacionDinero;
-import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
 import ar.edu.utn.frba.dds.models.entities.contacto.telegram.Telegram;
-import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Rubro;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoDonacionDinero;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRubroColaborador;
@@ -37,7 +35,7 @@ public class ColaboradorPersistencia {
         Colaborador colaborador2 = new Colaborador();
         colaborador2.setRazonSocial("Accenture");
         colaborador2.setTipoPersona(TipoPersona.JURIDICA);
-        colaborador2.setTipoJuridisccion(TipoJuridisccion.EMPRESA);
+        colaborador2.setTipoJuridiccion(TipoJuridiccion.EMPRESA);
 
         // Crear y persistir rubro
         RubroColaborador rubro = new RubroColaborador();

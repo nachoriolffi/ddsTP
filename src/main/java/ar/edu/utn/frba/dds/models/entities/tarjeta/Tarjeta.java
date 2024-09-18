@@ -2,7 +2,6 @@ package ar.edu.utn.frba.dds.models.entities.tarjeta;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
-import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import ar.edu.utn.frba.dds.models.entities.vulnerable.Vulnerable;
 import lombok.Getter;
 import lombok.Setter;
@@ -21,21 +20,21 @@ public class Tarjeta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_Tarjeta;
+    private Long id;
 
     @OneToMany
-    @JoinColumn(name = "id_UsoTarjeta")
+    @JoinColumn(name = "usoTarjeta_id")
     private List<UsoTarjeta> registroUsos;
 
     @OneToOne
-    @JoinColumn(name = "id_Vulnerable")
+    @JoinColumn(name = "vulnerable_id")
     private Vulnerable personaAsociada;
 
     @ManyToOne
-    @JoinColumn(name = "id_Colaborador", nullable = false)
+    @JoinColumn(name = "colaborador_id", nullable = false)
     private Colaborador colaboradorAsociado;
 
-    @Column(name = "fechaRegistro", columnDefinition = "Date", nullable = false)
+    @Column(name = "fechaRegistro", nullable = false)
     private Date fechaRegistro;
 
     public void sacarVianda(Heladera heladera) throws IOException {

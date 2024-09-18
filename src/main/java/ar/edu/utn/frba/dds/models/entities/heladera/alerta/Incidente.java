@@ -21,24 +21,27 @@ import java.util.Date;
 public class Incidente {
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
-    private Long id_Incidente;
-    @Column(name = "fecha", columnDefinition = "DATE",nullable = false)
+    private Long id;
+
+    @Column(name = "fecha",nullable = false)
     private Date fecha;
+
     @Column(name = "descripcion", columnDefinition = "TEXT")
     private String descripcion;
+
     @Column(name = "pathFoto", columnDefinition = "TEXT")
     private String pathFoto;
 
-    @Column(name = "tipoIncidente",nullable = false)
     @Enumerated(EnumType.STRING)
+    @Column(name = "tipoIncidente",nullable = false)
     private TipoIncidente tipoIncidente;
 
-    @Column(name = "tipoAlerta")
     @Enumerated(EnumType.STRING)
+    @Column(name = "tipoAlerta")
     private TipoAlerta tipoAlerta;
 
     @OneToOne
-    @JoinColumn(name = "id_Incidente",nullable = false)
+    @JoinColumn(name = "colaborador_id",nullable = false)
     private Colaborador colaborador;
 
     public Incidente(TipoAlerta tipoAlerta) {

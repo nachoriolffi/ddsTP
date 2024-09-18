@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.services.imp;
 import ar.edu.utn.frba.dds.dtos.ColaboradorDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.models.entities.colaborador.TipoJuridisccion;
+import ar.edu.utn.frba.dds.models.entities.colaborador.TipoJuridiccion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
@@ -33,7 +33,7 @@ public class ColaboradorService implements IColaboradorService {
         colaborador.setRazonSocial(colaboradorDTO.getRazonSocial().toString());
         colaborador.setRubroColaborador(new RubroColaborador(colaboradorDTO.getRubro()));
         colaborador.setTipoPersona(TipoPersona.valueOf(colaboradorDTO.getTipoPersona()));
-        colaborador.setTipoJuridisccion(TipoJuridisccion.valueOf(colaboradorDTO.getTipoJuridisccion()));
+        colaborador.setTipoJuridiccion(TipoJuridiccion.valueOf(colaboradorDTO.getTipoJuridisccion()));
         // faltan mas atributos
         return colaborador;
     }

@@ -12,24 +12,33 @@ import java.util.Date;
 @Getter
 @Setter
 public class Oferta {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_Oferta;
-    @Column(name = "imagen", columnDefinition = "VARCHAR(250)")
+    private Long id;
+
+    @Column(name = "imagen", columnDefinition = "VARCHAR(255)")
     private String imagen;
-    @Column(name = "nombreOferta", columnDefinition = "VARCHAR(250)",nullable = false)
+
+    @Column(name = "nombreOferta", columnDefinition = "VARCHAR(255)", nullable = false)
     private String nombre;
+
     @Getter
-    @Column(name = "puntosNecesarios", columnDefinition = "INT",nullable = false)
+    @Column(name = "puntosNecesarios", nullable = false)
     private Integer puntosNecesarios;
-    @Column(name = "fechaInicio", columnDefinition = "Date",nullable = false)
+
+    @Column(name = "fechaInicio", nullable = false)
     private Date fechaInicio;
-    @Column(name = "fechaFin", columnDefinition = "Date")
+
+    @Column(name = "fechaFin")
     private Date fechaFin;
-    @Column(name = "stockInicial", columnDefinition = "INT",nullable = false)
+
+    @Column(name = "stockInicial", nullable = false)
     private Integer stockInicial;
-    @Column(name = "stockUsado", columnDefinition = "Int",nullable = false)
+
+    @Column(name = "stockUsado", nullable = false)
     private Integer stockUsado;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "rubroOferta", nullable = false)
     private Rubro rubro;

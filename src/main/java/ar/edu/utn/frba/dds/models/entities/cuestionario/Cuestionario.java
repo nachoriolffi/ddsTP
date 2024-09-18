@@ -14,35 +14,36 @@ import java.util.List;
 @Table(name = "cuestionario")
 public class Cuestionario {
 
-         @Id
-         @GeneratedValue ( strategy = GenerationType.IDENTITY)
-        private Long id_Cuestionario;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-         @Column(name = "nombreCuestionario", columnDefinition = "VARCHAR(250)")
-         @Setter
-        private String nombreCuestionario;
+    @Column(name = "nombreCuestionario", columnDefinition = "VARCHAR(255)")
+    @Setter
+    private String nombreCuestionario;
 
-         @Column(name = "descripcion", columnDefinition = "VARCHAR(250)")
-        private String descripcion;
+    @Column(name = "descripcion", columnDefinition = "VARCHAR(255)")
+    private String descripcion;
 
-         @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-         @JoinColumn(name = "id_Cuestionario")
-        private List<Pregunta> preguntas;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "cuestionario_id")
+    private List<Pregunta> preguntas;
 
-        public Cuestionario(String nombreCuestionario,String descripcion) {
-            this.nombreCuestionario = nombreCuestionario;
-            this.descripcion = descripcion;
-            this.preguntas = new ArrayList<Pregunta>();
-        }
+    public Cuestionario(String nombreCuestionario, String descripcion) {
+        this.nombreCuestionario = nombreCuestionario;
+        this.descripcion = descripcion;
+        this.preguntas = new ArrayList<Pregunta>();
+    }
 
     public Cuestionario() {
         this.preguntas = new ArrayList<Pregunta>();
     }
 
     public void agregarPregunta(Pregunta pregunta) {
-            preguntas.add(pregunta);
-        }
-        public void quitarPregunta(Pregunta pregunta) {
-            preguntas.remove(pregunta);
-        }
+        preguntas.add(pregunta);
+    }
+
+    public void quitarPregunta(Pregunta pregunta) {
+        preguntas.remove(pregunta);
+    }
 }

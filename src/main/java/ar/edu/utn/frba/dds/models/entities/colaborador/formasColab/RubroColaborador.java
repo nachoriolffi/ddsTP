@@ -7,10 +7,10 @@ import javax.persistence.*;
 
 @Setter
 @Entity
-@Table(name = "rubroColaborador")
+@Table(name = "rubro_colaborador")
 public class RubroColaborador extends FormaDeColaboracion {
 
-    @Column(name = "nombre", columnDefinition = "VARCHAR(25)")
+    @Column(name = "nombreRubro", columnDefinition = "VARCHAR(255)")
     String nombre;
 
     public RubroColaborador() {

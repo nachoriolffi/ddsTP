@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.models.entities.heladera;
 
-import ar.edu.utn.frba.dds.models.entities.broker.Broker;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import lombok.Getter;
@@ -12,18 +11,18 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table (name = "registro_solicitud")
+@Table(name = "registro_solicitud")
 public class RegistroSolicitud {
 
     @Getter
     @Id
-    @GeneratedValue ( strategy = javax.persistence.GenerationType.IDENTITY)
-    private Integer id_RegistroSolicitud;
+    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+    private Long id;
 
-    @Column ( name = "fechaSolicitud", columnDefinition = "Date")
+    @Column(name = "fechaSolicitud")
     private Date fechaSolicitud;
     @ManyToOne
-    @JoinColumn(name = "id_tarjeta")
+    @JoinColumn(name = "tarjeta_id")
     @Setter
     private Tarjeta tarjeta;
 
@@ -31,40 +30,38 @@ public class RegistroSolicitud {
     @Getter
     @Setter
     private TipoSolicitud solicitud;
-    @Column ( name = "realizada", columnDefinition = "BOOLEAN")
+    @Column(name = "realizada")
     private Boolean realizada;
 
 
-    @ManyToMany (cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "registro_solicitud_vianda",
-            joinColumns = @JoinColumn(name = "id_RegistroSolicitud"),
-            inverseJoinColumns = @JoinColumn(name = "id_Vianda")
+            name = "regSolicitud_de_vianda",
+            joinColumns = @JoinColumn(name = "regSolicitud_id"),
+            inverseJoinColumns = @JoinColumn(name = "vianda_id")
     )
     @Setter
     @Getter
     private List<Vianda> cantidadViandas;
 
-    @Column ( name = "retiroVianda", columnDefinition = "BOOLEAN")
+    @Column(name = "retiroVianda")
     @Getter
     @Setter
     private Boolean retiroVianda;
 
-    @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn (name = "id_heladera")
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "heladera_id")
     private Heladera heladeraAIr;
 
 
-    public RegistroSolicitud(Tarjeta tarjeta){
+    public RegistroSolicitud(Tarjeta tarjeta) {
         this.tarjeta = tarjeta;
     }
 
-    public RegistroSolicitud(){
+    public RegistroSolicitud() {
         this.fechaSolicitud = new Date();
         this.cantidadViandas = new ArrayList<Vianda>();
     }
-
-
 
 
     public Tarjeta getTarjeta() {

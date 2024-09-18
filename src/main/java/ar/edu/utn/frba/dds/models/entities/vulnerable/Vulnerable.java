@@ -18,21 +18,21 @@ public class Vulnerable {
 
     @Id
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-    private Long id_Vulnerable;
+    private Long id;
 
-    @Column(name = "nombre", columnDefinition = "VARCHAR(250)", nullable = false)
+    @Column(name = "nombre", columnDefinition = "VARCHAR(255)", nullable = false)
     private String nombre;
 
-    @Column(name = "apellido", columnDefinition = "VARCHAR(250)", nullable = false)
+    @Column(name = "apellido", columnDefinition = "VARCHAR(255)", nullable = false)
     private String apellido;
 
-    @Column(name = "fechaDeNacimiento", columnDefinition = "DATE", nullable = false)
+    @Column(name = "fechaDeNacimiento", nullable = false)
     private Date fechaDeNacimiento;
 
-    @Column(name = "fechaDeRegistro", columnDefinition = "DATE", nullable = false)
+    @Column(name = "fechaDeRegistro", nullable = false)
     private Date fechaDeRegistro;
 
-    @Column(name = "situacionDeCalle", columnDefinition = "BOOLEAN", nullable = false)
+    @Column(name = "situacionDeCalle", nullable = false)
     private Boolean situacionDeCalle;
 
     @OneToOne(cascade = CascadeType.PERSIST)
@@ -40,9 +40,10 @@ public class Vulnerable {
     private Direccion direccion;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "tipoDocumento")
     private TipoDocumento tipoDocumento;
 
-    @Column(name = "numeroDocumento", columnDefinition = "INT")
+    @Column(name = "numeroDocumento")
     private Integer numeroDocumento;
 
     @OneToMany(mappedBy = "vulnerable", cascade = CascadeType.PERSIST, orphanRemoval = true)

@@ -11,60 +11,60 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
+
 @Entity
 @Table(name = "Tecnico")
-@Getter @Setter
+@Getter
+@Setter
 public class Tecnico {
 
     @Id
-    @GeneratedValue (strategy = javax.persistence.GenerationType.IDENTITY)
-    private Long id_Tecnico;
+    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+    private Long id;
 
-    @Column (name = "nombre", columnDefinition = "VARCHAR(250)", nullable = false)
+    @Column(name = "nombre", columnDefinition = "VARCHAR(255)", nullable = false)
     private String nombre;
-    @Column (name = "apellido", columnDefinition = "VARCHAR(250)", nullable = false)
+    @Column(name = "apellido", columnDefinition = "VARCHAR(255)", nullable = false)
     private String apellido;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TipoDocumento tipoDocumento;
 
-    @Column (name = "DNI", columnDefinition = "INT", nullable = false)
-    private Integer DNI;
+    @Column(name = "dni", nullable = false)
+    private Integer dni;
 
-
-    @Column (name = "CUIL", columnDefinition = "INT", nullable = false)
-    private Integer CUIL; // cambiar por string luego
-
+    @Column(name = "cuil", nullable = false)
+    private Integer cuil; // cambiar por string luego
 
     @Transient
     private List<MedioDeComunicacion> mediosDeComunicacion;
 
-    @Column (name = "areaCobertura", columnDefinition = "INT", nullable = false)
+    @Column(name = "areaCobertura", nullable = false)
     private Integer areaCobertura;
 
     @OneToOne
-    @JoinColumn(name = "id_Coordenada",nullable = false)
+    @JoinColumn(name = "coordenada_id", nullable = false)
     private Coordenada coordenada;
 
-    @Column (name = "disponible", columnDefinition = "BOOLEAN")
+    @Column(name = "disponible")
     private Boolean disponible;
 
     @OneToMany
     @JoinColumn(name = "tecnico_id")
     private List<Contacto> contactos;
 
-    public Tecnico(){
+    public Tecnico() {
 
     }
 
-    public Tecnico(Long id_Tecnico, String nombre, String apellido, TipoDocumento tipoDocumento, Integer DNI, Integer CUIL, List<MedioDeComunicacion> mediosDeComunicacion, Integer areaCobertura ) {
-        this.id_Tecnico = id_Tecnico;
+    public Tecnico(Long id, String nombre, String apellido, TipoDocumento tipoDocumento, Integer dni, Integer cuil, List<MedioDeComunicacion> mediosDeComunicacion, Integer areaCobertura) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.tipoDocumento = tipoDocumento;
-        this.DNI = DNI;
-        this.CUIL = CUIL;
+        this.dni = dni;
+        this.cuil = cuil;
         this.mediosDeComunicacion = mediosDeComunicacion;
         this.areaCobertura = areaCobertura;
     }
@@ -77,18 +77,18 @@ public class Tecnico {
         this.areaCobertura = areaCobertura;
     }
 
-    public Tecnico(Long id_Tecnico, String nombre, String apellido, TipoDocumento tipoDocumento, Integer DNI, Integer CUIL, List<MedioDeComunicacion> mediosDeComunicacion, Integer areaCobertura, Coordenada coordenada) {
+    public Tecnico(Long id, String nombre, String apellido, TipoDocumento tipoDocumento, Integer dni, Integer cuil, List<MedioDeComunicacion> mediosDeComunicacion, Integer areaCobertura, Coordenada coordenada) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.tipoDocumento = tipoDocumento;
-        this.DNI = DNI;
-        this.CUIL = CUIL;
+        this.dni = dni;
+        this.cuil = cuil;
         this.mediosDeComunicacion = mediosDeComunicacion;
         this.areaCobertura = areaCobertura;
         this.coordenada = coordenada;
     }
 
-    public void registrarVisita(RegistroVisita registro){
+    public void registrarVisita(RegistroVisita registro) {
         RepoRegistrosVisita.INSTANCE.agregar(registro);
     }
 

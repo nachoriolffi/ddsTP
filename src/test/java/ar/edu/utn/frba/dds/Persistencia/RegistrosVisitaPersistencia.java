@@ -5,7 +5,6 @@ import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
-import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoAlerta;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoIncidente;
 import ar.edu.utn.frba.dds.models.entities.tecnico.RegistroVisita;
 import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
@@ -53,8 +52,8 @@ public class RegistrosVisitaPersistencia {
         tecnico.setNombre("Juancito");
         tecnico.setApellido("Perez");
         tecnico.setTipoDocumento(TipoDocumento.DNI);
-        tecnico.setDNI(35142987);
-        tecnico.setCUIL(2035142987);
+        tecnico.setDni(35142987);
+        tecnico.setCuil(2035142987);
         tecnico.setAreaCobertura(12);
         tecnico.setDisponible(Boolean.TRUE);
         tecnico.setCoordenada(coordenada);

@@ -6,14 +6,11 @@ import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.multiplicador.config.ConfiguracionMultiplicador;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.checkerframework.checker.units.qual.C;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
 
 
 @Entity
@@ -53,7 +50,7 @@ public class DonacionVianda extends FormaDeColaboracion {
 
     public void solicitarAutorizacion(Heladera heladera, Tarjeta tarjeta) {
         Broker broker = Broker.getInstance();
-        broker.publish("heladeras/" + heladera.getNombre() + "/autorizacion", tarjeta.getId_Tarjeta().toString());
+        broker.publish("heladeras/" + heladera.getNombre() + "/autorizacion", tarjeta.getId().toString());
     }
 
 }

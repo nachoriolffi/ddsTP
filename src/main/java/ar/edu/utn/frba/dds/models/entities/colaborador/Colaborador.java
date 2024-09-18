@@ -37,19 +37,19 @@ public class Colaborador {
 
     @Id
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-    private Long id_Colaborador;
+    private Long id;
 
-    @Column(name = "nombre", columnDefinition = "VARCHAR(25)")
+    @Column(name = "nombre", columnDefinition = "VARCHAR(255)")
     private String nombre;
 
-    @Column(name = "apellido", columnDefinition = "VARCHAR(25)")
+    @Column(name = "apellido", columnDefinition = "VARCHAR(255)")
     private String apellido;
 
     @Convert(converter = MedioComunicacionAtributeConvertere.class)
     @ElementCollection(targetClass = String.class)
     private List<MedioDeComunicacion> mediosDeComunicacion;
 
-    @Column(name = "fechaDeNacimiento", columnDefinition = "DATE")
+    @Column(name = "fechaDeNacimiento")
     private LocalDate fechaDeNacimiento;
 
     @ManyToOne
@@ -72,10 +72,11 @@ public class Colaborador {
     private String razonSocial;
 
     @Enumerated(EnumType.STRING)
-    private TipoJuridisccion tipoJuridisccion;
+    @Column(name = "tipoJuridiccion")
+    private TipoJuridiccion tipoJuridiccion;
 
     @OneToOne
-    @JoinColumn(name = "rubro_id")
+    @JoinColumn(name = "rubroColaborador_id")
     private RubroColaborador rubroColaborador;
 
     @Column(nullable = false)
@@ -89,17 +90,17 @@ public class Colaborador {
     @Transient
     private IRecomendacionPuntos iRecomendacionPuntos;
 
-    @Column(name = "puntosTotalesUsados", columnDefinition = "DOUBLE")
+    @Column(name = "puntosTotalesUsados")
     private Double puntosTotalesUsados;
 
-    @Column(name = "numeroDocumento", columnDefinition = "INT")
+    @Column(name = "numeroDocumento")
     private Integer numeroDocumento; //nuevo requerimiento para carga masiva
 
     @Enumerated(EnumType.STRING)
     private TipoDocumento tipoDocumento; //nuevo requerimiento para carga masiva
 
     @ManyToMany
-    @JoinColumn(name = "id_ofertasRegistradas")
+    @JoinColumn(name = "oferta_id")
     private List<Oferta> ofertasRegistradas;
 
     public Colaborador() {

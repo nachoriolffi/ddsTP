@@ -13,9 +13,9 @@ import java.util.List;
 public class Provincia {
 
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id_Provincia")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(name = "nombre")
     private String nombre;
 

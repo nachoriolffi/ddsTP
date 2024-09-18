@@ -7,13 +7,13 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "registroPersonaACargo")
+@Table(name = "registro_menor_a_cargo")
 @Setter
 public class RegistroMenorACargo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_RegistroPersonaACargo;
+    private Long id;
 
     @Column(name = "tienePersonaACargo")
     private Boolean tienePersonaACargo;

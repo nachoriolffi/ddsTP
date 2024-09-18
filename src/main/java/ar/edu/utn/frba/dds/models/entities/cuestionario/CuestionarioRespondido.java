@@ -14,10 +14,10 @@ import java.util.List;
 public class CuestionarioRespondido {
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
-    private Long id_CuestionarioRespondido;
+    private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "id_Cuestionario")
+    @JoinColumn(name = "cuestionario_id")
     private Cuestionario cuestionario;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "cuestionarioRespondido")

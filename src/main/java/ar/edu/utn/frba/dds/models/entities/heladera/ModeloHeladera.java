@@ -8,23 +8,26 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "Modelo_Heladera")
+@Table(name = "modelo_heladera")
 public class ModeloHeladera {
 
     @Id
-    @GeneratedValue ( strategy = javax.persistence.GenerationType.IDENTITY)
-    private Integer id_ModeloHeladera;
+    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+    private Long id;
 
-    @Column(name = "temperaturaMaxima", columnDefinition = "DOUBLE")
+    @Column(name = "tempMax")
     private Double temperaturaMaxima;
-    @Column(name = "temperaturaMinima", columnDefinition = "DOUBLE")
+
+    @Column(name = "tempMin")
     private Double temperaturaMinima;
-    @Column(name = "peso", columnDefinition = "DOUBLE")
+
+    @Column(name = "peso")
     private Double peso;
-    @Column(name = "cantidadMaximaDeViandas", columnDefinition = "INT")
+
+    @Column(name = "cantidadMaximaDeViandas")
     private Integer cantidadMaximaDeViandas;
 
-    public ModeloHeladera(){
+    public ModeloHeladera() {
 
     }
 

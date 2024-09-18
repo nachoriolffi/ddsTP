@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.models.entities.ubicacionGeografica;
 
 import lombok.Setter;
-import org.checkerframework.checker.units.qual.C;
 
 import javax.persistence.*;
 
@@ -11,18 +10,21 @@ public class Direccion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", columnDefinition = "INT(11)")
-    private Integer id_Direccion;
+    private Long id;
+
     @Setter
     @OneToOne// saco el @Transient porque es necesario para el alta del colaborador
     @JoinColumn(name = "calle_id")
     private Calle calle;
-    @Column(name = "altura", columnDefinition = "INT(11)")
+
+    @Column(name = "altura")
     @Setter
     private Integer altura;
-    @Column(name = "piso", columnDefinition = "INT(11)")
+
+    @Column(name = "piso")
     @Setter
     private Integer piso;
+
     @Embedded
     private Ubicacion ubicacion;
 

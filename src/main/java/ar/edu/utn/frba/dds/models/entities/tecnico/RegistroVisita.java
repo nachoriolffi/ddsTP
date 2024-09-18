@@ -14,21 +14,27 @@ import java.util.Date;
 public class RegistroVisita {
 
     @Id
-    @GeneratedValue ( strategy = GenerationType.IDENTITY)
-    private Long id_RegistroVisita;
-    @Column(name = "fechaVisita",columnDefinition = "Date",nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "fechaVisita", nullable = false)
     private Date fechaVisita;
+
     @ManyToOne
-    @JoinColumn(name = "id_Tecnico",nullable = false)
+    @JoinColumn(name = "tecnico_id", nullable = false)
     private Tecnico tecnico;
-    @Column(name="descripcion",columnDefinition = "TEXT",nullable = false)
+
+    @Column(name = "descripcion", columnDefinition = "TEXT", nullable = false)
     private String descripcion;
-    @Column(name="pathFoto",columnDefinition = "VARCHAR (250)")
+
+    @Column(name = "pathFoto", columnDefinition = "VARCHAR (255)")
     private String pathFoto;
+
     @ManyToOne
-    @JoinColumn(name = "id_Incidente",nullable = false)
+    @JoinColumn(name = "incidente_id", nullable = false)
     private Incidente incidenteASolucionar;
-    @Column(name = "problemaSolucionado",columnDefinition = "Boolean",nullable = false)
+
+    @Column(name = "problemaSolucionado", nullable = false)
     private Boolean problemaSolucionado;
 
 }

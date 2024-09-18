@@ -20,7 +20,7 @@ public class Contacto {
     private TipoContacto tipoContacto;
     @Setter
     @Getter
-    @Column(name = "descripcion", nullable = false)
+    @Column(name = "descripcion", nullable = false,columnDefinition = "TEXT")
     private String descripcion;
 
     public Contacto(TipoContacto nombre, String descripcion) {

@@ -44,7 +44,7 @@ public class RepoRegistroSolicitud extends RepoGenerico<RegistroSolicitud>  {
 
     public RegistroSolicitud buscarRegistroSolicitudPorId(int idSolicitud) {
         for (RegistroSolicitud registroSolicitud : this.registrosSolicitud) {
-            if (registroSolicitud.getId_RegistroSolicitud() == idSolicitud) {
+            if (registroSolicitud.getId() == idSolicitud) {
                 return registroSolicitud;
             }
         }

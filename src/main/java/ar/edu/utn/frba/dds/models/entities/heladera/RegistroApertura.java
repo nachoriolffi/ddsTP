@@ -11,26 +11,28 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table ( name = "registroApertura")
+@Table ( name = "registro_apertura")
 public class RegistroApertura {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id_RegistroApertura;
+    private Long id;
 
-    @Column(name = "fechaApertura", columnDefinition = "Date")
+    @Column(name = "fechaApertura")
     private Date fechaApertura;
 
     @ManyToOne (cascade = CascadeType.ALL)
-    @JoinColumn ( name = "id_tarjeta")
+    @JoinColumn ( name = "tarjeta_id")
     private Tarjeta tarjeta;
+
     @Enumerated(EnumType.STRING)
+    @Column(name = "tipoSolicitud")
     private TipoSolicitud solicitud;
 
     @ManyToMany (cascade = CascadeType.ALL)
     @JoinTable(
-            name = "registroApertura_vianda",
-            joinColumns = @JoinColumn(name = "id_RegistroApertura"),
-            inverseJoinColumns = @JoinColumn(name = "id_Vianda")
+            name = "regApertura_de_vianda",
+            joinColumns = @JoinColumn(name = "regApertura_id"),
+            inverseJoinColumns = @JoinColumn(name = "vianda_id")
     )
     private List<Vianda> viandas;
 

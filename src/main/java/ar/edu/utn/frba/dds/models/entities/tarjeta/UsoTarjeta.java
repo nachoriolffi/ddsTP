@@ -4,16 +4,17 @@ import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 
 import javax.persistence.*;
 import java.util.Date;
+
 @Entity
 @Table(name = "usoTarjeta")
 public class UsoTarjeta {
     @Id
-    @GeneratedValue ( strategy = GenerationType.IDENTITY)
-    private Long id_UsoTarjeta;
-    @Column(name = "fechaUso",columnDefinition = "Date",nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "fechaUso", nullable = false)
     private Date fechaUso;
     @OneToOne
-    @JoinColumn(name = "id_Heladera",nullable = false)
+    @JoinColumn(name = "heladera_id", nullable = false)
     private Heladera heladera;
 
     public UsoTarjeta(Date fechaUso, Heladera heladera) {

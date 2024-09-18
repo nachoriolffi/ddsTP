@@ -13,11 +13,14 @@ public class Pregunta {
 
     @Id
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
-    private Long id_Pregunta;
-    @Column(name = "nombrePregunta", columnDefinition = "VARCHAR(250)")
+    private Long id;
+
+    @Column(name = "nombrePregunta", columnDefinition = "VARCHAR(255)")
     private String nombre;
-    @Column(name = "esObligatoria",columnDefinition = "BOOLEAN")
+
+    @Column(name = "esObligatoria")
     private Boolean esObligatoria;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "tipoPregunta", nullable = false)
     private TipoPregunta tipoPregunta;
