@@ -1,0 +1,15 @@
+.navbar {
+    padding: 2rem;
+}
+
+
+.contenedor{
+    border: 1px solid rgb(222, 226, 230);
+    border-radius: 15px;
+    padding: 20px;
+    background-color: rgb(248, 249, 250);
+}
+.sub-contenedor{
+    border: 1px solid rgb(222, 226, 230);
+    height: 100px;
+}

@@ -1,0 +1,146 @@
+{{#partial "contenido"}}
+        <div class="row">
+            <div class="col-md-9 col-6 justify-content-center">
+                <div class="">
+                    <div class="btn btn-outline-primary align-items-center">
+                        <strong>Puntos:</strong> {{PuntosTotales}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 justify-content-center">
+                <div class="text-end">
+                    <button type="button" class="btn btn-outline-primary align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#uploadProdServ">
+                        Subir Producto/Servicio
+                    </button>
+                </div>
+            </div>
+        </div>
+        {{#each ofertas}}
+            <hr class="my-2 border-0">
+            <div class="row row-cols-1 row-cols-md-5 g-4">
+                <div class="col-md-3">
+                    <div class="card h-100">
+                        <div class="d-flex justify-content-center align-items-center"
+                             style="height: 200px; overflow: hidden;">
+                            <img src="{{this.pathFoto}}" class="card-img-top" alt="...">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{this.nombreProducto}}</h5>
+                            <p class="card-text">{{this.descripcionP}}</p>
+                            <p class="card-text">Puntos Necesarios: {{this.puntosNecesarios}}</p>
+                            <div class="text-center">
+                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                        data-bs-target="#moreInfoProduct">
+                                    Ver Más
+                                </button>
+                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                        data-bs-target="#confirmCanje">
+                                    Canjear
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+
+
+        <!-- Modal Subir Producto/Servicio-->
+        <div class="modal fade" id="uploadProdServ" tabindex="-1" aria-labelledby="uploadProdServLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="uploadProdServLabel">Subir Producto/Servicio</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="POST" class=" row g-3 needs-validation">
+                            <div class="col-md-6">
+                                <label for="validationCustom01" class="form-label">Tipo del Producto</label>
+                                <select class="form-select" id="validationCustom01" name="validationCustom01" required>
+                                    <option value="" disabled selected>Seleccion una opcion</option>
+                                    <option>Electronico</option>
+                                    <option>Ropa</option>
+                                    <option>Muebles</option>
+                                    <option>Servicios</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="validationCustom02" class="form-label">Nombre Producto</label>
+                                <input type="text" class="form-control" id="validationCustom02"
+                                       required>
+                            </div>
+                            <div class="col-md-12">
+                                <label for="validationCustom03" class="form-label">Puntos Necesarios</label>
+                                <input type="text" class="form-control" id="validationCustom03" required>
+                            </div>
+                            <div>
+                                <label for="validationCustom04" class="form-label">Cargar Imagen</label>
+                                <input type="file" class="form-control" id="validationCustom04">
+                            </div>
+                            <div class="modal-footer col-md-12">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#confirmUpload">Cargar Producto/Servicio
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Modal Ver mas-->
+        <div class="modal fade" id="moreInfoProduct" tabindex="-1" aria-labelledby="moreInfoProductLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="moreInfoProductLabel">Más Información del Producto</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Contenido detallado del producto -->
+                        <p>Aquí puedes añadir más detalles sobre el producto, como sus características,
+                            especificaciones, o
+                            cualquier otra información relevante.</p>
+                        <img src="../assets/image_not_available.png" class="img-fluid" alt="Imagen del Producto">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" data-bs-target="#confirmCanje" data-bs-toggle="modal"
+                                class="btn btn-primary">Canjear
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Canjear Producto-->
+        <div class="modal fade" id="confirmCanje" tabindex="-1" aria-labelledby="confirmCanje" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmModalLabel1">Confirmación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Está seguro de que desea canjear X puntos por este producto?
+                    </div>
+                    <div class="modal-footer">
+                        <!-- Botón de Cancelar que cierra el modal de confirmación y vuelve al modal de donación -->
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal"
+                                data-bs-target="#donationModal">Cancelar
+                        </button>
+                        <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Sí, canjear
+                            puntos
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/partial}}
+{{>templates/base}}
