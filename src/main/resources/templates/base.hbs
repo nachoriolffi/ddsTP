@@ -4,14 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
-    <link rel="stylesheet" href="../scss/style.css">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-            crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-            crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/115c7ea5e6.js" crossorigin="anonymous"></script>
+
+    <!-- Referencia al archivo CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -28,16 +24,11 @@
                        aria-expanded="false">Donaciones</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="../html/donacionDinero.html">Donar Dinero</a></li>
-                        <li><a class="dropdown-item" href="../html/encargarseDeHeladera.html">Encargarse de Heladera</a>
-                        </li>
+                        <li><a class="dropdown-item" href="../html/encargarseDeHeladera.html">Encargarse de Heladera</a></li>
                         <li><a class="dropdown-item" href="../html/donacionViandas.html">Donar Viandas</a></li>
                         <li><a class="dropdown-item" href="../html/distribuirViandas.html">Distribuir Viandas</a></li>
-                        <li><a class="dropdown-item" href="../html/registroVulnerable.html">Registrar Personas
-                            Vulnerables</a>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
+                        <li><a class="dropdown-item" href="../html/registroVulnerable.html">Registrar Personas Vulnerables</a></li>
+                        <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" href="../html/misHeladeras.html">Mis Heladeras</a></li>
                     </ul>
                 </li>
@@ -51,8 +42,7 @@
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                        aria-expanded="false">Herramientas</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="../html/reportarFallaTecnica.html">Reportar Incidente</a>
-                        </li>
+                        <li><a class="dropdown-item" href="../html/reportarFallaTecnica.html">Reportar Incidente</a></li>
                         <li><a class="dropdown-item" href="../html/cargaCSV.html">Cargar Archivo CSV</a></li>
                         <li><a class="dropdown-item" href="../html/visualizacionReportes.html">Ver Reportes PDF</a></li>
                     </ul>
@@ -74,10 +64,24 @@
         </div>
     </div>
 </nav>
+
 <hr class="my-3 border-0">
+
 <div class="container mt-1">
-    <!-- ACA DENTRO VA EL CONTENIDO PROPIO DE CADA PAGINA --->
-    {{#block "content"}}{{/block}}
+    <!-- Contenido propio de cada página -->
+    {{#block "contenido"}}
+    {{/block}}
 </div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/115c7ea5e6.js" crossorigin="anonymous"></script>
+
 </body>
 </html>
