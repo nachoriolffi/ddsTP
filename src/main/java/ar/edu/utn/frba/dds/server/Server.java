@@ -1,7 +1,5 @@
 package ar.edu.utn.frba.dds.server;
 
-
-
 import ar.edu.utn.frba.dds.utils.Init;
 import ar.edu.utn.frba.dds.utils.JavalinRenderer;
 import com.github.jknack.handlebars.Handlebars;
