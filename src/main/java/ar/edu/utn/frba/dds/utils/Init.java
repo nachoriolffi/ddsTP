@@ -12,6 +12,7 @@ public class Init implements WithSimplePersistenceUnit {
     public static void iniciar() {
         Oferta oferta = new Oferta();
         oferta.setNombre("Televisor 45' Pindonga");
+        oferta.setImagen("../../main/resources/public/img/silla_ejemplo.jpg");
         oferta.setPuntosNecesarios(50000);
         oferta.setFechaInicio(new Date());
         oferta.setFechaFin(new Date(2024,10,24));

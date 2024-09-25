@@ -25,7 +25,7 @@ public class OfertaController implements ICrudViewsHandler {
             model.put("title", "Ofertas");
             model.put("ofertas", ofertas);
 
-            ctx.render("ofertas.hbs", model);
+            ctx.render("ofertas/ofertas.hbs", model);
 
     }
 

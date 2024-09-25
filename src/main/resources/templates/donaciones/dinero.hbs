@@ -1,6 +1,5 @@
 {{#extends "../base.hbs"}}
     {{#block "content"}}
-
         <div class="row mb-4">
             <div class="col-md-8">
                 <h1 class="h1">Donar Dinero</h1>
@@ -19,29 +18,17 @@
                     <tr class="align-middle">
                         <th scope="col">Fecha de donación</th>
                         <th scope="col">Monto</th>
-                        <th scope="col">Donación periódica</th>
-                        <th scope="col">Frecuencia Donacion (En Dias)</th>
+                        <th scope="col">Donación periódica (Mensual)</th>
                     </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                    <tr>
-                        <td>2024-08-15</td>
-                        <td>$100</td>
-                        <td>Sí</td>
-                        <td>30</td>
-                    </tr>
-                    <tr>
-                        <td>2024-08-01</td>
-                        <td>$50</td>
-                        <td>No</td>
-                        <td>-</td>
-                    </tr>
-                    <tr>
-                        <td>2024-07-20</td>
-                        <td>$200</td>
-                        <td>Sí</td>
-                        <td>15</td>
-                    </tr>
+                    {{#each donacionesDinero}}
+                        <tr>
+                            <td>{{this.fechaDonacion}}</td>
+                            <td>${{this.monto}}</td>
+                            <td>{{this.esPeriodica}}</td>
+                        </tr>
+                    {{/each}}
                     </tbody>
                 </table>
                 <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
@@ -50,33 +37,15 @@
                     </caption>
                     <thead>
                     <tr class="align-middle">
+                        <th scope="col">Fecha de donación</th>
                         <th>Monto</th>
-                        <th>Frecuencia Donación (En Días)</th>
                         <th>Cancelar Donacion</th>
                     </tr>
                     </thead>
                     <tbody class="table-group-divider">
                     <tr>
-                        <td>$50</td>
-                        <td>30</td>
-                        <td>
-                            <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">
-                                <i class="fa-solid fa-xmark fa-lg"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>$100</td>
-                        <td>60</td>
-                        <td>
-                            <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">
-                                <i class="fa-solid fa-xmark fa-lg"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>$25</td>
-                        <td>15</td>
+                        <td>{{this.fechaDonacion}}</td>
+                        <td>${{this.monto}}</td>
                         <td>
                             <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">
                                 <i class="fa-solid fa-xmark fa-lg"></i>
@@ -109,15 +78,11 @@
                                 <input type="number" min="0" step="0.01" class="form-control" id="validationCustom02"
                                        required>
                             </div>
-                            <div class="col-md-12">
-                                <label for="validationCustom03" class="form-label">Frecuencia (En Días)</label>
-                                <input type="number" min="0" class="form-control" id="validationCustom03" required>
-                            </div>
                             <div class="col-md-6 d-flex justify-content-center align-items-center">
                                 <div class="form-check d-flex align-items-center">
                                     <input class="form-check-input" type="checkbox" value="" id="invalidCheck">
                                     <label class="form-check-label ms-2" for="invalidCheck">
-                                        Donar de Forma Periódica
+                                        Donar de Forma Periódica (Mensual)
                                     </label>
                                 </div>
                             </div>

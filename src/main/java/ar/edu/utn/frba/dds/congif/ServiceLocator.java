@@ -10,7 +10,7 @@ public class ServiceLocator {
         return instance;
     }
 
-    public <T> T instanceOf(Class<T> clazz) {
+    public static <T> T instanceOf(Class<T> clazz) {
         try {
             return clazz.newInstance();
         } catch (InstantiationException | IllegalAccessException e) {

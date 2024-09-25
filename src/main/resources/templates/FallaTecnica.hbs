@@ -1,0 +1,43 @@
+{{#partial "contenido"}}
+    <div class="row">
+        <form class="row needs-validation" method="POST" action="/fallaTecnica" novalidate>
+            <div class="col-md-12 col-lg-6">
+                <div class="mb-3 d-flex justify-content-center">
+                    <div class="w-100">
+                        <label for="heladera-averiada" class="form-label">Heladera Averiada</label>
+                        <select class="form-select" id="heladera-averiada" name="heladeraAveriada" required>
+                            <option value="" disabled selected>Seleccione una Heladera</option>
+                            {{#each heladeras}}
+                                <option value="{{this.id}}">{{this.nombre}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <div class="mb-3 d-flex justify-content-center">
+                    <div class="w-100">
+                        <label for="dia-horario" class="form-label">Dia y Horario en el que visito la heladera</label>
+                        <input id="dia-horario" name="diaYHora" type="datetime-local" class="form-control" required>
+                    </div>
+                </div>
+                <div class="mb-3 d-flex justify-content-center">
+                    <div class="w-100">
+                        <label class="form-label">¿Tenés una foto? ¡Subila!</label>
+                        <input type="file" id="fotoFalla" name="fotoFalla" class="form-control" accept="image/*">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-6">
+                <div class="mb-3 d-flex justify-content-center">
+                    <div class="w-100">
+                        <label for="descripcion" class="form-label">Describa el estado en el que encontró la heladera</label>
+                        <textarea id="descripcion" name="descripcionFalla" class="form-control" rows="6" required style="resize: none"></textarea>
+                    </div>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                    <button type="submit" class="btn btn-outline-primary w-50">Enviar Reporte</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{{/partial}}
+{{> templates/base}}

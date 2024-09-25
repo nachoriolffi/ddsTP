@@ -1,0 +1,44 @@
+{{#partial "contenido"}}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="overflow-auto" style="max-height: 300px;">
+                <ul class="list-group" id="pdf-list">
+                    {{#each pdfs}}
+                        <li class="list-group-item list-group-item-action" data-file="{{this.archivo}}">{{this.mes}} {{this.anio}} - Semana {{this.semana}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            <a id="download-link" href="" download class="btn btn-outline-primary mt-3 d-md-block">Descargar Documento</a>
+            <hr class="my-2 border-0">
+        </div>
+        <div class="col-md-9 rounded">
+            <iframe id="pdf-preview" src="" class="w-100 rounded-3" sandbox="allow-same-origin allow-scripts" style="height: 75vh; border: none;"></iframe>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const pdfList = document.getElementById('pdf-list');
+        const pdfPreview = document.getElementById('pdf-preview');
+        const downloadLink = document.getElementById('download-link');
+
+        pdfList.addEventListener('click', (event) => {
+            if (event.target && event.target.matches('.list-group-item')) {
+                const listItems = document.querySelectorAll('.list-group-item');
+                listItems.forEach(item => item.classList.remove('active'));
+
+                const selectedItem = event.target;
+                selectedItem.classList.add('active');
+
+                const pdfSrc = selectedItem.getAttribute('data-file');
+                pdfPreview.src = pdfSrc;
+                downloadLink.href = pdfSrc;
+                downloadLink.style.pointerEvents = 'auto'; // Habilitar el botón de descarga
+            }
+        });
+    });
+</script>
+
+
+{{/partial}}
+{{> templates/base}}

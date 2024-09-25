@@ -1,0 +1,77 @@
+{{#partial "contenido"}}
+    <section class="container mt-1 pt-1">
+        <hr class="my-3 border-0">
+        <div class="row">
+            <figure class="col-md-5 figure">
+                <img class="figure-img img-fluid rounded mx-auto d-none d-md-block"
+                     src="../../src/main/resources/public/img/registroVulnerable.png" alt="">
+            </figure>
+            <div class="col-md-7">
+                <h1 class="h1">Registrar Persona Vulnerable</h1>
+                <hr class="border-1">
+                <form class="row g-3 needs-validation" method="POST" action="/registrarPersona" novalidate>
+                    <div class="col-lg-4 col-md-12">
+                        <label class="form-label" for="nombre">Nombre/s</label>
+                        <input class="form-control" type="text" id="nombre" name="nombre" required>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <label class="form-label" for="apellido">Apellido/s</label>
+                        <input class="form-control" type="text" id="apellido" name="apellido" required>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <label class="form-label" for="fechaNacimiento">Fecha de Nacimiento</label>
+                        <input class="form-control" type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <label class="form-label" for="provincia">Provincia</label>
+                        <select class="form-select" id="provincia" name="provincia" required>
+                            <option value="" disabled selected>Seleccion una opcion</option>
+                            <!-- Las opciones se llenarán mediante JavaScript -->
+                        </select>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <label class="form-label" for="localidad">Localidad</label>
+                        <select class="form-select" id="localidad" name="localidad" required>
+                            <option value="" disabled selected>Seleccion una opcion</option>
+                            <!-- Las opciones se llenarán mediante JavaScript -->
+                        </select>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <label class="form-label" for="direccion">Dirección</label>
+                        <input class="form-control" type="text" id="direccion" name="direccion" required>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <label class="form-label" for="altura">Altura</label>
+                        <input class="form-control" type="text" id="altura" name="altura" required>
+                    </div>
+                    <div class="col-lg-3 col-md-12">
+                        <label class="form-label" for="piso">Piso</label>
+                        <input class="form-control" type="text" id="piso" name="piso">
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <label class="form-label" for="menoresACargo">Tiene Menores a Cargo</label>
+                        <select class="form-select" id="menoresACargo" name="menoresACargo" required>
+                            <option value="" disabled selected>Seleccion una opcion</option>
+                            <option value="si">Si</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <label class="form-label" for="cantidadMenores">Cantidad de Menores a Cargo</label>
+                        <input class="form-control" type="text" id="cantidadMenores" name="cantidadMenores">
+                    </div>
+                    <hr class="my-3 border-0">
+                    <div class="col-12 text-end">
+                        <button class="btn btn-outline-primary" type="submit">¡Registrar Persona!</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+{{/partial}}
+{{#partial "agregarScript"}}
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="/js/ubicacion.js"></script>
+{{/partial}}
+{{> templates/base}}
