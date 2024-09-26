@@ -19,7 +19,7 @@ public class Init implements WithSimplePersistenceUnit {
         oferta.setStockInicial(500);
         oferta.setStockUsado(0);
         oferta.setRubro(Rubro.TECNOLOGIA);
-        RepoOferta.INSTANCE.agregar(oferta);
+        //RepoOferta.INSTANCE.agregar(oferta);
     }
 
 }

@@ -15,10 +15,10 @@ public class Router {
 
         RepoColaborador repoColaborador = new RepoColaborador();
         ColaboradorController colaboradorController = new ColaboradorController(repoColaborador);
-        
+
         RepoOferta repoOferta = new RepoOferta();
         OfertaController ofertaController = new OfertaController();
-        
+
         app.error(404, ctx -> {
             throw new SystemException("No se encontro la pagina solicitada");
         });
@@ -26,7 +26,7 @@ public class Router {
         app.error(500, ctx -> {
             throw new SystemException("f");
         });
-        
+
         app.get("/prueba", ctx -> ctx.result("Hello World"));
 
 
@@ -39,11 +39,15 @@ public class Router {
            String clave = ctx.formParam(("clave"));
         });
 
+        // donaciones
+        // encargarseDeHeladera
+        app.get("/encargarseHeladera",Objects.requireNonNull(ServiceLocator.instanceOf(EncargarseHeladeraController.class))::index);
+
         // fallaTecnica
         //app.get("/fallaTecnica",Objects.requireNonNull(ServiceLocator.instanceOf(FallaTecnicaController.class))::index);
         //app.post("/fallaTecnica",Objects.requireNonNull(ServiceLocator.instanceOf(FallaTecnicaController.class))::save);
         // visualizarPDFs
-        //app.get("/pdfViewer",Objects.requireNonNull(ServiceLocator.instanceOf(pdfViewerController.class))::index);
+        app.get("/reportes",Objects.requireNonNull(ServiceLocator.instanceOf(PdfViewerController.class))::index);
 
 
         app.get("/colaboradores", colaboradorController::index);
@@ -74,7 +78,13 @@ public class Router {
         });
 
         app.get("/registroVulnerable", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroVulnerableController.class))::index);
+
+        //app.get("/registroHumano", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroHumanoController.class))::index);
+
+        app.get("/reportarIncidente", Objects.requireNonNull(ServiceLocator.instanceOf(IncidenteController.class))::index);
+        app.post("/cargarIncidente", Objects.requireNonNull(ServiceLocator.instanceOf(IncidenteController.class))::save);
+
     }
-    
+
     }
 
