@@ -40,6 +40,8 @@ public class Router {
         });
 
         // donaciones
+        app.get("/donarDinero", Objects.requireNonNull(ServiceLocator.instanceOf(DonarDineroController.class))::index);
+
         // encargarseDeHeladera
         app.get("/encargarseHeladera",Objects.requireNonNull(ServiceLocator.instanceOf(EncargarseHeladeraController.class))::index);
 
