@@ -52,7 +52,11 @@ public class Router {
 
         app.get("/colaboradores", colaboradorController::index);
 
-        app.get("/ofertas", Objects.requireNonNull(ServiceLocator.instanceOf(OfertaController.class))::index);
+        app.get("/canjeProductos", Objects.requireNonNull(ServiceLocator.instanceOf(OfertaController.class))::index);
+
+        /* LOGS --- REGISTROS */
+
+        app.get("/crearCuenta", Objects.requireNonNull(ServiceLocator.instanceOf(CrearCuentaController.class))::index);
 
         app.get("/registroHumano", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroHumanoController.class))::index);
         app.post("/registroHumanoCarga", ctx -> {
