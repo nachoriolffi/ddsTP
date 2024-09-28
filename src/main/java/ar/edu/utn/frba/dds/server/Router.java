@@ -83,9 +83,11 @@ public class Router {
             ctx.redirect("/success"); // Redirigir a una página de éxito o mostrar un mensaje
         });
 
+        app.get("/cargaMasiva", Objects.requireNonNull(ServiceLocator.instanceOf(CargaMasivaController.class))::index);
+
         app.get("/registroVulnerable", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroVulnerableController.class))::index);
 
-        //app.get("/registroHumano", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroHumanoController.class))::index);
+       // app.get("/registroHumano", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroHumanoController.class))::index);
 
         app.get("/reportarIncidente", Objects.requireNonNull(ServiceLocator.instanceOf(IncidenteController.class))::index);
         app.post("/cargarIncidente", Objects.requireNonNull(ServiceLocator.instanceOf(IncidenteController.class))::save);

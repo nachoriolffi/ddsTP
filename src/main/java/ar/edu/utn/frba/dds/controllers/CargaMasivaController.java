@@ -3,10 +3,10 @@ package ar.edu.utn.frba.dds.controllers;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
-public class RegistroVulnerableController implements ICrudViewsHandler {
+public class CargaMasivaController implements ICrudViewsHandler {
     @Override
     public void index(Context context) {
-        context.render("logs/RegistroVulnerable.hbs");
+        context.render("cargaMasiva/cargaMasiva.hbs");
     }
 
     @Override
