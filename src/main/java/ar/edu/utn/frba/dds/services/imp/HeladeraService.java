@@ -26,20 +26,15 @@ public class HeladeraService implements IHeladeraService {
 
         Heladera nuevaHeladera = new Heladera();
         nuevaHeladera.setNombre(dtoHeladera.getNombre());
-        nuevaHeladera.setDireccion(dtoHeladera.getDireccion());
-        //nuevaHeladera.setCapacidad(dtoHeladera.getCapacidad());
         nuevaHeladera.setFechaPuestaFunc(new Date());
         nuevaHeladera.setIncidentes(new ArrayList<>());
         nuevaHeladera.setAperturas(new ArrayList<>());
         nuevaHeladera.setAperturas(new ArrayList<>());
         nuevaHeladera.setEstaActiva(Boolean.TRUE);
-        nuevaHeladera.setTempActual(dtoHeladera.getTempActual());
         nuevaHeladera.setReceptorMovimiento( new ReceptorMovimiento());
         nuevaHeladera.setReceptorTemperatura( new ReceptorTemperatura());
         ModeloHeladera modelo =null;
         nuevaHeladera.setModelo(modelo);
-        nuevaHeladera.setCoordenada(dtoHeladera.getCoordenada());
-        this.heladeraRepository.agregar(nuevaHeladera);
         return nuevaHeladera;
     }
 
