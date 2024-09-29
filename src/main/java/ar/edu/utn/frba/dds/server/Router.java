@@ -40,6 +40,8 @@ public class Router {
         });
 
         // donaciones
+        app.get("/donarDinero", Objects.requireNonNull(ServiceLocator.instanceOf(DonarDineroController.class))::index);
+
         // encargarseDeHeladera
         app.get("/encargarseHeladera",Objects.requireNonNull(ServiceLocator.instanceOf(EncargarseHeladeraController.class))::index);
 
@@ -52,7 +54,11 @@ public class Router {
 
         app.get("/colaboradores", colaboradorController::index);
 
-        app.get("/ofertas", Objects.requireNonNull(ServiceLocator.instanceOf(OfertaController.class))::index);
+        app.get("/canjeProductos", Objects.requireNonNull(ServiceLocator.instanceOf(OfertaController.class))::index);
+
+        /* LOGS --- REGISTROS */
+
+        app.get("/crearCuenta", Objects.requireNonNull(ServiceLocator.instanceOf(CrearCuentaController.class))::index);
 
         app.get("/registroHumano", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroHumanoController.class))::index);
         app.post("/registroHumanoCarga", ctx -> {
@@ -77,9 +83,11 @@ public class Router {
             ctx.redirect("/success"); // Redirigir a una página de éxito o mostrar un mensaje
         });
 
+        app.get("/cargaMasiva", Objects.requireNonNull(ServiceLocator.instanceOf(CargaMasivaController.class))::index);
+
         app.get("/registroVulnerable", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroVulnerableController.class))::index);
 
-        //app.get("/registroHumano", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroHumanoController.class))::index);
+       // app.get("/registroHumano", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroHumanoController.class))::index);
 
         app.get("/reportarIncidente", Objects.requireNonNull(ServiceLocator.instanceOf(IncidenteController.class))::index);
         app.post("/cargarIncidente", Objects.requireNonNull(ServiceLocator.instanceOf(IncidenteController.class))::save);

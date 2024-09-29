@@ -3,10 +3,15 @@ package ar.edu.utn.frba.dds.controllers;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
-public class RegistroVulnerableController implements ICrudViewsHandler {
+import java.util.HashMap;
+import java.util.Map;
+
+public class DonarDineroController implements ICrudViewsHandler {
     @Override
     public void index(Context context) {
-        context.render("logs/RegistroVulnerable.hbs");
+        Map<String, Object> model = new HashMap<>();
+        model.put("title", "Donar dinero");
+        context.render("donaciones/dinero.hbs", model);
     }
 
     @Override
