@@ -19,6 +19,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -174,14 +175,14 @@ public class TestExportadorPdf {
     }
 
     @Test
-    public void testExportarPdf() throws FileNotFoundException {
+    public void testExportarPdf() throws IOException {
         // Exportar a PDF
         ExportarAPdf exportarAPdf = new ExportarAPdf();
         exportarAPdf.exportar(exportable1, exportable2, exportable3);
     }
 
     @Test
-    public void testDeCroneJob() throws FileNotFoundException {
+    public void testDeCroneJob() throws IOException {
         /*ProcessBuilder processBuilder = new ProcessBuilder("java", "-jar", "target/ejercicio-1.0-SNAPSHOT.jar");
 
         try {

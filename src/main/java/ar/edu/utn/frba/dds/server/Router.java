@@ -58,9 +58,7 @@ public class Router {
 
         // encargarseDeHeladera
         app.get("/encargarseHeladera", Objects.requireNonNull(ServiceLocator.instanceOf(EncargarseHeladeraController.class))::index);
-        app.get("/encargarseHeladera/nuevaHeladera", Objects.requireNonNull(ServiceLocator.instanceOf(EncargarseHeladeraController.class))::create);
-        app.get("/encargarseHeladera/{id}", Objects.requireNonNull(ServiceLocator.instanceOf(EncargarseHeladeraController.class))::show);
-
+        app.post("/encargarseHeladera", Objects.requireNonNull(ServiceLocator.instanceOf(EncargarseHeladeraController.class))::save);
         // fallaTecnica
         app.get("/fallaTecnica", Objects.requireNonNull(ServiceLocator.instanceOf(FallaTecnicaController.class))::index);
         app.get("/crearfallaTecnica", Objects.requireNonNull(ServiceLocator.instanceOf(FallaTecnicaController.class))::create);

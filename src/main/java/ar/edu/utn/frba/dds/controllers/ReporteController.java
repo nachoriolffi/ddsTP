@@ -6,6 +6,7 @@ import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 import io.javalin.http.HttpStatus;
 
+import java.nio.file.Paths;
 import java.util.*;
 
 public class ReporteController implements ICrudViewsHandler {
@@ -23,23 +24,26 @@ public class ReporteController implements ICrudViewsHandler {
 
     @Override
     public void show(Context context) {
-        List<Reporte> reportes = this.repoReporte.buscarTodos();
         Map<String, Object> model = new HashMap<>();
-        model.put("pdfs", reportes);
-        model.put("title", "reportes");
+
         Long idReporte = Long.valueOf(context.pathParam("id"));
         Optional<Reporte> reporte = Optional.ofNullable(this.repoReporte.buscar(idReporte));
 
         if (reporte.isPresent()) {
+            String fileName = Paths.get(reporte.get().getPathDocumento()).getFileName().toString();
+            String pdfUrl = "/pdfs/" + fileName; // Asegúrate que sea accesible
+
             model.put("reporte", reporte.get());
-            model.put("pathDocumento", reporte.get().getPathDocumento()); // Asegúrate de que este método exista
+            model.put("pathDocumento", pdfUrl);
             context.render("visualizarReportes.hbs", model);
         } else {
-
             context.status(HttpStatus.NOT_FOUND);
             context.redirect("/error404");
         }
     }
+
+
+
 
 
     @Override
