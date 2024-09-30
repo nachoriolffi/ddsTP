@@ -6,13 +6,14 @@ import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.multiplicador.config.ConfiguracionMultiplicador;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 
-
+@Data
 @Entity
 @Table(name = "donacion_vianda")
 public class DonacionVianda extends FormaDeColaboracion {
