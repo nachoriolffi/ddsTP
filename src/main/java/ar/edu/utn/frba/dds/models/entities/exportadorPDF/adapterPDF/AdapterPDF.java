@@ -2,16 +2,21 @@ package ar.edu.utn.frba.dds.models.entities.exportadorPDF.adapterPDF;
 
 import ar.edu.utn.frba.dds.models.entities.exportadorPDF.Exportable;
 import ar.edu.utn.frba.dds.models.entities.exportadorPDF.Reporte;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoReporte;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.*;
 import com.itextpdf.layout.properties.UnitValue;
+
 import java.io.File;
 
 import java.io.FileNotFoundException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
@@ -27,10 +32,10 @@ import java.util.Map;
 
 public class AdapterPDF implements InterfaceAdapterPDF {
 
-    private String pathDocumento = "C:\\Users\\Micaela\\Desktop\\exportar.PDF";
-
-    private String userHome= System.getProperty("user.home");
-    Path pathDesktop = Paths.get(userHome, "Desktop", "exportar.PDF");
+    private String userHome = System.getProperty("user.home");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");  // Formato de fecha
+    String formattedDate = LocalDateTime.now().format(formatter);
+    Path pathDesktop = Paths.get(userHome, "Desktop", "reporte_" + formattedDate + ".pdf");
 
     public void exportToPdf(String dest, List<Exportable> exportables) throws FileNotFoundException {
         File file = new File(dest);
@@ -97,7 +102,9 @@ public class AdapterPDF implements InterfaceAdapterPDF {
     @Override
     public Reporte exportar(Exportable... exportables) throws FileNotFoundException {
         exportToPdf(pathDesktop.toString(), List.of(exportables));
-        return new Reporte(pathDesktop.toString());
+        Reporte reporte = new Reporte(pathDesktop.toString());
+        RepoReporte.INSTANCE.agregar(reporte);
+        return reporte;
     }
 }
 

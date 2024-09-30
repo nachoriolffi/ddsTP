@@ -26,7 +26,7 @@
                     <tr>
                         <td>{{this.nombre}}</td>
                         <td>{{this.direccion}}</td>
-                        <td>{{this.cantidadMaximaDeViandas}}</td>
+                        <td>{{this.capacidad}}</td>
                         <td>{{this.fechaPuestaFunc}}</td>
                     </tr>
                 {{/each}}
@@ -45,7 +45,7 @@
                 </div>
                 <div class="modal-body">
                     <!-- Formulario de Donación -->
-                    <form id="donationForm" class="row g-3 needs-validation" novalidate>
+                    <form action="" method="post" id="donationForm" class="row g-3 needs-validation" novalidate>
                         <div class="col-md-6">
                             <label class="form-label" for="nombreHeladera">Nombre Heladera</label>
                             <input class="form-control" type="text" id="nombreHeladera" name="nombreHeladera" required>
@@ -54,7 +54,7 @@
                             <label class="form-label" for="modelo">Modelo Heladera</label>
                             <select class="form-select" id="modelo" name="heladera" required>
                                 <option value="" disabled selected>Seleccione un Modelo</option>
-                                {{#each}}
+                                {{#each modelos}}
                                     <option>{{this.nombre}}</option>
                                 {{/each}}
 

@@ -5,7 +5,11 @@ import ar.edu.utn.frba.dds.controllers.*;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoOferta;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoReporte;
 import io.javalin.Javalin;
+import io.javalin.http.HttpStatus;
+import javassist.NotFoundException;
+
 import javax.transaction.SystemException;
 import java.util.Objects;
 
@@ -14,13 +18,14 @@ public class Router {
     public static void init(Javalin app) {
 
         RepoColaborador repoColaborador = new RepoColaborador();
+        RepoReporte repoReporte = RepoReporte.INSTANCE;
         ColaboradorController colaboradorController = new ColaboradorController(repoColaborador);
 
         RepoOferta repoOferta = new RepoOferta();
         OfertaController ofertaController = new OfertaController();
 
         app.error(404, ctx -> {
-            throw new SystemException("No se encontro la pagina solicitada");
+            ctx.render("error404.hbs"); // Asegúrate de que la ruta sea correcta
         });
 
         app.error(500, ctx -> {
@@ -29,28 +34,39 @@ public class Router {
 
         app.get("/prueba", ctx -> ctx.result("Hello World"));
 
-
         //app.get("/heladera", ServiceLocator.instanceOf(HeladeraController.class)::index)
-
+        // error404
+        app.get("/error404", ctx -> {
+            ctx.render("error404.hbs");
+            // TODO SOLUCIONAR//ctx.status(404); comento esto porque sino no muestra la pagina linda
+            // tira server error
+        });
+        // error500
+        app.get("/error500", ctx -> {
+            ctx.render("error500.hbs");
+            //TODO SOLUCIONAR//ctx.status(500); comento esto porque sino no muestra la pagina linda
+        });
         // iniciarSesion
         app.get("/inicioSesion", Objects.requireNonNull(ServiceLocator.instanceOf(InicioSesionController.class))::index);
-        app.post("/inicioSesion",ctx ->{
-           String correoElectronico = ctx.formParam("correoElectronico");
-           String clave = ctx.formParam(("clave"));
+        app.post("/inicioSesion", ctx -> {
+            String correoElectronico = ctx.formParam("correoElectronico");
+            String clave = ctx.formParam(("clave"));
         });
 
         // donaciones
         app.get("/donarDinero", Objects.requireNonNull(ServiceLocator.instanceOf(DonarDineroController.class))::index);
 
         // encargarseDeHeladera
-        app.get("/encargarseHeladera",Objects.requireNonNull(ServiceLocator.instanceOf(EncargarseHeladeraController.class))::index);
+        app.get("/encargarseHeladera", Objects.requireNonNull(ServiceLocator.instanceOf(EncargarseHeladeraController.class))::index);
+        app.get("/encargarseHeladera/nuevaHeladera", Objects.requireNonNull(ServiceLocator.instanceOf(EncargarseHeladeraController.class))::create);
+        app.get("/encargarseHeladera/{id}", Objects.requireNonNull(ServiceLocator.instanceOf(EncargarseHeladeraController.class))::show);
 
         // fallaTecnica
-        //app.get("/fallaTecnica",Objects.requireNonNull(ServiceLocator.instanceOf(FallaTecnicaController.class))::index);
-        //app.post("/fallaTecnica",Objects.requireNonNull(ServiceLocator.instanceOf(FallaTecnicaController.class))::save);
+        app.get("/fallaTecnica", Objects.requireNonNull(ServiceLocator.instanceOf(FallaTecnicaController.class))::index);
+        app.get("/crearfallaTecnica", Objects.requireNonNull(ServiceLocator.instanceOf(FallaTecnicaController.class))::create);
         // visualizarPDFs
-        app.get("/reportes",Objects.requireNonNull(ServiceLocator.instanceOf(PdfViewerController.class))::index);
-
+        app.get("/reportes", Objects.requireNonNull(ServiceLocator.instanceOf(ReporteController.class))::index);
+        app.get("/reportes/{id}", Objects.requireNonNull(ServiceLocator.instanceOf(ReporteController.class))::show);
 
         app.get("/colaboradores", colaboradorController::index);
 
@@ -78,7 +94,7 @@ public class Router {
 
 
             // Guardar el colaborador en la base de datos o realizar alguna acción
-           RepoColaborador.INSTANCE.agregar(colaborador);
+            RepoColaborador.INSTANCE.agregar(colaborador);
 
             ctx.redirect("/success"); // Redirigir a una página de éxito o mostrar un mensaje
         });
@@ -87,12 +103,9 @@ public class Router {
 
         app.get("/registroVulnerable", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroVulnerableController.class))::index);
 
-       // app.get("/registroHumano", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroHumanoController.class))::index);
-
-        app.get("/reportarIncidente", Objects.requireNonNull(ServiceLocator.instanceOf(IncidenteController.class))::index);
-        app.post("/cargarIncidente", Objects.requireNonNull(ServiceLocator.instanceOf(IncidenteController.class))::save);
+        // app.get("/registroHumano", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroHumanoController.class))::index);
 
     }
 
-    }
+}
 
