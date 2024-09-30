@@ -1,0 +1,128 @@
+{{#partial "contenido"}}
+    <hr class="my-3 border-0">
+    <section class="container mt-1">
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <h1 class="h1">Donar Viandas</h1>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                        data-bs-target="#donationModal">
+                    Donar Vianda
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 table-responsive">
+                <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                    <thead>
+                    <tr class="align-middle">
+                        <th scope="col">Comida</th>
+                        <th scope="col">Calorias</th>
+                        <th scope="col">Peso (En Gramos)</th>
+                        <th scope="col">Fecha de Donacion</th>
+                        <th scope="col">Fecha de Caducidad</th>
+                        <th scope="col">Heladera</th>
+                        <th scope="col">Fue Entregada</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                    {{#each viandas}}
+                        <tr>
+                            <td>{{this.comida}}</td>
+                            <td>{{this.calorias}}</td>
+                            <td>{{this.peso}}</td>
+                            <td>{{this.fechaCaducidad}}</td>
+                            <td>{{this.fechaDonacion}}</td>
+                            <td>Heladera A</td>
+                            <td>{{this.fueEntregada}}</td>
+                        </tr>
+                    {{/each}}
+                    <tr>
+                        <td>Manzanas</td>
+                        <td>52</td>
+                        <td>1000g</td>
+                        <td>2024-08-01</td>
+                        <td>2024-09-01</td>
+                        <td>Heladera A</td>
+                        <td>Sí</td>
+                    </tr>
+                    <tr>
+                        <td>Papas</td>
+                        <td>-</td>
+                        <td>2000g</td>
+                        <td>2024-08-05</td>
+                        <td>2024-10-05</td>
+                        <td>Heladera B</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>Leche</td>
+                        <td>42</td>
+                        <td>-</td>
+                        <td>2024-08-10</td>
+                        <td>2024-08-20</td>
+                        <td>Heladera C</td>
+                        <td>Sí</td>
+                    </tr>
+                    <tr>
+                        <td>Pan</td>
+                        <td>-</td>
+                        <td>500g</td>
+                        <td>2024-08-12</td>
+                        <td>2024-08-18</td>
+                        <td>Heladera A</td>
+                        <td>No</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Modal de Donación -->
+        <div class="modal fade" id="donationModal" tabindex="-1" aria-labelledby="donationModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="donationModalLabel">Encargarse De Heladera</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Formulario de Donación -->
+                        <form method="POST" action="/donacionViandas" class="row g-3 needs-validation">
+                            <div class="col-md-6">
+                                <label class="form-label" for="input1">Comida</label>
+                                <input class="form-control" type="text" id="input1" name="comida" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="input3">Fecha Caducidad</label>
+                                <input class="form-control" type="date" id="input3" name="fechaCaducidad" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label" for="input4">Heladera</label>
+                                <input class="form-control" type="text" id="input4" name="heladera" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="input5">Calorias</label>
+                                <input class="form-control" type="text" id="input5" name="calorias" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="input6">Peso (En Gramos)</label>
+                                <input class="form-control" type="text" id="input6" name="peso">
+                            </div>
+                            <div class="modal-footer col-md-12">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button class="btn btn-primary" type="submit" data-bs-toggle="modal"
+                                        data-bs-target="#confirmModal">¡Realizar Donación!
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Confirmación Donacion-->
+
+    </section>
+{{/partial}}
+{{> templates/base}}

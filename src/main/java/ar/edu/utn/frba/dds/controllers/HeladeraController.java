@@ -1,8 +1,15 @@
 package ar.edu.utn.frba.dds.controllers;
+
+import ar.edu.utn.frba.dds.dtos.inputs.HeladeraInputDTO;
+
+
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
 public class HeladeraController implements ICrudViewsHandler {
+
+
+
 
     public void index(Context context) {
 

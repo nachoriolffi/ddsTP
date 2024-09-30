@@ -10,12 +10,12 @@
                 </div>
                 <div class="row  mb-3">
                     <h5 class="text-center">
-                        <a href="/src/main/java/ar/edu/utn/frba/dds/models/entities/lectorCSV/archivo_ejemplo.csv"
+                        <a href="/archivo_ejemplo.csv"
                            class="text-center" download>Descargar Ejemplo de Archivo CSV</a>
                     </h5>
 
                     <div class="container mt-5">
-                        <form class="row g-3 needs-validation" action="/upload-csv" method="POST" enctype="multipart/form-data" novalidate>
+                        <form class="row g-3 needs-validation" action="/cargaMasiva" method="POST" enctype="multipart/form-data">
                             <div class="text-center mb-5">
                                 <label for="csv-file" class="form-label">Arrastre o Seleccione el Archivo CSV que desea subir</label>
                                 <input type="file" id="csv-file" name="csv-file" accept=".csv" required class="form-control">
@@ -32,6 +32,7 @@
             </div>
         </div>
     </div>
+
 
 {{/partial}}
 
