@@ -23,6 +23,10 @@ public class Incidente {
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "heladera_id")
+    private Heladera heladera;
+
     @Column(name = "fecha",nullable = false)
     private Date fecha;
 

@@ -1,3 +1,6 @@
+{{#partial "agregarScript"}}
+    <script src="js/validacionDatos.js"></script>
+{{/partial}}
 {{#partial "contenido"}}
     <div class="row">
         <form class="row needs-validation" method="POST" action="/fallaTecnica" novalidate>
@@ -8,7 +11,7 @@
                         <select class="form-select" id="heladera-averiada" name="heladeraAveriada" required>
                             <option value="" disabled selected>Seleccione una Heladera</option>
                             {{#each heladeras}}
-                                <option value="{{this.id}}">{{this.nombre}}</option>
+                                <option name="idHeladera" value="{{this.id}}">{{this.nombre}}</option>
                             {{/each}}
                         </select>
                     </div>

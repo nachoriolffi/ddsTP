@@ -26,7 +26,7 @@
                     <tr>
                         <td>{{this.nombre}}</td>
                         <td>{{this.direccion}}</td>
-                        <td>{{this.cantidadMaximaDeViandas}}</td>
+                        <td>{{this.capacidad}}</td>
                         <td>{{this.fechaPuestaFunc}}</td>
                     </tr>
                 {{/each}}
@@ -45,19 +45,18 @@
                 </div>
                 <div class="modal-body">
                     <!-- Formulario de Donación -->
-                    <form id="donationForm" class="row g-3 needs-validation" novalidate>
+                    <form action="/encargarseHeladera" method="POST" id="donationForm" class="row g-3 needs-validation" novalidate>
                         <div class="col-md-6">
                             <label class="form-label" for="nombreHeladera">Nombre Heladera</label>
                             <input class="form-control" type="text" id="nombreHeladera" name="nombreHeladera" required>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="modelo">Modelo Heladera</label>
-                            <select class="form-select" id="modelo" name="heladera" required>
+                            <select class="form-select" id="modelo" name="modeloHeladera" required>
                                 <option value="" disabled selected>Seleccione un Modelo</option>
-                                {{#each}}
-                                    <option>{{this.nombre}}</option>
+                                {{#each modelos}}
+                                    <option value="{{this.id}}">{{this.nombreModelo}}</option>
                                 {{/each}}
-
                             </select>
                         </div>
                         <div class="col-md-12 flex-fill">
@@ -68,7 +67,7 @@
                         </div>
                         <div class="col-md-12">
                             <label class="form-label" for="direccion">Calle</label>
-                            <input class="form-control" type="text" id="direccion" name="direccion" required>
+                            <input class="form-control" type="text" id="direccion" name="calle" required>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="altura">Altura</label>
@@ -76,7 +75,7 @@
                         </div>
                         <div class="col-md-6">
                             <label class="form-label" for="piso">Piso</label>
-                            <input class="form-control" type="text" id="piso" name="piso">
+                            <input class="form-control" value="0" type="text" id="piso" name="piso">
                         </div>
                         <div class="modal-footer col-md-12">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -117,48 +116,16 @@
                                 <div class="row flex-grow-1 overflow-auto">
                                     <div class="container">
                                         <ul class="list-group">
-                                            <li class="list-group-item">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <p>Medrano 951</p>
+                                            {{#each direcciones}}
+                                                <li class="list-group-item">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <p>{{this.direccion}}</p>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Medrano 951</h5>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Medrano 951</h5>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Medrano 951</h5>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Medrano 951</h5>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <div class="card">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">Medrano 951</h5>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                                </li>
+                                            {{/each}}
+
                                         </ul>
 
                                     </div>
@@ -194,7 +161,7 @@
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal"
                             data-bs-target="#donationModal">Cancelar
                     </button>
-                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Sí, realizar donación</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Sí, realizar donación</button>
                 </div>
             </div>
         </div>
@@ -206,6 +173,18 @@
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
             crossorigin=""></script>
     <script>
+        document.getElementById('submitDonation').addEventListener('click', function () {
+            // Cierra el modal de donación
+            var donationModal = bootstrap.Modal.getInstance(document.getElementById('donationModal'));
+            if (donationModal) {
+                donationModal.hide();
+            }
+
+            // Muestra el modal de confirmación
+            var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+            confirmModal.show();
+        });
+
         document.addEventListener('DOMContentLoaded', function () {
             let map;
 
@@ -245,6 +224,26 @@
                 }
             });
         });
+        document.getElementById('confirmModal').addEventListener('click', function (event) {
+            if (event.target.matches('.btn-primary')) {
+                document.getElementById('donationForm').submit();
+            }
+        });
+        // Agregar un evento de clic al botón de cancelar
+        document.getElementById('confirmModal').addEventListener('click', function (event) {
+            if (event.target.matches('.btn-secondary')) {
+                // Cierra el modal de confirmación
+                var confirmModal = bootstrap.Modal.getInstance(document.getElementById('confirmModal'));
+                if (confirmModal) {
+                    confirmModal.hide();
+                }
+
+                // Abre el modal de donación
+                var donationModal = new bootstrap.Modal(document.getElementById('donationModal'));
+                donationModal.show();
+            }
+        });
     </script>
+    <script src="../public/js/validacionDatos.js"></script>
 {{/partial}}
 {{> templates/base}}

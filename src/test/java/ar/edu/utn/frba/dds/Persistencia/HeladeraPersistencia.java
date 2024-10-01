@@ -26,6 +26,7 @@ public class HeladeraPersistencia {
         RepoModelo repoModelo = new RepoModelo();
         ModeloHeladera modelo = new ModeloHeladera();
         modelo.setPeso(200.0);
+        modelo.setNombreModelo("DDS 4AX");
         modelo.setCantidadMaximaDeViandas(400);
         modelo.setTemperaturaMaxima(21.0);
         modelo.setTemperaturaMinima(3.0);

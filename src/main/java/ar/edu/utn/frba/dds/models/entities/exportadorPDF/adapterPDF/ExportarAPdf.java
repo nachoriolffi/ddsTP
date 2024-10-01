@@ -4,7 +4,7 @@ import ar.edu.utn.frba.dds.models.entities.exportadorPDF.EstrategiaExportacion;
 import ar.edu.utn.frba.dds.models.entities.exportadorPDF.Exportable;
 import ar.edu.utn.frba.dds.models.entities.exportadorPDF.Reporte;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class ExportarAPdf implements EstrategiaExportacion {
 
@@ -15,7 +15,7 @@ public class ExportarAPdf implements EstrategiaExportacion {
     }
 
     @Override
-    public Reporte exportar(Exportable... exportable) throws FileNotFoundException {
+    public Reporte exportar(Exportable... exportable) throws IOException {
       return  adapterPDF.exportar(exportable);
 
    }

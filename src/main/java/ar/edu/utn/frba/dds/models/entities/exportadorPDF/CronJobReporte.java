@@ -3,12 +3,13 @@ package ar.edu.utn.frba.dds.models.entities.exportadorPDF;
 import ar.edu.utn.frba.dds.models.entities.exportadorPDF.adapterPDF.ExportarAPdf;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.rmi.server.ExportException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CronJobReporte {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
 
         System.out.println("EJEMPLO");
         FactoryDocumento factory = new FactoryDocumento();

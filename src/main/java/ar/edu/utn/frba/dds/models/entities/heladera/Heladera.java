@@ -76,7 +76,6 @@ public class Heladera {
         this.incidentes = new ArrayList<>();
         this.solicitudesApertura = new ArrayList<>();
         this.aperturas = new ArrayList<>();
-        this.viandasDisponibles = 0;
     }
 
     public Heladera(Direccion direccion, Coordenada coordenada) {

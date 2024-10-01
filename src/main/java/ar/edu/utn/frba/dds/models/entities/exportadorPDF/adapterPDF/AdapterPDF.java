@@ -2,40 +2,43 @@ package ar.edu.utn.frba.dds.models.entities.exportadorPDF.adapterPDF;
 
 import ar.edu.utn.frba.dds.models.entities.exportadorPDF.Exportable;
 import ar.edu.utn.frba.dds.models.entities.exportadorPDF.Reporte;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoReporte;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.*;
 import com.itextpdf.layout.properties.UnitValue;
 import java.io.File;
-
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 
-import com.itextpdf.kernel.pdf.*;
-import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.List;
-import java.util.Map;
-
 public class AdapterPDF implements InterfaceAdapterPDF {
 
-    private String pathDocumento = "C:\\Users\\Micaela\\Desktop\\exportar.PDF";
+    Path projectBasePath = Paths.get(System.getProperty("user.dir"));
 
-    private String userHome= System.getProperty("user.home");
-    Path pathDesktop = Paths.get(userHome, "Desktop", "exportar.PDF");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss");  // Formato de fecha
+    String formattedDate = LocalDateTime.now().format(formatter);
 
-    public void exportToPdf(String dest, List<Exportable> exportables) throws FileNotFoundException {
+    Path pathToPdf = projectBasePath.resolve("src/main/resources/public/pdfs/reporte_" + formattedDate + ".pdf");
+
+    public void exportToPdf(String dest, List<Exportable> exportables) throws IOException {
+
         File file = new File(dest);
-        if (!file.getParentFile().exists()) {
-            file.getParentFile().mkdirs(); // Crea el directorio si no existe
+        File parentDir = file.getParentFile();
+
+        if (parentDir != null && !parentDir.exists()) {
+            boolean created = parentDir.mkdirs();
+            if (!created) {
+                throw new IOException("No se pudo crear el directorio para el archivo PDF.");
+            }
         }
 
         PdfWriter writer = new PdfWriter(dest);
@@ -95,9 +98,11 @@ public class AdapterPDF implements InterfaceAdapterPDF {
     }
 
     @Override
-    public Reporte exportar(Exportable... exportables) throws FileNotFoundException {
-        exportToPdf(pathDesktop.toString(), List.of(exportables));
-        return new Reporte(pathDesktop.toString());
+    public Reporte exportar(Exportable... exportables) throws IOException {
+        exportToPdf(pathToPdf.toString(), List.of(exportables));
+        Reporte reporte = new Reporte(pathToPdf.toString());
+        RepoReporte.INSTANCE.agregar(reporte);
+        return reporte;
     }
 }
 
