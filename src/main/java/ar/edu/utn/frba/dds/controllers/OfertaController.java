@@ -7,6 +7,7 @@ import io.javalin.http.Context;
 
 import javax.ws.rs.ext.ContextResolver;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +42,22 @@ public class OfertaController implements ICrudViewsHandler {
 
     @Override
     public void save(Context context) {
+        Oferta oferta = new Oferta();
+
+        oferta.setNombre(context.formParam("nombreProducto"));
+        oferta.setImagen(context.formParam("imagenProducto"));
+        oferta.setPuntosNecesarios(Integer.parseInt(context.formParam("puntosNecesarios")));
+        oferta.setFechaInicio(new Date());
+        oferta.setFechaFin(new Date());
+        oferta.setStockInicial(20);
+        oferta.setStockUsado(15);
+        oferta.setRubro(null);
+
+
+        //repositorioOferta.agregar(oferta);
+
+        context.redirect("/canjeProductos");
+
 
     }
 

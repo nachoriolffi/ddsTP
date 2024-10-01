@@ -1,8 +1,7 @@
 {{#partial "contenido"}}
 <div class="container mt-5 pt-5 full-height text-center">
     <div class="row">
-    <form class="row needs-validation" novalidate>
-
+    <form method="POST" action="/cargarIncidente" class="row needs-validation" novalidate>
             <div class="col-md-12 col-lg-6">
                 <div class="mb-3 d-flex justify-content-center">
                     <div class="w-100">
@@ -19,13 +18,13 @@
                 <div class="mb-3 d-flex justify-content-center">
                     <div class="w-100">
                         <label for="dia-horario" class="form-label">Dia y Horario en el que visito la heladera</label>
-                        <input id="dia-horario" type="datetime-local" class="form-control" required>
+                        <input id="dia-horario" type="datetime-local" class="form-control" name="diaHorario" required>
                     </div>
                 </div>
                 <div class="mb-3 d-flex justify-content-center">
                     <div class="w-100">
                         <label class="form-label">¿Tenés una foto? ¡Subila!</label>
-                        <input type="file" id="fotoFalla" class="form-control" accept="image/*">
+                        <input type="file" id="fotoFalla" class="form-control" accept="image/*" name="foto">
                     </div>
                 </div>
             </div>
@@ -33,7 +32,7 @@
                 <div class="mb-3 d-flex justify-content-center">
                     <div class="w-100">
                         <label for="descripcion" class="form-label">Describa el estado en el que encontró la heladera</label>
-                        <textarea id="descripcion" class="form-control" rows="6" required style="resize: none"></textarea>
+                        <textarea id="descripcion" class="form-control" rows="6" required style="resize: none" name="descripcion"></textarea>
                     </div>
                 </div>
                 <div class="col-12 d-flex justify-content-center">
