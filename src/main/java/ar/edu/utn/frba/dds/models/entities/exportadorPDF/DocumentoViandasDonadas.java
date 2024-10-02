@@ -46,7 +46,7 @@ public class DocumentoViandasDonadas implements Exportable {
         }
 
         datos.put("Colaborador", colaboradoresNombre);
-        datos.put("Cantidad", cantidades);
+        datos.put("Cantidad Viandas Donadas", cantidades);
     }
 
 

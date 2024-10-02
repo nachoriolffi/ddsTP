@@ -8,12 +8,14 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.*;
 import com.itextpdf.layout.properties.UnitValue;
+
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +23,8 @@ import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 
 public class AdapterPDF implements InterfaceAdapterPDF {
+
+    List<String> secciones = new ArrayList<>();
 
     Path projectBasePath = Paths.get(System.getProperty("user.dir"));
 
@@ -41,6 +45,10 @@ public class AdapterPDF implements InterfaceAdapterPDF {
             }
         }
 
+        this.secciones.add("Fallas Por Heladera");
+        this.secciones.add("Viandas Retiradas/Colocadas Por Heladera");
+        this.secciones.add("Cantidad de Viandas Donadas Por Colaborador");
+
         PdfWriter writer = new PdfWriter(dest);
         PdfDocument pdf = new PdfDocument(writer);
         Document document = new Document(pdf);
@@ -56,7 +64,7 @@ public class AdapterPDF implements InterfaceAdapterPDF {
                 document.add(new AreaBreak());
             }
 
-            document.add(new Paragraph("Sección"));
+            document.add(new Paragraph(secciones.get(i)));
             addTableToDocument(datos, document);
         }
 

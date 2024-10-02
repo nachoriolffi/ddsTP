@@ -18,7 +18,7 @@ public class ReporteController implements ICrudViewsHandler {
         List<Reporte> reportes = this.repoReporte.buscarTodos();
         Map<String, Object> model = new HashMap<>();
         model.put("pdfs", reportes);
-        model.put("title", "reportes");
+        model.put("title", "Reportes PDFs");
         context.render("visualizarReportes.hbs", model);
     }
 
@@ -26,24 +26,27 @@ public class ReporteController implements ICrudViewsHandler {
     public void show(Context context) {
         Map<String, Object> model = new HashMap<>();
 
-        Long idReporte = Long.valueOf(context.pathParam("id"));
+        Long idReporte = Long.valueOf(context.pathParam("id")); // Obtener el ID del reporte desde la URL
+        List<Reporte> reportes = this.repoReporte.buscarTodos();
         Optional<Reporte> reporte = Optional.ofNullable(this.repoReporte.buscar(idReporte));
 
         if (reporte.isPresent()) {
             String fileName = Paths.get(reporte.get().getPathDocumento()).getFileName().toString();
-            String pdfUrl = "/pdfs/" + fileName; // Asegúrate que sea accesible
+            String pdfUrl = "/pdfs/" + fileName; // Asegúrate que la URL del PDF sea accesible
 
-            model.put("reporte", reporte.get());
+            // Pasa la lista de reportes y el reporte seleccionado al modelo
+            model.put("pdfs", reportes);
+            model.put("reporte", reporte.get()); // Asegúrate de pasar el reporte correctamente
             model.put("pathDocumento", pdfUrl);
+            model.put("title", "Reportes PDFs");
+
+            // Renderizar la vista con el modelo completo
             context.render("visualizarReportes.hbs", model);
         } else {
             context.status(HttpStatus.NOT_FOUND);
             context.redirect("/error404");
         }
     }
-
-
-
 
 
     @Override

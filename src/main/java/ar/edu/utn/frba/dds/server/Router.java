@@ -34,17 +34,17 @@ public class Router {
 
         app.get("/prueba", ctx -> ctx.result("Hello World"));
 
-        //app.get("/heladera", ServiceLocator.instanceOf(HeladeraController.class)::index)
         // error404
         app.get("/error404", ctx -> {
-            ctx.render("error404.hbs");
-            // TODO SOLUCIONAR//ctx.status(404); comento esto porque sino no muestra la pagina linda
-            // tira server error
+            ctx.render("errors/error404.hbs");
         });
         // error500
         app.get("/error500", ctx -> {
-            ctx.render("error500.hbs");
-            //TODO SOLUCIONAR//ctx.status(500); comento esto porque sino no muestra la pagina linda
+            ctx.render("errors/error500.hbs");
+        });
+        // error401
+        app.get("/error401", ctx -> {
+            ctx.render("errors/error401.hbs");
         });
         // iniciarSesion
         app.get("/inicioSesion", Objects.requireNonNull(ServiceLocator.instanceOf(InicioSesionController.class))::index);
@@ -105,7 +105,6 @@ public class Router {
 
         app.get("/donarViandas", Objects.requireNonNull(ServiceLocator.instanceOf(DonacionViandaController.class))::index);
         app.post("/donacionViandas", Objects.requireNonNull(ServiceLocator.instanceOf(DonacionViandaController.class))::save);
-
 
 
     }

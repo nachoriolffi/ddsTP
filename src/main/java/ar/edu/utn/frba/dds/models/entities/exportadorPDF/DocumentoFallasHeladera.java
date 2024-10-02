@@ -57,8 +57,8 @@ public class DocumentoFallasHeladera implements Exportable {
             }
         }
 
-        this.datos.put("HELADERA", heladerasNombre);
-        this.datos.put("CANTIDAD", fallas);
+        this.datos.put("Heladera", heladerasNombre);
+        this.datos.put("Cantidad Fallas", fallas);
 
     }
 }

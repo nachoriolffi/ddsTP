@@ -58,7 +58,7 @@ public class EncargarseHeladeraController implements ICrudViewsHandler {
         System.out.println("VOY A GUARDAR UNA HELADERA");
         Heladera heladera = new Heladera();
         ModeloHeladera modeloHeladera = RepoModelo.INSTANCE.buscar(Long.valueOf(Objects.requireNonNull(context.formParam("modeloHeladera"))));
-        System.out.println("MODELO "+modeloHeladera.getNombreModelo());
+        System.out.println("MODELO " + modeloHeladera.getNombreModelo());
         RepoCoordenada repoCoordenada = RepoCoordenada.INSTANCE;
         Coordenada coordenada = new Coordenada(-34.598630, -58.419962);
         repoCoordenada.agregar(coordenada);

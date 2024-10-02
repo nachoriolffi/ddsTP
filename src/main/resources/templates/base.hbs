@@ -7,8 +7,7 @@
 
     <!-- Referencia al archivo CSS -->
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="icon" href="/img/iconHead.png" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
             integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
             crossorigin="anonymous"></script>
@@ -33,7 +32,7 @@
                        aria-expanded="false">Donaciones</a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/donarDinero">Donar Dinero</a></li>
-                        <li><a class="dropdown-item" href="/encargarseDeHeladera">Encargarse de Heladera</a></li>
+                        <li><a class="dropdown-item" href="/encargarseHeladera">Encargarse de Heladera</a></li>
                         <li><a class="dropdown-item" href="/donacionViandas">Donar Viandas</a></li>
                         <li><a class="dropdown-item" href="/distribuirViandas">Distribuir Viandas</a></li>
                         <li><a class="dropdown-item" href="/registroVulnerable">Registrar Personas Vulnerables</a></li>
@@ -42,7 +41,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="canjeProductos">Tienda</a>
+                    <a class="nav-link" href="/canjeProductos">Tienda</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../html/heladeras.html">Ver Heladeras</a>
@@ -51,9 +50,9 @@
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                        aria-expanded="false">Herramientas</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="../html/reportarFallaTecnica.html">Reportar Incidente</a></li>
-                        <li><a class="dropdown-item" href="../html/cargaCSV.html">Cargar Archivo CSV</a></li>
-                        <li><a class="dropdown-item" href="../html/visualizacionReportes.html">Ver Reportes PDF</a></li>
+                        <li><a class="dropdown-item" href="/fallaTecnica">Reportar Incidente</a></li>
+                        <li><a class="dropdown-item" href="/cargaMasiva">Cargar Archivo CSV</a></li>
+                        <li><a class="dropdown-item" href="/reportes">Ver Reportes PDF</a></li>
                     </ul>
                 </li>
                 <li class="nav-item dropdown">
@@ -81,15 +80,6 @@
     {{#block "contenido"}}
     {{/block}}
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-        crossorigin="anonymous"></script>
-<script src="https://kit.fontawesome.com/115c7ea5e6.js" crossorigin="anonymous"></script>
-
 
 {{#block "agregarScript"}}
 {{/block}}

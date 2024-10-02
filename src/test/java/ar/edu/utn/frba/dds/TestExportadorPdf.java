@@ -40,17 +40,17 @@ public class TestExportadorPdf {
         RepoHeladeras repoHeladeras = RepoHeladeras.INSTANCE;
 
         fallasHeladeras = Map.of(
-                "HELADERA", List.of("HELADERA1", "HELADERA2"),
-                "CANTIDAD", List.of("55", "60")
+                "Heladera", List.of("Heladera Medrano", "Heladera Campus","Heladera FMED"),
+                "Cantidad Fallas", List.of("10", "2","15")
         );
         viandasRetCol = Map.of(
-                "HELADERA", List.of("HELADERA1"),
-                "COLOCADAS", List.of("123131333"),
-                "RETIRADAS", List.of("12312313")
+                "Heladera", List.of("Heladera Medrano"),
+                "Viandas Colocadas", List.of("60"),
+                "Viandas Retiradas", List.of("30")
         );
         viandasColaborador = Map.of(
-                "COLABORADOR", List.of("COLABORADOR1"),
-                "CANTIDAD", List.of("100")
+                "Colaborador", List.of("Juancito Perez","Luciana Maria"),
+                "Cantidad Viandas Donadas", List.of("100","50")
         );
         exportable1 = new DocumentoFallasHeladera(fallasHeladeras);
         exportable2= new DocumentoFallasHeladera(viandasRetCol);
