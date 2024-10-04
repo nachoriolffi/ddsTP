@@ -5,6 +5,8 @@ import ar.edu.utn.frba.dds.dtos.inputs.HeladeraInputDTO;
 
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoCoordenada;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoModelo;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
@@ -16,6 +18,8 @@ import java.util.Map;
 
 public class HeladeraController implements ICrudViewsHandler {
 
+
+    RepoHeladeras repositorioHeladeras = RepoHeladeras.INSTANCE;
 
 
     @Override
@@ -45,20 +49,24 @@ public class HeladeraController implements ICrudViewsHandler {
         String altura = context.formParam("altura");
         String piso = context.formParam("piso");
 
-        // Buscar el piso en el repositorio
 
-
-
-        // Crear una nueva instancia de Heladera
+        ModeloHeladera modeloHeladera = RepoModelo.INSTANCE.buscar(Long.parseLong(modelo));
+        System.out.println(modeloHeladera.getNombreModelo());
         Heladera heladera = new Heladera();
         heladera.setNombre(nombre);
-        heladera.setModelo(RepoModelo.INSTANCE.buscar(Long.parseLong(modelo)));
+        heladera.setModelo(modeloHeladera);
+        Coordenada coordenada= new Coordenada();
+        RepoCoordenada.INSTANCE.agregar(coordenada);
+        heladera.setCoordenada(coordenada);
+        heladera.setFechaPuestaFunc(new java.util.Date());
+        heladera.setEstaActiva(true);
+
        // heladera.setCalle(calle);
        // heladera.setAltura(altura);
         //heladera.setPiso(piso);
 
         // Guardar la nueva Heladera en el repositorio
-        RepoHeladeras.INSTANCE.agregar(heladera);
+        repositorioHeladeras.agregar(heladera);
 
         // Redirigir a la lista de heladeras
         context.redirect("/heladeras");
