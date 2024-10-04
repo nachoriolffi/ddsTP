@@ -77,6 +77,25 @@ public class Router {
 
         app.get("/crearCuenta", Objects.requireNonNull(ServiceLocator.instanceOf(CrearCuentaController.class))::index);
 
+
+        app.get("/cargaMasiva", Objects.requireNonNull(ServiceLocator.instanceOf(CargaMasivaController.class))::index);
+        app.post("/cargaMasiva", Objects.requireNonNull(ServiceLocator.instanceOf(CargaMasivaController.class))::cargaMasiva);
+        app.get("/registroVulnerable", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroVulnerableController.class))::index);
+
+        // app.get("/registroHumano", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroHumanoController.class))::index);
+
+        app.get("/donarViandas", Objects.requireNonNull(ServiceLocator.instanceOf(DonacionViandaController.class))::index);
+        app.post("/donacionViandas", Objects.requireNonNull(ServiceLocator.instanceOf(DonacionViandaController.class))::save);
+
+
+        /*---Pantallas de Nahuel (todavía no terminado)---*/
+        app.get("/misHeladeras",ctx->ctx.result("misHeladeras prueba"));
+        app.get("/registroJuridico",ctx->ctx.result("registroJuridico prueba"));
+        app.get("/registroHumano",Objects.requireNonNull(ServiceLocator.instanceOf(RegistroHumanoController.class))::index);// lo dejo así para probar, después me voy a asegurar que el verbo sea el correcto
+        app.get("/distribuirViandas",ctx->ctx.result("distribuirViandas prueba"));
+
+
+        /* Está parte ya estaba hecha pero la comento para revisarla ya que tengo que hacer la pantalla de registroHumano también
         app.get("/registroHumano", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroHumanoController.class))::index);
         app.post("/registroHumanoCarga", ctx -> {
             String nombre = ctx.formParam("nombre");
@@ -100,17 +119,6 @@ public class Router {
             ctx.redirect("/success"); // Redirigir a una página de éxito o mostrar un mensaje
         });
 
-        app.get("/cargaMasiva", Objects.requireNonNull(ServiceLocator.instanceOf(CargaMasivaController.class))::index);
-        app.post("/cargaMasiva", Objects.requireNonNull(ServiceLocator.instanceOf(CargaMasivaController.class))::cargaMasiva);
-        app.get("/registroVulnerable", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroVulnerableController.class))::index);
-
-        // app.get("/registroHumano", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroHumanoController.class))::index);
-
-        app.get("/donarViandas", Objects.requireNonNull(ServiceLocator.instanceOf(DonacionViandaController.class))::index);
-        app.post("/donacionViandas", Objects.requireNonNull(ServiceLocator.instanceOf(DonacionViandaController.class))::save);
-
-        app.get("/heladeras", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::index);
-        app.post("/heladeras", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::create);
     }
 
 }
