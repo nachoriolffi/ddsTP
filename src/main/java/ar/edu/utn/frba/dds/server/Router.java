@@ -109,7 +109,8 @@ public class Router {
         app.get("/donarViandas", Objects.requireNonNull(ServiceLocator.instanceOf(DonacionViandaController.class))::index);
         app.post("/donacionViandas", Objects.requireNonNull(ServiceLocator.instanceOf(DonacionViandaController.class))::save);
 
-
+        app.get("/heladeras", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::index);
+        app.post("/heladeras", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::create);
     }
 
 }

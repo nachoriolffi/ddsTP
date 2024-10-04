@@ -1,0 +1,207 @@
+{{#partial "contenido"}}
+    <section class="container">
+        <hr class="my-3 border-0">
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <h1 class="h1">Heladeras</h1>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                        data-bs-target="#cargarHeladeraModal">
+                    Cargar Heladera
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 table-responsive">
+                <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                    <thead>
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Cantidad Máx. de Viandas</th>
+                        <th scope="col">Cantidad de Viandas Restantes</th>
+                        <th scope="col">Suscribirme</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                    {{#each heladeras}}
+                        <tr>
+                            <td><a href="#" data-bs-toggle="modal" data-bs-target="#heladeraModal">{{this.nombre}}</a></td>
+                            <td>{{this.direccion}}</td>
+                            <td>{{this.max_viandas}}</td>
+                            <td>{{this.viandas_restantes}}</td>
+                            <td>
+                                <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                                    <i class="fa-solid fa-check-circle fa-lg"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="modal fade" id="cargarHeladeraModal" tabindex="-1" aria-labelledby="cargarHeladeraLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="cargarHeladeraLabel">Cargar Heladera</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form class="row g-3 needs-validation" action="/heladeras/create" method="POST" novalidate>
+                            <div class="col-7">
+                                <label for="validationCustom01" class="form-label">Nombre Heladera</label>
+                                <input type="text" class="form-control" id="validationCustom01" name="nombre" required>
+                            </div>
+                            <div class="col-5">
+                                <label for="validationCustom05" class="form-label">Modelo</label>
+                                <select class="form-select" id="validationCustom05" name="modelo" required>
+                                    <option value="" disabled selected>Modelo</option>
+                                    {{#each modelos}}
+                                        <option value="{{this.id}}">{{this.nombreModelo}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="col-7">
+                                <label for="validationCustom02" class="form-label">Calle</label>
+                                <input type="text" class="form-control" id="calle" name="calle" required>
+                            </div>
+                            <div class="col-3">
+                                <label for="validationCustom03" class="form-label">Altura</label>
+                                <input type="text" class="form-control" id="altura" name="altura" required>
+                            </div>
+                            <div class="col-2">
+                                <label for="validationCustom04" class="form-label">Piso</label>
+                                <input type="text" class="form-control" id="piso" name="piso">
+                            </div>
+                            <div class="modal-footer col-md-12">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button class="btn btn-outline-primary" type="submit">Cargar Heladera</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="heladeraModal" tabindex="-1" aria-labelledby="heladeraModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="heladeraModalLabel">Información de la Heladera</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <h4>{{heladera.nombre}}</h4>
+                            <div class="col-md-6 col-sm-12">
+                                <p>{{heladera.direccion}}</p>
+                                <div class="rounded" id="map" style="height: 400px;"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                                    <caption>Viandas de la Heladera</caption>
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Vianda</th>
+                                        <th scope="col">Calorías</th>
+                                        <th scope="col">Peso (En Gramos)</th>
+                                        <th scope="col">Fecha de Caducidad</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="table-group-divider">
+                                    {{#each heladera.viandas}}
+                                        <tr>
+                                            <td>{{this.nombre}}</td>
+                                            <td>{{this.calorias}}</td>
+                                            <td>{{this.peso}}</td>
+                                            <td>{{this.caducidad}}</td>
+                                        </tr>
+                                    {{/each}}
+                                    </tbody>
+                                </table>
+                                <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                                    <caption>Solicitudes de Apertura</caption>
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Fecha Solicitud de Apertura</th>
+                                        <th scope="col">Fecha Límite</th>
+                                        <th scope="col">Tiempo Restante</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="table-group-divider">
+                                    {{#each heladera.solicitudes}}
+                                        <tr>
+                                            <td>{{this.fecha_solicitud}}</td>
+                                            <td>{{this.fecha_limite}}</td>
+                                            <td>{{this.tiempo_restante}}</td>
+                                        </tr>
+                                    {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                                    <caption>Aperturas Realizadas</caption>
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Fecha Apertura</th>
+                                        <th scope="col">Colaborador</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="table-group-divider">
+                                    {{#each heladera.aperturas}}
+                                        <tr>
+                                            <td>{{this.fecha}}</td>
+                                            <td>{{this.colaborador}}</td>
+                                        </tr>
+                                    {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                                    <caption>Alertas</caption>
+                                    <thead>
+                                    <tr>
+                                        <th scope="col">Fecha</th>
+                                        <th scope="col">Horario</th>
+                                        <th scope="col">Alerta</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="table-group-divider">
+                                    {{#each heladera.alertas}}
+                                        <tr>
+                                            <td>{{this.fecha}}</td>
+                                            <td>{{this.horario}}</td>
+                                            <td>{{this.tipo}}</td>
+                                        </tr>
+                                    {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-outline-primary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{{/partial}}
+
+
+{{#partial "agregarScript"}}
+    <script src="/js/validacionDatos.js"></script>
+    <script src="/js/mapa.js"></script>
+{{/partial}}
+{{> templates/base }}
