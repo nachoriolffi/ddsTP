@@ -118,7 +118,10 @@ public class Router {
 
             ctx.redirect("/success"); // Redirigir a una página de éxito o mostrar un mensaje
         });
+        */
 
+        app.get("/heladeras", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::index);
+        app.post("/heladeras", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::create);
     }
 
 }
