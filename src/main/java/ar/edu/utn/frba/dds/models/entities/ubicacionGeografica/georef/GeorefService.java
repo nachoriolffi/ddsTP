@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef;
 
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.ListadoCoordenadas;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.ListadoLocalidades;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.ListadoMunicipios;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.ListadoProvincias;
@@ -26,4 +27,7 @@ public interface GeorefService {
 
     @GET("localidades")
     Call<ListadoLocalidades> localidades(@Query("provincia") String idProvincia, @Query("municipio") String idMunicipio);
+
+    @GET("geocoding")
+    Call<ListadoCoordenadas> geocodificar(@Query("direccion") String direccion, @Query("campos") String campos);
 }
