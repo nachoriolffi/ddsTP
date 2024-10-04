@@ -89,10 +89,11 @@ public class Router {
 
 
         /*---Pantallas de Nahuel (todavía no terminado)---*/
-        app.get("/misHeladeras",ctx->ctx.result("misHeladeras prueba"));
-        app.get("/registroJuridico",ctx->ctx.result("registroJuridico prueba"));
+        //todavía está harcodeado y los verbos no están chequeados, estoy probando que levanten las pantallas
+        app.get("/misHeladeras",Objects.requireNonNull(ServiceLocator.instanceOf(MisHeladerasController.class))::index);
+        app.get("/registroJuridico",Objects.requireNonNull(ServiceLocator.instanceOf(RegistroJuridicoController.class))::index);
         app.get("/registroHumano",Objects.requireNonNull(ServiceLocator.instanceOf(RegistroHumanoController.class))::index);// lo dejo así para probar, después me voy a asegurar que el verbo sea el correcto
-        app.get("/distribuirViandas",ctx->ctx.result("distribuirViandas prueba"));
+        app.get("/distribuirViandas",Objects.requireNonNull(ServiceLocator.instanceOf(DistribuirViandasController.class))::index);
 
 
         /* Está parte ya estaba hecha pero la comento para revisarla ya que tengo que hacer la pantalla de registroHumano también
@@ -104,11 +105,11 @@ public class Router {
             String provincia = ctx.formParam("provincia");
             String localidad = ctx.formParam("localidad");
             String direccion = ctx.formParam("direccion");
-            String altura = ctx.formParam("altura");
+            String altura = ctx.formParam("altura")
             String piso = ctx.formParam("piso");
             String telefono = ctx.formParam("telefono");
             String correo = ctx.formParam("correo");
-
+;
             // Crear un nuevo colaborador con estos datos
             Colaborador colaborador = new Colaborador();
 

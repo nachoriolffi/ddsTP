@@ -1,0 +1,59 @@
+{{#partial "contenido"}}
+<section class="container">
+    <hr class="my-3 border-0">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="h1">Mis Heladeras</h1>
+        </div>
+        <div class="col-md-4 text-md-end">
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#donationModal">
+                Suscribirse a Heladera
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 table-responsive">
+            <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                <thead>
+                <tr class="align-middle">
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Cantidad Máx. de Viandas</th>
+                    <th scope="col">Cantidad de Viandas Restantes</th>
+                    <th scope="col">Desuscribirme</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                <tr>
+                    <td><a href="">Heladera del Centro</a></td>
+                    <td>Calle Falsa 123</td>
+                    <td>100</td>
+                    <td>50</td>
+                    <td><button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                        <i class="fa-solid fa-xmark fa-lg"></i>
+                    </button></td>
+                </tr>
+                <tr>
+                    <td><a href="">Heladera del Norte</a></td>
+                    <td>Avenida Principal 456</td>
+                    <td>80</td>
+                    <td>30</td>
+                    <td>
+                        <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                            <i class="fa-solid fa-xmark fa-lg"></i>
+                        </button>
+                    </td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+    <!--Modal Suscribirse-->
+
+    <!--Modal Desuscribirse-->
+
+</section>
+{{/partial}}
+{{> templates/base}}
