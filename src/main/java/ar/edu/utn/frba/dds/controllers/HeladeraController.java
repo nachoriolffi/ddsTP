@@ -53,9 +53,9 @@ public class HeladeraController implements ICrudViewsHandler {
         Heladera heladera = new Heladera();
         heladera.setNombre(nombre);
         heladera.setModelo(RepoModelo.INSTANCE.buscar(Long.parseLong(modelo)));
-        heladera.setCalle(calle);
-        heladera.setAltura(altura);
-        heladera.setPiso(piso);
+       // heladera.setCalle(calle);
+       // heladera.setAltura(altura);
+        //heladera.setPiso(piso);
 
         // Guardar la nueva Heladera en el repositorio
         RepoHeladeras.INSTANCE.agregar(heladera);
