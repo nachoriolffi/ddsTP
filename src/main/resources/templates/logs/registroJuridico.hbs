@@ -7,51 +7,54 @@
                      alt="">
             </figure>
             <div class="col-md-7">
-                <h1 class="h1">Registro Colaborador Juridico</h1>
+                <h1 class="h1">Registro Colaborador Jurídico</h1>
                 <hr class="border-1">
-                <form class="row g-3 needs-validation" novalidate>
+
+                <form class="row g-3 needs-validation" method="POST" action="/registroJuridico" novalidate>
                     <div class="col-lg-8 col-md-12">
                         <label class="form-label" for="validationCustom01">Razón Social</label>
-                        <input class="form-control" type="text" id="validationCustom01" required>
+                        <input name="razon-social" class="form-control" type="text" id="validationCustom01" required>
                     </div>
                     <div class="col-lg-4 col-md-12">
                         <label class="form-label" for="tipo-razon-social">Tipo Razón Social</label>
                         <select class="form-select" id="tipo-razon-social" name="tipo-razon-social" required>
                             <option value="gubernamental">Gubernamental</option>
-                            <option value="gubernamental">ONG</option>
-                            <option value="gubernamental">Empresa</option>
-                            <option value="gubernamental">Instituto</option>
+                            <option value="ong">ONG</option>
+                            <option value="empresa">Empresa</option>
+                            <option value="instituto">Instituto</option>
                         </select>
                     </div>
                     <div class="col-lg-4 col-md-12">
-                        <label class="form-label" for="direccion">Calle</label>
-                        <input class="form-control" type="text" id="direccion" name="direccion" required>
+                        <label class="form-label" for="calle">Calle</label>
+                        <input name="calle" class="form-control" type="text" id="calle" required>
                     </div>
                     <div class="col-lg-4 col-md-12">
                         <label class="form-label" for="altura">Altura</label>
-                        <input class="form-control" type="text" id="altura" name="altura" required>
+                        <input name="altura" class="form-control" type="text" id="altura" required>
                     </div>
                     <div class="col-lg-4 col-md-12">
                         <label class="form-label" for="piso">Piso</label>
-                        <input class="form-control" type="text" id="piso" name="piso">
+                        <input name="piso" class="form-control" type="text" id="piso">
                     </div>
                     <h4 class="h4">Ingrese al menos un Medio de Contacto</h4>
                     <hr class="d-none d-md-block">
                     <div class="col-lg-6 col-md-12">
                         <label class="form-label" for="telefono">Número de Teléfono</label>
-                        <input class="form-control" type="text" id="telefono" name="telefono">
+                        <input name="telefono" class="form-control" type="text" id="telefono">
                     </div>
                     <div class="col-lg-6 col-md-12">
                         <label class="form-label" for="correo">Correo Electrónico</label>
-                        <input class="form-control" type="email" id="correo" name="correo">
+                        <input name="correo" class="form-control" type="email" id="correo">
                     </div>
                     <hr class="my-3 border-0">
                     <div class="col-12 text-end">
                         <button class="btn btn-outline-primary" type="submit">¡Registrarse!</button>
                     </div>
                 </form>
+
             </div>
         </div>
     </div>
+
 {{/partial}}
 {{> templates/base}}

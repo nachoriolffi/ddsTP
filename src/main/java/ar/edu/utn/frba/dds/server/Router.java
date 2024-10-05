@@ -91,9 +91,14 @@ public class Router {
         /*---Pantallas de Nahuel (todavía no terminado)---*/
         //todavía está harcodeado y los verbos no están chequeados, estoy probando que levanten las pantallas
         app.get("/misHeladeras",Objects.requireNonNull(ServiceLocator.instanceOf(MisHeladerasController.class))::index);
+
         app.get("/registroJuridico",Objects.requireNonNull(ServiceLocator.instanceOf(RegistroJuridicoController.class))::index);
+        app.post("/registroJuridico",Objects.requireNonNull(ServiceLocator.instanceOf(RegistroJuridicoController.class))::save);
+
         app.get("/registroHumano",Objects.requireNonNull(ServiceLocator.instanceOf(RegistroHumanoController.class))::index);// lo dejo así para probar, después me voy a asegurar que el verbo sea el correcto
         app.get("/distribuirViandas",Objects.requireNonNull(ServiceLocator.instanceOf(DistribuirViandasController.class))::index);
+
+
 
 
         /* Está parte ya estaba hecha pero la comento para revisarla ya que tengo que hacer la pantalla de registroHumano también

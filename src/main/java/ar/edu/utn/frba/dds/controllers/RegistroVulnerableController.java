@@ -6,7 +6,7 @@ import io.javalin.http.Context;
 public class RegistroVulnerableController implements ICrudViewsHandler {
     @Override
     public void index(Context context) {
-        context.render("logs/registroVulnerable.hbs");
+        context.render("logs/RegistroVulnerable.hbs");
     }
 
     @Override

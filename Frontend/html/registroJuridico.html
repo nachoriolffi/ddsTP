@@ -82,7 +82,7 @@
         <div class="col-md-7">
             <h1 class="h1">Registro Colaborador Juridico</h1>
             <hr class="border-1">
-            <form class="row g-3 needs-validation" novalidate>
+            <form class="row g-3 needs-validation" novalidate onsubmit="return validarMedioComunicacion();">
                 <div class="col-lg-8 col-md-12">
                     <label class="form-label" for="validationCustom01">Razón Social</label>
                     <input class="form-control" type="text" id="validationCustom01" required>
@@ -91,18 +91,18 @@
                     <label class="form-label" for="tipo-razon-social">Tipo Razón Social</label>
                     <select class="form-select" id="tipo-razon-social" name="tipo-razon-social" required>
                         <option value="gubernamental">Gubernamental</option>
-                        <option value="gubernamental">ONG</option>
-                        <option value="gubernamental">Empresa</option>
-                        <option value="gubernamental">Instituto</option>
+                        <option value="ong">ONG</option>
+                        <option value="empresa">Empresa</option>
+                        <option value="instituto">Instituto</option>
                     </select>
                 </div>
                 <div class="col-lg-4 col-md-12">
-                    <label class="form-label" for="direccion">Calle</label>
-                    <input class="form-control" type="text" id="direccion" name="direccion" required>
+                    <label class="form-label" for="calle">Calle</label>
+                    <input class="form-control" type="text" id="calle" name="calle">
                 </div>
                 <div class="col-lg-4 col-md-12">
                     <label class="form-label" for="altura">Altura</label>
-                    <input class="form-control" type="text" id="altura" name="altura" required>
+                    <input class="form-control" type="text" id="altura" name="altura">
                 </div>
                 <div class="col-lg-4 col-md-12">
                     <label class="form-label" for="piso">Piso</label>
@@ -127,5 +127,39 @@
     </div>
 </div>
 <script src="../../src/main/resources/public/js/validacionDatos.js"></script>
+
+<script>
+    function validarMedioComunicacion() {
+        var telefono = document.getElementById("telefono");
+        var correo = document.getElementById("correo");
+        var form = document.querySelector('form');
+
+        // Quitar clases previas de validación
+        telefono.classList.remove("is-invalid", "is-valid");
+        correo.classList.remove("is-invalid", "is-valid");
+
+        // Validar que al menos uno de los dos campos tenga valor
+        if (telefono.value === "" && correo.value === "") {
+            // Añadir clases de error (rojo) a ambos campos
+            telefono.classList.add("is-invalid");
+            correo.classList.add("is-invalid");
+
+            alert("Debe ingresar al menos un medio de comunicación: teléfono o correo electrónico.");
+            return false; // Evita que el formulario se envíe
+        } else {
+            // Si uno de los campos tiene valor, marcar ambos como válidos
+            telefono.classList.add("is-valid");
+            correo.classList.add("is-valid");
+
+            // Marcar el formulario como validado para que Bootstrap maneje las validaciones de campos requeridos
+            form.classList.add('was-validated');
+        }
+
+        // Deja que el navegador maneje el resto de las validaciones (campos con required)
+        return true;
+    }
+</script>
+
+
 </body>
 </html>

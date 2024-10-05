@@ -1,15 +1,15 @@
 package ar.edu.utn.frba.dds.utils;
 
+import ar.edu.utn.frba.dds.models.entities.colaborador.TipoJuridiccion;
+import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DonacionDinero;
+import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Rubro;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoModelo;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoOferta;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoViandas;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
 import java.util.Date;
@@ -75,6 +75,7 @@ public class Init implements WithSimplePersistenceUnit {
         vianda.setFueEntregada(false);
         vianda.setHeladera(null);
         RepoViandas.INSTANCE.agregar(vianda);
+
     }
 
 }
