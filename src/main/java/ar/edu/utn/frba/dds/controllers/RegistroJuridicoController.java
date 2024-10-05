@@ -3,18 +3,16 @@ package ar.edu.utn.frba.dds.controllers;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoJuridiccion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
-import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DonacionDinero;
-import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
-import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Calle;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoDonacionDinero;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRubroColaborador;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
+import ar.edu.utn.frba.dds.models.entities.contacto.*;
+
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RegistroJuridicoController implements ICrudViewsHandler {
@@ -50,16 +48,44 @@ public class RegistroJuridicoController implements ICrudViewsHandler {
         Colaborador colaboradorJuridico = new Colaborador();
         colaboradorJuridico.setRazonSocial(context.formParam("razon-social"));
         colaboradorJuridico.setTipoPersona(TipoPersona.JURIDICA);
-        colaboradorJuridico.setTipoJuridiccion(TipoJuridiccion.EMPRESA);
+
+        String razonSocial = context.formParam("tipo-razon-social").toUpperCase();
+        colaboradorJuridico.setTipoJuridiccion(TipoJuridiccion.valueOf(razonSocial));
 
         Direccion direccion = new Direccion();
-        Calle calle = new Calle();
-        direccion.setAltura(Integer.valueOf(context.formParam("altura")));
-        direccion.setPiso(Integer.valueOf(context.formParam("piso")));
-        calle.setCalle(context.formParam("calle"));
-        direccion.setCalle(calle);
-        //colaboradorJuridico.setDireccion(direccion);
-at
+
+        String altura = context.formParam("altura");
+        String piso = context.formParam("piso");
+        String calle = context.formParam("calle");
+
+        if(piso != null && !piso.isEmpty() || altura != null && !altura.isEmpty() || calle != null && !calle.isEmpty()){
+            if(piso != null && !piso.isEmpty()){
+                direccion.setPiso(Integer.valueOf(context.formParam("piso")));
+            }
+            if(altura != null && !altura.isEmpty()){
+                direccion.setAltura(Integer.valueOf(context.formParam("altura")));
+            }
+            if(calle != null && !calle.isEmpty()){
+                direccion.setCalle(new Calle(calle));
+            }
+            colaboradorJuridico.setDireccion(direccion);
+        }
+
+        String telefono = context.formParam("telefono");
+        String correo = context.formParam("correo");
+        List<Contacto> contacto = new ArrayList<>();
+
+        if (telefono != null && !telefono.isEmpty()) {
+            Contacto contactoTelefono = new Contacto(TipoContacto.TELEGRAM, telefono);
+            contacto.add(contactoTelefono);
+        }
+        if (correo != null && !correo.isEmpty()) {
+            Contacto contactoCorreo = new Contacto(TipoContacto.MAIL, correo);
+            contacto.add(contactoCorreo);
+        }
+        colaboradorJuridico.setContacto(contacto);
+
+
         repoColaborador.agregar(colaboradorJuridico);
 
     }

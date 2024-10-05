@@ -15,11 +15,11 @@ public class Direccion {
     private Long id;
 
     @Setter
-    @OneToOne// saco el @Transient porque es necesario para el alta del colaborador
-    @JoinColumn(name = "calle_id")
+    @OneToOne(cascade = CascadeType.ALL)// saco el @Transient porque es necesario para el alta del colaborador
+    @JoinColumn(name = "calle_id", nullable = false)
     private Calle calle;
 
-    @Column(name = "altura")
+    @Column(name = "altura", nullable = false)
     @Setter
     private Integer altura;
 
