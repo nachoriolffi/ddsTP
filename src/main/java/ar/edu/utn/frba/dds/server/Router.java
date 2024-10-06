@@ -96,7 +96,9 @@ public class Router {
         app.post("/registroJuridico",Objects.requireNonNull(ServiceLocator.instanceOf(RegistroJuridicoController.class))::save);
 
         app.get("/registroHumano",Objects.requireNonNull(ServiceLocator.instanceOf(RegistroHumanoController.class))::index);// lo dejo así para probar, después me voy a asegurar que el verbo sea el correcto
+
         app.get("/distribuirViandas",Objects.requireNonNull(ServiceLocator.instanceOf(DistribuirViandasController.class))::index);
+        app.post("/distribuirViandas",Objects.requireNonNull(ServiceLocator.instanceOf(DistribuirViandasController.class))::save);
 
 
 
