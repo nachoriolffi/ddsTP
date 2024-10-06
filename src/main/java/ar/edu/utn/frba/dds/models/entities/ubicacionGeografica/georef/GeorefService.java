@@ -28,6 +28,6 @@ public interface GeorefService {
     @GET("localidades")
     Call<ListadoLocalidades> localidades(@Query("provincia") String idProvincia, @Query("municipio") String idMunicipio);
 
-    @GET("geocoding")
-    Call<ListadoCoordenadas> geocodificar(@Query("direccion") String direccion, @Query("campos") String campos);
+    @GET("direcciones")
+    Call<ListadoCoordenadas> direcciones(@Query("direccion") String direccion, @Query("campos") String campos);
 }
