@@ -13,4 +13,5 @@ public class Permiso {
     private int id;
     @Column(name = "descripcion",columnDefinition = "VARCHAR(255")
     private String descripcion;
+
 }

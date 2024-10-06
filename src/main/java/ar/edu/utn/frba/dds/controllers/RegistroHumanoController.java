@@ -12,7 +12,6 @@ import java.util.Map;
 public class RegistroHumanoController implements ICrudViewsHandler {
     @Override
     public void index(Context context) {
-        /* Comenté esto por ahora porque lo estoy revisando
 
         RepoProvincia repoProvincia = RepoProvincia.INSTANCE;
         List<Provincia> provincias = repoProvincia.buscarTodos();
@@ -22,9 +21,9 @@ public class RegistroHumanoController implements ICrudViewsHandler {
         model.put("title", "Registro Humano");
         //model.put("provincias", provincias);
 
-        context.render("logs/registroHumano.hbs", model);*/
+        context.render("logs/registroHumano.hbs", model);
 
-        context.render("logs/registroHumano.hbs");//estoy probando que la pagina cargue, todavía no está terminado
+        //context.render("logs/registroHumano.hbs");//estoy probando que la pagina cargue, todavía no está terminado
     }
 
     @Override

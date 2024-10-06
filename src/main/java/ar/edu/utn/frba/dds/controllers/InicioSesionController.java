@@ -1,5 +1,9 @@
 package ar.edu.utn.frba.dds.controllers;
 
+import ar.edu.utn.frba.dds.models.entities.usuario.Rol;
+import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
+import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoUsuario;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
@@ -60,4 +64,20 @@ public class InicioSesionController implements ICrudViewsHandler {
     public void delete(Context context) {
 
     }
+
+    public void login(Context ctx) {
+        String email = ctx.formParam("email");
+        String password = ctx.formParam("password");
+
+        Usuario usuario = RepoUsuario.INSTANCE.buscarPorEmail(email).orElse(null);
+
+        if (usuario == null || !usuario.getContrasenia().equals(password)) {
+            ctx.redirect("logs/inicioSesion.hbs");
+            throw new RuntimeException("Usuario o Clave Incorrectos");
+        }
+    }
+
+
 }
+
+
