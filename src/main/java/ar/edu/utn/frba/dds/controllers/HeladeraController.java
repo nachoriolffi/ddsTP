@@ -6,6 +6,9 @@ import ar.edu.utn.frba.dds.dtos.inputs.HeladeraInputDTO;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.Georef;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.GeorefService;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.GeorefInitializer;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoCoordenada;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoModelo;
@@ -42,7 +45,7 @@ public class HeladeraController implements ICrudViewsHandler {
 
     }
     @Override
-    public void create(Context context) {
+   public void create(Context context) {
         String nombre = context.formParam("nombre");
         String modelo = context.formParam("modelo");
         String calle = context.formParam("calle");
@@ -55,11 +58,14 @@ public class HeladeraController implements ICrudViewsHandler {
         Heladera heladera = new Heladera();
         heladera.setNombre(nombre);
         heladera.setModelo(modeloHeladera);
-        Coordenada coordenada= new Coordenada();
+        Georef georef = GeorefInitializer.initializeGeoref();
+        Coordenada coordenada = georef.obtenerCoordenadasPorDireccion(calle + altura);
         RepoCoordenada.INSTANCE.agregar(coordenada);
         heladera.setCoordenada(coordenada);
         heladera.setFechaPuestaFunc(new java.util.Date());
         heladera.setEstaActiva(true);
+
+
 
        // heladera.setCalle(calle);
        // heladera.setAltura(altura);
