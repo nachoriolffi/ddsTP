@@ -13,6 +13,7 @@ import ar.edu.utn.frba.dds.models.entities.recomendacionPuntos.AServicioRecomend
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 
+import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import lombok.Data;
 import lombok.Getter;
@@ -102,6 +103,10 @@ public class Colaborador {
     @ManyToMany
     @JoinColumn(name = "oferta_id")
     private List<Oferta> ofertasRegistradas;
+
+    @OneToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
     public Colaborador() {
         this.mediosDeComunicacion = new ArrayList<>();

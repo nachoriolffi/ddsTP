@@ -101,28 +101,31 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="/canjearProductos" class="row g-3 needs-validation">
+                    <form method="POST" action="/canjearProductos" class="row g-3 needs-validation" enctype="multipart/form-data">
                         <div class="col-md-6">
                             <label for="validationCustom01" class="form-label">Tipo del Producto</label>
-                            <select class="form-select" id="validationCustom01" name="tipoProducto" required>
+                            <select class="form-select" id="validationCustom01" name="tipoProducto" >
                                 <option value="" disabled selected>Selecciona una opción</option>
-                                <option>Electrónico</option>
-                                <option>Ropa</option>
-                                <option>Muebles</option>
-                                <option>Servicios</option>
+                                {{#each rubros}}
+                                    <option value="{{this.descripcion}}">{{this.descripcion}}</option>
+                                {{/each}}
                             </select>
                         </div>
                         <div class="col-md-6">
                             <label for="validationCustom02" class="form-label">Nombre Producto</label>
-                            <input type="text" class="form-control" id="validationCustom02" name="nombreProducto" required>
+                            <input type="text" class="form-control" id="validationCustom02" name="nombreProducto" >
                         </div>
-                        <div class="col-md-12">
+                        <div class="col-md-6">
                             <label for="validationCustom03" class="form-label">Puntos Necesarios</label>
-                            <input type="number" class="form-control" id="validationCustom03" name="puntosNecesarios" required>
+                            <input type="text" class="form-control" id="validationCustom03" name="puntosNecesarios" >
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationCustom03" class="form-label">Stock Inicial</label>
+                            <input type="text" class="form-control" id="validationCustom03" name="stockInicial" >
                         </div>
                         <div class="col-md-12">
                             <label for="validationCustom04" class="form-label">Cargar Imagen</label>
-                            <input type="file" class="form-control" id="validationCustom04" name="imagenProducto" required>
+                            <input type="file" class="form-control" id="validationCustom04" name="imagenProducto" >
                         </div>
                         <div class="modal-footer col-md-12">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

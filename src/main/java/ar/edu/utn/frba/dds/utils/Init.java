@@ -19,7 +19,7 @@ public class Init implements WithSimplePersistenceUnit {
     public static void iniciar() {
         Oferta oferta = new Oferta();
         oferta.setNombre("Televisor 45' Pindonga");
-        oferta.setImagen("../../main/resources/public/img/silla_ejemplo.jpg");
+        oferta.setImagen("/img/image_not_available.png");
         oferta.setPuntosNecesarios(50000);
         oferta.setFechaInicio(new Date());
         oferta.setFechaFin(new Date(2024, 10, 24));
@@ -51,9 +51,9 @@ public class Init implements WithSimplePersistenceUnit {
         modelo3.setTemperaturaMinima(4.5);
 
         RepoModelo repoModelo = RepoModelo.INSTANCE;
-        //repoModelo.agregar(modelo1);
-        //repoModelo.agregar(modelo2);
-        //repoModelo.agregar(modelo3);
+        repoModelo.agregar(modelo1);
+        repoModelo.agregar(modelo2);
+        repoModelo.agregar(modelo3);
 
         //RepoOferta.INSTANCE.agregar(oferta);
 

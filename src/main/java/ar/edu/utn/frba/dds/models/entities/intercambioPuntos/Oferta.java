@@ -27,10 +27,10 @@ public class Oferta {
     @Column(name = "puntosNecesarios", nullable = false)
     private Integer puntosNecesarios;
 
-    @Column(name = "fechaInicio", nullable = false)
+    @Column(name = "fechaInicio", nullable = false,columnDefinition = "DATE")
     private Date fechaInicio;
 
-    @Column(name = "fechaFin")
+    @Column(name = "fechaFin",columnDefinition = "DATE")
     private Date fechaFin;
 
     @Column(name = "stockInicial", nullable = false)

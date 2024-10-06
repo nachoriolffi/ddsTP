@@ -7,10 +7,10 @@ import com.github.jknack.handlebars.Template;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.HttpStatus;
+import io.javalin.http.staticfiles.Location;
 
 import java.io.IOException;
 import java.util.function.Consumer;
-
 
 public class Server {
 
@@ -40,6 +40,8 @@ public class Server {
             config.staticFiles.add(staticFiles -> {
                 staticFiles.hostedPath = "/";
                 staticFiles.directory = "/public";
+
+
             });
 
             config.fileRenderer(new JavalinRenderer().register("hbs", (path, model, context) -> {
