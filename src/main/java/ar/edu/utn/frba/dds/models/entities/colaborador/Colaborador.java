@@ -52,7 +52,7 @@ public class Colaborador {
     @Column(name = "fechaDeNacimiento")
     private LocalDate fechaDeNacimiento;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "direccion_id")
     private Direccion direccion;
 
@@ -83,7 +83,7 @@ public class Colaborador {
     @Enumerated(EnumType.STRING)
     private TipoPersona tipoPersona;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "colaborador_id")
     private List<Contacto> contacto;
 

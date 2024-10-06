@@ -3,10 +3,12 @@ package ar.edu.utn.frba.dds.controllers;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
-public class RegistroVulnerableController implements ICrudViewsHandler {
+import java.text.ParseException;
+
+public class DistribuirViandasController implements ICrudViewsHandler {
     @Override
     public void index(Context context) {
-        context.render("logs/RegistroVulnerable.hbs");
+        context.render("donaciones/distribuirViandas.hbs");
     }
 
     @Override
@@ -20,7 +22,7 @@ public class RegistroVulnerableController implements ICrudViewsHandler {
     }
 
     @Override
-    public void save(Context context) {
+    public void save(Context context) throws ParseException {
 
     }
 
