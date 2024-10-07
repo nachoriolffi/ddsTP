@@ -2,6 +2,8 @@ package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
+import ar.edu.utn.frba.dds.models.entities.usuario.Permiso;
+import ar.edu.utn.frba.dds.models.entities.usuario.Rol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoUsuario;
@@ -11,7 +13,7 @@ import io.javalin.http.Context;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CrearCuentaController implements ICrudViewsHandler {
+public class CrearCuentaController  extends BaseController implements ICrudViewsHandler {
     @Override
     public void index(Context context) {
         Map<String,Object> model = new HashMap<>();
@@ -53,7 +55,8 @@ public class CrearCuentaController implements ICrudViewsHandler {
         Usuario nuevoUsuario = new Usuario();
         nuevoUsuario.setCorreoElectronico(correoElectronico);
         nuevoUsuario.setContrasenia(password);
-
+        //RepoRol rol =
+        //nuevoUsuario.setRol(rol);
         try {
             // Save the new user to the repository
             RepoUsuario.INSTANCE.agregar(nuevoUsuario);

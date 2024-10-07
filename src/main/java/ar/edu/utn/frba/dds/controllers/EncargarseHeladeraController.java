@@ -18,7 +18,7 @@ import io.javalin.http.Context;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class EncargarseHeladeraController implements ICrudViewsHandler {
+public class EncargarseHeladeraController  extends BaseController implements ICrudViewsHandler {
 
     private RepoHeladeras repoHeladeras = RepoHeladeras.INSTANCE;
 

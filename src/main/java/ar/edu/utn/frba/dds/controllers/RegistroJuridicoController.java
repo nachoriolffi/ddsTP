@@ -15,7 +15,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RegistroJuridicoController implements ICrudViewsHandler {
+public class RegistroJuridicoController extends BaseController implements ICrudViewsHandler {
     @Override
     public void index(Context context) {
         context.render("logs/registroJuridico.hbs");

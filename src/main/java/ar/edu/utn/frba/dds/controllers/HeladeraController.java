@@ -19,7 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HeladeraController implements ICrudViewsHandler {
+public class HeladeraController extends BaseController implements ICrudViewsHandler {
 
 
     RepoHeladeras repositorioHeladeras = RepoHeladeras.INSTANCE;

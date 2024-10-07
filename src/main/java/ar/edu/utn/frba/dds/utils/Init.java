@@ -8,6 +8,8 @@ import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Rubro;
+import ar.edu.utn.frba.dds.models.entities.usuario.Rol;
+import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
@@ -75,6 +77,12 @@ public class Init implements WithSimplePersistenceUnit {
         vianda.setFueEntregada(false);
         vianda.setHeladera(null);
         RepoViandas.INSTANCE.agregar(vianda);
+
+        /*for (TipoRol tipoRol : TipoRol.values()) {
+            Rol rol = new Rol();
+            rol.setTipoRol(tipoRol);
+            RepoRol.INSTANCE.agregar(rol);
+        }*/
 
     }
 

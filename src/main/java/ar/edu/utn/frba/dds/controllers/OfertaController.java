@@ -7,16 +7,16 @@ import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 import io.javalin.http.UploadedFile;
 import io.javalin.util.FileUtil;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
-public class OfertaController implements ICrudViewsHandler {
+public class OfertaController extends BaseController implements ICrudViewsHandler {
 
     RepoOferta repositorioOferta = RepoOferta.INSTANCE;
 
     @Override
     public void index(Context ctx) {
+
+          usuarioLogueado(ctx);
 
             List<Oferta> ofertas = repositorioOferta.buscarTodos();
 

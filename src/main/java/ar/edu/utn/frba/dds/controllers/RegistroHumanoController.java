@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RegistroHumanoController implements ICrudViewsHandler {
+public class RegistroHumanoController extends BaseController implements ICrudViewsHandler {
     @Override
     public void index(Context context) {
 

@@ -12,7 +12,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class DonarDineroController implements ICrudViewsHandler {
+public class DonarDineroController extends BaseController implements ICrudViewsHandler {
 
     RepoDonacionDinero repoDonacionDinero = RepoDonacionDinero.INSTANCE;
 
@@ -41,7 +41,7 @@ public class DonarDineroController implements ICrudViewsHandler {
         }
 
         model.put("donacionesDinero",donacionesDinero);
-        model.put("donacionesPeriodicas",donacionDinerosPeriodicas);
+        //model.put("donacionesPeriodicas",donacionDinerosPeriodicas);
 
 
         model.put("title", "Donar dinero");
