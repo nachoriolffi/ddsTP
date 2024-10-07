@@ -47,7 +47,7 @@ public class OfertaController implements ICrudViewsHandler {
             System.out.println("NOMBRE IMAGEN: "+ file.filename());
             String contentType = file.contentType();
             if ("image/jpg".equals(contentType)||"image/jpeg".equals(contentType) || "image/png".equals(contentType)) {
-                FileUtil.streamToFile(file.content(), "src/main/resources/imagenes/" + file.filename()); // ESTO NO SE TOCA
+                FileUtil.streamToFile(file.content(), "src/main/resources/public/imagenes/" + file.filename()); // ESTO NO SE TOCA
                 oferta.setImagen("/imagenes/" + file.filename());
             } else {
                 context.status(400).result("Invalid file type. Only JPG and PNG are allowed.");

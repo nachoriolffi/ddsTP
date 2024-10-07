@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12 table-responsive">
+        <div class="col-md-8 table-responsive">
             <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
                 <thead>
                 <tr class="align-middle">
@@ -30,33 +30,34 @@
                 {{/each}}
                 </tbody>
             </table>
+        </div>
+        <div class="col-md-4 table-responsive">
             <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
-                <caption>
-                    Donaciones Periodicas Activas
-                </caption>
                 <thead>
                 <tr class="align-middle">
-                    <th scope="col">Fecha de donación</th>
-                    <th>Monto</th>
-                    <th>Cancelar Donacion</th>
+                    <th scope="col">Monto</th>
+                    <th scope="col">Cancelar Donacion</th>
                 </tr>
                 </thead>
                 <tbody class="table-group-divider">
                 <tr>
-                    <td>{{this.fechaDonacion}}</td>
-                    <td>${{this.monto}}</td>
-                    <td>
-                        <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">
-                            <i class="fa-solid fa-xmark fa-lg"></i>
-                        </button>
-                    </td>
+                    {{#each donacionesPeriodicas}}
+                        <td>${{this.monto}}</td>
+                        <td>
+                            <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                                <i class="fa-solid fa-xmark fa-lg"></i>
+                            </button>
+                        </td>
+                    {{/each}}
                 </tr>
                 </tbody>
             </table>
         </div>
+
+
     </div>
 
-    <!--Modal Form-->
+    <!-- Modal Formulario -->
     <div class="modal fade" id="donationModal" tabindex="-1" aria-labelledby="donationModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
@@ -67,19 +68,19 @@
                 </div>
                 <div class="modal-body">
                     <!-- Formulario de Donación -->
-                    <form class="row g-3 needs-validation">
+                    <form action="/donacionDinero" method="POST" class="row g-3 needs-validation">
                         <div class="col-md-6">
                             <label for="validationCustom01" class="form-label">Fecha De Donación</label>
-                            <input type="date" class="form-control" id="validationCustom01" required>
+                            <input type="date" name="fechaDonacion" class="form-control" id="validationCustom01" required>
                         </div>
                         <div class="col-md-6">
                             <label for="validationCustom02" class="form-label">Monto</label>
-                            <input type="number" min="0" step="0.01" class="form-control" id="validationCustom02"
+                            <input type="text" name="monto" min="0" class="form-control" id="validationCustom02"
                                    required>
                         </div>
-                        <div class="col-md-6 d-flex justify-content-center align-items-center">
+                        <div class="col-md-12 d-flex justify-content-center align-items-center">
                             <div class="form-check d-flex align-items-center">
-                                <input class="form-check-input" type="checkbox" value="" id="invalidCheck">
+                                <input name="esPeriodica" class="form-check-input" type="checkbox" value="" id="invalidCheck">
                                 <label class="form-check-label ms-2" for="invalidCheck">
                                     Donar de Forma Periódica (Mensual)
                                 </label>
@@ -88,17 +89,16 @@
                         <div class="modal-footer col-md-12">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                             <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal"
-                                    data-bs-target="#confirmModalDonation">¡Realizar Donación!
+                                    data-bs-target="#confirmModal">¡Realizar Donación!
                             </button>
                         </div>
                     </form>
                 </div>
-
             </div>
         </div>
     </div>
     <!-- Modal de Confirmación Donacion-->
-    <div class="modal fade" id="confirmModalDonation" tabindex="-1" aria-labelledby="confirmModalLabel"
+    <div class="modal fade" data-bs-keyboard="false" id="confirmModal" aria-labelledby="confirmModalLabel"
          aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -110,17 +110,17 @@
                     ¿Está seguro de que desea realizar esta donación?
                 </div>
                 <div class="modal-footer">
-                    <!-- Botón de Cancelar que cierra el modal de confirmación y vuelve al modal de donación -->
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal"
-                            data-bs-target="#donationModal">Cancelar
+                    <!-- Botón de Cancelar -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                            data-bs-toggle="modal" data-bs-target="#donationModal">Cancelar
                     </button>
-                    <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Sí, realizar
-                        donación
-                    </button>
+                    <!-- Botón que envía el formulario -->
+                    <button type="button" class="btn btn-primary">Sí, realizar donación</button>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- Modal de Confirmación Dar de Baja Donacion-->
     <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -139,5 +139,12 @@
             </div>
         </div>
     </div>
+    <script>
+        document.getElementById('confirmModal').addEventListener('click', function (event) {
+            if (event.target.matches('.btn-primary')) {
+                document.querySelector('#donationModal form').submit(); // Selecciona y envía el formulario del modal de donación
+            }
+        });
+    </script>
 {{/partial}}
 {{> templates/base}}

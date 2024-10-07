@@ -51,8 +51,9 @@ public class Router {
         app.get("/inicioSesion", Objects.requireNonNull(ServiceLocator.instanceOf(InicioSesionController.class))::index);
         app.post("/inicioSesion", Objects.requireNonNull(ServiceLocator.instanceOf(InicioSesionController.class))::login);
 
-        // donaciones
-        app.get("/donarDinero", Objects.requireNonNull(ServiceLocator.instanceOf(DonarDineroController.class))::index, TipoRol.COLABORADOR_HUMANO,TipoRol.COLABORADOR_JURIDICO);
+        // donacion de dinero
+        app.get("/donacionDinero", Objects.requireNonNull(ServiceLocator.instanceOf(DonarDineroController.class))::index, TipoRol.COLABORADOR_HUMANO,TipoRol.COLABORADOR_JURIDICO);
+        app.post("/donacionDinero",Objects.requireNonNull(ServiceLocator.instanceOf(DonarDineroController.class))::save,TipoRol.COLABORADOR_HUMANO,TipoRol.COLABORADOR_JURIDICO);
 
         // encargarseDeHeladera
         app.get("/encargarseHeladera", Objects.requireNonNull(ServiceLocator.instanceOf(EncargarseHeladeraController.class))::index,TipoRol.COLABORADOR_JURIDICO);
