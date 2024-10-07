@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.models.entities.usuario;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -8,18 +10,24 @@ import javax.persistence.*;
 
 @Table(name = "usuario")
 @Entity
+@Getter
+@Setter
 public class Usuario {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "nombreUsuario",columnDefinition = "TEXT")
+    @Column(name = "nombreUsuario",columnDefinition = "VARCHAR(255)")
     private String nombre;
-    @Column(name = "clave",columnDefinition = "TEXT")
+    @Column(name = "clave",columnDefinition = "VARCHAR(255)")
     private String contrasenia;
+    @Column(name = "correoElectronico",columnDefinition = "TEXT")
+    private String correoElectronico;
     @OneToOne
     private Rol rol;
 
     public Usuario() {
 
     }
+
+
 }

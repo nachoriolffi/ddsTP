@@ -1,0 +1,60 @@
+{{#partial "contenido"}}
+    <div class="container">
+        <hr class="my-3 border-0">
+        <div class="row">
+            <figure class="col-md-5 figure">
+                <img class="figure-img img-fluid rounded mx-auto d-none d-md-block" src="/img/team_juridico.svg"
+                     alt="">
+            </figure>
+            <div class="col-md-7">
+                <h1 class="h1">Registro Colaborador Jurídico</h1>
+                <hr class="border-1">
+
+                <form class="row g-3 needs-validation" method="POST" action="/registroJuridico" novalidate>
+                    <div class="col-lg-8 col-md-12">
+                        <label class="form-label" for="validationCustom01">Razón Social</label>
+                        <input name="razon-social" class="form-control" type="text" id="validationCustom01" required>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <label class="form-label" for="tipo-razon-social">Tipo Razón Social</label>
+                        <select class="form-select" id="tipo-razon-social" name="tipo-razon-social" required>
+                            <option value="gubernamental">Gubernamental</option>
+                            <option value="ong">ONG</option>
+                            <option value="empresa">Empresa</option>
+                            <option value="institucion">Institución</option>
+                        </select>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <label class="form-label" for="calle">Calle</label>
+                        <input name="calle" class="form-control" type="text" id="calle" required>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <label class="form-label" for="altura">Altura</label>
+                        <input name="altura" class="form-control" type="text" id="altura" required>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <label class="form-label" for="piso">Piso</label>
+                        <input name="piso" class="form-control" type="text" id="piso">
+                    </div>
+                    <h4 class="h4">Ingrese al menos un Medio de Contacto</h4>
+                    <hr class="d-none d-md-block">
+                    <div class="col-lg-6 col-md-12">
+                        <label class="form-label" for="telefono">Número de Teléfono</label>
+                        <input name="telefono" class="form-control" type="text" id="telefono">
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <label class="form-label" for="correo">Correo Electrónico</label>
+                        <input name="correo" class="form-control" type="email" id="correo">
+                    </div>
+                    <hr class="my-3 border-0">
+                    <div class="col-12 text-end">
+                        <button class="btn btn-outline-primary" type="submit">¡Registrarse!</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+{{/partial}}
+{{> templates/base}}

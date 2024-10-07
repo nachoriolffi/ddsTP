@@ -26,7 +26,6 @@ RepoGenerico<T> implements WithSimplePersistenceUnit {
         beginTransaction();
         persist(entidad);
         commitTransaction();
-
     }
 
     public void modificar(T entidad) {

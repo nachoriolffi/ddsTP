@@ -1,0 +1,105 @@
+{{#partial "contenido"}}
+    <hr class="my-3 border-0">
+    <section class="container mt-1">
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <h1 class="h1">Distribucion de Viandas</h1>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#donationModal">
+                    Distribuir Vianda/s
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 table-responsive">
+                <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                    <thead>
+                    <tr class="align-middle">
+                        <th>Heladera de origen</th>
+                        <th>Heladera destino</th>
+                        <th>Cantidad de Viandas Movidas</th>
+                        <th>Motivo</th>
+                        <th>Fecha de Distribución</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                    <!-- Tengo que leer esto de la base de datos -->
+                    <tr>
+                        <td>Heladera A</td>
+                        <td>Heladera B</td>
+                        <td>15</td>
+                        <td>Desperfecto en la heladera</td>
+                        <td>2024-08-12</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Modal de Donación -->
+        <div class="modal fade" id="donationModal" tabindex="-1" aria-labelledby="donationModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="donationModalLabel">Mover Viandas</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Formulario de Donación -->
+                        <form id="donationForm" class="row g-3 needs-validation" novalidate method="POST" action="/distribuirViandas">
+                            <div class="col-md-6">
+                                <label class="form-label" for="input1">Heladera Origen</label>
+                                <input class="form-control" type="text" id="input1" name="heladera-origen" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="input3">Heladera Destino</label>
+                                <input class="form-control" type="text" id="input3" name="heladera-destino" required>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label" for="modelo">Motivo Distribucion Viandas</label>
+                                <select class="form-select" id="modelo" name="motivo" required>
+                                    <option value="DESPERFECTO_H_ORIGEN">Desperfecto en Heladera Origen</option>
+                                    <option value="FALTA_VIANDAS_H_DESTINO">Faltan Viandas en Heladera Destino</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="input4">Cantidad Viandas A Mover</label>
+                                <input class="form-control" type="text" id="input4" name="cantidad-viandas" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="input6">Fecha Distribucion</label>
+                                <input class="form-control" type="date" id="input6" name="fecha-distribucion">
+                            </div>
+                            <div class="modal-footer col-md-12">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal">¡Realizar Donación!</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Confirmación Donacion-->
+        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmModalLabel">Confirmación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Está seguro de que desea realizar esta donación?
+                    </div>
+                    <div class="modal-footer">
+                        <!-- Botón de Cancelar que cierra el modal de confirmación y vuelve al modal de donación -->
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#donationModal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" onclick="document.getElementById('donationForm').submit();">Sí, realizar donación</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{{/partial}}
+{{> templates/base}}

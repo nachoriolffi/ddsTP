@@ -23,6 +23,7 @@ public class RegistroHumanoController implements ICrudViewsHandler {
 
         context.render("logs/registroHumano.hbs", model);
 
+        //context.render("logs/registroHumano.hbs");//estoy probando que la pagina cargue, todavía no está terminado
     }
 
     @Override

@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef;
 
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Provincia;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.ListadoCoordenadas;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.ListadoLocalidades;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.ListadoMunicipios;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.ListadoProvincias;
@@ -8,6 +10,9 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoProvincia;
 import retrofit2.Call;
 import retrofit2.Response;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 
 
 public class Georef extends ApiCaller {
@@ -85,4 +90,50 @@ public class Georef extends ApiCaller {
         Response<ListadoLocalidades> responseLocalidadesArg = requestLocalidadesArg.execute();
         return responseLocalidadesArg.body();
     }
+
+    public Coordenada obtenerCoordenadasPorDireccion(String direccion) {
+        try {
+            // Codifica la dirección para la solicitud HTTP
+            String direccionCodificada = URLEncoder.encode(direccion, StandardCharsets.UTF_8.toString());
+            String campos = "ubicacion.lat,ubicacion.lon";
+
+            // Llama al servicio de geocodificación con la dirección codificada y los campos necesarios
+            Call<ListadoCoordenadas> requestGeocodificacion = georefService.direcciones(direccionCodificada, campos);
+            Response<ListadoCoordenadas> responseGeocodificacion = requestGeocodificacion.execute();
+
+            // Verifica si la respuesta es exitosa
+            if (!responseGeocodificacion.isSuccessful()) {
+                System.out.println("Código de respuesta: " + responseGeocodificacion.code());
+                System.out.println("Mensaje: " + responseGeocodificacion.message());
+                throw new RuntimeException("Error en la solicitud: " + responseGeocodificacion.message());
+            }
+
+            // Obtiene el cuerpo de la respuesta
+            ListadoCoordenadas listadoCoordenadas = responseGeocodificacion.body();
+            System.out.println("Cuerpo de la respuesta: " + listadoCoordenadas); // Imprime el cuerpo
+
+            // Verifica si hay coordenadas disponibles
+            if (listadoCoordenadas != null && listadoCoordenadas.getDirecciones() != null && !listadoCoordenadas.getDirecciones().isEmpty()) {
+                ListadoCoordenadas.Direccion direccionResultado = listadoCoordenadas.getDirecciones().get(0);
+                if (direccionResultado.getUbicacion() != null) {
+                    // Retorna la coordenada con latitud y longitud
+                    return new Coordenada(direccionResultado.getUbicacion().getLat(), direccionResultado.getUbicacion().getLon());
+                }
+            } else {
+                throw new RuntimeException("No se encontraron coordenadas para la dirección proporcionada.");
+            }
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException("Error al codificar la dirección.", e);
+        } catch (IOException e) {
+            throw new RuntimeException("Error al intentar obtener coordenadas de la dirección.", e);
+        }
+
+        return null; // Retorna null si no se encuentran resultados
+    }
+
+
+
+
+
+
 }

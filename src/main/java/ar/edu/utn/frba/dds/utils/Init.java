@@ -1,15 +1,15 @@
 package ar.edu.utn.frba.dds.utils;
 
+import ar.edu.utn.frba.dds.models.entities.colaborador.TipoJuridiccion;
+import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DonacionDinero;
+import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Rubro;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoModelo;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoOferta;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoViandas;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
 import java.util.Date;
@@ -19,7 +19,7 @@ public class Init implements WithSimplePersistenceUnit {
     public static void iniciar() {
         Oferta oferta = new Oferta();
         oferta.setNombre("Televisor 45' Pindonga");
-        oferta.setImagen("../../main/resources/public/img/silla_ejemplo.jpg");
+        oferta.setImagen("/img/image_not_available.png");
         oferta.setPuntosNecesarios(50000);
         oferta.setFechaInicio(new Date());
         oferta.setFechaFin(new Date(2024, 10, 24));
@@ -51,9 +51,9 @@ public class Init implements WithSimplePersistenceUnit {
         modelo3.setTemperaturaMinima(4.5);
 
         RepoModelo repoModelo = RepoModelo.INSTANCE;
-        //repoModelo.agregar(modelo1);
-        //repoModelo.agregar(modelo2);
-        //repoModelo.agregar(modelo3);
+        repoModelo.agregar(modelo1);
+        repoModelo.agregar(modelo2);
+        repoModelo.agregar(modelo3);
 
         //RepoOferta.INSTANCE.agregar(oferta);
 
@@ -75,6 +75,7 @@ public class Init implements WithSimplePersistenceUnit {
         vianda.setFueEntregada(false);
         vianda.setHeladera(null);
         RepoViandas.INSTANCE.agregar(vianda);
+
     }
 
 }

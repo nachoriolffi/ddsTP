@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.Persistencia;
 
 
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.Georef;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.GeorefService;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.ListadoProvincias;
@@ -77,5 +78,19 @@ public class TestRapidoDeGeoRef {
         assertNotNull(result);
         System.out.println("Number of provinces: " + result.cantidad);
 
+    }
+
+    @Test
+    public void testObtenerCoordenadasPorDireccion() {
+        String direccion = "av.gaona1535";
+        Coordenada coordenada = georef2.obtenerCoordenadasPorDireccion(direccion);
+
+        assertNotNull(coordenada, "La coordenada no debe ser nula");
+        System.out.println("Latitud: " + coordenada.getLatitud());
+        System.out.println("Longitud: " + coordenada.getLongitud());
+
+        // Opcional: Verificar valores específicos si se conocen
+        // assertEquals(expectedLat, coordenada.getLat());
+        // assertEquals(expectedLon, coordenada.getLon());
     }
 }
