@@ -21,7 +21,7 @@ public class Init implements WithSimplePersistenceUnit {
     public static void iniciar() {
         Oferta oferta = new Oferta();
         oferta.setNombre("Televisor 45' Pindonga");
-        oferta.setImagen("/img/image_not_available.png");
+        oferta.setImagen("/img/descarga.jpg");
         oferta.setPuntosNecesarios(50000);
         oferta.setFechaInicio(new Date());
         oferta.setFechaFin(new Date(2024, 10, 24));
@@ -29,7 +29,7 @@ public class Init implements WithSimplePersistenceUnit {
         oferta.setStockUsado(0);
         oferta.setRubro(Rubro.TECNOLOGIA);
         RepoOferta repoOferta = RepoOferta.INSTANCE;
-        //repoOferta.agregar(oferta);
+        repoOferta.agregar(oferta);
 
         ModeloHeladera modelo1 = new ModeloHeladera();
         modelo1.setNombreModelo("Sansing X-4");
@@ -57,7 +57,7 @@ public class Init implements WithSimplePersistenceUnit {
         repoModelo.agregar(modelo2);
         repoModelo.agregar(modelo3);
 
-        //RepoOferta.INSTANCE.agregar(oferta);
+        RepoOferta.INSTANCE.agregar(oferta);
 
         Vianda vianda = new Vianda();
         vianda.setComida("qweqwe");

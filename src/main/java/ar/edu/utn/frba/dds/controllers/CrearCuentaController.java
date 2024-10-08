@@ -56,7 +56,13 @@ public class CrearCuentaController  extends BaseController implements ICrudViews
         nuevoUsuario.setCorreoElectronico(correoElectronico);
         nuevoUsuario.setContrasenia(password);
         //RepoRol rol =
-        //nuevoUsuario.setRol(rol);
+       /* assert tipoUsuario != null;
+        if(tipoUsuario.equals("Juridico")) {
+            nuevoUsuario.setRol(TipoPersona.JURIDICA);
+        } else {
+            nuevoColaborador.setTipoPersona(TipoPersona.HUMANA);
+        }*/
+
         try {
             // Save the new user to the repository
             RepoUsuario.INSTANCE.agregar(nuevoUsuario);

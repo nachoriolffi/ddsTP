@@ -9,20 +9,9 @@ public abstract class BaseController {
     protected Usuario usuarioLogueado(Context ctx) {
         if (ctx.sessionAttribute("usuario_id") == null)
             return null;
+        return RepoUsuario.INSTANCE.buscar((Long) Objects.requireNonNull(ctx.sessionAttribute("usuario_id")));
 
-        System.out.println("usuario_id: " + ctx.sessionAttribute("usuario_id"));
-        Object usuarioIdObj = ctx.sessionAttribute("usuario_id");
-        if (usuarioIdObj instanceof Integer) {
-            String usuarioIdStr = String.valueOf(usuarioIdObj);
-            try {
-                Long usuarioId = Long.parseLong(usuarioIdStr);
-                // Usa usuarioId como necesites
-            } catch (NumberFormatException e) {
-                ctx.status(400).result("Formato de Usuario ID no válido");
-            }
-        } else {
-            ctx.status(400).result("Usuario ID no es un String");
-        }
-        return null;
+
     }
+
 }

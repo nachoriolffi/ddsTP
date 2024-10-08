@@ -1,7 +1,10 @@
 package ar.edu.utn.frba.dds.controllers;
 
+import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Rubro;
+import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoOferta;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
@@ -16,8 +19,8 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
     @Override
     public void index(Context ctx) {
 
-          usuarioLogueado(ctx);
-
+          Usuario usuario = usuarioLogueado(ctx);
+          Colaborador repoColaborador = RepoColaborador.INSTANCE.buscar(Long.valueOf(usuario.getId()));
             List<Oferta> ofertas = repositorioOferta.buscarTodos();
 
             Map<String, Object> model = new HashMap<>();
