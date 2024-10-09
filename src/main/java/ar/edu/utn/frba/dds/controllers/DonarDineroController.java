@@ -73,7 +73,8 @@ public class DonarDineroController extends BaseController implements ICrudViewsH
             donacionDinero.setFechaColaboracion(fechaDonacion);
 
             // Verificar si la donación es periódica
-            donacionDinero.setDonacionMensual(Boolean.valueOf(context.formParam("esPeriodica")));
+            donacionDinero.setDonacionMensual("true".equals(context.formParam("esPeriodica")));
+
             if (donacionDinero.getDonacionMensual()) {
                 donacionDinero.setFechaPeriodica(fechaDonacion);
             }

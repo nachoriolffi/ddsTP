@@ -32,6 +32,7 @@
             </table>
         </div>
         <div class="col-md-4 table-responsive">
+            <h2 class="h2">Donacion Periódica</h2>
             <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
                 <thead>
                 <tr class="align-middle">
@@ -49,9 +50,12 @@
                             </button>
                         </td>
                     {{/each}}
+
                 </tr>
                 </tbody>
             </table>
+            <button class="btn btn-outline-primary" data-bs-toggle="modal">
+                Modificar donación</button>
         </div>
 
 
@@ -80,7 +84,7 @@
                         </div>
                         <div class="col-md-12 d-flex justify-content-center align-items-center">
                             <div class="form-check d-flex align-items-center">
-                                <input name="esPeriodica" class="form-check-input" type="checkbox" value="" id="invalidCheck">
+                                <input name="esPeriodica" class="form-check-input" type="checkbox" value="true" id="invalidCheck">
                                 <label class="form-check-label ms-2" for="invalidCheck">
                                     Donar de Forma Periódica (Mensual)
                                 </label>
