@@ -5,7 +5,7 @@ import io.javalin.http.Context;
 
 import java.text.ParseException;
 
-public class MisHeladerasController implements ICrudViewsHandler {
+public class MisHeladerasController extends BaseController implements ICrudViewsHandler {
     @Override
     public void index(Context context) {
         context.render("donaciones/misHeladeras.hbs");

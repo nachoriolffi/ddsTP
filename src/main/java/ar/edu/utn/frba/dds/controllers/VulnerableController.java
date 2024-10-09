@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class VulnerableController implements  ICrudViewsHandler {
+public class VulnerableController extends BaseController implements  ICrudViewsHandler {
 
 
 

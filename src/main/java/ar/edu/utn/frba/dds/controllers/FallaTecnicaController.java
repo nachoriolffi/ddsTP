@@ -14,7 +14,7 @@ import java.util.Objects;
 
 import static ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoIncidente.FALLA;
 
-public class FallaTecnicaController implements ICrudViewsHandler {
+public class FallaTecnicaController extends BaseController implements ICrudViewsHandler {
 
     private RepoIncidente repositorioIncidentes = RepoIncidente.INSTANCE;
     @Override

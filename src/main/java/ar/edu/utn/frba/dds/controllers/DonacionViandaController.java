@@ -17,7 +17,7 @@ import java.util.*;
 
 import static ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.TipoColaboracion.DONACION_VIANDAS;
 
-public class DonacionViandaController implements ICrudViewsHandler {
+public class DonacionViandaController  extends BaseController implements ICrudViewsHandler {
 
 
     RepoDonacionVianda repositorioDonacionVianda = RepoDonacionVianda.INSTANCE;

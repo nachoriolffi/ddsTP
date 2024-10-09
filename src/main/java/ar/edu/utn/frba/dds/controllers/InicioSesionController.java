@@ -9,8 +9,9 @@ import io.javalin.http.Context;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
-public class InicioSesionController implements ICrudViewsHandler {
+public class InicioSesionController extends BaseController implements ICrudViewsHandler  {
     @Override
     public void index(Context ctx) {
 
@@ -66,8 +67,8 @@ public class InicioSesionController implements ICrudViewsHandler {
     }
 
     public void login(Context ctx) {
-        String email = ctx.formParam("email");
-        String password = ctx.formParam("password");
+        String email = ctx.formParam("correoElectronico");
+        String password = ctx.formParam("clave");
 
         Usuario usuario = RepoUsuario.INSTANCE.buscarPorEmail(email).orElse(null);
 
@@ -75,6 +76,11 @@ public class InicioSesionController implements ICrudViewsHandler {
             ctx.redirect("logs/inicioSesion.hbs");
             throw new RuntimeException("Usuario o Clave Incorrectos");
         }
+
+        ctx.sessionAttribute("usuario_id", usuario.getId());
+      //  System.out.println("IMPRIMO ESTOOO: " + Objects.requireNonNull(ctx.sessionAttribute("usuario_id")));
+
+
     }
 
 

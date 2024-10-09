@@ -9,7 +9,7 @@ import io.javalin.http.Context;
 import java.sql.Date;
 import java.text.ParseException;
 
-public class DistribuirViandasController implements ICrudViewsHandler {
+public class DistribuirViandasController  extends BaseController implements ICrudViewsHandler {
     @Override
     public void index(Context context) {
         context.render("donaciones/distribuirViandas.hbs");

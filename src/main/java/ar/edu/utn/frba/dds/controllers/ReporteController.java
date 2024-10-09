@@ -9,7 +9,7 @@ import io.javalin.http.HttpStatus;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class ReporteController implements ICrudViewsHandler {
+public class ReporteController extends BaseController implements ICrudViewsHandler {
 
     private RepoReporte repoReporte = RepoReporte.INSTANCE;
 

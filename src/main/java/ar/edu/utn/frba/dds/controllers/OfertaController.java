@@ -1,23 +1,26 @@
 package ar.edu.utn.frba.dds.controllers;
 
+import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Rubro;
+import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoOferta;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 import io.javalin.http.UploadedFile;
 import io.javalin.util.FileUtil;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 
-public class OfertaController implements ICrudViewsHandler {
+public class OfertaController extends BaseController implements ICrudViewsHandler {
 
     RepoOferta repositorioOferta = RepoOferta.INSTANCE;
 
     @Override
     public void index(Context ctx) {
 
+          Usuario usuario = usuarioLogueado(ctx);
+          Colaborador repoColaborador = RepoColaborador.INSTANCE.buscar(Long.valueOf(usuario.getId()));
             List<Oferta> ofertas = repositorioOferta.buscarTodos();
 
             Map<String, Object> model = new HashMap<>();

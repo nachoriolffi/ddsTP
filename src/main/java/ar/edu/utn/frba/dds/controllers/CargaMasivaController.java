@@ -6,7 +6,7 @@ import io.javalin.http.Context;
 import io.javalin.http.UploadedFile;
 import io.javalin.util.FileUtil;
 
-public class CargaMasivaController implements ICrudViewsHandler {
+public class CargaMasivaController  extends BaseController implements ICrudViewsHandler {
     @Override
     public void index(Context context) {
         context.render("cargaMasiva/cargaMasiva.hbs");

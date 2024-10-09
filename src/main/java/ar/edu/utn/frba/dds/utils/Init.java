@@ -8,6 +8,8 @@ import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Rubro;
+import ar.edu.utn.frba.dds.models.entities.usuario.Rol;
+import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
@@ -19,7 +21,7 @@ public class Init implements WithSimplePersistenceUnit {
     public static void iniciar() {
         Oferta oferta = new Oferta();
         oferta.setNombre("Televisor 45' Pindonga");
-        oferta.setImagen("/img/image_not_available.png");
+        oferta.setImagen("/img/descarga.jpg");
         oferta.setPuntosNecesarios(50000);
         oferta.setFechaInicio(new Date());
         oferta.setFechaFin(new Date(2024, 10, 24));
@@ -27,7 +29,7 @@ public class Init implements WithSimplePersistenceUnit {
         oferta.setStockUsado(0);
         oferta.setRubro(Rubro.TECNOLOGIA);
         RepoOferta repoOferta = RepoOferta.INSTANCE;
-        //repoOferta.agregar(oferta);
+        repoOferta.agregar(oferta);
 
         ModeloHeladera modelo1 = new ModeloHeladera();
         modelo1.setNombreModelo("Sansing X-4");
@@ -55,7 +57,7 @@ public class Init implements WithSimplePersistenceUnit {
         repoModelo.agregar(modelo2);
         repoModelo.agregar(modelo3);
 
-        //RepoOferta.INSTANCE.agregar(oferta);
+        RepoOferta.INSTANCE.agregar(oferta);
 
         Vianda vianda = new Vianda();
         vianda.setComida("qweqwe");
@@ -75,6 +77,12 @@ public class Init implements WithSimplePersistenceUnit {
         vianda.setFueEntregada(false);
         vianda.setHeladera(null);
         RepoViandas.INSTANCE.agregar(vianda);
+
+        /*for (TipoRol tipoRol : TipoRol.values()) {
+            Rol rol = new Rol();
+            rol.setTipoRol(tipoRol);
+            RepoRol.INSTANCE.agregar(rol);
+        }*/
 
     }
 
