@@ -23,6 +23,7 @@ public class DonarDineroController implements ICrudViewsHandler {
         List<DonacionDinero> donacionesDineroNormal = repoDonacionDinero.buscarTodos();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); // Formato para la fecha
         List<DonacionDineroOutputDTO> donacionesDinero = new ArrayList<>();
+        //List<DonacionDineroOutputDTO>
 
         for (DonacionDinero donacion : donacionesDineroNormal) {
             DonacionDineroOutputDTO dto = new DonacionDineroOutputDTO();
@@ -41,7 +42,7 @@ public class DonarDineroController implements ICrudViewsHandler {
         }
 
         model.put("donacionesDinero",donacionesDinero);
-        model.put("donacionesPeriodicas",donacionDinerosPeriodicas);
+        //model.put("donacionesPeriodicas",donacionDinerosPeriodicas);
 
 
         model.put("title", "Donar dinero");
