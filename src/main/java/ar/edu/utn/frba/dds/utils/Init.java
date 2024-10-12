@@ -12,6 +12,7 @@ import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Rubro;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.usuario.Rol;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
+import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
@@ -73,12 +74,12 @@ public class Init implements WithSimplePersistenceUnit {
         vianda.setFueEntregada(false);
         vianda.setHeladera(null);
 
-        repoOferta.agregar(oferta);
-        repoModelo.agregar(modelo1);
-        repoModelo.agregar(modelo2);
-        repoModelo.agregar(modelo3);
-        RepoOferta.INSTANCE.agregar(oferta);
-        RepoViandas.INSTANCE.agregar(vianda);
+        //repoOferta.agregar(oferta);
+        //repoModelo.agregar(modelo1);
+        //repoModelo.agregar(modelo2);
+        //repoModelo.agregar(modelo3);
+        //RepoOferta.INSTANCE.agregar(oferta);
+        //RepoViandas.INSTANCE.agregar(vianda);
 
         /*for (TipoRol tipoRol : TipoRol.values()) {
             Rol rol = new Rol();
@@ -91,7 +92,7 @@ public class Init implements WithSimplePersistenceUnit {
 
         RepoCoordenada repoCoordenada = new RepoCoordenada();
         Coordenada coordenada = new Coordenada(-34.598630, -58.419962);
-        repoCoordenada.agregar(coordenada);
+        //repoCoordenada.agregar(coordenada);
 
         RepoHeladeras repoHeladeras = RepoHeladeras.INSTANCE;
         Heladera heladera1 = new Heladera();
@@ -100,7 +101,7 @@ public class Init implements WithSimplePersistenceUnit {
         heladera1.setFechaPuestaFunc(new Date());
         heladera1.setEstaActiva(Boolean.TRUE);
         heladera1.setModelo(modelo1);
-        repoHeladeras.agregar(heladera1);
+        //repoHeladeras.agregar(heladera1);
 
         Heladera heladera2 = new Heladera();
         heladera2.setNombre("UTN CAMPUS");
@@ -108,7 +109,15 @@ public class Init implements WithSimplePersistenceUnit {
         heladera2.setFechaPuestaFunc(new Date());
         heladera2.setEstaActiva(Boolean.TRUE);
         heladera2.setModelo(modelo1);
-        repoHeladeras.agregar(heladera2);
+        //repoHeladeras.agregar(heladera2);
+
+        Usuario usuario = new Usuario();
+        usuario.setNombre("Joaquin Belli");
+        usuario.setRol(TipoRol.COLABORADOR_JURIDICO);
+        usuario.setContrasenia("1234");
+        usuario.setCorreoElectronico("joaco@gmail.com");
+        RepoUsuario repoUsuario = RepoUsuario.INSTANCE;
+        //repoUsuario.agregar(usuario);
 
     }
 

@@ -18,6 +18,7 @@ public class DonarDineroController extends BaseController implements ICrudViewsH
 
     @Override
     public void index(Context context) {
+
         Map<String, Object> model = new HashMap<>();
 
         List<DonacionDinero> donacionesDineroNormal = repoDonacionDinero.buscarTodos();

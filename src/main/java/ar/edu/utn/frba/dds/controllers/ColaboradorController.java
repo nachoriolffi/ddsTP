@@ -15,13 +15,6 @@ public class ColaboradorController extends BaseController implements ICrudViewsH
     }
 
     public void index(Context context){
-
-
-
-
-        /*List<Colaborador> colaboradores = this.repositorioColaborador.buscarTodos();
-
-        Map<String, Object> model = new HashMap<>()*/
     }
 
     @Override

@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.models.entities.exportadorPDF.Reporte;
+import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
+import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoReporte;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
@@ -15,39 +17,48 @@ public class ReporteController extends BaseController implements ICrudViewsHandl
 
     @Override
     public void index(Context context) {
-        List<Reporte> reportes = this.repoReporte.buscarTodos();
+
         Map<String, Object> model = new HashMap<>();
-        model.put("pdfs", reportes);
-        model.put("title", "Reportes PDFs");
-        context.render("visualizarReportes.hbs", model);
+        Usuario usuario = verificarAdmin(context, model);
+        if (usuario != null) {
+            List<Reporte> reportes = this.repoReporte.buscarTodos();
+            model.put("pdfs", reportes);
+            model.put("title", "Reportes PDFs");
+            context.render("visualizarReportes.hbs", model);
+        } else {
+            context.status(403);
+        }
+
     }
 
     @Override
     public void show(Context context) {
+
         Map<String, Object> model = new HashMap<>();
+        Usuario usuario = verificarAdmin(context, model);
+        if (usuario != null) {
+            
+            List<Reporte> reportes = this.repoReporte.buscarTodos();
+            Reporte reporte = this.repoReporte.buscar(Long.valueOf(context.pathParam("id")));
+            if (reporte != null) {
 
-        Long idReporte = Long.valueOf(context.pathParam("id")); // Obtener el ID del reporte desde la URL
-        List<Reporte> reportes = this.repoReporte.buscarTodos();
-        Optional<Reporte> reporte = Optional.ofNullable(this.repoReporte.buscar(idReporte));
+                String fileName = Paths.get(reporte.getPathDocumento()).getFileName().toString();
+                String pdfUrl = "/pdfs/" + fileName;
 
-        if (reporte.isPresent()) {
-            String fileName = Paths.get(reporte.get().getPathDocumento()).getFileName().toString();
-            String pdfUrl = "/pdfs/" + fileName; // Asegúrate que la URL del PDF sea accesible
+                model.put("pdfs", reportes);
+                model.put("reporte", reporte);
+                model.put("pathDocumento", pdfUrl);
+                model.put("title", "Reportes PDFs");
+                context.render("visualizarReportes.hbs", model);
 
-            // Pasa la lista de reportes y el reporte seleccionado al modelo
-            model.put("pdfs", reportes);
-            model.put("reporte", reporte.get()); // Asegúrate de pasar el reporte correctamente
-            model.put("pathDocumento", pdfUrl);
-            model.put("title", "Reportes PDFs");
-
-            // Renderizar la vista con el modelo completo
-            context.render("visualizarReportes.hbs", model);
+            } else {
+                context.status(404);
+            }
         } else {
-            context.status(HttpStatus.NOT_FOUND);
-            context.redirect("/error404");
+            context.status(403);
         }
-    }
 
+    }
 
     @Override
     public void create(Context context) {

@@ -16,7 +16,12 @@ public class InicioSesionController extends BaseController implements ICrudViews
     public void index(Context ctx) {
 
         Map<String, Object> model = new HashMap<>();
-        model.put("title", "inicioSesion");
+        model.put("title", "Iniciar Sesión");
+
+        verificarSesion(ctx, model);
+        String loginError = ctx.sessionAttribute("loginError");
+        model.put("loginError", loginError);
+
         ctx.render("logs/inicioSesion.hbs", model);
     }
 
@@ -67,20 +72,29 @@ public class InicioSesionController extends BaseController implements ICrudViews
     }
 
     public void login(Context ctx) {
+        ctx.sessionAttribute("loginError", null); // Limpia el mensaje de error de la sesión
         String email = ctx.formParam("correoElectronico");
         String password = ctx.formParam("clave");
 
         Usuario usuario = RepoUsuario.INSTANCE.buscarPorEmail(email).orElse(null);
 
         if (usuario == null || !usuario.getContrasenia().equals(password)) {
-            ctx.redirect("logs/inicioSesion.hbs");
-            throw new RuntimeException("Usuario o Clave Incorrectos");
+            ctx.sessionAttribute("loginError", "Usuario o Clave Incorrectas");
+            ctx.redirect("/iniciarSesion");
+        }else{
+            // TODO el else falta desarrollador un poco mas
+            ctx.sessionAttribute("usuario_id", usuario.getId());
+            if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
+                ctx.redirect("/misHeladeras");
+            }else if (usuario.getRol().equals(TipoRol.ADMIN)){
+                ctx.redirect("/reportes");
+            }
         }
-
-        ctx.sessionAttribute("usuario_id", usuario.getId());
-      //  System.out.println("IMPRIMO ESTOOO: " + Objects.requireNonNull(ctx.sessionAttribute("usuario_id")));
-
-
+    }
+    public void logout(Context ctx){
+        ctx.consumeSessionAttribute("usuario_id");
+        ctx.consumeSessionAttribute("tipo_rol");
+        ctx.redirect("/iniciarSesion");
     }
 
 
