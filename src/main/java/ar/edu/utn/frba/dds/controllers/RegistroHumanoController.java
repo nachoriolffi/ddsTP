@@ -1,6 +1,8 @@
 package ar.edu.utn.frba.dds.controllers;
 
+import ar.edu.utn.frba.dds.models.entities.cuestionario.Cuestionario;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Provincia;
+import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoProvincia;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
@@ -10,8 +12,12 @@ import java.util.List;
 import java.util.Map;
 
 public class RegistroHumanoController extends BaseController implements ICrudViewsHandler {
+
     @Override
     public void index(Context context) {
+
+        Usuario usuario = usuarioLogueado(context);
+
 
         RepoProvincia repoProvincia = RepoProvincia.INSTANCE;
         List<Provincia> provincias = repoProvincia.buscarTodos();
@@ -33,6 +39,10 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
 
     @Override
     public void create(Context context) {
+
+        Cuestionario cuestionario = new Cuestionario();
+
+
 
     }
 

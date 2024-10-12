@@ -3,8 +3,11 @@ package ar.edu.utn.frba.dds.models.entities.cuestionario;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.persistence.Entity;
+
 @Getter
 @Setter
+
 public class Opcion {
 
     private String texto;

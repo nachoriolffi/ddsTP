@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Setter
 @Getter
@@ -24,6 +26,8 @@ public class Pregunta {
     @Enumerated(EnumType.STRING)
     @Column(name = "tipoPregunta", nullable = false)
     private TipoPregunta tipoPregunta;
+    @OneToMany(mappedBy = "pregunta", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Respuesta> respuestas = new ArrayList<>();
 
     public Pregunta( String nombre, Boolean esObligatoria, TipoPregunta tipoPregunta) {
         this.nombre = nombre;

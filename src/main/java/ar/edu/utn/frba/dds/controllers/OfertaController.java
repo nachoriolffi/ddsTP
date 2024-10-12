@@ -26,7 +26,7 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
             Map<String, Object> model = new HashMap<>();
             model.put("title", "Ofertas");
             model.put("ofertas", ofertas);
-            model.put("PuntosTotales", repoColaborador.puntosActualesDisponibles());
+            model.put("PuntosTotalesç", repoColaborador.puntosActualesDisponibles());
             model.put("rubros", Rubro.values());
 
             ctx.render("ofertas/ofertas.hbs", model);
