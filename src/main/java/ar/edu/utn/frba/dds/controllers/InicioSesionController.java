@@ -74,12 +74,14 @@ public class InicioSesionController extends BaseController implements ICrudViews
 
         if (usuario == null || !usuario.getContrasenia().equals(password)) {
             ctx.redirect("logs/inicioSesion.hbs");
-            throw new RuntimeException("Usuario o Clave Incorrectos");
+            ctx.render("errors/error404.hbs");  //Cambiar por pantalla de log incorrecto
+            //throw new RuntimeException("Usuario o Clave Incorrectos");
+
         }
 
         ctx.sessionAttribute("usuario_id", usuario.getId());
       //  System.out.println("IMPRIMO ESTOOO: " + Objects.requireNonNull(ctx.sessionAttribute("usuario_id")));
-
+        ctx.render("donaciones/misHeladeras.hbs");
 
     }
 
