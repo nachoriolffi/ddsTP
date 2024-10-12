@@ -22,8 +22,8 @@ public class Usuario {
     private String contrasenia;
     @Column(name = "correoElectronico", columnDefinition = "VARCHAR(255)", unique = true)
     private String correoElectronico;
-    @OneToOne
-    private Rol rol;
+    @Enumerated(EnumType.STRING)
+    private TipoRol rol;
 
     public Usuario() {
 
