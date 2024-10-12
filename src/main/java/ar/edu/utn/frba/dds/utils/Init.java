@@ -29,7 +29,6 @@ public class Init implements WithSimplePersistenceUnit {
         oferta.setStockUsado(0);
         oferta.setRubro(Rubro.TECNOLOGIA);
         RepoOferta repoOferta = RepoOferta.INSTANCE;
-        repoOferta.agregar(oferta);
 
         ModeloHeladera modelo1 = new ModeloHeladera();
         modelo1.setNombreModelo("Sansing X-4");
@@ -53,15 +52,10 @@ public class Init implements WithSimplePersistenceUnit {
         modelo3.setTemperaturaMinima(4.5);
 
         RepoModelo repoModelo = RepoModelo.INSTANCE;
-        repoModelo.agregar(modelo1);
-        repoModelo.agregar(modelo2);
-        repoModelo.agregar(modelo3);
-
-        RepoOferta.INSTANCE.agregar(oferta);
 
         Vianda vianda = new Vianda();
         vianda.setComida("qweqwe");
-        vianda.setFechaCaducidad(new Date(2021,10,24));
+        vianda.setFechaCaducidad(new Date(2021, 10, 24));
         vianda.setFechaDonacion(new Date());
         Colaborador colaborador1 = new Colaborador();
         colaborador1.setNombre("Pepito");
@@ -76,6 +70,12 @@ public class Init implements WithSimplePersistenceUnit {
         vianda.setPeso(200.0);
         vianda.setFueEntregada(false);
         vianda.setHeladera(null);
+
+        repoOferta.agregar(oferta);
+        repoModelo.agregar(modelo1);
+        repoModelo.agregar(modelo2);
+        repoModelo.agregar(modelo3);
+        RepoOferta.INSTANCE.agregar(oferta);
         RepoViandas.INSTANCE.agregar(vianda);
 
         /*for (TipoRol tipoRol : TipoRol.values()) {

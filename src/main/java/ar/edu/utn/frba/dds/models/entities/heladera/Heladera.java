@@ -35,7 +35,8 @@ public class Heladera {
     @Column(name = "nombre", nullable = false, columnDefinition = "VARCHAR(255)")
     private String nombre;
 
-    @Transient
+    @OneToOne
+    @JoinColumn(name = "direccion")
     private Direccion direccion;
 
     @Column(name = "viandasDisponibles")

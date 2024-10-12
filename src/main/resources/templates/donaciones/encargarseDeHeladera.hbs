@@ -54,7 +54,7 @@
                             <label class="form-label" for="modelo">Modelo Heladera</label>
                             <select class="form-select" id="modelo" name="modeloHeladera" required>
                                 <option value="" disabled selected>Seleccione un Modelo</option>
-                                {{#each rubros}}
+                                {{#each modelos}}
                                     <option value="{{this.id}}">{{this.nombreModelo}}</option>
                                 {{/each}}
                             </select>
