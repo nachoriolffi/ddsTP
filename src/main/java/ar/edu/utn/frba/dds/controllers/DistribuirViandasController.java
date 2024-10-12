@@ -10,11 +10,22 @@ import io.javalin.http.Context;
 
 import java.sql.Date;
 import java.text.ParseException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DistribuirViandasController implements ICrudViewsHandler {
     @Override
     public void index(Context context) {
-        context.render("donaciones/distribuirViandas.hbs");
+        //Estoy buscando todas las distribuciones de viandas para probar, luego voy a buscar solo
+        //Las del usuario que inició la sesión
+        List<DistribucionVianda> distribuciones = RepoDistribucionVianda.INSTANCE.buscarTodos();
+
+        Map<String, Object> model = new HashMap<>();
+        model.put("distribuciones", distribuciones);
+
+        context.render("donaciones/distribuirViandas.hbs",model);
+
     }
 
     @Override
@@ -62,6 +73,9 @@ public class DistribuirViandasController implements ICrudViewsHandler {
         distribucionVianda.setFechaColaboracion(new java.util.Date());
 
         RepoDistribucionVianda.INSTANCE.agregar(distribucionVianda);
+
+        //distribucionVianda.getHeladeraOrigen().getId();
+        //distribucionVianda.getCantidadViandas()
 
         //Lo siguiente se haría cuando el colaborador asista personalmente a realizar la distribución:
         //Habría que quitar las viandas de la heladera A segun la cantidad y agregarlas a la heladera B

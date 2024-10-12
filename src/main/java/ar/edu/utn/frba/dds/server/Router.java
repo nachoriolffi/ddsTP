@@ -65,7 +65,7 @@ public class Router {
         app.get("/reportes", Objects.requireNonNull(ServiceLocator.instanceOf(ReporteController.class))::index,TipoRol.ADMIN);
         app.get("/reportes/{id}", Objects.requireNonNull(ServiceLocator.instanceOf(ReporteController.class))::show,TipoRol.ADMIN);
 
-        app.get("/canjeProductos", Objects.requireNonNull(ServiceLocator.instanceOf(OfertaController.class))::index,TipoRol.COLABORADOR_HUMANO);
+        app.get("/canjeProductos", Objects.requireNonNull(ServiceLocator.instanceOf(OfertaController.class))::index,TipoRol.COLABORADOR_HUMANO,TipoRol.COLABORADOR_JURIDICO);
 
         app.post("/canjearProductos", Objects.requireNonNull(ServiceLocator.instanceOf(OfertaController.class))::save);
 

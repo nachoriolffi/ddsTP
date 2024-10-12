@@ -1,5 +1,4 @@
 {{#partial "contenido"}}
-    <!--
         <div class="container">
             <hr class="my-3 border-0">
             <div class="row">
@@ -11,60 +10,28 @@
                     <h1 class="h1">Registrar Colaborador Humano</h1>
                     <hr class="border-1">
 
-                     Formulario de registro de colaborador humano
+                     Formulario de Registro de colaborador humano
                 <form class="row g-3 needs-validation" method="POST" action="/registrarColaborador" novalidate>
-                    <div class="col-lg-4 col-md-12">
-                        <label class="form-label" for="validationCustom01">Nombre/s</label>
-                        <input class="form-control" type="text" id="validationCustom01" name="nombre" required>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <label class="form-label" for="validationCustom02">Apellido/s</label>
-                        <input class="form-control" type="text" id="validationCustom02" name="apellido" required>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <label class="form-label" for="validationCustom03">Fecha de Nacimiento</label>
-                        <input class="form-control" type="date" id="validationCustom03" name="fechaNacimiento" required>
-                    </div>
+                    {{#each cuestionario.preguntas}}
 
-                    <div class="col-lg-6 col-md-12">
-                        <label class="form-label" for="provincia">Provincia</label>
-                        <select class="form-select" id="provincia" required>
-                            <option value="" disabled selected>Seleccion una opcion</option>
-                        </select>
-                    </div>
-
-                    <div class="col-lg-6 col-md-12">
-                        <label class="form-label" for="localidad">Localidad</label>
-                        <select class="form-select" id="localidad" required>
-                            <option value="" disabled selected>Seleccion una opcion</option>
-                        </select>
-                    </div>
-
-                    <div class="col-lg-6 col-md-12">
-                        <label class="form-label" for="validationCustom06">Dirección</label>
-                        <input class="form-control" type="text" id="validationCustom06" name="direccion" required>
-                    </div>
-                    <div class="col-lg-3 col-md-12">
-                        <label class="form-label" for="validationCustom07">Altura</label>
-                        <input class="form-control" type="text" id="validationCustom07" name="altura" required>
-                    </div>
-                    <div class="col-lg-3 col-md-12">
-                        <label class="form-label" for="validationCustom08">Piso</label>
-                        <input class="form-control" type="text" id="validationCustom08" name="piso">
-                    </div>
-
-                    <h4 class="h4">Ingrese al menos un Medio de Contacto</h4>
-                    <hr class="d-none d-md-block">
-
-                    <div class="col-lg-6 col-md-12">
-                        <label class="form-label" for="telefono">Número de Teléfono</label>
-                        <input class="form-control" type="text" id="telefono" name="telefono">
-                    </div>
-                    <div class="col-lg-6 col-md-12">
-                        <label class="form-label" for="correo">Correo Electrónico</label>
-                        <input class="form-control" type="email" id="correo" name="correo">
-                    </div>
-
+                        <div class="col-lg-4 col-md-12">
+                            <label class="form-label" for="validationCustom01" name={{this.id}}>{{this.nombre}}</label>
+                            {{#if this.tipoPregunta "MULITPLE"}}
+                                {{#each this.opciones}}
+                                    <input class="form-check
+                                <select class="form-select" id= name="modeloHeladera" required>
+                                    <option value="" disabled selected>Seleccione un Modelo</option>
+                                    {{#each rubros}}
+                                        <option value="{{this.id}}">{{this.nombreModelo}}</option>
+                                    {{/each}}
+                                </select>
+                                {{/each}}
+                            {{/if}}
+                            {{#if this.tipoPregunta "RESPUESTAUNICA"}}
+                                <input class="form-control" type="text" id="validationCustom01" name="nombre" required>
+                            {{/if}}
+                        </div>
+                    {{/each}}
                     <hr class="my-3 border-0">
                     <div class="col-12 text-end">
                         <button class="btn btn-outline-primary" type="submit">¡Registrarse!</button>
@@ -73,7 +40,6 @@
             </div>
         </div>
     </div>
-    -->
 {{/partial}}
 {{#partial "agregarScript"}}
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

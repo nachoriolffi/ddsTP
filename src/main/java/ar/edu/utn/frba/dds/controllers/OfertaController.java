@@ -19,13 +19,14 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
     @Override
     public void index(Context ctx) {
 
-          Usuario usuario = usuarioLogueado(ctx);
-          Colaborador repoColaborador = RepoColaborador.INSTANCE.buscar(Long.valueOf(usuario.getId()));
+            Usuario usuario = usuarioLogueado(ctx);
+            Colaborador repoColaborador = RepoColaborador.INSTANCE.buscar(Long.valueOf(usuario.getId()));
             List<Oferta> ofertas = repositorioOferta.buscarTodos();
 
             Map<String, Object> model = new HashMap<>();
             model.put("title", "Ofertas");
             model.put("ofertas", ofertas);
+            model.put("PuntosTotalesç", repoColaborador.puntosActualesDisponibles());
             model.put("rubros", Rubro.values());
 
             ctx.render("ofertas/ofertas.hbs", model);
