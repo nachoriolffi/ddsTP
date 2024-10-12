@@ -26,8 +26,9 @@ public class Pregunta {
     @Enumerated(EnumType.STRING)
     @Column(name = "tipoPregunta", nullable = false)
     private TipoPregunta tipoPregunta;
+
     @OneToMany(mappedBy = "pregunta", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Respuesta> respuestas = new ArrayList<>();
+    private List<Opcion> opciones = new ArrayList<>();
 
     public Pregunta( String nombre, Boolean esObligatoria, TipoPregunta tipoPregunta) {
         this.nombre = nombre;

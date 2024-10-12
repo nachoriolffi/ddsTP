@@ -3,6 +3,9 @@ package ar.edu.utn.frba.dds.utils;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoJuridiccion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DonacionDinero;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
+import ar.edu.utn.frba.dds.models.entities.cuestionario.Cuestionario;
+import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
+import ar.edu.utn.frba.dds.models.entities.cuestionario.TipoPregunta;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
@@ -118,6 +121,23 @@ public class Init implements WithSimplePersistenceUnit {
         usuario.setCorreoElectronico("joaco@gmail.com");
         RepoUsuario repoUsuario = RepoUsuario.INSTANCE;
         //repoUsuario.agregar(usuario);
+
+        Cuestionario cuestionario = new Cuestionario();
+
+        Pregunta nombrePregunta = new Pregunta();
+        nombrePregunta.setNombre("nombre");
+        nombrePregunta.setTipoPregunta(TipoPregunta.STRING);
+        Pregunta apellidoPregunta = new Pregunta();
+        apellidoPregunta.setNombre("apellido");
+        apellidoPregunta.setTipoPregunta(TipoPregunta.STRING);
+
+        RepoPregunta.INSTANCE.agregar(nombrePregunta);
+        RepoPregunta.INSTANCE.agregar(apellidoPregunta);
+
+        cuestionario.agregarPregunta(nombrePregunta);
+        cuestionario.agregarPregunta(apellidoPregunta);
+
+        RepoCuestionario.INSTANCE.agregar(cuestionario);
 
     }
 
