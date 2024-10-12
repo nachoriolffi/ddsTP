@@ -3,11 +3,13 @@ package ar.edu.utn.frba.dds.utils;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoJuridiccion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DonacionDinero;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
+import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Rubro;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.usuario.Rol;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
@@ -83,6 +85,30 @@ public class Init implements WithSimplePersistenceUnit {
             rol.setTipoRol(tipoRol);
             RepoRol.INSTANCE.agregar(rol);
         }*/
+
+        /*Persistencia para probar DistribuirViandas*/
+
+
+        RepoCoordenada repoCoordenada = new RepoCoordenada();
+        Coordenada coordenada = new Coordenada(-34.598630, -58.419962);
+        repoCoordenada.agregar(coordenada);
+
+        RepoHeladeras repoHeladeras = RepoHeladeras.INSTANCE;
+        Heladera heladera1 = new Heladera();
+        heladera1.setNombre("UTN MEDRANO");
+        heladera1.setCoordenada(coordenada);
+        heladera1.setFechaPuestaFunc(new Date());
+        heladera1.setEstaActiva(Boolean.TRUE);
+        heladera1.setModelo(modelo1);
+        repoHeladeras.agregar(heladera1);
+
+        Heladera heladera2 = new Heladera();
+        heladera2.setNombre("UTN CAMPUS");
+        heladera2.setCoordenada(coordenada);
+        heladera2.setFechaPuestaFunc(new Date());
+        heladera2.setEstaActiva(Boolean.TRUE);
+        heladera2.setModelo(modelo1);
+        repoHeladeras.agregar(heladera2);
 
     }
 

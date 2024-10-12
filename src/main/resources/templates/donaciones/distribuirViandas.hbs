@@ -25,13 +25,15 @@
                     </thead>
                     <tbody class="table-group-divider">
                     <!-- Tengo que leer esto de la base de datos -->
+                    {{#each distribuciones}}
                     <tr>
-                        <td>Heladera A</td>
-                        <td>Heladera B</td>
-                        <td>15</td>
-                        <td>Desperfecto en la heladera</td>
-                        <td>2024-08-12</td>
+                        <td>{{this.heladeraOrigen.id}}</td>
+                        <td>{{this.heladeraDestino.id}}</td>
+                        <td>{{this.cantidadViandas}}</td>
+                        <td>{{this.motivo}}</td>
+                        <td>{{this.fechaDistribucion}}</td>
                     </tr>
+                    {{/each}}
 
                     </tbody>
                 </table>

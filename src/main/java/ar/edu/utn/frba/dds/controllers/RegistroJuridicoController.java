@@ -44,7 +44,6 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
 
         RepoColaborador repoColaborador = new RepoColaborador();
 
-
         Colaborador colaboradorJuridico = new Colaborador();
         colaboradorJuridico.setRazonSocial(context.formParam("razon-social"));
         colaboradorJuridico.setTipoPersona(TipoPersona.JURIDICA);
@@ -75,9 +74,21 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
         String correo = context.formParam("correo");
         List<Contacto> contacto = new ArrayList<>();
 
+        List<String> mediosContacto = context.formParams("medios-contacto");
+        // Verificar si se seleccionaron "WhatsApp" o "Telegram"
+        boolean seleccionoWhatsApp = mediosContacto != null && mediosContacto.contains("whatsapp");
+        boolean seleccionoTelegram = mediosContacto != null && mediosContacto.contains("telegram");
+
+
         if (telefono != null && !telefono.isEmpty()) {
-            Contacto contactoTelefono = new Contacto(TipoContacto.TELEGRAM, telefono);
-            contacto.add(contactoTelefono);
+            if(seleccionoWhatsApp){
+                Contacto contactoWhatsApp = new Contacto(TipoContacto.WPP, telefono);
+                contacto.add(contactoWhatsApp);
+            }
+            if(seleccionoTelegram){
+                Contacto contactoTelegram = new Contacto(TipoContacto.TELEGRAM, telefono);
+                contacto.add(contactoTelegram);
+            }
         }
         if (correo != null && !correo.isEmpty()) {
             Contacto contactoCorreo = new Contacto(TipoContacto.MAIL, correo);
@@ -85,9 +96,7 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
         }
         colaboradorJuridico.setContacto(contacto);
 
-
         repoColaborador.agregar(colaboradorJuridico);
-
     }
 
     @Override
