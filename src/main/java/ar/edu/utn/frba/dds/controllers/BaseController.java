@@ -10,8 +10,6 @@ public abstract class BaseController {
         if (ctx.sessionAttribute("usuario_id") == null)
             return null;
         return RepoUsuario.INSTANCE.buscar((Long) Objects.requireNonNull(ctx.sessionAttribute("usuario_id")));
-
-
     }
 
 }

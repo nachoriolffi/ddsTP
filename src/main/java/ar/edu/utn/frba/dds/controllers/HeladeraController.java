@@ -43,6 +43,8 @@ public class HeladeraController extends BaseController implements ICrudViewsHand
     @Override
     public void show(Context context){
 
+
+
     }
     @Override
    public void create(Context context) {
@@ -64,12 +66,6 @@ public class HeladeraController extends BaseController implements ICrudViewsHand
         heladera.setCoordenada(coordenada);
         heladera.setFechaPuestaFunc(new java.util.Date());
         heladera.setEstaActiva(true);
-
-
-
-       // heladera.setCalle(calle);
-       // heladera.setAltura(altura);
-        //heladera.setPiso(piso);
 
         // Guardar la nueva Heladera en el repositorio
         repositorioHeladeras.agregar(heladera);

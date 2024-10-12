@@ -27,7 +27,7 @@
                     <tbody class="table-group-divider">
                     {{#each heladeras}}
                         <tr>
-                            <td><a href="#" data-bs-toggle="modal" data-bs-target="#heladeraModal">{{this.nombre}}</a></td>
+                            <td><a href="#" data-bs-toggle="modal" data-bs-target="#heladeraModal" data-id="{{this.id}}" >{{this.nombre}}</a></td>
                             <td>{{this.direccion}}</td>
                             <td>{{this.max_viandas}}</td>
                             <td>{{this.viandas_restantes}}</td>
@@ -203,5 +203,57 @@
 {{#partial "agregarScript"}}
     <script src="/js/validacionDatos.js"></script>
     <script src="/js/mapa.js"></script>
+    <script> document.addEventListener('DOMContentLoaded', (event) => {
+    const heladeraModal = document.getElementById('heladeraModal');
+
+    heladeraModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget; // Elemento que disparó el modal
+        const heladeraId = button.getAttribute('data-id'); // Extraer el ID de heladera
+
+        // Hacer una solicitud AJAX para obtener los detalles de la heladera
+        fetch(`/heladeras/${heladeraId}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Actualizar el contenido del modal con los datos de la heladera
+                document.querySelector('#heladeraModalLabel').textContent = data.nombre;
+                document.querySelector('#heladeraModal .modal-body').innerHTML = `
+                    <p>${data.direccion}</p>
+                    <div class="rounded" id="map" style="height: 400px;"></div>
+                    <!-- Aquí puedes agregar más detalles de la heladera -->
+                `;
+                // Inicializar el mapa con la ubicación de la heladera
+                initMap(data.latitud, data.longitud);
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+                document.querySelector('#heladeraModal .modal-body').innerHTML = `
+                    <p>Error al cargar los detalles de la heladera.</p>
+                `;
+            });
+    });
+
+    heladeraModal.addEventListener('hidden.bs.modal', function () {
+        // Limpiar el contenido del modal cuando se cierra
+        document.querySelector('#heladeraModalLabel').textContent = '';
+        document.querySelector('#heladeraModal .modal-body').innerHTML = '';
+    });
+});
+
+function initMap(lat, lng) {
+    // Inicializar el mapa con la ubicación proporcionada
+    const map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: lat, lng: lng },
+        zoom: 15
+    });
+    new google.maps.Marker({
+        position: { lat: lat, lng: lng },
+        map: map
+    });
+} </script>
 {{/partial}}
 {{> templates/base }}
