@@ -18,11 +18,13 @@ public class DonarDineroController extends BaseController implements ICrudViewsH
 
     @Override
     public void index(Context context) {
+
         Map<String, Object> model = new HashMap<>();
 
         List<DonacionDinero> donacionesDineroNormal = repoDonacionDinero.buscarTodos();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); // Formato para la fecha
         List<DonacionDineroOutputDTO> donacionesDinero = new ArrayList<>();
+        //List<DonacionDineroOutputDTO>
 
         for (DonacionDinero donacion : donacionesDineroNormal) {
             DonacionDineroOutputDTO dto = new DonacionDineroOutputDTO();

@@ -81,7 +81,9 @@
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                        aria-expanded="false">Mi Perfil</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                        <form id="logout-form" action="/cerrarSesion" method="POST">
+                            <button type="submit" class="dropdown-item" >Cerrar Sesión</button>
+                        </form>
                     </ul>
                 </li>
                 <li class="nav-item">

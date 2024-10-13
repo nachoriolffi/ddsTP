@@ -45,7 +45,9 @@ public class Server {
             });
 
             config.fileRenderer(new JavalinRenderer().register("hbs", (path, model, context) -> {
-                Handlebars handlebars = new Handlebars();
+
+                //Handlebars handlebars = new Handlebars();
+                Handlebars handlebars = JavalinRenderer.configureHandlebars();
                 Template template = null;
                 try {
                     template = handlebars.compile(

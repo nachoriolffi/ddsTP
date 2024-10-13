@@ -5,6 +5,8 @@ import ar.edu.utn.frba.dds.models.entities.colaborador.TipoJuridiccion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Calle;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
+import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
+import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
@@ -18,7 +20,16 @@ import java.util.List;
 public class RegistroJuridicoController extends BaseController implements ICrudViewsHandler {
     @Override
     public void index(Context context) {
-        context.render("logs/registroJuridico.hbs");
+        Usuario usuario = usuarioLogueado(context);
+        if (usuario == null) {
+            context.redirect("/inicioSesion");
+        } else if (!usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
+            context.redirect("/error403");
+        }
+        else{
+            context.render("logs/registroJuridico.hbs");
+        }
+
     }
 
     @Override
@@ -33,6 +44,7 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
 
     @Override
     public void save(Context context) throws ParseException {
+        //si llega acá es porque pasó el chequeo de inicio de sesión y es un colaborador juridico
         // Logging form parameters
         System.out.println("razon-social: " + context.formParam("razon-social"));
         System.out.println("tipo-razon-social: " + context.formParam("tipo-razon-social"));
@@ -42,61 +54,71 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
         System.out.println("telefono: " + context.formParam("telefono"));
         System.out.println("correo: " + context.formParam("correo"));
 
-        RepoColaborador repoColaborador = new RepoColaborador();
+        Usuario usuario = usuarioLogueado(context);
+        try {
+            RepoColaborador repoColaborador = new RepoColaborador();
 
-        Colaborador colaboradorJuridico = new Colaborador();
-        colaboradorJuridico.setRazonSocial(context.formParam("razon-social"));
-        colaboradorJuridico.setTipoPersona(TipoPersona.JURIDICA);
+            Colaborador colaboradorJuridico = new Colaborador();
 
-        String razonSocial = context.formParam("tipo-razon-social").toUpperCase();
-        colaboradorJuridico.setTipoJuridiccion(TipoJuridiccion.valueOf(razonSocial));
+            colaboradorJuridico.setUsuario(usuario);
+            colaboradorJuridico.setRazonSocial(context.formParam("razon-social"));
+            colaboradorJuridico.setTipoPersona(TipoPersona.JURIDICA);
 
-        Direccion direccion = new Direccion();
+            String razonSocial = context.formParam("tipo-razon-social").toUpperCase();
+            colaboradorJuridico.setTipoJuridiccion(TipoJuridiccion.valueOf(razonSocial));
 
-        String altura = context.formParam("altura");
-        String piso = context.formParam("piso");
-        String calle = context.formParam("calle");
+            Direccion direccion = new Direccion();
 
-        if(piso != null && !piso.isEmpty() || altura != null && !altura.isEmpty() || calle != null && !calle.isEmpty()){
-            if(piso != null && !piso.isEmpty()){
-                direccion.setPiso(Integer.valueOf(context.formParam("piso")));
+            String altura = context.formParam("altura");
+            String piso = context.formParam("piso");
+            String calle = context.formParam("calle");
+
+            if (piso != null && !piso.isEmpty() || altura != null && !altura.isEmpty() || calle != null && !calle.isEmpty()) {
+                if (piso != null && !piso.isEmpty()) {
+                    direccion.setPiso(Integer.valueOf(context.formParam("piso")));
+                }
+                if (altura != null && !altura.isEmpty()) {
+                    direccion.setAltura(Integer.valueOf(context.formParam("altura")));
+                }
+                if (calle != null && !calle.isEmpty()) {
+                    direccion.setCalle(new Calle(calle));
+                }
+                colaboradorJuridico.setDireccion(direccion);
             }
-            if(altura != null && !altura.isEmpty()){
-                direccion.setAltura(Integer.valueOf(context.formParam("altura")));
+
+            String telefono = context.formParam("telefono");
+            String correo = context.formParam("correo");
+            List<Contacto> contacto = new ArrayList<>();
+
+            List<String> mediosContacto = context.formParams("medios-contacto");
+            // Verificar si se seleccionaron "WhatsApp" o "Telegram"
+            boolean seleccionoWhatsApp = mediosContacto.contains("whatsapp");
+            boolean seleccionoTelegram = mediosContacto.contains("telegram");
+
+
+            if (telefono != null && !telefono.isEmpty()) {
+                if (seleccionoWhatsApp) {
+                    Contacto contactoWhatsApp = new Contacto(TipoContacto.WPP, telefono);
+                    contacto.add(contactoWhatsApp);
+                }
+                if (seleccionoTelegram) {
+                    Contacto contactoTelegram = new Contacto(TipoContacto.TELEGRAM, telefono);
+                    contacto.add(contactoTelegram);
+                }
             }
-            if(calle != null && !calle.isEmpty()){
-                direccion.setCalle(new Calle(calle));
+            if (correo != null && !correo.isEmpty()) {
+                Contacto contactoCorreo = new Contacto(TipoContacto.MAIL, correo);
+                contacto.add(contactoCorreo);
             }
-            colaboradorJuridico.setDireccion(direccion);
+            colaboradorJuridico.setContacto(contacto);
+
+            repoColaborador.agregar(colaboradorJuridico);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            context.status(500).result("Server error");
         }
 
-        String telefono = context.formParam("telefono");
-        String correo = context.formParam("correo");
-        List<Contacto> contacto = new ArrayList<>();
-
-        List<String> mediosContacto = context.formParams("medios-contacto");
-        // Verificar si se seleccionaron "WhatsApp" o "Telegram"
-        boolean seleccionoWhatsApp = mediosContacto != null && mediosContacto.contains("whatsapp");
-        boolean seleccionoTelegram = mediosContacto != null && mediosContacto.contains("telegram");
-
-
-        if (telefono != null && !telefono.isEmpty()) {
-            if(seleccionoWhatsApp){
-                Contacto contactoWhatsApp = new Contacto(TipoContacto.WPP, telefono);
-                contacto.add(contactoWhatsApp);
-            }
-            if(seleccionoTelegram){
-                Contacto contactoTelegram = new Contacto(TipoContacto.TELEGRAM, telefono);
-                contacto.add(contactoTelegram);
-            }
-        }
-        if (correo != null && !correo.isEmpty()) {
-            Contacto contactoCorreo = new Contacto(TipoContacto.MAIL, correo);
-            contacto.add(contactoCorreo);
-        }
-        colaboradorJuridico.setContacto(contacto);
-
-        repoColaborador.agregar(colaboradorJuridico);
     }
 
     @Override
