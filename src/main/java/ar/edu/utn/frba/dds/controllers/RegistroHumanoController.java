@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.dtos.PreguntaDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Cuestionario;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.CuestionarioRespondido;
+import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoCuestionario;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
@@ -27,16 +28,14 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
                 context.status(404).result("Cuestionario no encontrado");
                 return;
             }
-            List<PreguntaDTO> preguntasDTO = cuestionario.getPreguntas().stream()
-                    .map(PreguntaDTO::new)
-                    .toList();
-            // Procesa todos los datos necesarios antes de cerrar la conexión
+            Map<String, List<Pregunta>> categorizedQuestions = cuestionario.getPreguntas().stream()
+                    .collect(Collectors.groupingBy(Pregunta::getTipoPregunta));
+
             Map<String, Object> model = new HashMap<>();
             model.put("title", "Registro Humano");
-            model.put("preguntas", preguntasDTO);
+            model.put("preguntas", categorizedQuestions);
             context.render("logs/registroHumano.hbs", model);
         } catch (Exception e) {
-            // Imprimir el stacktrace en los logs
             e.printStackTrace();
             context.status(500).result("Server error");
         }

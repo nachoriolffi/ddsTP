@@ -11,34 +11,47 @@
                 <hr class="border-1">
 
                 <form class="row g-3 needs-validation" method="POST" action="/registrarColaborador" novalidate>
-                    {{#each preguntas}}
+                    {{#each preguntas.RESPUESTAUNICA}}
                         <div class="form-group">
                             <label for="pregunta-{{id}}">{{nombre}}</label>
-                    {{#if tipoPregunta}}
-                            {{#isEqual tipoPregunta "RESPUESTAUNICA"}}
-                                <input type="text" class="form-control" id="pregunta-{{id}}" name="respuesta-{{id}}" required="{{esObligatoria}}">
-                            {{else if (isEqual tipoPregunta "MULTIPLECHOICE")}}
-                                <select class="form-control" id="pregunta-{{id}}" name="respuesta-{{id}}">
-                                    {{#each opciones}}
-                                        <option value="{{this.value}}">{{this.nombre}}</option>
-                                    {{/each}}
-                                </select>
-                            {{else if (isEqual tipoPregunta "VERDADEROFALSO")}}
-                                <select class="form-control" id="pregunta-{{id}}" name="respuesta-{{id}}">
-                                    <option value="true">Verdadero</option>
-                                    <option value="false">Falso</option>
-                                </select>
-                            {{else if (isEqual tipoPregunta "STRING")}}
-                                <input type="text" class="form-control" id="pregunta-{{id}}" name="respuesta-{{id}}" required="{{esObligatoria}}">
-                            {{else if (isEqual tipoPregunta "FECHA")}}
-                                <input type="date" class="form-control" id="pregunta-{{id}}" name="respuesta-{{id}}" required="{{esObligatoria}}">
-                            {{else}}
-                                <p>Tipo de pregunta no reconocido: {{tipoPregunta}}</p>
-                            {{/isEqual}}
-                    {{/if}}
+                            <input type="text" class="form-control" id="pregunta-{{id}}" name="respuesta-{{id}}" required="{{esObligatoria}}">
                         </div>
                     {{/each}}
 
+                    {{#each preguntas.MULTIPLECHOICE}}
+                        <div class="form-group">
+                            <label for="pregunta-{{id}}">{{nombre}}</label>
+                            <select class="form-control" id="pregunta-{{id}}" name="respuesta-{{id}}">
+                                {{#each opciones}}
+                                    <option value="{{this.value}}">{{this.nombre}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    {{/each}}
+
+                    {{#each preguntas.VERDADEROFALSO}}
+                        <div class="form-group">
+                            <label for="pregunta-{{id}}">{{nombre}}</label>
+                            <select class="form-control" id="pregunta-{{id}}" name="respuesta-{{id}}">
+                                <option value="true">Verdadero</option>
+                                <option value="false">Falso</option>
+                            </select>
+                        </div>
+                    {{/each}}
+
+                    {{#each preguntas.STRING}}
+                        <div class="form-group">
+                            <label for="pregunta-{{id}}">{{nombre}}</label>
+                            <input type="text" class="form-control" id="pregunta-{{id}}" name="respuesta-{{id}}" required="{{esObligatoria}}">
+                        </div>
+                    {{/each}}
+
+                    {{#each preguntas.FECHA}}
+                        <div class="form-group">
+                            <label for="pregunta-{{id}}">{{nombre}}</label>
+                            <input type="date" class="form-control" id="pregunta-{{id}}" name="respuesta-{{id}}" required="{{esObligatoria}}">
+                        </div>
+                    {{/each}}
 
                     <div class="col-lg-6 col-md-12">
                         <label class="form-label" for="provincia">Provincia</label>
@@ -64,8 +77,6 @@
                         <input class="form-control" type="email" id="correo" name="correo" required>
                     </div>
 
-
-
                     <div class="col-12 text-end">
                         <button class="btn btn-outline-primary" type="submit">¡Registrarse!</button>
                     </div>
@@ -89,8 +100,6 @@
                 alert('Debe ingresar al menos un medio de contacto');
             }
         });
-
     </script>
-
 {{/partial}}
 {{> templates/base}}

@@ -44,5 +44,7 @@ public class Pregunta {
             return this.esObligatoria;
         }
 
-
+    public String getTipoPregunta() {
+        return tipoPregunta.toString();
+    }
 }
