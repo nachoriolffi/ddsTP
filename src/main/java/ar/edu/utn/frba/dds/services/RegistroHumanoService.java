@@ -2,8 +2,10 @@ package ar.edu.utn.frba.dds.services;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.CuestionarioRespondido;
+import ar.edu.utn.frba.dds.models.entities.cuestionario.Opcion;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Respuesta;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoCuestionarioRespondido;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoOpcion;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoPregunta;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRespuesta;
 import io.javalin.http.Context;
@@ -17,6 +19,7 @@ public class RegistroHumanoService {
 
     RepoPregunta repoPregunta = RepoPregunta.INSTANCE;
     RepoRespuesta repoRespuesta = RepoRespuesta.INSTANCE;
+    RepoOpcion repoOpcion = RepoOpcion.INSTANCE;
     public CuestionarioRespondido processAndSaveResponses(Context context) {
     Map<String, String> params = context.formParamMap().entrySet().stream()
             .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().get(0)));
@@ -36,6 +39,22 @@ public class RegistroHumanoService {
                 cuestionarioRespondido.agregarRespuesta(respuestaEntity);
                 repoRespuesta.agregar(respuestaEntity);
             });
+
+        params.entrySet().stream()
+                .filter(entry -> entry.getKey().startsWith("opcion-"))
+                .forEach(entry -> {
+                    Long preguntaId = Long.parseLong(entry.getKey().replace("opcion-", ""));
+                    Long opcionId = Long.parseLong(entry.getValue());
+                    String respuesta = entry.getValue();
+                    Opcion opcion = repoOpcion.buscar(opcionId);
+                    Respuesta respuestaEntity = new Respuesta();
+                    respuestaEntity.setPregunta(repoPregunta.buscar(preguntaId));
+                    respuestaEntity.setRespuestaAbierta(respuesta);
+                    respuestaEntity.setOpciones(Arrays.asList(opcion));
+                    respuestaEntity.setCuestionarioRespondido(cuestionarioRespondido); // Associate with CuestionarioRespondido
+                    cuestionarioRespondido.agregarRespuesta(respuestaEntity);
+                    repoRespuesta.agregar(respuestaEntity);
+                });
     return cuestionarioRespondido;
     }
 }
