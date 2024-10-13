@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.models.entities.colaborador.TipoJuridiccion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DonacionDinero;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Cuestionario;
+import ar.edu.utn.frba.dds.models.entities.cuestionario.Opcion;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.TipoPregunta;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
@@ -20,6 +21,7 @@ import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
+import java.util.Arrays;
 import java.util.Date;
 
 public class Init implements WithSimplePersistenceUnit {
@@ -124,21 +126,56 @@ public class Init implements WithSimplePersistenceUnit {
 
         Cuestionario cuestionario = new Cuestionario();
 
+// Crear preguntas de tipo STRING
         Pregunta nombrePregunta = new Pregunta();
         nombrePregunta.setNombre("nombre");
         nombrePregunta.setTipoPregunta(TipoPregunta.STRING);
+
         Pregunta apellidoPregunta = new Pregunta();
         apellidoPregunta.setNombre("apellido");
         apellidoPregunta.setTipoPregunta(TipoPregunta.STRING);
 
+// Persistir preguntas de tipo STRING
         RepoPregunta.INSTANCE.agregar(nombrePregunta);
         RepoPregunta.INSTANCE.agregar(apellidoPregunta);
 
+// Agregar preguntas de tipo STRING al cuestionario
         cuestionario.agregarPregunta(nombrePregunta);
         cuestionario.agregarPregunta(apellidoPregunta);
 
-        RepoCuestionario.INSTANCE.agregar(cuestionario);
+// Crear pregunta de opción múltiple
+        Pregunta multipleChoicePregunta = new Pregunta();
+        multipleChoicePregunta.setNombre("Pregunta de opción múltiple");
+        multipleChoicePregunta.setTipoPregunta(TipoPregunta.MULTIPLECHOICE);
 
+// Persistir pregunta de opción múltiple antes de agregar opciones
+        RepoPregunta.INSTANCE.agregar(multipleChoicePregunta);
+
+// Crear opciones para la pregunta de opción múltiple
+        Opcion opcion1 = new Opcion("Opción 1");
+        Opcion opcion2 = new Opcion("Opción 2");
+        Opcion opcion3 = new Opcion("Opción 3");
+
+// Asignar la pregunta a cada opción
+        opcion1.setPregunta(multipleChoicePregunta);
+        opcion2.setPregunta(multipleChoicePregunta);
+        opcion3.setPregunta(multipleChoicePregunta);
+
+// Agregar opciones a la pregunta de opción múltiple
+        multipleChoicePregunta.getOpciones().add(opcion1);
+        multipleChoicePregunta.getOpciones().add(opcion2);
+        multipleChoicePregunta.getOpciones().add(opcion3);
+
+// Persistir opciones
+        RepoOpcion.INSTANCE.agregar(opcion1);
+        RepoOpcion.INSTANCE.agregar(opcion2);
+        RepoOpcion.INSTANCE.agregar(opcion3);
+
+// Agregar pregunta de opción múltiple al cuestionario
+        cuestionario.agregarPregunta(multipleChoicePregunta);
+
+// Persistir el cuestionario
+        RepoCuestionario.INSTANCE.agregar(cuestionario);
     }
 
 }

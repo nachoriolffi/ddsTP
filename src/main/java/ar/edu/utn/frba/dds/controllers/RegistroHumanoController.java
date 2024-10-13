@@ -29,7 +29,6 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
             Cuestionario cuestionario = RepoCuestionario.INSTANCE.buscar(1L);
             if (cuestionario == null) {
                 context.status(404).result("Cuestionario no encontrado");
-                return;
             }
             Map<String, List<Pregunta>> categorizedQuestions = cuestionario.getPreguntas().stream()
                     .collect(Collectors.groupingBy(Pregunta::getTipoPregunta));

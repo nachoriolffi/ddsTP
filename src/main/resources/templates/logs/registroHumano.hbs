@@ -23,7 +23,7 @@
                             <label for="pregunta-{{id}}">{{nombre}}</label>
                             <select class="form-control" id="pregunta-{{id}}" name="opcion-{{id}}">
                                 {{#each opciones}}
-                                    <option value="{{this.value}}">{{this.nombre}}</option>
+                                    <option value="{{this.id}}">{{this.texto}}</option>
                                 {{/each}}
                             </select>
                         </div>
