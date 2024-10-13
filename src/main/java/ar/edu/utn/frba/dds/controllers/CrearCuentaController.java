@@ -57,6 +57,8 @@ public class CrearCuentaController  extends BaseController implements ICrudViews
         nuevoUsuario.setCorreoElectronico(correoElectronico);
         nuevoUsuario.setContrasenia(password);
 
+        nuevoUsuario.setNombre("nombreHarcodeado");//harcodeo el nombre para poder probar
+
         assert tipoUsuario != null;
         if(tipoUsuario.equals("Juridico")) {
             nuevoUsuario.setRol(TipoRol.COLABORADOR_JURIDICO);

@@ -18,13 +18,6 @@ public class Router {
 
     public static void init(Javalin app) {
 
-        RepoColaborador repoColaborador = new RepoColaborador();
-        RepoReporte repoReporte = RepoReporte.INSTANCE;
-        ColaboradorController colaboradorController = new ColaboradorController(repoColaborador);
-
-        RepoOferta repoOferta = new RepoOferta();
-        OfertaController ofertaController = new OfertaController();
-
         app.error(404, ctx -> {
             ctx.render("errors/error404.hbs");
         });

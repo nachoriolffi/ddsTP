@@ -3,6 +3,8 @@ package ar.edu.utn.frba.dds.controllers;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DistribucionVianda;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.MotivoDistribucion;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
+import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
+import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoDistribucionVianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
@@ -14,18 +16,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DistribuirViandasController implements ICrudViewsHandler {
+public class DistribuirViandasController extends BaseController implements ICrudViewsHandler {
     @Override
     public void index(Context context) {
-        //Estoy buscando todas las distribuciones de viandas para probar, luego voy a buscar solo
-        //Las del usuario que inició la sesión
-        List<DistribucionVianda> distribuciones = RepoDistribucionVianda.INSTANCE.buscarTodos();
 
-        Map<String, Object> model = new HashMap<>();
-        model.put("distribuciones", distribuciones);
+        Usuario usuario = usuarioLogueado(context);
+        if (usuario == null) {
+            context.redirect("/inicioSesion");
+        } else if (!usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)){
+            context.redirect("/error403");
+        }
+        else{
+            List<DistribucionVianda> distribuciones = RepoDistribucionVianda.INSTANCE.buscarTodos();
+            //Estoy buscando todas las distribuciones de viandas para probar, luego voy a buscar solo
+            //Las del usuario que inició la sesión
 
-        context.render("donaciones/distribuirViandas.hbs",model);
+            Map<String, Object> model = new HashMap<>();
+            model.put("distribuciones", distribuciones);
 
+            context.render("donaciones/distribuirViandas.hbs",model);
+        }
     }
 
     @Override
