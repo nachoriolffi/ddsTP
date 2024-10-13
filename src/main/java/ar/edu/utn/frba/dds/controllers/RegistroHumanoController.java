@@ -6,8 +6,11 @@ import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Cuestionario;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.CuestionarioRespondido;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
+import ar.edu.utn.frba.dds.models.entities.cuestionario.Respuesta;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoCuestionario;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoCuestionarioRespondido;
+import ar.edu.utn.frba.dds.services.RegistroHumanoService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
@@ -33,6 +36,8 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
 
             Map<String, Object> model = new HashMap<>();
             model.put("title", "Registro Humano");
+            model.put("usuario", usuario);
+            model.put("cuestionario", cuestionario);
             model.put("preguntas", categorizedQuestions);
             context.render("logs/registroHumano.hbs", model);
         } catch (Exception e) {
@@ -48,58 +53,13 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
 
     @Override
     public void create(Context context) {
+        RegistroHumanoService registroHumanosService = new RegistroHumanoService();
+        CuestionarioRespondido cuestionarioRespondido = registroHumanosService.processAndSaveResponses(context);
+        System.out.println(cuestionarioRespondido.getRespuestas().size());
 
-        Map<String, String> params = context.formParamMap().entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().get(0)));
-
-        RespuestaDTO respuestaDTO = new RespuestaDTO();
-
-        // Process open-ended responses
-        respuestaDTO.setRespuestasAbiertas(params.entrySet().stream()
-                .filter(entry -> entry.getKey().startsWith("textoPregunta"))
-                .collect(Collectors.toMap(
-                        entry -> Long.parseLong(entry.getKey().replace("textoPregunta", "")),
-                        Map.Entry::getValue
-                )));
-
-        // Process single-choice responses
-        respuestaDTO.setRespuestasUnicas(params.entrySet().stream()
-                .filter(entry -> entry.getKey().startsWith("opcionesPregunta"))
-                .collect(Collectors.toMap(
-                        entry -> Long.parseLong(entry.getKey().replace("opcionesPregunta", "")),
-                        entry -> Long.parseLong(entry.getValue())
-                )));
-
-        // Process multiple-choice responses
-        respuestaDTO.setRespuestasMultiples(params.entrySet().stream()
-                .filter(entry -> entry.getKey().startsWith("opcionesMultiplesPregunta"))
-                .collect(Collectors.toMap(
-                        entry -> Long.parseLong(entry.getKey().replace("opcionesMultiplesPregunta", "")),
-                        entry -> Arrays.stream(entry.getValue().split(","))
-                                .map(Long::parseLong)
-                                .collect(Collectors.toList())
-                )));
-
-        // Process date responses
-        respuestaDTO.setRespuestasFechas(params.entrySet().stream()
-                .filter(entry -> entry.getKey().startsWith("fechaPregunta"))
-                .collect(Collectors.toMap(
-                        entry -> Long.parseLong(entry.getKey().replace("fechaPregunta", "")),
-                        Map.Entry::getValue
-                )));
-
-        // Save the responses (implement your own logic here)
-        // saveResponses(respuestaDTO);
-
-        // Create the collaborator and save the responses
-        Colaborador colaborador = new Colaborador();
-        CuestionarioRespondido cuestionarioRespondido = new CuestionarioRespondido();
-        // Add logic to save the responses to the `cuestionarioRespondido`
-        // and associate it with the `colaborador`
-
-        // Redirect or respond as needed
-        context.redirect("/success");
     }
+
+
 
     @Override
     public void save(Context context) {

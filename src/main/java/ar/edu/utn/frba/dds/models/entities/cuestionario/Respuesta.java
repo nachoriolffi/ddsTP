@@ -19,9 +19,9 @@ public class Respuesta {
     @JoinColumn(name = "pregunta_id")
     private Pregunta pregunta;
 
-    @ManyToOne
-    @JoinColumn(name = "cuestionarioRespondido_id")
-    private CuestionarioRespondido cuestionarioRespondido;
+   @ManyToOne
+   @JoinColumn(name = "cuestionarioRespondido_id")
+   private CuestionarioRespondido cuestionarioRespondido;
 
     @Column(name = "respuestaAbierta", columnDefinition = "TEXT")
     private String respuestaAbierta;
