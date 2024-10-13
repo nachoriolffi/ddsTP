@@ -27,6 +27,8 @@ public class DonarDineroController extends BaseController implements ICrudViewsH
         for (DonacionDinero donacion : donacionesDineroNormal) {
             DonacionDineroOutputDTO dto = new DonacionDineroOutputDTO();
 
+            dto.setId(donacion.getId());
+
             // Convertir la fecha a String
             dto.setFechaDonacion(dateFormat.format(donacion.getFechaColaboracion()));
 
@@ -36,12 +38,13 @@ public class DonarDineroController extends BaseController implements ICrudViewsH
             // Convertir esPeriodica (booleano) a "Sí" o "No"
             dto.setEsPeriodica(donacion.getDonacionMensual() ? "Sí" : "No");
 
+            dto.setRenovacion(donacion.getDonacionMensual());
+
             // Agregar el dto a la lista de salida
             donacionesDinero.add(dto);
         }
 
         model.put("donacionesDinero",donacionesDinero);
-        //model.put("donacionesPeriodicas",donacionDinerosPeriodicas);
 
 
         model.put("title", "Donar dinero");
@@ -108,4 +111,17 @@ public class DonarDineroController extends BaseController implements ICrudViewsH
     public void delete(Context context) {
 
     }
+
+    public void cancelar(Context context) {
+        Optional<DonacionDinero> donacionDinero = Optional.ofNullable(repoDonacionDinero.buscar(Long.valueOf(context.pathParam("id"))));
+        if(donacionDinero.isPresent()) {
+            donacionDinero.get().setDonacionMensual(false);
+            repoDonacionDinero.modificar(donacionDinero.get());
+            context.redirect("/donacionDinero");
+        }else {
+            context.status(404).result("Donación no encontrada");
+        }
+
+    }
+
 }

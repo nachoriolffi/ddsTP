@@ -32,7 +32,7 @@
             </table>
         </div>
         <div class="col-md-4 table-responsive">
-            <h2 class="h2">Donacion Periódica</h2>
+            <h3 class="h2">Donaciones Periódicas</h3>
             <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
                 <thead>
                 <tr class="align-middle">
@@ -41,24 +41,26 @@
                 </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                <tr>
-                    {{#each donacionesPeriodicas}}
-                        <td>${{this.monto}}</td>
-                        <td>
-                            <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">
-                                <i class="fa-solid fa-xmark fa-lg"></i>
-                            </button>
-                        </td>
-                    {{/each}}
+                {{#each donacionesDinero}}
+                    {{#if this.renovacion}}
+                        <tr>
+                            <td>${{this.monto}}</td>
+                            <td>
+                                <form action="/donacionDinero/{{this.id}}/cancelar" method="POST">
+                                    <input type="hidden" name="esPeriodica" value="false">
+                                <button type="submit" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#darDeBaja">
+                                    <i class="fa-solid fa-xmark fa-lg"></i>
+                                </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {{/if}}
+                {{/each}}
 
-                </tr>
                 </tbody>
             </table>
-            <button class="btn btn-outline-primary" data-bs-toggle="modal">
-                Modificar donación</button>
+            <!-- <button class="btn btn-outline-primary" data-bs-toggle="modal">Modificar donación</button> -->
         </div>
-
-
     </div>
 
     <!-- Modal Formulario -->
@@ -75,7 +77,8 @@
                     <form action="/donacionDinero" method="POST" class="row g-3 needs-validation">
                         <div class="col-md-6">
                             <label for="validationCustom01" class="form-label">Fecha De Donación</label>
-                            <input type="date" name="fechaDonacion" class="form-control" id="validationCustom01" required>
+                            <input type="date" name="fechaDonacion" class="form-control" id="validationCustom01"
+                                   required>
                         </div>
                         <div class="col-md-6">
                             <label for="validationCustom02" class="form-label">Monto</label>
@@ -84,7 +87,8 @@
                         </div>
                         <div class="col-md-12 d-flex justify-content-center align-items-center">
                             <div class="form-check d-flex align-items-center">
-                                <input name="esPeriodica" class="form-check-input" type="checkbox" value="true" id="invalidCheck">
+                                <input name="esPeriodica" class="form-check-input" type="checkbox" value="true"
+                                       id="invalidCheck">
                                 <label class="form-check-label ms-2" for="invalidCheck">
                                     Donar de Forma Periódica (Mensual)
                                 </label>
@@ -101,6 +105,7 @@
             </div>
         </div>
     </div>
+
     <!-- Modal de Confirmación Donacion-->
     <div class="modal fade" data-bs-keyboard="false" id="confirmModal" aria-labelledby="confirmModalLabel"
          aria-hidden="true">
@@ -143,6 +148,7 @@
             </div>
         </div>
     </div>
+
     <script>
         document.getElementById('confirmModal').addEventListener('click', function (event) {
             if (event.target.matches('.btn-primary')) {
