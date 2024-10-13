@@ -80,7 +80,7 @@ public class InicioSesionController extends BaseController implements ICrudViews
 
         if (usuario == null || !usuario.getContrasenia().equals(password)) {
             ctx.sessionAttribute("loginError", "Usuario o Clave Incorrectas");
-            ctx.redirect("/iniciarSesion");
+            ctx.redirect("/inicioSesion");
         }else{
             // TODO el else falta desarrollador un poco mas
             ctx.sessionAttribute("usuario_id", usuario.getId());
@@ -94,7 +94,7 @@ public class InicioSesionController extends BaseController implements ICrudViews
     public void logout(Context ctx){
         ctx.consumeSessionAttribute("usuario_id");
         ctx.consumeSessionAttribute("tipo_rol");
-        ctx.redirect("/iniciarSesion");
+        ctx.redirect("/inicionSesion");
     }
 
 

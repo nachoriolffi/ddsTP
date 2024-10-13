@@ -24,8 +24,8 @@ public abstract class BaseController {
             model.put("inicioSesion", true);
             model.put("noInicioSesion", false);
         } else {
-            if (!ctx.path().equals("/iniciarSesion")) {
-                ctx.redirect("/iniciarSesion");
+            if (!ctx.path().equals("/inicioSesion")) {
+                ctx.redirect("/inicioSesion");
             }
             model.put("inicioSesion", false);
             model.put("noInicioSesion", true);

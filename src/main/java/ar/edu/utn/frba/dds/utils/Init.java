@@ -86,11 +86,11 @@ public class Init implements WithSimplePersistenceUnit {
         //RepoOferta.INSTANCE.agregar(oferta);
         //RepoViandas.INSTANCE.agregar(vianda);
 
-        /*for (TipoRol tipoRol : TipoRol.values()) {
-            Rol rol = new Rol();
-            rol.setTipoRol(tipoRol);
-            RepoRol.INSTANCE.agregar(rol);
-        }*/
+//        for (TipoRol tipoRol : TipoRol.values()) {
+//            Rol rol = new Rol();
+//            rol.setTipoRol(tipoRol);
+//            RepoRol.INSTANCE.agregar(rol);
+//        }
 
         /*Persistencia para probar DistribuirViandas*/
 
