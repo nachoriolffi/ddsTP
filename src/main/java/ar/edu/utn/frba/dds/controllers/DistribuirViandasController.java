@@ -33,6 +33,7 @@ public class DistribuirViandasController extends BaseController implements ICrud
 
             Map<String, Object> model = new HashMap<>();
             model.put("distribuciones", distribuciones);
+            model.put("title", "Distribuir Viandas");
 
             context.render("donaciones/distribuirViandas.hbs",model);
         }

@@ -87,7 +87,8 @@ public class Router {
 
         /*---Pantallas de Nahuel (todavía no terminado)---*/
         //todavía está harcodeado y los verbos no están chequeados, estoy probando que levanten las pantallas
-        app.get("/misHeladeras", Objects.requireNonNull(ServiceLocator.instanceOf(MisHeladerasController.class))::index);
+        app.get("/misHeladeras", Objects.requireNonNull(ServiceLocator.instanceOf(MisHeladerasController.class))::index,TipoRol.COLABORADOR_HUMANO, TipoRol.COLABORADOR_JURIDICO);
+        app.post("/misHeladeras", Objects.requireNonNull(ServiceLocator.instanceOf(MisHeladerasController.class))::save);
 
         app.get("/registroJuridico", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroJuridicoController.class))::index);
         app.post("/registroJuridico", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroJuridicoController.class))::save);

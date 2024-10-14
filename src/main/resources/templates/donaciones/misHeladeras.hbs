@@ -6,7 +6,7 @@
             <h1 class="h1">Mis Heladeras</h1>
         </div>
         <div class="col-md-4 text-md-end">
-            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#donationModal">
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#sucribirseModal">
                 Suscribirse a Heladera
             </button>
         </div>
@@ -25,11 +25,11 @@
                 </thead>
                 <tbody class="table-group-divider">
                 <tr>
-                    <td><a href="">Heladera del Centro</a></td>
+                    <td><a href="#" data-bs-toggle="modal" data-bs-target="#heladeraModal">Heladera del Centro</a></td>
                     <td>Calle Falsa 123</td>
                     <td>100</td>
                     <td>50</td>
-                    <td><button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                    <td><button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#unsubscribeModal">
                         <i class="fa-solid fa-xmark fa-lg"></i>
                     </button></td>
                 </tr>
@@ -39,7 +39,7 @@
                     <td>80</td>
                     <td>30</td>
                     <td>
-                        <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                        <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#unsubscribeModal">
                             <i class="fa-solid fa-xmark fa-lg"></i>
                         </button>
                     </td>
@@ -51,8 +51,82 @@
     </div>
 
     <!--Modal Suscribirse-->
+    <div class="modal fade" id="sucribirseModal" tabindex="-1" aria-labelledby="donationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="donationModalLabel">Suscribirse a Heladera</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulario de suscripción -->
+                    <form id="subscriptionForm" class="row g-3 needs-validation" novalidate method="POST" action="/misHeladeras">
 
+                        <div class="modal-footer col-md-12">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal">Suscribirse</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--Modal Desuscribirse-->
+    <div class="modal fade" id="unsubscribeModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Confirmación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Está seguro de que desea anular la suscripción a esta heladera?
+                </div>
+                <div class="modal-footer">
+                    <!-- Botón de Cancelar que cierra el modal de confirmación y vuelve al modal de suscripción -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#donationModal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="document.getElementById('donationForm').submit();">Sí, anular la suscripción</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Confirmación Suscripción-->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Confirmación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Está seguro de que desea suscribirse a esta heladera?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#donationModal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="document.getElementById('subscriptionForm').submit();">Sí, realizar suscripción</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal de información heladera-->
+    <div class="modal fade" id="heladeraModal" tabindex="-1" aria-labelledby="heladeraModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="heladeraModalLabel">Información de la Heladera</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                <div class="modal-footer">
+                    <button class="btn btn-outline-primary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </section>
 {{/partial}}

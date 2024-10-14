@@ -15,7 +15,9 @@ import ar.edu.utn.frba.dds.models.entities.contacto.*;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RegistroJuridicoController extends BaseController implements ICrudViewsHandler {
     @Override
@@ -27,7 +29,10 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
             context.redirect("/error403");
         }
         else{
-            context.render("logs/registroJuridico.hbs");
+            Map<String, Object> model = new HashMap<>();
+            model.put("title", "Registro Juridico");
+
+            context.render("logs/registroJuridico.hbs",model);
         }
 
     }
