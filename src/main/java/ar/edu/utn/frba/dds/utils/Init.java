@@ -14,6 +14,7 @@ import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Rubro;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.models.entities.usuario.Rol;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
@@ -61,10 +62,23 @@ public class Init implements WithSimplePersistenceUnit {
 
         RepoModelo repoModelo = RepoModelo.INSTANCE;
 
-        Vianda vianda = new Vianda();
-        vianda.setComida("qweqwe");
-        vianda.setFechaCaducidad(new Date(2021, 10, 24));
-        vianda.setFechaDonacion(new Date());
+        RepoCoordenada repoCoordenada = new RepoCoordenada();
+        Coordenada coordenada = new Coordenada(-34.598630, -58.419962);
+        Direccion direccion = new Direccion();
+       // direccion.setCalle("Medrano");
+        direccion.setAltura(951);
+        repoCoordenada.agregar(coordenada);
+
+        RepoHeladeras repoHeladeras = RepoHeladeras.INSTANCE;
+        Heladera heladera1 = new Heladera();
+        heladera1.setNombre("UTN MEDRANO");
+        heladera1.setCoordenada(coordenada);
+        //heladera1.setDireccion(direccion);
+        heladera1.setFechaPuestaFunc(new Date());
+        heladera1.setEstaActiva(Boolean.TRUE);
+        heladera1.setModelo(modelo1);
+        repoHeladeras.agregar(heladera1);
+
         Colaborador colaborador1 = new Colaborador();
         colaborador1.setNombre("Pepito");
         colaborador1.setApellido("Perez");
@@ -72,12 +86,22 @@ public class Init implements WithSimplePersistenceUnit {
         colaborador1.setNumeroDocumento(32458652);
         colaborador1.setTipoPersona(TipoPersona.HUMANA);
 
+        Vianda vianda = new Vianda();
+        vianda.setComida("qweqwe");
+        vianda.setFechaCaducidad(new Date(2021, 10, 24));
+        vianda.setFechaDonacion(new Date());
+
+
+
+
         RepoColaborador.INSTANCE.agregar(colaborador1);
         vianda.setColaborador(colaborador1);
         vianda.setCalorias(500.0);
         vianda.setPeso(200.0);
         vianda.setFueEntregada(false);
-        vianda.setHeladera(null);
+        vianda.setHeladera(heladera1);
+
+        RepoViandas.INSTANCE.agregar(vianda);
 
         //repoOferta.agregar(oferta);
         //repoModelo.agregar(modelo1);
@@ -95,18 +119,7 @@ public class Init implements WithSimplePersistenceUnit {
         /*Persistencia para probar DistribuirViandas*/
 
 
-        RepoCoordenada repoCoordenada = new RepoCoordenada();
-        Coordenada coordenada = new Coordenada(-34.598630, -58.419962);
-        repoCoordenada.agregar(coordenada);
 
-        RepoHeladeras repoHeladeras = RepoHeladeras.INSTANCE;
-        Heladera heladera1 = new Heladera();
-        heladera1.setNombre("UTN MEDRANO");
-        heladera1.setCoordenada(coordenada);
-        heladera1.setFechaPuestaFunc(new Date());
-        heladera1.setEstaActiva(Boolean.TRUE);
-        heladera1.setModelo(modelo1);
-        repoHeladeras.agregar(heladera1);
 
         Heladera heladera2 = new Heladera();
         heladera2.setNombre("UTN CAMPUS");
@@ -114,7 +127,10 @@ public class Init implements WithSimplePersistenceUnit {
         heladera2.setFechaPuestaFunc(new Date());
         heladera2.setEstaActiva(Boolean.TRUE);
         heladera2.setModelo(modelo1);
+
         repoHeladeras.agregar(heladera2);
+
+
 
         Usuario usuario = new Usuario();
         usuario.setNombre("Joaquin Belli");

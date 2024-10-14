@@ -1,0 +1,164 @@
+{{#partial "contenido"}}
+    <section class="container">
+        <!-- Título principal y dirección -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h3>Información de la Heladera</h3>
+                <h1>{{nombre}}</h1>
+                <p>{{direccion}}</p>
+            </div>
+        </div>
+
+        <!-- Mapa y viandas -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <!-- Mapa -->
+                <div id="map" style="height: 400px;" class="border"></div>
+            </div>
+            <div class="col-md-6">
+                <!-- Tabla de Viandas -->
+                <h4>Viandas de la Heladera</h4>
+                <table class="table table-bordered table-sm">
+                    <thead>
+                    <tr>
+                        <th>Vianda</th>
+                        <th>Calorías</th>
+                        <th>Peso (En Gramos)</th>
+                        <th>Fecha de Caducidad</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each viandas}}
+                        <tr>
+                            <td>{{this.comida}}</td>
+                            <td>{{this.calorias}}</td>
+                            <td>{{this.peso}}</td>
+                            <td>{{this.fechaCaducidad}}</td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Aperturas realizadas y solicitudes de apertura -->
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <!-- Tabla de Aperturas realizadas -->
+                <h4>Aperturas Realizadas</h4>
+                <table class="table table-bordered table-sm">
+                    <thead>
+                    <tr>
+                        <th>Fecha Apertura</th>
+                        <th>Colaborador</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each aperturas}}
+                        <tr>
+                            <td>{{this.fecha}}</td>
+                            <td>{{this.colaborador}}</td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-6">
+                <!-- Tabla de solicitudes de apertura -->
+                <h4>Solicitudes de Apertura</h4>
+                <table class="table table-bordered table-sm">
+                    <thead>
+                    <tr>
+                        <th>Fecha Solicitud de Apertura</th>
+                        <th>Fecha Límite</th>
+                        <th>Tiempo Restante</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each solicitudes}}
+                        <tr>
+                            <td>{{this.fechaSolicitud}}</td>
+                            <td>{{this.fechaLimite}}</td>
+                            <td>{{this.tiempoRestante}}</td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Alertas -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <h4>Alertas</h4>
+                <table class="table table-bordered table-sm">
+                    <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Horario</th>
+                        <th>Alerta</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each alertas}}
+                        <tr>
+                            <td>{{this.fecha}}</td>
+                            <td>{{this.horario}}</td>
+                            <td>{{this.alerta}}</td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Botón para cerrar y volver a la página anterior -->
+        <div class="row">
+            <div class="col-12 text-end">
+                <button type="button" class="btn btn-warning" onclick="window.history.back();">Cerrar</button>
+            </div>
+        </div>
+    </section>
+{{/partial}}
+
+{{#partial "agregarScript"}}
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        let map;
+
+        const initMap = () => {
+            const lat = {{latitud}};
+            const lng = {{longitud}};
+
+            // Inicializar el mapa con la vista centrada en la latitud y longitud proporcionadas
+            map = L.map('map', {
+                center: [lat, lng],
+                zoom: 12,
+                scrollWheelZoom: false, // Desactiva el zoom con la rueda del ratón
+                dragging: false, // Desactiva el arrastre del mapa
+                touchZoom: false, // Desactiva el zoom táctil
+                doubleClickZoom: false, // Desactiva el zoom por doble clic
+                boxZoom: false, // Desactiva el zoom por selección de área
+                keyboard: false, // Desactiva el control del mapa con teclado
+                zoomControl: false, // Desactiva los controles de zoom del mapa
+            }).setView([lat, lng], 18); // Ubicación inicial
+
+            // Cargar los tiles de OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
+
+            // Agregar un marcador al mapa con las coordenadas proporcionadas
+            L.marker([lat, lng]).addTo(map)
+                .bindPopup('{{direccion}}');
+        };
+
+        initMap(); // Inicializar el mapa cuando el documento esté cargado
+    });
+</script>
+{{/partial}}
+
+{{> templates/base }}
