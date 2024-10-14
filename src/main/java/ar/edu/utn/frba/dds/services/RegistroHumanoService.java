@@ -10,7 +10,10 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoPregunta;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRespuesta;
 import io.javalin.http.Context;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -49,12 +52,30 @@ public class RegistroHumanoService {
                     Opcion opcion = repoOpcion.buscar(opcionId);
                     Respuesta respuestaEntity = new Respuesta();
                     respuestaEntity.setPregunta(repoPregunta.buscar(preguntaId));
-                    respuestaEntity.setRespuestaAbierta(respuesta);
                     respuestaEntity.setOpciones(Arrays.asList(opcion));
                     respuestaEntity.setCuestionarioRespondido(cuestionarioRespondido); // Associate with CuestionarioRespondido
                     cuestionarioRespondido.agregarRespuesta(respuestaEntity);
                     repoRespuesta.agregar(respuestaEntity);
                 });
-    return cuestionarioRespondido;
+
+        params.entrySet().stream()
+                .filter(entry -> entry.getKey().startsWith("fecha-"))
+                .forEach(entry -> {
+                    Long preguntaId = Long.parseLong(entry.getKey().replace("fecha-", ""));
+                    String fechaString = entry.getValue();
+                    try {
+                        Date fecha = new SimpleDateFormat("yyyy-MM-dd").parse(fechaString);
+                        Respuesta respuestaEntity = new Respuesta();
+                        respuestaEntity.setPregunta(repoPregunta.buscar(preguntaId));
+                        respuestaEntity.setFecha(fecha);
+                        respuestaEntity.setCuestionarioRespondido(cuestionarioRespondido);
+                        cuestionarioRespondido.agregarRespuesta(respuestaEntity);
+                        repoRespuesta.agregar(respuestaEntity);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                });
+
+        return cuestionarioRespondido;
     }
 }
