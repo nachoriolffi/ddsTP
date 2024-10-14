@@ -3,11 +3,13 @@ package ar.edu.utn.frba.dds.controllers;
 import ar.edu.utn.frba.dds.dtos.RespuestaDTO;
 import ar.edu.utn.frba.dds.dtos.PreguntaDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Cuestionario;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.CuestionarioRespondido;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Respuesta;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoCuestionario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoCuestionarioRespondido;
 import ar.edu.utn.frba.dds.services.RegistroHumanoService;
@@ -52,10 +54,11 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
 
     @Override
     public void create(Context context) {
-        RegistroHumanoService registroHumanosService = new RegistroHumanoService();
-        CuestionarioRespondido cuestionarioRespondido = registroHumanosService.processAndSaveResponses(context);
-        System.out.println(cuestionarioRespondido.getRespuestas().size());
 
+        RegistroHumanoService registroHumanosService = new RegistroHumanoService();
+        Colaborador colaborador = registroHumanosService.processAndSaveResponses(context);
+        colaborador.setTipoPersona(TipoPersona.HUMANA);
+        RepoColaborador.INSTANCE.agregar(colaborador);
     }
 
 

@@ -10,44 +10,79 @@
                 <h1 class="h1">Registro Colaborador Jurídico</h1>
                 <hr class="border-1">
 
-                <form class="row g-3 needs-validation" method="POST" action="/registroJuridico" novalidate>
-                    <div class="col-lg-8 col-md-12">
-                        <label class="form-label" for="validationCustom01">Razón Social</label>
-                        <input name="razon-social" class="form-control" type="text" id="validationCustom01" required>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <label class="form-label" for="tipo-razon-social">Tipo Razón Social</label>
-                        <select class="form-select" id="tipo-razon-social" name="tipo-razon-social" required>
-                            <option value="gubernamental">Gubernamental</option>
-                            <option value="ong">ONG</option>
-                            <option value="empresa">Empresa</option>
-                            <option value="institucion">Institución</option>
+                <form class="row g-3 needs-validation" method="POST" action="/registroHumano" novalidate>
+                    {{#each preguntas.RESPUESTAUNICA}}
+                        <div class="form-group">
+                            <label for="pregunta-{{id}}">{{nombre}}</label>
+                            <input type="text" class="form-control" id="pregunta-{{id}}" name="respuesta-{{id}}" required="{{esObligatoria}}">
+                        </div>
+                    {{/each}}
+
+                    {{#each preguntas.MULTIPLECHOICE}}
+                        <div class="form-group">
+                            <label for="pregunta-{{id}}">{{nombre}}</label>
+                            <select class="form-control" id="pregunta-{{id}}" name="opcion-{{id}}">
+                                {{#each opciones}}
+                                    <option value="{{this.id}}">{{this.texto}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    {{/each}}
+
+                    {{#each preguntas.VERDADEROFALSO}}
+                        <div class="form-group">
+                            <label for="pregunta-{{id}}">{{nombre}}</label>
+                            <select class="form-control" id="pregunta-{{id}}" name="verdaderoFalso-{{id}}">
+                                <option value="true">Verdadero</option>
+                                <option value="false">Falso</option>
+                            </select>
+                        </div>
+                    {{/each}}
+
+                    {{#each preguntas.STRING}}
+                        <div class="form-group">
+                            <label for="pregunta-{{id}}">{{nombre}}</label>
+                            <input type="text" class="form-control" id="pregunta-{{id}}" name="respuesta-{{id}}" required="{{esObligatoria}}">
+                        </div>
+                    {{/each}}
+
+                    {{#each preguntas.FECHA}}
+                        <div class="form-group">
+                            <label for="pregunta-{{id}}">{{nombre}}</label>
+                            <input type="date" class="form-control" id="pregunta-{{id}}" name="fecha-{{id}}" required="{{esObligatoria}}">
+                        </div>
+                    {{/each}}
+
+                    <div class="col-lg-6 col-md-12">
+                        <label class="form-label" for="provincia">Provincia</label>
+                        <select class="form-select" id="provincia" name="provincia" required>
+                            <option value="" disabled selected>Seleccion una opción</option>
                         </select>
                     </div>
-                    <div class="col-lg-4 col-md-12">
-                        <label class="form-label" for="calle">Calle</label>
-                        <input name="calle" class="form-control" type="text" id="calle" required>
+                    <div class="col-lg-6 col-md-12">
+                        <label class="form-label" for="localidad">Localidad</label>
+                        <select class="form-select" id="localidad" name="localidad" required>
+                            <option value="" disabled selected>Seleccion una opción</option>
+                        </select>
                     </div>
-                    <div class="col-lg-4 col-md-12">
-                        <label class="form-label" for="altura">Altura</label>
-                        <input name="altura" class="form-control" type="text" id="altura" required>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <label class="form-label" for="piso">Piso</label>
-                        <input name="piso" class="form-control" type="text" id="piso">
-                    </div>
+
                     <h4 class="h4">Ingrese al menos un Medio de Contacto</h4>
                     <hr class="d-none d-md-block">
                     <div class="col-lg-6 col-md-12">
                         <label class="form-label" for="telefono">Número de Teléfono</label>
-                        <input name="telefono" class="form-control" type="text" id="telefono">
+                        <input class="form-control" type="text" id="telefono" name="telefono" >
                     </div>
                     <div class="col-lg-6 col-md-12">
                         <label class="form-label" for="correo">Correo Electrónico</label>
-                        <input name="correo" class="form-control" type="email" id="correo">
+                        <input class="form-control" type="email" id="correo" name="correo" >
                     </div>
 
-                    <div class="col-lg-12 col-md-12">
+                    <div class="col-12 text-end">
+                        <button class="btn btn-outline-primary" type="submit">¡Registrarse!</button>
+                    </div>
+
+                    <!--
+                                        <div class="col-lg-12 col-md-12">
                         <label for="whatsapp">
                             <input type="checkbox" id="whatsapp" name="medios-contacto" value="whatsapp">
                             WhatsApp
@@ -65,6 +100,8 @@
                     <div class="col-12 text-end">
                         <button class="btn btn-outline-primary" type="submit">¡Registrarse!</button>
                     </div>
+
+                    -->
                 </form>
 
             </div>
