@@ -10,7 +10,7 @@
                 <h1 class="h1">Registro Colaborador Jurídico</h1>
                 <hr class="border-1">
 
-                <form class="row g-3 needs-validation" method="POST" action="/registroHumano" novalidate>
+                <form class="row g-3 needs-validation" method="POST" action="/registroJuridico" novalidate>
                     {{#each preguntas.RESPUESTAUNICA}}
                         <div class="form-group">
                             <label for="pregunta-{{id}}">{{nombre}}</label>
@@ -107,6 +107,12 @@
             </div>
         </div>
     </div>
+
+{{/partial}}
+{{#partial "agregarScript"}}
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="/js/ubicacion.js"></script>
+
 
 {{/partial}}
 {{> templates/base}}

@@ -20,17 +20,16 @@ public class CrearCuentaController  extends BaseController implements ICrudViews
 
     @Override
     public void index(Context context) {
-        Map<String, Object> model = new HashMap<>();
-        verificarSesion(context, model);
+        Map<String,Object> model = new HashMap<>();
+        model.put("title","Crear Cuenta");
         String faltaRellenar = context.sessionAttribute("faltaRellenar");
         String clavesNoCoinciden = context.sessionAttribute("clavesNoCoinciden");
         String tipoNoSeleccionado = context.sessionAttribute("tipoNoSeleccionado");
-
         model.put("title", "Crear Cuenta");
         model.put("tipoNoSeleccionado", tipoNoSeleccionado);
         model.put("faltaRellenar", faltaRellenar);
         model.put("clavesNoCoinciden", clavesNoCoinciden);
-        context.render("logs/crearCuenta.hbs", model);
+        context.render("logs/crearCuenta.hbs",model);
     }
 
     @Override
@@ -73,7 +72,10 @@ public class CrearCuentaController  extends BaseController implements ICrudViews
         nuevoUsuario.setCorreoElectronico(correoElectronico);
         nuevoUsuario.setContrasenia(password);
 
-        if (tipoUsuario.equals("Juridico")) {
+        nuevoUsuario.setNombre("nombreHarcodeado");//harcodeo el nombre para poder probar
+
+        assert tipoUsuario != null;
+        if(tipoUsuario.equals("Juridico")) {
             nuevoUsuario.setRol(TipoRol.COLABORADOR_JURIDICO);
             context.sessionAttribute("nuevoUsuario", nuevoUsuario);
             context.sessionAttribute("usuario_id", nuevoUsuario.getId());
@@ -84,7 +86,6 @@ public class CrearCuentaController  extends BaseController implements ICrudViews
             context.sessionAttribute("usuario_id", nuevoUsuario.getId());
             context.redirect("/registroHumano");
         }
-        // NOTA: Los usuarios los guardamos recien cuando se registran como juridico o humano
 
 
     }

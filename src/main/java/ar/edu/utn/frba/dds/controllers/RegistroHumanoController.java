@@ -26,7 +26,11 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
 
     @Override
     public void index(Context context) {
-        Usuario usuario = usuarioLogueado(context);
+        Usuario nuevoUsuario = context.sessionAttribute("nuevoUsuario");
+        if (nuevoUsuario == null) {
+            context.redirect("/crearCuenta");
+            return;
+        }
         try {
             Cuestionario cuestionario = RepoCuestionario.INSTANCE.buscar(1L);
             if (cuestionario == null) {
@@ -37,7 +41,7 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
 
             Map<String, Object> model = new HashMap<>();
             model.put("title", "Registro Humano");
-            model.put("usuario", usuario);
+            model.put("usuario", nuevoUsuario);
             model.put("cuestionario", cuestionario);
             model.put("preguntas", categorizedQuestions);
             context.render("logs/registroHumano.hbs", model);
