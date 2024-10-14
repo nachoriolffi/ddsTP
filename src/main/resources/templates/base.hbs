@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{title}}</title>
-
     <!-- Referencia al archivo CSS -->
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" href="/img/iconHead.png" type="image/x-icon">
@@ -29,52 +28,56 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
                 {{#if inicioSesion}}
-
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                               aria-expanded="false">Donaciones</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/donacionDinero">Donar Dinero</a></li>
-                                {{#if esJuridico}}
-                                    <li><a class="dropdown-item" href="/encargarseHeladera">Encargarse de Heladera</a>
-                                    </li>
-                                {{/if}}
-                                {{#if esHumano}}
-                                    <li><a class="dropdown-item" href="/donacionViandas">Donar Viandas</a></li>
-                                    <li><a class="dropdown-item" href="/distribuirViandas">Distribuir Viandas</a></li>
-                                    <li><a class="dropdown-item" href="/registroVulnerable">Registrar Personas
-                                        Vulnerables</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="/misHeladeras">Mis Heladeras</a></li>
-                                {{/if}}
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/canjeProductos">Tienda</a>
-                        </li>
-                        {{#if esHumano}}
-                            <li class="nav-item">
-                                <a class="nav-link" href="/heladeras">Ver Heladeras</a>
-                            </li>
-
-                    {{/if}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                           aria-expanded="false">Herramientas</a>
+                           aria-expanded="false">Donaciones</a>
                         <ul class="dropdown-menu">
-
-                                {{#if esHumano}}
-                                    <li><a class="dropdown-item" href="/fallaTecnica">Reportar Incidente</a></li>
-                                {{/if}}
-
-                            {{#if esAdmin}}
-                                <li><a class="dropdown-item" href="/cargaMasiva">Cargar Archivo CSV</a></li>
-                                <li><a class="dropdown-item" href="/reportes">Ver Reportes PDF</a></li>
+                            <li><a class="dropdown-item" href="/donacionDinero">Donar Dinero</a></li>
+                            {{#if esJuridico}}
+                                <li><a class="dropdown-item" href="/encargarseHeladera">Encargarse de Heladera</a>
+                                </li>
+                            {{/if}}
+                            {{#if esHumano}}
+                                <li><a class="dropdown-item" href="/donacionViandas">Donar Viandas</a></li>
+                                <li><a class="dropdown-item" href="/distribuirViandas">Distribuir Viandas</a></li>
+                                <li><a class="dropdown-item" href="/registroVulnerable">Registrar Personas
+                                    Vulnerables</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="/misHeladeras">Mis Heladeras</a></li>
                             {{/if}}
                         </ul>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/canjeProductos">Tienda</a>
+                    </li>
+                    {{#if esHumano}}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/heladeras">Ver Heladeras</a>
+                        </li>
+                    {{/if}}
+                    {{#if esHumano}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                               aria-expanded="false">Herramientas</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/fallaTecnica">Reportar Incidente</a></li>
+                            </ul>
+                        </li>
+                    {{/if}}
+
+                    {{#if esAdmin}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                               aria-expanded="false">Herramientas</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/cargaMasiva">Cargar Archivo CSV</a></li>
+                                <li><a class="dropdown-item" href="/reportes">Ver Reportes PDF</a></li>
+                            </ul>
+                        </li>
+
+                    {{/if}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                            aria-expanded="false">Mi Perfil</a>

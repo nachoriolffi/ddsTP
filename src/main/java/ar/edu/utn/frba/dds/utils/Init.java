@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.utils;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoJuridiccion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DonacionDinero;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
+import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.TipoColaboracion;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Cuestionario;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Opcion;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
@@ -27,16 +28,6 @@ import java.util.Date;
 public class Init implements WithSimplePersistenceUnit {
 
     public static void iniciar() {
-        Oferta oferta = new Oferta();
-        oferta.setNombre("Televisor 45' Pindonga");
-        oferta.setImagen("/img/descarga.jpg");
-        oferta.setPuntosNecesarios(50000);
-        oferta.setFechaInicio(new Date());
-        oferta.setFechaFin(new Date(2024, 10, 24));
-        oferta.setStockInicial(500);
-        oferta.setStockUsado(0);
-        oferta.setRubro(Rubro.TECNOLOGIA);
-        RepoOferta repoOferta = RepoOferta.INSTANCE;
 
         ModeloHeladera modelo1 = new ModeloHeladera();
         modelo1.setNombreModelo("Sansing X-4");
@@ -72,7 +63,7 @@ public class Init implements WithSimplePersistenceUnit {
         colaborador1.setNumeroDocumento(32458652);
         colaborador1.setTipoPersona(TipoPersona.HUMANA);
 
-        RepoColaborador.INSTANCE.agregar(colaborador1);
+        //RepoColaborador.INSTANCE.agregar(colaborador1);
         vianda.setColaborador(colaborador1);
         vianda.setCalorias(500.0);
         vianda.setPeso(200.0);
@@ -188,6 +179,23 @@ public class Init implements WithSimplePersistenceUnit {
         cuestionario.agregarPregunta(fechaPregunta);
 // Persistir el cuestionario
         RepoCuestionario.INSTANCE.agregar(cuestionario);
+
+        Usuario usuario2 = new Usuario();
+        usuario2.setCorreoElectronico("juan@gmail.com");
+        usuario2.setRol(TipoRol.COLABORADOR_JURIDICO);
+        usuario2.setContrasenia("1234");
+
+        Colaborador colaborador = new Colaborador();
+        colaborador.setNombre("Juan Manuel");
+        colaborador.setApellido("Nuñez");
+        usuario2.setNombre(colaborador.getNombre() + " " + colaborador.getApellido());
+        repoUsuario = RepoUsuario.INSTANCE;
+        //repoUsuario.agregar(usuario2);
+        colaborador.setTipoPersona(TipoPersona.JURIDICA);
+        colaborador.setUsuario(usuario2);
+        RepoColaborador repoColaborador = RepoColaborador.INSTANCE;
+        //repoColaborador.agregar(colaborador);
     }
+
 
 }

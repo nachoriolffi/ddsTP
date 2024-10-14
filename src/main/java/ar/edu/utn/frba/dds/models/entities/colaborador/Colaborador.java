@@ -14,6 +14,7 @@ import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import lombok.Data;
 import lombok.Getter;
@@ -217,8 +218,9 @@ public class Colaborador {
         return CalculadorPuntos.getInstancia().sumarPuntosA(this) - this.puntosTotalesUsados;
     }
 
-    public void agregarOfertasCanjeadas(List<Oferta> ofertas) {
-        this.ofertasRegistradas.addAll(ofertas);
+    public void agregarOfertasCanjeadas(Oferta oferta) {
+        this.ofertasRegistradas.add(oferta);
+        RepoColaborador.INSTANCE.modificar(this);
     }
 
     public List<Coordenada> obtenerPuntosRecomendadosParaHeladera(Double longitud, Double latitud, Integer radio) throws IOException {

@@ -10,6 +10,7 @@ import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 import io.javalin.http.UploadedFile;
 import io.javalin.util.FileUtil;
+
 import java.util.*;
 
 public class OfertaController extends BaseController implements ICrudViewsHandler {
@@ -19,28 +20,30 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
     @Override
     public void index(Context ctx) {
 
-            Usuario usuario = usuarioLogueado(ctx);
-            Colaborador repoColaborador = RepoColaborador.INSTANCE.buscar(Long.valueOf(usuario.getId()));
-            List<Oferta> ofertas = repositorioOferta.buscarTodos();
+        Map<String, Object> model = new HashMap<>();
+        Usuario usuario = verificarJuridicoOHumano(ctx, model);
+        Colaborador colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
+        List<Oferta> ofertas = repositorioOferta.buscarTodos();
+        colaborador.puntosActualesDisponibles();
 
-            Map<String, Object> model = new HashMap<>();
-            model.put("title", "Ofertas");
-            model.put("ofertas", ofertas);
-            model.put("PuntosTotalesç", repoColaborador.puntosActualesDisponibles());
-            model.put("rubros", Rubro.values());
-
-            ctx.render("ofertas/ofertas.hbs", model);
-
+        model.put("title", "Tienda Productos/Servicios");
+        model.put("ofertas", ofertas);
+        model.put("PuntosTotales", colaborador.puntosActualesDisponibles());
+        model.put("rubros", Rubro.values());
+        ctx.render("ofertas/ofertas.hbs", model);
     }
 
-    @Override
-    public void show(Context context) {
-
-    }
-
-    @Override
-    public void create(Context context) {
-
+    public void canjear(Context context) {
+        Long idUsuario = context.sessionAttribute("usuario_id");
+        Colaborador colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(Long.valueOf(idUsuario));
+        Long idOferta = Long.valueOf(context.formParam("idProducto"));
+        Long puntosProductos = Long.valueOf(context.formParam("puntosNecesarios"));
+        Oferta oferta = repositorioOferta.buscar(Long.valueOf(idOferta));
+        if (oferta.getStockInicial() > 0 && colaborador.puntosActualesDisponibles() >= Double.valueOf(puntosProductos)) {
+            colaborador.agregarOfertasCanjeadas(oferta);
+            repositorioOferta.modificar(oferta);
+            RepoColaborador.INSTANCE.modificar(colaborador);
+        }
     }
 
     @Override
@@ -50,7 +53,7 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
         UploadedFile file = context.uploadedFile("imagenProducto");
         if (file != null) {
             String contentType = file.contentType();
-            if ("image/jpg".equals(contentType)||"image/jpeg".equals(contentType) || "image/png".equals(contentType)) {
+            if ("image/jpg".equals(contentType) || "image/jpeg".equals(contentType) || "image/png".equals(contentType)) {
                 FileUtil.streamToFile(file.content(), "src/main/resources/public/imagenes/" + file.filename()); // ESTO NO SE TOCA
                 oferta.setImagen("/imagenes/" + file.filename());
             } else {
@@ -89,6 +92,17 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
 
         context.redirect("/canjeProductos");
     }
+
+    @Override
+    public void show(Context context) {
+
+    }
+
+    @Override
+    public void create(Context context) {
+
+    }
+
 
     @Override
     public void edit(Context context) {

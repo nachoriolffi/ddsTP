@@ -71,9 +71,11 @@ public class InicioSesionController extends BaseController implements ICrudViews
             // TODO EN VEZ DE HACER REDIRECT A ESA PAGINAS QUE NO TIENEN MUCHO QUE VER
             ctx.sessionAttribute("usuario_id", usuario.getId());
             if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
-                ctx.redirect("/misHeladeras");
+                ctx.redirect("/donacionDinero");
             }else if (usuario.getRol().equals(TipoRol.ADMIN)){
                 ctx.redirect("/reportes");
+            }else if(usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)){
+                ctx.redirect("/canjeProductos");
             }
         }
     }

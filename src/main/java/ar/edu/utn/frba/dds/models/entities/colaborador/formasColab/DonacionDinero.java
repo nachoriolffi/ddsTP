@@ -25,7 +25,7 @@ public class DonacionDinero extends FormaDeColaboracion {
     private Float monto;
 
     @Column(name="frecuencia", columnDefinition = "BOOLEAN")
-    private Boolean donacionMensual; // en dias
+    private Boolean esDonacionMensual; // en dias
 
     @Column(name="fechaColaboracion",nullable = false,columnDefinition = "DATE")
     private Date fechaColaboracion;

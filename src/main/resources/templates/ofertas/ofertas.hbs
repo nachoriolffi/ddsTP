@@ -1,22 +1,24 @@
 {{#partial "contenido"}}
     <div class="row">
-        <div class="col-md-9 col-6 justify-content-center">
-            <div class="">
-                <div class="btn btn-outline-primary align-items-center">
-                    <strong>Puntos:</strong> {{PuntosTotales}}
+        {{#if esHumano}}
+            <div class="col-md-9 col-6 justify-content-center">
+                <div>
+                    <div class="btn btn-outline-primary align-items-center">
+                        <strong>Puntos:</strong> {{PuntosTotales}}
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3 col-6 justify-content-center">
-            <div class="text-end">
-    {{#if colaborador.esJuridico}}
-        <button type="button" class="btn btn-outline-primary align-items-center" data-bs-toggle="modal"
-                data-bs-target="#uploadProdServ">
-            Subir Producto/Servicio
-        </button>
-    {{/if}}
+        {{/if}}
+        {{#if esJuridico}}
+            <div class="col-md-9 col-6 justify-content-center">
+                <div>
+                    <button type="button" class="btn btn-outline-primary align-items-center" data-bs-toggle="modal"
+                            data-bs-target="#uploadProdServ">
+                        Subir Producto/Servicio
+                    </button>
+                </div>
             </div>
-        </div>
+        {{/if}}
     </div>
     <hr class="my-2 border-0">
 
@@ -38,10 +40,12 @@
                                     data-bs-target="#moreInfoProduct-{{@index}}">
                                 Ver Más
                             </button>
-                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                                    data-bs-target="#confirmCanje-{{@index}}">
-                                Canjear
-                            </button>
+                            {{#if esHumano}}
+                                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                                        data-bs-target="#confirmCanje-{{@index}}">
+                                    Canjear
+                                </button>
+                            {{/if}}
                         </div>
                     </div>
                 </div>
@@ -53,38 +57,48 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="moreInfoProductLabel">Más Información del Producto</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                            <h5 class="modal-title" id="moreInfoProductLabel">{{this.nombre}}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Cerrar"></button>
                         </div>
                         <div class="modal-body">
                             <img src="{{this.imagen}}" class="img-fluid" alt="Imagen del Producto">
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            <button type="button" data-bs-target="#confirmCanje-{{@index}}" data-bs-toggle="modal"
-                                    class="btn btn-primary">Canjear
-                            </button>
+                            {{#if esHumano}}
+                                <button type="button" data-bs-target="#confirmCanje-{{@index}}" data-bs-toggle="modal"
+                                        class="btn btn-primary">Canjear
+                                </button>
+                            {{/if}}
                         </div>
                     </div>
                 </div>
             </div>
 
             <!-- Modal Canjear Producto-->
-            <div class="modal fade" id="confirmCanje-{{@index}}" tabindex="-1" aria-labelledby="confirmCanje" aria-hidden="true">
+            <div class="modal fade" id="confirmCanje-{{@index}}" tabindex="-1" aria-labelledby="confirmCanje"
+                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="confirmModalLabel1">Confirmación</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                            <h5 class="modal-title" id="confirmModalLabel1">Confirmación de Canje</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Cerrar"></button>
                         </div>
                         <div class="modal-body">
-                            ¿Está seguro de que desea canjear {{this.puntosNecesarios}} puntos por este producto?
+                            ¿Está seguro de que desea canjear {{this.puntosNecesarios}} puntos por este producto
+                            ({{this.nombre}})?
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="button" class="btn btn-outline-primary" data-bs-dismiss="modal">Sí, canjear
-                                puntos
-                            </button>
+                            <form method="POST" action="/canjearProducto">
+                                <input type="hidden" name="puntosNecesarios" value="{{this.puntosNecesarios}}">
+                                <input type="hidden" name="idProducto" value="{{this.id}}">
+                                <button type="submit" class="btn btn-outline-primary" data-bs-dismiss="modal">Sí, canjear
+                                    puntos
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -103,10 +117,11 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
                 <div class="modal-body">
-                    <form method="POST" action="/canjearProductos" class="row g-3 needs-validation" enctype="multipart/form-data">
+                    <form method="POST" action="/cargarProducto" class="row g-3 needs-validation"
+                          enctype="multipart/form-data">
                         <div class="col-md-6">
                             <label for="validationCustom01" class="form-label">Tipo del Producto</label>
-                            <select class="form-select" id="validationCustom01" name="tipoProducto" >
+                            <select class="form-select" id="validationCustom01" name="tipoProducto">
                                 <option value="" disabled selected>Selecciona una opción</option>
                                 {{#each rubros}}
                                     <option value="{{this.descripcion}}">{{this.descripcion}}</option>
@@ -115,19 +130,19 @@
                         </div>
                         <div class="col-md-6">
                             <label for="validationCustom02" class="form-label">Nombre Producto</label>
-                            <input type="text" class="form-control" id="validationCustom02" name="nombreProducto" >
+                            <input type="text" class="form-control" id="validationCustom02" name="nombreProducto">
                         </div>
                         <div class="col-md-6">
                             <label for="validationCustom03" class="form-label">Puntos Necesarios</label>
-                            <input type="text" class="form-control" id="validationCustom03" name="puntosNecesarios" >
+                            <input type="text" class="form-control" id="validationCustom03" name="puntosNecesarios">
                         </div>
                         <div class="col-md-6">
                             <label for="validationCustom03" class="form-label">Stock Inicial</label>
-                            <input type="text" class="form-control" id="validationCustom03" name="stockInicial" >
+                            <input type="text" class="form-control" id="validationCustom03" name="stockInicial">
                         </div>
                         <div class="col-md-12">
                             <label for="validationCustom04" class="form-label">Cargar Imagen</label>
-                            <input type="file" class="form-control" id="validationCustom04" name="imagenProducto" >
+                            <input type="file" class="form-control" id="validationCustom04" name="imagenProducto">
                         </div>
                         <div class="modal-footer col-md-12">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

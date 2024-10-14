@@ -68,7 +68,8 @@ public class Router {
         app.get("/reportes/{id}", Objects.requireNonNull(ServiceLocator.instanceOf(ReporteController.class))::show, TipoRol.ADMIN);
 
         app.get("/canjeProductos", Objects.requireNonNull(ServiceLocator.instanceOf(OfertaController.class))::index, TipoRol.COLABORADOR_HUMANO, TipoRol.COLABORADOR_JURIDICO);
-        app.post("/canjearProductos", Objects.requireNonNull(ServiceLocator.instanceOf(OfertaController.class))::save);
+        app.post("/cargarProducto", Objects.requireNonNull(ServiceLocator.instanceOf(OfertaController.class))::save);
+        app.post("/canjearProducto",Objects.requireNonNull(ServiceLocator.instanceOf(OfertaController.class))::canjear);
 
         app.get("/crearCuenta", Objects.requireNonNull(ServiceLocator.instanceOf(CrearCuentaController.class))::index);
         app.post("/crearCuenta", Objects.requireNonNull(ServiceLocator.instanceOf(CrearCuentaController.class))::save);
@@ -84,9 +85,6 @@ public class Router {
         app.get("/donarViandas", Objects.requireNonNull(ServiceLocator.instanceOf(DonacionViandaController.class))::index);
         app.post("/donarViandas", Objects.requireNonNull(ServiceLocator.instanceOf(DonacionViandaController.class))::save);
 
-
-        /*---Pantallas de Nahuel (todavía no terminado)---*/
-        //todavía está harcodeado y los verbos no están chequeados, estoy probando que levanten las pantallas
         app.get("/misHeladeras", Objects.requireNonNull(ServiceLocator.instanceOf(MisHeladerasController.class))::index,TipoRol.COLABORADOR_HUMANO, TipoRol.COLABORADOR_JURIDICO);
         app.post("/misHeladeras", Objects.requireNonNull(ServiceLocator.instanceOf(MisHeladerasController.class))::save);
 
