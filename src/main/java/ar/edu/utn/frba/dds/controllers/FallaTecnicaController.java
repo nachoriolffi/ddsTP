@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
+import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoIncidente;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
@@ -17,21 +18,18 @@ import static ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoIncidente.
 public class FallaTecnicaController extends BaseController implements ICrudViewsHandler {
 
     private RepoIncidente repositorioIncidentes = RepoIncidente.INSTANCE;
+
     @Override
     public void index(Context context) {
+
         Map<String, Object> model = new HashMap<>();
-        model.put("title", "fallaTecnica");
-        context.render("incidentes/reportarFallaTecnica.hbs", model);
-    }
-
-    @Override
-    public void show(Context context) {
-
-    }
-
-    @Override
-    public void create(Context context) {
-
+        Usuario usuario = verificarHumano(context, model);
+        if (usuario != null) {
+            model.put("title", "Reportar Falla Tecnica");
+            context.render("incidentes/reportarFallaTecnica.hbs", model);
+        } else {
+            context.status(403);
+        }
     }
 
     @Override
@@ -43,10 +41,7 @@ public class FallaTecnicaController extends BaseController implements ICrudViews
         nuevoIncidente.setDescripcion(context.formParam("descripcionFalla"));
         nuevoIncidente.setFecha(Date.valueOf(Objects.requireNonNull(context.formParam("diaYHora"))));
         nuevoIncidente.setPathFoto(context.formParam("fotoFalla"));
-
         this.repositorioIncidentes.agregar(nuevoIncidente);
-        //O BIEN LANZO UNA PANTALLA DE EXITO
-        //O BIEN REDIRECCIONO AL USER A LA PANTALLA DE LISTADO DE PRODUCTOS
         context.redirect("/fallaTecnica");
     }
 
@@ -62,6 +57,15 @@ public class FallaTecnicaController extends BaseController implements ICrudViews
 
     @Override
     public void delete(Context context) {
+
+    }
+    @Override
+    public void show(Context context) {
+
+    }
+
+    @Override
+    public void create(Context context) {
 
     }
 

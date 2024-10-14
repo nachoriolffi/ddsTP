@@ -46,9 +46,9 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
     @Override
     public void save(Context context) {
         Oferta oferta = new Oferta();
+
         UploadedFile file = context.uploadedFile("imagenProducto");
         if (file != null) {
-            System.out.println("NOMBRE IMAGEN: "+ file.filename());
             String contentType = file.contentType();
             if ("image/jpg".equals(contentType)||"image/jpeg".equals(contentType) || "image/png".equals(contentType)) {
                 FileUtil.streamToFile(file.content(), "src/main/resources/public/imagenes/" + file.filename()); // ESTO NO SE TOCA

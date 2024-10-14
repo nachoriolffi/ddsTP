@@ -5,9 +5,7 @@ import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoUsuario;
 import io.javalin.http.Context;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public abstract class BaseController {
 
@@ -18,13 +16,24 @@ public abstract class BaseController {
         return RepoUsuario.INSTANCE.buscar((Long) Objects.requireNonNull(ctx.sessionAttribute("usuario_id")));
     }
 
+    Set<String> validPaths = new HashSet<>(Set.of(
+            "/iniciarSesion",
+            "/crearCuenta"
+    ));
+
+    Set<String> validPathsColaborador = new HashSet<>(Set.of(
+            "/registroJuridico",
+            "/registroHumano"
+    ));
+
     protected Usuario verificarSesion(Context ctx, Map<String, Object> model) {
         Usuario usuario = usuarioLogueado(ctx);
         if (usuario != null) {
             model.put("inicioSesion", true);
             model.put("noInicioSesion", false);
         } else {
-            if (!ctx.path().equals("/iniciarSesion")) {
+            // Si no está logueado, exceptúa las rutas de iniciar sesión y registrarse
+            if (!validPaths.contains(ctx.path())) {
                 ctx.redirect("/iniciarSesion");
             }
             model.put("inicioSesion", false);

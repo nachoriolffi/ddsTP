@@ -18,7 +18,7 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "nombreUsuario", columnDefinition = "VARCHAR(255)", nullable = false)
+    @Column(name = "nombreUsuario", columnDefinition = "VARCHAR(255)")
     private String nombre;
     @Column(name = "clave", columnDefinition = "VARCHAR(255)", nullable = false)
     private String contrasenia;

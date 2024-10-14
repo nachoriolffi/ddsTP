@@ -18,49 +18,51 @@
                     <div class="col-lg-4 col-md-12">
                         <label class="form-label" for="tipo-razon-social">Tipo Razón Social</label>
                         <select class="form-select" id="tipo-razon-social" name="tipo-razon-social" required>
+                            <option value="" disabled selected>Seleccion una opcion</option>
                             <option value="gubernamental">Gubernamental</option>
                             <option value="ong">ONG</option>
                             <option value="empresa">Empresa</option>
                             <option value="institucion">Institución</option>
                         </select>
                     </div>
-                    <div class="col-lg-4 col-md-12">
+                    <div class="col-lg-8 col-md-12">
                         <label class="form-label" for="calle">Calle</label>
                         <input name="calle" class="form-control" type="text" id="calle" required>
                     </div>
-                    <div class="col-lg-4 col-md-12">
+                    <div class="col-lg-2 col-md-12">
                         <label class="form-label" for="altura">Altura</label>
                         <input name="altura" class="form-control" type="text" id="altura" required>
                     </div>
-                    <div class="col-lg-4 col-md-12">
+                    <div class="col-lg-2 col-md-12">
                         <label class="form-label" for="piso">Piso</label>
                         <input name="piso" class="form-control" type="text" id="piso">
                     </div>
-                    <h4 class="h4">Ingrese al menos un Medio de Contacto</h4>
                     <hr class="d-none d-md-block">
-                    <div class="col-lg-6 col-md-12">
-                        <label class="form-label" for="telefono">Número de Teléfono</label>
-                        <input name="telefono" class="form-control" type="text" id="telefono">
+                    <div class="col-lg-5 col-md-12">
+                        <input placeholder="Numero de Telefono" name="telefono" class="form-control" type="text" id="telefono">
+                        <div class="invalid-feedback">
+                            Si selecciona WhatsApp o Telegram, debe ingresar un número de teléfono.
+                        </div>
                     </div>
-                    <div class="col-lg-6 col-md-12">
-                        <label class="form-label" for="correo">Correo Electrónico</label>
-                        <input name="correo" class="form-control" type="email" id="correo">
+                    <div class="col-lg-7 ">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-5 col-md-5 text-center">
+                                <input class="form-check-input" type="checkbox" id="email" name="medios-contacto" value="email">
+                                <label class="form-check-label" for="email">Correo Electronico</label>
+                            </div>
+                            <div class="col-lg-4 col-md-4 text-center">
+                                <input class="form-check-input" type="checkbox" id="whatsapp" name="medios-contacto" value="whatsapp">
+                                <label class="form-check-label" for="whatsapp">WhatsApp</label>
+                            </div>
+                            <div class="col-lg-3 col-md-3 text-center">
+                                <input class="form-check-input" type="checkbox" id="telegram" name="medios-contacto" value="telegram">
+                                <label class="form-check-label" for="telegram">Telegram</label>
+                            </div>
+                        </div>
+                        <div class="invalid-feedback text-center" id="checkbox-error">
+                            Debe seleccionar al menos un medio de contacto.
+                        </div>
                     </div>
-
-                    <div class="col-lg-12 col-md-12">
-                        <label for="whatsapp">
-                            <input type="checkbox" id="whatsapp" name="medios-contacto" value="whatsapp">
-                            WhatsApp
-                        </label>
-                    </div>
-
-                    <div class="col-lg-12 col-md-12">
-                        <label for="telegram">
-                            <input type="checkbox" id="telegram" name="medios-contacto" value="telegram">
-                            Telegram
-                        </label>
-                    </div>
-
                     <hr class="my-3 border-0">
                     <div class="col-12 text-end">
                         <button class="btn btn-outline-primary" type="submit">¡Registrarse!</button>
@@ -70,6 +72,78 @@
             </div>
         </div>
     </div>
+<script>
+    (function () {
+        'use strict';
 
+        var forms = document.querySelectorAll('.needs-validation');
+
+        Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    var telefono = document.getElementById('telefono');
+                    var whatsapp = document.getElementById('whatsapp');
+                    var telegram = document.getElementById('telegram');
+                    var email = document.getElementById('email');
+                    var checkboxError = document.getElementById('checkbox-error');
+
+                    // Función para validar si al menos una checkbox está seleccionada
+                    function validarCheckboxes() {
+                        if (email.checked || whatsapp.checked || telegram.checked) {
+                            // Si al menos una está seleccionada, ocultar el mensaje de error y eliminar la clase is-invalid
+                            checkboxError.style.display = 'none';
+                            email.classList.remove('is-invalid');
+                            whatsapp.classList.remove('is-invalid');
+                            telegram.classList.remove('is-invalid');
+                            return true;
+                        } else {
+                            // Si ninguna está seleccionada, mostrar el mensaje de error y agregar la clase is-invalid
+                            checkboxError.style.display = 'block';
+                            email.classList.add('is-invalid');
+                            whatsapp.classList.add('is-invalid');
+                            telegram.classList.add('is-invalid');
+                            return false;
+                        }
+                    }
+
+                    // Función para validar si WhatsApp o Telegram están seleccionados
+                    function validarTelefono() {
+                        if (whatsapp.checked || telegram.checked) {
+                            // Si WhatsApp o Telegram están seleccionados, hacer el campo obligatorio
+                            telefono.setAttribute('required', 'required');
+                            // Si el campo de teléfono está vacío, mostrar mensaje de error
+                            if (telefono.value.trim() === "") {
+                                telefono.classList.add('is-invalid');
+                            } else {
+                                telefono.classList.remove('is-invalid');
+                            }
+                        } else {
+                            // Si no están seleccionados, eliminar la obligatoriedad
+                            telefono.removeAttribute('required');
+                            telefono.classList.remove('is-invalid');
+                        }
+                    }
+
+                    // Validación en tiempo de envío del formulario
+                    form.addEventListener('submit', function (event) {
+                        var checkboxesValid = validarCheckboxes(); // Valida si se seleccionó al menos una checkbox
+                        validarTelefono(); // Valida si el teléfono debe ser requerido
+
+                        // Validación nativa de Bootstrap y validación de las checkboxes
+                        if (!form.checkValidity() || !checkboxesValid) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+
+                        form.classList.add('was-validated');
+                    }, false);
+
+                    // Ejecutar la validación cuando se hace clic en los checkbox
+                    whatsapp.addEventListener('change', validarTelefono);
+                    telegram.addEventListener('change', validarTelefono);
+                });
+    })();
+
+
+</script>
 {{/partial}}
 {{> templates/base}}

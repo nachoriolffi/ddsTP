@@ -16,13 +16,40 @@ public class InicioSesionController extends BaseController implements ICrudViews
     public void index(Context ctx) {
 
         Map<String, Object> model = new HashMap<>();
-        model.put("title", "Iniciar Sesión");
-
         verificarSesion(ctx, model);
         String loginError = ctx.sessionAttribute("loginError");
+        model.put("title", "Iniciar Sesión");
         model.put("loginError", loginError);
 
         ctx.render("logs/inicioSesion.hbs", model);
+    }
+
+    public void login(Context ctx) {
+        ctx.sessionAttribute("loginError", null); // Limpia el mensaje de error de la sesión
+        String email = ctx.formParam("correoElectronico");
+        String password = ctx.formParam("clave");
+
+        Usuario usuario = RepoUsuario.INSTANCE.buscarPorEmail(email).orElse(null);
+
+        if (usuario == null || !usuario.getContrasenia().equals(password)) {
+            ctx.sessionAttribute("loginError", "Usuario o Clave Incorrectas");
+            ctx.redirect("/iniciarSesion");
+        }else{
+            // TODO TENEMOS QUE HACER QUE SE VAYANA A PANTALLAS MAIN DE CADA UNO
+            // TODO TIPO QUE DIGAN TODO LO PUEDAN HACER CON BOTONES COMO UN PANEL DE CONTROL
+            // TODO EN VEZ DE HACER REDIRECT A ESA PAGINAS QUE NO TIENEN MUCHO QUE VER
+            ctx.sessionAttribute("usuario_id", usuario.getId());
+            if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
+                ctx.redirect("/misHeladeras");
+            }else if (usuario.getRol().equals(TipoRol.ADMIN)){
+                ctx.redirect("/reportes");
+            }
+        }
+    }
+    public void logout(Context ctx){
+        ctx.consumeSessionAttribute("usuario_id");
+        ctx.consumeSessionAttribute("tipo_rol");
+        ctx.redirect("/iniciarSesion");
     }
 
     @Override
@@ -37,23 +64,6 @@ public class InicioSesionController extends BaseController implements ICrudViews
 
     @Override
     public void save(Context context) {
-
-//        String correoElectronico = context.formParam("correoElectronico");
-//        String clave = context.formParam(("clave"));
-//
-////        ctx ->{
-////            String correoElectronico = ctx.formParam("correoElectronico");
-////            String clave = ctx.formParam(("clave"));
-////        Producto nuevoProducto = new Producto();
-////
-////        nuevoProducto.setNombre(context.formParam("nombre"));
-////        nuevoProducto.setPrecio(Float.valueOf(context.formParam("precio")));
-////
-////        this.repositorioDeProductos.guardar(nuevoProducto);
-//        //O BIEN LANZO UNA PANTALLA DE EXITO
-//        //O BIEN REDIRECCIONO AL USER A LA PANTALLA DE LISTADO DE PRODUCTOS
-//        context.redirect("/productos");
-
     }
 
     @Override
@@ -70,34 +80,6 @@ public class InicioSesionController extends BaseController implements ICrudViews
     public void delete(Context context) {
 
     }
-
-    public void login(Context ctx) {
-        ctx.sessionAttribute("loginError", null); // Limpia el mensaje de error de la sesión
-        String email = ctx.formParam("correoElectronico");
-        String password = ctx.formParam("clave");
-
-        Usuario usuario = RepoUsuario.INSTANCE.buscarPorEmail(email).orElse(null);
-
-        if (usuario == null || !usuario.getContrasenia().equals(password)) {
-            ctx.sessionAttribute("loginError", "Usuario o Clave Incorrectas");
-            ctx.redirect("/iniciarSesion");
-        }else{
-            // TODO el else falta desarrollador un poco mas
-            ctx.sessionAttribute("usuario_id", usuario.getId());
-            if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
-                ctx.redirect("/misHeladeras");
-            }else if (usuario.getRol().equals(TipoRol.ADMIN)){
-                ctx.redirect("/reportes");
-            }
-        }
-    }
-    public void logout(Context ctx){
-        ctx.consumeSessionAttribute("usuario_id");
-        ctx.consumeSessionAttribute("tipo_rol");
-        ctx.redirect("/iniciarSesion");
-    }
-
-
 }
 
 

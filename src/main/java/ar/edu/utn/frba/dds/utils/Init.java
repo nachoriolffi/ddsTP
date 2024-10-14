@@ -115,10 +115,10 @@ public class Init implements WithSimplePersistenceUnit {
         //repoHeladeras.agregar(heladera2);
 
         Usuario usuario = new Usuario();
-        usuario.setNombre("Joaquin Belli");
-        usuario.setRol(TipoRol.COLABORADOR_JURIDICO);
+        usuario.setNombre("Ignacio Riolffi");
+        usuario.setRol(TipoRol.ADMIN);
         usuario.setContrasenia("1234");
-        usuario.setCorreoElectronico("joaco@gmail.com");
+        usuario.setCorreoElectronico("nacho@gmail.com");
         RepoUsuario repoUsuario = RepoUsuario.INSTANCE;
         //repoUsuario.agregar(usuario);
 
