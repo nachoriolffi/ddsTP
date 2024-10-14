@@ -52,9 +52,9 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
 
     @Override
     public void create(Context context) {
+
         RegistroHumanoService registroHumanosService = new RegistroHumanoService();
-        CuestionarioRespondido cuestionarioRespondido = registroHumanosService.processAndSaveResponses(context);
-        System.out.println(cuestionarioRespondido.getRespuestas().size());
+        Colaborador colaborador = registroHumanosService.processAndSaveResponses(context);
 
     }
 

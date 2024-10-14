@@ -129,10 +129,12 @@ public class Init implements WithSimplePersistenceUnit {
 // Crear preguntas de tipo STRING
         Pregunta nombrePregunta = new Pregunta();
         nombrePregunta.setNombre("nombre");
+        nombrePregunta.setDescripcionPregunta("Ingrese su nombre");
         nombrePregunta.setTipoPregunta(TipoPregunta.STRING);
 
         Pregunta apellidoPregunta = new Pregunta();
         apellidoPregunta.setNombre("apellido");
+        apellidoPregunta.setDescripcionPregunta("Ingrese su apellido");
         apellidoPregunta.setTipoPregunta(TipoPregunta.STRING);
 
 // Persistir preguntas de tipo STRING
@@ -175,7 +177,8 @@ public class Init implements WithSimplePersistenceUnit {
         cuestionario.agregarPregunta(multipleChoicePregunta);
 // Crear pregunta de tipo fecha
         Pregunta fechaPregunta = new Pregunta();
-        fechaPregunta.setNombre("Fecha de Nacimiento");
+        fechaPregunta.setNombre("fechaDeNacimiento");
+        fechaPregunta.setDescripcionPregunta("Ingrese su fecha de nacimiento");
         fechaPregunta.setTipoPregunta(TipoPregunta.FECHA);
 
 // Persistir pregunta de tipo fecha
