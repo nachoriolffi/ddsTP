@@ -27,31 +27,32 @@ public class RegistroHumanoService {
     RepoPregunta repoPregunta = RepoPregunta.INSTANCE;
     RepoRespuesta repoRespuesta = RepoRespuesta.INSTANCE;
     RepoOpcion repoOpcion = RepoOpcion.INSTANCE;
+
     public Colaborador processAndSaveResponses(Context context) {
         Usuario nuevoUsuario = context.sessionAttribute("nuevoUsuario");
         Colaborador colaborador = new Colaborador();
         colaborador.setUsuario(nuevoUsuario);
 
         Map<String, String> params = context.formParamMap().entrySet().stream()
-            .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().get(0)));
+                .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().get(0)));
 
-    CuestionarioRespondido cuestionarioRespondido = new CuestionarioRespondido();
-    RepoCuestionarioRespondido.INSTANCE.agregar(cuestionarioRespondido);
+        CuestionarioRespondido cuestionarioRespondido = new CuestionarioRespondido();
+        RepoCuestionarioRespondido.INSTANCE.agregar(cuestionarioRespondido);
 
-    params.entrySet().stream()
-            .filter(entry -> entry.getKey().startsWith("respuesta-"))
-            .forEach(entry -> {
-                Long preguntaId = Long.parseLong(entry.getKey().replace("respuesta-", ""));
-                String respuesta = entry.getValue();
-                Respuesta respuestaEntity = new Respuesta();
-                Pregunta pregunta = repoPregunta.buscar(preguntaId);
-                setearCampo(pregunta, respuesta, colaborador);
-                respuestaEntity.setPregunta(pregunta);
-                respuestaEntity.setRespuestaAbierta(respuesta);
-                respuestaEntity.setCuestionarioRespondido(cuestionarioRespondido); // Associate with CuestionarioRespondido
-                cuestionarioRespondido.agregarRespuesta(respuestaEntity);
-                repoRespuesta.agregar(respuestaEntity);
-            });
+        params.entrySet().stream()
+                .filter(entry -> entry.getKey().startsWith("respuesta-"))
+                .forEach(entry -> {
+                    Long preguntaId = Long.parseLong(entry.getKey().replace("respuesta-", ""));
+                    String respuesta = entry.getValue();
+                    Respuesta respuestaEntity = new Respuesta();
+                    Pregunta pregunta = repoPregunta.buscar(preguntaId);
+                    setearCampo(pregunta, respuesta, colaborador);
+                    respuestaEntity.setPregunta(pregunta);
+                    respuestaEntity.setRespuestaAbierta(respuesta);
+                    respuestaEntity.setCuestionarioRespondido(cuestionarioRespondido); // Associate with CuestionarioRespondido
+                    cuestionarioRespondido.agregarRespuesta(respuestaEntity);
+                    repoRespuesta.agregar(respuestaEntity);
+                });
 
         params.entrySet().stream()
                 .filter(entry -> entry.getKey().startsWith("opcion-"))
@@ -89,7 +90,7 @@ public class RegistroHumanoService {
                     }
                 });
 
-       // return cuestionarioRespondido;
+        // return cuestionarioRespondido;
 
         return colaborador;
     }
@@ -100,13 +101,23 @@ public class RegistroHumanoService {
         try {
             Field campo = claseColab.getDeclaredField(pregunta.getNombre());
             campo.setAccessible(true);
-            if (campo.getType().equals(LocalDate.class) && respuesta instanceof String) {
+            Class<?> tipoCampo = campo.getType();
+
+            Object valorConvertido;
+            if (tipoCampo.equals(LocalDate.class) && respuesta instanceof String) {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                LocalDate fecha = LocalDate.parse((String) respuesta, formatter);
-                campo.set(colaborador, fecha);
+                valorConvertido = LocalDate.parse((String) respuesta, formatter);
+            } else if (tipoCampo.equals(Integer.class)) {
+                valorConvertido = Integer.parseInt((String) respuesta);
+            } else if (tipoCampo.equals(Double.class)) {
+                valorConvertido = Double.parseDouble((String) respuesta);
+            } else if (tipoCampo.isEnum()) {
+                valorConvertido = Enum.valueOf((Class<Enum>) tipoCampo, (String) respuesta);
             } else {
-                campo.set(colaborador, respuesta);
+                valorConvertido = respuesta;
             }
+
+            campo.set(colaborador, valorConvertido);
         } catch (NoSuchFieldException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
