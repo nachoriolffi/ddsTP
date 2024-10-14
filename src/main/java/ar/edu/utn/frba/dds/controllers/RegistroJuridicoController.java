@@ -31,6 +31,7 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
 
     @Override
     public void index(Context context) {
+
         Usuario nuevoUsuario = context.sessionAttribute("nuevoUsuario");
         if (nuevoUsuario == null) {
             context.redirect("/crearCuenta");

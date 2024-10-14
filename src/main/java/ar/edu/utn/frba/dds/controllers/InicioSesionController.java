@@ -94,7 +94,7 @@ public class InicioSesionController extends BaseController implements ICrudViews
     public void logout(Context ctx){
         ctx.consumeSessionAttribute("usuario_id");
         ctx.consumeSessionAttribute("tipo_rol");
-        ctx.redirect("/inicionSesion");
+        ctx.redirect("/inicioSesion");
     }
 
 

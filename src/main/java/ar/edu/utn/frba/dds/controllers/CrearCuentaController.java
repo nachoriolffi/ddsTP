@@ -20,8 +20,7 @@ public class CrearCuentaController  extends BaseController implements ICrudViews
 
     @Override
     public void index(Context context) {
-        Map<String,Object> model = new HashMap<>();
-        model.put("title","Crear Cuenta");
+        Map<String, Object> model = new HashMap<>();
         String faltaRellenar = context.sessionAttribute("faltaRellenar");
         String clavesNoCoinciden = context.sessionAttribute("clavesNoCoinciden");
         String tipoNoSeleccionado = context.sessionAttribute("tipoNoSeleccionado");

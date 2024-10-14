@@ -24,25 +24,47 @@ public class DistribuirViandasController extends BaseController implements ICrud
     @Override
     public void index(Context context) {
 
-        Usuario usuario = usuarioLogueado(context);
-        if (usuario == null) {
-            context.redirect("/inicioSesion");
-        } /*else if (!usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)){
-            context.redirect("/error403");
-        }*/
-        else{
-            Colaborador colaboradorHumano = RepoColaborador.INSTANCE.buscar(usuario.getId());
-            List<DistribucionVianda> distribuciones = colaboradorHumano.getColaboracionesRealizadas().stream()
-                    .filter(c -> c instanceof DistribucionVianda)
-                    .map(c -> (DistribucionVianda) c)
-                    .collect(Collectors.toList());
 
-            Map<String, Object> model = new HashMap<>();
-            model.put("distribuciones", distribuciones);
-            model.put("title", "Distribuir Viandas");
+        Map<String, Object> model = new HashMap<>();
+        Usuario usuario = verificarSesion(context, model);
+        verificarHumano(context, model);
 
-            context.render("donaciones/distribuirViandas.hbs",model);
-        }
+        Colaborador colaboradorHumano = RepoColaborador.INSTANCE.buscar(usuario.getId());
+        List<DistribucionVianda> distribuciones = colaboradorHumano.getColaboracionesRealizadas().stream()
+                .filter(c -> c instanceof DistribucionVianda)
+                .map(c -> (DistribucionVianda) c)
+                .collect(Collectors.toList());
+
+
+        //Estoy buscando todas las distribuciones de viandas para probar, luego voy a buscar solo
+        //Las del usuario que inició la sesión
+
+        model.put("distribuciones", distribuciones);
+        model.put("title", "Distribuir Viandas");
+
+
+
+        context.render("donaciones/distribuirViandas.hbs",model);
+
+//        Usuario usuario = usuarioLogueado(context);
+//        if (usuario == null) {
+//            context.redirect("/inicioSesion");
+//        } /*else if (!usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)){
+//            context.redirect("/error403");
+//        } */
+//        else{
+//            Colaborador colaboradorHumano = RepoColaborador.INSTANCE.buscar(usuario.getId());
+//            List<DistribucionVianda> distribuciones = colaboradorHumano.getColaboracionesRealizadas().stream()
+//                    .filter(c -> c instanceof DistribucionVianda)
+//                    .map(c -> (DistribucionVianda) c)
+//                    .collect(Collectors.toList());
+//
+//            Map<String, Object> model = new HashMap<>();
+//            model.put("distribuciones", distribuciones);
+//            model.put("title", "Distribuir Viandas");
+//
+//            context.render("donaciones/distribuirViandas.hbs",model);
+//        }
     }
 
     @Override

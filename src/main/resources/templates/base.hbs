@@ -27,7 +27,6 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
                 {{#if inicioSesion}}
-
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                                aria-expanded="false">Donaciones</a>
@@ -38,7 +37,7 @@
                                     </li>
                                 {{/if}}
                                 {{#if esHumano}}
-                                    <li><a class="dropdown-item" href="/donacionViandas">Donar Viandas</a></li>
+                                    <li><a class="dropdown-item" href="/donarViandas">Donar Viandas</a></li>
                                     <li><a class="dropdown-item" href="/distribuirViandas">Distribuir Viandas</a></li>
                                     <li><a class="dropdown-item" href="/registroVulnerable">Registrar Personas
                                         Vulnerables</a></li>
@@ -56,17 +55,14 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/heladeras">Ver Heladeras</a>
                             </li>
-
-                    {{/if}}
+                        {{/if}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                            aria-expanded="false">Herramientas</a>
                         <ul class="dropdown-menu">
-
                                 {{#if esHumano}}
                                     <li><a class="dropdown-item" href="/fallaTecnica">Reportar Incidente</a></li>
                                 {{/if}}
-
                             {{#if esAdmin}}
                                 <li><a class="dropdown-item" href="/cargaMasiva">Cargar Archivo CSV</a></li>
                                 <li><a class="dropdown-item" href="/reportes">Ver Reportes PDF</a></li>

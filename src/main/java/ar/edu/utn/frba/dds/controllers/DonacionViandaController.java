@@ -31,16 +31,22 @@ public class DonacionViandaController  extends BaseController implements ICrudVi
     @Override
     public void index(Context context) {
 
+        Map<String, Object> model = new HashMap<>();
+
+        verificarHumano(context, model);
+
+
+
 //        RepoViandas repositorioViandas = RepoViandas.INSTANCE;
         List<DonacionVianda> donacionesViandas = repositorioDonacionVianda.buscarTodos();
+
+
 
         List<Vianda> viandas = donacionesViandas.stream()
                 .map(DonacionVianda::getVianda)
                 .filter(Objects::nonNull)
                 .toList();
 
-
-        Map<String, Object> model = new HashMap<>();
         model.put("title", "Donaciones de Viandas");
         model.put("viandas", viandas);
 

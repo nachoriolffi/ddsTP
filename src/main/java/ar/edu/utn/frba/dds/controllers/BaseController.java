@@ -43,10 +43,22 @@ public abstract class BaseController {
             model.put("esHumano", true);
             return usuario;
         }
+        else {
+            ctx.redirect("/error403");
+        }
         return null;
+
     }
 
-    protected Usuario verificarJuridico() {
+    protected Usuario verificarJuridico(Context ctx, Map<String, Object> model) {
+        Usuario usuario = verificarSesion(ctx, model);
+        if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
+            model.put("esJuridico", true);
+            return usuario;
+        }
+        else {
+            ctx.redirect("/error403");
+        }
         return null;
     }
 
