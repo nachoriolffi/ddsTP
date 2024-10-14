@@ -1,123 +1,48 @@
 {{#partial "contenido"}}
     <section class="container">
-        <!-- Título principal y dirección -->
-        <div class="row mb-4">
-            <div class="col-12">
-                <h3>Información de la Heladera</h3>
-                <h1>{{nombre}}</h1>
-                <p>{{direccion}}</p>
-            </div>
-        </div>
-
-        <!-- Mapa y viandas -->
-        <div class="row mb-4">
-            <div class="col-md-6">
-                <!-- Mapa -->
-                <div id="map" style="height: 400px;" class="border"></div>
-            </div>
-            <div class="col-md-6">
-                <!-- Tabla de Viandas -->
-                <h4>Viandas de la Heladera</h4>
-                <table class="table table-bordered table-sm">
-                    <thead>
-                    <tr>
-                        <th>Vianda</th>
-                        <th>Calorías</th>
-                        <th>Peso (En Gramos)</th>
-                        <th>Fecha de Caducidad</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {{#each viandas}}
-                        <tr>
-                            <td>{{this.comida}}</td>
-                            <td>{{this.calorias}}</td>
-                            <td>{{this.peso}}</td>
-                            <td>{{this.fechaCaducidad}}</td>
-                        </tr>
-                    {{/each}}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Aperturas realizadas y solicitudes de apertura -->
-        <div class="row mb-4">
-            <div class="col-md-6">
-                <!-- Tabla de Aperturas realizadas -->
-                <h4>Aperturas Realizadas</h4>
-                <table class="table table-bordered table-sm">
-                    <thead>
-                    <tr>
-                        <th>Fecha Apertura</th>
-                        <th>Colaborador</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {{#each aperturas}}
-                        <tr>
-                            <td>{{this.fecha}}</td>
-                            <td>{{this.colaborador}}</td>
-                        </tr>
-                    {{/each}}
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="col-md-6">
-                <!-- Tabla de solicitudes de apertura -->
-                <h4>Solicitudes de Apertura</h4>
-                <table class="table table-bordered table-sm">
-                    <thead>
-                    <tr>
-                        <th>Fecha Solicitud de Apertura</th>
-                        <th>Fecha Límite</th>
-                        <th>Tiempo Restante</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {{#each solicitudes}}
-                        <tr>
-                            <td>{{this.fechaSolicitud}}</td>
-                            <td>{{this.fechaLimite}}</td>
-                            <td>{{this.tiempoRestante}}</td>
-                        </tr>
-                    {{/each}}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Alertas -->
-        <div class="row mb-4">
-            <div class="col-12">
-                <h4>Alertas</h4>
-                <table class="table table-bordered table-sm">
-                    <thead>
-                    <tr>
-                        <th>Fecha</th>
-                        <th>Horario</th>
-                        <th>Alerta</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {{#each alertas}}
-                        <tr>
-                            <td>{{this.fecha}}</td>
-                            <td>{{this.horario}}</td>
-                            <td>{{this.alerta}}</td>
-                        </tr>
-                    {{/each}}
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- Botón para cerrar y volver a la página anterior -->
-        <div class="row">
-            <div class="col-12 text-end">
-                <button type="button" class="btn btn-warning" onclick="window.history.back();">Cerrar</button>
-            </div>
+        <h1>{{nombre}}</h1>
+        <p>Dirección: {{direccion}}</p>
+        <div id="map" style="height: 400px;" class="border"></div>
+        <h2>Viandas</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Calorías</th>
+                <th>Peso (En Gramos)</th>
+                <th>Fecha de Caducidad</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each viandas}}
+                <tr>
+                    <td>{{this.nombre}}</td>
+                    <td>{{this.calorias}}</td>
+                    <td>{{this.peso}}</td>
+                    <td>{{this.caducidad}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+        <h2>Aperturas</h2>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Fecha Apertura</th>
+                <th>Colaborador</th>
+            </tr>
+            </thead>
+            <tbody>
+            {{#each aperturas}}
+                <tr>
+                    <td>{{this.fecha}}</td>
+                    <td>{{this.colaborador}}</td>
+                </tr>
+            {{/each}}
+            </tbody>
+        </table>
+        <div class="text-end">
+            <button type="button" class="btn btn-primary" onclick="window.history.back();">Cerrar</button>
         </div>
     </section>
 {{/partial}}
