@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -19,12 +20,15 @@ public class Respuesta {
     @JoinColumn(name = "pregunta_id")
     private Pregunta pregunta;
 
-    @ManyToOne
-    @JoinColumn(name = "cuestionarioRespondido_id")
-    private CuestionarioRespondido cuestionarioRespondido;
+   @ManyToOne
+   @JoinColumn(name = "cuestionarioRespondido_id")
+   private CuestionarioRespondido cuestionarioRespondido;
 
     @Column(name = "respuestaAbierta", columnDefinition = "TEXT")
     private String respuestaAbierta;
+
+    @Column(name = "fecha")
+    private Date fecha;
 
     @ManyToMany
     @JoinTable(

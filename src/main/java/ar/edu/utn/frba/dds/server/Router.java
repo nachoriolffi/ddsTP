@@ -18,13 +18,6 @@ public class Router {
 
     public static void init(Javalin app) {
 
-        RepoColaborador repoColaborador = new RepoColaborador();
-        RepoReporte repoReporte = RepoReporte.INSTANCE;
-        ColaboradorController colaboradorController = new ColaboradorController(repoColaborador);
-
-        RepoOferta repoOferta = new RepoOferta();
-        OfertaController ofertaController = new OfertaController();
-
         app.error(404, ctx -> {
             ctx.render("errors/error404.hbs");
         });
@@ -63,7 +56,7 @@ public class Router {
         // donacion de dinero
         app.get("/donacionDinero", Objects.requireNonNull(ServiceLocator.instanceOf(DonarDineroController.class))::index, TipoRol.COLABORADOR_HUMANO, TipoRol.COLABORADOR_JURIDICO);
         app.post("/donacionDinero", Objects.requireNonNull(ServiceLocator.instanceOf(DonarDineroController.class))::save, TipoRol.COLABORADOR_HUMANO, TipoRol.COLABORADOR_JURIDICO);
-
+        app.post("/donacionDinero/{id}/cancelar", Objects.requireNonNull(ServiceLocator.instanceOf(DonarDineroController.class))::cancelar, TipoRol.COLABORADOR_HUMANO,TipoRol.COLABORADOR_JURIDICO);
         // encargarseDeHeladera
         app.get("/encargarseHeladera", Objects.requireNonNull(ServiceLocator.instanceOf(EncargarseHeladeraController.class))::index, TipoRol.COLABORADOR_JURIDICO);
         app.post("/encargarseHeladera", Objects.requireNonNull(ServiceLocator.instanceOf(EncargarseHeladeraController.class))::save, TipoRol.COLABORADOR_JURIDICO);
@@ -94,12 +87,14 @@ public class Router {
 
         /*---Pantallas de Nahuel (todavía no terminado)---*/
         //todavía está harcodeado y los verbos no están chequeados, estoy probando que levanten las pantallas
-        app.get("/misHeladeras", Objects.requireNonNull(ServiceLocator.instanceOf(MisHeladerasController.class))::index);
+        app.get("/misHeladeras", Objects.requireNonNull(ServiceLocator.instanceOf(MisHeladerasController.class))::index,TipoRol.COLABORADOR_HUMANO, TipoRol.COLABORADOR_JURIDICO);
+        app.post("/misHeladeras", Objects.requireNonNull(ServiceLocator.instanceOf(MisHeladerasController.class))::save);
 
         app.get("/registroJuridico", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroJuridicoController.class))::index);
         app.post("/registroJuridico", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroJuridicoController.class))::save);
 
         app.get("/registroHumano", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroHumanoController.class))::index);
+        app.post("/registroHumano", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroHumanoController.class))::create);
 
         app.get("/distribuirViandas", Objects.requireNonNull(ServiceLocator.instanceOf(DistribuirViandasController.class))::index);
         app.post("/distribuirViandas", Objects.requireNonNull(ServiceLocator.instanceOf(DistribuirViandasController.class))::save);
@@ -110,4 +105,3 @@ public class Router {
     }
 
 }
-

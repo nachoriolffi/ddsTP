@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoUsuario;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -22,6 +23,36 @@ public class InicioSesionController extends BaseController implements ICrudViews
         model.put("loginError", loginError);
 
         ctx.render("logs/inicioSesion.hbs", model);
+    }
+
+    @Override
+    public void show(Context context) {
+
+    }
+
+    @Override
+    public void create(Context context) {
+
+    }
+
+    @Override
+    public void save(Context context) throws ParseException {
+
+    }
+
+    @Override
+    public void edit(Context context) {
+
+    }
+
+    @Override
+    public void update(Context context) {
+
+    }
+
+    @Override
+    public void delete(Context context) {
+
     }
 
     public void login(Context ctx) {
@@ -52,34 +83,7 @@ public class InicioSesionController extends BaseController implements ICrudViews
         ctx.redirect("/iniciarSesion");
     }
 
-    @Override
-    public void show(Context context) {
 
-    }
-
-    @Override
-    public void create(Context context) {
-
-    }
-
-    @Override
-    public void save(Context context) {
-    }
-
-    @Override
-    public void edit(Context context) {
-
-    }
-
-    @Override
-    public void update(Context context) {
-
-    }
-
-    @Override
-    public void delete(Context context) {
-
-    }
 }
 
 

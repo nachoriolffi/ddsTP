@@ -17,8 +17,11 @@ public class Pregunta {
     @GeneratedValue ( strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "nombrePregunta", columnDefinition = "VARCHAR(255)")
-    private String nombre;
+    @Column(name = "descripcionPregunta", columnDefinition = "VARCHAR(255)")
+    private String descripcionPregunta;
+
+    @Column(name = "nombre", columnDefinition = "VARCHAR(255)")
+    private String nombre; //esto representa a que campo desesa que se mapee la respuesta al momento de crear la clase que necestie un cuestionario para crearse
 
     @Column(name = "esObligatoria")
     private Boolean esObligatoria;
@@ -44,5 +47,7 @@ public class Pregunta {
             return this.esObligatoria;
         }
 
-
+    public String getTipoPregunta() {
+        return tipoPregunta.toString();
+    }
 }

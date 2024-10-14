@@ -186,7 +186,7 @@ public class Colaborador {
             Class<Colaborador> claseColab = Colaborador.class;
             try {
                 Field campo = claseColab.getDeclaredField(cuestionarioRespondido.getRespuestas().get(i).getPregunta().getNombre());
-                if (cuestionarioRespondido.getRespuestas().get(i).getPregunta().getNombre().equals("fechaDeNacimiento")) {
+                if (cuestionarioRespondido.getRespuestas().get(i).getPregunta().getTipoPregunta().equals("FECHA")) {
                     campo.set(this, StringToFecha(respuesta));
                     continue;
                 }

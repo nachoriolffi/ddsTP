@@ -14,6 +14,10 @@ import java.util.Date;
 @Table(name="doancion_dinero")
 public class DonacionDinero extends FormaDeColaboracion {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     @Column(name= "fecha", columnDefinition = "DATE")
     private Date fechaPeriodica; // esta es la periodica, que se da el valor cuando se vuelve a donar si es mensual
 

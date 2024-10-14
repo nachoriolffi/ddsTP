@@ -29,7 +29,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto">
                 {{#if inicioSesion}}
-                    {{#if esColaborador}}
+
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                                aria-expanded="false">Donaciones</a>
@@ -58,17 +58,17 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="/heladeras">Ver Heladeras</a>
                             </li>
-                        {{/if}}
+
                     {{/if}}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                            aria-expanded="false">Herramientas</a>
                         <ul class="dropdown-menu">
-                            {{#if esColaborador}}
+
                                 {{#if esHumano}}
                                     <li><a class="dropdown-item" href="/fallaTecnica">Reportar Incidente</a></li>
                                 {{/if}}
-                            {{/if}}
+
                             {{#if esAdmin}}
                                 <li><a class="dropdown-item" href="/cargaMasiva">Cargar Archivo CSV</a></li>
                                 <li><a class="dropdown-item" href="/reportes">Ver Reportes PDF</a></li>
@@ -87,7 +87,7 @@
                 {{/if}}
                 {{#if noInicioSesion}}
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="/iniciarSesion">Iniciar Sesión</a>
+                        <a class="nav-link" aria-current="page" href="/inicioSesion">Iniciar Sesión</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="/crearCuenta">Registrarse</a>

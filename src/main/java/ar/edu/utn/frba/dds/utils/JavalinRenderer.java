@@ -43,6 +43,51 @@ public class JavalinRenderer implements FileRenderer {
                 return options.inverse(context); // If they are not equal, return the inverse block
             }
         });
+        handlebars.registerHelper("isRespuestaUnica", (context, options) -> {
+            Object param = options.param(0);
+            if ("RESPUESTAUNICA".equals(param)) {
+                return options.fn(context);
+            } else {
+                return options.inverse(context);
+            }
+        });
+
+        handlebars.registerHelper("isMultipleChoice", (context, options) -> {
+            Object param = options.param(0);
+            if ("MULTIPLECHOICE".equals(param)) {
+                return options.fn(context);
+            } else {
+                return options.inverse(context);
+            }
+        });
+
+        handlebars.registerHelper("isVerdaderoFalso", (context, options) -> {
+            Object param = options.param(0);
+            if ("VERDADEROFALSO".equals(param)) {
+                return options.fn(context);
+            } else {
+                return options.inverse(context);
+            }
+        });
+
+        handlebars.registerHelper("isString", (context, options) -> {
+            Object param = options.param(0);
+            if ("STRING".equals(param)) {
+                return options.fn(context);
+            } else {
+                return options.inverse(context);
+            }
+        });
+
+        handlebars.registerHelper("isFecha", (context, options) -> {
+            Object param = options.param(0);
+            if ("FECHA".equals(param)) {
+                return options.fn(context);
+            } else {
+                return options.inverse(context);
+            }
+        });
+
 
         return handlebars;
     }

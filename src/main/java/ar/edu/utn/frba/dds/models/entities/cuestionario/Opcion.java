@@ -28,7 +28,10 @@ public class Opcion {
     @JoinColumn(name = "pregunta_id")
     private Pregunta pregunta;
 
-    public Opcion(String texto, boolean esCorrecta) {
+    public Opcion() {
+    }
+
+    public Opcion(String texto) {
         this.texto = texto;
         this.esCorrecta = esCorrecta;
         this.respuestas = new ArrayList<>();
