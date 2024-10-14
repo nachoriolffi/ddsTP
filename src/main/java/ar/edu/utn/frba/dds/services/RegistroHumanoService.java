@@ -6,10 +6,7 @@ import ar.edu.utn.frba.dds.models.entities.cuestionario.Opcion;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Respuesta;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoCuestionarioRespondido;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoOpcion;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoPregunta;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRespuesta;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import io.javalin.http.Context;
 
 import java.lang.reflect.Field;
@@ -27,12 +24,12 @@ public class RegistroHumanoService {
     RepoPregunta repoPregunta = RepoPregunta.INSTANCE;
     RepoRespuesta repoRespuesta = RepoRespuesta.INSTANCE;
     RepoOpcion repoOpcion = RepoOpcion.INSTANCE;
-
+    RepoUsuario repoUsuario = RepoUsuario.INSTANCE;
     public Colaborador processAndSaveResponses(Context context) {
         Usuario nuevoUsuario = context.sessionAttribute("nuevoUsuario");
         Colaborador colaborador = new Colaborador();
         colaborador.setUsuario(nuevoUsuario);
-
+        repoUsuario.agregar(nuevoUsuario);
         Map<String, String> params = context.formParamMap().entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().get(0)));
 

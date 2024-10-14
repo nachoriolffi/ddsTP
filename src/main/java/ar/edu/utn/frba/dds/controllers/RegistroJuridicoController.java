@@ -13,6 +13,7 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoCuestionario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoDireccion;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoUsuario;
+import ar.edu.utn.frba.dds.services.RegistroHumanoService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
@@ -30,34 +31,21 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
 
     @Override
     public void index(Context context) {
-        /*Usuario usuario = usuarioLogueado(context);
-        if (usuario == null) {
-            context.redirect("/inicioSesion");
-        } else if (!usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
-            context.redirect("/error403");
-        }
-        else{
-            Map<String, Object> model = new HashMap<>();
-            model.put("title", "Registro Juridico");
 
-            context.render("logs/registroJuridico.hbs",model);
-        }*/
-
-
-        Map<String, Object> model = new HashMap<>();
         Usuario nuevoUsuario = context.sessionAttribute("nuevoUsuario");
         if (nuevoUsuario == null) {
             context.redirect("/crearCuenta");
             return;
         }
         try {
-            Cuestionario cuestionario = RepoCuestionario.INSTANCE.buscar(2L); //los cuestionarios se cargan en el init al inicio del proghrama de ultima despues agregamos que busque el cuestionario mas viejo
+            Cuestionario cuestionario = RepoCuestionario.INSTANCE.buscar(1L);
             if (cuestionario == null) {
                 context.status(404).result("Cuestionario no encontrado");
             }
             Map<String, List<Pregunta>> categorizedQuestions = cuestionario.getPreguntas().stream()
                     .collect(Collectors.groupingBy(Pregunta::getTipoPregunta));
 
+            Map<String, Object> model = new HashMap<>();
             model.put("title", "Registro Juridico");
             model.put("usuario", nuevoUsuario);
             model.put("cuestionario", cuestionario);
@@ -71,7 +59,7 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
 
     @Override
     public void save(Context context) throws ParseException {
-        Usuario nuevoUsuario = context.sessionAttribute("nuevoUsuario");
+       /* Usuario nuevoUsuario = context.sessionAttribute("nuevoUsuario");
         if (nuevoUsuario == null) {
             context.redirect("/crearCuenta");
             return;
@@ -126,7 +114,12 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
         colaboradorJuridico.setContacto(contacto);
         repoUsuario.agregar(nuevoUsuario);
         repoColaborador.agregar(colaboradorJuridico);
+        context.redirect("/inicioSesion");*/
 
+        RegistroHumanoService registroHumanosService = new RegistroHumanoService();
+        Colaborador colaborador = registroHumanosService.processAndSaveResponses(context);
+        colaborador.setTipoPersona(TipoPersona.JURIDICA);
+        RepoColaborador.INSTANCE.agregar(colaborador);
     }
 
     @Override

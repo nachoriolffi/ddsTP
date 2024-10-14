@@ -33,6 +33,11 @@
                             {{clavesNoCoinciden}}
                         </div>
                     {{/if}}
+                    {{#if claveNoSegura}}
+                        <div class="alert alert-primary" role="alert">
+                            {{claveNoSegura}}
+                        </div>
+                    {{/if}}
                     <div>
                         <label class="form-label" for="validationCustom01">Correo Electrónico</label>
                         <input id="validationCustom01" name="email" type="email" class="form-control"

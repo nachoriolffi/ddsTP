@@ -27,7 +27,7 @@
                     <tbody class="table-group-divider">
                     {{#each heladeras}}
                         <tr>
-                            <td><a href="#" data-bs-toggle="modal" data-bs-target="#heladeraModal" data-id="{{this.id}}" >{{this.nombre}}</a></td>
+                            <td><a href="/heladeras/{{this.id}}">{{this.nombre}}</a></td>
                             <td>{{this.direccion}}</td>
                             <td>{{this.max_viandas}}</td>
                             <td>{{this.viandas_restantes}}</td>
@@ -88,112 +88,6 @@
             </div>
         </div>
 
-        <div class="modal fade" id="heladeraModal" tabindex="-1" aria-labelledby="heladeraModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="heladeraModalLabel">Información de la Heladera</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="row">
-                            <h4>{{heladera.nombre}}</h4>
-                            <div class="col-md-6 col-sm-12">
-                                <p>{{heladera.direccion}}</p>
-                                <div class="rounded" id="map" style="height: 400px;"></div>
-                            </div>
-                            <div class="col-md-6">
-                                <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
-                                    <caption>Viandas de la Heladera</caption>
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">Vianda</th>
-                                        <th scope="col">Calorías</th>
-                                        <th scope="col">Peso (En Gramos)</th>
-                                        <th scope="col">Fecha de Caducidad</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody class="table-group-divider">
-                                    {{#each heladera.viandas}}
-                                        <tr>
-                                            <td>{{this.nombre}}</td>
-                                            <td>{{this.calorias}}</td>
-                                            <td>{{this.peso}}</td>
-                                            <td>{{this.caducidad}}</td>
-                                        </tr>
-                                    {{/each}}
-                                    </tbody>
-                                </table>
-                                <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
-                                    <caption>Solicitudes de Apertura</caption>
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">Fecha Solicitud de Apertura</th>
-                                        <th scope="col">Fecha Límite</th>
-                                        <th scope="col">Tiempo Restante</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody class="table-group-divider">
-                                    {{#each heladera.solicitudes}}
-                                        <tr>
-                                            <td>{{this.fecha_solicitud}}</td>
-                                            <td>{{this.fecha_limite}}</td>
-                                            <td>{{this.tiempo_restante}}</td>
-                                        </tr>
-                                    {{/each}}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
-                                    <caption>Aperturas Realizadas</caption>
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">Fecha Apertura</th>
-                                        <th scope="col">Colaborador</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody class="table-group-divider">
-                                    {{#each heladera.aperturas}}
-                                        <tr>
-                                            <td>{{this.fecha}}</td>
-                                            <td>{{this.colaborador}}</td>
-                                        </tr>
-                                    {{/each}}
-                                    </tbody>
-                                </table>
-                            </div>
-                            <div class="col-6">
-                                <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
-                                    <caption>Alertas</caption>
-                                    <thead>
-                                    <tr>
-                                        <th scope="col">Fecha</th>
-                                        <th scope="col">Horario</th>
-                                        <th scope="col">Alerta</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody class="table-group-divider">
-                                    {{#each heladera.alertas}}
-                                        <tr>
-                                            <td>{{this.fecha}}</td>
-                                            <td>{{this.horario}}</td>
-                                            <td>{{this.tipo}}</td>
-                                        </tr>
-                                    {{/each}}
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-outline-primary" data-bs-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
 
 
@@ -203,57 +97,125 @@
 {{#partial "agregarScript"}}
     <script src="/js/validacionDatos.js"></script>
     <script src="/js/mapa.js"></script>
-    <script> document.addEventListener('DOMContentLoaded', (event) => {
-    const heladeraModal = document.getElementById('heladeraModal');
+    <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const heladeraModal = document.getElementById('heladeraModal');
 
-    heladeraModal.addEventListener('show.bs.modal', function (event) {
-        const button = event.relatedTarget; // Elemento que disparó el modal
-        const heladeraId = button.getAttribute('data-id'); // Extraer el ID de heladera
+        heladeraModal.addEventListener('show.bs.modal', function (event) {
+            const button = event.relatedTarget; // Element that triggered the modal
+            const heladeraId = button.getAttribute('data-id'); // Extract the fridge ID
 
-        // Hacer una solicitud AJAX para obtener los detalles de la heladera
-        fetch(`/heladeras/${heladeraId}`)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Actualizar el contenido del modal con los datos de la heladera
-                document.querySelector('#heladeraModalLabel').textContent = data.nombre;
-                document.querySelector('#heladeraModal .modal-body').innerHTML = `
-                    <p>${data.direccion}</p>
-                    <div class="rounded" id="map" style="height: 400px;"></div>
-                    <!-- Aquí puedes agregar más detalles de la heladera -->
-                `;
-                // Inicializar el mapa con la ubicación de la heladera
-                initMap(data.latitud, data.longitud);
-            })
-            .catch(error => {
-                console.error('There was a problem with the fetch operation:', error);
-                document.querySelector('#heladeraModal .modal-body').innerHTML = `
-                    <p>Error al cargar los detalles de la heladera.</p>
-                `;
+            // Make an AJAX request to get the fridge details
+            fetch(`/heladeras/${heladeraId}`)
+                .then(response => {
+                    console.log('Response status:', response.status); // Log response status
+                    if (!response.ok) {
+                        throw new Error(`Error: ${response.status} - ${response.statusText}`); // Improved error handling
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log('Data received:', data); // Log received data
+
+                    // Update the modal content with fridge data
+                    document.querySelector('#heladeraModalLabel').textContent = data.nombre;
+                    document.querySelector('#heladeraModal .modal-body').innerHTML = `
+                        <div class="row">
+                            <h4>${data.nombre}</h4>
+                            <div class="col-md-6 col-sm-12">
+                                <p>${data.direccion}</p>
+                                <div class="rounded" id="map" style="height: 400px;"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                                    <caption>Viandas de la Heladera</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Vianda</th>
+                                            <th scope="col">Calorías</th>
+                                            <th scope="col">Peso (En Gramos)</th>
+                                            <th scope="col">Fecha de Caducidad</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-group-divider">
+                                        ${data.viandas.map(vianda => `
+                                            <tr>
+                                                <td>${vianda.nombre}</td>
+                                                <td>${vianda.calorias}</td>
+                                                <td>${vianda.peso}</td>
+                                                <td>${vianda.caducidad}</td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                                    <caption>Aperturas Realizadas</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Fecha Apertura</th>
+                                            <th scope="col">Colaborador</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-group-divider">
+                                        ${data.aperturas.map(apertura => `
+                                            <tr>
+                                                <td>${apertura.fecha}</td>
+                                                <td>${apertura.colaborador}</td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-6">
+                                <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                                    <caption>Alertas</caption>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Fecha</th>
+                                            <th scope="col">Horario</th>
+                                            <th scope="col">Alerta</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-group-divider">
+                                        ${data.alertas.map(alerta => `
+                                            <tr>
+                                                <td>${alerta.fecha}</td>
+                                                <td>${alerta.horario}</td>
+                                                <td>${alerta.tipo}</td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    `;
+
+                    // Initialize the map with the heladera's coordinates
+                    initMap(data.latitud, data.longitud);
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
+        });
+
+        // Function to initialize the map
+        function initMap(lat, lng) {
+            const map = new google.maps.Map(document.getElementById("map"), {
+                center: { lat: lat, lng: lng },
+                zoom: 15,
             });
+            new google.maps.Marker({
+                position: { lat: lat, lng: lng },
+                map: map,
+                title: "Heladera Location",
+            });
+        }
     });
+</script>
 
-    heladeraModal.addEventListener('hidden.bs.modal', function () {
-        // Limpiar el contenido del modal cuando se cierra
-        document.querySelector('#heladeraModalLabel').textContent = '';
-        document.querySelector('#heladeraModal .modal-body').innerHTML = '';
-    });
-});
-
-function initMap(lat, lng) {
-    // Inicializar el mapa con la ubicación proporcionada
-    const map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: lat, lng: lng },
-        zoom: 15
-    });
-    new google.maps.Marker({
-        position: { lat: lat, lng: lng },
-        map: map
-    });
-} </script>
 {{/partial}}
 {{> templates/base }}

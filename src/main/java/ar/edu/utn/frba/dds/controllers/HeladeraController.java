@@ -8,6 +8,7 @@ import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseCl
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoCoordenada;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoModelo;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoViandas;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
@@ -33,11 +34,26 @@ public class HeladeraController extends BaseController implements ICrudViewsHand
         context.render("heladeras/heladeras.hbs",model);
 
     }
+
     @Override
-    public void show(Context context){
+    public void show(Context context) {
+        String heladeraId = context.pathParam("heladeraId");
+        Heladera heladera = repositorioHeladeras.buscar(Long.parseLong(heladeraId));
 
+        if (heladera != null) {
+            Map<String, Object> model = new HashMap<>();
+            model.put("nombre", heladera.getNombre());
+            model.put("direccion", "avenida medrano 951");
+            model.put("latitud", heladera.getCoordenada().getLatitud());
+            model.put("longitud", heladera.getCoordenada().getLongitud());
+            model.put("viandas", RepoViandas.INSTANCE.buscarViandasPorHeladeraId(heladera.getId()));
+            model.put("aperturas", heladera.getAperturas());
+            // model.put("alertas", heladera.getAlertas());
 
-
+            context.render("heladeras/verHeladera.hbs", model);
+        } else {
+            context.status(404).result("Heladera no encontrada");
+        }
     }
     @Override
    public void create(Context context) {

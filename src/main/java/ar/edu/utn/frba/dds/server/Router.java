@@ -49,8 +49,8 @@ public class Router {
         });
 
         // iniciarSesion
-        app.get("/iniciarSesion", Objects.requireNonNull(ServiceLocator.instanceOf(InicioSesionController.class))::index);
-        app.post("/iniciarSesion", Objects.requireNonNull(ServiceLocator.instanceOf(InicioSesionController.class))::login);
+        app.get("/inicioSesion", Objects.requireNonNull(ServiceLocator.instanceOf(InicioSesionController.class))::index);
+        app.post("/inicioSesion", Objects.requireNonNull(ServiceLocator.instanceOf(InicioSesionController.class))::login);
         app.post("/cerrarSesion", Objects.requireNonNull(ServiceLocator.instanceOf(InicioSesionController.class))::logout);
 
         // donacion de dinero
@@ -99,7 +99,7 @@ public class Router {
 
         app.get("/heladeras", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::index);
         app.post("/heladeras/create", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::create);
-        app.get("/heladeras/{id}", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::show);
+        app.get("/heladeras/{heladeraId}", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::show);
     }
 
 }
