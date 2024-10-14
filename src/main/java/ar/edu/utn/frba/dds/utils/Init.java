@@ -173,7 +173,16 @@ public class Init implements WithSimplePersistenceUnit {
 
 // Agregar pregunta de opción múltiple al cuestionario
         cuestionario.agregarPregunta(multipleChoicePregunta);
+// Crear pregunta de tipo fecha
+        Pregunta fechaPregunta = new Pregunta();
+        fechaPregunta.setNombre("Fecha de Nacimiento");
+        fechaPregunta.setTipoPregunta(TipoPregunta.FECHA);
 
+// Persistir pregunta de tipo fecha
+        RepoPregunta.INSTANCE.agregar(fechaPregunta);
+
+// Agregar pregunta de tipo fecha al cuestionario
+        cuestionario.agregarPregunta(fechaPregunta);
 // Persistir el cuestionario
         RepoCuestionario.INSTANCE.agregar(cuestionario);
     }

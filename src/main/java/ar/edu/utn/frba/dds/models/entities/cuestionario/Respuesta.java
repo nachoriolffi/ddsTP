@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -25,6 +26,9 @@ public class Respuesta {
 
     @Column(name = "respuestaAbierta", columnDefinition = "TEXT")
     private String respuestaAbierta;
+
+    @Column(name = "fecha")
+    private Date fecha;
 
     @ManyToMany
     @JoinTable(

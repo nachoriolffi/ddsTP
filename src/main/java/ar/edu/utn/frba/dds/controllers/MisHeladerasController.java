@@ -4,11 +4,17 @@ import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
 import java.text.ParseException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MisHeladerasController extends BaseController implements ICrudViewsHandler {
     @Override
     public void index(Context context) {
-        context.render("donaciones/misHeladeras.hbs");
+
+        Map<String, Object> model = new HashMap<>();
+        model.put("title", "Mis Heladeras");
+
+        context.render("donaciones/misHeladeras.hbs", model);
     }
 
     @Override
