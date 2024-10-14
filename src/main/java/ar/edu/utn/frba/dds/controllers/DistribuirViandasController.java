@@ -31,7 +31,7 @@ public class DistribuirViandasController extends BaseController implements ICrud
             context.redirect("/error403");
         }*/
         else{
-            Colaborador colaboradorHumano = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
+            Colaborador colaboradorHumano = RepoColaborador.INSTANCE.buscar(usuario.getId());
             List<DistribucionVianda> distribuciones = colaboradorHumano.getColaboracionesRealizadas().stream()
                     .filter(c -> c instanceof DistribucionVianda)
                     .map(c -> (DistribucionVianda) c)
@@ -94,7 +94,7 @@ public class DistribuirViandasController extends BaseController implements ICrud
 
         Usuario usuario = usuarioLogueado(context);
         usuario.getId();
-        Colaborador colaboradorHumano = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
+        Colaborador colaboradorHumano = RepoColaborador.INSTANCE.buscar(usuario.getId());
         colaboradorHumano.agregarColaboracionRealizada(distribucionVianda);
         RepoColaborador.INSTANCE.modificar(colaboradorHumano);
 
