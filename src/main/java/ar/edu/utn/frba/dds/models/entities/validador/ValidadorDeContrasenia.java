@@ -11,6 +11,7 @@ public class ValidadorDeContrasenia {
 
     public ValidadorDeContrasenia(){
         this.validadores= new ArrayList<FormaValidar>();
+
     }
 
     public ValidadorDeContrasenia(List<FormaValidar> validadores){
@@ -32,6 +33,11 @@ public class ValidadorDeContrasenia {
 
     public void agregarValidador(FormaValidar validador){
         validadores.add(validador);
+    }
+
+    public void instanciarFormaValidar(){
+        this.agregarValidador(new FormaValidarLongitud());
+        this.agregarValidador(new FormaValidar10MilPeoresContrasenias());
     }
 
 }
