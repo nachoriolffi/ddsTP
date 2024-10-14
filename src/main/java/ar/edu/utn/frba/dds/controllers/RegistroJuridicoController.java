@@ -22,14 +22,15 @@ import java.util.Map;
 public class RegistroJuridicoController extends BaseController implements ICrudViewsHandler {
     @Override
     public void index(Context context) {
-        Usuario usuario = usuarioLogueado(context);
+//        Usuario usuario = usuarioLogueado(context);
+        Map<String, Object> model = new HashMap<>();
+        Usuario usuario = verificarJuridico(context, model);
         if (usuario == null) {
             context.redirect("/inicioSesion");
         } else if (!usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
             context.redirect("/error403");
         }
         else{
-            Map<String, Object> model = new HashMap<>();
             model.put("title", "Registro Juridico");
 
             context.render("logs/registroJuridico.hbs",model);

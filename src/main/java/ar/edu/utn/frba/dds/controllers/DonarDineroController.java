@@ -21,6 +21,10 @@ public class DonarDineroController extends BaseController implements ICrudViewsH
 
         Map<String, Object> model = new HashMap<>();
 
+        verificarHumano(context, model);
+        verificarHumano(context, model);
+
+
         List<DonacionDinero> donacionesDineroNormal = repoDonacionDinero.buscarTodos();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); // Formato para la fecha
         List<DonacionDineroOutputDTO> donacionesDinero = new ArrayList<>();
@@ -52,6 +56,7 @@ public class DonarDineroController extends BaseController implements ICrudViewsH
         model.put("title", "Donar dinero");
         context.render("donaciones/donacionDinero.hbs", model);
     }
+
 
     @Override
     public void show(Context context) {

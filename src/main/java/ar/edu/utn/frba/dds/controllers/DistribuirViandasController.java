@@ -20,23 +20,39 @@ public class DistribuirViandasController extends BaseController implements ICrud
     @Override
     public void index(Context context) {
 
-        Usuario usuario = usuarioLogueado(context);
-        if (usuario == null) {
-            context.redirect("/inicioSesion");
-        } else if (!usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)){
-            context.redirect("/error403");
-        }
-        else{
-            List<DistribucionVianda> distribuciones = RepoDistribucionVianda.INSTANCE.buscarTodos();
-            //Estoy buscando todas las distribuciones de viandas para probar, luego voy a buscar solo
-            //Las del usuario que inició la sesión
+        Map<String, Object> model = new HashMap<>();
+        verificarSesion(context, model);
+        verificarHumano(context, model);
 
-            Map<String, Object> model = new HashMap<>();
-            model.put("distribuciones", distribuciones);
-            model.put("title", "Distribuir Viandas");
+        List<DistribucionVianda> distribuciones = RepoDistribucionVianda.INSTANCE.buscarTodos();
+        //Estoy buscando todas las distribuciones de viandas para probar, luego voy a buscar solo
+        //Las del usuario que inició la sesión
 
-            context.render("donaciones/distribuirViandas.hbs",model);
-        }
+        model.put("distribuciones", distribuciones);
+        model.put("title", "Distribuir Viandas");
+
+
+
+        context.render("donaciones/distribuirViandas.hbs",model);
+
+
+//        Usuario usuario = usuarioLogueado(context);
+//        if (usuario == null) {
+//            context.redirect("/inicioSesion");
+//        } else if (!usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)){
+//            context.redirect("/error403");
+//        }
+//        else{
+//            List<DistribucionVianda> distribuciones = RepoDistribucionVianda.INSTANCE.buscarTodos();
+//            //Estoy buscando todas las distribuciones de viandas para probar, luego voy a buscar solo
+//            //Las del usuario que inició la sesión
+//
+//            Map<String, Object> model = new HashMap<>();
+//            model.put("distribuciones", distribuciones);
+//            model.put("title", "Distribuir Viandas");
+//
+//            context.render("donaciones/distribuirViandas.hbs",model);
+//        }
     }
 
     @Override
