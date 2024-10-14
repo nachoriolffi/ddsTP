@@ -97,7 +97,7 @@ public class Init implements WithSimplePersistenceUnit {
 
         RepoCoordenada repoCoordenada = new RepoCoordenada();
         Coordenada coordenada = new Coordenada(-34.598630, -58.419962);
-        //repoCoordenada.agregar(coordenada);
+        repoCoordenada.agregar(coordenada);
 
         RepoHeladeras repoHeladeras = RepoHeladeras.INSTANCE;
         Heladera heladera1 = new Heladera();
@@ -106,7 +106,7 @@ public class Init implements WithSimplePersistenceUnit {
         heladera1.setFechaPuestaFunc(new Date());
         heladera1.setEstaActiva(Boolean.TRUE);
         heladera1.setModelo(modelo1);
-        //repoHeladeras.agregar(heladera1);
+        repoHeladeras.agregar(heladera1);
 
         Heladera heladera2 = new Heladera();
         heladera2.setNombre("UTN CAMPUS");
@@ -114,7 +114,7 @@ public class Init implements WithSimplePersistenceUnit {
         heladera2.setFechaPuestaFunc(new Date());
         heladera2.setEstaActiva(Boolean.TRUE);
         heladera2.setModelo(modelo1);
-        //repoHeladeras.agregar(heladera2);
+        repoHeladeras.agregar(heladera2);
 
         Usuario usuario = new Usuario();
         usuario.setNombre("Joaquin Belli");

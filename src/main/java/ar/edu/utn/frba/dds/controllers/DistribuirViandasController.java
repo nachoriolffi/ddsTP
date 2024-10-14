@@ -1,14 +1,18 @@
 package ar.edu.utn.frba.dds.controllers;
 
+import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DistribucionVianda;
+import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.MotivoDistribucion;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoDistribucionVianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
+import java.util.stream.Collectors;
 
 import java.sql.Date;
 import java.text.ParseException;
@@ -23,13 +27,15 @@ public class DistribuirViandasController extends BaseController implements ICrud
         Usuario usuario = usuarioLogueado(context);
         if (usuario == null) {
             context.redirect("/inicioSesion");
-        } else if (!usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)){
+        } /*else if (!usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)){
             context.redirect("/error403");
-        }
+        }*/
         else{
-            List<DistribucionVianda> distribuciones = RepoDistribucionVianda.INSTANCE.buscarTodos();
-            //Estoy buscando todas las distribuciones de viandas para probar, luego voy a buscar solo
-            //Las del usuario que inició la sesión
+            Colaborador colaboradorHumano = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
+            List<DistribucionVianda> distribuciones = colaboradorHumano.getColaboracionesRealizadas().stream()
+                    .filter(c -> c instanceof DistribucionVianda)
+                    .map(c -> (DistribucionVianda) c)
+                    .collect(Collectors.toList());
 
             Map<String, Object> model = new HashMap<>();
             model.put("distribuciones", distribuciones);
@@ -84,6 +90,15 @@ public class DistribuirViandasController extends BaseController implements ICrud
         distribucionVianda.setFechaColaboracion(new java.util.Date());
 
         RepoDistribucionVianda.INSTANCE.agregar(distribucionVianda);
+        //hay que agregarle la contribución al usuario y luego hacer un update
+
+        Usuario usuario = usuarioLogueado(context);
+        usuario.getId();
+        Colaborador colaboradorHumano = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
+        colaboradorHumano.agregarColaboracionRealizada(distribucionVianda);
+        RepoColaborador.INSTANCE.modificar(colaboradorHumano);
+
+        //en base al usuario obtener el id de colaborador
 
         //distribucionVianda.getHeladeraOrigen().getId();
         //distribucionVianda.getCantidadViandas()
