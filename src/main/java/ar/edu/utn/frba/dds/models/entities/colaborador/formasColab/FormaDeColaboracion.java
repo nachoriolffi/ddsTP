@@ -9,6 +9,7 @@ import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "forma_de_colaboracion") //pongo esto para que quede mejor
 public abstract class FormaDeColaboracion {
 
     @Id
