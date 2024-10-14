@@ -13,6 +13,7 @@ import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
+
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -26,50 +27,39 @@ public class EncargarseHeladeraController extends BaseController implements ICru
     @Override
     public void index(Context context) {
         Map<String, Object> model = new HashMap<>();
-        Usuario usuario = usuarioLogueado(context);
-        model.put("inicioSesion", true);
-        model.put("noInicioSesion", false);
-        /*if (usuario == null) {
-            context.redirect("/inicioSesion");
-        } else if (!usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
-            context.redirect("/error403");
-        }else {
-            model.put("inicioSesion", true);
-            model.put("noInicioSesion", false);
-            // se supone que ya pasa los filtros y es juridico y son los datos de esa persona
-        }*/
-            List<Heladera> heladeras = this.repoHeladeras.buscarTodos();
-            List<HeladeraOutputDTO> heladeraOutputDTOS = new ArrayList<>();
-            if (heladeras != null) {
-                for (Heladera heladera : heladeras) {
-                    HeladeraOutputDTO heladeraOutputDTO = new HeladeraOutputDTO();
-                    heladeraOutputDTO.setNombre(heladera.getNombre());
-                    heladeraOutputDTO.setCapacidad(heladera.getModelo().getCantidadMaximaDeViandas());
-                    if (heladera.getDireccion()!=null){
-                        Long idDireccion = heladera.getDireccion().getId();
-                        Direccion direccion = repoDireccion.buscar(idDireccion);
-                        Long idCalle = direccion.getCalle().getId();
-                        String calle = repoCalle.buscar(idCalle).getCalle();
-                        String direccionDTO;
-                        if (direccion.getPiso() >= 1) {
-                            direccionDTO = calle + " " + direccion.getAltura().toString() + " (Piso: " + direccion.getPiso() + ")";
-                        } else {
-                            direccionDTO = calle + " " + direccion.getAltura().toString();
-                        }
-                        heladeraOutputDTO.setDireccion(direccionDTO);
+        Usuario usuario = verificarJuridico(context, model);
+        List<Heladera> heladeras = this.repoHeladeras.buscarTodos();
+        List<HeladeraOutputDTO> heladeraOutputDTOS = new ArrayList<>();
+        if (heladeras != null) {
+            for (Heladera heladera : heladeras) {
+                HeladeraOutputDTO heladeraOutputDTO = new HeladeraOutputDTO();
+                heladeraOutputDTO.setNombre(heladera.getNombre());
+                heladeraOutputDTO.setCapacidad(heladera.getModelo().getCantidadMaximaDeViandas());
+                if (heladera.getDireccion() != null) {
+                    Long idDireccion = heladera.getDireccion().getId();
+                    Direccion direccion = repoDireccion.buscar(idDireccion);
+                    Long idCalle = direccion.getCalle().getId();
+                    String calle = repoCalle.buscar(idCalle).getCalle();
+                    String direccionDTO;
+                    if (direccion.getPiso() >= 1) {
+                        direccionDTO = calle + " " + direccion.getAltura().toString() + " (Piso: " + direccion.getPiso() + ")";
+                    } else {
+                        direccionDTO = calle + " " + direccion.getAltura().toString();
                     }
-
-                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-                    heladeraOutputDTO.setFechaPuestaFunc(sdf.format(heladera.getFechaPuestaFunc()));
-                    heladeraOutputDTOS.add(heladeraOutputDTO);
+                    heladeraOutputDTO.setDireccion(direccionDTO);
                 }
-                List<ModeloHeladera> modelos = RepoModelo.INSTANCE.buscarTodos();
-                model.put("modelos", modelos);
-                model.put("heladeras", heladeraOutputDTOS);
-            }
 
-            model.put("title", "Encargarse De Heladera");
-            context.render("donaciones/encargarseDeHeladera.hbs", model);
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                heladeraOutputDTO.setFechaPuestaFunc(sdf.format(heladera.getFechaPuestaFunc()));
+                heladeraOutputDTOS.add(heladeraOutputDTO);
+            }
+            List<ModeloHeladera> modelos = RepoModelo.INSTANCE.buscarTodos();
+            model.put("modelos", modelos);
+            model.put("heladeras", heladeraOutputDTOS);
+        }
+
+        model.put("title", "Encargarse De Heladera");
+        context.render("donaciones/encargarseDeHeladera.hbs", model);
 
 
     }

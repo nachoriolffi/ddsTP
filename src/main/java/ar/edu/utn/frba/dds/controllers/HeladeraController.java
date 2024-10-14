@@ -1,13 +1,9 @@
 package ar.edu.utn.frba.dds.controllers;
 
-import ar.edu.utn.frba.dds.dtos.inputs.HeladeraInputDTO;
-
-
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.Georef;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.GeorefService;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.GeorefInitializer;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoCoordenada;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
@@ -22,10 +18,7 @@ import java.util.Map;
 
 public class HeladeraController extends BaseController implements ICrudViewsHandler {
 
-
     RepoHeladeras repositorioHeladeras = RepoHeladeras.INSTANCE;
-
-
     @Override
     public void index(Context context) {
 

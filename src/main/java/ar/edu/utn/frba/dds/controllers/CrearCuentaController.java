@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class CrearCuentaController  extends BaseController implements ICrudViewsHandler {
+public class CrearCuentaController extends BaseController implements ICrudViewsHandler {
 
     RepoUsuario repoUsuario = RepoUsuario.INSTANCE;
 
@@ -33,16 +33,6 @@ public class CrearCuentaController  extends BaseController implements ICrudViews
         model.put("clavesNoCoinciden", clavesNoCoinciden);
         model.put("claveNoSegura",claveNoSegura);
         context.render("logs/crearCuenta.hbs",model);
-    }
-
-    @Override
-    public void show(Context context) {
-
-    }
-
-    @Override
-    public void create(Context context) {
-
     }
 
     @Override
@@ -100,8 +90,7 @@ public class CrearCuentaController  extends BaseController implements ICrudViews
             context.sessionAttribute("usuario_id", nuevoUsuario.getId());
             context.redirect("/registroHumano");
         }
-
-
+        // NOTA: Los usuarios los guardamos recien cuando se registran como juridico o humano
     }
 
     @Override
@@ -116,6 +105,16 @@ public class CrearCuentaController  extends BaseController implements ICrudViews
 
     @Override
     public void delete(Context context) {
+
+    }
+
+    @Override
+    public void show(Context context) {
+
+    }
+
+    @Override
+    public void create(Context context) {
 
     }
 }

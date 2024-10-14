@@ -18,15 +18,15 @@ public class CanjeadorPuntos {
     }
 
     public Boolean CanjearPuntos(Colaborador colaborador, List<Oferta> ofertas) {
-        return validarPuntos(colaborador, ofertas);
+        return validarPuntos(colaborador, (Oferta) ofertas);
     }
 
     // la idea general es que l calulador de puntos de oferta sea una instancia unica que sea usada por todos que nos premita
     // calcular los puntos de una lista de todas las ofertas que alguin quiera cambia y que de esta manera podamos
-    public Boolean validarPuntos(Colaborador colaborador, List<Oferta> ofertas) {
+    public Boolean validarPuntos(Colaborador colaborador, Oferta ofertas) {
 
-        if (colaborador.puntosActualesDisponibles() >= puntosTotalesOfertas(ofertas)) {
-            colaborador.sumarPuntosUsados(puntosTotalesOfertas(ofertas));
+        if (colaborador.puntosActualesDisponibles() >= puntosTotalesOfertas((List<Oferta>) ofertas)) {
+            colaborador.sumarPuntosUsados(puntosTotalesOfertas((List<Oferta>) ofertas));
             colaborador.agregarOfertasCanjeadas(ofertas);
             RepoColaborador.INSTANCE.modificar(colaborador); // agrego esto para que cada vez que un colaborador cambie los puntos me haga la modificacion de los puntos tambien tengo al duda que sea de la capa de controller.
             return true;

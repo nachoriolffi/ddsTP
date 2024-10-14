@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoUsuario;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
+import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -16,10 +17,9 @@ public class InicioSesionController extends BaseController implements ICrudViews
     public void index(Context ctx) {
 
         Map<String, Object> model = new HashMap<>();
-        model.put("title", "Iniciar Sesión");
-
         verificarSesion(ctx, model);
         String loginError = ctx.sessionAttribute("loginError");
+        model.put("title", "Iniciar Sesión");
         model.put("loginError", loginError);
 
         ctx.render("logs/inicioSesion.hbs", model);
@@ -36,23 +36,7 @@ public class InicioSesionController extends BaseController implements ICrudViews
     }
 
     @Override
-    public void save(Context context) {
-
-//        String correoElectronico = context.formParam("correoElectronico");
-//        String clave = context.formParam(("clave"));
-//
-////        ctx ->{
-////            String correoElectronico = ctx.formParam("correoElectronico");
-////            String clave = ctx.formParam(("clave"));
-////        Producto nuevoProducto = new Producto();
-////
-////        nuevoProducto.setNombre(context.formParam("nombre"));
-////        nuevoProducto.setPrecio(Float.valueOf(context.formParam("precio")));
-////
-////        this.repositorioDeProductos.guardar(nuevoProducto);
-//        //O BIEN LANZO UNA PANTALLA DE EXITO
-//        //O BIEN REDIRECCIONO AL USER A LA PANTALLA DE LISTADO DE PRODUCTOS
-//        context.redirect("/productos");
+    public void save(Context context) throws ParseException {
 
     }
 
@@ -80,21 +64,25 @@ public class InicioSesionController extends BaseController implements ICrudViews
 
         if (usuario == null || !usuario.getContrasenia().equals(password)) {
             ctx.sessionAttribute("loginError", "Usuario o Clave Incorrectas");
-            ctx.redirect("/inicioSesion");
+            ctx.redirect("/iniciarSesion");
         }else{
-            // TODO el else falta desarrollador un poco mas
+            // TODO TENEMOS QUE HACER QUE SE VAYANA A PANTALLAS MAIN DE CADA UNO
+            // TODO TIPO QUE DIGAN TODO LO PUEDAN HACER CON BOTONES COMO UN PANEL DE CONTROL
+            // TODO EN VEZ DE HACER REDIRECT A ESA PAGINAS QUE NO TIENEN MUCHO QUE VER
             ctx.sessionAttribute("usuario_id", usuario.getId());
             if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
-                ctx.redirect("/misHeladeras");
+                ctx.redirect("/donacionDinero");
             }else if (usuario.getRol().equals(TipoRol.ADMIN)){
                 ctx.redirect("/reportes");
+            }else if(usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)){
+                ctx.redirect("/canjeProductos");
             }
         }
     }
     public void logout(Context ctx){
         ctx.consumeSessionAttribute("usuario_id");
         ctx.consumeSessionAttribute("tipo_rol");
-        ctx.redirect("/inicioSesion");
+        ctx.redirect("/iniciarSesion");
     }
 
 
