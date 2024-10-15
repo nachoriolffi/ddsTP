@@ -22,18 +22,24 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
 
         Map<String, Object> model = new HashMap<>();
 
+        try{
+            Usuario usuario = verificarJuridicoOHumano(ctx, model);
+            Colaborador colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
+            List<Oferta> ofertas = repositorioOferta.buscarTodos();
+            colaborador.puntosActualesDisponibles();
 
-        Usuario usuario = verificarJuridicoOHumano(ctx, model);
+            model.put("title", "Tienda Productos/Servicios");
+            model.put("ofertas", ofertas);
+            model.put("PuntosTotales", colaborador.puntosActualesDisponibles());
+            model.put("rubros", Rubro.values());
+            ctx.render("ofertas/ofertas.hbs", model);
+        }
+        catch (Exception e){
+            ctx.redirect("/iniciarSesion");
+        }
 
-        Colaborador colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
-        List<Oferta> ofertas = repositorioOferta.buscarTodos();
-        colaborador.puntosActualesDisponibles();
 
-        model.put("title", "Tienda Productos/Servicios");
-        model.put("ofertas", ofertas);
-        model.put("PuntosTotales", colaborador.puntosActualesDisponibles());
-        model.put("rubros", Rubro.values());
-        ctx.render("ofertas/ofertas.hbs", model);
+
     }
 
     public void canjear(Context context) {

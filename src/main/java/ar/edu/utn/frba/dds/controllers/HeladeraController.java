@@ -26,12 +26,19 @@ public class HeladeraController extends BaseController implements ICrudViewsHand
         List<ModeloHeladera> modelos = RepoModelo.INSTANCE.buscarTodos();
 
         Map<String,Object> model = new HashMap<>();
-        model.put("title","Heladeras");
-        model.put("heladeras", heladeras);
-        model.put("modelos", modelos);
 
+        try {
+            verificarJuridicoOHumano(context,model);
+            model.put("title","Heladeras");
+            model.put("heladeras", heladeras);
+            model.put("modelos", modelos);
 
-        context.render("heladeras/heladeras.hbs",model);
+            context.render("heladeras/heladeras.hbs",model);
+        } catch (Exception e) {
+            context.redirect("/iniciarSesion");
+        }
+        
+
 
     }
 

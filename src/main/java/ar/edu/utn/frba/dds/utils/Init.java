@@ -99,7 +99,29 @@ public class Init implements WithSimplePersistenceUnit {
         //repoModelo.agregar(modelo1);
         //repoModelo.agregar(modelo2);
         //repoModelo.agregar(modelo3);
-        //RepoOferta.INSTANCE.agregar(oferta);
+
+        Oferta oferta1 = new Oferta();
+        oferta1.setNombre("Oferta 1");
+        oferta1.setPuntosNecesarios(100);
+        oferta1.setFechaInicio(new Date());
+        oferta1.setFechaFin(new Date());
+        oferta1.setStockInicial(10);
+        oferta1.setStockUsado(0);
+        oferta1.setRubro(Rubro.EDUCACION);
+
+        Oferta oferta2 = new Oferta();
+        oferta2.setNombre("Oferta 1");
+        oferta2.setPuntosNecesarios(100);
+        oferta2.setFechaInicio(new Date());
+        oferta2.setFechaFin(new Date());
+        oferta2.setStockInicial(10);
+        oferta2.setStockUsado(0);
+        oferta2.setRubro(Rubro.EDUCACION);
+
+
+
+        RepoOferta.INSTANCE.agregar(oferta1);
+        RepoOferta.INSTANCE.agregar(oferta2);
         //RepoViandas.INSTANCE.agregar(vianda);
 
 //        for (TipoRol tipoRol : TipoRol.values()) {

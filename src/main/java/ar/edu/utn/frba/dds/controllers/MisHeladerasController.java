@@ -12,11 +12,18 @@ public class MisHeladerasController extends BaseController implements ICrudViews
     public void index(Context context) {
 
         Map<String, Object> model = new HashMap<>();
-        verificarSesion(context, model);
+        try{
+            verificarJuridicoOHumano(context, model);
+            model.put("title", "Mis Heladeras");
 
-        model.put("title", "Mis Heladeras");
+            context.render("donaciones/misHeladeras.hbs", model);
+        }
+        catch (Exception e){
+            context.redirect("/iniciarSesion");
+        }
 
-        context.render("donaciones/misHeladeras.hbs", model);
+
+
     }
 
     @Override
