@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Entity
@@ -150,6 +151,9 @@ public class Heladera implements IObservableColaborador {
             this.solicitudesApertura.add(registro);
         }
     }
+    public Integer cantidadViandasLugar () {
+        return this.modelo.getCantidadMaximaDeViandas() - this.viandasDisponibles;
+    }
 
     /*----------------- BROKER -----------------*/
 
@@ -191,27 +195,31 @@ public class Heladera implements IObservableColaborador {
 
     @Override
     public void notificar() {
-        List<ObserverColaborador> observersFaltanViandas= observers.stream()
-                .filter(observerColaborador -> observerColaborador.getTipoSuscripcion() == TipoSuscripcion.FALTAN_VIANDAS)
+        List<ObserverColaborador> observersMuchasViandas= observers.stream()
+                .filter(observerColaborador -> observerColaborador.getTipoSuscripcion() == TipoSuscripcion.MUCHAS_VIANDAS)
                 .toList();
 
-        List<ObserverColaborador> observersMuchasViandas = observers.stream()
-                .filter(observerColaborador -> observerColaborador.getTipoSuscripcion() == TipoSuscripcion.MUCHAS_VIANDAS)
+        List<ObserverColaborador> observersViandasDisponibles = observers.stream()
+                .filter(observerColaborador -> observerColaborador.getTipoSuscripcion() == TipoSuscripcion.VIANDAS_DISPONIBLES)
                 .toList();
 
         List<ObserverColaborador> observersDesperfecto = observers.stream()
                 .filter(observerColaborador -> observerColaborador.getTipoSuscripcion() == TipoSuscripcion.DESPERFECTO)
                 .toList();
+        if(this.modelo != null)
+        {
+            Integer cantidadViandasLugar = this.cantidadViandasLugar(); //para cuantas viadas hay lugar en la heladera
+            observersMuchasViandas.forEach(observer ->{//acaaa
+                if(cantidadViandasLugar.equals(observer.getCantidadViandas()))
+                {observer.getSuscriptor().recibirNotificacion("Solo queda lugar para " + observer.getCantidadViandas() + " viandas en la heladera");}
+            });
+        }
 
-        observersFaltanViandas.forEach(observer ->{
-            if(this.viandasDisponibles < observer.getCantidadViandas())
-            {observer.getSuscriptor().recibirNotificacion("Faltan viandas en la heladera");}
+        observersViandasDisponibles.forEach(observer ->{
+            if(Objects.equals(this.viandasDisponibles, observer.getCantidadViandas()))
+            {observer.getSuscriptor().recibirNotificacion("Hay "+ observer.getCantidadViandas() + " viandas disponibles");}
         });
 
-        observersMuchasViandas.forEach(observer ->{
-            if(this.viandasDisponibles > observer.getCantidadViandas())
-            {observer.getSuscriptor().recibirNotificacion("Hay más viandas");}
-        });
 
         if(!this.estaActiva){
             observersDesperfecto.forEach(observer ->{

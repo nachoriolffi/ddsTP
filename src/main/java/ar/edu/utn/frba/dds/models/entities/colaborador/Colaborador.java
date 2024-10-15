@@ -230,6 +230,6 @@ public class Colaborador extends IObserverColaborador {
 
     @Override
     public void recibirNotificacion(String mensaje) {
-        System.out.println("Mensaje recibido: " + mensaje);
+        System.out.println("Soy " + this.nombre + " " + this.apellido + " y recibí el mensaje: " + mensaje);
     }
 }
