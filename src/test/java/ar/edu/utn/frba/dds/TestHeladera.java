@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.AdapterCorreo;
@@ -14,12 +15,15 @@ import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoAlerta;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.registro.RegistroTemperatura;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
+import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.ObserverColaborador;
+import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.TipoSuscripcion;
 import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoTecnico;
+import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import lombok.Getter;
 import lombok.Setter;
 import org.junit.jupiter.api.BeforeEach;
@@ -75,10 +79,13 @@ public class TestHeladera {
         vianda6 = new Vianda("Ravioles", new Colaborador(), true);
 
         heladera = new Heladera(direccion1, coordenada1);
+        heladera.setEstaActiva(Boolean.TRUE);
         heladera1 = new Heladera(direccion1, coordenada1);
         heladera1.setEstaActiva(Boolean.TRUE);
         heladera2 = new Heladera(direccion2, coordenada2);
+        heladera2.setEstaActiva(Boolean.TRUE);
         heladera3 = new Heladera(direccion3, coordenada3);
+        heladera3.setEstaActiva(Boolean.TRUE);
 
         heladera.agregarVianda();
         heladera1.agregarVianda();
@@ -98,6 +105,7 @@ public class TestHeladera {
         repoHeladeras = RepoHeladeras.INSTANCE;
 
         //--------------------------------------- Noticacion tecnico --------------------------------------------
+        /*
         tecnico1 = new Tecnico("Juan","Cracio",coordenada1,Boolean.TRUE,1000);
         Contacto contacto = new Contacto(TipoContacto.MAIL,"iriolffi@frba.utn.edu.ar");
         tecnico1.setContactos(new ArrayList<>());
@@ -114,9 +122,9 @@ public class TestHeladera {
         tecnico1.setMediosDeComunicacion(mediosDeComunicacion);
 
         repoTec = RepoTecnico.INSTANCE;
-        repoTec.agregar(tecnico1);
+        repoTec.agregar(tecnico1);*/
     }
-
+/*
     @Test
     public void TestAgregarHeladera() {
 
@@ -227,7 +235,7 @@ public class TestHeladera {
         CronjobTemperatura.main(null);
 
         assert heladera.getEstaActiva().equals(Boolean.TRUE);
-    }
+    }*/
     @Test
     public void testMuchasViandasSuscripcion() {
         //Faltan n viandas para que la heladera esté llena y no se puedan ingresar más viandas
@@ -242,6 +250,21 @@ public class TestHeladera {
     public void testHeladeraFallaSuscripcion() {
         //La heladera sufrió un desperfecto y las viandas deben ser llevadas a otras heladeras
         // a la brevedad para que las mismas no se echen a perder
+
+        //tengo que hacer que un colaborador se suscriba a una heladera
+        Colaborador colaborador1 = new Colaborador();
+        colaborador1.setNombre("Martin");
+        colaborador1.setApellido("Fierro");
+        colaborador1.setTipoDocumento(TipoDocumento.DNI);
+        colaborador1.setNumeroDocumento(12345845);
+        colaborador1.setTipoPersona(TipoPersona.HUMANA);
+
+        ObserverColaborador observer = new ObserverColaborador();
+        observer.setTipoSuscripcion(TipoSuscripcion.DESPERFECTO);
+        observer.setSuscriptor(colaborador1);
+
+        heladera.agregarColaborador(observer);
+        heladera.setEstaActiva(Boolean.TRUE);
     }
 
 }

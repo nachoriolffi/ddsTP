@@ -36,7 +36,7 @@ import java.util.List;
 @Getter
 @Entity
 @Table(name = "colaborador")
-public class Colaborador implements IObserverColaborador {
+public class Colaborador extends IObserverColaborador {
 
     @Id
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
@@ -230,6 +230,6 @@ public class Colaborador implements IObserverColaborador {
 
     @Override
     public void recibirNotificacion(String mensaje) {
-
+        System.out.println("Mensaje recibido: " + mensaje);
     }
 }

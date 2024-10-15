@@ -6,9 +6,11 @@ import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
 import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.IObservableColaborador;
 import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.ObserverColaborador;
+import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.TipoSuscripcion;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -65,7 +68,9 @@ public class Heladera implements IObservableColaborador {
     @JoinColumn(name = "regApertura_id")
     private List<RegistroApertura> aperturas; // es una lista de registros de aperturas que se hicieron
 
+
     @Column(name = "activa", nullable = false)
+    @Setter(AccessLevel.NONE)//pongo esto para yo definir el setter
     private Boolean estaActiva;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -75,10 +80,15 @@ public class Heladera implements IObservableColaborador {
     @Column(name = "tempActual")
     private Double tempActual;
 
+    @OneToMany
+    @JoinColumn(name = "heladera_id")
+    private List<ObserverColaborador> observers;
+
     public Heladera() {
         this.incidentes = new ArrayList<>();
         this.solicitudesApertura = new ArrayList<>();
         this.aperturas = new ArrayList<>();
+        this.observers = new ArrayList<>();
     }
 
     public Heladera(Direccion direccion, Coordenada coordenada) {
@@ -86,6 +96,7 @@ public class Heladera implements IObservableColaborador {
         this.coordenada = coordenada;
         this.incidentes = new ArrayList<Incidente>();
         this.viandasDisponibles = 0;
+        this.observers = new ArrayList<>();
     }
 
     public Heladera(Direccion direccion, Coordenada coordenada, Date fechaPuestaFunc) {
@@ -93,6 +104,7 @@ public class Heladera implements IObservableColaborador {
         this.coordenada = coordenada;
         this.fechaPuestaFunc = fechaPuestaFunc;
         this.viandasDisponibles = 0;
+        this.observers = new ArrayList<>();
     }
 
     public Heladera(Direccion direccion, Coordenada coordenada, Boolean estaActiva) {
@@ -100,14 +112,17 @@ public class Heladera implements IObservableColaborador {
         this.coordenada = coordenada;
         this.estaActiva = estaActiva;
         this.viandasDisponibles = 0;
+        this.observers = new ArrayList<>();
     }
 
     public void agregarVianda() {
         this.viandasDisponibles++;
+        this.notificar();
     }
 
     public void quitarVianda() {
         this.viandasDisponibles--;
+        this.notificar();
     }
 
     public void agregarRegistroDeAlerta(Incidente registro) {
@@ -158,19 +173,50 @@ public class Heladera implements IObservableColaborador {
         }
         return null;
     }
-
+    /*----------------- Suscripción a heladera -----------------*/
+    @SuppressWarnings("all")// pongo esto porque me dice que puede estar definido por loombok, pero ya lo excluí
+    public void setEstaActiva(Boolean activada){
+        this.estaActiva = activada;
+        this.notificar();
+    }
     @Override
     public void agregarColaborador(ObserverColaborador observerColaborador) {
-
+        observers.add(observerColaborador);
     }
 
     @Override
-    public void eliminar(ObserverColaborador observerColaborador) {
+    public void eliminarColaborador(ObserverColaborador observerColaborador) {
 
     }
 
     @Override
     public void notificar() {
+        List<ObserverColaborador> observersFaltanViandas= observers.stream()
+                .filter(observerColaborador -> observerColaborador.getTipoSuscripcion() == TipoSuscripcion.FALTAN_VIANDAS)
+                .toList();
 
+        List<ObserverColaborador> observersMuchasViandas = observers.stream()
+                .filter(observerColaborador -> observerColaborador.getTipoSuscripcion() == TipoSuscripcion.MUCHAS_VIANDAS)
+                .toList();
+
+        List<ObserverColaborador> observersDesperfecto = observers.stream()
+                .filter(observerColaborador -> observerColaborador.getTipoSuscripcion() == TipoSuscripcion.DESPERFECTO)
+                .toList();
+
+        observersFaltanViandas.forEach(observer ->{
+            if(this.viandasDisponibles < observer.getCantidadViandas())
+            {observer.getSuscriptor().recibirNotificacion("Faltan viandas en la heladera");}
+        });
+
+        observersMuchasViandas.forEach(observer ->{
+            if(this.viandasDisponibles > observer.getCantidadViandas())
+            {observer.getSuscriptor().recibirNotificacion("Hay más viandas");}
+        });
+
+        if(!this.estaActiva){
+            observersDesperfecto.forEach(observer ->{
+                observer.getSuscriptor().recibirNotificacion("La heladera está desactivada");
+            });
+        }
     }
 }
