@@ -120,6 +120,7 @@ public class DistribuirViandasController extends BaseController implements ICrud
         colaboradorHumano.agregarColaboracionRealizada(distribucionVianda);
         RepoColaborador.INSTANCE.modificar(colaboradorHumano);
 
+        context.redirect("distribuirViandas");
         //en base al usuario obtener el id de colaborador
 
         //distribucionVianda.getHeladeraOrigen().getId();

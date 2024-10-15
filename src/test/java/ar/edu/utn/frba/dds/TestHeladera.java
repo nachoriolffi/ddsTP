@@ -228,6 +228,21 @@ public class TestHeladera {
 
         assert heladera.getEstaActiva().equals(Boolean.TRUE);
     }
+    @Test
+    public void testMuchasViandasSuscripcion() {
+        //Faltan n viandas para que la heladera esté llena y no se puedan ingresar más viandas
+        //Un colaborador distribuidor puede llevar N viandas a otra heladera que está menos llena.
+    }
+    @Test
+    public void testFaltanViandasSuscripcion() {
+        //Quedan únicamente n viandas disponibles en la heladera, siendo n
+        //un número que el colaborador puede setear
+    }
+    @Test
+    public void testHeladeraFallaSuscripcion() {
+        //La heladera sufrió un desperfecto y las viandas deben ser llevadas a otras heladeras
+        // a la brevedad para que las mismas no se echen a perder
+    }
 
 }
 

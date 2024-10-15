@@ -4,6 +4,8 @@ import ar.edu.utn.frba.dds.models.entities.broker.Broker;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
+import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.IObservableColaborador;
+import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.ObserverColaborador;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
@@ -22,7 +24,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @Table(name = "heladera")
-public class Heladera {
+public class Heladera implements IObservableColaborador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -155,5 +157,20 @@ public class Heladera {
             }
         }
         return null;
+    }
+
+    @Override
+    public void agregarColaborador(ObserverColaborador observerColaborador) {
+
+    }
+
+    @Override
+    public void eliminar(ObserverColaborador observerColaborador) {
+
+    }
+
+    @Override
+    public void notificar() {
+
     }
 }

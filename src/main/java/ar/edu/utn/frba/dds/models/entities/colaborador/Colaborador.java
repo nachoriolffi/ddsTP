@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.models.entities.colaborador;
 import ar.edu.utn.frba.dds.models.converters.MedioComunicacionAtributeConvertere;
 import ar.edu.utn.frba.dds.models.entities.colaborador.calculoPuntos.CalculadorPuntos;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
+import ar.edu.utn.frba.dds.models.entities.colaborador.observer.IObserverColaborador;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.models.entities.recomendacionPuntos.IRecomendacionPuntos;
@@ -35,7 +36,7 @@ import java.util.List;
 @Getter
 @Entity
 @Table(name = "colaborador")
-public class Colaborador {
+public class Colaborador implements IObserverColaborador {
 
     @Id
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
@@ -225,5 +226,10 @@ public class Colaborador {
 
     public List<Coordenada> obtenerPuntosRecomendadosParaHeladera(Double longitud, Double latitud, Integer radio) throws IOException {
         return iRecomendacionPuntos.recomendarPuntos(longitud, latitud, radio);
+    }
+
+    @Override
+    public void recibirNotificacion(String mensaje) {
+
     }
 }
