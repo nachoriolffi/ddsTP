@@ -26,11 +26,11 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
             Usuario usuario = verificarJuridicoOHumano(ctx, model);
             Colaborador colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
             List<Oferta> ofertas = repositorioOferta.buscarTodos();
-            colaborador.puntosActualesDisponibles();
+            Double puntos = colaborador.puntosActualesDisponibles();
 
             model.put("title", "Tienda Productos/Servicios");
             model.put("ofertas", ofertas);
-            model.put("PuntosTotales", colaborador.puntosActualesDisponibles());
+            model.put("PuntosTotales", puntos);
             model.put("rubros", Rubro.values());
             ctx.render("ofertas/ofertas.hbs", model);
         }
@@ -49,10 +49,16 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
         Long puntosProductos = Long.valueOf(context.formParam("puntosNecesarios"));
         Oferta oferta = repositorioOferta.buscar(Long.valueOf(idOferta));
         if (oferta.getStockInicial() > 0 && colaborador.puntosActualesDisponibles() >= Double.valueOf(puntosProductos)) {
+
+            oferta.setStockInicial(oferta.getStockInicial() - 1);
+            oferta.setStockUsado(oferta.getStockUsado() + 1);
+            colaborador.sumarPuntosUsados(Double.valueOf(puntosProductos));
+
             colaborador.agregarOfertasCanjeadas(oferta);
             repositorioOferta.modificar(oferta);
             RepoColaborador.INSTANCE.modificar(colaborador);
         }
+        context.redirect("/canjeProductos");
     }
 
     @Override
