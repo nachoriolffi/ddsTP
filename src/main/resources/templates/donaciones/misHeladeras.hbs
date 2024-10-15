@@ -63,6 +63,23 @@
                     <form id="subscriptionForm" class="row g-3 needs-validation" novalidate method="POST" action="/misHeladeras">
 
                         <div class="modal-footer col-md-12">
+                            <button class="btn btn-primary w-100" type="button" data-bs-toggle="modal" data-bs-target="#confirmModalHacer">Seleccionar Heladera</button>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label" for="modelo">Motivo Suscripción</label>
+                            <select class="form-select" id="modelo" name="motivo" required>
+                                <option value="VIANDAS_DISPONIBLES">Hay n viandas disponibles</option>
+                                <option value="MUCHAS_VIANDAS">Queda lugar para almacenar n viandas</option>
+                                <option value="DESPERFECTO">Desperfecto</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label" for="input3">Cantidad de viandas</label>
+                            <input class="form-control" type="text" id="input3" name="cantidad-viandas" required>
+                        </div>
+
+                        <div class="modal-footer col-md-12">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                             <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal">Suscribirse</button>
                         </div>
