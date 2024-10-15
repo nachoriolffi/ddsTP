@@ -114,7 +114,7 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
         colaboradorJuridico.setContacto(contacto);
         repoUsuario.agregar(nuevoUsuario);
         repoColaborador.agregar(colaboradorJuridico);
-        context.redirect("/inicioSesion");*/
+        context.redirect("/iniciarSesion");*/
 
         RegistroHumanoService registroHumanosService = new RegistroHumanoService();
         Colaborador colaborador = registroHumanosService.processAndSaveResponses(context);

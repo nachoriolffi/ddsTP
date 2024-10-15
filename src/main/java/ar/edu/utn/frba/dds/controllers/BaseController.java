@@ -26,7 +26,7 @@ public abstract class BaseController {
             "/registroHumano"
     ));
 
-    protected Usuario verificarSesion(Context ctx, Map<String, Object> model) {
+    protected void verificarSesion(Context ctx, Map<String, Object> model) {
         Usuario usuario = usuarioLogueado(ctx);
         if (usuario != null) {
             model.put("inicioSesion", true);
@@ -39,12 +39,13 @@ public abstract class BaseController {
             model.put("inicioSesion", false);
             model.put("noInicioSesion", true);
         }
-        return usuario;
+
 
     }
 
     protected Usuario verificarHumano(Context ctx, Map<String, Object> model) {
-        Usuario usuario = verificarSesion(ctx, model);
+        Usuario usuario = usuarioLogueado(ctx);
+        verificarSesion(ctx, model);
         if (usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)) {
             model.put("esHumano", true);
             return usuario;
@@ -57,24 +58,29 @@ public abstract class BaseController {
     }
 
     protected Usuario verificarJuridicoOHumano(Context ctx, Map<String, Object> model) {
-        Usuario usuario = verificarSesion(ctx, model);
+        Usuario usuario = usuarioLogueado(ctx);
+        verificarSesion(ctx, model);
         if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
             model.put("esJuridico", true);
+            System.out.println("es juridico");
             return usuario;
 
         } else if (usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)) {
             model.put("esHumano", true);
+            System.out.println("es humano");
             return usuario;
         } else {
             model.put("inicioSesion", false);
             model.put("noInicioSesion", true);
             ctx.redirect("/error403");
+            System.out.println("No es juridico ni humano");
             return null;
         }
     }
 
     protected Usuario verificarJuridico(Context ctx, Map<String, Object> model) {
-        Usuario usuario = verificarSesion(ctx, model);
+        Usuario usuario = usuarioLogueado(ctx);
+        verificarSesion(ctx, model);
         if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
             model.put("esJuridico", true);
             return usuario;
@@ -87,7 +93,8 @@ public abstract class BaseController {
     }
 
     protected Usuario verificarAdmin(Context ctx, Map<String, Object> model) {
-        Usuario usuario = verificarSesion(ctx, model);
+        Usuario usuario = usuarioLogueado(ctx);
+        verificarSesion(ctx, model);
         if (usuario.getRol().equals(TipoRol.ADMIN)) {
             model.put("esAdmin", true);
             return usuario;

@@ -23,6 +23,7 @@ public class CrearCuentaController extends BaseController implements ICrudViewsH
     @Override
     public void index(Context context) {
         Map<String, Object> model = new HashMap<>();
+        verificarSesion(context, model);
         String faltaRellenar = context.sessionAttribute("faltaRellenar");
         String clavesNoCoinciden = context.sessionAttribute("clavesNoCoinciden");
         String tipoNoSeleccionado = context.sessionAttribute("tipoNoSeleccionado");

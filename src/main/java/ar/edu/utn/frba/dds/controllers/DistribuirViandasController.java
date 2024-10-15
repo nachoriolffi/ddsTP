@@ -26,21 +26,28 @@ public class DistribuirViandasController extends BaseController implements ICrud
 
 
         Map<String, Object> model = new HashMap<>();
-        Usuario usuario = verificarSesion(context, model);
-        verificarHumano(context, model);
 
-        Colaborador colaboradorHumano = RepoColaborador.INSTANCE.buscar(usuario.getId());
-        List<DistribucionVianda> distribuciones = colaboradorHumano.getColaboracionesRealizadas().stream()
-                .filter(c -> c instanceof DistribucionVianda)
-                .map(c -> (DistribucionVianda) c)
-                .collect(Collectors.toList());
+        try{
+            Usuario usuario = usuarioLogueado(context);
+            verificarHumano(context, model);
+            Colaborador colaboradorHumano = RepoColaborador.INSTANCE.buscar(usuario.getId());
+            List<DistribucionVianda> distribuciones = colaboradorHumano.getColaboracionesRealizadas().stream()
+                    .filter(c -> c instanceof DistribucionVianda)
+                    .map(c -> (DistribucionVianda) c)
+                    .collect(Collectors.toList());
 
 
-        //Estoy buscando todas las distribuciones de viandas para probar, luego voy a buscar solo
-        //Las del usuario que inició la sesión
+            //Estoy buscando todas las distribuciones de viandas para probar, luego voy a buscar solo
+            //Las del usuario que inició la sesión
 
-        model.put("distribuciones", distribuciones);
-        model.put("title", "Distribuir Viandas");
+            model.put("distribuciones", distribuciones);
+            model.put("title", "Distribuir Viandas");
+
+        }
+        catch (Exception e){
+            context.redirect("/iniciarSesion");
+        }
+
 
 
 
@@ -48,7 +55,7 @@ public class DistribuirViandasController extends BaseController implements ICrud
 
 //        Usuario usuario = usuarioLogueado(context);
 //        if (usuario == null) {
-//            context.redirect("/inicioSesion");
+//            context.redirect("/iniciarSesion");
 //        } /*else if (!usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)){
 //            context.redirect("/error403");
 //        } */

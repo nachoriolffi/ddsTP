@@ -33,7 +33,13 @@ public class DonacionViandaController  extends BaseController implements ICrudVi
 
         Map<String, Object> model = new HashMap<>();
 
-        verificarHumano(context, model);
+        try{
+            verificarHumano(context, model);
+        }
+        catch (Exception e){
+            context.redirect("/iniciarSesion");
+        }
+
 
 
 

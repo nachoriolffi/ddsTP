@@ -49,8 +49,8 @@ public class Router {
         });
 
         // iniciarSesion
-        app.get("/inicioSesion", Objects.requireNonNull(ServiceLocator.instanceOf(InicioSesionController.class))::index);
-        app.post("/inicioSesion", Objects.requireNonNull(ServiceLocator.instanceOf(InicioSesionController.class))::login);
+        app.get("/iniciarSesion", Objects.requireNonNull(ServiceLocator.instanceOf(InicioSesionController.class))::index);
+        app.post("/iniciarSesion", Objects.requireNonNull(ServiceLocator.instanceOf(InicioSesionController.class))::login);
         app.post("/cerrarSesion", Objects.requireNonNull(ServiceLocator.instanceOf(InicioSesionController.class))::logout);
 
         // donacion de dinero

@@ -21,7 +21,10 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
     public void index(Context ctx) {
 
         Map<String, Object> model = new HashMap<>();
+
+
         Usuario usuario = verificarJuridicoOHumano(ctx, model);
+
         Colaborador colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
         List<Oferta> ofertas = repositorioOferta.buscarTodos();
         colaborador.puntosActualesDisponibles();

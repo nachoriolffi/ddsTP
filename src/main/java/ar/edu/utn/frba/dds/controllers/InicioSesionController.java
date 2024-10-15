@@ -17,12 +17,13 @@ public class InicioSesionController extends BaseController implements ICrudViews
     public void index(Context ctx) {
 
         Map<String, Object> model = new HashMap<>();
+
         verificarSesion(ctx, model);
         String loginError = ctx.sessionAttribute("loginError");
         model.put("title", "Iniciar Sesión");
         model.put("loginError", loginError);
 
-        ctx.render("logs/inicioSesion.hbs", model);
+        ctx.render("logs/iniciarSesion.hbs", model);
     }
 
     @Override
