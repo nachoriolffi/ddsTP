@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Setter
 @Enabled
 @Entity
-@Table(name = "observer_colaborador")
+@Table(name = "suscripcion")
 public class ObserverColaborador {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

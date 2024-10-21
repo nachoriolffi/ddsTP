@@ -46,10 +46,12 @@ public class TestHeladera {
     List<Heladera> heladeras;
     ReceptorMovimiento receptorMovimiento;
     ReceptorTemperatura receptorTemperatura;
-    ModeloHeladera modeloHeladera;
+    ModeloHeladera modeloHeladera, modeloHeladera2;
     RepoHeladeras repoHeladeras;
     Tecnico tecnico1;
     RepoTecnico repoTec;
+    Colaborador colaborador1;
+    ObserverColaborador observer;
 
     @BeforeEach
     public void seteoHeladeras() {
@@ -99,10 +101,13 @@ public class TestHeladera {
         receptorTemperatura= new ReceptorTemperatura();
 
         modeloHeladera = new ModeloHeladera(18.0,1.5,100.0,200);
+        modeloHeladera2 = new ModeloHeladera(18.0,1.5,100.0,10);
 
         heladera.setModelo(modeloHeladera);
 
         repoHeladeras = RepoHeladeras.INSTANCE;
+
+        observer = new ObserverColaborador();
 
         //--------------------------------------- Noticacion tecnico --------------------------------------------
         /*
@@ -123,6 +128,14 @@ public class TestHeladera {
 
         repoTec = RepoTecnico.INSTANCE;
         repoTec.agregar(tecnico1);*/
+
+        //--------------------------------------- Noticacion Colaborador --------------------------------------------
+        colaborador1 = new Colaborador();
+        colaborador1.setNombre("Martin");
+        colaborador1.setApellido("Fierro");
+        colaborador1.setTipoDocumento(TipoDocumento.DNI);
+        colaborador1.setNumeroDocumento(12345845);
+        colaborador1.setTipoPersona(TipoPersona.HUMANA);
     }
 /*
     @Test
@@ -237,34 +250,50 @@ public class TestHeladera {
         assert heladera.getEstaActiva().equals(Boolean.TRUE);
     }*/
     @Test
+    public void testViandasDisponiblesSuscripcion() {
+        //Quedan únicamente n viandas disponibles en la heladera, siendo n
+        //un número que el colaborador puede setear
+
+        //Es decir, hay un número n de viandas que pueden ser retiradas de la heladera
+        ObserverColaborador observer = new ObserverColaborador();
+        observer.setTipoSuscripcion(TipoSuscripcion.VIANDAS_DISPONIBLES);
+        observer.setCantidadViandas(2);
+        observer.setSuscriptor(colaborador1);
+
+        heladera.agregarColaborador(observer);
+        System.out.println("heladera tiene " + heladera.getViandasDisponibles()+ " viandas disponibles");
+        heladera.agregarVianda();
+        System.out.println("heladera tiene " + heladera.getViandasDisponibles()+ " viandas disponibles");
+    }
+    @Test
     public void testMuchasViandasSuscripcion() {
         //Faltan n viandas para que la heladera esté llena y no se puedan ingresar más viandas
         //Un colaborador distribuidor puede llevar N viandas a otra heladera que está menos llena.
-    }
-    @Test
-    public void testFaltanViandasSuscripcion() {
-        //Quedan únicamente n viandas disponibles en la heladera, siendo n
-        //un número que el colaborador puede setear
+
+        //es decir, en la heladera queda lugar para almacenar n viandas
+        heladera.setModelo(modeloHeladera2);//modeloHeladera2 tiene capacidad para 10 viandas
+
+        ObserverColaborador observer = new ObserverColaborador();
+        observer.setTipoSuscripcion(TipoSuscripcion.MUCHAS_VIANDAS);
+        observer.setCantidadViandas(8);
+        observer.setSuscriptor(colaborador1);
+
+        heladera.agregarColaborador(observer);
+
+        System.out.println("La heladera tiene lugar para ingresar " + heladera.cantidadViandasLugar()+ " viandas");
+        heladera.agregarVianda();
+        System.out.println("La heladera tiene lugar para ingresar " + heladera.cantidadViandasLugar()+ " viandas");
     }
     @Test
     public void testHeladeraFallaSuscripcion() {
         //La heladera sufrió un desperfecto y las viandas deben ser llevadas a otras heladeras
         // a la brevedad para que las mismas no se echen a perder
-
-        //tengo que hacer que un colaborador se suscriba a una heladera
-        Colaborador colaborador1 = new Colaborador();
-        colaborador1.setNombre("Martin");
-        colaborador1.setApellido("Fierro");
-        colaborador1.setTipoDocumento(TipoDocumento.DNI);
-        colaborador1.setNumeroDocumento(12345845);
-        colaborador1.setTipoPersona(TipoPersona.HUMANA);
-
         ObserverColaborador observer = new ObserverColaborador();
         observer.setTipoSuscripcion(TipoSuscripcion.DESPERFECTO);
         observer.setSuscriptor(colaborador1);
 
         heladera.agregarColaborador(observer);
-        heladera.setEstaActiva(Boolean.TRUE);
+        heladera.setEstaActiva(Boolean.FALSE);
     }
 
 }
