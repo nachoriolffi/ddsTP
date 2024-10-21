@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.outputs.DonacionDineroOutputDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DistribucionVianda;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DonacionDinero;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.TipoColaboracion;
 import ar.edu.utn.frba.dds.models.entities.multiplicador.config.ConfiguracionMultiplicador;
@@ -24,26 +25,29 @@ public class DonarDineroController extends BaseController implements ICrudViewsH
     public void index(Context context) {
 
         Map<String, Object> model = new HashMap<>();
-        if (verificarJuridicoOHumano(context,model) != null) {
-            List<DonacionDinero> donacionesDineroNormal = repoDonacionDinero.buscarTodos();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); // Formato para la fecha
-            List<DonacionDineroOutputDTO> donacionesDinero = new ArrayList<>();
+        Usuario usuario = verificarJuridicoOHumano(context, model);
+        Colaborador colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
+        List<DonacionDinero> donacionesDineroNormal = colaborador.getColaboracionesRealizadas().stream()
+                .filter(c -> c instanceof DonacionDinero)
+                .map(c -> (DonacionDinero) c)
+                .toList();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); // Formato para la fecha
+        List<DonacionDineroOutputDTO> donacionesDinero = new ArrayList<>();
 
-            for (DonacionDinero donacion : donacionesDineroNormal) {
-                DonacionDineroOutputDTO dto = new DonacionDineroOutputDTO();
+        for (DonacionDinero donacion : donacionesDineroNormal) {
+            DonacionDineroOutputDTO dto = new DonacionDineroOutputDTO();
 
-                dto.setId(donacion.getId());
-                dto.setFechaDonacion(dateFormat.format(donacion.getFechaColaboracion()));
-                dto.setMonto(String.format("%.2f", donacion.getMonto()));
-                dto.setEsPeriodica(donacion.getEsDonacionMensual() ? "Sí" : "No");
-                dto.setRenovacion(donacion.getEsDonacionMensual());
-                donacionesDinero.add(dto);
-            }
-
-            model.put("donacionesDinero", donacionesDinero);
-            model.put("title", "Donar dinero");
-            context.render("donaciones/donacionDinero.hbs", model);
+            dto.setId(donacion.getId());
+            dto.setFechaDonacion(dateFormat.format(donacion.getFechaColaboracion()));
+            dto.setMonto(String.format("%.2f", donacion.getMonto()));
+            dto.setEsPeriodica(donacion.getEsDonacionMensual() ? "Sí" : "No");
+            dto.setRenovacion(donacion.getEsDonacionMensual());
+            donacionesDinero.add(dto);
         }
+
+        model.put("donacionesDinero", donacionesDinero);
+        model.put("title", "Donar dinero");
+        context.render("donaciones/donacionDinero.hbs", model);
     }
 
     @Override

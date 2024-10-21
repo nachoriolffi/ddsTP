@@ -31,49 +31,13 @@
                         <tr>
                             <td>{{this.comida}}</td>
                             <td>{{this.calorias}}</td>
-                            <td>{{this.peso}}</td>
-                            <td>{{this.fechaCaducidad}}</td>
+                            <td>{{this.pesoEnGramos}}</td>
                             <td>{{this.fechaDonacion}}</td>
-                            <td>Heladera A</td>
+                            <td>{{this.fechaCaducidad}}</td>
+                            <td>{{this.heladera}}</td>
                             <td>{{this.fueEntregada}}</td>
                         </tr>
                     {{/each}}
-                    <tr>
-                        <td>Manzanas</td>
-                        <td>52</td>
-                        <td>1000g</td>
-                        <td>2024-08-01</td>
-                        <td>2024-09-01</td>
-                        <td>Heladera A</td>
-                        <td>Sí</td>
-                    </tr>
-                    <tr>
-                        <td>Papas</td>
-                        <td>-</td>
-                        <td>2000g</td>
-                        <td>2024-08-05</td>
-                        <td>2024-10-05</td>
-                        <td>Heladera B</td>
-                        <td>No</td>
-                    </tr>
-                    <tr>
-                        <td>Leche</td>
-                        <td>42</td>
-                        <td>-</td>
-                        <td>2024-08-10</td>
-                        <td>2024-08-20</td>
-                        <td>Heladera C</td>
-                        <td>Sí</td>
-                    </tr>
-                    <tr>
-                        <td>Pan</td>
-                        <td>-</td>
-                        <td>500g</td>
-                        <td>2024-08-12</td>
-                        <td>2024-08-18</td>
-                        <td>Heladera A</td>
-                        <td>No</td>
-                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -99,7 +63,12 @@
                             </div>
                             <div class="col-md-12">
                                 <label class="form-label" for="input4">Heladera</label>
-                                <input class="form-control" type="text" id="input4" name="heladera" required>
+                                <select class="form-select" id="input4" name="nombreHeladera" required>
+                                    <option value="" disabled selected>Seleccione una Heladera</option>
+                                    {{#each heladeras}}
+                                        <option value="{{this.id}}">{{this.nombre}}</option>
+                                    {{/each}}
+                                </select>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label" for="input5">Calorias</label>

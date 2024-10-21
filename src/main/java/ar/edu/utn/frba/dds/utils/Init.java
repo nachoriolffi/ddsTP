@@ -83,9 +83,6 @@ public class Init implements WithSimplePersistenceUnit {
         vianda.setFechaCaducidad(new Date(2021, 10, 24));
         vianda.setFechaDonacion(new Date());
 
-
-
-
         RepoColaborador.INSTANCE.agregar(colaborador1);
         vianda.setColaborador(colaborador1);
         vianda.setCalorias(500.0);
@@ -96,33 +93,10 @@ public class Init implements WithSimplePersistenceUnit {
         RepoViandas.INSTANCE.agregar(vianda);
 
         //repoOferta.agregar(oferta);
-        //repoModelo.agregar(modelo1);
-        //repoModelo.agregar(modelo2);
-        //repoModelo.agregar(modelo3);
+        repoModelo.agregar(modelo1);
+        repoModelo.agregar(modelo2);
+        repoModelo.agregar(modelo3);
 
-//        Oferta oferta1 = new Oferta();
-//        oferta1.setNombre("Oferta 1");
-//        oferta1.setPuntosNecesarios(100);
-//        oferta1.setFechaInicio(new Date());
-//        oferta1.setFechaFin(new Date());
-//        oferta1.setStockInicial(10);
-//        oferta1.setStockUsado(0);
-//        oferta1.setRubro(Rubro.EDUCACION);
-//
-//        Oferta oferta2 = new Oferta();
-//        oferta2.setNombre("Oferta 1");
-//        oferta2.setPuntosNecesarios(100);
-//        oferta2.setFechaInicio(new Date());
-//        oferta2.setFechaFin(new Date());
-//        oferta2.setStockInicial(10);
-//        oferta2.setStockUsado(0);
-//        oferta2.setRubro(Rubro.EDUCACION);
-//
-//
-//
-//        RepoOferta.INSTANCE.agregar(oferta1);
-//        RepoOferta.INSTANCE.agregar(oferta2);
-        //RepoViandas.INSTANCE.agregar(vianda);
 
 //        for (TipoRol tipoRol : TipoRol.values()) {
 //            Rol rol = new Rol();
@@ -132,9 +106,6 @@ public class Init implements WithSimplePersistenceUnit {
 
         /*Persistencia para probar DistribuirViandas*/
 
-
-
-
         Heladera heladera2 = new Heladera();
         heladera2.setNombre("UTN CAMPUS");
         heladera2.setCoordenada(coordenada);
@@ -143,8 +114,6 @@ public class Init implements WithSimplePersistenceUnit {
         heladera2.setModelo(modelo1);
 
         repoHeladeras.agregar(heladera2);
-
-
 
         Usuario usuario = new Usuario();
         usuario.setNombre("Ignacio Riolffi");
@@ -220,17 +189,17 @@ public class Init implements WithSimplePersistenceUnit {
         RepoCuestionario.INSTANCE.agregar(cuestionario);
 
         Usuario usuario2 = new Usuario();
-        usuario2.setCorreoElectronico("juan@gmail.com");
-        usuario2.setRol(TipoRol.COLABORADOR_JURIDICO);
+        usuario2.setCorreoElectronico("nacho@gmail.com");
+        usuario2.setRol(TipoRol.COLABORADOR_HUMANO);
         usuario2.setContrasenia("1234");
 
         Colaborador colaborador = new Colaborador();
-        colaborador.setNombre("Juan Manuel");
-        colaborador.setApellido("Nuñez");
+        colaborador.setNombre("Nacho");
+        colaborador.setApellido("Nachito");
         usuario2.setNombre(colaborador.getNombre() + " " + colaborador.getApellido());
         repoUsuario = RepoUsuario.INSTANCE;
         //repoUsuario.agregar(usuario2);
-        colaborador.setTipoPersona(TipoPersona.JURIDICA);
+        colaborador.setTipoPersona(TipoPersona.HUMANA);
         colaborador.setUsuario(usuario2);
         RepoColaborador repoColaborador = RepoColaborador.INSTANCE;
         //repoColaborador.agregar(colaborador);

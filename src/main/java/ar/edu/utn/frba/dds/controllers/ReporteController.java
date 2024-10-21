@@ -34,7 +34,7 @@ public class ReporteController extends BaseController implements ICrudViewsHandl
         Map<String, Object> model = new HashMap<>();
         Usuario usuario = verificarAdmin(context, model);
         if (usuario != null) {
-            
+
             List<Reporte> reportes = this.repoReporte.buscarTodos();
             Reporte reporte = this.repoReporte.buscar(Long.valueOf(context.pathParam("id")));
             if (reporte != null) {

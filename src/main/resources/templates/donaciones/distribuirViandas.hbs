@@ -6,7 +6,8 @@
                 <h1 class="h1">Distribucion de Viandas</h1>
             </div>
             <div class="col-md-4 text-md-end">
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#donationModal">
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                        data-bs-target="#donationModal">
                     Distribuir Vianda/s
                 </button>
             </div>
@@ -26,13 +27,13 @@
                     <tbody class="table-group-divider">
                     <!-- Tengo que leer esto de la base de datos -->
                     {{#each distribuciones}}
-                    <tr>
-                        <td>{{this.heladeraOrigen.id}}</td>
-                        <td>{{this.heladeraDestino.id}}</td>
-                        <td>{{this.cantidadViandas}}</td>
-                        <td>{{this.motivo}}</td>
-                        <td>{{this.fechaDistribucion}}</td>
-                    </tr>
+                        <tr>
+                            <td>{{this.heladeraOrigen}}</td>
+                            <td>{{this.heladeraDestino}}</td>
+                            <td>{{this.viandasMovidas}}</td>
+                            <td>{{this.motivo}}</td>
+                            <td>{{this.fechaDistribucion}}</td>
+                        </tr>
                     {{/each}}
 
                     </tbody>
@@ -40,7 +41,8 @@
             </div>
         </div>
         <!-- Modal de Donación -->
-        <div class="modal fade" id="donationModal" tabindex="-1" aria-labelledby="donationModalLabel" aria-hidden="true">
+        <div class="modal fade" id="donationModal" tabindex="-1" aria-labelledby="donationModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -49,18 +51,30 @@
                     </div>
                     <div class="modal-body">
                         <!-- Formulario de Donación -->
-                        <form id="donationForm" class="row g-3 needs-validation" novalidate method="POST" action="/distribuirViandas">
+                        <form id="donationForm" class="row g-3 needs-validation" novalidate method="POST"
+                              action="/distribuirViandas">
                             <div class="col-md-6">
                                 <label class="form-label" for="input1">Heladera Origen</label>
-                                <input class="form-control" type="text" id="input1" name="heladera-origen" required>
+                                <select class="form-select" id="input4" name="nombreHeladeraOrigen" required>
+                                    <option value="" disabled selected>Seleccione una Heladera</option>
+                                    {{#each heladeras}}
+                                        <option value="{{this.id}}">{{this.nombre}}</option>
+                                    {{/each}}
+                                </select>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label" for="input3">Heladera Destino</label>
-                                <input class="form-control" type="text" id="input3" name="heladera-destino" required>
+                                <select class="form-select" id="input4" name="nombreHeladeraDestino" required>
+                                    <option value="" disabled selected>Seleccione una Heladera</option>
+                                    {{#each heladeras}}
+                                        <option value="{{this.id}}">{{this.nombre}}</option>
+                                    {{/each}}
+                                </select>
                             </div>
                             <div class="col-md-12">
                                 <label class="form-label" for="modelo">Motivo Distribucion Viandas</label>
                                 <select class="form-select" id="modelo" name="motivo" required>
+                                    <option value="" disabled selected>Seleccione un Motivo</option>
                                     <option value="DESPERFECTO_H_ORIGEN">Desperfecto en Heladera Origen</option>
                                     <option value="FALTA_VIANDAS_H_DESTINO">Faltan Viandas en Heladera Destino</option>
                                 </select>
@@ -75,7 +89,9 @@
                             </div>
                             <div class="modal-footer col-md-12">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal">¡Realizar Donación!</button>
+                                <button class="btn btn-primary" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#confirmModal">¡Realizar Donación!
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -96,8 +112,12 @@
                     </div>
                     <div class="modal-footer">
                         <!-- Botón de Cancelar que cierra el modal de confirmación y vuelve al modal de donación -->
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#donationModal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" onclick="document.getElementById('donationForm').submit();">Sí, realizar donación</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal"
+                                data-bs-target="#donationModal">Cancelar
+                        </button>
+                        <button type="button" class="btn btn-primary"
+                                onclick="document.getElementById('donationForm').submit();">Sí, realizar donación
+                        </button>
                     </div>
                 </div>
             </div>
