@@ -26,15 +26,19 @@ public class Tarjeta {
     @JoinColumn(name = "usoTarjeta_id")
     private List<UsoTarjeta> registroUsos;
 
+    @ManyToOne
+    @JoinColumn(name = "colaboradorAsignador_id")
+    private Colaborador colaboradorAsignador;
+
     @OneToOne
     @JoinColumn(name = "vulnerable_id")
     private Vulnerable personaAsociada;
 
     @ManyToOne
-    @JoinColumn(name = "colaborador_id", nullable = false)
+    @JoinColumn(name = "colaborador_id" )
     private Colaborador colaboradorAsociado;
 
-    @Column(name = "fechaRegistro", nullable = false)
+    @Column(name = "fechaRegistro")
     private Date fechaRegistro;
 
     public void sacarVianda(Heladera heladera) throws IOException {

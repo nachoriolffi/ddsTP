@@ -14,6 +14,7 @@ import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Rubro;
+import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.models.entities.usuario.Rol;
@@ -203,6 +204,15 @@ public class Init implements WithSimplePersistenceUnit {
         colaborador.setUsuario(usuario2);
         RepoColaborador repoColaborador = RepoColaborador.INSTANCE;
         repoColaborador.agregar(colaborador);
+
+        Tarjeta tarjeta = new Tarjeta();
+        tarjeta.setColaboradorAsignador(colaborador);
+        Tarjeta tarjeta2 = new Tarjeta();
+        tarjeta2.setColaboradorAsignador(colaborador);
+
+        RepoTarjeta.INSTANCE.agregar(tarjeta);
+        RepoTarjeta.INSTANCE.agregar(tarjeta2);
+
     }
 
 
