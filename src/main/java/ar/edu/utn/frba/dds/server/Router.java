@@ -79,7 +79,7 @@ public class Router {
         app.post("/cargaMasiva", Objects.requireNonNull(ServiceLocator.instanceOf(CargaMasivaController.class))::cargaMasiva, TipoRol.ADMIN);
 
         app.get("/registroVulnerable", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroVulnerableController.class))::index, TipoRol.COLABORADOR_HUMANO);
-
+        app.post("/registrarPersona", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroVulnerableController.class))::create, TipoRol.COLABORADOR_HUMANO);
         // app.get("/registroHumano", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroHumanoController.class))::index);
 
         app.get("/donarViandas", Objects.requireNonNull(ServiceLocator.instanceOf(DonacionViandaController.class))::index);

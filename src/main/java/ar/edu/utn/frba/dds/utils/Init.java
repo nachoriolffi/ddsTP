@@ -121,7 +121,7 @@ public class Init implements WithSimplePersistenceUnit {
         usuario.setContrasenia("1234");
         usuario.setCorreoElectronico("nacho@gmail.com");
         RepoUsuario repoUsuario = RepoUsuario.INSTANCE;
-        //repoUsuario.agregar(usuario);
+        repoUsuario.agregar(usuario);
 
         Cuestionario cuestionario = new Cuestionario();
 
@@ -189,7 +189,7 @@ public class Init implements WithSimplePersistenceUnit {
         RepoCuestionario.INSTANCE.agregar(cuestionario);
 
         Usuario usuario2 = new Usuario();
-        usuario2.setCorreoElectronico("nacho@gmail.com");
+        usuario2.setCorreoElectronico("nacho2@gmail.com");
         usuario2.setRol(TipoRol.COLABORADOR_HUMANO);
         usuario2.setContrasenia("1234");
 
@@ -198,11 +198,11 @@ public class Init implements WithSimplePersistenceUnit {
         colaborador.setApellido("Nachito");
         usuario2.setNombre(colaborador.getNombre() + " " + colaborador.getApellido());
         repoUsuario = RepoUsuario.INSTANCE;
-        //repoUsuario.agregar(usuario2);
+        repoUsuario.agregar(usuario2);
         colaborador.setTipoPersona(TipoPersona.HUMANA);
         colaborador.setUsuario(usuario2);
         RepoColaborador repoColaborador = RepoColaborador.INSTANCE;
-        //repoColaborador.agregar(colaborador);
+        repoColaborador.agregar(colaborador);
     }
 
 
