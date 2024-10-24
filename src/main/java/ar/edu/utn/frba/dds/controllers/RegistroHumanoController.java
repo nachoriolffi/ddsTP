@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.dtos.RespuestaDTO;
 import ar.edu.utn.frba.dds.dtos.PreguntaDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
+import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.TipoColaboracion;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Cuestionario;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.CuestionarioRespondido;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
@@ -39,7 +40,10 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
             Map<String, List<Pregunta>> categorizedQuestions = cuestionario.getPreguntas().stream()
                     .collect(Collectors.groupingBy(Pregunta::getTipoPregunta));
 
+            List<TipoColaboracion> formasDeColaboracion = Arrays.asList(TipoColaboracion.values());
+
             Map<String, Object> model = new HashMap<>();
+            model.put("formasDeColaboracion", formasDeColaboracion);
             model.put("title", "Registro Humano");
             model.put("usuario", nuevoUsuario);
             model.put("cuestionario", cuestionario);

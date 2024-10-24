@@ -1,8 +1,10 @@
 package ar.edu.utn.frba.dds.models.entities.colaborador;
 
+import ar.edu.utn.frba.dds.models.converters.FormaDeColaboracionConverter;
 import ar.edu.utn.frba.dds.models.converters.MedioComunicacionAtributeConvertere;
 import ar.edu.utn.frba.dds.models.entities.colaborador.calculoPuntos.CalculadorPuntos;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
+import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.TipoColaboracion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.observer.IObserverColaborador;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.FormaDeColaboracion;
@@ -61,8 +63,11 @@ public class Colaborador extends IObserverColaborador {
 
     //@OneToMany
     //@JoinColumn(name = "id_FormasColaboracion")
-    @Transient
-    private List<FormaDeColaboracion> formasDeColaboracion;
+    //@Transient
+    @Convert(converter = FormaDeColaboracionConverter.class)
+    @ElementCollection(targetClass = String.class) // de esta manera puedo cargar las formas de colaboracion que la persona elige y ademas me ayuda a poder asignarle la tarjeta en base a la forma que elige.
+    //ademas podemos usar el factory que tenemos creado de esto para el caso de tener que usarlo solo necesitamos el string y en abse a eso creamos la intancia de la colaboracion
+    private List<TipoColaboracion> formasDeColaboracion;
 
     @OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FormaDeColaboracion> colaboracionesRealizadas;
@@ -143,7 +148,7 @@ public class Colaborador extends IObserverColaborador {
         this.puntosTotalesUsados = (double) 0;
     }
 
-    public Colaborador(String nombre, String apellido, List<MedioDeComunicacion> mediosDeComunicacion, List<FormaDeColaboracion> formasDeColaboracion, CuestionarioRespondido cuestionarioRespondido, TipoPersona tipoPersona) {
+   /* public Colaborador(String nombre, String apellido, List<MedioDeComunicacion> mediosDeComunicacion, List<FormaDeColaboracion> formasDeColaboracion, CuestionarioRespondido cuestionarioRespondido, TipoPersona tipoPersona) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.mediosDeComunicacion = mediosDeComunicacion;
@@ -155,15 +160,15 @@ public class Colaborador extends IObserverColaborador {
         this.mediosDeComunicacion = new ArrayList<>();
         this.formasDeColaboracion = new ArrayList<>();
         this.colaboracionesRealizadas = new ArrayList<>();
-    }
+    }*/
 
     public void agregarMedioDeComunicacion(MedioDeComunicacion medioDeComunicacion) {
         this.mediosDeComunicacion.add(medioDeComunicacion);
     }
 
-    public void agregarFormaDeColaboracion(FormaDeColaboracion formaDeColaboracion) {
+    /*public void agregarFormaDeColaboracion(FormaDeColaboracion formaDeColaboracion) {
         this.formasDeColaboracion.add(formaDeColaboracion);
-    }
+    }*/
 
     public void agregarColaboracionRealizada(FormaDeColaboracion formaDeColaboracion) {
         this.colaboracionesRealizadas.add(formaDeColaboracion);
