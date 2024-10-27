@@ -44,7 +44,7 @@ public class Tecnico {
     private Integer areaCobertura;
 
     @OneToOne
-    @JoinColumn(name = "coordenada_id", nullable = false)
+    @JoinColumn(name = "coordenada_id")
     private Coordenada coordenada;
 
     @Column(name = "disponible")

@@ -7,6 +7,9 @@ import ar.edu.utn.frba.dds.models.entities.cuestionario.TipoPregunta;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
+import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
+import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Rubro;
+import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
@@ -145,16 +148,35 @@ public class Init implements WithSimplePersistenceUnit {
         usuario.setRol(TipoRol.ADMIN);
         usuario.setContrasenia("1234");
         usuario.setCuentaEliminada(false);
+        Usuario usuario2 = new Usuario();
+        usuario2.setCorreoElectronico("nacho2@gmail.com");
+        usuario2.setRol(TipoRol.COLABORADOR_HUMANO);
+        usuario2.setContrasenia("1234");
+
         Colaborador colaborador = new Colaborador();
         colaborador.setNombre("Ignacio Joaquin");
         colaborador.setApellido("Riolffi");
         usuario.setNombre(colaborador.getNombre() + " " + colaborador.getApellido());
         //repoUsuario = RepoUsuario.INSTANCE;
         //repoUsuario.agregar(usuario);
+        colaborador.setNombre("Nacho");
+        colaborador.setApellido("Nachito");
+        usuario2.setNombre(colaborador.getNombre() + " " + colaborador.getApellido());
+        repoUsuario = RepoUsuario.INSTANCE;
+        repoUsuario.agregar(usuario2);
         colaborador.setTipoPersona(TipoPersona.HUMANA);
         colaborador.setUsuario(usuario);
         RepoColaborador repoColaborador = RepoColaborador.INSTANCE;
-        //repoColaborador.agregar(colaborador);
+        repoColaborador.agregar(colaborador);
+
+        Tarjeta tarjeta = new Tarjeta();
+        tarjeta.setColaboradorAsignador(colaborador);
+        Tarjeta tarjeta2 = new Tarjeta();
+        tarjeta2.setColaboradorAsignador(colaborador);
+
+        RepoTarjeta.INSTANCE.agregar(tarjeta);
+        RepoTarjeta.INSTANCE.agregar(tarjeta2);
+
     }
 
 

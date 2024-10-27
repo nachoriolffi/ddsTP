@@ -22,6 +22,22 @@
                         <label class="form-label" for="fechaNacimiento">Fecha de Nacimiento</label>
                         <input class="form-control" type="date" id="fechaNacimiento" name="fechaNacimiento" required>
                     </div>
+
+                    <div class="col-lg-4 col-md-12">
+                        <label class="form-label" for="apellido">Numero de documento/s</label>
+                        <input class="form-control" type="text" id="numeroDeDocumento" name="numeroDeDocumento" required>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12">
+                        <label class="form-label" for="tipoDocumento">Numero de documento</label>
+                        <select class="form-select" id="tipoDocumento" name="tipoDocumento" required>
+                            <option value="" disabled selected>Seleccion una opcion</option>
+                            {{#each tipoDocumentos}}
+                                <option value="{{this}}">{{this}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+
                     <div class="col-lg-6 col-md-12">
                         <label class="form-label" for="provincia">Provincia</label>
                         <select class="form-select" id="provincia" name="provincia" required>
@@ -60,6 +76,27 @@
                         <label class="form-label" for="cantidadMenores">Cantidad de Menores a Cargo</label>
                         <input class="form-control" type="text" id="cantidadMenores" name="cantidadMenores">
                     </div>
+
+                    <div class="col-lg-6 col-md-12">
+                        <label class="form-label" for="situacionDeCalle">Situación de Calle</label>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="situacionDeCalle" name="situacionDeCalle">
+                            <label class="form-check-label" for="situacionDeCalle">
+                                ¿Está en situación de calle?
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-12">
+                        <label class="form-label" for="tarjeta">Tarjeta</label>
+                        <select class="form-select" id="tarjeta" name="tarjeta" required>
+                            <option value="" disabled selected>Seleccione una tarjeta</option>
+                            {{#each tarjetas}}
+                                <option value="{{this.id}}">{{this.id}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+
                     <hr class="my-3 border-0">
                     <div class="col-12 text-end">
                         <button class="btn btn-outline-primary" type="submit">¡Registrar Persona!</button>

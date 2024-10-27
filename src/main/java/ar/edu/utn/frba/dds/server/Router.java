@@ -80,7 +80,7 @@ public class Router {
         app.post("/cargaMasiva", Objects.requireNonNull(ServiceLocator.instanceOf(CargaMasivaController.class))::cargaMasiva, TipoRol.ADMIN);
 
         app.get("/registroVulnerable", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroVulnerableController.class))::index, TipoRol.COLABORADOR_HUMANO);
-
+        app.post("/registrarPersona", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroVulnerableController.class))::create, TipoRol.COLABORADOR_HUMANO);
         // app.get("/registroHumano", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroHumanoController.class))::index);
 
         app.get("/donarViandas", Objects.requireNonNull(ServiceLocator.instanceOf(DonacionViandaController.class))::index);
@@ -101,6 +101,9 @@ public class Router {
         app.get("/heladeras", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::index);
         app.post("/heladeras/create", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::create);
         app.get("/heladeras/{heladeraId}", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::show);
+
+        app.get("/cargaTecnico", Objects.requireNonNull(ServiceLocator.instanceOf(TecnicoController.class))::index);
+        app.post("/cargaTecnico", Objects.requireNonNull(ServiceLocator.instanceOf(TecnicoController.class))::save);
         app.get("/mapaHeladeras", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::showMap);
         app.post("/cargarModelo", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::createModel);
         app.post("heladeras/modificar", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::edit);
