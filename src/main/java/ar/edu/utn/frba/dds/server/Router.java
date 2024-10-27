@@ -56,10 +56,11 @@ public class Router {
         // donacion de dinero
         app.get("/donacionDinero", Objects.requireNonNull(ServiceLocator.instanceOf(DonarDineroController.class))::index, TipoRol.COLABORADOR_HUMANO, TipoRol.COLABORADOR_JURIDICO);
         app.post("/donacionDinero", Objects.requireNonNull(ServiceLocator.instanceOf(DonarDineroController.class))::save, TipoRol.COLABORADOR_HUMANO, TipoRol.COLABORADOR_JURIDICO);
-        app.post("/donacionDinero/{id}/cancelar", Objects.requireNonNull(ServiceLocator.instanceOf(DonarDineroController.class))::cancelar, TipoRol.COLABORADOR_HUMANO,TipoRol.COLABORADOR_JURIDICO);
+        app.post("/donacionDinero/{id}/cancelar", Objects.requireNonNull(ServiceLocator.instanceOf(DonarDineroController.class))::cancelar, TipoRol.COLABORADOR_HUMANO, TipoRol.COLABORADOR_JURIDICO);
         // encargarseDeHeladera
         app.get("/encargarseHeladera", Objects.requireNonNull(ServiceLocator.instanceOf(EncargarseHeladeraController.class))::index, TipoRol.COLABORADOR_JURIDICO);
         app.post("/encargarseHeladera", Objects.requireNonNull(ServiceLocator.instanceOf(EncargarseHeladeraController.class))::save, TipoRol.COLABORADOR_JURIDICO);
+        app.post("/buscarPuntosRecomendacion", Objects.requireNonNull(ServiceLocator.instanceOf(EncargarseHeladeraController.class))::searchPoints);
         // fallaTecnica
         app.get("/fallaTecnica", Objects.requireNonNull(ServiceLocator.instanceOf(FallaTecnicaController.class))::index, TipoRol.COLABORADOR_HUMANO);
         app.get("/crearfallaTecnica", Objects.requireNonNull(ServiceLocator.instanceOf(FallaTecnicaController.class))::create, TipoRol.COLABORADOR_HUMANO);
@@ -69,7 +70,7 @@ public class Router {
 
         app.get("/canjeProductos", Objects.requireNonNull(ServiceLocator.instanceOf(OfertaController.class))::index, TipoRol.COLABORADOR_HUMANO, TipoRol.COLABORADOR_JURIDICO);
         app.post("/cargarProducto", Objects.requireNonNull(ServiceLocator.instanceOf(OfertaController.class))::save);
-        app.post("/canjearProducto",Objects.requireNonNull(ServiceLocator.instanceOf(OfertaController.class))::canjear);
+        app.post("/canjearProducto", Objects.requireNonNull(ServiceLocator.instanceOf(OfertaController.class))::canjear);
 
         app.get("/crearCuenta", Objects.requireNonNull(ServiceLocator.instanceOf(CrearCuentaController.class))::index);
         app.post("/crearCuenta", Objects.requireNonNull(ServiceLocator.instanceOf(CrearCuentaController.class))::save);
@@ -85,7 +86,7 @@ public class Router {
         app.get("/donarViandas", Objects.requireNonNull(ServiceLocator.instanceOf(DonacionViandaController.class))::index);
         app.post("/donarViandas", Objects.requireNonNull(ServiceLocator.instanceOf(DonacionViandaController.class))::save);
 
-        app.get("/misHeladeras", Objects.requireNonNull(ServiceLocator.instanceOf(MisHeladerasController.class))::index,TipoRol.COLABORADOR_HUMANO, TipoRol.COLABORADOR_JURIDICO);
+        app.get("/misHeladeras", Objects.requireNonNull(ServiceLocator.instanceOf(MisHeladerasController.class))::index, TipoRol.COLABORADOR_HUMANO, TipoRol.COLABORADOR_JURIDICO);
         app.post("/misHeladeras", Objects.requireNonNull(ServiceLocator.instanceOf(MisHeladerasController.class))::save);
 
         app.get("/registroJuridico", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroJuridicoController.class))::index);
@@ -100,6 +101,16 @@ public class Router {
         app.get("/heladeras", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::index);
         app.post("/heladeras/create", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::create);
         app.get("/heladeras/{heladeraId}", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::show);
+        app.get("/mapaHeladeras", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::showMap);
+        app.post("/cargarModelo", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::createModel);
+        app.post("heladeras/modificar", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::edit);
+        app.post("heladeras/darDeBaja", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::delete);
+
+        app.get("/verPerfil", Objects.requireNonNull(ServiceLocator.instanceOf(UserController.class))::index);
+        app.post("/guardarCambiosPerfil", Objects.requireNonNull(ServiceLocator.instanceOf(UserController.class))::edit);
+
+        app.post("/darDeBaja", Objects.requireNonNull(ServiceLocator.instanceOf(ColaboradorController.class))::delete);
+        app.get("/verColaboradores", Objects.requireNonNull(ServiceLocator.instanceOf(ColaboradorController.class))::index);
     }
 
 }

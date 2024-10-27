@@ -32,8 +32,8 @@ public class CrearCuentaController extends BaseController implements ICrudViewsH
         model.put("tipoNoSeleccionado", tipoNoSeleccionado);
         model.put("faltaRellenar", faltaRellenar);
         model.put("clavesNoCoinciden", clavesNoCoinciden);
-        model.put("claveNoSegura",claveNoSegura);
-        context.render("logs/crearCuenta.hbs",model);
+        model.put("claveNoSegura", claveNoSegura);
+        context.render("logs/crearCuenta.hbs", model);
     }
 
     @Override
@@ -65,11 +65,12 @@ public class CrearCuentaController extends BaseController implements ICrudViewsH
             context.sessionAttribute("clavesNoCoinciden", "Las claves no coinciden. Intente de nuevo");
             context.redirect("/crearCuenta");
             return;
-        }else{   ValidadorDeContrasenia validadorDeContrasenia = new ValidadorDeContrasenia();
+        } else {
+            ValidadorDeContrasenia validadorDeContrasenia = new ValidadorDeContrasenia();
             validadorDeContrasenia.instanciarFormaValidar();
             boolean respuesta = validadorDeContrasenia.validarContrasenia(password, nuevoUsuario);
             if (!respuesta) {
-                context.sessionAttribute("claveNoSegura", "La contraseña debe tener entre 8 y 64 caracteres y algo más");
+                context.sessionAttribute("claveNoSegura", "La contraseña debe tener entre 8 y 64 caracteres y no debe estar entre las peores 10000");
                 context.redirect("/crearCuenta");
                 return;
             }
@@ -80,7 +81,7 @@ public class CrearCuentaController extends BaseController implements ICrudViewsH
         nuevoUsuario.setNombre("nombreHarcodeado");//harcodeo el nombre para poder probar
 
         assert tipoUsuario != null;
-        if(tipoUsuario.equals("Juridico")) {
+        if (tipoUsuario.equals("Juridico")) {
             nuevoUsuario.setRol(TipoRol.COLABORADOR_JURIDICO);
             context.sessionAttribute("nuevoUsuario", nuevoUsuario);
             context.sessionAttribute("usuario_id", nuevoUsuario.getId());

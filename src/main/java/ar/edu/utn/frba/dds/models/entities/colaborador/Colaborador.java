@@ -232,4 +232,7 @@ public class Colaborador extends IObserverColaborador {
     public void recibirNotificacion(String mensaje) {
         System.out.println("Soy " + this.nombre + " " + this.apellido + " y recibí el mensaje: " + mensaje);
     }
+    public String obtenerDireccion(){
+        return this.getDireccion().getCalle().toString() + " " + this.getDireccion().getAltura().toString() + " Piso:" + this.getDireccion().getPiso().toString();
+    }
 }

@@ -1,0 +1,69 @@
+{{#partial "contenido"}}
+    <section class="container">
+        <div id="map" style="height: 75vh; width: 100%" class="border"></div>
+    </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Obtener las heladeras desde Handlebars y generar un array de objetos con latitud, longitud y nombre
+            const heladeras = [
+                {{#if heladeras}}
+                    {{#each heladeras}}
+                        {
+                            id: "{{this.id}}", // Asegúrate de incluir el ID si lo necesitas
+                            lat: {{this.latitud}}, // Latitud
+                            lng: {{this.longitud}}, // Longitud
+                            nombre: "{{this.nombre}}", // Nombre
+                            url: "/heladeras/{{this.id}}" // Enlace a la heladera
+                        }{{#unless @last}},{{/unless}}
+                    {{/each}}
+                {{else}}
+                    [] // Si no hay heladeras, retorna un array vacío
+                {{/if}}
+            ];
+
+            // Imprimir el array de heladeras en la consola
+            console.log("Heladeras:", heladeras); // Aquí
+
+            // Filtra objetos con latitud o longitud indefinidos
+            const heladerasFiltradas = heladeras.filter(heladera => heladera.lat !== undefined && heladera.lng !== undefined);
+
+            // Imprimir el array filtrado en la consola
+            console.log("Heladeras filtradas:", heladerasFiltradas); // Aquí
+
+            // Inicializar el mapa de Leaflet
+            var map;
+
+            // Verificar si hay heladeras válidas
+            if (heladerasFiltradas.length > 0) {
+                // Si hay heladeras, centrar el mapa en la primera
+                console.log("Centrando el mapa en:", heladerasFiltradas[0]); // Aquí
+                map = L.map('map').setView([heladerasFiltradas[0].lat, heladerasFiltradas[0].lng], 13);
+
+                // Añadir marcadores para cada heladera con un popup que contiene un enlace
+                heladerasFiltradas.forEach(function(heladera) {
+                    console.log("Añadiendo marcador para:", heladera); // Aquí
+                    L.marker([heladera.lat, heladera.lng]).addTo(map)
+                            .bindPopup(`<b>${heladera.nombre}</b><br><a href="${heladera.url}">Ver más detalles</a>`);
+                });
+
+                // Añadir el layer de OpenStreetMap
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+            } else {
+                console.log("No hay heladeras válidas."); // Aquí
+                // Si no hay heladeras, centrar el mapa en una ubicación predeterminada (por ejemplo, Buenos Aires)
+                map = L.map('map').setView([-34.6037, -58.3816], 13); // Coordenadas de Buenos Aires
+                // Añadir el layer de OpenStreetMap
+                L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+            }
+        });
+    </script>
+
+
+
+
+{{/partial}}
+{{> templates/base}}

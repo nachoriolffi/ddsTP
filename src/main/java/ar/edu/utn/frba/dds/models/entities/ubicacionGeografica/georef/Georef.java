@@ -1,18 +1,21 @@
 package ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef;
 
+import ar.edu.utn.frba.dds.dtos.CalleDTO;
+import ar.edu.utn.frba.dds.dtos.PuntoRecomendadoDTO;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Calle;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Provincia;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.ListadoCoordenadas;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.ListadoLocalidades;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.ListadoMunicipios;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.ListadoProvincias;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.*;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoProvincia;
 import retrofit2.Call;
 import retrofit2.Response;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Georef extends ApiCaller {
@@ -130,10 +133,6 @@ public class Georef extends ApiCaller {
 
         return null; // Retorna null si no se encuentran resultados
     }
-
-
-
-
 
 
 }

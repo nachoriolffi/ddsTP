@@ -1,0 +1,80 @@
+{{#partial "contenido"}}
+    <section class="container">
+        <hr class="my-3 border-0">
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <h1 class="h1">Colaboradores</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 table-responsive">
+                <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                    <thead>
+                    <tr>
+                        <th scope="col">Tipo Colaborador</th>
+                        <th scope="col">Nombre y Apellido</th>
+                        <th scope="col">Fecha de Nacimiento</th>
+                        <th scope="col">Razon Social</th>
+                        <th scope="col">Tipo Jurisdiccion</th>
+                        <th scope="col">Direccion</th>
+                        <th scope="col">Dar de Baja</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                    {{#each colaboradores}}
+                        <tr>
+                            <td>{{this.tipoColaborador}}</td>
+                            <td>{{this.nombreYApellido}}</td>
+                            <td>{{this.fechaDeNacimiento}}</td>
+                            <td>{{this.razonSocial}}</td>
+                            <td>{{this.jurisdiccion}}</td>
+                            <td>{{this.direccion}}</td>
+                            <td>
+                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                        data-bs-target="#deleteAccountModal"
+                                        data-id="{{this.ID}}">
+                                    <i class="fa-solid fa-trash fa-lg"></i> Borrar Cuenta
+                                </button>
+                            </td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal para Confirmar Borrado -->
+    <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteAccountModalLabel">Confirmar Borrado</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que deseas borrar tu cuenta? Esta acción no se puede deshacer.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <form method="post" action="/darDeBaja">
+                        <input type="hidden" id="colaboradorId" name="colaboradorId"> <!-- Campo oculto -->
+                        <button type="submit" class="btn btn-danger">Borrar Cuenta</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función para actualizar el ID del colaborador en el campo oculto del formulario
+        document.querySelectorAll('[data-bs-target="#deleteAccountModal"]').forEach(button => {
+            button.addEventListener('click', function () {
+                const colaboradorId = this.getAttribute('data-id');
+                document.getElementById('colaboradorId').value = colaboradorId; // Asigna el ID al campo oculto
+            });
+        });
+    </script>
+{{/partial}}
+{{> templates/base }}

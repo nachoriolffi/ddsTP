@@ -45,7 +45,8 @@
                 </div>
                 <div class="modal-body">
                     <!-- Formulario de Donación -->
-                    <form action="/encargarseHeladera" method="POST" id="donationForm" class="row g-3 needs-validation" novalidate>
+                    <form action="/encargarseHeladera" method="POST" id="donationForm" class="row g-3 needs-validation"
+                          novalidate>
                         <div class="col-md-6">
                             <label class="form-label" for="nombreHeladera">Nombre Heladera</label>
                             <input class="form-control" type="text" id="nombreHeladera" name="nombreHeladera" required>
@@ -98,20 +99,25 @@
                 </div>
                 <div class="modal-body">
                     <div class="row" style="height: 100%;">
-                        <div class="col-md-5" style="height: 100%">
+                        <div class="col-md-6" style="height: 100%">
                             <div class="container">
                                 <div class="row align-items-center justify-content-center">
-                                    <div class="col-md-4 mb-3 mb-sm-4">
-                                        <input class="form-control" type="text" id="direccion-1" placeholder="Direccion"
-                                               required>
-                                    </div>
-                                    <div class="col-md-3 mb-3 mb-sm-4">
-                                        <input class="form-control" type="text" id="altura-1" placeholder="Altura"
-                                               required>
-                                    </div>
-                                    <div class="col-md-5 mb-sm-4">
-                                        <button class="btn btn-outline-primary w-100">Buscar Puntos</button>
-                                    </div>
+                                    <form action="/buscarPuntosRecomendacion" method="post">
+                                        <div class="col-md-4 mb-3 mb-sm-4">
+                                            <input class="form-control" type="text" id="direccion-1"
+                                                   placeholder="Direccion" name="direccion"
+                                                   required>
+                                        </div>
+                                        <div class="col-md-3 mb-3 mb-sm-4">
+                                            <input class="form-control" type="text" id="altura-1" placeholder="Altura"
+                                                   name="altura"
+                                                   required>
+                                        </div>
+                                        <div class="col-md-5 mb-sm-4">
+                                            <button type="submit" class="btn btn-outline-primary w-100">Buscar Puntos
+                                            </button>
+                                        </div>
+                                    </form>
                                 </div>
                                 <div class="row flex-grow-1 overflow-auto">
                                     <div class="container">
@@ -125,14 +131,12 @@
                                                     </div>
                                                 </li>
                                             {{/each}}
-
                                         </ul>
-
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-7 ">
+                        <div class="col-md-6">
                             <div class="container rounded" id="map" style="height: 100%"></div>
                             <!--ACA DENTRO APARECE EL MAPA CON LOS PUNTOS A RECOMENDAR-->
                         </div>

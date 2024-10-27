@@ -4,8 +4,12 @@ import lombok.Data;
 
 @Data
 public class HeladeraOutputDTO {
+    private String id;
+    private Double latitud;
+    private Double longitud;
     private String nombre;
     private String direccion;
     private Integer capacidad;
+    private String viandasRestantes;
     private String fechaPuestaFunc;
 }

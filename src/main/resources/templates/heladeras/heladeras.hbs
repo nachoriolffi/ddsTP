@@ -2,15 +2,26 @@
     <section class="container">
         <hr class="my-3 border-0">
         <div class="row mb-4">
-            <div class="col-md-8">
+            <div class="col-md-4">
                 <h1 class="h1">Heladeras</h1>
             </div>
-            <div class="col-md-4 text-md-end">
+            <div class="col-md-2 text-md-end">
+                <a class="btn btn-outline-primary" href="/mapaHeladeras">Ver Mapa</a>
+            </div>
+            <div class="col-md-2 text-md-end">
                 <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                         data-bs-target="#cargarHeladeraModal">
                     Cargar Heladera
                 </button>
             </div>
+            {{#if esAdmin}}
+                <div class="col-md-4 text-md-end">
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                            data-bs-target="#cargarModeloModal">
+                        Cargar Modelo
+                    </button>
+                </div>
+            {{/if}}
         </div>
         <div class="row">
             <div class="col-md-12 table-responsive">
@@ -19,9 +30,14 @@
                     <tr>
                         <th scope="col">Nombre</th>
                         <th scope="col">Dirección</th>
-                        <th scope="col">Cantidad Máx. de Viandas</th>
-                        <th scope="col">Cantidad de Viandas Restantes</th>
+                        <th scope="col">Máx. de Viandas</th>
+                        <th scope="col">Viandas Restantes</th>
                         <th scope="col">Suscribirme</th>
+                        {{#if esAdmin}}
+                            <th scope="col">Dar de Baja</th>
+                            <th scope="col">Modificar</th>
+                        {{/if}}
+
                     </tr>
                     </thead>
                     <tbody class="table-group-divider">
@@ -29,97 +45,296 @@
                         <tr>
                             <td><a href="/heladeras/{{this.id}}">{{this.nombre}}</a></td>
                             <td>{{this.direccion}}</td>
-                            <td>{{this.max_viandas}}</td>
-                            <td>{{this.viandas_restantes}}</td>
+                            <td>{{this.capacidad}}</td>
+                            <td>{{this.viandasRestantes}}</td>
                             <td>
-                                <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#confirmModal">
+                                <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#susbscribeModal">
                                     <i class="fa-solid fa-check-circle fa-lg"></i>
                                 </button>
                             </td>
+                            {{#if esAdmin}}
+                                <td>
+                                    <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#deleteAccountModal"
+                                            data-id="{{this.id}}">
+                                        <i class="fa-solid fa-trash fa-lg"></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#editProfileModal"
+                                            data-id="{{this.id}}">
+                                        <i class="fa-solid fa-edit"></i>
+                                    </button>
+                                </td>
+                            {{/if}}
                         </tr>
                     {{/each}}
                     </tbody>
                 </table>
             </div>
         </div>
+        {{#if esAdmin}}
+            <div class="modal fade" id="cargarHeladeraModal" tabindex="-1" aria-labelledby="cargarHeladeraLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="cargarHeladeraLabel">Cargar Heladera</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="row g-3 needs-validation" action="/heladeras/create" method="POST" novalidate>
+                                <div class="col-7">
+                                    <label for="validationCustom01" class="form-label">Nombre Heladera</label>
+                                    <input type="text" class="form-control" id="validationCustom01" name="nombre"
+                                           required>
+                                </div>
+                                <div class="col-5">
+                                    <label for="validationCustom05" class="form-label">Modelo</label>
+                                    <select class="form-select" id="validationCustom05" name="modelo" required>
+                                        <option value="" disabled selected>Modelo</option>
+                                        {{#each modelos}}
+                                            <option value="{{this.id}}">{{this.nombreModelo}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="col-7">
+                                    <label for="validationCustom02" class="form-label">Calle</label>
+                                    <input type="text" class="form-control" id="calle" name="calle" required>
+                                </div>
+                                <div class="col-3">
+                                    <label for="validationCustom03" class="form-label">Altura</label>
+                                    <input type="text" class="form-control" id="altura" name="altura" required>
+                                </div>
+                                <div class="col-2">
+                                    <label for="validationCustom04" class="form-label">Piso</label>
+                                    <input type="text" class="form-control" id="piso" name="piso">
+                                </div>
+                                <div class="modal-footer col-md-12">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar
+                                    </button>
+                                    <button class="btn btn-outline-primary" type="submit">Cargar Heladera</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <div class="modal fade" id="cargarHeladeraModal" tabindex="-1" aria-labelledby="cargarHeladeraLabel"
+            <div class="modal fade" id="cargarModeloModal" tabindex="-1" aria-labelledby="cargarModeloLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="cargarModeloLabel">Cargar Modelo de Heladera</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form class="row g-3 needs-validation" action="/cargarModelo" method="POST"
+                                  novalidate>
+                                <div class="col-7">
+                                    <label for="validationCustom01" class="form-label">Nombre</label>
+                                    <input type="text" class="form-control" id="validationCustom01" name="nombre"
+                                           required>
+                                </div>
+                                <div class="col-5">
+                                    <label for="validationCustom02" class="form-label">Peso (Kg)</label>
+                                    <input type="text" class="form-control" id="validationCustom02" name="peso"
+                                           required>
+                                </div>
+                                <div class="col-6">
+                                    <label for="validationCustom03" class="form-label">Cantidad Viandas</label>
+                                    <input type="text" class="form-control" id="validationCustom03"
+                                           name="cantidadViandas"
+                                           required>
+                                </div>
+                                <div class="col-3">
+                                    <label for="validationCustom04" class="form-label">Temp. Max.</label>
+                                    <input type="text" class="form-control" id="validationCustom04" name="tempMax"
+                                           required>
+                                </div>
+                                <div class="col-3">
+                                    <label for="validationCustom05" class="form-label">Temp. Min.</label>
+                                    <input type="text" class="form-control" id="validationCustom05" name="tempMin">
+                                </div>
+                                <div class="modal-footer col-md-12">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar
+                                    </button>
+                                    <button class="btn btn-outline-primary" type="submit">Cargar Modelo de Heladera
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/if}}
+
+        <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountLabel"
              aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="cargarHeladeraLabel">Cargar Heladera</h5>
+                        <h5 class="modal-title" id="deleteAccountLabel">Confirmar Baja de Heladera</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form class="row g-3 needs-validation" action="/heladeras/create" method="POST" novalidate>
-                            <div class="col-7">
-                                <label for="validationCustom01" class="form-label">Nombre Heladera</label>
-                                <input type="text" class="form-control" id="validationCustom01" name="nombre" required>
-                            </div>
-                            <div class="col-5">
-                                <label for="validationCustom05" class="form-label">Modelo</label>
-                                <select class="form-select" id="validationCustom05" name="modelo" required>
-                                    <option value="" disabled selected>Modelo</option>
-                                    {{#each modelos}}
-                                        <option value="{{this.id}}">{{this.nombreModelo}}</option>
-                                    {{/each}}
-                                </select>
-                            </div>
-                            <div class="col-7">
-                                <label for="validationCustom02" class="form-label">Calle</label>
-                                <input type="text" class="form-control" id="calle" name="calle" required>
-                            </div>
-                            <div class="col-3">
-                                <label for="validationCustom03" class="form-label">Altura</label>
-                                <input type="text" class="form-control" id="altura" name="altura" required>
-                            </div>
-                            <div class="col-2">
-                                <label for="validationCustom04" class="form-label">Piso</label>
-                                <input type="text" class="form-control" id="piso" name="piso">
-                            </div>
-                            <div class="modal-footer col-md-12">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button class="btn btn-outline-primary" type="submit">Cargar Heladera</button>
-                            </div>
+                        ¿Estás seguro de que quieres dar de baja esta heladera?
+                    </div>
+                    <div class="modal-footer">
+                        <form id="deleteHeladeraForm" method="POST" action="/heladeras/darDeBaja">
+                            <input type="hidden" name="heladeraId" id="heladeraIdToDelete">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-danger">Dar de Baja</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-
     </section>
 
+    <!-- Modal de confirmación -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">Confirmar Cambios</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que deseas guardar los cambios en tu perfil?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="sub" class="btn btn-primary" id="saveChanges">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Editar Heladera -->
+    <!-- Modal para Editar Heladera -->
+    <div class="modal modal-lg fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editProfileModalLabel">Editar Heladera</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editProfileForm" action="heladeras/modificar" method="POST">
+                        <!-- Campo oculto para el ID -->
+                        <input type="hidden" name="id" id="editHeladeraId">
+                        <div class="mb-3">
+                            <label for="nombreHeladera" class="form-label">Nombre</label>
+                            <input type="text" class="form-control" name="nombre" value="{{this.nombre}}" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="modeloHeladera" class="form-label">Modelo</label>
+                            <select class="form-select" id="modeloHeladera" name="modelo" required>
+                                <option value="" disabled selected>Modelo</option>
+                                {{#each modelos}}
+                                    <option value="{{this.id}}">{{this.nombreModelo}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="direccionHeladera" class="form-label">Dirección</label>
+                            <input type="text" class="form-control" name="direccion" value="{{this.direccion}}" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary" id="confirmSaveChanges">Guardar Cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {{/partial}}
 
-
 {{#partial "agregarScript"}}
+    <script>
+        document.getElementById('editProfileModal').addEventListener('show.bs.modal', function (event) {
+            // Botón que activó el modal
+            const button = event.relatedTarget;
+
+            // Obtén el id desde el atributo data-id del botón
+            const heladeraId = button.getAttribute('data-id');
+
+            // Asigna el id al input oculto del formulario
+            document.getElementById('editHeladeraId').value = heladeraId;
+        });
+    </script>
+
     <script src="/js/validacionDatos.js"></script>
     <script src="/js/mapa.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        const heladeraModal = document.getElementById('heladeraModal');
 
-        heladeraModal.addEventListener('show.bs.modal', function (event) {
-            const button = event.relatedTarget; // Element that triggered the modal
-            const heladeraId = button.getAttribute('data-id'); // Extract the fridge ID
+        document.getElementById('confirmSaveChanges').addEventListener('click', function () {
+            const editProfileModal = bootstrap.Modal.getInstance(document.getElementById('editProfileModal'));
+            editProfileModal.hide();
+            document.getElementById('editProfileModal').addEventListener('hidden.bs.modal', function () {
+                const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+                confirmModal.show();
+            }, {once: true});
+        });
+        document.getElementById('saveChanges').addEventListener('click', function () {
+            const confirmModal = bootstrap.Modal.getInstance(document.getElementById('confirmModal'));
+            confirmModal.hide();
+            document.getElementById('editProfileForm').submit();
+        });
+        document.querySelector('#confirmModal .btn-secondary').addEventListener('click', function () {
+            const confirmModal = bootstrap.Modal.getInstance(document.getElementById('confirmModal'));
+            confirmModal.hide();
+            document.getElementById('confirmModal').addEventListener('hidden.bs.modal', function () {
+                const editProfileModal = new bootstrap.Modal(document.getElementById('editProfileModal'));
+                editProfileModal.show();
+            }, {once: true});
+        });
+        document.getElementById('saveChanges').addEventListener('click', function () {
+            // Ocultar el modal de confirmación
+            const confirmModal = bootstrap.Modal.getInstance(document.getElementById('confirmModal'));
+            confirmModal.hide();
 
-            // Make an AJAX request to get the fridge details
-            fetch(`/heladeras/${heladeraId}`)
-                .then(response => {
-                    console.log('Response status:', response.status); // Log response status
-                    if (!response.ok) {
-                        throw new Error(`Error: ${response.status} - ${response.statusText}`); // Improved error handling
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Data received:', data); // Log received data
+            // Enviar el formulario de edición
+            document.getElementById('editProfileForm').submit();
+        });
 
-                    // Update the modal content with fridge data
-                    document.querySelector('#heladeraModalLabel').textContent = data.nombre;
-                    document.querySelector('#heladeraModal .modal-body').innerHTML = `
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const deleteAccountModal = document.getElementById('deleteAccountModal');
+
+            deleteAccountModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                const heladeraId = button.getAttribute('data-id');
+                const inputHeladeraId = document.getElementById('heladeraIdToDelete');
+                inputHeladeraId.value = heladeraId;
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const heladeraModal = document.getElementById('heladeraModal');
+
+            heladeraModal.addEventListener('show.bs.modal', function (event) {
+                const button = event.relatedTarget;
+                const heladeraId = button.getAttribute('data-id');
+
+                fetch(`/heladeras/${heladeraId}`)
+                        .then(response => {
+                            console.log('Response status:', response.status);
+                            if (!response.ok) {
+                                throw new Error(`Error: ${response.status} - ${response.statusText}`);
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            console.log('Data received:', data);
+                            document.querySelector('#heladeraModalLabel').textContent = data.nombre;
+                            document.querySelector('#heladeraModal .modal-body').innerHTML = `
                         <div class="row">
                             <h4>${data.nombre}</h4>
                             <div class="col-md-6 col-sm-12">
@@ -193,29 +408,26 @@
                             </div>
                         </div>
                     `;
+                            initMap(data.latitud, data.longitud);
+                        })
+                        .catch(error => {
+                            console.error('There has been a problem with your fetch operation:', error);
+                        });
+            });
 
-                    // Initialize the map with the heladera's coordinates
-                    initMap(data.latitud, data.longitud);
-                })
-                .catch(error => {
-                    console.error('There has been a problem with your fetch operation:', error);
+            function initMap(lat, lng) {
+                const map = new google.maps.Map(document.getElementById("map"), {
+                    center: {lat: lat, lng: lng},
+                    zoom: 15,
                 });
+                new google.maps.Marker({
+                    position: {lat: lat, lng: lng},
+                    map: map,
+                    title: "Heladera Location",
+                });
+            }
         });
-
-        // Function to initialize the map
-        function initMap(lat, lng) {
-            const map = new google.maps.Map(document.getElementById("map"), {
-                center: { lat: lat, lng: lng },
-                zoom: 15,
-            });
-            new google.maps.Marker({
-                position: { lat: lat, lng: lng },
-                map: map,
-                title: "Heladera Location",
-            });
-        }
-    });
-</script>
+    </script>
 
 {{/partial}}
 {{> templates/base }}

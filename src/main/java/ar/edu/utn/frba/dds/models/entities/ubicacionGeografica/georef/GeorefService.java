@@ -1,9 +1,6 @@
 package ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef;
 
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.ListadoCoordenadas;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.ListadoLocalidades;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.ListadoMunicipios;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.ListadoProvincias;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.*;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
@@ -30,4 +27,19 @@ public interface GeorefService {
 
     @GET("direcciones")
     Call<ListadoCoordenadas> direcciones(@Query("direccion") String direccion, @Query("campos") String campos);
+
+    @GET("calles")
+    Call<ListadoCalles> obtenerCallesPorCoordenadas(
+            @Query("lat") double latitud,
+            @Query("lon") double longitud,
+            @Query("campos") String campos
+    );
+    @GET("geocodificar")
+    Call<ListadoCoordenadas> coordenadas(@Query("lat") double latitud, @Query("lon") double longitud, @Query("campos") String campos);
+
+
+
+
+
+
 }

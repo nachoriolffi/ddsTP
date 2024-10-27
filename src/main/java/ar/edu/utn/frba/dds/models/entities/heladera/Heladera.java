@@ -81,6 +81,9 @@ public class Heladera implements IObservableColaborador {
     @Column(name = "tempActual")
     private Double tempActual;
 
+    @Column(name="dadaDeBaja")
+    private Boolean dadaDeBaja;
+
     @OneToMany
     @JoinColumn(name = "heladera_id")
     private List<ObserverColaborador> observers;

@@ -21,16 +21,12 @@ public abstract class BaseController {
             "/crearCuenta"
     ));
 
-    Set<String> validPathsColaborador = new HashSet<>(Set.of(
-            "/registroJuridico",
-            "/registroHumano"
-    ));
-
-    protected void verificarSesion(Context ctx, Map<String, Object> model) {
+    protected Usuario verificarSesion(Context ctx, Map<String, Object> model) {
         Usuario usuario = usuarioLogueado(ctx);
         if (usuario != null) {
             model.put("inicioSesion", true);
             model.put("noInicioSesion", false);
+            return  usuario;
         } else {
             // Si no está logueado, exceptúa las rutas de iniciar sesión y registrarse
             if (!validPaths.contains(ctx.path())) {
@@ -39,8 +35,7 @@ public abstract class BaseController {
             model.put("inicioSesion", false);
             model.put("noInicioSesion", true);
         }
-
-
+        return null;
     }
 
     protected Usuario verificarHumano(Context ctx, Map<String, Object> model) {

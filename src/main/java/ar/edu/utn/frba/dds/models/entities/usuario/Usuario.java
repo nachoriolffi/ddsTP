@@ -27,6 +27,8 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     @Column(name = "tipoRol", nullable = false)
     private TipoRol rol;
+    @Column(name = "cuentaEliminada")
+    private Boolean cuentaEliminada;
 
     public Usuario() {
 

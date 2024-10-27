@@ -1,14 +1,15 @@
 package ar.edu.utn.frba.dds.controllers;
 
+import ar.edu.utn.frba.dds.dtos.ModeloDTO;
+import ar.edu.utn.frba.dds.dtos.inputs.HeladeraInputDTO;
+import ar.edu.utn.frba.dds.dtos.outputs.HeladeraOutputDTO;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.Georef;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.GeorefInitializer;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoCoordenada;
+import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
+import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoModelo;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoViandas;
+import ar.edu.utn.frba.dds.services.HeladeraService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
@@ -18,93 +19,108 @@ import java.util.Map;
 
 public class HeladeraController extends BaseController implements ICrudViewsHandler {
 
-    RepoHeladeras repositorioHeladeras = RepoHeladeras.INSTANCE;
+    HeladeraService heladeraService = new HeladeraService();
+
     @Override
     public void index(Context context) {
 
-        List<Heladera> heladeras = RepoHeladeras.INSTANCE.buscarTodos();
-        List<ModeloHeladera> modelos = RepoModelo.INSTANCE.buscarTodos();
-
-        Map<String,Object> model = new HashMap<>();
+        List<HeladeraOutputDTO> heladeras = heladeraService.obtenerHeladeras();
+        List<ModeloHeladera> modelos = heladeraService.obtenerModelosHeladera();
+        Map<String, Object> model = new HashMap<>();
 
         try {
-            verificarJuridicoOHumano(context,model);
-            model.put("title","Heladeras");
+            Usuario usuario = verificarSesion(context, model);
+            if (usuario.getRol().equals(TipoRol.ADMIN)) {
+                model.put("esAdmin", true);
+            }
+            model.put("title", "Heladeras");
             model.put("heladeras", heladeras);
             model.put("modelos", modelos);
-
-            context.render("heladeras/heladeras.hbs",model);
+            context.render("heladeras/heladeras.hbs", model);
         } catch (Exception e) {
             context.redirect("/iniciarSesion");
         }
-
-
-
     }
 
     @Override
     public void show(Context context) {
+        context.sessionAttribute("yaExisteConEseNombre", null);
         String heladeraId = context.pathParam("heladeraId");
-        Heladera heladera = repositorioHeladeras.buscar(Long.parseLong(heladeraId));
-
-        if (heladera != null) {
-            Map<String, Object> model = new HashMap<>();
-            model.put("nombre", heladera.getNombre());
-            model.put("direccion", "avenida medrano 951");
-            model.put("latitud", heladera.getCoordenada().getLatitud());
-            model.put("longitud", heladera.getCoordenada().getLongitud());
-            model.put("viandas", RepoViandas.INSTANCE.buscarViandasPorHeladeraId(heladera.getId()));
-            model.put("aperturas", heladera.getAperturas());
-            // model.put("alertas", heladera.getAlertas());
-
+        Map<String, Object> model = heladeraService.mostrarHeladera(Long.valueOf(heladeraId));
+        if (model != null) {
             context.render("heladeras/verHeladera.hbs", model);
         } else {
             context.status(404).result("Heladera no encontrada");
         }
     }
+
     @Override
-   public void create(Context context) {
-        String nombre = context.formParam("nombre");
-        String modelo = context.formParam("modelo");
-        String calle = context.formParam("calle");
-        String altura = context.formParam("altura");
-        String piso = context.formParam("piso");
+    public void create(Context context) {
+        context.sessionAttribute("yaExisteConEseNombre", null);
+        HeladeraInputDTO heladeraInputDTO = new HeladeraInputDTO();
+        heladeraInputDTO.setPiso(context.formParam("piso"));
+        heladeraInputDTO.setCalle(context.formParam("calle"));
+        heladeraInputDTO.setNombre(context.formParam("nombre"));
+        heladeraInputDTO.setAltura(context.formParam("altura"));
+        heladeraInputDTO.setModelo(context.formParam("modelo"));
 
+        heladeraService.darDeAltaHeladera(heladeraInputDTO);
 
-        ModeloHeladera modeloHeladera = RepoModelo.INSTANCE.buscar(Long.parseLong(modelo));
-        System.out.println(modeloHeladera.getNombreModelo());
-        Heladera heladera = new Heladera();
-        heladera.setNombre(nombre);
-        heladera.setModelo(modeloHeladera);
-        Georef georef = GeorefInitializer.initializeGeoref();
-        Coordenada coordenada = georef.obtenerCoordenadasPorDireccion(calle + altura);
-        RepoCoordenada.INSTANCE.agregar(coordenada);
-        heladera.setCoordenada(coordenada);
-        heladera.setFechaPuestaFunc(new java.util.Date());
-        heladera.setEstaActiva(true);
-
-        // Guardar la nueva Heladera en el repositorio
-        repositorioHeladeras.agregar(heladera);
-
-        // Redirigir a la lista de heladeras
         context.redirect("/heladeras");
     }
-    @Override
-    public void save(Context context){
 
-    }
-    @Override
-    public void edit(Context context){
-
-    }
-    @Override
-    public void update(Context context){
-
-    }
-    @Override
-    public void delete(Context context){
-
+    public void showMap(Context context) {
+        context.sessionAttribute("yaExisteConEseNombre", null);
+        Map<String, Object> model = new HashMap<>();
+        Usuario usuario = verificarSesion(context, model);
+        List<HeladeraOutputDTO> heladeras = heladeraService.obtenerHeladeras();
+        model.put("heladeras", heladeras);
+        context.render("heladeras/mapaHeladeras.hbs", model);
     }
 
+    public void createModel(Context context) {
+        ModeloDTO modeloDTO = new ModeloDTO();
+        modeloDTO.setPeso(context.formParam("peso"));
+        modeloDTO.setNombre(context.formParam("nombre"));
+        modeloDTO.setTempMax(context.formParam("tempMax"));
+        modeloDTO.setTempMin(context.formParam("tempMin"));
+        modeloDTO.setCantidadViandas(context.formParam("cantidadViandas"));
+        heladeraService.cargarModelo(modeloDTO);
+        context.redirect("/heladeras");
+    }
+
+    @Override
+    public void save(Context context) {
+    }
+
+    @Override
+    public void edit(Context context) {
+        Map<String, Object> model = new HashMap<>();
+        context.sessionAttribute("yaExisteConEseNombre", null);
+        String heladeraId = context.formParam("id");
+        HeladeraInputDTO heladeraInputDTO = new HeladeraInputDTO();
+        heladeraInputDTO.setNombre(context.formParam("nombre"));
+        heladeraInputDTO.setModelo(context.formParam("modelo"));
+        heladeraInputDTO.setCalle(context.formParam("calle"));
+        heladeraInputDTO.setAltura(context.formParam("altura"));
+        heladeraInputDTO.setPiso(context.formParam("piso"));
+        boolean modificacionRealizada = heladeraService.modificarHeladera(Long.parseLong(heladeraId), heladeraInputDTO);
+        if (!modificacionRealizada) {
+            // TODO AVISAR CON MENSAJE EN PANTALLA QUE YA ESTA ESE NOMBRE Y DEBE INTENTAR CON OTRO
+            model.put("yaExisteConEseNombre", true);
+        }
+        context.redirect("/heladeras");
+    }
+
+    @Override
+    public void update(Context context) {
+    }
+
+    @Override
+    public void delete(Context context) {
+        String heladeraId = context.formParam("heladeraId");
+        heladeraService.darDeBajaHeladera(Long.parseLong(heladeraId));
+        context.redirect("/heladeras");
+    }
 }
 
