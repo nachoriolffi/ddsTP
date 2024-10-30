@@ -10,12 +10,9 @@ public class Exportador {
 
     public void exportar(List<Exportable> exportables, EstrategiaExportacion estrategia) throws IOException {
 
-        RepoReporte repo= new RepoReporte();
-
-
         Reporte reporte = estrategia.exportar(exportables.toArray(new Exportable[0]));
             // Agregamos el reporte al repoReporte
-        repo.agregar(reporte);
+        RepoReporte.INSTANCE.agregar(reporte);
 
     }
 

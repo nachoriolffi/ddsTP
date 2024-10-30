@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.models.entities.colaborador.formasColab;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoViandas;
 import lombok.Setter;
 import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 
@@ -29,7 +30,7 @@ public abstract class FormaDeColaboracion {
         return null;
     }
 
-    public Integer getCantidadViandas() {
-        return null;
-    }
+    //public Integer getCantidadViandas() {
+    //   return null;
+    //}
 }

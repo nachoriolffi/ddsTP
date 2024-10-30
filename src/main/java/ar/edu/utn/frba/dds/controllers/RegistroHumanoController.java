@@ -17,10 +17,7 @@ import ar.edu.utn.frba.dds.services.RegistroHumanoService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class RegistroHumanoController extends BaseController implements ICrudViewsHandler {
@@ -66,6 +63,12 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
         RegistroHumanoService registroHumanosService = new RegistroHumanoService();
         Colaborador colaborador = registroHumanosService.processAndSaveResponses(context);
         colaborador.setTipoPersona(TipoPersona.HUMANA);
+
+        String[] formasDeColaboracion = context.formParams("colaboraciones").toArray(new String[0]);
+        for (String forma : formasDeColaboracion) {
+            colaborador.agregarFormaColaboracion(TipoColaboracion.valueOf(forma));
+        }
+
         RepoColaborador.INSTANCE.agregar(colaborador);
     }
 

@@ -45,7 +45,7 @@ public class Incidente {
     private TipoAlerta tipoAlerta;
 
     @OneToOne
-    @JoinColumn(name = "colaborador_id",nullable = false)
+    @JoinColumn(name = "colaborador_id")
     private Colaborador colaborador;
 
     public Incidente(TipoAlerta tipoAlerta) {

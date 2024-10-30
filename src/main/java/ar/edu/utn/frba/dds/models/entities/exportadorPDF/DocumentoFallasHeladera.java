@@ -40,7 +40,7 @@ public class DocumentoFallasHeladera implements Exportable {
         List<String> heladerasNombre = new ArrayList<String>(); // guarda nombre de healderas
         List<String> fallas = new ArrayList<String>(); // guarda cantidad de falla por heladera
 
-        for(Heladera heladera : repoHeladeras.INSTANCE.buscarTodos()) // SE RECIBEN TODAS LAS HELADERAS Y SE TOMA UNA A LA VEZ
+        for(Heladera heladera : RepoHeladeras.INSTANCE.buscarTodos()) // SE RECIBEN TODAS LAS HELADERAS Y SE TOMA UNA A LA VEZ
         {
             if(!heladera.getIncidentes().isEmpty()) // SI TIENE INCIDENTES
             {

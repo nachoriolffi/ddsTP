@@ -16,10 +16,10 @@ public class Direccion {
 
     @Setter
     @OneToOne(cascade = CascadeType.ALL)// saco el @Transient porque es necesario para el alta del colaborador
-    @JoinColumn(name = "calle_id", nullable = false)
+    @JoinColumn(name = "calle_id")
     private Calle calle;
 
-    @Column(name = "altura", nullable = false)
+    @Column(name = "altura")
     @Setter
     private Integer altura;
 

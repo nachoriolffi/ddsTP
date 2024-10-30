@@ -10,7 +10,7 @@ import java.util.*;
 public class DocumentoViandasDonadas implements Exportable {
     
     private Map<String, List<String>>  datos;
-    private RepoColaborador repoColaborador;
+    private final RepoColaborador repoColaborador;
 
     public DocumentoViandasDonadas() {
         this.datos = new HashMap<String, List<String>>();
@@ -29,22 +29,19 @@ public class DocumentoViandasDonadas implements Exportable {
         List<String> colaboradoresNombre = new ArrayList<String>();
         List<String> cantidades = new ArrayList<String>();
 
-        for(Colaborador colaborador : repoColaborador.INSTANCE.buscarTodos()){
+        for(Colaborador colaborador : RepoColaborador.INSTANCE.buscarTodos()){
             if(!colaborador.getColaboracionesRealizadas().isEmpty()) {
                 List<FormaDeColaboracion> colaboraciones = colaborador.getColaboracionesRealizadas();
                 colaboradoresNombre.add(colaborador.getNombre());
                 Integer cantidad = 0;
                 for(FormaDeColaboracion colaboracion : colaboraciones){
                     if(Objects.equals(colaboracion.getTipoColaboracion(), TipoColaboracion.DONACION_VIANDAS)){
-
-                        cantidad+= colaboracion.getCantidadViandas();
-
+                        cantidad++; // solamente se puede donar de una vianda a la vez
                     }
                 }
               cantidades.add(String.valueOf(cantidad));
             }
         }
-
         datos.put("Colaborador", colaboradoresNombre);
         datos.put("Cantidad Viandas Donadas", cantidades);
     }

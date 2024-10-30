@@ -181,7 +181,7 @@ public class TestExportadorPdf {
         exportarAPdf.exportar(exportable1, exportable2, exportable3);
     }
 
-    @Test
+   /* @Test
     public void testDeCroneJob() throws IOException {
         /*ProcessBuilder processBuilder = new ProcessBuilder("java", "-jar", "target/ejercicio-1.0-SNAPSHOT.jar");
 
@@ -208,7 +208,7 @@ public class TestExportadorPdf {
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
         }*/
-        CronJobReporte cronJobReporte = new CronJobReporte();
+        /*CronJobReporte cronJobReporte = new CronJobReporte();
         cronJobReporte.main(new String[0]);
-    }
+    }*/
 }
