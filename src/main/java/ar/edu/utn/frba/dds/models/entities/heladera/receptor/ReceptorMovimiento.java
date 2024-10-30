@@ -4,10 +4,22 @@ import ar.edu.utn.frba.dds.models.entities.broker.Broker;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoAlerta;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoIncidente;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRegistroMovimiento;
 
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
+@Table (name = "receptor_movimiento")
 public class ReceptorMovimiento {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @OneToOne(mappedBy = "receptorMovimiento", cascade = CascadeType.ALL)
     private Heladera heladera;
+    @Transient
     private Broker broker;
 
     public ReceptorMovimiento(Heladera heladera) {
@@ -30,6 +42,10 @@ public class ReceptorMovimiento {
 
     public void registrarAlerta(Heladera heladera, TipoAlerta tipoAlerta) {
         Incidente registro = new Incidente(tipoAlerta);
+        registro.setHeladera(heladera);
+        registro.setFecha(new Date());
+        registro.setDescripcion("Se detecto movimiento en la heladera");
+        RepoIncidente.INSTANCE.agregar(registro);
         heladera.agregarRegistroDeAlerta(registro);
         heladera.setEstaActiva(false);
     }

@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.server;
 
+import ar.edu.utn.frba.dds.server.crons.SchedulerMain;
 import ar.edu.utn.frba.dds.utils.Init;
 import ar.edu.utn.frba.dds.utils.JavalinRenderer;
 import com.github.jknack.handlebars.Handlebars;
@@ -28,6 +29,7 @@ public class Server {
             int port = Integer.parseInt(System.getProperty("port", "8081"));
             app = Javalin.create(config()).start(port);
             Router router = new Router();
+            SchedulerMain.main(new String[]{});
             Init.iniciar();
             router.init(Server.app());
 

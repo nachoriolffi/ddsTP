@@ -32,6 +32,7 @@ public class DonacionVianda extends FormaDeColaboracion {
     private TipoColaboracion tipoColaboracion;
 
     public DonacionVianda() {
+        this.tipoColaboracion= TipoColaboracion.DONACION_VIANDAS;
     }
 
     public DonacionVianda(Integer cantidad, Date fechaColaboracion) {

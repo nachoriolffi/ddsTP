@@ -18,17 +18,17 @@ public class Vianda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "comida", columnDefinition = "VARCHAR (255)", nullable = false)
+    @Column(name = "comida", columnDefinition = "VARCHAR (255)")
     private String comida;
 
-    @Column(name = "fechaCaducidad", nullable = false)
+    @Column(name = "fechaCaducidad")
     private Date fechaCaducidad;
 
-    @Column(name = "fechaDonacion", nullable = false)
+    @Column(name = "fechaDonacion")
     private Date fechaDonacion;
 
     @ManyToOne
-    @JoinColumn(name = "colaborador_id", nullable = false)
+    @JoinColumn(name = "colaborador_id")
     private Colaborador colaborador;
 
     @Column(name = "calorias")
@@ -37,7 +37,7 @@ public class Vianda {
     @Column(name = "peso")
     private Double peso;
 
-    @Column(name = "fueEntregada", nullable = false)
+    @Column(name = "fueEntregada")
     private Boolean fueEntregada;
 
     @ManyToOne

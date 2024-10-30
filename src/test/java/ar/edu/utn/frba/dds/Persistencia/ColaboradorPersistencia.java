@@ -5,11 +5,14 @@ import ar.edu.utn.frba.dds.models.entities.colaborador.TipoJuridiccion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DonacionDinero;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
+import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
+import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.CorreoElectronico;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
 import ar.edu.utn.frba.dds.models.entities.contacto.telegram.Telegram;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoDonacionDinero;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRubroColaborador;
+import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import org.junit.jupiter.api.Test;
 
@@ -48,7 +51,7 @@ public class ColaboradorPersistencia {
         RepoDonacionDinero.INSTANCE.agregar(donacionDinero);
 
         // Establecer relación bidireccional
-        colaborador2.agregarFormaDeColaboracion(donacionDinero);
+        colaborador2.agregarColaboracionRealizada(donacionDinero);
         donacionDinero.setColaborador(colaborador2); // Asegurarse de que la relación sea bidireccional
 
         // Persistir colaborador2 con su donación y rubro
@@ -87,9 +90,41 @@ public class ColaboradorPersistencia {
         colaborador.setTipoDocumento(TipoDocumento.DNI);
         colaborador.setNumeroDocumento(12345678);
         colaborador.setTipoPersona(TipoPersona.HUMANA);
-        MedioDeComunicacion medioDeComunicacion = new Telegram();
+        MedioDeComunicacion medioDeComunicacion = new CorreoElectronico();
         colaborador.agregarMedioDeComunicacion(medioDeComunicacion);
 
+
+
         repoColaborador.agregar(colaborador);
+
+        Colaborador colaborador1 = RepoColaborador.INSTANCE.buscar(1L);
+        colaborador1.getMediosDeComunicacion().forEach(medioDeComunicacion1 -> System.out.println(medioDeComunicacion1.getClass().getName()));
+        //colaborador1.getMediosDeComunicacion().forEach(medioDeComunicacion1 -> medioDeComunicacion.comunicar(null));
+        MedioDeComunicacion correo = new CorreoElectronico();
+
+        Coordenada coordenadaTecnico = new Coordenada();
+        coordenadaTecnico.setLatitud(-34.615803);
+        coordenadaTecnico.setLongitud(-58.433298);
+
+        RepoCoordenada.INSTANCE.agregar(coordenadaTecnico);
+
+        Contacto contacto = new Contacto();
+        contacto.setTipoContacto(TipoContacto.MAIL);
+        contacto.setDescripcion("federperez@frba.utn.edu.ar");
+        RepoContacto.INSTANCE.agregar(contacto);
+
+        Tecnico tecnico = new Tecnico();
+        tecnico.setNombre("Tecnico1");
+        tecnico.setApellido("Apellido1");
+        tecnico.setCoordenada(coordenadaTecnico);
+        tecnico.setAreaCobertura((int) 10.0);
+        tecnico.setDni(Integer.valueOf("12345678"));
+        tecnico.setCuil(Integer.valueOf("12345678"));
+        tecnico.setTipoDocumento(TipoDocumento.DNI);
+        tecnico.setDisponible(true);
+        tecnico.agregarContacto(contacto);
+        tecnico.agregarMedioDeComunicacion(correo);
+        RepoTecnico.INSTANCE.agregar(tecnico);
+
     }
 }

@@ -13,10 +13,12 @@ public class RegistroTemperatura {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     @Column(name = "lectura")
     private Float lectura;
+
     @Column(name = "fechaHora")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaHora;
 
     public RegistroTemperatura(Float lectura, Date fechaHora) {

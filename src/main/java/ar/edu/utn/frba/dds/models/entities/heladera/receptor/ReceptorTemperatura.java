@@ -7,18 +7,27 @@ import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoAlerta;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.registro.RegistroTemperatura;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.mapping.Join;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Getter
-
+@Entity
+@Table(name = "receptorTemperatura")
 public class ReceptorTemperatura {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @OneToOne(mappedBy = "receptorTemperatura", cascade = CascadeType.ALL)
     private Heladera heladera;
 
     @Setter
+    @OneToMany
+    @JoinColumn(name = "registroTemperatura_id")
     private List<RegistroTemperatura> temperaturasLeidas;
 
     public ReceptorTemperatura(List<RegistroTemperatura> temperaturasLeidas) {
@@ -60,5 +69,9 @@ public class ReceptorTemperatura {
         //registro.notificarTecnicoMasCercano(heladera); DESCOMENTAR NO SEAMOS SALAMES QUE DESPUES NO ANDA LO DEL TECNICO
         heladera.agregarRegistroDeAlerta(registro);
         heladera.setEstaActiva(false);
+    }
+
+    public void agregarRegistro(RegistroTemperatura registro){
+        temperaturasLeidas.add(registro);
     }
 }

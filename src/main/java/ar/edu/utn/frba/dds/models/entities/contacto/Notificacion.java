@@ -14,7 +14,7 @@ public class Notificacion {
     private Mensaje mensaje;
 
     public Contacto filtrarContacto(TipoContacto tipoContacto){
-        return this.contactos.stream().filter(contacto -> contacto.getNombre().equals(tipoContacto)).findFirst().orElse(null);
+        return this.contactos.stream().filter(contacto -> contacto.getTipoContacto().equals(tipoContacto)).findFirst().orElse(null);
     }
 
     public Notificacion(List<Contacto> contacto, Mensaje mensaje) {

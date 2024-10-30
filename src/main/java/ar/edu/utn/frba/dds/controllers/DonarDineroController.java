@@ -26,6 +26,8 @@ public class DonarDineroController extends BaseController implements ICrudViewsH
 
         Map<String, Object> model = new HashMap<>();
         Usuario usuario = verificarJuridicoOHumano(context, model);
+        if(usuario == null) usuario= verificarAdmin(context, model);
+
         Colaborador colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
         List<DonacionDinero> donacionesDineroNormal = colaborador.getColaboracionesRealizadas().stream()
                 .filter(c -> c instanceof DonacionDinero)

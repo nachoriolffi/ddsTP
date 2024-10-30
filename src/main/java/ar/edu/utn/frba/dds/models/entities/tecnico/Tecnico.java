@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.models.entities.tecnico;
 
+import ar.edu.utn.frba.dds.models.converters.MedioComunicacionAtributeConvertere;
 import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRegistrosVisita;
@@ -10,6 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -37,7 +39,8 @@ public class Tecnico {
     @Column(name = "cuil", nullable = false)
     private Integer cuil; // cambiar por string luego
 
-    @Transient
+    @Convert(converter = MedioComunicacionAtributeConvertere.class)
+    @ElementCollection(targetClass = String.class)
     private List<MedioDeComunicacion> mediosDeComunicacion;
 
     @Column(name = "areaCobertura", nullable = false)
@@ -55,7 +58,8 @@ public class Tecnico {
     private List<Contacto> contactos;
 
     public Tecnico() {
-
+        this.contactos = new ArrayList<>();
+        this.mediosDeComunicacion = new ArrayList<>();
     }
 
     public Tecnico(Long id, String nombre, String apellido, TipoDocumento tipoDocumento, Integer dni, Integer cuil, List<MedioDeComunicacion> mediosDeComunicacion, Integer areaCobertura) {
@@ -90,6 +94,14 @@ public class Tecnico {
 
     public void registrarVisita(RegistroVisita registro) {
         RepoRegistrosVisita.INSTANCE.agregar(registro);
+    }
+
+    public void agregarMedioDeComunicacion(MedioDeComunicacion medioDeComunicacion) {
+        this.mediosDeComunicacion.add(medioDeComunicacion);
+    }
+
+    public void agregarContacto(Contacto contacto) {
+        this.contactos.add(contacto);
     }
 
 }

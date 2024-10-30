@@ -67,7 +67,7 @@ public class Colaborador extends IObserverColaborador {
     @Convert(converter = FormaDeColaboracionConverter.class)
     @ElementCollection(targetClass = String.class) // de esta manera puedo cargar las formas de colaboracion que la persona elige y ademas me ayuda a poder asignarle la tarjeta en base a la forma que elige.
     //ademas podemos usar el factory que tenemos creado de esto para el caso de tener que usarlo solo necesitamos el string y en abse a eso creamos la intancia de la colaboracion
-    private List<TipoColaboracion> formasDeColaboracion;
+    private List<TipoColaboracion> formasDeColaboracion; 
 
     @OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FormaDeColaboracion> colaboracionesRealizadas;
@@ -148,6 +148,10 @@ public class Colaborador extends IObserverColaborador {
         this.puntosTotalesUsados = (double) 0;
     }
 
+    public <E> Colaborador(String nombreDelDestinatario, String apellidoDelDestinatario, ArrayList<E> es, ArrayList<E> es1, Object o, Object o1) {
+        super();
+    }
+
    /* public Colaborador(String nombre, String apellido, List<MedioDeComunicacion> mediosDeComunicacion, List<FormaDeColaboracion> formasDeColaboracion, CuestionarioRespondido cuestionarioRespondido, TipoPersona tipoPersona) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -166,9 +170,9 @@ public class Colaborador extends IObserverColaborador {
         this.mediosDeComunicacion.add(medioDeComunicacion);
     }
 
-    /*public void agregarFormaDeColaboracion(FormaDeColaboracion formaDeColaboracion) {
+    public void agregarFormaDeColaboracion(TipoColaboracion formaDeColaboracion) {
         this.formasDeColaboracion.add(formaDeColaboracion);
-    }*/
+    }
 
     public void agregarColaboracionRealizada(FormaDeColaboracion formaDeColaboracion) {
         this.colaboracionesRealizadas.add(formaDeColaboracion);
@@ -239,5 +243,9 @@ public class Colaborador extends IObserverColaborador {
     }
     public String obtenerDireccion(){
         return this.getDireccion().getCalle().toString() + " " + this.getDireccion().getAltura().toString() + " Piso:" + this.getDireccion().getPiso().toString();
+    }
+
+    public void agregarFormaColaboracion(TipoColaboracion tipoColaboracion) {
+        this.formasDeColaboracion.add(tipoColaboracion);
     }
 }

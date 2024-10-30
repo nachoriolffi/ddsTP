@@ -6,6 +6,8 @@ import ar.edu.utn.frba.dds.models.entities.contacto.Mensaje;
 
 public class AdapterCorreo implements IAdapterCorreo {
 
+    private ServicioMail servicioMail = ServicioMail.getInstance();
+
     public AdapterCorreo(ServicioMail servicioMail) {
         this.servicioMail = servicioMail;
     }
@@ -13,7 +15,7 @@ public class AdapterCorreo implements IAdapterCorreo {
     public AdapterCorreo() {
     }
 
-    private ServicioMail servicioMail = ServicioMail.getInstance();
+
 
     @Override
     public void comunicarMensaje(Mensaje mensaje, Contacto destinatario) {

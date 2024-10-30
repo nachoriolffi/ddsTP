@@ -35,7 +35,7 @@ public class Heladera implements IObservableColaborador {
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "coordenada_id", nullable = false)
+    @JoinColumn(name = "coordenada_id")
     private Coordenada coordenada;
 
     @Column(name = "nombre", nullable = false, columnDefinition = "VARCHAR(255)")
@@ -45,16 +45,19 @@ public class Heladera implements IObservableColaborador {
     @JoinColumn(name = "direccion")
     private Direccion direccion;
 
+
     @Column(name = "viandasDisponibles")
     private Integer viandasDisponibles;
 
-    @Column(name = "fechaPuestaFunc", nullable = false)
+    @Column(name = "fechaPuestaFunc")
     private Date fechaPuestaFunc;
 
-    @Transient // no creemos necesario persistir los receptores
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "receptor_movimiento_id")
     private ReceptorMovimiento receptorMovimiento;
 
-    @Transient  // no creemos necesario persistir los receptores
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "receptor_temperatura_id")
     private ReceptorTemperatura receptorTemperatura;
 
     @OneToMany
@@ -69,8 +72,7 @@ public class Heladera implements IObservableColaborador {
     @JoinColumn(name = "regApertura_id")
     private List<RegistroApertura> aperturas; // es una lista de registros de aperturas que se hicieron
 
-
-    @Column(name = "activa", nullable = false)
+    @Column(name = "activa")
     @Setter(AccessLevel.NONE)//pongo esto para yo definir el setter
     private Boolean estaActiva;
 
@@ -162,7 +164,7 @@ public class Heladera implements IObservableColaborador {
 
     // SE LLAMA A AGREGAR APERTURA
 
-    public void agregarApertura(RegistroApertura registro) throws IOException {
+    public void agregarApertura(RegistroApertura registro) {
         aperturas.add(registro);
         // cuando un colaborador intenta abrir la heladera, si este puede hacerlo, entonces
         // la solicitud hecha debe actualizarse y ponerse true
@@ -184,7 +186,7 @@ public class Heladera implements IObservableColaborador {
     @SuppressWarnings("all")// pongo esto porque me dice que puede estar definido por loombok, pero ya lo excluí
     public void setEstaActiva(Boolean activada){
         this.estaActiva = activada;
-        this.notificar();
+       // this.notificar();
     }
     @Override
     public void agregarColaborador(ObserverColaborador observerColaborador) {
