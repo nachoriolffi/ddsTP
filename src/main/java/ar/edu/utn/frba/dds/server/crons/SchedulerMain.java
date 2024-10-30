@@ -19,17 +19,17 @@ public class SchedulerMain {
 
         // Programa el job para que se ejecute cada 7 días
         long initialDelay = 0;  // Tiempo de espera inicial antes de la primera ejecución
-        long period = 1;        // Intervalo de ejecución en días (1 semana)
+        long period = 7;        // Intervalo de ejecución en días (1 semana)
 
         scheduler.scheduleAtFixedRate(
                 jobReporte::ejecutarReporte,
                 initialDelay,
                 period,
-                TimeUnit.MINUTES
+                TimeUnit.DAYS
         );
 
         long initialDelayTemperatura = 0;  // Tiempo de espera inicial antes de la primera ejecución
-        long periodTemperatura = 1;        // Intervalo de ejecución en días (1 día)
+        long periodTemperatura = 5;        // Intervalo de ejecución en días (5 minutos)
 
         CronjobTemperatura jobTemperatura = new CronjobTemperatura();
 
