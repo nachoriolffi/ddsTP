@@ -186,7 +186,7 @@ public class Heladera implements IObservableColaborador {
     @SuppressWarnings("all")// pongo esto porque me dice que puede estar definido por loombok, pero ya lo excluí
     public void setEstaActiva(Boolean activada){
         this.estaActiva = activada;
-       // this.notificar();
+        this.notificar();
     }
     @Override
     public void agregarColaborador(ObserverColaborador observerColaborador) {

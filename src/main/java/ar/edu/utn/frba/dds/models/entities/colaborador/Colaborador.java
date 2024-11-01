@@ -6,6 +6,10 @@ import ar.edu.utn.frba.dds.models.entities.colaborador.calculoPuntos.CalculadorP
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.TipoColaboracion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.observer.IObserverColaborador;
+import ar.edu.utn.frba.dds.models.entities.contacto.Mensaje;
+import ar.edu.utn.frba.dds.models.entities.contacto.Notificacion;
+import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.CorreoElectronico;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.models.entities.recomendacionPuntos.IRecomendacionPuntos;
@@ -65,9 +69,10 @@ public class Colaborador extends IObserverColaborador {
     //@JoinColumn(name = "id_FormasColaboracion")
     //@Transient
     @Convert(converter = FormaDeColaboracionConverter.class)
-    @ElementCollection(targetClass = String.class) // de esta manera puedo cargar las formas de colaboracion que la persona elige y ademas me ayuda a poder asignarle la tarjeta en base a la forma que elige.
+    @ElementCollection(targetClass = String.class)
+    // de esta manera puedo cargar las formas de colaboracion que la persona elige y ademas me ayuda a poder asignarle la tarjeta en base a la forma que elige.
     //ademas podemos usar el factory que tenemos creado de esto para el caso de tener que usarlo solo necesitamos el string y en abse a eso creamos la intancia de la colaboracion
-    private List<TipoColaboracion> formasDeColaboracion; 
+    private List<TipoColaboracion> formasDeColaboracion;
 
     @OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FormaDeColaboracion> colaboracionesRealizadas;
@@ -240,8 +245,21 @@ public class Colaborador extends IObserverColaborador {
     @Override
     public void recibirNotificacion(String mensaje) {
         System.out.println("Soy " + this.nombre + " " + this.apellido + " y recibí el mensaje: " + mensaje);
+        //Por ahora el correo está harcodeado, pero luego voy a obtenerlo de los contactos del colaborador
+
+        List<Contacto> contactos = new ArrayList<>();
+        Contacto contacto = new Contacto(TipoContacto.MAIL, "clazarte@frba.utn.edu.ar");
+        contactos.add(contacto);
+
+        Mensaje mensaje1 = new Mensaje("Notificación suscripción a heladera", mensaje);
+
+        Notificacion notificacion = new Notificacion(contactos, mensaje1);
+
+        CorreoElectronico correoElectronico = new CorreoElectronico();
+        correoElectronico.comunicar(notificacion);
     }
-    public String obtenerDireccion(){
+
+    public String obtenerDireccion() {
         return this.getDireccion().getCalle().toString() + " " + this.getDireccion().getAltura().toString() + " Piso:" + this.getDireccion().getPiso().toString();
     }
 
