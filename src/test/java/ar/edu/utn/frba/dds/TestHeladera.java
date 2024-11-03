@@ -296,6 +296,7 @@ public class TestHeladera {
         //un número que el colaborador puede setear
 
         //Es decir, hay un número n de viandas que pueden ser retiradas de la heladera
+        heladera.setNombre("Heladera1");
         ObserverColaborador observer = new ObserverColaborador();
         observer.setTipoSuscripcion(TipoSuscripcion.VIANDAS_DISPONIBLES);
         observer.setCantidadViandas(2);
@@ -313,6 +314,7 @@ public class TestHeladera {
         //Un colaborador distribuidor puede llevar N viandas a otra heladera que está menos llena.
 
         //es decir, en la heladera queda lugar para almacenar n viandas
+        heladera.setNombre("Heladera1");
         heladera.setModelo(modeloHeladera2);//modeloHeladera2 tiene capacidad para 10 viandas
 
         ObserverColaborador observer = new ObserverColaborador();
@@ -331,6 +333,8 @@ public class TestHeladera {
     public void testHeladeraFallaSuscripcion() {
         //La heladera sufrió un desperfecto y las viandas deben ser llevadas a otras heladeras
         // a la brevedad para que las mismas no se echen a perder
+        heladera.setNombre("Heladera1");
+
         ObserverColaborador observer = new ObserverColaborador();
         observer.setTipoSuscripcion(TipoSuscripcion.DESPERFECTO);
         observer.setSuscriptor(colaborador1);

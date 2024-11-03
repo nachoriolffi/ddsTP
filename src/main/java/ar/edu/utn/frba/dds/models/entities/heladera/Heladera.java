@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
 import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.IObservableColaborador;
+import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.NotificacionColaborador;
 import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.ObserverColaborador;
 import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.TipoSuscripcion;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
@@ -83,18 +84,22 @@ public class Heladera implements IObservableColaborador {
     @Column(name = "tempActual")
     private Double tempActual;
 
-    @Column(name="dadaDeBaja")
+    @Column(name = "dadaDeBaja")
     private Boolean dadaDeBaja;
 
     @OneToMany
     @JoinColumn(name = "heladera_id")
     private List<ObserverColaborador> observers;
 
+    @Transient
+    private List<NotificacionColaborador> notificaciones;
+
     public Heladera() {
         this.incidentes = new ArrayList<>();
         this.solicitudesApertura = new ArrayList<>();
         this.aperturas = new ArrayList<>();
         this.observers = new ArrayList<>();
+        this.notificaciones = new ArrayList<>();
     }
 
     public Heladera(Direccion direccion, Coordenada coordenada) {
@@ -103,6 +108,7 @@ public class Heladera implements IObservableColaborador {
         this.incidentes = new ArrayList<Incidente>();
         this.viandasDisponibles = 0;
         this.observers = new ArrayList<>();
+        this.notificaciones = new ArrayList<>();
     }
 
     public Heladera(Direccion direccion, Coordenada coordenada, Date fechaPuestaFunc) {
@@ -111,6 +117,7 @@ public class Heladera implements IObservableColaborador {
         this.fechaPuestaFunc = fechaPuestaFunc;
         this.viandasDisponibles = 0;
         this.observers = new ArrayList<>();
+        this.notificaciones = new ArrayList<>();
     }
 
     public Heladera(Direccion direccion, Coordenada coordenada, Boolean estaActiva) {
@@ -119,6 +126,7 @@ public class Heladera implements IObservableColaborador {
         this.estaActiva = estaActiva;
         this.viandasDisponibles = 0;
         this.observers = new ArrayList<>();
+        this.notificaciones = new ArrayList<>();
     }
 
     public void agregarVianda() {
@@ -156,7 +164,8 @@ public class Heladera implements IObservableColaborador {
             this.solicitudesApertura.add(registro);
         }
     }
-    public Integer cantidadViandasLugar () {
+
+    public Integer cantidadViandasLugar() {
         return this.modelo.getCantidadMaximaDeViandas() - this.viandasDisponibles;
     }
 
@@ -182,12 +191,14 @@ public class Heladera implements IObservableColaborador {
         }
         return null;
     }
+
     /*----------------- Suscripción a heladera -----------------*/
     @SuppressWarnings("all")// pongo esto porque me dice que puede estar definido por loombok, pero ya lo excluí
-    public void setEstaActiva(Boolean activada){
+    public void setEstaActiva(Boolean activada) {
         this.estaActiva = activada;
         this.notificar();
     }
+
     @Override
     public void agregarColaborador(ObserverColaborador observerColaborador) {
         observers.add(observerColaborador);
@@ -200,7 +211,7 @@ public class Heladera implements IObservableColaborador {
 
     @Override
     public void notificar() {
-        List<ObserverColaborador> observersMuchasViandas= observers.stream()
+        List<ObserverColaborador> observersMuchasViandas = observers.stream()
                 .filter(observerColaborador -> observerColaborador.getTipoSuscripcion() == TipoSuscripcion.MUCHAS_VIANDAS)
                 .toList();
 
@@ -211,24 +222,39 @@ public class Heladera implements IObservableColaborador {
         List<ObserverColaborador> observersDesperfecto = observers.stream()
                 .filter(observerColaborador -> observerColaborador.getTipoSuscripcion() == TipoSuscripcion.DESPERFECTO)
                 .toList();
-        if(this.modelo != null)
-        {
+        if (this.modelo != null) {
             Integer cantidadViandasLugar = this.cantidadViandasLugar(); //para cuantas viadas hay lugar en la heladera
-            observersMuchasViandas.forEach(observer ->{//acaaa
-                if(cantidadViandasLugar.equals(observer.getCantidadViandas()))
-                {observer.getSuscriptor().recibirNotificacion("Solo queda lugar para " + observer.getCantidadViandas() + " viandas en la heladera");}
+            observersMuchasViandas.forEach(observer -> {
+                if (cantidadViandasLugar.equals(observer.getCantidadViandas())) {
+                    String mensaje = nombre + " solo tiene lugar para " + observer.getCantidadViandas() + " vianda";
+                    if(observer.getCantidadViandas() > 1){mensaje += "s";}
+
+                    observer.getSuscriptor().recibirNotificacion(mensaje);
+                    NotificacionColaborador notificacion = new NotificacionColaborador(new Date(), observer.getSuscriptor(), mensaje);
+                    notificaciones.add(notificacion);
+                }
             });
         }
 
-        observersViandasDisponibles.forEach(observer ->{
-            if(Objects.equals(this.viandasDisponibles, observer.getCantidadViandas()))
-            {observer.getSuscriptor().recibirNotificacion("Hay "+ observer.getCantidadViandas() + " viandas disponibles");}
+        observersViandasDisponibles.forEach(observer -> {
+            if (Objects.equals(this.viandasDisponibles, observer.getCantidadViandas())) {
+                String mensaje = nombre +" tiene " + observer.getCantidadViandas();
+                if(observer.getCantidadViandas() > 1){mensaje += " viandas disponibles";}
+                else{mensaje += " vianda disponible";}
+
+                observer.getSuscriptor().recibirNotificacion(mensaje);
+                NotificacionColaborador notificacion = new NotificacionColaborador(new Date(), observer.getSuscriptor(), mensaje);
+                notificaciones.add(notificacion);
+            }
         });
 
 
-        if(!this.estaActiva){
-            observersDesperfecto.forEach(observer ->{
-                observer.getSuscriptor().recibirNotificacion("La heladera está desactivada");
+        if (!this.estaActiva) {
+            observersDesperfecto.forEach(observer -> {
+                String mensaje = nombre + " está desactivada";
+                observer.getSuscriptor().recibirNotificacion(mensaje);
+                NotificacionColaborador notificacion = new NotificacionColaborador(new Date(), observer.getSuscriptor(), mensaje);
+                notificaciones.add(notificacion);
             });
         }
     }

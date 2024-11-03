@@ -251,20 +251,7 @@ public class Colaborador extends IObserverColaborador {
 
     @Override
     public void recibirNotificacion(String mensaje) {
-        System.out.println("Soy " + this.nombre + " " + this.apellido + " y recibí el mensaje: " + mensaje);
-        //Por ahora el correo está harcodeado, pero luego voy a obtenerlo de los contactos del colaborador
-        /*
-        List<Contacto> contactos = new ArrayList<>();
-        contactos.add(new Contacto(TipoContacto.MAIL, "clazarte@frba.utn.edu.ar"));
-        contactos.add(new Contacto(TipoContacto.TELEGRAM, "7166927758"));
-
-        Notificacion notificacion = new Notificacion(contactos, new Mensaje("Notificación suscripción a heladera", mensaje));
-
-        Telegram telegram = new Telegram(new AdapterTelegram());
-        telegram.comunicar(notificacion);
-
-        CorreoElectronico correoElectronico = new CorreoElectronico(new AdapterCorreo());
-        correoElectronico.comunicar(notificacion);*/
+        //System.out.println("Soy " + this.nombre + " " + this.apellido + " y recibí el mensaje: " + mensaje);
 
         Notificacion notificacion = new Notificacion(this.contacto, new Mensaje("Notificación suscripción a heladera", mensaje));
 
