@@ -9,7 +9,12 @@ import ar.edu.utn.frba.dds.models.entities.colaborador.observer.IObserverColabor
 import ar.edu.utn.frba.dds.models.entities.contacto.Mensaje;
 import ar.edu.utn.frba.dds.models.entities.contacto.Notificacion;
 import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.AdapterCorreo;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.CorreoElectronico;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.ServicioMail;
+import ar.edu.utn.frba.dds.models.entities.contacto.telegram.IAdapterTelegram;
+import ar.edu.utn.frba.dds.models.entities.contacto.telegram.ServicioTelegram;
+import ar.edu.utn.frba.dds.models.entities.contacto.telegram.Telegram;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.models.entities.recomendacionPuntos.IRecomendacionPuntos;
@@ -36,6 +41,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import ar.edu.utn.frba.dds.models.entities.contacto.telegram.AdapterTelegram;
 
 @Data
 @Setter
@@ -246,17 +253,25 @@ public class Colaborador extends IObserverColaborador {
     public void recibirNotificacion(String mensaje) {
         System.out.println("Soy " + this.nombre + " " + this.apellido + " y recibí el mensaje: " + mensaje);
         //Por ahora el correo está harcodeado, pero luego voy a obtenerlo de los contactos del colaborador
-
+        /*
         List<Contacto> contactos = new ArrayList<>();
-        Contacto contacto = new Contacto(TipoContacto.MAIL, "clazarte@frba.utn.edu.ar");
-        contactos.add(contacto);
+        contactos.add(new Contacto(TipoContacto.MAIL, "clazarte@frba.utn.edu.ar"));
+        contactos.add(new Contacto(TipoContacto.TELEGRAM, "7166927758"));
 
-        Mensaje mensaje1 = new Mensaje("Notificación suscripción a heladera", mensaje);
+        Notificacion notificacion = new Notificacion(contactos, new Mensaje("Notificación suscripción a heladera", mensaje));
 
-        Notificacion notificacion = new Notificacion(contactos, mensaje1);
+        Telegram telegram = new Telegram(new AdapterTelegram());
+        telegram.comunicar(notificacion);
 
-        CorreoElectronico correoElectronico = new CorreoElectronico();
-        correoElectronico.comunicar(notificacion);
+        CorreoElectronico correoElectronico = new CorreoElectronico(new AdapterCorreo());
+        correoElectronico.comunicar(notificacion);*/
+
+        Notificacion notificacion = new Notificacion(this.contacto, new Mensaje("Notificación suscripción a heladera", mensaje));
+
+        mediosDeComunicacion.forEach(medioDeComunicacion -> {
+            medioDeComunicacion.comunicar(notificacion);
+        });
+
     }
 
     public String obtenerDireccion() {
