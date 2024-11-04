@@ -29,7 +29,7 @@ public class Server {
             int port = Integer.parseInt(System.getProperty("port", "8081"));
             app = Javalin.create(config()).start(port);
             Router router = new Router();
-            SchedulerMain.main(new String[]{});
+            //SchedulerMain.main(new String[]{});
             Init.iniciar();
             router.init(Server.app());
 
