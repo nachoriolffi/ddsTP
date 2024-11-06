@@ -332,15 +332,15 @@ public class Init implements WithSimplePersistenceUnit {
         //heladera2.setModelo(modelo1);
 
         //repoHeladeras.agregar(heladera2);
-
+/*
         Usuario usuario = new Usuario();
         usuario.setNombre("Ignacio Riolffi");
         usuario.setRol(TipoRol.ADMIN);
         usuario.setContrasenia("1234");
         usuario.setCorreoElectronico("nacho@gmail.com");
+*/
         RepoUsuario repoUsuario = RepoUsuario.INSTANCE;
-        repoUsuario.agregar(usuario);
-
+        //repoUsuario.agregar(usuario);
         Cuestionario cuestionario = new Cuestionario();
 
 // Crear preguntas de tipo STRING
@@ -405,7 +405,7 @@ public class Init implements WithSimplePersistenceUnit {
         cuestionario.agregarPregunta(fechaPregunta);
 // Persistir el cuestionario
         RepoCuestionario.INSTANCE.agregar(cuestionario);
-
+/*
         Usuario usuario1 = new Usuario();
         usuario1.setCorreoElectronico("iriolffi@gmail.com");
         usuario1.setRol(TipoRol.ADMIN);
@@ -437,7 +437,16 @@ public class Init implements WithSimplePersistenceUnit {
         tarjeta2.setColaboradorAsignador(colaborador);
         RepoTarjeta.INSTANCE.agregar(tarjeta);
         RepoTarjeta.INSTANCE.agregar(tarjeta2);
-
+*/
+/*
+        //prueba de juridikoo
+        Usuario usuario3 = new Usuario();
+        usuario3.setCorreoElectronico("joaridiko@gmail.com");
+        usuario3.setRol(TipoRol.COLABORADOR_JURIDICO);
+        usuario3.setContrasenia("1234");
+        usuario3.setNombre("Joa");
+        repoUsuario.agregar(usuario3);
+*/
         ReceptorTemperatura receptorTemperatura = new ReceptorTemperatura();
         RepoReceptorTemperatura.INSTANCE.agregar(receptorTemperatura);
 
