@@ -1,0 +1,22 @@
+{{#partial "contenido"}}
+    <div class="container">
+        <form class="row g-3 needs-validation" novalidate>
+            <div class="col-md-6">
+                <label for="latitude" class="form-label">Latitude</label>
+                <input type="text" class="form-control" id="latitude" required>
+            </div>
+            <div class="col-md-6">
+                <label for="longitude" class="form-label">Longitude</label>
+                <input type="text" class="form-control" id="longitude" required>
+            </div>
+
+            <div class="col-12">
+                <button class="btn btn-primary" type="button" id="requestPointsButton">Request Points</button>
+            </div>
+        </form>
+    </div>
+{{/partial}}
+{{#partial "agregarScript"}}
+
+{{/partial}}
+{{> templates/base }}

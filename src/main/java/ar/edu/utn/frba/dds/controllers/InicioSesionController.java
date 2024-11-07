@@ -70,13 +70,15 @@ public class InicioSesionController extends BaseController implements ICrudViews
             // TODO TENEMOS QUE HACER QUE SE VAYANA A PANTALLAS MAIN DE CADA UNO
             // TODO TIPO QUE DIGAN TODO LO PUEDAN HACER CON BOTONES COMO UN PANEL DE CONTROL
             // TODO EN VEZ DE HACER REDIRECT A ESA PAGINAS QUE NO TIENEN MUCHO QUE VER
+            //Me parece que lo podemos tirar al perfil una vez que inician
+            // despues se podria armar un panel de control personalizado
             ctx.sessionAttribute("usuario_id", usuario.getId());
             if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
-                ctx.redirect("/donacionDinero");
+                ctx.redirect("/verPerfil");
             }else if (usuario.getRol().equals(TipoRol.ADMIN)){
-                ctx.redirect("/reportes");
+                ctx.redirect("/verPerfil");
             }else if(usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)){
-                ctx.redirect("/canjeProductos");
+                ctx.redirect("/verPerfil");
             }
         }
     }

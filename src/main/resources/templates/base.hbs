@@ -95,6 +95,11 @@
                 {{/if}}
 
             </ul>
+            {{#if inicioSesion}}
+                <span class="navbar-text ms-auto">
+                    Bienvenido, {{usuario.nombre}}
+                </span>
+            {{/if}}
         </div>
     </div>
 </nav>

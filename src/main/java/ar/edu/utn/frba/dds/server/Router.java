@@ -114,6 +114,8 @@ public class Router {
 
         app.post("/darDeBaja", Objects.requireNonNull(ServiceLocator.instanceOf(ColaboradorController.class))::delete);
         app.get("/verColaboradores", Objects.requireNonNull(ServiceLocator.instanceOf(ColaboradorController.class))::index);
+
+        app.get("/servicioUbicacion", Objects.requireNonNull(ServiceLocator.instanceOf(ServicioPuntoDonacionController.class))::index);
     }
 
 }

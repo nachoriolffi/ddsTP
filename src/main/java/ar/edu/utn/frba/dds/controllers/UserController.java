@@ -20,10 +20,16 @@ public class UserController extends BaseController implements ICrudViewsHandler 
     @Override
     public void index(Context context) {
         Map<String, Object> model = new HashMap<>();
+        try {
         Usuario usuario = verificarSesion(context, model);
         if (usuario.getRol().equals(TipoRol.ADMIN)) {
             model.put("esAdmin", true);
+        }else if (usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)) {
+            model.put("esHumano", true);
+        }else if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
+            model.put("esJuridico", true);
         }
+
         model.put("title", "Mi Perfil");
 
         UsuarioDTO usuarioDTO = userService.obtenerUsuarioDTO(usuario);
@@ -35,6 +41,11 @@ public class UserController extends BaseController implements ICrudViewsHandler 
         model.put("claveNoSegura", claveNoSegura);
 
         context.render("perfil.hbs", model);
+    } catch (Exception e) {
+            context.status(500);
+            context.result("Error interno del servidor");
+            e.printStackTrace();
+        }
     }
 
     @Override
