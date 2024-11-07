@@ -49,7 +49,7 @@ import ar.edu.utn.frba.dds.models.entities.contacto.telegram.AdapterTelegram;
 @Getter
 @Entity
 @Table(name = "colaborador")
-public class Colaborador extends IObserverColaborador {
+public class Colaborador implements IObserverColaborador {
 
     @Id
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
