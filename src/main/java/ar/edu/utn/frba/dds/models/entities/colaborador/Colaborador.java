@@ -6,6 +6,15 @@ import ar.edu.utn.frba.dds.models.entities.colaborador.calculoPuntos.CalculadorP
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.TipoColaboracion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.observer.IObserverColaborador;
+import ar.edu.utn.frba.dds.models.entities.contacto.Mensaje;
+import ar.edu.utn.frba.dds.models.entities.contacto.Notificacion;
+import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.AdapterCorreo;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.CorreoElectronico;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.ServicioMail;
+import ar.edu.utn.frba.dds.models.entities.contacto.telegram.IAdapterTelegram;
+import ar.edu.utn.frba.dds.models.entities.contacto.telegram.ServicioTelegram;
+import ar.edu.utn.frba.dds.models.entities.contacto.telegram.Telegram;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.models.entities.recomendacionPuntos.IRecomendacionPuntos;
@@ -33,12 +42,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import ar.edu.utn.frba.dds.models.entities.contacto.telegram.AdapterTelegram;
+
 @Data
 @Setter
 @Getter
 @Entity
 @Table(name = "colaborador")
-public class Colaborador extends IObserverColaborador {
+public class Colaborador implements IObserverColaborador {
 
     @Id
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
@@ -65,9 +76,10 @@ public class Colaborador extends IObserverColaborador {
     //@JoinColumn(name = "id_FormasColaboracion")
     //@Transient
     @Convert(converter = FormaDeColaboracionConverter.class)
-    @ElementCollection(targetClass = String.class) // de esta manera puedo cargar las formas de colaboracion que la persona elige y ademas me ayuda a poder asignarle la tarjeta en base a la forma que elige.
+    @ElementCollection(targetClass = String.class)
+    // de esta manera puedo cargar las formas de colaboracion que la persona elige y ademas me ayuda a poder asignarle la tarjeta en base a la forma que elige.
     //ademas podemos usar el factory que tenemos creado de esto para el caso de tener que usarlo solo necesitamos el string y en abse a eso creamos la intancia de la colaboracion
-    private List<TipoColaboracion> formasDeColaboracion; 
+    private List<TipoColaboracion> formasDeColaboracion;
 
     @OneToMany(mappedBy = "colaborador", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FormaDeColaboracion> colaboracionesRealizadas;
@@ -239,9 +251,17 @@ public class Colaborador extends IObserverColaborador {
 
     @Override
     public void recibirNotificacion(String mensaje) {
-        System.out.println("Soy " + this.nombre + " " + this.apellido + " y recibí el mensaje: " + mensaje);
+        //System.out.println("Soy " + this.nombre + " " + this.apellido + " y recibí el mensaje: " + mensaje);
+
+        Notificacion notificacion = new Notificacion(this.contacto, new Mensaje("Notificación suscripción a heladera", mensaje));
+
+        mediosDeComunicacion.forEach(medioDeComunicacion -> {
+            medioDeComunicacion.comunicar(notificacion);
+        });
+
     }
-    public String obtenerDireccion(){
+
+    public String obtenerDireccion() {
         return this.getDireccion().getCalle().toString() + " " + this.getDireccion().getAltura().toString() + " Piso:" + this.getDireccion().getPiso().toString();
     }
 

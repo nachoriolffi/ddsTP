@@ -47,7 +47,7 @@
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="/misHeladeras">Mis Heladeras</a></li>
+                                    <li><a class="dropdown-item" href="/misHeladeras">Suscripciones a Heladeras</a></li>
                                 {{/if}}
                             </ul>
                         {{/if}}
@@ -98,6 +98,11 @@
                 {{/if}}
 
             </ul>
+            {{#if inicioSesion}}
+                <span class="navbar-text ms-auto">
+                    Bienvenido, {{usuario.nombre}}
+                </span>
+            {{/if}}
         </div>
     </div>
 </nav>

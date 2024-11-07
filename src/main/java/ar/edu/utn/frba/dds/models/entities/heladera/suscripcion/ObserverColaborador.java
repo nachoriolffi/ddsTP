@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.models.entities.heladera.suscripcion;
 
+import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.observer.IObserverColaborador;
 import jdk.jfr.Enabled;
 import lombok.Getter;
@@ -21,7 +22,7 @@ public class ObserverColaborador {
 
     @ManyToOne
     @JoinColumn(name = "suscriptor_id")
-    private IObserverColaborador suscriptor;
+    private Colaborador suscriptor; // IObserverColaborador
 
     @Enumerated(EnumType.STRING)
     private TipoSuscripcion tipoSuscripcion;

@@ -9,10 +9,12 @@ import ar.edu.utn.frba.dds.models.entities.cuestionario.Cuestionario;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.CuestionarioRespondido;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Respuesta;
+import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoCuestionario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoCuestionarioRespondido;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoTarjeta;
 import ar.edu.utn.frba.dds.services.RegistroHumanoService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
@@ -67,6 +69,13 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
         String[] formasDeColaboracion = context.formParams("colaboraciones").toArray(new String[0]);
         for (String forma : formasDeColaboracion) {
             colaborador.agregarFormaColaboracion(TipoColaboracion.valueOf(forma));
+        }
+
+        if(colaborador.getFormasDeColaboracion().contains(TipoColaboracion.DONACION_VIANDAS) || colaborador.getFormasDeColaboracion().contains(TipoColaboracion.REDISTRIBUCION_VIANDAS)){
+            Tarjeta tarjeta = new Tarjeta();
+            tarjeta.setColaboradorAsignador(colaborador);
+            tarjeta.setFechaRegistro(new Date());
+            RepoTarjeta.INSTANCE.agregar(tarjeta);
         }
 
         RepoColaborador.INSTANCE.agregar(colaborador);

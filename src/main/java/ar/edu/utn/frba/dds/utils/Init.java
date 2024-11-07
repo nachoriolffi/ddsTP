@@ -306,6 +306,14 @@ public class Init implements WithSimplePersistenceUnit {
 
         /*--------------USUARIOS--------------*/
 
+        //repoHeladeras.agregar(heladera2);
+/*
+        Usuario usuario = new Usuario();
+        usuario.setNombre("Ignacio Riolffi");
+        usuario.setRol(TipoRol.ADMIN);
+        usuario.setContrasenia("1234");
+        usuario.setCorreoElectronico("nacho@gmail.com");
+*/
         RepoUsuario repoUsuario = RepoUsuario.INSTANCE;
 
         // ADMIN
@@ -318,6 +326,8 @@ public class Init implements WithSimplePersistenceUnit {
         //repoUsuario.agregar(usuarioAdmin);
 
         /*--------------CUESTIONARIOS--------------*/
+        //repoUsuario.agregar(usuario);
+        Cuestionario cuestionario = new Cuestionario();
 
         RepoPregunta repoPregunta = RepoPregunta.INSTANCE;
         RepoCuestionario repoCuestionario = RepoCuestionario.INSTANCE;
@@ -422,6 +432,29 @@ public class Init implements WithSimplePersistenceUnit {
         //colaborador.setNombre("Ignacio Joaquin");
         //colaborador.setApellido("Riolffi");
         //usuario1.setNombre(colaborador.getNombre() + " " + colaborador.getApellido());
+// Agregar pregunta de tipo fecha al cuestionario
+        cuestionario.agregarPregunta(fechaPregunta);
+// Persistir el cuestionario
+        RepoCuestionario.INSTANCE.agregar(cuestionario);
+/*
+        Usuario usuario1 = new Usuario();
+        usuario1.setCorreoElectronico("iriolffi@gmail.com");
+        usuario1.setRol(TipoRol.ADMIN);
+        usuario1.setContrasenia("1234");
+        usuario1.setCuentaEliminada(false);
+        Usuario usuario2 = new Usuario();
+        usuario2.setCorreoElectronico("nacho2@gmail.com");
+        usuario2.setRol(TipoRol.COLABORADOR_HUMANO);
+        usuario2.setContrasenia("1234");
+        Colaborador colaborador = new Colaborador();
+        colaborador.setNombre("Ignacio Joaquin");
+        colaborador.setApellido("Riolffi");
+        usuario1.setNombre(colaborador.getNombre() + " " + colaborador.getApellido());
+        repoUsuario = RepoUsuario.INSTANCE;
+        repoUsuario.agregar(usuario1);
+        colaborador.setNombre("Nacho");
+        colaborador.setApellido("Nachito");
+        usuario2.setNombre(colaborador.getNombre() + " " + colaborador.getApellido());
         repoUsuario = RepoUsuario.INSTANCE;
         //repoUsuario.agregar(usuario2);
         //colaborador.setNombre("Juan");
@@ -436,6 +469,19 @@ public class Init implements WithSimplePersistenceUnit {
         Tarjeta tarjeta = new Tarjeta();
         //tarjeta.setColaboradorAsignador(colaborador);
         Tarjeta tarjeta2 = new Tarjeta();
+        tarjeta2.setColaboradorAsignador(colaborador);
+        RepoTarjeta.INSTANCE.agregar(tarjeta);
+        RepoTarjeta.INSTANCE.agregar(tarjeta2);
+*/
+/*
+        //prueba de juridikoo
+        Usuario usuario3 = new Usuario();
+        usuario3.setCorreoElectronico("joaridiko@gmail.com");
+        usuario3.setRol(TipoRol.COLABORADOR_JURIDICO);
+        usuario3.setContrasenia("1234");
+        usuario3.setNombre("Joa");
+        repoUsuario.agregar(usuario3);
+*/
         //tarjeta2.setColaboradorAsignador(colaborador);
         //RepoTarjeta.INSTANCE.agregar(tarjeta);
         //RepoTarjeta.INSTANCE.agregar(tarjeta2);

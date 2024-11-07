@@ -8,6 +8,8 @@ import ar.edu.utn.frba.dds.models.entities.contacto.correo.AdapterCorreo;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.CorreoElectronico;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.ServicioMail;
+import ar.edu.utn.frba.dds.models.entities.contacto.telegram.AdapterTelegram;
+import ar.edu.utn.frba.dds.models.entities.contacto.telegram.Telegram;
 import ar.edu.utn.frba.dds.models.entities.heladera.CronjobTemperatura;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
@@ -37,11 +39,11 @@ import java.util.List;
 @Setter
 public class TestHeladera {
 
-    Heladera heladera,heladera1, heladera2, heladera3;
+    Heladera heladera, heladera1, heladera2, heladera3;
     Direccion direccion1, direccion2, direccion3;
     Coordenada coordenada1, coordenada2, coordenada3;
     Vianda vianda, vianda1, vianda2, vianda3, vianda4, vianda5, vianda6;
-    List<Vianda> viandas1, viandas2, viandas3,viandas;
+    List<Vianda> viandas1, viandas2, viandas3, viandas;
     List<Heladera> heladeras;
     ReceptorMovimiento receptorMovimiento;
     ReceptorTemperatura receptorTemperatura;
@@ -63,7 +65,6 @@ public class TestHeladera {
         RepoDireccion.INSTANCE.agregar(direccion1);
         RepoDireccion.INSTANCE.agregar(direccion2);
         RepoDireccion.INSTANCE.agregar(direccion3);
-
 
 
         coordenada1 = new Coordenada(125.0, 410.0);
@@ -94,7 +95,7 @@ public class TestHeladera {
         vianda3 = new Vianda("Milanesa", colaborador, true);
         vianda4 = new Vianda("Pizza", colaborador, false);
         vianda5 = new Vianda("Fideos", colaborador, true);
-        vianda6 = new Vianda("Ravioles",colaborador, true);
+        vianda6 = new Vianda("Ravioles", colaborador, true);
         RepoViandas.INSTANCE.agregar(vianda);
         RepoViandas.INSTANCE.agregar(vianda1);
         RepoViandas.INSTANCE.agregar(vianda2);
@@ -121,11 +122,11 @@ public class TestHeladera {
         heladera3.agregarVianda();
         heladera3.agregarVianda();
 
-        receptorMovimiento= new ReceptorMovimiento();
-        receptorTemperatura= new ReceptorTemperatura();
+        receptorMovimiento = new ReceptorMovimiento();
+        receptorTemperatura = new ReceptorTemperatura();
 
-        modeloHeladera = new ModeloHeladera(18.0,1.5,100.0,200);
-        modeloHeladera2 = new ModeloHeladera(18.0,1.5,100.0,10);
+        modeloHeladera = new ModeloHeladera(18.0, 1.5, 100.0, 200);
+        modeloHeladera2 = new ModeloHeladera(18.0, 1.5, 100.0, 10);
 
         heladera.setModelo(modeloHeladera);
 
@@ -160,7 +161,18 @@ public class TestHeladera {
         colaborador1.setTipoDocumento(TipoDocumento.DNI);
         colaborador1.setNumeroDocumento(12345845);
         colaborador1.setTipoPersona(TipoPersona.HUMANA);
+
+        List<Contacto> contactos = new ArrayList<>();
+        contactos.add(new Contacto(TipoContacto.MAIL, "clazarte@frba.utn.edu.ar"));
+        contactos.add(new Contacto(TipoContacto.TELEGRAM, "7166927758"));
+        colaborador1.setContacto(contactos);
+
+        List<MedioDeComunicacion> mediosDeComunicacion = new ArrayList<>();
+        mediosDeComunicacion.add(new CorreoElectronico(new AdapterCorreo()));
+        mediosDeComunicacion.add(new Telegram(new AdapterTelegram()));
+        colaborador1.setMediosDeComunicacion(mediosDeComunicacion);
     }
+
     @Test
     public void TestAgregarHeladera() {
 
@@ -205,20 +217,20 @@ public class TestHeladera {
     }
 
     @Test
-    public void TestEstadoTiempoRealHeladera(){
+    public void TestEstadoTiempoRealHeladera() {
 
         assert heladera1.getEstaActiva().equals(Boolean.TRUE);
     }
 
     @Test
-    public void TestReceptoresTemperaturaFueraRango(){
+    public void TestReceptoresTemperaturaFueraRango() {
         heladera1.setModelo(modeloHeladera);
         System.out.println(heladera1.getEstaActiva().equals(Boolean.TRUE));
 
 
         //heladera1.setReceptorTemperatura(receptorTemperatura);
 
-        receptorTemperatura.evaluarTemperatura("19.0",heladera1);
+        receptorTemperatura.evaluarTemperatura("19.0", heladera1);
 
         System.out.println(heladera1.getIncidentes().get(0).getTipoAlerta().equals(TipoAlerta.TEMPERATURA));
         System.out.println(receptorTemperatura.getTemperaturasLeidas().get(0));
@@ -227,19 +239,19 @@ public class TestHeladera {
     }
 
     @Test
-    public void TestReceptoresTemperaturaEntreRango(){
+    public void TestReceptoresTemperaturaEntreRango() {
 
         heladera1.setModelo(modeloHeladera);
         System.out.println(heladera1.getEstaActiva());
         //heladera1.setReceptorTemperatura(receptorTemperatura);
-        receptorTemperatura.evaluarTemperatura("14.0",heladera1);
+        receptorTemperatura.evaluarTemperatura("14.0", heladera1);
         System.out.println(heladera1.getEstaActiva().equals(Boolean.TRUE));
         System.out.println(receptorTemperatura.getTemperaturasLeidas().get(0));
         assert heladera1.getIncidentes().size() == 0;
     }
 
     @Test
-    public void testCronjobTemperaturaSensorFalla(){
+    public void testCronjobTemperaturaSensorFalla() {
         // Se simula una lectura de temperatura con tiempo mayor a 5 minutos
         Date fechaActual = new Date();
         Calendar calendar = Calendar.getInstance();
@@ -247,7 +259,7 @@ public class TestHeladera {
         calendar.add(Calendar.MINUTE, -6);
         Date fechaUltimaLectura = calendar.getTime();
         RepoRegistroTemperatura repoRegistroTemperatura = new RepoRegistroTemperatura();
-        RegistroTemperatura registro = new RegistroTemperatura( Float.parseFloat("18.0"), fechaUltimaLectura);
+        RegistroTemperatura registro = new RegistroTemperatura(Float.parseFloat("18.0"), fechaUltimaLectura);
         repoRegistroTemperatura.agregar(registro);
         receptorTemperatura.getTemperaturasLeidas().add(registro);
 
@@ -263,8 +275,9 @@ public class TestHeladera {
 
         assert heladera.getEstaActiva().equals(Boolean.FALSE);
     }
+
     @Test
-    public void testCronjobTemperaturaSensorFunciona(){
+    public void testCronjobTemperaturaSensorFunciona() {
         receptorTemperatura.evaluarTemperatura("18.0", heladera);
         heladera.setReceptorTemperatura(receptorTemperatura);
         heladera.setEstaActiva(true);
@@ -276,28 +289,32 @@ public class TestHeladera {
 
         assert heladera.getEstaActiva().equals(Boolean.TRUE);
     }
+
     @Test
     public void testViandasDisponiblesSuscripcion() {
         //Quedan únicamente n viandas disponibles en la heladera, siendo n
         //un número que el colaborador puede setear
 
         //Es decir, hay un número n de viandas que pueden ser retiradas de la heladera
+        heladera.setNombre("Heladera1");
         ObserverColaborador observer = new ObserverColaborador();
         observer.setTipoSuscripcion(TipoSuscripcion.VIANDAS_DISPONIBLES);
         observer.setCantidadViandas(2);
         observer.setSuscriptor(colaborador1);
 
         heladera.agregarColaborador(observer);
-        System.out.println("heladera tiene " + heladera.getViandasDisponibles()+ " viandas disponibles");
+        System.out.println("heladera tiene " + heladera.getViandasDisponibles() + " viandas disponibles");
         heladera.agregarVianda();
-        System.out.println("heladera tiene " + heladera.getViandasDisponibles()+ " viandas disponibles");
+        System.out.println("heladera tiene " + heladera.getViandasDisponibles() + " viandas disponibles");
     }
+
     @Test
     public void testMuchasViandasSuscripcion() {
         //Faltan n viandas para que la heladera esté llena y no se puedan ingresar más viandas
         //Un colaborador distribuidor puede llevar N viandas a otra heladera que está menos llena.
 
         //es decir, en la heladera queda lugar para almacenar n viandas
+        heladera.setNombre("Heladera1");
         heladera.setModelo(modeloHeladera2);//modeloHeladera2 tiene capacidad para 10 viandas
 
         ObserverColaborador observer = new ObserverColaborador();
@@ -307,14 +324,17 @@ public class TestHeladera {
 
         heladera.agregarColaborador(observer);
 
-        System.out.println("La heladera tiene lugar para ingresar " + heladera.cantidadViandasLugar()+ " viandas");
+        System.out.println("La heladera tiene lugar para ingresar " + heladera.cantidadViandasLugar() + " viandas");
         heladera.agregarVianda();
-        System.out.println("La heladera tiene lugar para ingresar " + heladera.cantidadViandasLugar()+ " viandas");
+        System.out.println("La heladera tiene lugar para ingresar " + heladera.cantidadViandasLugar() + " viandas");
     }
+
     @Test
     public void testHeladeraFallaSuscripcion() {
         //La heladera sufrió un desperfecto y las viandas deben ser llevadas a otras heladeras
         // a la brevedad para que las mismas no se echen a perder
+        heladera.setNombre("Heladera1");
+
         ObserverColaborador observer = new ObserverColaborador();
         observer.setTipoSuscripcion(TipoSuscripcion.DESPERFECTO);
         observer.setSuscriptor(colaborador1);

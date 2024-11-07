@@ -9,6 +9,7 @@ import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoReceptorTemperatura;
 import lombok.Getter;
 import lombok.Setter;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,13 +39,17 @@ public class TestBroker {
         receptorMovimiento= new ReceptorMovimiento();
         receptorTemperatura= new ReceptorTemperatura();
 
+        RepoReceptorTemperatura.INSTANCE.agregar(receptorTemperatura);
+
 
         modeloHeladera = new ModeloHeladera(12.5,0.0,90.0,15);
         heladera.setNombre("medrano");
         heladera.setModelo(modeloHeladera);
+        heladera.setReceptorTemperatura(receptorTemperatura);
+        heladera.setReceptorMovimiento(receptorMovimiento);
 
-        repoHeladeras = RepoHeladeras.INSTANCE;
-        repoHeladeras.agregar(heladera);
+
+        RepoHeladeras.INSTANCE.agregar(heladera);
 
         broker = new Broker();
         broker.connect("escuchadno");
@@ -55,6 +60,17 @@ public class TestBroker {
     public void testAlerta(){
         broker.subscribe("dds2024/heladera/medrano/alerta");
         receptorMovimiento.evaluarDatosSensor("1",heladera);
-       //broker.disconnect();
+        broker.disconnect();
+    }
+
+    @Test
+    public void probamosHeladeraYBroker(){
+        broker.subscribe("heladeras/+/temperatura");
+        String topic = "heladeras/"+heladera.getId().toString()+"/temperatura";
+        String temperatureValue = "22.5";
+        broker.publish(topic,temperatureValue);
+        //receptorMovimiento.evaluarDatosSensor("1",heladera);
+        //receptorTemperatura.evaluarTemperatura("1",heladera);
+        broker.disconnect();
     }
 }
