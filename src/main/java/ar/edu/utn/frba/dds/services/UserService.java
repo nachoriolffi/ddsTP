@@ -7,7 +7,11 @@ import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.entities.validador.ValidadorDeContrasenia;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoUsuario;
+import org.hibernate.Cache;
+import org.hibernate.SessionFactory;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.Arrays;
 
 public class UserService {
@@ -21,6 +25,7 @@ public class UserService {
         String nombre = String.join(" ", Arrays.copyOfRange(partesNombre, 0, partesNombre.length - 1));
         String apellido = partesNombre[partesNombre.length - 1];
         Colaborador colaborador;
+
         switch (usuario.getRol()) {
             case ADMIN:
                 usuarioDTO.setNombre(nombre);
@@ -73,7 +78,7 @@ public class UserService {
     public boolean validarContraseniaSegura(String clave, Usuario usuario) {
         ValidadorDeContrasenia validadorDeContrasenia = new ValidadorDeContrasenia();
         validadorDeContrasenia.instanciarFormaValidar();
-        return validadorDeContrasenia.validarContrasenia(clave, usuario); // TODO ARREGLAR ESTO
+        return validadorDeContrasenia.validarContraseniaModificar(clave, usuario);
     }
 
     public void actualizarUsuario(Usuario usuario, UsuarioDTO usuarioDTO) {

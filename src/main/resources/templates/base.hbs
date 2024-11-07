@@ -15,7 +15,7 @@
             crossorigin="anonymous"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css"
           rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script src="https://kit.fontawesome.com/115c7ea5e6.js" crossorigin="anonymous"></script>
 </head>
@@ -30,24 +30,27 @@
             <ul class="navbar-nav mx-auto">
                 {{#if inicioSesion}}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                           aria-expanded="false">Donaciones</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/donacionDinero">Donar Dinero</a></li>
-                            {{#if esJuridico}}
-                                <li><a class="dropdown-item" href="/encargarseHeladera">Encargarse de Heladera</a></li>
-                            {{/if}}
-                            {{#if esHumano}}
-                                <li><a class="dropdown-item" href="/donarViandas">Donar Viandas</a></li>
-                                <li><a class="dropdown-item" href="/distribuirViandas">Distribuir Viandas</a></li>
-                                <li><a class="dropdown-item" href="/registroVulnerable">Registrar Personas
-                                    Vulnerables</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="/misHeladeras">Mis Heladeras</a></li>
-                            {{/if}}
-                        </ul>
+                        {{#if noEsAdmin}}
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                               aria-expanded="false">Donaciones</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/donacionDinero">Donar Dinero</a></li>
+                                {{#if esJuridico}}
+                                    <li><a class="dropdown-item" href="/encargarseHeladera">Encargarse de Heladera</a>
+                                    </li>
+                                {{/if}}
+                                {{#if esHumano}}
+                                    <li><a class="dropdown-item" href="/donarViandas">Donar Viandas</a></li>
+                                    <li><a class="dropdown-item" href="/distribuirViandas">Distribuir Viandas</a></li>
+                                    <li><a class="dropdown-item" href="/registroVulnerable">Registrar Personas
+                                        Vulnerables</a></li>
+                                    <li>
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li><a class="dropdown-item" href="/misHeladeras">Mis Heladeras</a></li>
+                                {{/if}}
+                            </ul>
+                        {{/if}}
                     </li>
                     <li class="nav-item"><a class="nav-link" href="/canjeProductos">Tienda</a></li>
                     <li class="nav-item"><a class="nav-link" href="/heladeras">Ver Heladeras</a></li>

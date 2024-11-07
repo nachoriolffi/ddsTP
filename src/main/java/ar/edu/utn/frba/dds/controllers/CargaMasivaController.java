@@ -1,17 +1,17 @@
 package ar.edu.utn.frba.dds.controllers;
 
-import ar.edu.utn.frba.dds.models.entities.lectorCSV.LectorColaborador;
-import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
+import ar.edu.utn.frba.dds.services.CargaMasivaService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 import io.javalin.http.UploadedFile;
-import io.javalin.util.FileUtil;
-
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 public class CargaMasivaController extends BaseController implements ICrudViewsHandler {
+
+    CargaMasivaService cargaMasivaService = new CargaMasivaService();
 
     @Override
     public void index(Context context) {
@@ -29,17 +29,13 @@ public class CargaMasivaController extends BaseController implements ICrudViewsH
     public void cargaMasiva(Context context) {
 
         UploadedFile file = context.uploadedFile("csv-file");
-        if (file == null) {
+        if (file != null) {
+            // procesamos el archivo svg en un hilo separado
+            CompletableFuture.runAsync(() -> cargaMasivaService.realizarLecturaCSV(file));
+            // asi redirecciona directamente otra vez a cargaMasiva
             context.redirect("/cargaMasiva");
-            // TODO AGREGAR QUE SE TIRE UN MENSAJE DE ERROR
-        } else {
-            String rutaUploads = "src/main/resources/uploads/";
-            FileUtil.streamToFile(file.content(), rutaUploads + file.filename());
-            LectorColaborador lector = new LectorColaborador();
-            lector.leerCSV(rutaUploads + file.filename());
+        } else
             context.redirect("/cargaMasiva");
-            // TODO AGREGAR QUE SE TIRE UN MENSAJE DE EXITO
-        }
     }
 
     @Override

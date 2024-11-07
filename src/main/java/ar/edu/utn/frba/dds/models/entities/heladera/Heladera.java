@@ -152,7 +152,7 @@ public class Heladera implements IObservableColaborador {
             throw new IOException("No se pueden agregar más viandas ahora, intente más tarde");
         } else {
             //heladeras/medrano/autorizacion: (ID de tarjeta)
-            broker.publish("heladeras/" + this.nombre + "/autorizacion", registro.getTarjeta().getId().toString());
+            broker.publish("heladeras/" + this.id + "/autorizacion", registro.getTarjeta().getId().toString());
             this.solicitudesApertura.add(registro);
         }
     }

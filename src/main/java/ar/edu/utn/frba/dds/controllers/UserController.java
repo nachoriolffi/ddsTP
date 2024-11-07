@@ -56,14 +56,16 @@ public class UserController extends BaseController implements ICrudViewsHandler 
         String confirmarClave = context.formParam("confirmarClave");
 
         if (userService.validarContrasenia(usuarioDTO.getClave(), confirmarClave)) {
-            if (userService.validarContraseniaSegura(usuarioDTO.getClave(), usuario)) {
-                // Si la contraseña es válida y segura, actualizar el usuario
-                userService.actualizarUsuario(usuario, usuarioDTO);
-                context.redirect("/verPerfil");
-            } else {
+            if (!userService.validarContraseniaSegura(usuarioDTO.getClave(), usuario)) {
                 // Si la contraseña no es segura, mostrar un mensaje y no actualizar
                 context.sessionAttribute("claveNoSegura", "La contraseña debe tener entre 8 y 64 caracteres y no debe estar entre las peores 10000.");
                 context.redirect("/verPerfil");
+            } else {
+                // Si la contraseña es válida y segura, actualizar el usuario
+                userService.actualizarUsuario(usuario, usuarioDTO);
+                context.consumeSessionAttribute("usuario_id");
+                context.consumeSessionAttribute("tipo_rol");
+                context.redirect("/iniciarSesion");
             }
         } else {
             // Si las contraseñas no coinciden, mostrar un mensaje y no actualizar

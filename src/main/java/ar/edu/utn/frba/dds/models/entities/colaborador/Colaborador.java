@@ -228,7 +228,7 @@ public class Colaborador extends IObserverColaborador {
         return CalculadorPuntos.getInstancia().sumarPuntosA(this) - this.puntosTotalesUsados;
     }
 
-    public void agregarOfertasCanjeadas(Oferta oferta) {
+    public void agregarOferta(Oferta oferta) {
         this.ofertasRegistradas.add(oferta);
         RepoColaborador.INSTANCE.modificar(this);
     }

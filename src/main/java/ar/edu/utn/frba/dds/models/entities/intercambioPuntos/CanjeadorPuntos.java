@@ -2,7 +2,6 @@ package ar.edu.utn.frba.dds.models.entities.intercambioPuntos;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoGenerico;
 
 import java.util.List;
 
@@ -27,7 +26,7 @@ public class CanjeadorPuntos {
 
         if (colaborador.puntosActualesDisponibles() >= puntosTotalesOfertas((List<Oferta>) ofertas)) {
             colaborador.sumarPuntosUsados(puntosTotalesOfertas((List<Oferta>) ofertas));
-            colaborador.agregarOfertasCanjeadas(ofertas);
+            colaborador.agregarOferta(ofertas);
             RepoColaborador.INSTANCE.modificar(colaborador); // agrego esto para que cada vez que un colaborador cambie los puntos me haga la modificacion de los puntos tambien tengo al duda que sea de la capa de controller.
             return true;
         }

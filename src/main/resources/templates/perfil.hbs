@@ -2,20 +2,20 @@
     <hr class="my-3 border-0">
     <section class="container mt-4">
         <div class="row mb-4">
-            <div class="col-md-8">
+            <div class="col-md-3">
                 <h1 class="h1">Mi Perfil</h1>
             </div>
             {{#if clavesNoCoinciden}}
-                <div class="col-md-2 alert alert-primary" role="alert">
+                <div class="col-md-6 alert alert-primary" role="alert">
                     {{clavesNoCoinciden}}
                 </div>
             {{/if}}
             {{#if claveNoSegura}}
-                <div class="col-md-2 alert alert-primary" role="alert">
+                <div class="col-md-6 alert alert-primary" role="alert">
                     {{claveNoSegura}}
                 </div>
             {{/if}}
-            <div class="col-md-4 text-md-end">
+            <div class="col-md-3 text-md-end">
                 <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                         data-bs-target="#editProfileModal">
                     Modificar Perfil

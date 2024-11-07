@@ -13,11 +13,8 @@ public class SchedulerMain {
         // Crea el ScheduledExecutorService con un solo hilo
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(8);
 
-        CronJobReporte jobReporte = new CronJobReporte();
-
-
-
-        // Programa el job para que se ejecute cada 7 días
+        // CRONJOB GENERACION REPORTES CADA UNA SEMANA
+        /*CronJobReporte jobReporte = new CronJobReporte();
         long initialDelay = 0;  // Tiempo de espera inicial antes de la primera ejecución
         long period = 7;        // Intervalo de ejecución en días (1 semana)
 
@@ -26,10 +23,12 @@ public class SchedulerMain {
                 initialDelay,
                 period,
                 TimeUnit.DAYS
-        );
+        );*/
 
-        long initialDelayTemperatura = 0;  // Tiempo de espera inicial antes de la primera ejecución
-        long periodTemperatura = 5;        // Intervalo de ejecución en días (5 minutos)
+        // CRONJOB CHEQUEO TEMPERATURA POR HELADERA CADA 5 MINUTOS
+
+        /*long initialDelayTemperatura = 0;  // Tiempo de espera inicial antes de la primera ejecución
+        long periodTemperatura = 5;        // Intervalo de ejecución en minutos (5 minutos)
 
         CronjobTemperatura jobTemperatura = new CronjobTemperatura();
 
@@ -39,7 +38,6 @@ public class SchedulerMain {
                 periodTemperatura,
                 TimeUnit.MINUTES
         );
-
-        System.out.println("Scheduler iniciado para la generación de reportes cada semana y para revisar la temperatura de una heladera.");
+        System.out.println("Scheduler iniciado para la generación de reportes cada semana y para revisar la temperatura de una heladera cada 5 minutos.");*/
     }
 }

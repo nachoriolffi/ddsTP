@@ -22,6 +22,10 @@ public class ValidadorDeContrasenia {
         return validadores.stream().allMatch(validador -> validador.validar(contrasenia, usuario)) && validarIgualdadContrasenia(contrasenia, usuario);
     }
 
+    public boolean validarContraseniaModificar (String contrasenia, Usuario usuario){
+        return validadores.stream().allMatch(validador -> validador.validar(contrasenia, usuario)) && !validarIgualdadContrasenia(contrasenia, usuario);
+    }
+
     public boolean validarIgualdadContrasenia (String contrasenia, Usuario usuario){
         if(!contrasenia.equals(usuario.getContrasenia()))
         {

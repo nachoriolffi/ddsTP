@@ -2,14 +2,13 @@
     <div class="container">
         <hr class="my-3 border-0">
         <div class="row">
-            <figure class="col-md-4 figure">
+            <figure class="col-md-5 figure">
                 <img class="figure-img img-fluid rounded mx-auto d-none d-md-block"
-                     src="/public/img/tecnico.svg" alt="Imagen técnico">
+                     src="img/tecnico.svg" alt="Imagen Tecnico">
             </figure>
             <div class="col-md-7">
                 <h1 class="h1">Registrar Técnico</h1>
                 <hr class="border-1">
-
                 <form class="row g-3 needs-validation" method="POST" action="/cargaTecnico" novalidate>
                     <div class="col-lg-6 col-md-12">
                         <label class="form-label" for="nombre">Nombre</label>
@@ -19,13 +18,12 @@
                         <label class="form-label" for="apellido">Apellido</label>
                         <input type="text" class="form-control" id="apellido" name="apellido" required>
                     </div>
-                    <div class="col-lg-4 col-md-12">
-                        <label class="form-label" for="apellido">Numero de documento/s</label>
+                    <div class="col-lg-6 col-md-12">
+                        <label class="form-label" for="apellido">Numero de documento</label>
                         <input class="form-control" type="text" id="numeroDeDocumento" name="numeroDeDocumento" required>
                     </div>
-
                     <div class="col-lg-6 col-md-12">
-                        <label class="form-label" for="tipoDocumento">Numero de documento</label>
+                        <label class="form-label" for="tipoDocumento">Tipo de documento</label>
                         <select class="form-select" id="tipoDocumento" name="tipoDocumento" required>
                             <option value="" disabled selected>Seleccion una opcion</option>
                             {{#each tipoDocumentos}}
