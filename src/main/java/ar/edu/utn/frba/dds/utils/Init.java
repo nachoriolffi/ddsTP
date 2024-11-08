@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.utils;
 
+import ar.edu.utn.frba.dds.models.entities.colaborador.TipoJuridiccion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.*;
 import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
@@ -313,9 +314,9 @@ public class Init implements WithSimplePersistenceUnit {
         // JURIDICO
         Usuario usuarioJuridico = new Usuario();
         usuarioJuridico.setNombre("Taylor Alison Swift");
-        usuarioJuridico.setContrasenia("123_LETS_GO_B");
+        usuarioJuridico.setContrasenia("1234");
         usuarioJuridico.setCuentaEliminada(false);
-        usuarioJuridico.setCorreoElectronico("taylorswift13@gmail.com");
+        usuarioJuridico.setCorreoElectronico("ts@gmail.com");
         usuarioJuridico.setRol(TipoRol.COLABORADOR_JURIDICO);
         repoUsuario.agregar(usuarioJuridico);
 
@@ -330,16 +331,17 @@ public class Init implements WithSimplePersistenceUnit {
 
         /*--------------COLABORADORES--------------*/
 
+        // COLABORADOR HUMANO
         List<TipoColaboracion> formaDeColaboraciones = new ArrayList<>();
         formaDeColaboraciones.add(TipoColaboracion.DONACION_VIANDAS);
         formaDeColaboraciones.add(TipoColaboracion.DINERO);
         formaDeColaboraciones.add(TipoColaboracion.REDISTRIBUCION_VIANDAS);
         formaDeColaboraciones.add(TipoColaboracion.ENTREGA_TARJETAS);
-        Usuario usuario = repoUsuario.buscar(2L);
+        usuarioHumano = repoUsuario.buscar(2L);
         Colaborador colaboradorHumano = new Colaborador();
         colaboradorHumano.setNombre("Ignacio Joaquin");
         colaboradorHumano.setApellido("Riolffi");
-        colaboradorHumano.setUsuario(usuario);
+        colaboradorHumano.setUsuario(usuarioHumano);
         colaboradorHumano.setTipoPersona(TipoPersona.HUMANA);
         colaboradorHumano.setFechaDeNacimiento(LocalDate.now());
         colaboradorHumano.setFormasDeColaboracion(formaDeColaboraciones);
@@ -362,6 +364,21 @@ public class Init implements WithSimplePersistenceUnit {
                 break;
             }
         }
+
+        // COLABORADOR JURIDICO
+        usuarioJuridico = repoUsuario.buscar(3L);
+        Colaborador colaboradorJuridico = new Colaborador();
+        colaboradorJuridico.setRazonSocial("Taylor Nation");
+        colaboradorJuridico.setUsuario(usuarioJuridico);
+        colaboradorJuridico.setTipoPersona(TipoPersona.JURIDICA);
+        colaboradorJuridico.setFueCargaMasiva(false);
+        colaboradorJuridico.setTipoJuridiccion(TipoJuridiccion.EMPRESA);
+        List<TipoColaboracion> formasColaboracion = new ArrayList<>();
+        formasColaboracion.add(TipoColaboracion.HACERSE_CARGO_HELADERA);
+        formasColaboracion.add(TipoColaboracion.DINERO);
+        colaboradorJuridico.setFormasDeColaboracion(formasColaboracion);
+        RepoColaborador.INSTANCE.agregar(colaboradorJuridico);
+
         /*--------------CUESTIONARIOS--------------*/
 
         RepoPregunta repoPregunta = RepoPregunta.INSTANCE;
