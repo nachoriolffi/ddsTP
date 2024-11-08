@@ -23,18 +23,15 @@ import ar.edu.utn.frba.dds.models.entities.heladera.alerta.registro.RegistroTemp
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.*;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.util.*;
 
 public class Init implements WithSimplePersistenceUnit {
 
@@ -306,14 +303,6 @@ public class Init implements WithSimplePersistenceUnit {
 
         /*--------------USUARIOS--------------*/
 
-        //repoHeladeras.agregar(heladera2);
-/*
-        Usuario usuario = new Usuario();
-        usuario.setNombre("Ignacio Riolffi");
-        usuario.setRol(TipoRol.ADMIN);
-        usuario.setContrasenia("1234");
-        usuario.setCorreoElectronico("nacho@gmail.com");
-*/
         RepoUsuario repoUsuario = RepoUsuario.INSTANCE;
 
         // ADMIN
@@ -323,7 +312,35 @@ public class Init implements WithSimplePersistenceUnit {
         usuarioAdmin.setCuentaEliminada(false);
         usuarioAdmin.setCorreoElectronico("iriolffi@gmail.com");
         usuarioAdmin.setRol(TipoRol.ADMIN);
-        //repoUsuario.agregar(usuarioAdmin);
+        repoUsuario.agregar(usuarioAdmin);
+
+        // HUMANO
+        Usuario usuarioHumano = new Usuario();
+        usuarioHumano.setNombre("Ignacio Joaquin Riolffi");
+        usuarioHumano.setContrasenia("1234");
+        usuarioHumano.setCuentaEliminada(false);
+        usuarioHumano.setCorreoElectronico("nacho@gmail.com");
+        usuarioHumano.setRol(TipoRol.COLABORADOR_HUMANO);
+        repoUsuario.agregar(usuarioHumano);
+
+
+        /*--------------COLABORADORES--------------*/
+
+        List<TipoColaboracion> formaDeColaboraciones = new ArrayList<>();
+        formaDeColaboraciones.add(TipoColaboracion.DONACION_VIANDAS);
+        formaDeColaboraciones.add(TipoColaboracion.DINERO);
+        formaDeColaboraciones.add(TipoColaboracion.REDISTRIBUCION_VIANDAS);
+        formaDeColaboraciones.add(TipoColaboracion.ENTREGA_TARJETAS);
+        Usuario usuario = repoUsuario.buscar(2L);
+        Colaborador colaboradorHumano = new Colaborador();
+        colaboradorHumano.setNombre("Ignacio Joaquin");
+        colaboradorHumano.setApellido("Riolffi");
+        colaboradorHumano.setUsuario(usuario);
+        colaboradorHumano.setTipoPersona(TipoPersona.HUMANA);
+        colaboradorHumano.setFechaDeNacimiento(LocalDate.now());
+
+        colaboradorHumano.setFormasDeColaboracion(formaDeColaboraciones);
+        RepoColaborador.INSTANCE.agregar(colaboradorHumano);
 
         /*--------------CUESTIONARIOS--------------*/
         //repoUsuario.agregar(usuario);
@@ -388,6 +405,21 @@ public class Init implements WithSimplePersistenceUnit {
 
         //HUMANO
 
+        Cuestionario cuestionarioHumano = new Cuestionario();
+        cuestionarioHumano.setNombreCuestionario("Cuestionario Humano");
+        cuestionarioHumano.setDescripcion("Este es el cuestionario para registrar colaboradores humanos");
+
+        Pregunta preguntaNombre = new Pregunta();
+        preguntaNombre.setEsObligatoria(true);
+        preguntaNombre.setNombre("Nombre");
+        preguntaNombre.setTipoPregunta(TipoPregunta.STRING);
+        preguntaNombre.setDescripcionPregunta("Ingrese su nombre");
+
+        Pregunta preguntaApellido = new Pregunta();
+        preguntaApellido.setEsObligatoria(true);
+        preguntaApellido.setNombre("Apellido");
+        preguntaApellido.setTipoPregunta(TipoPregunta.STRING);
+        preguntaApellido.setDescripcionPregunta("Ingrese su Apellido");
 
         //Cuestionario cuestionario = new Cuestionario();
         //Pregunta nombrePregunta = new Pregunta();
@@ -433,7 +465,7 @@ public class Init implements WithSimplePersistenceUnit {
         //colaborador.setApellido("Riolffi");
         //usuario1.setNombre(colaborador.getNombre() + " " + colaborador.getApellido());
 // Agregar pregunta de tipo fecha al cuestionario
-        cuestionario.agregarPregunta(fechaPregunta);
+        //cuestionario.agregarPregunta(fechaPregunta);
 // Persistir el cuestionario
         RepoCuestionario.INSTANCE.agregar(cuestionario);
 /*

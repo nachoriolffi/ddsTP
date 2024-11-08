@@ -8,13 +8,6 @@ import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.TipoColaborac
 import ar.edu.utn.frba.dds.models.entities.colaborador.observer.IObserverColaborador;
 import ar.edu.utn.frba.dds.models.entities.contacto.Mensaje;
 import ar.edu.utn.frba.dds.models.entities.contacto.Notificacion;
-import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
-import ar.edu.utn.frba.dds.models.entities.contacto.correo.AdapterCorreo;
-import ar.edu.utn.frba.dds.models.entities.contacto.correo.CorreoElectronico;
-import ar.edu.utn.frba.dds.models.entities.contacto.correo.ServicioMail;
-import ar.edu.utn.frba.dds.models.entities.contacto.telegram.IAdapterTelegram;
-import ar.edu.utn.frba.dds.models.entities.contacto.telegram.ServicioTelegram;
-import ar.edu.utn.frba.dds.models.entities.contacto.telegram.Telegram;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.models.entities.recomendacionPuntos.IRecomendacionPuntos;
@@ -42,8 +35,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import ar.edu.utn.frba.dds.models.entities.contacto.telegram.AdapterTelegram;
-
 @Data
 @Setter
 @Getter
@@ -52,7 +43,7 @@ import ar.edu.utn.frba.dds.models.entities.contacto.telegram.AdapterTelegram;
 public class Colaborador implements IObserverColaborador {
 
     @Id
-    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "nombre", columnDefinition = "VARCHAR(255)")
@@ -72,9 +63,6 @@ public class Colaborador implements IObserverColaborador {
     @JoinColumn(name = "direccion_id")
     private Direccion direccion;
 
-    //@OneToMany
-    //@JoinColumn(name = "id_FormasColaboracion")
-    //@Transient
     @Convert(converter = FormaDeColaboracionConverter.class)
     @ElementCollection(targetClass = String.class)
     // de esta manera puedo cargar las formas de colaboracion que la persona elige y ademas me ayuda a poder asignarle la tarjeta en base a la forma que elige.

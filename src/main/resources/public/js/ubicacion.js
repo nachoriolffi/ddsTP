@@ -1,45 +1,68 @@
-$(document).ready(function() {
+$(document).ready(function () {
     const apiBase = "https://apis.datos.gob.ar/georef/api";
+    let provinciaId;
 
-    // Cargar provincias al cargar la página
-    $.get(`${apiBase}/provincias`, function(data) {
+    $.get(`${apiBase}/provincias`, function (data) {
         let provincias = data.provincias;
 
-        // Ordenar provincias alfabéticamente
-        provincias.sort(function(a, b) {
+        provincias.sort(function (a, b) {
             return a.nombre.localeCompare(b.nombre);
         });
 
         let provinciaSelect = $('#provincia');
-        provincias.forEach(function(provincia) {
+        provincias.forEach(function (provincia) {
             provinciaSelect.append(new Option(provincia.nombre, provincia.id));
         });
     });
+    $('#provincia').change(function () {
+        provinciaId = $(this).val();
+    });
+    $('#calle').on('input', function () {
+        let direccion = $(this).val();
+        let suggestionsContainer = $('#suggestions');
 
-    // Manejar cambio en el select de provincias
-    $('#provincia').change(function() {
-        let provinciaId = $(this).val();
-        let localidadSelect = $('#localidad');
+        // Limpiar las opciones previas
+        suggestionsContainer.empty();
 
-        if (provinciaId) {
-            localidadSelect.prop('disabled', false);
-            localidadSelect.empty().append(new Option('Seleccione una localidad', ''));
+        if (direccion.length >= 3) { // Realizar búsqueda si hay al menos 3 caracteres
+            $.get(`https://apis.datos.gob.ar/georef/api/direcciones?direccion=${direccion}&provincia=${provinciaId}&campos=completo&max=100`, function (data) {
+                if (data.direcciones && data.direcciones.length > 0) {
+                    suggestionsContainer.removeClass('d-none'); // Mostrar las sugerencias
 
-            // Cargar localidades basadas en la provincia seleccionada
-            $.get(`${apiBase}/localidades?provincia=${provinciaId}&campos=id,nombre&max=1000`, function(data) {
-                let localidades = data.localidades;
+                    // Crear un conjunto para almacenar las direcciones únicas
+                    let seenAddresses = new Set();
 
-                // Ordenar localidades alfabéticamente
-                localidades.sort(function(a, b) {
-                    return a.nombre.localeCompare(b.nombre);
-                });
+                    data.direcciones.forEach(function (direccionItem) {
+                        // Verificar si la nomenclatura ya existe en el conjunto
+                        if (!seenAddresses.has(direccionItem.nomenclatura)) {
+                            // Agregar la dirección al conjunto para evitar duplicados
+                            seenAddresses.add(direccionItem.nomenclatura);
 
-                localidades.forEach(function(localidad) {
-                    localidadSelect.append(new Option(localidad.nombre, localidad.id));
-                });
+                            // Crear un elemento de la lista de sugerencias
+                            let suggestion = $('<button type="button" class="list-group-item list-group-item-action"></button>')
+                                .text(direccionItem.nomenclatura) // Mostrar la dirección completa
+                                .click(function () {
+                                    $('#calle').val(direccionItem.nomenclatura); // Colocar el valor seleccionado en el input
+                                    suggestionsContainer.addClass('d-none'); // Ocultar las sugerencias
+                                });
+                            suggestionsContainer.append(suggestion);
+                        }
+                    });
+                } else {
+                    suggestionsContainer.addClass('d-none'); // Ocultar el contenedor si no hay resultados
+                }
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                console.error("Error al cargar las direcciones:", textStatus, errorThrown);
             });
         } else {
-            localidadSelect.prop('disabled', true).empty().append(new Option('Seleccione una localidad', ''));
+            suggestionsContainer.addClass('d-none'); // Ocultar el contenedor si hay menos de 3 caracteres
         }
     });
+    $(document).on('click', function (event) {
+        if (!$(event.target).closest('#calle, #suggestions').length) {
+            $('#suggestions').addClass('d-none');
+        }
+    });
+
+
 });

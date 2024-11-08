@@ -7,11 +7,6 @@ import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.entities.validador.ValidadorDeContrasenia;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoUsuario;
-import org.hibernate.Cache;
-import org.hibernate.SessionFactory;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.Arrays;
 
 public class UserService {
@@ -44,9 +39,11 @@ public class UserService {
                     usuarioDTO.setApellido(apellido);
                     usuarioDTO.setEmail(usuario.getCorreoElectronico());
                     usuarioDTO.setClave(usuario.getContrasenia());
-                    usuarioDTO.setProvincia(colaborador.getDireccion().getUbicacion().getProvincia().toString());
-                    usuarioDTO.setLocalidad(colaborador.getDireccion().getUbicacion().getLocalidad().toString());
-                    usuarioDTO.setDireccion(colaborador.obtenerDireccion());
+                    if (colaborador.getDireccion()!=null){
+                        usuarioDTO.setProvincia(colaborador.getDireccion().getUbicacion().getProvincia().toString());
+                        usuarioDTO.setLocalidad(colaborador.getDireccion().getUbicacion().getLocalidad().toString());
+                        usuarioDTO.setDireccion(colaborador.obtenerDireccion());
+                    }
                     //TODO como setear el telefono
                     //usuarioDTO.setTelefono(colaborador.get);
                 }

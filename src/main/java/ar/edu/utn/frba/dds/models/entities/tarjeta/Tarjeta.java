@@ -1,11 +1,11 @@
 package ar.edu.utn.frba.dds.models.entities.tarjeta;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.models.entities.generadorCodigo.GeneradorDeCodigo;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.vulnerable.Vulnerable;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,6 +21,8 @@ public class Tarjeta {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "codigo", columnDefinition = "VARCHAR(11)")
+    private String codigo; // codigo alfanumerico unico por tarjeta
 
     @OneToMany
     @JoinColumn(name = "usoTarjeta_id")
@@ -35,7 +37,7 @@ public class Tarjeta {
     private Vulnerable personaAsociada;
 
     @ManyToOne
-    @JoinColumn(name = "colaborador_id" )
+    @JoinColumn(name = "colaborador_id")
     private Colaborador colaboradorAsociado;
 
     @Column(name = "fechaRegistro")
@@ -50,6 +52,7 @@ public class Tarjeta {
     }
 
     public Tarjeta() {
+        //this.codigo = GeneradorDeCodigo.getInstance().generarCodigoUnico();
     }
 
     public Tarjeta(Vulnerable personaAsociada, Colaborador colaboradorAsociado) {

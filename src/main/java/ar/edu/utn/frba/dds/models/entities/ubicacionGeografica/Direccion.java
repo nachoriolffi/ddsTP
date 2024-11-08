@@ -27,6 +27,7 @@ public class Direccion {
     @Setter
     private Integer piso;
 
+    @Setter
     @Embedded
     private Ubicacion ubicacion;
 
