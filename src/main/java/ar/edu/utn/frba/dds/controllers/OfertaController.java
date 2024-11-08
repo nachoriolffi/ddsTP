@@ -114,6 +114,10 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
         context.redirect("/canjeProductos");
     }
 
+
+    public void verMisOfertas(Context context) {
+    }
+
     @Override
     public void delete(Context context) {
 
@@ -140,4 +144,5 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
     public void update(Context context) {
 
     }
+
 }

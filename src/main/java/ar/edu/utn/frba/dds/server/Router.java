@@ -71,6 +71,7 @@ public class Router {
         app.get("/canjeProductos", Objects.requireNonNull(ServiceLocator.instanceOf(OfertaController.class))::index, TipoRol.COLABORADOR_HUMANO, TipoRol.COLABORADOR_JURIDICO);
         app.post("/cargarProducto", Objects.requireNonNull(ServiceLocator.instanceOf(OfertaController.class))::save);
         app.post("/canjearProducto", Objects.requireNonNull(ServiceLocator.instanceOf(OfertaController.class))::canjear);
+        app.get("/ofertasCanjeadas",Objects.requireNonNull(ServiceLocator.instanceOf(OfertaController.class))::verMisOfertas);
 
         app.get("/crearCuenta", Objects.requireNonNull(ServiceLocator.instanceOf(CrearCuentaController.class))::index);
         app.post("/crearCuenta", Objects.requireNonNull(ServiceLocator.instanceOf(CrearCuentaController.class))::save);

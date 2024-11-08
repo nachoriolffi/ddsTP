@@ -54,7 +54,8 @@
                     <div class="col-lg-8 col-md-12">
                         <label class="form-label" for="calle">Dirección</label>
                         <div class="autocomplete-container position-relative">
-                            <input type="text" id="calle" class="form-control" placeholder="Escribe una calle"
+                            <input type="text" id="calle" name="calle" class="form-control"
+                                   placeholder="Escribe una calle"
                                    list="suggestions">
                             <div class="list-group" id="suggestions"></div>
                         </div>
@@ -63,11 +64,11 @@
                         <label class="form-label" for="altura">Altura</label>
                         <input class="form-control" type="text" id="altura" name="altura">
                     </div>
-                    <div class="col-lg-3 col-md-12">
+                    <div class="col-lg-2 col-md-12">
                         <label class="form-label" for="piso">Piso</label>
                         <input class="form-control" type="text" id="piso" name="piso">
                     </div>
-                    <div class="col-lg-3 col-md-12">
+                    <div class="col-lg-4 col-md-12">
                         <label class="form-label" for="menoresACargo">Tiene Menores a Cargo</label>
                         <select class="form-select" id="menoresACargo" name="menoresACargo" required>
                             <option value="" disabled selected>Seleccion una opcion</option>
@@ -90,7 +91,7 @@
                             </label>
                         </div>
                     </div>
-                    <!--<div class="col-lg-6 col-md-12">
+                    <div class="col-lg-6 col-md-12">
                         <label class="form-label" for="tarjeta">Tarjeta</label>
                         <select class="form-select" id="tarjeta" name="tarjeta" required>
                             <option value="" disabled selected>Seleccione una tarjeta</option>
@@ -98,7 +99,7 @@
                                 <option value="{{this.id}}">{{this.id}}</option>
                             {{/each}}
                         </select>
-                    </div>-->
+                    </div>
                     <hr class="my-3 border-0">
                     <div class="col-12 text-end">
                         <button class="btn btn-outline-primary" type="submit">¡Registrar Persona!</button>

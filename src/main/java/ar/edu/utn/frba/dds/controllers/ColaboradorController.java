@@ -19,6 +19,7 @@ public class ColaboradorController extends BaseController implements ICrudViewsH
         verificarAdmin(context, model);
         List<ColaboradorDTO> colaboradorDTOS = colaboradorService.obtenerColaboradores();
         model.put("colaboradores", colaboradorDTOS);
+        model.put("title","Colaboradores");
         context.render("colaboradores.hbs", model);
     }
 

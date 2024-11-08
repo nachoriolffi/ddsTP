@@ -2,6 +2,7 @@ $(document).ready(function () {
     const apiBase = "https://apis.datos.gob.ar/georef/api";
     let provinciaId;
 
+    // Cargar provincias en el selector
     $.get(`${apiBase}/provincias`, function (data) {
         let provincias = data.provincias;
 
@@ -14,6 +15,7 @@ $(document).ready(function () {
             provinciaSelect.append(new Option(provincia.nombre, provincia.id));
         });
     });
+
     $('#provincia').change(function () {
         provinciaId = $(this).val();
     });
@@ -21,26 +23,20 @@ $(document).ready(function () {
         let direccion = $(this).val();
         let suggestionsContainer = $('#suggestions');
 
-        // Limpiar las opciones previas
         suggestionsContainer.empty();
 
         if (direccion.length >= 3) { // Realizar búsqueda si hay al menos 3 caracteres
-            $.get(`https://apis.datos.gob.ar/georef/api/direcciones?direccion=${direccion}&provincia=${provinciaId}&campos=completo&max=100`, function (data) {
+            $.get(`${apiBase}/direcciones?direccion=${direccion}&provincia=${provinciaId}&campos=completo&max=100`, function (data) {
                 if (data.direcciones && data.direcciones.length > 0) {
                     suggestionsContainer.removeClass('d-none'); // Mostrar las sugerencias
 
-                    // Crear un conjunto para almacenar las direcciones únicas
                     let seenAddresses = new Set();
-
                     data.direcciones.forEach(function (direccionItem) {
-                        // Verificar si la nomenclatura ya existe en el conjunto
                         if (!seenAddresses.has(direccionItem.nomenclatura)) {
-                            // Agregar la dirección al conjunto para evitar duplicados
                             seenAddresses.add(direccionItem.nomenclatura);
 
-                            // Crear un elemento de la lista de sugerencias
                             let suggestion = $('<button type="button" class="list-group-item list-group-item-action"></button>')
-                                .text(direccionItem.nomenclatura) // Mostrar la dirección completa
+                                .text(direccionItem.nomenclatura)
                                 .click(function () {
                                     $('#calle').val(direccionItem.nomenclatura); // Colocar el valor seleccionado en el input
                                     suggestionsContainer.addClass('d-none'); // Ocultar las sugerencias
@@ -58,11 +54,11 @@ $(document).ready(function () {
             suggestionsContainer.addClass('d-none'); // Ocultar el contenedor si hay menos de 3 caracteres
         }
     });
+
+    // Cerrar las sugerencias al hacer clic fuera
     $(document).on('click', function (event) {
         if (!$(event.target).closest('#calle, #suggestions').length) {
             $('#suggestions').addClass('d-none');
         }
     });
-
-
 });

@@ -23,9 +23,11 @@ public class ColaboradorService {
                 cDTO.setID(String.valueOf(c.getId()));
                 cDTO.setNombreYApellido(c.getNombre() + " " + c.getApellido());
                 cDTO.setTipoColaborador(String.valueOf(c.getTipoPersona()));
-                cDTO.setFechaDeNacimiento(String.valueOf(c.getFechaDeNacimiento()));
-                cDTO.setRazonSocial(c.getRazonSocial());
-                cDTO.setJurisdiccion(String.valueOf(c.getTipoJuridiccion()));
+                cDTO.setFechaDeNacimiento(c.getFechaDeNacimiento() != null ? String.valueOf(c.getFechaDeNacimiento()) : "-");
+                cDTO.setRazonSocial(c.getRazonSocial() != null ? c.getRazonSocial() : "-");
+                cDTO.setJurisdiccion(c.getTipoJuridiccion() != null ? String.valueOf(c.getTipoJuridiccion()) : "-");
+                cDTO.setDireccion(c.getDireccion() != null ? String.valueOf(c.obtenerDireccion()) : "-");
+                cDTO.setCorreoElectronico(c.getUsuario().getCorreoElectronico());
                 colaboradorDTOS.add(cDTO);
             }
         }

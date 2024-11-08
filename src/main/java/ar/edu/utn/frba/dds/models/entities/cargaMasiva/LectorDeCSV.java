@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.models.entities.lectorCSV;
+package ar.edu.utn.frba.dds.models.entities.cargaMasiva;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;

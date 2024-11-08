@@ -1,9 +1,8 @@
 package ar.edu.utn.frba.dds.services;
 
-import ar.edu.utn.frba.dds.models.entities.lectorCSV.LectorColaborador;
+import ar.edu.utn.frba.dds.models.entities.cargaMasiva.LectorColaborador;
 import io.javalin.http.UploadedFile;
 import io.javalin.util.FileUtil;
-import java.io.File;
 
 public class CargaMasivaService {
     public void realizarLecturaCSV(UploadedFile file) {

@@ -111,6 +111,9 @@ public class Colaborador implements IObserverColaborador {
     @JoinColumn(name = "oferta_id")
     private List<Oferta> ofertasRegistradas;
 
+    @Column(name = "fueCargaMasiva")
+    private Boolean fueCargaMasiva;
+
     @OneToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
