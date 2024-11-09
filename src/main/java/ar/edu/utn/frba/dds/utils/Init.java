@@ -419,7 +419,7 @@ public class Init implements WithSimplePersistenceUnit {
         cuestionarioJuridico.agregarPregunta(preguntaRazonSocial);
         cuestionarioJuridico.agregarPregunta(preguntaTipoRazon);
 
-        //repoCuestionario.agregar(cuestionarioJuridico);
+        repoCuestionario.agregar(cuestionarioJuridico);
 
         //HUMANO
 

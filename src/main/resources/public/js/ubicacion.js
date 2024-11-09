@@ -1,6 +1,7 @@
 $(document).ready(function () {
     const apiBase = "https://apis.datos.gob.ar/georef/api";
     let provinciaId;
+    let localidadId;
 
     // Cargar provincias en el selector
     $.get(`${apiBase}/provincias`, function (data) {
@@ -18,7 +19,33 @@ $(document).ready(function () {
 
     $('#provincia').change(function () {
         provinciaId = $(this).val();
+        const localidadSelect = $('#localidad');
+
+        // Vaciar el selector de localidades antes de cargar las nuevas opciones
+        localidadSelect.empty();
+        localidadSelect.append(new Option("Seleccione una opción", "", true, true));
+
+        // Cargar localidades de la provincia seleccionada
+        $.get(`${apiBase}/localidades?provincia=${provinciaId}`, function (data) {
+            const localidades = data.localidades;
+
+            localidades.sort((a, b) => a.nombre.localeCompare(b.nombre));
+
+            localidades.forEach(function (localidad) {
+                localidadSelect.append(new Option(localidad.nombre, localidad.id));
+            });
+
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            console.error("Error al cargar las localidades:", textStatus, errorThrown);
+        });
+
     });
+
+    $('#localidad').change(function () {
+        localidadId = $(this).val();
+    });
+
+
     $('#calle').on('input', function () {
         let direccion = $(this).val();
         let suggestionsContainer = $('#suggestions');
