@@ -12,9 +12,9 @@
                     <thead>
                     <tr>
                         <th scope="col">Tipo Colaborador</th>
-                        <th scope="col">Nombre y Apellido</th>
+                        <th scope="col">Nombre y Apellido/Razon Social</th>
+                        <th scope="col">Correo Electronico</th>
                         <th scope="col">Fecha de Nacimiento</th>
-                        <th scope="col">Razon Social</th>
                         <th scope="col">Tipo Jurisdiccion</th>
                         <th scope="col">Direccion</th>
                         <th scope="col">Dar de Baja</th>
@@ -25,56 +25,47 @@
                         <tr>
                             <td>{{this.tipoColaborador}}</td>
                             <td>{{this.nombreYApellido}}</td>
+                            <td>{{this.correoElectronico}}</td>
                             <td>{{this.fechaDeNacimiento}}</td>
-                            <td>{{this.razonSocial}}</td>
                             <td>{{this.jurisdiccion}}</td>
                             <td>{{this.direccion}}</td>
                             <td>
                                 <button class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                        data-bs-target="#deleteAccountModal"
+                                        data-bs-target="#deleteAccountModal-{{@index}}"
                                         data-id="{{this.ID}}">
-                                    <i class="fa-solid fa-trash fa-lg"></i> Borrar Cuenta
+                                    <i class="fa-solid fa-trash fa-lg"></i>
                                 </button>
                             </td>
                         </tr>
+
+                        <!-- Modal para Confirmar Borrado -->
+                        <div class="modal fade" id="deleteAccountModal-{{@index}}" tabindex="-1" aria-labelledby="deleteAccountModalLabel-{{@index}}"
+                             aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteAccountModalLabel-{{@index}}">Confirmar Borrado</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        ¿Estás seguro de que deseas borrar esta cuenta ({{this.correoElectronico}})? Esta acción no
+                                        se puede deshacer.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                        <form method="post" action="/darDeBaja">
+                                            <input type="hidden" name="colaboradorId" value="{{this.ID}}">
+                                            <button type="submit" class="btn btn-danger">Borrar Cuenta</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     {{/each}}
                     </tbody>
                 </table>
             </div>
         </div>
     </section>
-
-    <!-- Modal para Confirmar Borrado -->
-    <div class="modal fade" id="deleteAccountModal" tabindex="-1" aria-labelledby="deleteAccountModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteAccountModalLabel">Confirmar Borrado</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    ¿Estás seguro de que deseas borrar tu cuenta? Esta acción no se puede deshacer.
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <form method="post" action="/darDeBaja">
-                        <input type="hidden" id="colaboradorId" name="colaboradorId"> <!-- Campo oculto -->
-                        <button type="submit" class="btn btn-danger">Borrar Cuenta</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Función para actualizar el ID del colaborador en el campo oculto del formulario
-        document.querySelectorAll('[data-bs-target="#deleteAccountModal"]').forEach(button => {
-            button.addEventListener('click', function () {
-                const colaboradorId = this.getAttribute('data-id');
-                document.getElementById('colaboradorId').value = colaboradorId; // Asigna el ID al campo oculto
-            });
-        });
-    </script>
 {{/partial}}
 {{> templates/base }}

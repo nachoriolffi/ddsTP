@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.entities.vulnerable.RegistroMenorACargo;
 import ar.edu.utn.frba.dds.models.entities.vulnerable.Vulnerable;
@@ -55,6 +56,7 @@ public class RegistroVulnerableController extends BaseController implements ICru
         vulnerable.setFechaDeNacimiento(java.sql.Date.valueOf(Objects.requireNonNull(context.formParam("fechaNacimiento"))));
         vulnerable.setFechaDeRegistro(new java.sql.Date(System.currentTimeMillis()));
         vulnerable.setSituacionDeCalle(Boolean.valueOf(context.formParam("situacionDeCalle")));
+        String direccion = context.formParam("calle");
 
         //menor a cargo
         menorACargo.setVulnerable(vulnerable);
@@ -64,7 +66,8 @@ public class RegistroVulnerableController extends BaseController implements ICru
         vulnerable.getMenoresACargo().add(menorACargo);
 
         //tarjeta
-        Tarjeta tarjeta = RepoTarjeta.INSTANCE.buscar(Long.valueOf(Objects.requireNonNull(context.formParam("tarjeta"))));
+        //Tarjeta tarjeta = RepoTarjeta.INSTANCE.buscar(Long.valueOf(Objects.requireNonNull(context.formParam("tarjeta"))));
+        Tarjeta tarjeta = new Tarjeta();
         tarjeta.setPersonaAsociada(vulnerable);
 
         //carga repos

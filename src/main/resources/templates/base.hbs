@@ -53,18 +53,26 @@
                             </ul>
                         {{/if}}
                     </li>
-                    <li class="nav-item"><a class="nav-link" href="/canjeProductos">Tienda</a></li>
+                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" role="button"
+                                                     aria-expanded="false" data-bs-toggle="dropdown" href="#">Canje
+                        Puntos/Servicios</a>
+                        <ul class="dropdown-menu">
+                        <li class="nav-item"><a class="dropdown-item" href="/canjeProductos">Tienda</a>
+                            {{#if esHumano}}
+                                <li><a class="dropdown-item" href="/ofertasCanjeadas">Ofertas Canjeadas</a></li>
+                            {{/if}}
+                        </ul>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="/heladeras">Ver Heladeras</a></li>
                     {{#if esHumano}}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                                aria-expanded="false">Herramientas</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/fallaTecnica">Reportar Incidente</a></li>
+                                <li><a class="dropdown-item" href="/fallaTecnica">Reportar Fallas Tecnicas</a></li>
                             </ul>
                         </li>
                     {{/if}}
-
                     {{#if esAdmin}}
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
@@ -73,10 +81,10 @@
                                 <li><a class="dropdown-item" href="/verColaboradores">Ver Colaboradores</a></li>
                                 <li><a class="dropdown-item" href="/cargaMasiva">Cargar Archivo CSV</a></li>
                                 <li><a class="dropdown-item" href="/reportes">Ver Reportes PDF</a></li>
+                                <li><a class="dropdown-item" href="/verFallasTecnicas">Ver Fallas Tecnicas</a></li>
                                 <li><a class="dropdown-item" href="/cargaTecnico">Cargar Tecnico</a></li>
                             </ul>
                         </li>
-
                     {{/if}}
 
                     {{#if esJuridico}}
@@ -99,6 +107,7 @@
                             </form>
                         </ul>
                     </li>
+                    <li class="nav-item"><a class="nav-link">Bienvenido, {{usuario.nombre}}</a></li>
                 {{/if}}
                 {{#if noInicioSesion}}
                     <li class="nav-item">
@@ -108,13 +117,7 @@
                         <a class="nav-link" aria-current="page" href="/crearCuenta">Registrarse</a>
                     </li>
                 {{/if}}
-
             </ul>
-            {{#if inicioSesion}}
-                <span class="navbar-text ms-auto">
-                    Bienvenido, {{usuario.nombre}}
-                </span>
-            {{/if}}
         </div>
     </div>
 </nav>

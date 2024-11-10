@@ -26,9 +26,17 @@ public abstract class BaseController {
         if (usuario != null) {
             model.put("inicioSesion", true);
             model.put("noInicioSesion", false);
+            if (usuario.getRol().equals(TipoRol.ADMIN)) {
+                model.put("esAdmin", true);
+            }else if (usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)) {
+                model.put("noEsAdmin",true);
+                model.put("esHumano", true);
+            }else if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
+                model.put("noEsAdmin",true);
+                model.put("esJuridico", true);
+            }
             return  usuario;
         } else {
-            // Si no está logueado, exceptúa las rutas de iniciar sesión y registrarse
             if (!validPaths.contains(ctx.path())) {
                 ctx.redirect("/iniciarSesion");
             }
@@ -57,12 +65,11 @@ public abstract class BaseController {
         verificarSesion(ctx, model);
         if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
             model.put("esJuridico", true);
-            System.out.println("es juridico");
+            model.put("noEsAdmin",true);
             return usuario;
 
         } else if (usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)) {
             model.put("esHumano", true);
-            System.out.println("es humano");
             return usuario;
         } else {
             model.put("inicioSesion", false);
@@ -78,6 +85,7 @@ public abstract class BaseController {
         verificarSesion(ctx, model);
         if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
             model.put("esJuridico", true);
+            model.put("noEsAdmin",true);
             return usuario;
         } else {
             model.put("inicioSesion", false);
@@ -92,6 +100,7 @@ public abstract class BaseController {
         verificarSesion(ctx, model);
         if (usuario.getRol().equals(TipoRol.ADMIN)) {
             model.put("esAdmin", true);
+            model.put("noEsAdmin",false);
             return usuario;
         } else {
             model.put("inicioSesion", false);

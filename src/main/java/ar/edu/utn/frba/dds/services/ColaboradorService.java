@@ -6,6 +6,7 @@ import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoUsuario;
 
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +24,13 @@ public class ColaboradorService {
                 cDTO.setID(String.valueOf(c.getId()));
                 cDTO.setNombreYApellido(c.getNombre() + " " + c.getApellido());
                 cDTO.setTipoColaborador(String.valueOf(c.getTipoPersona()));
-                cDTO.setFechaDeNacimiento(String.valueOf(c.getFechaDeNacimiento()));
-                cDTO.setRazonSocial(c.getRazonSocial());
-                cDTO.setJurisdiccion(String.valueOf(c.getTipoJuridiccion()));
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                cDTO.setFechaDeNacimiento(c.getFechaDeNacimiento() != null ?
+                        c.getFechaDeNacimiento().format(formatter) : "-");
+                cDTO.setNombreYApellido(c.getRazonSocial() != null ? c.getRazonSocial() : "-");
+                cDTO.setJurisdiccion(c.getTipoJuridiccion() != null ? String.valueOf(c.getTipoJuridiccion()) : "-");
+                cDTO.setDireccion(c.getDireccion() != null ? String.valueOf(c.obtenerDireccion()) : "-");
+                cDTO.setCorreoElectronico(c.getUsuario().getCorreoElectronico());
                 colaboradorDTOS.add(cDTO);
             }
         }

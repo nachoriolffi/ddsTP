@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.dtos.OfertaDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Rubro;
+import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoOferta;
@@ -12,10 +13,8 @@ import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 import io.javalin.http.UploadedFile;
 import io.javalin.util.FileUtil;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+
+import java.util.*;
 
 public class OfertaController extends BaseController implements ICrudViewsHandler {
 
@@ -33,7 +32,7 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
             switch (usuario.getRol()) {
                 case ADMIN:
                     verificarAdmin(ctx, model);
-                    model.put("darDeBajaOferta",true);
+                    model.put("darDeBajaOferta", true);
                     break;
                 case COLABORADOR_HUMANO:
                     verificarHumano(ctx, model);
@@ -62,7 +61,7 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
         OfertaDTO ofertaDTO = new OfertaDTO();
         ofertaDTO.setId(Long.valueOf(context.formParam("idProducto")));
         ofertaDTO.setPuntos(Long.valueOf(context.formParam("puntosNecesarios")));
-        ofertaService.canjearOferta(idUsuario,ofertaDTO);
+        ofertaService.canjearOferta(idUsuario, ofertaDTO);
         context.redirect("/canjeProductos");
     }
 
@@ -114,6 +113,27 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
         context.redirect("/canjeProductos");
     }
 
+
+    public void verMisOfertas(Context ctx) {
+        Map<String, Object> model = new HashMap<>();
+        try {
+            Usuario usuario = verificarSesion(ctx, model);
+            Colaborador colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
+            List<Oferta> ofertas;
+            if (Objects.requireNonNull(usuario.getRol()) == TipoRol.COLABORADOR_HUMANO) {
+                verificarHumano(ctx, model);
+                Double puntos = colaborador.puntosActualesDisponibles();
+                model.put("PuntosTotales", puntos);
+            }
+            ofertas = colaborador.getOfertasRegistradas();
+            model.put("ofertas", ofertas);
+            model.put("title", "Ofertas Canjeadas");
+            ctx.render("ofertas/ofertasCanjeadasColaborador.hbs", model);
+        } catch (Exception e) {
+            ctx.redirect("/iniciarSesion");
+        }
+    }
+
     @Override
     public void delete(Context context) {
 
@@ -140,4 +160,5 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
     public void update(Context context) {
 
     }
+
 }

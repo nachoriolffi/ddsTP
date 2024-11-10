@@ -5,6 +5,8 @@ import ar.edu.utn.frba.dds.dtos.PreguntaDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.TipoColaboracion;
+import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
+import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Cuestionario;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.CuestionarioRespondido;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
@@ -70,8 +72,9 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
         for (String forma : formasDeColaboracion) {
             colaborador.agregarFormaColaboracion(TipoColaboracion.valueOf(forma));
         }
-
+        
         RepoColaborador.INSTANCE.agregar(colaborador);
+
 
         if(colaborador.getFormasDeColaboracion().contains(TipoColaboracion.DONACION_VIANDAS) || colaborador.getFormasDeColaboracion().contains(TipoColaboracion.REDISTRIBUCION_VIANDAS)){
             Tarjeta tarjeta = new Tarjeta();
@@ -80,7 +83,7 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
             RepoTarjeta.INSTANCE.agregar(tarjeta);
         }
 
-
+        context.redirect("/iniciarSesion");
     }
 
 

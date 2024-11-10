@@ -4,7 +4,7 @@
         <div class="row">
             <figure class="col-md-4 figure">
                 <img class="figure-img img-fluid rounded mx-auto d-none d-md-block"
-                     src="/public/img/colaborador_humano.svg" alt="Imagen colaborador">
+                     src="/img/colaborador_humano.svg" alt="Imagen colaborador">
             </figure>
             <div class="col-md-7">
                 <h1 class="h1">Registrar Colaborador Humano</h1>
@@ -41,14 +41,14 @@
 
                     {{#each preguntas.STRING}}
                         <div class="form-group">
-                            <label for="pregunta-{{id}}">{{nombre}}</label>
+                            <label for="pregunta-{{id}}">{{descripcionPregunta}}</label>
                             <input type="text" class="form-control" id="pregunta-{{id}}" name="respuesta-{{id}}" required="{{esObligatoria}}">
                         </div>
                     {{/each}}
 
                     {{#each preguntas.FECHA}}
                         <div class="form-group">
-                            <label for="pregunta-{{id}}">{{nombre}}</label>
+                            <label for="pregunta-{{id}}">{{descripcionPregunta}}</label>
                             <input type="date" class="form-control" id="pregunta-{{id}}" name="fecha-{{id}}" required="{{esObligatoria}}">
                         </div>
                     {{/each}}
@@ -65,7 +65,6 @@
                             <option value="" disabled selected>Seleccion una opción</option>
                         </select>
                     </div>
-
                     <h4 class="h4">Ingrese al menos un Medio de Contacto</h4>
                     <hr class="d-none d-md-block">
                     <div class="col-lg-6 col-md-12">
@@ -76,6 +75,21 @@
                         <label class="form-label" for="correo">Correo Electrónico</label>
                         <input class="form-control" type="email" id="correo" name="correo" >
                     </div>
+
+                    <div class="col-lg-12 col-md-12">
+                        <label for="whatsapp">
+                            <input type="checkbox" id="whatsapp" name="medios-contacto" value="whatsapp">
+                            WhatsApp
+                        </label>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12">
+                        <label for="telegram">
+                            <input type="checkbox" id="telegram" name="medios-contacto" value="telegram">
+                            Telegram
+                        </label>
+                    </div>
+
                     <h4 class="h4">Formas de Colaboración</h4>
                     <hr class="d-none d-md-block">
                     {{#each formasDeColaboracion}}
@@ -87,7 +101,7 @@
                         </div>
                     {{/each}}
 
-                    <div class="col-12 text-end">
+                    <div class="col-12 text-end mb-3">
                         <button class="btn btn-outline-primary" type="submit">¡Registrarse!</button>
                     </div>
                 </form>

@@ -13,4 +13,5 @@ public class ColaboradorDTO {
     private String razonSocial;
     private String jurisdiccion;
     private String direccion;
+    private String correoElectronico;
 }

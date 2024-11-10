@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.utils;
 
+import ar.edu.utn.frba.dds.models.entities.colaborador.TipoJuridiccion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.*;
 import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
@@ -10,6 +11,7 @@ import ar.edu.utn.frba.dds.models.entities.cuestionario.Opcion;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.TipoPregunta;
 import ar.edu.utn.frba.dds.models.entities.exportadorPDF.DocumentoFallasHeladera;
+import ar.edu.utn.frba.dds.models.entities.generadorCodigo.GeneradorDeCodigo;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
@@ -23,18 +25,15 @@ import ar.edu.utn.frba.dds.models.entities.heladera.alerta.registro.RegistroTemp
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.*;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDate;
+import java.util.*;
 
 public class Init implements WithSimplePersistenceUnit {
 
@@ -49,22 +48,6 @@ public class Init implements WithSimplePersistenceUnit {
         Coordenada coordenada = new Coordenada(-34.598630, -58.419962);
         repoCoordenada.agregar(coordenada);
 
-        ModeloHeladera modeloPDF = new ModeloHeladera();
-        modeloPDF.setTemperaturaMinima(3.0);
-        modeloPDF.setTemperaturaMaxima(15.0);
-        modeloPDF.setPeso(200.0);
-        modeloPDF.setCantidadMaximaDeViandas(500);
-        modeloPDF.setNombreModelo("Modelo PDF");
-        repoModelo.agregar(modeloPDF);
-
-        Heladera heladeraPDF = new Heladera();
-        heladeraPDF.setModelo(modeloPDF);
-        heladeraPDF.setEstaActiva(true);
-        heladeraPDF.setViandasDisponibles(0);
-        heladeraPDF.setFechaPuestaFunc(new Date());
-         heladeraPDF.setNombre("Heladera PDF");
-        heladeraPDF.setCoordenada(coordenada);
-        repoHeladera.agregar(heladeraPDF);
 
         Vianda viandaPDF = new Vianda();
         viandaPDF.setFueEntregada(true);
@@ -226,16 +209,6 @@ public class Init implements WithSimplePersistenceUnit {
 // Persistir el cuestionario
         //RepoCuestionario.INSTANCE.agregar(cuestionario);
 
-        Usuario usuario = new Usuario();
-        usuario.setCorreoElectronico("iriolffi@gmail.com");
-        usuario.setRol(TipoRol.ADMIN);
-        usuario.setContrasenia("1234");
-        usuario.setCuentaEliminada(false);
-        Usuario usuario2 = new Usuario();
-        usuario2.setCorreoElectronico("nacho2@gmail.com");
-        usuario2.setRol(TipoRol.COLABORADOR_HUMANO);
-        usuario2.setContrasenia("1234");
-
         Colaborador colaborador = new Colaborador();
         colaborador.setNombre("Ignacio Joaquin");
         colaborador.setApellido("Riolffi");
@@ -260,60 +233,64 @@ public class Init implements WithSimplePersistenceUnit {
         RepoTarjeta.INSTANCE.agregar(tarjeta);
         RepoTarjeta.INSTANCE.agregar(tarjeta2);
 */
+        /*--------------MODELOS--------------*/
 
-        //----------------------------------------------
+        RepoModelo repoModelo = new RepoModelo();
 
-        RepoCoordenada repoCoordenada = new RepoCoordenada();
-        Coordenada coordenada = new Coordenada(-34.598630, -58.419962);
-        Direccion direccion = new Direccion();
-        direccion.setAltura(951);
-        //repoCoordenada.agregar(coordenada);
+        ModeloHeladera modeloHeladera1 = new ModeloHeladera();
+        modeloHeladera1.setNombreModelo("Heladera Industrial X500");
+        modeloHeladera1.setPeso(90D);
+        modeloHeladera1.setCantidadMaximaDeViandas(100);
+        modeloHeladera1.setTemperaturaMaxima(10D);
+        modeloHeladera1.setTemperaturaMinima(-18D);
+        repoModelo.agregar(modeloHeladera1);
 
-        RepoHeladeras repoHeladeras = RepoHeladeras.INSTANCE;
-        Heladera heladera1 = new Heladera();
-        heladera1.setNombre("UTN MEDRANO");
-        heladera1.setCoordenada(coordenada);
-        //heladera1.setDireccion(direccion);
-        heladera1.setFechaPuestaFunc(new Date());
-        heladera1.setEstaActiva(Boolean.TRUE);
+        ModeloHeladera modeloHeladera2 = new ModeloHeladera();
+        modeloHeladera2.setNombreModelo("Heladera Comercial C300");
+        modeloHeladera2.setPeso(80D);
+        modeloHeladera2.setCantidadMaximaDeViandas(60);
+        modeloHeladera2.setTemperaturaMaxima(7D);
+        modeloHeladera2.setTemperaturaMinima(-12D);
+        repoModelo.agregar(modeloHeladera2);
 
-        Colaborador colaborador1 = new Colaborador();
-        colaborador1.setNombre("Pepito");
-        colaborador1.setApellido("Perez");
-        colaborador1.setTipoDocumento(TipoDocumento.DNI);
-        colaborador1.setNumeroDocumento(32458652);
-        colaborador1.setTipoPersona(TipoPersona.HUMANA);
+        ModeloHeladera modeloHeladera3 = new ModeloHeladera();
+        modeloHeladera3.setNombreModelo("Heladera de Oficina MiniCool");
+        modeloHeladera3.setPeso(40D);
+        modeloHeladera3.setCantidadMaximaDeViandas(30);
+        modeloHeladera3.setTemperaturaMaxima(8D);
+        modeloHeladera3.setTemperaturaMinima(-5D);
+        repoModelo.agregar(modeloHeladera3);
 
-        //RepoColaborador.INSTANCE.agregar(colaborador1);
-        Vianda vianda = new Vianda();
-        vianda.setComida("qweqwe");
-        vianda.setFechaCaducidad(new Date(2021, 10, 24));
-        vianda.setFechaDonacion(new Date());
+        ModeloHeladera modeloHeladera4 = new ModeloHeladera();
+        modeloHeladera4.setNombreModelo("Heladera Portátil VíaFresh");
+        modeloHeladera4.setPeso(15D);
+        modeloHeladera4.setCantidadMaximaDeViandas(20);
+        modeloHeladera4.setTemperaturaMaxima(6D);
+        modeloHeladera4.setTemperaturaMinima(-10D);
+        repoModelo.agregar(modeloHeladera4);
 
-        // RepoColaborador.INSTANCE.agregar(colaborador1);
-        vianda.setColaborador(colaborador1);
-        vianda.setCalorias(500.0);
-        vianda.setPeso(200.0);
-        vianda.setFueEntregada(false);
-        vianda.setHeladera(heladera1);
+        ModeloHeladera modeloHeladera5 = new ModeloHeladera();
+        modeloHeladera5.setNombreModelo("Heladera Doméstica EcoCool 250");
+        modeloHeladera5.setPeso(55D);
+        modeloHeladera5.setCantidadMaximaDeViandas(40);
+        modeloHeladera5.setTemperaturaMaxima(5D);
+        modeloHeladera5.setTemperaturaMinima(-15D);
+        repoModelo.agregar(modeloHeladera5);
 
-        //RepoViandas.INSTANCE.agregar(vianda);
+        ModeloHeladera modeloHeladera6 = new ModeloHeladera();
+        modeloHeladera6.setNombreModelo("Congeladora Vertical FrostMaster");
+        modeloHeladera6.setPeso(120D);
+        modeloHeladera6.setCantidadMaximaDeViandas(120);
+        modeloHeladera6.setTemperaturaMaxima(-10D);
+        modeloHeladera6.setTemperaturaMinima(-25D);
+        repoModelo.agregar(modeloHeladera6);
 
         /*--------------HELADERAS--------------*/
 
         RepoHeladeras repoHeladera = RepoHeladeras.INSTANCE;
 
-
         /*--------------USUARIOS--------------*/
 
-        //repoHeladeras.agregar(heladera2);
-/*
-        Usuario usuario = new Usuario();
-        usuario.setNombre("Ignacio Riolffi");
-        usuario.setRol(TipoRol.ADMIN);
-        usuario.setContrasenia("1234");
-        usuario.setCorreoElectronico("nacho@gmail.com");
-*/
         RepoUsuario repoUsuario = RepoUsuario.INSTANCE;
 
         // ADMIN
@@ -323,11 +300,86 @@ public class Init implements WithSimplePersistenceUnit {
         usuarioAdmin.setCuentaEliminada(false);
         usuarioAdmin.setCorreoElectronico("iriolffi@gmail.com");
         usuarioAdmin.setRol(TipoRol.ADMIN);
-        //repoUsuario.agregar(usuarioAdmin);
+        repoUsuario.agregar(usuarioAdmin);
+
+        // HUMANO
+        Usuario usuarioHumano = new Usuario();
+        usuarioHumano.setNombre("Ignacio Joaquin Riolffi");
+        usuarioHumano.setContrasenia("1234");
+        usuarioHumano.setCuentaEliminada(false);
+        usuarioHumano.setCorreoElectronico("nacho@gmail.com");
+        usuarioHumano.setRol(TipoRol.COLABORADOR_HUMANO);
+        repoUsuario.agregar(usuarioHumano);
+
+        // JURIDICO
+        Usuario usuarioJuridico = new Usuario();
+        usuarioJuridico.setNombre("Taylor Alison Swift");
+        usuarioJuridico.setContrasenia("1234");
+        usuarioJuridico.setCuentaEliminada(false);
+        usuarioJuridico.setCorreoElectronico("ts@gmail.com");
+        usuarioJuridico.setRol(TipoRol.COLABORADOR_JURIDICO);
+        repoUsuario.agregar(usuarioJuridico);
+
+        /*--------------TARJETAS--------------*/
+
+        RepoTarjeta repoTarjeta = new RepoTarjeta();
+        for (int i = 0; i < 200; i++) {
+            Tarjeta tarjeta = new Tarjeta();
+            tarjeta.setCodigo(GeneradorDeCodigo.getInstance().generarCodigoUnico());
+            repoTarjeta.agregar(tarjeta);
+        }
+
+        /*--------------COLABORADORES--------------*/
+
+        // COLABORADOR HUMANO
+        List<TipoColaboracion> formaDeColaboraciones = new ArrayList<>();
+        formaDeColaboraciones.add(TipoColaboracion.DONACION_VIANDAS);
+        formaDeColaboraciones.add(TipoColaboracion.DINERO);
+        formaDeColaboraciones.add(TipoColaboracion.REDISTRIBUCION_VIANDAS);
+        formaDeColaboraciones.add(TipoColaboracion.ENTREGA_TARJETAS);
+        usuarioHumano = repoUsuario.buscar(2L);
+        Colaborador colaboradorHumano = new Colaborador();
+        colaboradorHumano.setNombre("Ignacio Joaquin");
+        colaboradorHumano.setApellido("Riolffi");
+        colaboradorHumano.setUsuario(usuarioHumano);
+        colaboradorHumano.setTipoPersona(TipoPersona.HUMANA);
+        colaboradorHumano.setFechaDeNacimiento(LocalDate.now());
+        colaboradorHumano.setFormasDeColaboracion(formaDeColaboraciones);
+        colaboradorHumano.setFueCargaMasiva(false);
+        RepoColaborador.INSTANCE.agregar(colaboradorHumano);
+        // Asigno Tarjetas al colaborador para registrar vulnerables
+        List<Tarjeta> tarjetas = repoTarjeta.buscarTodos();
+        for (int i = 0; i < 10; i++) {
+            Tarjeta tarjeta = tarjetas.get(i);
+            if (tarjeta.getColaboradorAsignador() == null) {
+                tarjeta.setColaboradorAsignador(colaboradorHumano);
+                repoTarjeta.modificar(tarjeta);
+            }
+        }
+        // Asigno tarjeta al colaborador para que pueda realizar donaciones y distribuciones
+        for (Tarjeta tarjeta : tarjetas) {
+            if (tarjeta.getColaboradorAsignador() == null && tarjeta.getColaboradorAsociado() == null) {
+                tarjeta.setColaboradorAsociado(colaboradorHumano);
+                repoTarjeta.modificar(tarjeta);
+                break;
+            }
+        }
+
+        // COLABORADOR JURIDICO
+        usuarioJuridico = repoUsuario.buscar(3L);
+        Colaborador colaboradorJuridico = new Colaborador();
+        colaboradorJuridico.setRazonSocial("Taylor Nation");
+        colaboradorJuridico.setUsuario(usuarioJuridico);
+        colaboradorJuridico.setTipoPersona(TipoPersona.JURIDICA);
+        colaboradorJuridico.setFueCargaMasiva(false);
+        colaboradorJuridico.setTipoJuridiccion(TipoJuridiccion.EMPRESA);
+        List<TipoColaboracion> formasColaboracion = new ArrayList<>();
+        formasColaboracion.add(TipoColaboracion.HACERSE_CARGO_HELADERA);
+        formasColaboracion.add(TipoColaboracion.DINERO);
+        colaboradorJuridico.setFormasDeColaboracion(formasColaboracion);
+        RepoColaborador.INSTANCE.agregar(colaboradorJuridico);
 
         /*--------------CUESTIONARIOS--------------*/
-        //repoUsuario.agregar(usuario);
-        Cuestionario cuestionario = new Cuestionario();
 
         RepoPregunta repoPregunta = RepoPregunta.INSTANCE;
         RepoCuestionario repoCuestionario = RepoCuestionario.INSTANCE;
@@ -361,11 +413,10 @@ public class Init implements WithSimplePersistenceUnit {
         repoPregunta.agregar(preguntaTipoRazon);
 
 
-
-        opcionGubernamental.setPregunta(preguntaRazonSocial);
+        opcionGubernamental.setPregunta(preguntaTipoRazon);
         opcionONG.setPregunta(preguntaTipoRazon);
         opcionEmpresa.setPregunta(preguntaTipoRazon);
-        opcionInstitucion.setPregunta(preguntaRazonSocial);
+        opcionInstitucion.setPregunta(preguntaTipoRazon);
 
         preguntaTipoRazon.getOpciones().add(opcionGubernamental);
         preguntaTipoRazon.getOpciones().add(opcionONG);
@@ -390,6 +441,37 @@ public class Init implements WithSimplePersistenceUnit {
         repoCuestionario.agregar(cuestionarioJuridico);
 
         //HUMANO
+
+        Cuestionario cuestionarioHumano = new Cuestionario();
+        cuestionarioHumano.setNombreCuestionario("Cuestionario Humano");
+        cuestionarioHumano.setDescripcion("Este es el cuestionario para registrar colaboradores humanos");
+
+        Pregunta preguntaNombre = new Pregunta();
+        preguntaNombre.setEsObligatoria(true);
+        preguntaNombre.setNombre("nombre");
+        preguntaNombre.setTipoPregunta(TipoPregunta.STRING);
+        preguntaNombre.setDescripcionPregunta("Ingrese su nombre");
+
+        Pregunta preguntaApellido = new Pregunta();
+        preguntaApellido.setEsObligatoria(true);
+        preguntaApellido.setNombre("apellido");
+        preguntaApellido.setTipoPregunta(TipoPregunta.STRING);
+        preguntaApellido.setDescripcionPregunta("Ingrese su Apellido");
+
+        RepoPregunta.INSTANCE.agregar(preguntaNombre);
+        ;
+        RepoPregunta.INSTANCE.agregar(preguntaApellido);
+        cuestionarioHumano.agregarPregunta(preguntaNombre);
+        cuestionarioHumano.agregarPregunta(preguntaApellido);
+
+        Pregunta fechaPregunta = new Pregunta();
+        fechaPregunta.setNombre("fechaDeNacimiento");
+        fechaPregunta.setDescripcionPregunta("Ingrese su fecha de nacimiento");
+        fechaPregunta.setTipoPregunta(TipoPregunta.FECHA);
+        RepoPregunta.INSTANCE.agregar(fechaPregunta);
+        cuestionarioHumano.agregarPregunta(fechaPregunta);
+
+        RepoCuestionario.INSTANCE.agregar(cuestionarioHumano);
 
 
         Cuestionario cuestionario1 = new Cuestionario();
@@ -422,24 +504,26 @@ public class Init implements WithSimplePersistenceUnit {
         RepoOpcion.INSTANCE.agregar(opcion2);
         RepoOpcion.INSTANCE.agregar(opcion3);
         cuestionario1.agregarPregunta(multipleChoicePregunta);
-        Pregunta fechaPregunta = new Pregunta();
+        // Pregunta fechaPregunta = new Pregunta();
         fechaPregunta.setNombre("fechaDeNacimiento");
         fechaPregunta.setDescripcionPregunta("Ingrese su fecha de nacimiento");
         fechaPregunta.setTipoPregunta(TipoPregunta.FECHA);
         RepoPregunta.INSTANCE.agregar(fechaPregunta);
         cuestionario1.agregarPregunta(fechaPregunta);
         RepoCuestionario.INSTANCE.agregar(cuestionario1);
-
+    }
+}
 
         //Colaborador colaborador = new Colaborador();
         //colaborador.setNombre("Ignacio Joaquin");
         //colaborador.setApellido("Riolffi");
         //usuario1.setNombre(colaborador.getNombre() + " " + colaborador.getApellido());
 // Agregar pregunta de tipo fecha al cuestionario
-       // cuestionario.agregarPregunta(fechaPregunta);
-// Persistir el cuestionario
-       // RepoCuestionario.INSTANCE.agregar(cuestionario);
 
+        //cuestionario.agregarPregunta(fechaPregunta);
+// Persistir el cuestionario
+/*
+>>>>>>> 2c3a42bc261e4347efd8604f1f1e28eba9d72267
         Usuario usuario1 = new Usuario();
         usuario1.setCorreoElectronico("iriolffi@gmail.com");
         usuario1.setRol(TipoRol.ADMIN);
@@ -641,6 +725,3 @@ public class Init implements WithSimplePersistenceUnit {
         distribucionVianda.setColaborador(colaborador3);
         RepoDistribucionVianda.INSTANCE.agregar(distribucionVianda);
     }
-
-
-}

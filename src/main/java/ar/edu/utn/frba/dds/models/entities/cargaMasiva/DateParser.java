@@ -1,4 +1,4 @@
-package ar.edu.utn.frba.dds.models.entities.lectorCSV;
+package ar.edu.utn.frba.dds.models.entities.cargaMasiva;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

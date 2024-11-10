@@ -6,41 +6,30 @@ import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DistribucionV
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.MotivoDistribucion;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
+import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoDistribucionVianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
+import ar.edu.utn.frba.dds.services.DistribuirViandasService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
+
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.text.ParseException;
 
 public class DistribuirViandasController extends BaseController implements ICrudViewsHandler {
+
+    DistribuirViandasService distribuirViandasService = new DistribuirViandasService();
+
     @Override
     public void index(Context context) {
 
         Map<String, Object> model = new HashMap<>();
         Usuario usuario = verificarHumano(context, model);
-        List<Heladera> heladeras = RepoHeladeras.INSTANCE.buscarTodos();
-        Colaborador colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
-        List<DistribucionVianda> distribuciones = colaborador.getColaboracionesRealizadas().stream()
-                .filter(c -> c instanceof DistribucionVianda)
-                .map(c -> (DistribucionVianda) c)
-                .toList();
-
-        List<DistribucionViandaOutputDTO> distribucionViandaOutputDTOS = new ArrayList<>();
-        for (DistribucionVianda distribucion : distribuciones) {
-            DistribucionViandaOutputDTO distribucionViandaOutputDTO = new DistribucionViandaOutputDTO();
-            distribucionViandaOutputDTO.setViandasMovidas(String.valueOf(distribucion.getCantidadViandas()));
-            distribucionViandaOutputDTO.setMotivo(distribucion.getMotivo().toString());
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            distribucionViandaOutputDTO.setFechaDistribucion(sdf.format(distribucion.getFechaDistribucion()));
-            distribucionViandaOutputDTO.setHeladeraOrigen(distribucion.getHeladeraOrigen().getNombre());
-            distribucionViandaOutputDTO.setHeladeraDestino(distribucion.getHeladeraDestino().getNombre());
-            distribucionViandaOutputDTOS.add(distribucionViandaOutputDTO);
-
-        }
+        List<Heladera> heladeras = distribuirViandasService.buscarHeladeras();
+        List<DistribucionViandaOutputDTO> distribucionViandaOutputDTOS = distribuirViandasService.buscarDistribucionesVianda(usuario);
         model.put("heladeras", heladeras);
         model.put("distribuciones", distribucionViandaOutputDTOS);
         model.put("title", "Distribuir Viandas");
@@ -72,10 +61,13 @@ public class DistribuirViandasController extends BaseController implements ICrud
         colaborador.agregarColaboracionRealizada(distribucionVianda);
         RepoColaborador.INSTANCE.modificar(colaborador);
 
-        //Lo siguiente se haría cuando el colaborador asista personalmente a realizar la distribución:
-        //Habría que quitar las viandas de la heladera A segun la cantidad y agregarlas a la heladera B
-        //Despues hay que hacer un update o modificar
         context.redirect("/distribuirViandas");
+    }
+
+    public void obtenerViandasOrigen(Context context){
+        long heladeraId = Long.parseLong(context.queryParam("heladeraId"));
+        List<Vianda> viandasHeladeraOrigen = distribuirViandasService.buscarViandas(heladeraId);
+        context.json(viandasHeladeraOrigen);  // Retorna las viandas como respuesta JSON
     }
 
     @Override
