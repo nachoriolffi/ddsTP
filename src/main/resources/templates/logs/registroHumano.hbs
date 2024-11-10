@@ -41,14 +41,14 @@
 
                     {{#each preguntas.STRING}}
                         <div class="form-group">
-                            <label for="pregunta-{{id}}">{{nombre}}</label>
+                            <label for="pregunta-{{id}}">{{descripcionPregunta}}</label>
                             <input type="text" class="form-control" id="pregunta-{{id}}" name="respuesta-{{id}}" required="{{esObligatoria}}">
                         </div>
                     {{/each}}
 
                     {{#each preguntas.FECHA}}
                         <div class="form-group">
-                            <label for="pregunta-{{id}}">{{nombre}}</label>
+                            <label for="pregunta-{{id}}">{{descripcionPregunta}}</label>
                             <input type="date" class="form-control" id="pregunta-{{id}}" name="fecha-{{id}}" required="{{esObligatoria}}">
                         </div>
                     {{/each}}
@@ -75,6 +75,21 @@
                         <label class="form-label" for="correo">Correo Electrónico</label>
                         <input class="form-control" type="email" id="correo" name="correo" >
                     </div>
+
+                    <div class="col-lg-12 col-md-12">
+                        <label for="whatsapp">
+                            <input type="checkbox" id="whatsapp" name="medios-contacto" value="whatsapp">
+                            WhatsApp
+                        </label>
+                    </div>
+
+                    <div class="col-lg-12 col-md-12">
+                        <label for="telegram">
+                            <input type="checkbox" id="telegram" name="medios-contacto" value="telegram">
+                            Telegram
+                        </label>
+                    </div>
+
                     <h4 class="h4">Formas de Colaboración</h4>
                     <hr class="d-none d-md-block">
                     {{#each formasDeColaboracion}}

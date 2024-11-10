@@ -5,6 +5,8 @@ import ar.edu.utn.frba.dds.dtos.PreguntaDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.TipoColaboracion;
+import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
+import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Cuestionario;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.CuestionarioRespondido;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
@@ -71,6 +73,32 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
             colaborador.agregarFormaColaboracion(TipoColaboracion.valueOf(forma));
         }
 
+        String telefono = context.formParam("telefono");
+        String correo = context.formParam("correo");
+        List<Contacto> contacto = new ArrayList<>();
+
+        List<String> mediosContacto = context.formParams("medios-contacto");
+        // Verificar si se seleccionaron "WhatsApp" o "Telegram"
+        boolean seleccionoWhatsApp = mediosContacto.contains("whatsapp");
+        boolean seleccionoTelegram = mediosContacto.contains("telegram");
+
+
+        if (telefono != null && !telefono.isEmpty()) {
+            /*if (seleccionoWhatsApp) {
+                Contacto contactoWhatsApp = new Contacto(TipoContacto.WPP, telefono);
+                contacto.add(contactoWhatsApp);
+            }*/ // lo dejo comentado para no enviar todavía notificaciones por whatsapp y no gastar recursos
+            if (seleccionoTelegram) {
+                Contacto contactoTelegram = new Contacto(TipoContacto.TELEGRAM, telefono);
+                contacto.add(contactoTelegram);
+            }
+        }
+        if (correo != null && !correo.isEmpty()) {
+            Contacto contactoCorreo = new Contacto(TipoContacto.MAIL, correo);
+            contacto.add(contactoCorreo);
+        }
+        colaborador.setContacto(contacto);
+
         RepoColaborador.INSTANCE.agregar(colaborador); // lo pongo antes porque para persistir la tarjeta el colabordor ya debe estar persistido
 
         if(colaborador.getFormasDeColaboracion().contains(TipoColaboracion.DONACION_VIANDAS) || colaborador.getFormasDeColaboracion().contains(TipoColaboracion.REDISTRIBUCION_VIANDAS)){
@@ -80,7 +108,7 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
             RepoTarjeta.INSTANCE.agregar(tarjeta);
         }
 
-
+        context.redirect("/iniciarSesion");
     }
 
 

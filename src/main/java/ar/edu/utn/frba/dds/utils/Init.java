@@ -411,10 +411,10 @@ public class Init implements WithSimplePersistenceUnit {
         Opcion opcionEmpresa = new Opcion("Empresa");
         Opcion opcionInstitucion = new Opcion("Institucion");
 
-        opcionGubernamental.setPregunta(preguntaRazonSocial);
+        opcionGubernamental.setPregunta(preguntaTipoRazon);
         opcionONG.setPregunta(preguntaTipoRazon);
         opcionEmpresa.setPregunta(preguntaTipoRazon);
-        opcionInstitucion.setPregunta(preguntaRazonSocial);
+        opcionInstitucion.setPregunta(preguntaTipoRazon);
 
         preguntaTipoRazon.getOpciones().add(opcionGubernamental);
         preguntaTipoRazon.getOpciones().add(opcionONG);
