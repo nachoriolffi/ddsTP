@@ -446,15 +446,29 @@ public class Init implements WithSimplePersistenceUnit {
 
         Pregunta preguntaNombre = new Pregunta();
         preguntaNombre.setEsObligatoria(true);
-        preguntaNombre.setNombre("Nombre");
+        preguntaNombre.setNombre("nombre");
         preguntaNombre.setTipoPregunta(TipoPregunta.STRING);
         preguntaNombre.setDescripcionPregunta("Ingrese su nombre");
 
         Pregunta preguntaApellido = new Pregunta();
         preguntaApellido.setEsObligatoria(true);
-        preguntaApellido.setNombre("Apellido");
+        preguntaApellido.setNombre("apellido");
         preguntaApellido.setTipoPregunta(TipoPregunta.STRING);
         preguntaApellido.setDescripcionPregunta("Ingrese su Apellido");
+
+        RepoPregunta.INSTANCE.agregar(preguntaNombre);        ;
+        RepoPregunta.INSTANCE.agregar(preguntaApellido);
+        cuestionarioHumano.agregarPregunta(preguntaNombre);
+        cuestionarioHumano.agregarPregunta(preguntaApellido);
+
+        Pregunta fechaPregunta = new Pregunta();
+        fechaPregunta.setNombre("fechaDeNacimiento");
+        fechaPregunta.setDescripcionPregunta("Ingrese su fecha de nacimiento");
+        fechaPregunta.setTipoPregunta(TipoPregunta.FECHA);
+        RepoPregunta.INSTANCE.agregar(fechaPregunta);
+        cuestionarioHumano.agregarPregunta(fechaPregunta);
+
+        RepoCuestionario.INSTANCE.agregar(cuestionarioHumano);
 
         //Cuestionario cuestionario = new Cuestionario();
         //Pregunta nombrePregunta = new Pregunta();
@@ -492,7 +506,7 @@ public class Init implements WithSimplePersistenceUnit {
         //fechaPregunta.setTipoPregunta(TipoPregunta.FECHA);
         //RepoPregunta.INSTANCE.agregar(fechaPregunta);
         //cuestionario.agregarPregunta(fechaPregunta);
-        //RepoCuestionario.INSTANCE.agregar(cuestionario);
+
 
 
         //Colaborador colaborador = new Colaborador();

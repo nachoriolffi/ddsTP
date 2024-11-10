@@ -32,7 +32,7 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
             return;
         }
         try {
-            Cuestionario cuestionario = RepoCuestionario.INSTANCE.buscar(1L);
+            Cuestionario cuestionario = RepoCuestionario.INSTANCE.buscar(2L);
             if (cuestionario == null) {
                 context.status(404).result("Cuestionario no encontrado");
             }
@@ -71,6 +71,8 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
             colaborador.agregarFormaColaboracion(TipoColaboracion.valueOf(forma));
         }
 
+        RepoColaborador.INSTANCE.agregar(colaborador); // lo pongo antes porque para persistir la tarjeta el colabordor ya debe estar persistido
+
         if(colaborador.getFormasDeColaboracion().contains(TipoColaboracion.DONACION_VIANDAS) || colaborador.getFormasDeColaboracion().contains(TipoColaboracion.REDISTRIBUCION_VIANDAS)){
             Tarjeta tarjeta = new Tarjeta();
             tarjeta.setColaboradorAsignador(colaborador);
@@ -78,7 +80,7 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
             RepoTarjeta.INSTANCE.agregar(tarjeta);
         }
 
-        RepoColaborador.INSTANCE.agregar(colaborador);
+
     }
 
 
