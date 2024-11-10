@@ -38,6 +38,7 @@
                                 {{#if esJuridico}}
                                     <li><a class="dropdown-item" href="/encargarseHeladera">Encargarse de Heladera</a>
                                     </li>
+
                                 {{/if}}
                                 {{#if esHumano}}
                                     <li><a class="dropdown-item" href="/donarViandas">Donar Viandas</a></li>
@@ -77,6 +78,17 @@
                         </li>
 
                     {{/if}}
+
+                    {{#if esJuridico}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                               aria-expanded="false">Herramientas</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/servicioUbicacion">Solicitar Puntos Colocacion</a></li>
+                            </ul>
+                        </li>
+                    {{/if}}
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                            aria-expanded="false">Mi Perfil</a>

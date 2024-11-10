@@ -90,7 +90,7 @@ public class Router {
         app.post("/misHeladeras", Objects.requireNonNull(ServiceLocator.instanceOf(MisHeladerasController.class))::save);
 
         app.get("/registroJuridico", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroJuridicoController.class))::index);
-        app.post("/registroJuridico", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroJuridicoController.class))::save);
+        app.post("/registroJuridico", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroJuridicoController.class))::create);
 
         app.get("/registroHumano", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroHumanoController.class))::index);
         app.post("/registroHumano", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroHumanoController.class))::create);
@@ -116,6 +116,7 @@ public class Router {
         app.get("/verColaboradores", Objects.requireNonNull(ServiceLocator.instanceOf(ColaboradorController.class))::index);
 
         app.get("/servicioUbicacion", Objects.requireNonNull(ServiceLocator.instanceOf(ServicioPuntoDonacionController.class))::index);
+        app.post("/puntosRecomendadosServicio", Objects.requireNonNull(ServiceLocator.instanceOf(ServicioPuntoDonacionController.class))::show);
     }
 
 }

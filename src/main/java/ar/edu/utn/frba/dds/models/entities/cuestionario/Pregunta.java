@@ -50,4 +50,8 @@ public class Pregunta {
     public String getTipoPregunta() {
         return tipoPregunta.toString();
     }
+
+    public void agregarOpcion(Opcion opcion){
+        this.opciones.add(opcion);
+    }
 }

@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.controllers;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoJuridiccion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
+import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.TipoColaboracion;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Cuestionario;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Calle;
@@ -45,7 +46,10 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
             Map<String, List<Pregunta>> categorizedQuestions = cuestionario.getPreguntas().stream()
                     .collect(Collectors.groupingBy(Pregunta::getTipoPregunta));
 
+            List<TipoColaboracion> formasDeColaboracion = Arrays.asList(TipoColaboracion.values());
+
             Map<String, Object> model = new HashMap<>();
+            model.put("formasDeColaboracion", formasDeColaboracion);
             model.put("title", "Registro Juridico");
             model.put("usuario", nuevoUsuario);
             model.put("cuestionario", cuestionario);
@@ -144,6 +148,15 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
 
     @Override
     public void create(Context context) {
+        RegistroHumanoService registroHumanosService = new RegistroHumanoService();
+        Colaborador colaborador = registroHumanosService.processAndSaveResponses(context);
+        colaborador.setTipoPersona(TipoPersona.JURIDICA);
 
+        String[] formasDeColaboracion = context.formParams("colaboraciones").toArray(new String[0]);
+        for (String forma : formasDeColaboracion) {
+            colaborador.agregarFormaColaboracion(TipoColaboracion.valueOf(forma));
+        }
+
+        RepoColaborador.INSTANCE.agregar(colaborador);
     }
 }

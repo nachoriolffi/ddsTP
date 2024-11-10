@@ -37,8 +37,14 @@ public class ServicioPuntosDonacion {
                 }
                 in.close();
                 System.out.println("GET Response: " + response.toString());
-                // Procesar la respuesta y agregar los puntos a la lista
-                // puntos = parsearRespuesta(response.toString());
+
+                // Parse the JSON response and add the points to the list
+                JSONArray jsonArray = new JSONArray(response.toString());
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String punto = jsonObject.toString();
+                    puntos.add(punto);
+                }
             } else {
                 System.out.println("GET request failed. Response code: " + responseCode);
             }

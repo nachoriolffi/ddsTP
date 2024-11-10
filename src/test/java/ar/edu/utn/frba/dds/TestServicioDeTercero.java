@@ -31,7 +31,7 @@ public class TestServicioDeTercero {
 
     @Test
     public void testCrearPuntoDonacion() throws IOException {
-        String nombre = "Donación Centro 1";
+        String nombre = "Donación Centro 2";
         double lat = -34.603722;
         double lon = -58.381592;
         String direccion = "Calle Falsa 123";

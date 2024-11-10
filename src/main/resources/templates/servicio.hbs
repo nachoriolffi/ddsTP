@@ -1,22 +1,74 @@
 {{#partial "contenido"}}
-    <div class="container">
-        <form class="row g-3 needs-validation" novalidate>
-            <div class="col-md-6">
-                <label for="latitude" class="form-label">Latitude</label>
-                <input type="text" class="form-control" id="latitude" required>
-            </div>
-            <div class="col-md-6">
-                <label for="longitude" class="form-label">Longitude</label>
-                <input type="text" class="form-control" id="longitude" required>
-            </div>
-
+    <section class="container mt-4">
+        <h1 class="h1">Request Nearby Points</h1>
+        <hr class="border-1">
+        <p>Enter the latitude and longitude to request nearby points.</p>
+        <div class="row">
             <div class="col-12">
-                <button class="btn btn-primary" type="button" id="requestPointsButton">Request Points</button>
+                <form class="row g-3 needs-validation" id="requestPointsForm" method="post" action="/puntosRecomendadosServicio" novalidate>
+                    <div class="col-md-6">
+                        <label for="latitude" class="form-label">Latitude</label>
+                        <input type="text" class="form-control" id="latitude" name="latitude" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="longitude" class="form-label">Longitude</label>
+                        <input type="text" class="form-control" id="longitude" name="longitude" required>
+                    </div>
+                    <div class="col-12">
+                        <button class="btn btn-primary" type="button" id="requestPointsButton">Request Points</button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
+    </section>
+    <!-- Modal -->
+    <div class="modal fade" id="pointsModal" tabindex="-1" aria-labelledby="pointsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pointsModalLabel">Nearby Points</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul id="pointsList" class="list-group">
+                        <!-- Points will be appended here -->
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 {{/partial}}
 {{#partial "agregarScript"}}
+    <script>
+        document.getElementById('requestPointsButton').addEventListener('click', function() {
+            const form = document.getElementById('requestPointsForm');
+            const formData = new FormData(form);
 
+            fetch('/puntosRecomendadosServicio', {
+                method: 'POST',
+                body: formData
+            })
+                    .then(response => response.json())
+                    .then(data => {
+                        const pointsList = document.getElementById('pointsList');
+                        pointsList.innerHTML = ''; // Clear previous points
+
+                        data.forEach(point => {
+                            const listItem = document.createElement('li');
+                            listItem.className = 'list-group-item';
+                            listItem.textContent = point;
+                            pointsList.appendChild(listItem);
+                        });
+
+                        // Show the modal
+                        const pointsModal = new bootstrap.Modal(document.getElementById('pointsModal'));
+                        pointsModal.show();
+                    })
+                    .catch(error => console.error('Error fetching points:', error));
+        });
+    </script>
 {{/partial}}
-{{> templates/base }}
+{{> templates/base}}
