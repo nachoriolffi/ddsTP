@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.services;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.CuestionarioRespondido;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Opcion;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
@@ -51,15 +52,17 @@ public class RegistroHumanoService {
                     repoRespuesta.agregar(respuestaEntity);
                 });
 
+
         params.entrySet().stream()
                 .filter(entry -> entry.getKey().startsWith("opcion-"))
                 .forEach(entry -> {
                     Long preguntaId = Long.parseLong(entry.getKey().replace("opcion-", ""));
                     Long opcionId = Long.parseLong(entry.getValue());
-                    String respuesta = entry.getValue();
                     Opcion opcion = repoOpcion.buscar(opcionId);
+                    String respuesta = opcion.getTexto();
                     Respuesta respuestaEntity = new Respuesta();
                     Pregunta pregunta = repoPregunta.buscar(preguntaId);
+                    setearCampo(pregunta, respuesta, colaborador);
                     respuestaEntity.setPregunta(pregunta);
                     respuestaEntity.setOpciones(Arrays.asList(opcion));
                     respuestaEntity.setCuestionarioRespondido(cuestionarioRespondido); // Associate with CuestionarioRespondido
@@ -110,9 +113,13 @@ public class RegistroHumanoService {
                 valorConvertido = Double.parseDouble((String) respuesta);
             } else if (tipoCampo.isEnum()) {
                 valorConvertido = Enum.valueOf((Class<Enum>) tipoCampo, (String) respuesta);
+            } else if (tipoCampo.equals(String.class)){
+                valorConvertido =(String) respuesta;
             } else {
-                valorConvertido = respuesta;
+                //if(nombrePregunta.equals("rubro")){valorConvertido = RepoRubroColaborador.INSTANCE.buscar();}
+                valorConvertido = RepoRubroColaborador.INSTANCE.buscarPorNombre((String) respuesta);
             }
+
 
             campo.set(colaborador, valorConvertido);
         } catch (NoSuchFieldException | IllegalAccessException e) {

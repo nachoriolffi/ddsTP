@@ -39,14 +39,14 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
             return;
         }
         try {
-            Cuestionario cuestionario = RepoCuestionario.INSTANCE.buscar(1L);
+            Cuestionario cuestionario = RepoCuestionario.INSTANCE.buscar(2L);
             if (cuestionario == null) {
                 context.status(404).result("Cuestionario no encontrado");
             }
             Map<String, List<Pregunta>> categorizedQuestions = cuestionario.getPreguntas().stream()
                     .collect(Collectors.groupingBy(Pregunta::getTipoPregunta));
 
-            List<TipoColaboracion> formasDeColaboracion = Arrays.asList(TipoColaboracion.values());
+            List<TipoColaboracion> formasDeColaboracion = Arrays.asList(TipoColaboracion.DINERO, TipoColaboracion.HACERSE_CARGO_HELADERA);
 
             Map<String, Object> model = new HashMap<>();
             model.put("formasDeColaboracion", formasDeColaboracion);

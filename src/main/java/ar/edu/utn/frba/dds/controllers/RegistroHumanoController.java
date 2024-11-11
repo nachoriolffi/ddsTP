@@ -34,7 +34,7 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
             return;
         }
         try {
-            Cuestionario cuestionario = RepoCuestionario.INSTANCE.buscar(2L);
+            Cuestionario cuestionario = RepoCuestionario.INSTANCE.buscar(1L);
             if (cuestionario == null) {
                 context.status(404).result("Cuestionario no encontrado");
             }

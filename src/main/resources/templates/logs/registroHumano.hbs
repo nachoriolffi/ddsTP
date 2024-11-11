@@ -53,18 +53,23 @@
                         </div>
                     {{/each}}
 
-                    <div class="col-lg-6 col-md-12">
+                    <div class="col-lg-4 col-md-12">
                         <label class="form-label" for="provincia">Provincia</label>
                         <select class="form-select" id="provincia" name="provincia" required>
-                            <option value="" disabled selected>Seleccion una opción</option>
+                            <option value="" disabled selected>Seleccion una provincia</option>
+                            <!-- Las opciones se llenarán mediante JavaScript-->
                         </select>
                     </div>
-                    <div class="col-lg-6 col-md-12">
-                        <label class="form-label" for="localidad">Localidad</label>
-                        <select class="form-select" id="localidad" name="localidad" required>
-                            <option value="" disabled selected>Seleccion una opción</option>
-                        </select>
+                    <div class="col-lg-8 col-md-12">
+                        <label class="form-label" for="calle">Dirección</label>
+                        <div class="autocomplete-container position-relative">
+                            <input type="text" id="calle" name="calle" class="form-control"
+                                   placeholder="Escribe una calle"
+                                   list="suggestions">
+                            <div class="list-group" id="suggestions"></div>
+                        </div>
                     </div>
+
                     <h4 class="h4">Ingrese al menos un Medio de Contacto</h4>
                     <hr class="d-none d-md-block">
                     <div class="col-lg-6 col-md-12">

@@ -2,36 +2,19 @@ package ar.edu.utn.frba.dds.utils;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoJuridiccion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.*;
-import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
-import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
-import ar.edu.utn.frba.dds.models.entities.contacto.correo.CorreoElectronico;
-import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Cuestionario;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Opcion;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.TipoPregunta;
-import ar.edu.utn.frba.dds.models.entities.exportadorPDF.DocumentoFallasHeladera;
 import ar.edu.utn.frba.dds.models.entities.generadorCodigo.GeneradorDeCodigo;
-import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
-import ar.edu.utn.frba.dds.models.entities.heladera.RegistroApertura;
-import ar.edu.utn.frba.dds.models.entities.heladera.TipoSolicitud;
-import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
-import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoAlerta;
-import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoIncidente;
-import ar.edu.utn.frba.dds.models.entities.heladera.alerta.registro.RegistroTemperatura;
-import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
-import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.*;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
-import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
-
 import java.time.LocalDate;
 import java.util.*;
 
@@ -40,111 +23,6 @@ public class Init implements WithSimplePersistenceUnit {
     public static void iniciar() {
 
 /*
-        RepoCoordenada repoCoordenada = new RepoCoordenada();
-        RepoModelo repoModelo = new RepoModelo();
-        RepoHeladeras repoHeladera = new RepoHeladeras();
-        RepoViandas repoViandas = new RepoViandas();
-        RepoDonacionVianda repoDonacionVianda = new RepoDonacionVianda();
-        Coordenada coordenada = new Coordenada(-34.598630, -58.419962);
-        repoCoordenada.agregar(coordenada);
-
-
-        Vianda viandaPDF = new Vianda();
-        viandaPDF.setFueEntregada(true);
-        viandaPDF.setCalorias(500.0);
-        viandaPDF.setPeso(500.0);
-        viandaPDF.setFechaDonacion(new Date());
-        viandaPDF.setFechaCaducidad(new Date());
-        viandaPDF.setHeladera(heladeraPDF);
-        viandaPDF.setComida("Comida");
-
-
-        DonacionVianda donacionVianda = new DonacionVianda();
-        donacionVianda.setVianda(viandaPDF);
-        donacionVianda.setFechaColaboracion(new Date());
-        donacionVianda.setTipoColaboracion(TipoColaboracion.DONACION_VIANDAS);
-
-
-        Colaborador colaboradorPDF=new Colaborador();
-        viandaPDF.setColaborador(colaboradorPDF);
-        repoViandas.agregar(viandaPDF);
-        donacionVianda.setColaborador(colaboradorPDF);
-        repoDonacionVianda.agregar(donacionVianda);
-
-        colaboradorPDF.setNombre("Ignacio Joaquin");
-        colaboradorPDF.setApellido("Riolffi");
-        colaboradorPDF.setTipoPersona(TipoPersona.HUMANA);
-        colaboradorPDF.agregarColaboracionRealizada(donacionVianda);
-
-        Direccion direccion = new Direccion();
-        direccion.setAltura(951);
-        //repoCoordenada.agregar(coordenada);
-
-        RepoHeladeras repoHeladeras = RepoHeladeras.INSTANCE;
-        Heladera heladera1 = new Heladera();
-
-        heladera1.setNombre("UTN MEDRANO");
-        heladera1.setCoordenada(coordenada);
-        //heladera1.setDireccion(direccion);
-        heladera1.setFechaPuestaFunc(new Date());
-        heladera1.setEstaActiva(Boolean.TRUE);
-
-        Colaborador colaborador1 = new Colaborador();
-        colaborador1.setNombre("Pepito");
-        colaborador1.setApellido("Perez");
-        colaborador1.setTipoDocumento(TipoDocumento.DNI);
-        colaborador1.setNumeroDocumento(32458652);
-        colaborador1.setTipoPersona(TipoPersona.HUMANA);
-
-        RepoColaborador.INSTANCE.agregar(colaborador1);
-
-        Incidente incidente1 = new Incidente();
-        incidente1.setDescripcion("Incidente de prueba 1");
-        incidente1.setPathFoto(null);
-        incidente1.setTipoIncidente(TipoIncidente.FALLA);
-        incidente1.setTipoAlerta(null);
-        incidente1.setColaborador(colaborador1);
-        incidente1.setHeladera(heladera1);
-        RepoIncidente.INSTANCE.agregar(incidente1);
-
-        repoHeladeras.agregar(heladera1);
-
-
-
-        Vianda vianda = new Vianda();
-        vianda.setComida("qweqwe");
-        vianda.setFechaCaducidad(new Date(2021, 10, 24));
-        vianda.setFechaDonacion(new Date());
-
-       // RepoColaborador.INSTANCE.agregar(colaborador1);
-        vianda.setColaborador(colaborador1);
-        vianda.setCalorias(500.0);
-        vianda.setPeso(200.0);
-        vianda.setFueEntregada(false);
-        vianda.setHeladera(heladera1);
-
-        //RepoViandas.INSTANCE.agregar(vianda);
-
-        //repoOferta.agregar(oferta);
-
-        Heladera heladera2 = new Heladera();
-        heladera2.setNombre("UTN CAMPUS");
-        heladera2.setCoordenada(coordenada);
-        heladera2.setFechaPuestaFunc(new Date());
-        heladera2.setEstaActiva(Boolean.TRUE);
-        //heladera2.setModelo(modelo1);
-
-        //repoHeladeras.agregar(heladera2);
-
-        //Usuario usuario = new Usuario();
-        //usuario.setNombre("Ignacio Riolffi");
-        //usuario.setRol(TipoRol.ADMIN);
-        //usuario.setContrasenia("1234");
-        //usuario.setCorreoElectronico("nacho@gmail.com");
-        RepoUsuario repoUsuario = RepoUsuario.INSTANCE;
-        //repoUsuario.agregar(usuario);
-
-        Cuestionario cuestionario = new Cuestionario();
 
 // Crear preguntas de tipo STRING
         Pregunta nombrePregunta = new Pregunta();
@@ -385,7 +263,7 @@ public class Init implements WithSimplePersistenceUnit {
         RepoCuestionario repoCuestionario = RepoCuestionario.INSTANCE;
         RepoOpcion repoOpcion = RepoOpcion.INSTANCE;
 
-        // JURIDICO
+     /*   // JURIDICO
 
         Cuestionario cuestionarioJuridico = new Cuestionario();
         cuestionarioJuridico.setDescripcion("Cuestionario Juridico");
@@ -438,11 +316,11 @@ public class Init implements WithSimplePersistenceUnit {
         cuestionarioJuridico.agregarPregunta(preguntaRazonSocial);
         cuestionarioJuridico.agregarPregunta(preguntaTipoRazon);
 
-        repoCuestionario.agregar(cuestionarioJuridico);
+        repoCuestionario.agregar(cuestionarioJuridico);*/
 
         //HUMANO
 
-        Cuestionario cuestionarioHumano = new Cuestionario();
+       /* Cuestionario cuestionarioHumano = new Cuestionario();
         cuestionarioHumano.setNombreCuestionario("Cuestionario Humano");
         cuestionarioHumano.setDescripcion("Este es el cuestionario para registrar colaboradores humanos");
 
@@ -471,8 +349,7 @@ public class Init implements WithSimplePersistenceUnit {
         RepoPregunta.INSTANCE.agregar(fechaPregunta);
         cuestionarioHumano.agregarPregunta(fechaPregunta);
 
-        RepoCuestionario.INSTANCE.agregar(cuestionarioHumano);
-
+        RepoCuestionario.INSTANCE.agregar(cuestionarioHumano);*/
 
         Cuestionario cuestionario1 = new Cuestionario();
         Pregunta nombrePregunta = new Pregunta();
@@ -504,75 +381,95 @@ public class Init implements WithSimplePersistenceUnit {
         RepoOpcion.INSTANCE.agregar(opcion2);
         RepoOpcion.INSTANCE.agregar(opcion3);
         cuestionario1.agregarPregunta(multipleChoicePregunta);
-        // Pregunta fechaPregunta = new Pregunta();
+         Pregunta fechaPregunta = new Pregunta();
         fechaPregunta.setNombre("fechaDeNacimiento");
         fechaPregunta.setDescripcionPregunta("Ingrese su fecha de nacimiento");
         fechaPregunta.setTipoPregunta(TipoPregunta.FECHA);
         RepoPregunta.INSTANCE.agregar(fechaPregunta);
         cuestionario1.agregarPregunta(fechaPregunta);
         RepoCuestionario.INSTANCE.agregar(cuestionario1);
+
+        RubroColaborador rubroGastronomia = new RubroColaborador();
+        rubroGastronomia.setNombre("GASTRONOMIA");
+
+        RubroColaborador rubroEducacion = new RubroColaborador();
+        rubroEducacion.setNombre("EDUCACION");
+
+        RubroColaborador rubroSalud = new RubroColaborador();
+        rubroSalud.setNombre("SALUD");
+
+        RepoRubroColaborador.INSTANCE.agregar(rubroGastronomia);
+        RepoRubroColaborador.INSTANCE.agregar(rubroEducacion);
+        RepoRubroColaborador.INSTANCE.agregar(rubroSalud);
+
+        //JURIDICO
+        Cuestionario cuestionarioJuridico2 = new Cuestionario();
+        cuestionarioJuridico2.setNombreCuestionario("Cuestionario Juridico");
+        cuestionarioJuridico2.setDescripcion("Este es el cuestionario para registrar colaboradores juridicos");
+
+        Pregunta preguntarRazonSocial = new Pregunta();
+        preguntarRazonSocial.setNombre("razonSocial");
+        preguntarRazonSocial.setDescripcionPregunta("Ingrese su Razon Social");
+        preguntarRazonSocial.setEsObligatoria(true);
+        preguntarRazonSocial.setTipoPregunta(TipoPregunta.STRING);
+        RepoPregunta.INSTANCE.agregar(preguntarRazonSocial);
+
+        Pregunta preguntaTipoRazonSocial = new Pregunta();
+        preguntaTipoRazonSocial.setTipoPregunta(TipoPregunta.MULTIPLECHOICE);
+        preguntaTipoRazonSocial.setNombre("tipoJuridiccion");
+        preguntaTipoRazonSocial.setDescripcionPregunta("Ingrese su razon social");
+        preguntaTipoRazonSocial.setEsObligatoria(true);
+        RepoPregunta.INSTANCE.agregar(preguntaTipoRazonSocial);
+
+        Opcion opcionGubernamental2 = new Opcion("GUBERNAMENTAL");
+        Opcion opcionONG2 = new Opcion("ONG");
+        Opcion opcionEmpresa2 = new Opcion("EMPRESA");
+        Opcion opcionInstitucion2 = new Opcion("INSTITUCION");
+
+        opcionGubernamental2.setPregunta(preguntaTipoRazonSocial);
+        opcionONG2.setPregunta(preguntaTipoRazonSocial);
+        opcionEmpresa2.setPregunta(preguntaTipoRazonSocial);
+        opcionInstitucion2.setPregunta(preguntaTipoRazonSocial);
+
+        preguntaTipoRazonSocial.agregarOpcion(opcionGubernamental2);
+        preguntaTipoRazonSocial.agregarOpcion(opcionONG2);
+        preguntaTipoRazonSocial.agregarOpcion(opcionEmpresa2);
+        preguntaTipoRazonSocial.agregarOpcion(opcionInstitucion2);
+
+        RepoOpcion.INSTANCE.agregar(opcionGubernamental2);
+        RepoOpcion.INSTANCE.agregar(opcionONG2);
+        RepoOpcion.INSTANCE.agregar(opcionEmpresa2);
+        RepoOpcion.INSTANCE.agregar(opcionInstitucion2);
+
+        Pregunta preguntaRubro = new Pregunta();
+        preguntaRubro.setNombre("rubroColaborador");
+        preguntaRubro.setDescripcionPregunta("Rubro de Persona Juridica");
+        preguntaRubro.setTipoPregunta(TipoPregunta.MULTIPLECHOICE);
+        preguntaRubro.setEsObligatoria(true);
+        RepoPregunta.INSTANCE.agregar(preguntaRubro);
+
+      List<RubroColaborador> rubrosParaOpcion =  RepoRubroColaborador.INSTANCE.buscarTodos();
+
+        agregarRubrosAPreguntaComoOpciones(preguntaRubro, rubrosParaOpcion);
+        cuestionarioJuridico2.agregarPregunta(preguntarRazonSocial);
+        cuestionarioJuridico2.agregarPregunta(preguntaTipoRazonSocial);
+        cuestionarioJuridico2.agregarPregunta(preguntaRubro);
+
+        RepoCuestionario.INSTANCE.agregar(cuestionarioJuridico2);
+
+    }
+
+    public static void agregarRubrosAPreguntaComoOpciones(Pregunta pregunta, List<RubroColaborador> rubros) {
+        for (RubroColaborador rubro : rubros) {
+            Opcion opcion = new Opcion(rubro.getNombre());
+            opcion.setPregunta(pregunta);
+            pregunta.agregarOpcion(opcion);
+            RepoOpcion.INSTANCE.agregar(opcion);
+        }
     }
 }
 
-        //Colaborador colaborador = new Colaborador();
-        //colaborador.setNombre("Ignacio Joaquin");
-        //colaborador.setApellido("Riolffi");
-        //usuario1.setNombre(colaborador.getNombre() + " " + colaborador.getApellido());
-// Agregar pregunta de tipo fecha al cuestionario
-
-        //cuestionario.agregarPregunta(fechaPregunta);
-// Persistir el cuestionario
 /*
->>>>>>> 2c3a42bc261e4347efd8604f1f1e28eba9d72267
-        Usuario usuario1 = new Usuario();
-        usuario1.setCorreoElectronico("iriolffi@gmail.com");
-        usuario1.setRol(TipoRol.ADMIN);
-        usuario1.setContrasenia("1234");
-        usuario1.setCuentaEliminada(false);
-        Usuario usuario2 = new Usuario();
-        usuario2.setCorreoElectronico("nacho2@gmail.com");
-        usuario2.setRol(TipoRol.COLABORADOR_JURIDICO);
-        usuario2.setContrasenia("1234");
-        Colaborador colaborador = new Colaborador();
-        colaborador.setNombre("Ignacio Joaquin");
-        colaborador.setApellido("Riolffi");
-        usuario1.setNombre(colaborador.getNombre() + " " + colaborador.getApellido());
-        repoUsuario = RepoUsuario.INSTANCE;
-        repoUsuario.agregar(usuario1);
-        colaborador.setNombre("Nacho");
-        colaborador.setApellido("Nachito");
-        usuario2.setNombre(colaborador.getNombre() + " " + colaborador.getApellido());
-        repoUsuario = RepoUsuario.INSTANCE;
-        repoUsuario.agregar(usuario2);
-        colaborador.setNombre("Juan");
-        colaborador.setApellido("Perez");
-        usuario2.setNombre(colaborador.getNombre() + " " + colaborador.getApellido());
-        repoUsuario.agregar(usuario2);
-        colaborador.setTipoPersona(TipoPersona.HUMANA);
-        colaborador.setUsuario(usuario1);
-        RepoColaborador repoColaborador = RepoColaborador.INSTANCE;
-        repoColaborador.agregar(colaborador);
-        repoColaborador.agregar(colaborador);
-        Tarjeta tarjeta = new Tarjeta();
-        tarjeta.setColaboradorAsignador(colaborador);
-        Tarjeta tarjeta2 = new Tarjeta();
-        tarjeta2.setColaboradorAsignador(colaborador);
-        RepoTarjeta.INSTANCE.agregar(tarjeta);
-        RepoTarjeta.INSTANCE.agregar(tarjeta2);
-
-
-        //prueba de juridikoo
-        Usuario usuario3 = new Usuario();
-        usuario3.setCorreoElectronico("joaridiko@gmail.com");
-        usuario3.setRol(TipoRol.COLABORADOR_JURIDICO);
-        usuario3.setContrasenia("1234");
-        usuario3.setNombre("Joa");
-        repoUsuario.agregar(usuario3);
-
-        tarjeta2.setColaboradorAsignador(colaborador);
-        RepoTarjeta.INSTANCE.agregar(tarjeta);
-        RepoTarjeta.INSTANCE.agregar(tarjeta2);
-
         ReceptorTemperatura receptorTemperatura = new ReceptorTemperatura();
              RepoReceptorTemperatura.INSTANCE.agregar(receptorTemperatura);
 
@@ -633,18 +530,6 @@ public class Init implements WithSimplePersistenceUnit {
         receptorTemperatura.agregarRegistro(registroTemperatura);
             RepoReceptorTemperatura.INSTANCE.modificar(receptorTemperatura);
 
-        ModeloHeladera modeloPDF = new ModeloHeladera();
-        modeloPDF.setTemperaturaMinima(3.0);
-        modeloPDF.setTemperaturaMaxima(15.0);
-        modeloPDF.setPeso(200.0);
-        modeloPDF.setCantidadMaximaDeViandas(500);
-        modeloPDF.setNombreModelo("Modelo PDF");
-           RepoModelo.INSTANCE.agregar(modeloPDF);
-
-        Vianda vianda3 = new Vianda();
-
-        vianda3.setComida("Comida 1");
-        vianda3.setFechaDonacion(new Date());
 
         RegistroApertura registroAperturaSACAR = new RegistroApertura();
         registroAperturaSACAR.setFechaApertura(new Date());
@@ -652,22 +537,6 @@ public class Init implements WithSimplePersistenceUnit {
         registroAperturaSACAR.setRetiroVianda(Boolean.TRUE);
         registroAperturaSACAR.setViandas(Collections.singletonList(vianda3));
            RepoRegistroApertura.INSTANCE.agregar(registroAperturaSACAR);
-
-        Heladera heladera3 = new Heladera();
-        heladera3.setNombre("Heladera Medrano");
-        heladera3.setEstaActiva(true);
-        heladera3.agregarApertura(registroAperturaSACAR);
-        heladera3.setModelo(modeloPDF);
-        RepoHeladeras.INSTANCE.agregar(heladera3);
-
-        vianda3.setHeladera(heladera3);
-        RepoViandas.INSTANCE.agregar(vianda3);
-
-        Vianda vianda4 = new Vianda();
-        vianda4.setHeladera(heladera3);
-        vianda4.setComida("Comida 4");
-        vianda4.setFechaDonacion(new Date());
-        RepoViandas.INSTANCE.agregar(vianda4);
 
         RegistroApertura registroAperturaPONER = new RegistroApertura();
         registroAperturaPONER.setFechaApertura(new Date());
@@ -682,31 +551,6 @@ public class Init implements WithSimplePersistenceUnit {
         incidente3.setTipoIncidente(TipoIncidente.FALLA);
         incidente3.setTipoAlerta(null);
 
-         RepoHeladeras.INSTANCE.agregar(heladera3);
-        incidente3.setHeladera(heladera3);
-          RepoIncidente.INSTANCE.agregar(incidente3);
-        heladera3.agregarRegistroDeAlerta(incidente3);
-        RepoHeladeras.INSTANCE.modificar(heladera3);
-
-        DonacionVianda donacionVianda3 = new DonacionVianda();
-        donacionVianda3.setFechaColaboracion(new Date());
-        donacionVianda3.setVianda(vianda3);
-
-        DonacionVianda donacionVianda4 = new DonacionVianda();
-        donacionVianda4.setFechaColaboracion(new Date());
-        donacionVianda4.setVianda(vianda4);
-
-
-        Colaborador colaborador3 = new Colaborador();
-        colaborador3.setNombre("Juan");
-        colaborador3.setApellido("Perez");
-        colaborador3.setTipoPersona(TipoPersona.HUMANA);
-        vianda3.setColaborador(colaborador3);
-        colaborador3.agregarColaboracionRealizada(donacionVianda3);
-        colaborador3.agregarColaboracionRealizada(donacionVianda4);
-        RepoColaborador.INSTANCE.agregar(colaborador3);
-        RepoDonacionVianda.INSTANCE.agregar(donacionVianda3);
-         RepoDonacionVianda.INSTANCE.agregar(donacionVianda4);
 
         Heladera heladera4 = new Heladera();
         heladera4.setNombre("Heladera de Fede");
@@ -725,3 +569,4 @@ public class Init implements WithSimplePersistenceUnit {
         distribucionVianda.setColaborador(colaborador3);
         RepoDistribucionVianda.INSTANCE.agregar(distribucionVianda);
     }
+*/
