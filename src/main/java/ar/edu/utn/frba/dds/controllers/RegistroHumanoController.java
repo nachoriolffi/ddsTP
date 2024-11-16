@@ -13,10 +13,7 @@ import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Respuesta;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoCuestionario;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoCuestionarioRespondido;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoTarjeta;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import ar.edu.utn.frba.dds.services.RegistroHumanoService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
@@ -25,6 +22,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class RegistroHumanoController extends BaseController implements ICrudViewsHandler {
+
+    RepoColaborador repoColaborador = RepoColaborador.INSTANCE;
+    RepoUsuario repoUsuario = RepoUsuario.INSTANCE;
 
     @Override
     public void index(Context context) {
@@ -75,7 +75,6 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
         
         RepoColaborador.INSTANCE.agregar(colaborador);
 
-
         if(colaborador.getFormasDeColaboracion().contains(TipoColaboracion.DONACION_VIANDAS) || colaborador.getFormasDeColaboracion().contains(TipoColaboracion.REDISTRIBUCION_VIANDAS)){
             Tarjeta tarjeta = new Tarjeta();
             tarjeta.setColaboradorAsignador(colaborador);
@@ -83,14 +82,37 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
             RepoTarjeta.INSTANCE.agregar(tarjeta);
         }
 
-        context.redirect("/iniciarSesion");
+        //context.redirect("/iniciarSesion");
     }
 
 
 
     @Override
     public void save(Context context) {
+        Usuario nuevoUsuario = context.sessionAttribute("nuevoUsuario");
+        if (nuevoUsuario == null) {
+            context.redirect("/crearCuenta");
+            return;
+        }
 
+        String nombre = context.formParam("respuesta-1");
+        String apellido = context.formParam("respuesta-2");
+
+        nuevoUsuario.setNombre(nombre);
+
+        Colaborador colaboradorHumano = new Colaborador();
+        colaboradorHumano.setNombre(nombre);
+        colaboradorHumano.setApellido(apellido);
+        colaboradorHumano.setTipoPersona(TipoPersona.HUMANA);
+        colaboradorHumano.setUsuario(nuevoUsuario);
+
+        List<Contacto> contacto = new ArrayList<>();
+
+        colaboradorHumano.setContacto(contacto);
+
+        repoUsuario.agregar(nuevoUsuario);
+        repoColaborador.agregar(colaboradorHumano);
+        context.redirect("/iniciarSesion");
     }
 
     @Override

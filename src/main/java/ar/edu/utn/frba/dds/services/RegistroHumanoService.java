@@ -99,7 +99,13 @@ public class RegistroHumanoService {
     public <T> void setearCampo(Pregunta pregunta, T respuesta, Colaborador colaborador) {
         Class<Colaborador> claseColab = Colaborador.class;
         try {
-            Field campo = claseColab.getDeclaredField(pregunta.getNombre());
+            Field campo;
+            try {//le agrego este trycatch para que no tire error cuando hace un registroHumano, espero no romper nada :s
+                campo = claseColab.getDeclaredField(pregunta.getNombre());
+            } catch (NoSuchFieldException e) {
+                System.err.println("Campo no encontrado: " + pregunta.getNombre());
+                return;
+            }
             campo.setAccessible(true);
             Class<?> tipoCampo = campo.getType();
 
@@ -122,7 +128,7 @@ public class RegistroHumanoService {
 
 
             campo.set(colaborador, valorConvertido);
-        } catch (NoSuchFieldException | IllegalAccessException e) {
+        } catch (IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }
