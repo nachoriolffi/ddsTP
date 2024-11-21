@@ -73,8 +73,6 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
         String tipoRazonSocial = context.formParam("opcion-2").toUpperCase(); //"tipo-razon-social"
 
 
-
-
         nuevoUsuario.setNombre(razonSocial);
 
         Colaborador colaboradorJuridico = new Colaborador();
@@ -84,52 +82,10 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
         Integer tRazonSocialIndex = Integer.parseInt(tipoRazonSocial);
         colaboradorJuridico.setTipoJuridiccion(TipoJuridiccion.values()[tRazonSocialIndex]);
 
-//        String altura = context.formParam("altura");
-//        String piso = context.formParam("piso");
-//        String calle = context.formParam("calle");
 
-//        if (piso != null && !piso.isEmpty() && altura != null && !altura.isEmpty() && calle != null && !calle.isEmpty()) {
-//            Direccion direccion = new Direccion();
-//            direccion.setPiso(Integer.valueOf(piso));
-//            direccion.setAltura(Integer.valueOf(altura));
-//            direccion.setCalle(new Calle(calle));
-//            repoDireccion.agregar(direccion);
-//            colaboradorJuridico.setDireccion(direccion);
-//        }
-
-        String telefono = context.formParam("telefono");
-        String correo = context.formParam("correo");
-        List<Contacto> contacto = new ArrayList<>();
-
-        List<String> mediosContacto = context.formParams("medios-contacto");
-        // Verificar si se seleccionaron "WhatsApp" o "Telegram"
-        boolean seleccionoWhatsApp = mediosContacto.contains("whatsapp");
-        boolean seleccionoTelegram = mediosContacto.contains("telegram");
-
-
-        if (telefono != null && !telefono.isEmpty()) {
-            /*if (seleccionoWhatsApp) {
-                Contacto contactoWhatsApp = new Contacto(TipoContacto.WPP, telefono);
-                contacto.add(contactoWhatsApp);
-            }*/ // lo dejo comentado para no enviar todavía notificaciones por whatsapp y no gastar recursos
-            if (seleccionoTelegram) {
-                Contacto contactoTelegram = new Contacto(TipoContacto.TELEGRAM, telefono);
-                contacto.add(contactoTelegram);
-            }
-        }
-        if (correo != null && !correo.isEmpty()) {
-            Contacto contactoCorreo = new Contacto(TipoContacto.MAIL, correo);
-            contacto.add(contactoCorreo);
-        }
-       colaboradorJuridico.setContacto(contacto);
         repoUsuario.agregar(nuevoUsuario);
         repoColaborador.agregar(colaboradorJuridico);
         context.redirect("/iniciarSesion");
-
-       //RegistroHumanoService registroHumanosService = new RegistroHumanoService();
-        //Colaborador colaborador = registroHumanosService.processAndSaveResponses(context);
-        //colaborador.setTipoPersona(TipoPersona.JURIDICA);
-        //RepoColaborador.INSTANCE.agregar(colaborador);
     }
 
     @Override

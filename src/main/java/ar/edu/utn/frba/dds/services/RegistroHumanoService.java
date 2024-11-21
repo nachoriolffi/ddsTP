@@ -2,6 +2,8 @@ package ar.edu.utn.frba.dds.services;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
+import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
+import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.CuestionarioRespondido;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Opcion;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
@@ -15,9 +17,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class RegistroHumanoService {
@@ -89,6 +89,32 @@ public class RegistroHumanoService {
                         e.printStackTrace();
                     }
                 });
+
+        String telefono = context.formParam("telefono");
+        String correo = context.formParam("correo");
+        List<Contacto> contacto = new ArrayList<>();
+
+        List<String> mediosContacto = context.formParams("medios-contacto");
+        // Verificar si se seleccionaron "WhatsApp" o "Telegram"
+        boolean seleccionoWhatsApp = mediosContacto.contains("whatsapp");
+        boolean seleccionoTelegram = mediosContacto.contains("telegram");
+
+
+        if (telefono != null && !telefono.isEmpty()) {
+            /*if (seleccionoWhatsApp) {
+                Contacto contactoWhatsApp = new Contacto(TipoContacto.WPP, telefono);
+                contacto.add(contactoWhatsApp);
+            }*/ // lo dejo comentado para no enviar todavía notificaciones por whatsapp y no gastar recursos
+            if (seleccionoTelegram) {
+                Contacto contactoTelegram = new Contacto(TipoContacto.TELEGRAM, telefono);
+                contacto.add(contactoTelegram);
+            }
+        }
+        if (correo != null && !correo.isEmpty()) {
+            Contacto contactoCorreo = new Contacto(TipoContacto.MAIL, correo);
+            contacto.add(contactoCorreo);
+        }
+        colaborador.setContacto(contacto);
 
         // return cuestionarioRespondido;
 
