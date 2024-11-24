@@ -60,6 +60,8 @@ public class HeladeraController extends BaseController implements ICrudViewsHand
         HeladeraInputDTO heladeraInputDTO = new HeladeraInputDTO();
         heladeraInputDTO.setPiso(context.formParam("piso"));
         heladeraInputDTO.setCalle(context.formParam("calle"));
+        heladeraInputDTO.setLatitud(context.formParam("latitud"));
+        heladeraInputDTO.setLongitud(context.formParam("longitud"));
         heladeraInputDTO.setNombre(context.formParam("nombre"));
         heladeraInputDTO.setAltura(context.formParam("altura"));
         heladeraInputDTO.setModelo(context.formParam("modelo"));

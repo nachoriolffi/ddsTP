@@ -7,6 +7,8 @@ public class HeladeraInputDTO {
     private String nombre;
     private String modelo;
     private String calle;
+    private String latitud;
+    private String longitud;
     private String altura;
     private String piso;
 }

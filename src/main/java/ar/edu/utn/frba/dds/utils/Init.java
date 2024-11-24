@@ -30,95 +30,6 @@ public class Init implements WithSimplePersistenceUnit {
 
     public static void iniciar() {
 
-/*
-
-// Crear preguntas de tipo STRING
-        Pregunta nombrePregunta = new Pregunta();
-        nombrePregunta.setNombre("nombre");
-        nombrePregunta.setDescripcionPregunta("Ingrese su nombre");
-        nombrePregunta.setTipoPregunta(TipoPregunta.STRING);
-
-        Pregunta apellidoPregunta = new Pregunta();
-        apellidoPregunta.setNombre("apellido");
-        apellidoPregunta.setDescripcionPregunta("Ingrese su apellido");
-        apellidoPregunta.setTipoPregunta(TipoPregunta.STRING);
-
-// Persistir preguntas de tipo STRING
-        //RepoPregunta.INSTANCE.agregar(nombrePregunta);
-        //RepoPregunta.INSTANCE.agregar(apellidoPregunta);
-
-// Agregar preguntas de tipo STRING al cuestionario
-        //cuestionario.agregarPregunta(nombrePregunta);
-        //cuestionario.agregarPregunta(apellidoPregunta);
-
-// Crear pregunta de opción múltiple
-        Pregunta multipleChoicePregunta = new Pregunta();
-        multipleChoicePregunta.setNombre("Pregunta de opción múltiple");
-        multipleChoicePregunta.setTipoPregunta(TipoPregunta.MULTIPLECHOICE);
-
-// Persistir pregunta de opción múltiple antes de agregar opciones
-       // RepoPregunta.INSTANCE.agregar(multipleChoicePregunta);
-
-// Crear opciones para la pregunta de opción múltiple
-        Opcion opcion1 = new Opcion("Opción 1");
-        Opcion opcion2 = new Opcion("Opción 2");
-        Opcion opcion3 = new Opcion("Opción 3");
-
-// Asignar la pregunta a cada opción
-        opcion1.setPregunta(multipleChoicePregunta);
-        opcion2.setPregunta(multipleChoicePregunta);
-        opcion3.setPregunta(multipleChoicePregunta);
-
-// Agregar opciones a la pregunta de opción múltiple
-        multipleChoicePregunta.getOpciones().add(opcion1);
-        multipleChoicePregunta.getOpciones().add(opcion2);
-        multipleChoicePregunta.getOpciones().add(opcion3);
-
-// Persistir opciones
-        //RepoOpcion.INSTANCE.agregar(opcion1);
-        //RepoOpcion.INSTANCE.agregar(opcion2);
-        //RepoOpcion.INSTANCE.agregar(opcion3);
-
-// Agregar pregunta de opción múltiple al cuestionario
-        //cuestionario.agregarPregunta(multipleChoicePregunta);
-// Crear pregunta de tipo fecha
-        Pregunta fechaPregunta = new Pregunta();
-        fechaPregunta.setNombre("fechaDeNacimiento");
-        fechaPregunta.setDescripcionPregunta("Ingrese su fecha de nacimiento");
-        fechaPregunta.setTipoPregunta(TipoPregunta.FECHA);
-
-// Persistir pregunta de tipo fecha
-        //RepoPregunta.INSTANCE.agregar(fechaPregunta);
-
-// Agregar pregunta de tipo fecha al cuestionario
-        //cuestionario.agregarPregunta(fechaPregunta);
-// Persistir el cuestionario
-        //RepoCuestionario.INSTANCE.agregar(cuestionario);
-
-        Colaborador colaborador = new Colaborador();
-        colaborador.setNombre("Ignacio Joaquin");
-        colaborador.setApellido("Riolffi");
-        usuario.setNombre(colaborador.getNombre() + " " + colaborador.getApellido());
-        //repoUsuario = RepoUsuario.INSTANCE;
-        //repoUsuario.agregar(usuario);
-        colaborador.setNombre("Nacho");
-        colaborador.setApellido("Nachito");
-        usuario2.setNombre(colaborador.getNombre() + " " + colaborador.getApellido());
-        repoUsuario = RepoUsuario.INSTANCE;
-        repoUsuario.agregar(usuario2);
-        colaborador.setTipoPersona(TipoPersona.HUMANA);
-        colaborador.setUsuario(usuario);
-        RepoColaborador repoColaborador = RepoColaborador.INSTANCE;
-        repoColaborador.agregar(colaborador);
-
-        Tarjeta tarjeta = new Tarjeta();
-        tarjeta.setColaboradorAsignador(colaborador);
-        Tarjeta tarjeta2 = new Tarjeta();
-        tarjeta2.setColaboradorAsignador(colaborador);
-
-        RepoTarjeta.INSTANCE.agregar(tarjeta);
-        RepoTarjeta.INSTANCE.agregar(tarjeta2);
-*/
         /*--------------MODELOS--------------*/
 
         RepoModelo repoModelo = new RepoModelo();
@@ -129,7 +40,7 @@ public class Init implements WithSimplePersistenceUnit {
         modeloHeladera1.setCantidadMaximaDeViandas(100);
         modeloHeladera1.setTemperaturaMaxima(10D);
         modeloHeladera1.setTemperaturaMinima(-18D);
-        repoModelo.agregar(modeloHeladera1);
+        //repoModelo.agregar(modeloHeladera1);
 
         ModeloHeladera modeloHeladera2 = new ModeloHeladera();
         modeloHeladera2.setNombreModelo("Heladera Comercial C300");
@@ -253,7 +164,7 @@ public class Init implements WithSimplePersistenceUnit {
         usuarioTecnico.setCuentaEliminada(false);
         usuarioTecnico.setCorreoElectronico("fede@gmail.com");
         usuarioTecnico.setRol(TipoRol.TECNICO);
-        repoUsuario.agregar(usuarioTecnico);
+        //repoUsuario.agregar(usuarioTecnico);
 
         /*--------------TARJETAS--------------*/
 
@@ -411,13 +322,11 @@ public class Init implements WithSimplePersistenceUnit {
 
         //---------TECNICO---------
 
-
-
         Coordenada coordenadaTecnico = new Coordenada();
         coordenadaTecnico.setLatitud(-34.615803);
         coordenadaTecnico.setLongitud(-58.433298);
 
-        RepoCoordenada.INSTANCE.agregar(coordenadaTecnico);
+        //RepoCoordenada.INSTANCE.agregar(coordenadaTecnico);
 
 
         Tecnico tecnico = new Tecnico();
@@ -431,7 +340,7 @@ public class Init implements WithSimplePersistenceUnit {
         tecnico.setDisponible(true);
         tecnico.setUsuario(usuarioTecnico);
         //tecnico.agregarMedioDeComunicacion(correo);
-        RepoTecnico.INSTANCE.agregar(tecnico);
+        //RepoTecnico.INSTANCE.agregar(tecnico);
 
 
         //-------------------------

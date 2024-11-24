@@ -53,8 +53,9 @@ public class HeladeraService {
         Heladera heladera = new Heladera();
         heladera.setNombre(heladeraInputDTO.getNombre());
         heladera.setModelo(modelo);
-        Georef georef = GeorefInitializer.initializeGeoref();
-        Coordenada coordenada = georef.obtenerCoordenadasPorDireccion(heladeraInputDTO.getCalle() + heladeraInputDTO.getAltura());
+        //Georef georef = GeorefInitializer.initializeGeoref();
+        //Coordenada coordenada = georef.obtenerCoordenadasPorDireccion(heladeraInputDTO.getCalle() + heladeraInputDTO.getAltura());
+        Coordenada coordenada = new Coordenada(Double.valueOf(heladeraInputDTO.getLatitud()),Double.valueOf(heladeraInputDTO.getLongitud()));
         repoCoordenada.agregar(coordenada);
         heladera.setCoordenada(coordenada);
         heladera.setViandasDisponibles(0);

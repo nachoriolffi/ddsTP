@@ -52,10 +52,10 @@ $(document).ready(function () {
 
         suggestionsContainer.empty();
 
-        if (direccion.length >= 3) { // Realizar búsqueda si hay al menos 3 caracteres
+        if (direccion.length >= 3) {
             $.get(`${apiBase}/direcciones?direccion=${direccion}&provincia=${provinciaId}&campos=completo&max=100`, function (data) {
                 if (data.direcciones && data.direcciones.length > 0) {
-                    suggestionsContainer.removeClass('d-none'); // Mostrar las sugerencias
+                    suggestionsContainer.removeClass('d-none');
 
                     let seenAddresses = new Set();
                     data.direcciones.forEach(function (direccionItem) {
@@ -65,22 +65,34 @@ $(document).ready(function () {
                             let suggestion = $('<button type="button" class="list-group-item list-group-item-action"></button>')
                                 .text(direccionItem.nomenclatura)
                                 .click(function () {
-                                    $('#calle').val(direccionItem.nomenclatura); // Colocar el valor seleccionado en el input
-                                    suggestionsContainer.addClass('d-none'); // Ocultar las sugerencias
+                                    $('#calle').val(direccionItem.nomenclatura);
+                                    $('#altura').val(direccionItem.altura.valor);
+                                    // Asignar coordenadas
+                                    $('#latitud').val(direccionItem.ubicacion.lat);
+                                    $('#longitud').val(direccionItem.ubicacion.lon);
+
+                                    // Verificar en consola
+                                    console.log("Altura:", direccionItem.altura.valor);
+                                    console.log("Latitud:", direccionItem.ubicacion.lat);
+                                    console.log("Longitud:", direccionItem.ubicacion.lon);
+
+                                    suggestionsContainer.addClass('d-none');
                                 });
                             suggestionsContainer.append(suggestion);
                         }
                     });
                 } else {
-                    suggestionsContainer.addClass('d-none'); // Ocultar el contenedor si no hay resultados
+                    suggestionsContainer.addClass('d-none');
                 }
             }).fail(function (jqXHR, textStatus, errorThrown) {
                 console.error("Error al cargar las direcciones:", textStatus, errorThrown);
             });
         } else {
-            suggestionsContainer.addClass('d-none'); // Ocultar el contenedor si hay menos de 3 caracteres
+            suggestionsContainer.addClass('d-none');
         }
     });
+
+
 
     // Cerrar las sugerencias al hacer clic fuera
     $(document).on('click', function (event) {
