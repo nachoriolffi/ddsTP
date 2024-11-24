@@ -3,21 +3,20 @@ package ar.edu.utn.frba.dds.models.entities.colaborador;
 import ar.edu.utn.frba.dds.models.converters.FormaDeColaboracionConverter;
 import ar.edu.utn.frba.dds.models.converters.MedioComunicacionAtributeConvertere;
 import ar.edu.utn.frba.dds.models.entities.colaborador.calculoPuntos.CalculadorPuntos;
+import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.TipoColaboracion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.observer.IObserverColaborador;
+import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.Mensaje;
 import ar.edu.utn.frba.dds.models.entities.contacto.Notificacion;
-import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
-import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.FormaDeColaboracion;
-import ar.edu.utn.frba.dds.models.entities.recomendacionPuntos.IRecomendacionPuntos;
-import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.CuestionarioRespondido;
+import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.OfertaCanje;
 import ar.edu.utn.frba.dds.models.entities.recomendacionPuntos.AServicioRecomendacionPuntos;
+import ar.edu.utn.frba.dds.models.entities.recomendacionPuntos.IRecomendacionPuntos;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
-
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
@@ -107,9 +106,8 @@ public class Colaborador implements IObserverColaborador {
     @Enumerated(EnumType.STRING)
     private TipoDocumento tipoDocumento; //nuevo requerimiento para carga masiva
 
-    @ManyToMany
-    @JoinColumn(name = "oferta_id")
-    private List<Oferta> ofertasRegistradas;
+    @OneToMany(mappedBy = "colaborador")
+    private List<OfertaCanje> ofertasCanjeadasORegistradas;
 
     @Column(name = "fueCargaMasiva")
     private Boolean fueCargaMasiva;
@@ -138,7 +136,6 @@ public class Colaborador implements IObserverColaborador {
         this.nombre = nombre;
         this.apellido = apellido;
         this.puntosTotalesUsados = (double) 0;
-        this.ofertasRegistradas = new ArrayList<Oferta>();
     }
 
     public Colaborador(Integer numeroDocumento, TipoDocumento tipoDocumento, String nombre, String apellido, List<MedioDeComunicacion> mediosDeComunicacion) {
@@ -154,20 +151,6 @@ public class Colaborador implements IObserverColaborador {
     public <E> Colaborador(String nombreDelDestinatario, String apellidoDelDestinatario, ArrayList<E> es, ArrayList<E> es1, Object o, Object o1) {
         super();
     }
-
-   /* public Colaborador(String nombre, String apellido, List<MedioDeComunicacion> mediosDeComunicacion, List<FormaDeColaboracion> formasDeColaboracion, CuestionarioRespondido cuestionarioRespondido, TipoPersona tipoPersona) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.mediosDeComunicacion = mediosDeComunicacion;
-        this.formasDeColaboracion = formasDeColaboracion;
-        this.puntosTotalesUsados = (double) 0;
-        this.cuestionarioRespondido = cuestionarioRespondido;
-        this.tipoPersona = tipoPersona;
-        this.contacto = new ArrayList<>();
-        this.mediosDeComunicacion = new ArrayList<>();
-        this.formasDeColaboracion = new ArrayList<>();
-        this.colaboracionesRealizadas = new ArrayList<>();
-    }*/
 
     public void agregarMedioDeComunicacion(MedioDeComunicacion medioDeComunicacion) {
         this.mediosDeComunicacion.add(medioDeComunicacion);
@@ -231,8 +214,8 @@ public class Colaborador implements IObserverColaborador {
         return CalculadorPuntos.getInstancia().sumarPuntosA(this) - this.puntosTotalesUsados;
     }
 
-    public void agregarOferta(Oferta oferta) {
-        this.ofertasRegistradas.add(oferta);
+    public void agregarOferta(OfertaCanje ofertaCanjeada) {
+        this.ofertasCanjeadasORegistradas.add(ofertaCanjeada);
         RepoColaborador.INSTANCE.modificar(this);
     }
 
@@ -242,10 +225,7 @@ public class Colaborador implements IObserverColaborador {
 
     @Override
     public void recibirNotificacion(String mensaje) {
-        //System.out.println("Soy " + this.nombre + " " + this.apellido + " y recibí el mensaje: " + mensaje);
-
         Notificacion notificacion = new Notificacion(this.contacto, new Mensaje("Notificación suscripción a heladera", mensaje));
-
         mediosDeComunicacion.forEach(medioDeComunicacion -> {
             medioDeComunicacion.comunicar(notificacion);
         });

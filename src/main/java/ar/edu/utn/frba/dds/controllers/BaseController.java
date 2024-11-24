@@ -9,105 +9,79 @@ import java.util.*;
 
 public abstract class BaseController {
 
-    protected Usuario usuarioLogueado(Context ctx) {
-        if (ctx.sessionAttribute("usuario_id") == null) {
-            return null;
-        }
-        return RepoUsuario.INSTANCE.buscar((Long) Objects.requireNonNull(ctx.sessionAttribute("usuario_id")));
-    }
-
-    Set<String> validPaths = new HashSet<>(Set.of(
+    private static final Set<String> rutasValidas = new HashSet<>(Set.of(
             "/iniciarSesion",
             "/crearCuenta"
     ));
 
+    private static final String RUTA_ERROR_403 = "/error403";
+    private static final String RUTA_INICIO_SESION = "/iniciarSesion";
+
+    protected Usuario usuarioLogueado(Context ctx) {
+        Long usuarioId = ctx.sessionAttribute("usuario_id");
+        if (usuarioId == null) {
+            return null;
+        }
+        return RepoUsuario.INSTANCE.buscar(usuarioId);
+    }
+
     protected Usuario verificarSesion(Context ctx, Map<String, Object> model) {
         Usuario usuario = usuarioLogueado(ctx);
         if (usuario != null) {
-            model.put("inicioSesion", true);
-            model.put("noInicioSesion", false);
-            if (usuario.getRol().equals(TipoRol.ADMIN)) {
-                model.put("esAdmin", true);
-            }else if (usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)) {
-                model.put("noEsAdmin",true);
-                model.put("esHumano", true);
-            }else if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
-                model.put("noEsAdmin",true);
-                model.put("esJuridico", true);
-            }
-            return  usuario;
-        } else {
-            if (!validPaths.contains(ctx.path())) {
-                ctx.redirect("/iniciarSesion");
-            }
-            model.put("inicioSesion", false);
-            model.put("noInicioSesion", true);
-        }
-        return null;
-    }
-
-    protected Usuario verificarHumano(Context ctx, Map<String, Object> model) {
-        Usuario usuario = usuarioLogueado(ctx);
-        verificarSesion(ctx, model);
-        if (usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)) {
-            model.put("esHumano", true);
+            configurarUsuarioLogueado(model, usuario);
             return usuario;
         } else {
-            model.put("inicioSesion", false);
-            model.put("noInicioSesion", true);
-            ctx.redirect("/error403");
+            manejarSesionNoEncontrada(ctx, model);
             return null;
         }
     }
 
-    protected Usuario verificarJuridicoOHumano(Context ctx, Map<String, Object> model) {
-        Usuario usuario = usuarioLogueado(ctx);
-        verificarSesion(ctx, model);
-        if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
-            model.put("esJuridico", true);
-            model.put("noEsAdmin",true);
-            return usuario;
-
-        } else if (usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)) {
-            model.put("esHumano", true);
-            return usuario;
-        } else {
-            model.put("inicioSesion", false);
-            model.put("noInicioSesion", true);
-            ctx.redirect("/error403");
-            System.out.println("No es juridico ni humano");
-            return null;
-        }
-    }
-
-    protected Usuario verificarJuridico(Context ctx, Map<String, Object> model) {
-        Usuario usuario = usuarioLogueado(ctx);
-        verificarSesion(ctx, model);
-        if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
-            model.put("esJuridico", true);
-            model.put("noEsAdmin",true);
-            return usuario;
-        } else {
-            model.put("inicioSesion", false);
-            model.put("noInicioSesion", true);
-            ctx.redirect("/error403");
-            return null;
-        }
-    }
-
-    protected Usuario verificarAdmin(Context ctx, Map<String, Object> model) {
-        Usuario usuario = usuarioLogueado(ctx);
-        verificarSesion(ctx, model);
+    private void configurarUsuarioLogueado(Map<String, Object> modelo, Usuario usuario) {
+        modelo.put("inicioSesion", true);
+        modelo.put("noInicioSesion", false);
         if (usuario.getRol().equals(TipoRol.ADMIN)) {
-            model.put("esAdmin", true);
-            model.put("noEsAdmin",false);
-            return usuario;
-        } else {
-            model.put("inicioSesion", false);
-            model.put("noInicioSesion", true);
-            ctx.redirect("/error403");
-            return null;
+            modelo.put("esAdmin", true);
+        } else if (usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)) {
+            modelo.put("esHumano", true);
+            modelo.put("noEsAdmin", true);
+        } else if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
+            modelo.put("esJuridico", true);
+            modelo.put("noEsAdmin", true);
         }
     }
 
+    private void manejarSesionNoEncontrada(Context ctx, Map<String, Object> modelo) {
+        if (!rutasValidas.contains(ctx.path())) {
+            ctx.redirect(RUTA_INICIO_SESION);
+        }
+        modelo.put("inicioSesion", false);
+        modelo.put("noInicioSesion", true);
+    }
+
+    protected Usuario verificarRol(Context ctx, Map<String, Object> modelo, TipoRol... rolesPermitidos) {
+        Usuario usuario = usuarioLogueado(ctx);
+        if (usuario == null || !Arrays.asList(rolesPermitidos).contains(usuario.getRol())) {
+            manejarSesionNoEncontrada(ctx, modelo);
+            ctx.redirect(RUTA_ERROR_403);
+            return null;
+        }
+        configurarUsuarioLogueado(modelo, usuario);
+        return usuario;
+    }
+
+    protected Usuario verificarHumano(Context ctx, Map<String, Object> modelo) {
+        return verificarRol(ctx, modelo, TipoRol.COLABORADOR_HUMANO);
+    }
+
+    protected Usuario verificarJuridicoOHumano(Context ctx, Map<String, Object> modelo) {
+        return verificarRol(ctx, modelo, TipoRol.COLABORADOR_JURIDICO, TipoRol.COLABORADOR_HUMANO);
+    }
+
+    protected Usuario verificarJuridico(Context ctx, Map<String, Object> modelo) {
+        return verificarRol(ctx, modelo, TipoRol.COLABORADOR_JURIDICO);
+    }
+
+    protected Usuario verificarAdmin(Context ctx, Map<String, Object> modelo) {
+        return verificarRol(ctx, modelo, TipoRol.ADMIN);
+    }
 }

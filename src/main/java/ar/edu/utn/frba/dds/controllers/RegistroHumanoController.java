@@ -99,6 +99,7 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
         String apellido = context.formParam("respuesta-2");
 
         nuevoUsuario.setNombre(nombre);
+        nuevoUsuario.setApellido(apellido);
 
         Colaborador colaboradorHumano = new Colaborador();
         colaboradorHumano.setNombre(nombre);

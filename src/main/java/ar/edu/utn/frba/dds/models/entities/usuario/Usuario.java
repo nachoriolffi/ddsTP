@@ -18,8 +18,10 @@ public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "nombreUsuario", columnDefinition = "VARCHAR(255)")
+    @Column(name = "nombre")
     private String nombre;
+    @Column(name = "apellido")
+    private String apellido;
     @Column(name = "clave", columnDefinition = "VARCHAR(255)", nullable = false)
     private String contrasenia;
     @Column(name = "correoElectronico", columnDefinition = "VARCHAR(255)", unique = true)

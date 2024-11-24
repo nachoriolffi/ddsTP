@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.FileReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.text.ParseException;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -30,7 +31,7 @@ public abstract class  LectorDeCSV {
     public LectorDeCSV() {
     }
 
-    public void leerCSV(String ruta) {
+    public void leerCSV(String ruta) throws ParseException {
         List<String[]> csvComoLista = csvALista(ruta);
         if (csvComoLista != null) {
             levantarObjetos(csvComoLista);
@@ -48,5 +49,5 @@ public abstract class  LectorDeCSV {
         }
     }
 
-    public abstract void levantarObjetos(List<String[]> csvComoLista);
+    public abstract void levantarObjetos(List<String[]> csvComoLista) throws ParseException;
 }

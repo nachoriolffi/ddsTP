@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.controllers;
 
-import ar.edu.utn.frba.dds.models.entities.usuario.Rol;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoUsuario;
@@ -10,9 +9,9 @@ import io.javalin.http.Context;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
-public class InicioSesionController extends BaseController implements ICrudViewsHandler  {
+public class InicioSesionController extends BaseController implements ICrudViewsHandler {
+
     @Override
     public void index(Context ctx) {
 
@@ -66,28 +65,23 @@ public class InicioSesionController extends BaseController implements ICrudViews
         if (usuario == null || !usuario.getContrasenia().equals(password)) {
             ctx.sessionAttribute("loginError", "Usuario o Clave Incorrectas");
             ctx.redirect("/iniciarSesion");
-        }else{
-            // TODO TENEMOS QUE HACER QUE SE VAYANA A PANTALLAS MAIN DE CADA UNO
-            // TODO TIPO QUE DIGAN TODO LO PUEDAN HACER CON BOTONES COMO UN PANEL DE CONTROL
-            // TODO EN VEZ DE HACER REDIRECT A ESA PAGINAS QUE NO TIENEN MUCHO QUE VER
-            //Me parece que lo podemos tirar al perfil una vez que inician
-            // despues se podria armar un panel de control personalizado
+        } else {
             ctx.sessionAttribute("usuario_id", usuario.getId());
             if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
                 ctx.redirect("/verPerfil");
-            }else if (usuario.getRol().equals(TipoRol.ADMIN)){
+            } else if (usuario.getRol().equals(TipoRol.ADMIN)) {
                 ctx.redirect("/verPerfil");
-            }else if(usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)){
+            } else if (usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)) {
                 ctx.redirect("/verPerfil");
             }
         }
     }
-    public void logout(Context ctx){
+
+    public void logout(Context ctx) {
         ctx.consumeSessionAttribute("usuario_id");
         ctx.consumeSessionAttribute("tipo_rol");
         ctx.redirect("/iniciarSesion");
     }
-
 
 }
 

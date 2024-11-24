@@ -5,5 +5,9 @@ import lombok.Data;
 @Data
 public class OfertaDTO {
     Long id;
-    Long puntos;
+    String oferta;
+    Long cantidadPuntos;
+    String fecha;
+    String rubro;
+
 }

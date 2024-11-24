@@ -1,14 +1,1 @@
-LE,44556677,Sofía,Torres,sofia.torres@example.com,2024-08-05,DINERO,150
-DNI,12345678,Juan,Pérez,juan.perez@example.com,2024-02-20,REDISTRIBUCION_VIANDAS,40
-LC,33445566,José,García,jose.garcia@example.com,2024-06-25,DINERO,300
-DNI,55667788,María,Ramírez,maria.ramirez@example.com,2024-05-18,DONACION_VIANDAS,12
-DNI,77889900,Roberto,Molina,roberto.molina@example.com,2024-08-12,DONACION_VIANDAS,5
-DNI,12345678,Juan,Pérez,juan.perez@example.com,2024-01-15,DINERO,500
-LE,11223344,Carlos,López,carlos.lopez@example.com,2024-04-07,DINERO,200
-DNI,55667788,María,Ramírez,maria.ramirez@example.com,2024-04-20,ENTREGA_TARJETAS,10
-LC,87654321,Ana,González,ana.gonzalez@example.com,2024-02-10,DONACION_VIANDAS,20
-DNI,77889900,Roberto,Molina,roberto.molina@example.com,2024-09-14,ENTREGA_TARJETAS,6
-LC,87654321,Ana,González,ana.gonzalez@example.com,2024-03-15,ENTREGA_TARJETAS,5
-LE,11223344,Carlos,López,carlos.lopez@example.com,2024-03-05,REDISTRIBUCION_VIANDAS,15
-LE,44556677,Sofía,Torres,sofia.torres@example.com,2024-07-30,ENTREGA_TARJETAS,8
-LC,33445566,José,García,jose.garcia@example.com,2024-07-12,REDISTRIBUCION_VIANDAS,20
+DNI,12345678,Juan,Pérez,juan.perez@example.com,2024-05-15,DINERO,50000

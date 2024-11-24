@@ -15,6 +15,7 @@ import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
+
 import java.time.LocalDate;
 import java.util.*;
 
@@ -129,7 +130,7 @@ public class Init implements WithSimplePersistenceUnit {
         modeloHeladera2.setCantidadMaximaDeViandas(60);
         modeloHeladera2.setTemperaturaMaxima(7D);
         modeloHeladera2.setTemperaturaMinima(-12D);
-        repoModelo.agregar(modeloHeladera2);
+        //repoModelo.agregar(modeloHeladera2);
 
         ModeloHeladera modeloHeladera3 = new ModeloHeladera();
         modeloHeladera3.setNombreModelo("Heladera de Oficina MiniCool");
@@ -137,7 +138,7 @@ public class Init implements WithSimplePersistenceUnit {
         modeloHeladera3.setCantidadMaximaDeViandas(30);
         modeloHeladera3.setTemperaturaMaxima(8D);
         modeloHeladera3.setTemperaturaMinima(-5D);
-        repoModelo.agregar(modeloHeladera3);
+        //repoModelo.agregar(modeloHeladera3);
 
         ModeloHeladera modeloHeladera4 = new ModeloHeladera();
         modeloHeladera4.setNombreModelo("Heladera Portátil VíaFresh");
@@ -145,7 +146,7 @@ public class Init implements WithSimplePersistenceUnit {
         modeloHeladera4.setCantidadMaximaDeViandas(20);
         modeloHeladera4.setTemperaturaMaxima(6D);
         modeloHeladera4.setTemperaturaMinima(-10D);
-        repoModelo.agregar(modeloHeladera4);
+        //repoModelo.agregar(modeloHeladera4);
 
         ModeloHeladera modeloHeladera5 = new ModeloHeladera();
         modeloHeladera5.setNombreModelo("Heladera Doméstica EcoCool 250");
@@ -153,7 +154,7 @@ public class Init implements WithSimplePersistenceUnit {
         modeloHeladera5.setCantidadMaximaDeViandas(40);
         modeloHeladera5.setTemperaturaMaxima(5D);
         modeloHeladera5.setTemperaturaMinima(-15D);
-        repoModelo.agregar(modeloHeladera5);
+        //repoModelo.agregar(modeloHeladera5);
 
         ModeloHeladera modeloHeladera6 = new ModeloHeladera();
         modeloHeladera6.setNombreModelo("Congeladora Vertical FrostMaster");
@@ -161,7 +162,7 @@ public class Init implements WithSimplePersistenceUnit {
         modeloHeladera6.setCantidadMaximaDeViandas(120);
         modeloHeladera6.setTemperaturaMaxima(-10D);
         modeloHeladera6.setTemperaturaMinima(-25D);
-        repoModelo.agregar(modeloHeladera6);
+        //repoModelo.agregar(modeloHeladera6);
 
         /*--------------HELADERAS--------------*/
 
@@ -178,7 +179,7 @@ public class Init implements WithSimplePersistenceUnit {
         usuarioAdmin.setCuentaEliminada(false);
         usuarioAdmin.setCorreoElectronico("iriolffi@gmail.com");
         usuarioAdmin.setRol(TipoRol.ADMIN);
-        repoUsuario.agregar(usuarioAdmin);
+        //repoUsuario.agregar(usuarioAdmin);
 
         // HUMANO
         Usuario usuarioHumano = new Usuario();
@@ -187,7 +188,7 @@ public class Init implements WithSimplePersistenceUnit {
         usuarioHumano.setCuentaEliminada(false);
         usuarioHumano.setCorreoElectronico("nacho@gmail.com");
         usuarioHumano.setRol(TipoRol.COLABORADOR_HUMANO);
-        repoUsuario.agregar(usuarioHumano);
+        //repoUsuario.agregar(usuarioHumano);
 
         // JURIDICO
         Usuario usuarioJuridico = new Usuario();
@@ -196,7 +197,7 @@ public class Init implements WithSimplePersistenceUnit {
         usuarioJuridico.setCuentaEliminada(false);
         usuarioJuridico.setCorreoElectronico("ts@gmail.com");
         usuarioJuridico.setRol(TipoRol.COLABORADOR_JURIDICO);
-        repoUsuario.agregar(usuarioJuridico);
+        //repoUsuario.agregar(usuarioJuridico);
 
         /*--------------TARJETAS--------------*/
 
@@ -224,9 +225,9 @@ public class Init implements WithSimplePersistenceUnit {
         colaboradorHumano.setFechaDeNacimiento(LocalDate.now());
         colaboradorHumano.setFormasDeColaboracion(formaDeColaboraciones);
         colaboradorHumano.setFueCargaMasiva(false);
-        RepoColaborador.INSTANCE.agregar(colaboradorHumano);
+        //RepoColaborador.INSTANCE.agregar(colaboradorHumano);
         // Asigno Tarjetas al colaborador para registrar vulnerables
-        List<Tarjeta> tarjetas = repoTarjeta.buscarTodos();
+        /*List<Tarjeta> tarjetas = repoTarjeta.buscarTodos();
         for (int i = 0; i < 10; i++) {
             Tarjeta tarjeta = tarjetas.get(i);
             if (tarjeta.getColaboradorAsignador() == null) {
@@ -255,7 +256,7 @@ public class Init implements WithSimplePersistenceUnit {
         formasColaboracion.add(TipoColaboracion.HACERSE_CARGO_HELADERA);
         formasColaboracion.add(TipoColaboracion.DINERO);
         colaboradorJuridico.setFormasDeColaboracion(formasColaboracion);
-        RepoColaborador.INSTANCE.agregar(colaboradorJuridico);
+        //RepoColaborador.INSTANCE.agregar(colaboradorJuridico);
 
         /*--------------CUESTIONARIOS--------------*/
 
@@ -381,7 +382,7 @@ public class Init implements WithSimplePersistenceUnit {
         RepoOpcion.INSTANCE.agregar(opcion2);
         RepoOpcion.INSTANCE.agregar(opcion3);
         cuestionario1.agregarPregunta(multipleChoicePregunta);
-         Pregunta fechaPregunta = new Pregunta();
+        Pregunta fechaPregunta = new Pregunta();
         fechaPregunta.setNombre("fechaDeNacimiento");
         fechaPregunta.setDescripcionPregunta("Ingrese su fecha de nacimiento");
         fechaPregunta.setTipoPregunta(TipoPregunta.FECHA);
@@ -448,7 +449,7 @@ public class Init implements WithSimplePersistenceUnit {
         preguntaRubro.setEsObligatoria(true);
         RepoPregunta.INSTANCE.agregar(preguntaRubro);
 
-      List<RubroColaborador> rubrosParaOpcion =  RepoRubroColaborador.INSTANCE.buscarTodos();
+        List<RubroColaborador> rubrosParaOpcion = RepoRubroColaborador.INSTANCE.buscarTodos();
 
         agregarRubrosAPreguntaComoOpciones(preguntaRubro, rubrosParaOpcion);
         cuestionarioJuridico2.agregarPregunta(preguntarRazonSocial);
@@ -477,24 +478,6 @@ public class Init implements WithSimplePersistenceUnit {
         coordenadaHeladera.setLatitud(-34.603722);
         coordenadaHeladera.setLongitud(-58.381592);
         // Save the coordenadaHeladera if necessary
-
-        // Create and save the coordinates for the tecnico
-        Coordenada coordenadaTecnico = new Coordenada();
-        coordenadaTecnico.setLatitud(-34.615803);
-        coordenadaTecnico.setLongitud(-58.433298);
-
-           RepoCoordenada.INSTANCE.agregar(coordenadaHeladera);
-           RepoCoordenada.INSTANCE.agregar(coordenadaTecnico);
-
-        ModeloHeladera modeloHeladera = new ModeloHeladera();
-        modeloHeladera.setTemperaturaMinima(0.0);
-        modeloHeladera.setTemperaturaMaxima(10.0);
-        //RepoModelo.INSTANCE.agregar(modeloHeladera);
-
-        // Create the tecnico and associate the coordinate
-
-        MedioDeComunicacion correo = new CorreoElectronico();
-
 
         Contacto contacto = new Contacto();
         contacto.setTipoContacto(TipoContacto.MAIL);

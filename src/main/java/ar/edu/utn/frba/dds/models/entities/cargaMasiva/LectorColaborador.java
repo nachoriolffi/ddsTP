@@ -17,23 +17,22 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoUsuario;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import lombok.Getter;
-
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import static org.apache.commons.lang3.time.DateUtils.parseDate;
 
 @Getter
 public class LectorColaborador extends LectorDeCSV {
 
-    private Set<Colaborador> colaboradorLeido;
+    private final Set<Colaborador> colaboradorLeido;
 
     public LectorColaborador() {
         this.colaboradorLeido = new HashSet<>();
     }
 
     @Override
-    public void levantarObjetos(List<String[]> csvComoLista) {
+    public void levantarObjetos(List<String[]> csvComoLista) throws ParseException {
         for (String[] strings : csvComoLista) {
 
             // tomo la primer lista de strings
@@ -42,12 +41,10 @@ public class LectorColaborador extends LectorDeCSV {
             String nombre = strings[2];
             String apellido = strings[3];
             String contacto = strings[4];
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            Date fecha = new Date();
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
             Date fechaColaboracion = new Date();
             try {
                 fechaColaboracion = formatter.parse(strings[5]);
-                //fechaColaboracion= fecha;
             } catch (java.text.ParseException e) {
                 System.out.println("Error al parsear la fecha: " + e.getMessage());
             }
@@ -66,7 +63,8 @@ public class LectorColaborador extends LectorDeCSV {
 
             if (!esColaboradorCargado(numeroDocumento, tipoDocumento)) {
                 Usuario usuario = new Usuario();
-                usuario.setNombre(nombre + " " + apellido);
+                usuario.setNombre(nombre);
+                usuario.setApellido(apellido);
                 usuario.setCuentaEliminada(false);
                 usuario.setRol(TipoRol.COLABORADOR_HUMANO);
                 usuario.setCorreoElectronico(contacto);
@@ -93,9 +91,10 @@ public class LectorColaborador extends LectorDeCSV {
             }
             Colaborador colaboradorCargado = obtenerColaborador(numeroDocumento, tipoDocumento);
             FormaDeColaboracion colaboracion = obtenerColaboracion(formaDeColaboracion, cantidad, fechaColaboracion);
-
+            assert colaboradorCargado != null;
             colaboradorCargado.agregarColaboracionRealizada(colaboracion);
             RepoColaborador.INSTANCE.modificar(colaboradorCargado);
+
             //una vez terminado la forma de colaboracion agrego un else que hace la logica de si ya contiene para agregarle la donacion realizada
         }
     }
@@ -108,7 +107,6 @@ public class LectorColaborador extends LectorDeCSV {
         }
         return false;
     }
-
     private Colaborador obtenerColaborador(Integer numeroDocumento, TipoDocumento tipoDocumento) {
         for (Colaborador colaborador : colaboradorLeido) {
             if (colaborador.getNumeroDocumento().equals(numeroDocumento) && colaborador.getTipoDocumento().equals(tipoDocumento)) {
@@ -117,14 +115,12 @@ public class LectorColaborador extends LectorDeCSV {
         }
         return null;
     }
-
     public void impirmirColaboracionesRealizadas() {
         colaboradorLeido.forEach(colaborador -> {
             System.out.println("Colaborador: " + colaborador.getNombre() + " " + colaborador.getApellido());
             System.out.println(colaborador.getColaboracionesRealizadas().size());
         });
     }
-
     public FormaDeColaboracion obtenerColaboracion(TipoColaboracion formaDeColaboracion, Integer cantidad, Date fechaColaboracion) {
         FormaDeColaboracionFactoryProvider factoryProvider = new FormaDeColaboracionFactoryProvider();
         FormaDeColaboracionFactory factory = factoryProvider.getFactory(formaDeColaboracion);

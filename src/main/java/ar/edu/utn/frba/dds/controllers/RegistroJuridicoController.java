@@ -79,9 +79,8 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
         colaboradorJuridico.setRazonSocial(razonSocial);
         colaboradorJuridico.setTipoPersona(TipoPersona.JURIDICA);
 
-        Integer tRazonSocialIndex = Integer.parseInt(tipoRazonSocial);
+        int tRazonSocialIndex = Integer.parseInt(tipoRazonSocial);
         colaboradorJuridico.setTipoJuridiccion(TipoJuridiccion.values()[tRazonSocialIndex]);
-
 
         repoUsuario.agregar(nuevoUsuario);
         repoColaborador.agregar(colaboradorJuridico);

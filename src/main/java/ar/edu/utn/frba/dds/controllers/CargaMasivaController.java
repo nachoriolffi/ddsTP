@@ -5,6 +5,7 @@ import ar.edu.utn.frba.dds.services.CargaMasivaService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 import io.javalin.http.UploadedFile;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -30,9 +31,7 @@ public class CargaMasivaController extends BaseController implements ICrudViewsH
 
         UploadedFile file = context.uploadedFile("csv-file");
         if (file != null) {
-            // procesamos el archivo svg en un hilo separado
             CompletableFuture.runAsync(() -> cargaMasivaService.realizarLecturaCSV(file));
-            // asi redirecciona directamente otra vez a cargaMasiva
             context.redirect("/cargaMasiva");
         } else
             context.redirect("/cargaMasiva");

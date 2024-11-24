@@ -77,10 +77,6 @@ public class CrearCuentaController extends BaseController implements ICrudViewsH
 
         }
 
-
-        nuevoUsuario.setNombre("nombreHarcodeado");//harcodeo el nombre para poder probar
-
-        assert tipoUsuario != null;
         if (tipoUsuario.equals("Juridico")) {
             nuevoUsuario.setRol(TipoRol.COLABORADOR_JURIDICO);
             context.sessionAttribute("nuevoUsuario", nuevoUsuario);
@@ -92,7 +88,6 @@ public class CrearCuentaController extends BaseController implements ICrudViewsH
             context.sessionAttribute("usuario_id", nuevoUsuario.getId());
             context.redirect("/registroHumano");
         }
-        // NOTA: Los usuarios los guardamos recien cuando se registran como juridico o humano
     }
 
     @Override

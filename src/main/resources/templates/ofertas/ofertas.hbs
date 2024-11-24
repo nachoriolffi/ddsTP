@@ -47,24 +47,18 @@
                                 </button>
                             {{/if}}
                             {{#if esAdmin}}
-                                <div class="col-md-9 col-6 justify-content-center">
-                                    <div>
-                                        <button type="button" class="btn btn-outline-primary align-items-center" data-bs-toggle="modal"
-                                                data-bs-target="#deleteProdServ">
-                                            Dar de Baja
-                                        </button>
-                                    </div>
-                                </div>
+                                <button type="button" class="btn btn-outline-primary align-items-center"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#deleteProdServ">
+                                    Dar de Baja
+                                </button>
                             {{/if}}
                             {{#if esJuridico}}
-                                <div class="col-md-9 col-6 justify-content-center">
-                                    <div>
-                                        <button type="button" class="btn btn-outline-primary align-items-center" data-bs-toggle="modal"
-                                                data-bs-target="#deleteProdServ">
-                                            Dar de Baja
-                                        </button>
-                                    </div>
-                                </div>
+                                <button type="button" class="btn btn-outline-primary align-items-center"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#deleteProdServ">
+                                    Dar de Baja
+                                </button>
                             {{/if}}
                         </div>
                     </div>
@@ -115,7 +109,8 @@
                             <form method="POST" action="/canjearProducto">
                                 <input type="hidden" name="puntosNecesarios" value="{{this.puntosNecesarios}}">
                                 <input type="hidden" name="idProducto" value="{{this.id}}">
-                                <button type="submit" class="btn btn-outline-primary" data-bs-dismiss="modal">Sí, canjear
+                                <button type="submit" class="btn btn-outline-primary" data-bs-dismiss="modal">Sí,
+                                    canjear
                                     puntos
                                 </button>
                             </form>

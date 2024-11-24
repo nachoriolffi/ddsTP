@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.controllers;
 import ar.edu.utn.frba.dds.dtos.OfertaDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
+import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.OfertaCanje;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Rubro;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
@@ -14,6 +15,7 @@ import io.javalin.http.Context;
 import io.javalin.http.UploadedFile;
 import io.javalin.util.FileUtil;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class OfertaController extends BaseController implements ICrudViewsHandler {
@@ -47,7 +49,13 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
                     break;
             }
             ofertas = repositorioOferta.buscarTodos();
-            model.put("ofertas", ofertas);
+            List<Oferta> ofertasConStock = new ArrayList<>();
+            for (Oferta oferta : ofertas) {
+                if (oferta.getStockInicial() != 0) {
+                    ofertasConStock.add(oferta);
+                }
+            }
+            model.put("ofertas", ofertasConStock);
             model.put("title", "Tienda Productos/Servicios");
             ctx.render("ofertas/ofertas.hbs", model);
         } catch (Exception e) {
@@ -59,8 +67,8 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
 
         Long idUsuario = context.sessionAttribute("usuario_id");
         OfertaDTO ofertaDTO = new OfertaDTO();
-        ofertaDTO.setId(Long.valueOf(context.formParam("idProducto")));
-        ofertaDTO.setPuntos(Long.valueOf(context.formParam("puntosNecesarios")));
+        ofertaDTO.setId(Long.valueOf(Objects.requireNonNull(context.formParam("idProducto"))));
+        ofertaDTO.setCantidadPuntos(Long.valueOf(Objects.requireNonNull(context.formParam("puntosNecesarios"))));
         ofertaService.canjearOferta(idUsuario, ofertaDTO);
         context.redirect("/canjeProductos");
     }
@@ -68,7 +76,6 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
     @Override
     public void save(Context context) {
         Oferta oferta = new Oferta();
-        //Usuario usuario = verificarSesion(ctx, model);
         UploadedFile file = context.uploadedFile("imagenProducto");
         if (file != null) {
             String contentType = file.contentType();
@@ -101,6 +108,7 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
         oferta.setFechaInicio(new Date());
         oferta.setFechaFin(new Date());
         String stockInicialStr = context.formParam("stockInicial");
+        assert stockInicialStr != null;
         int stockInicial = Integer.parseInt(stockInicialStr);
         oferta.setStockInicial(stockInicial);
         oferta.setStockUsado(0);
@@ -108,27 +116,40 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
         Rubro rubro = Rubro.fromDescripcion(context.formParam("tipoProducto"));
         oferta.setRubro(rubro);
         repositorioOferta.agregar(oferta);
-        //Colaborador colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
-        //colaborador.agregarOferta(oferta);
         context.redirect("/canjeProductos");
     }
 
 
     public void verMisOfertas(Context ctx) {
         Map<String, Object> model = new HashMap<>();
+        List<OfertaCanje> ofertasCanjeadas;
+        Colaborador colaborador;
         try {
-            Usuario usuario = verificarSesion(ctx, model);
-            Colaborador colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
-            List<Oferta> ofertas;
+            Usuario usuario = verificarHumano(ctx, model);
             if (Objects.requireNonNull(usuario.getRol()) == TipoRol.COLABORADOR_HUMANO) {
-                verificarHumano(ctx, model);
+                colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
                 Double puntos = colaborador.puntosActualesDisponibles();
                 model.put("PuntosTotales", puntos);
+
+                ofertasCanjeadas = colaborador.getOfertasCanjeadasORegistradas();
+                List<OfertaDTO> misCanjes = new ArrayList<>();
+                for (OfertaCanje ofertaCanje : ofertasCanjeadas) {
+                    OfertaDTO ofertaDTO = new OfertaDTO();
+                    ofertaDTO.setOferta(ofertaCanje.getOferta().getNombre());
+                    ofertaDTO.setRubro(ofertaCanje.getOferta().getRubro().toString());
+                    ofertaDTO.setCantidadPuntos(ofertaCanje.getOferta().getPuntosNecesarios().longValue());
+
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                    ofertaDTO.setFecha(formatter.format(ofertaCanje.getFechaCanje()));
+
+                    misCanjes.add(ofertaDTO);
+                }
+                model.put("ofertasCanjeadas", misCanjes);
+                model.put("title", "Ofertas Canjeadas");
+                ctx.render("ofertas/ofertasCanjeadasColaborador.hbs", model);
+
             }
-            ofertas = colaborador.getOfertasRegistradas();
-            model.put("ofertas", ofertas);
-            model.put("title", "Ofertas Canjeadas");
-            ctx.render("ofertas/ofertasCanjeadasColaborador.hbs", model);
+
         } catch (Exception e) {
             ctx.redirect("/iniciarSesion");
         }
