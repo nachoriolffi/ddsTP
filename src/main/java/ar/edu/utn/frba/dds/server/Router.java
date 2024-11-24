@@ -63,7 +63,7 @@ public class Router {
         app.post("/buscarPuntosRecomendacion", Objects.requireNonNull(ServiceLocator.instanceOf(EncargarseHeladeraController.class))::searchPoints);
         // fallaTecnica
         app.get("/fallaTecnica", Objects.requireNonNull(ServiceLocator.instanceOf(FallaTecnicaController.class))::index, TipoRol.COLABORADOR_HUMANO);
-        app.get("/crearfallaTecnica", Objects.requireNonNull(ServiceLocator.instanceOf(FallaTecnicaController.class))::create, TipoRol.COLABORADOR_HUMANO);
+        app.post("/fallaTecnica", Objects.requireNonNull(ServiceLocator.instanceOf(FallaTecnicaController.class))::save, TipoRol.COLABORADOR_HUMANO);
         // visualizarPDFs
         app.get("/reportes", Objects.requireNonNull(ServiceLocator.instanceOf(ReporteController.class))::index, TipoRol.ADMIN);
         app.get("/reportes/{id}", Objects.requireNonNull(ServiceLocator.instanceOf(ReporteController.class))::show, TipoRol.ADMIN);
@@ -119,6 +119,12 @@ public class Router {
 
         app.get("/servicioUbicacion", Objects.requireNonNull(ServiceLocator.instanceOf(ServicioPuntoDonacionController.class))::index);
         app.post("/puntosRecomendadosServicio", Objects.requireNonNull(ServiceLocator.instanceOf(ServicioPuntoDonacionController.class))::show);
+        app.get("/IncidentesTecnico", Objects.requireNonNull(ServiceLocator.instanceOf(TecnicoController.class))::show);
+        app.get("/IncidentesTecnico/{id}", Objects.requireNonNull(ServiceLocator.instanceOf(IncidenteController.class))::index);
+        app.get("/perfilTecnico", Objects.requireNonNull(ServiceLocator.instanceOf(TecnicoController.class))::perfil);
+
+        app.get("/visita", Objects.requireNonNull(ServiceLocator.instanceOf(VisitaController.class))::index);
+        app.post("/visita", Objects.requireNonNull(ServiceLocator.instanceOf(VisitaController.class))::create);
     }
 
 }

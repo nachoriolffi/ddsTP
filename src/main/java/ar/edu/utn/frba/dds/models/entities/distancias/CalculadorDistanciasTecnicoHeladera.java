@@ -3,6 +3,11 @@ package ar.edu.utn.frba.dds.models.entities.distancias;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
+import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoIncidente;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoTecnico;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoUsuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,5 +59,23 @@ public class CalculadorDistanciasTecnicoHeladera {
         }
 
         return tecnicoMasCercano;
+    }
+
+    public List<Heladera> healderasCercanasATecnico(Usuario usuario){
+
+        List<Heladera> heladerasCercanas = new ArrayList<>();
+        List<Heladera> heladeras = RepoHeladeras.INSTANCE.buscarTodos();
+
+        Tecnico tecnico = RepoTecnico.INSTANCE.buscarPorUsuario(usuario.getId());
+
+        for(Heladera heladera : heladeras){
+            if(instanciaCalculadorDistancias.calcularDistancia(tecnico.getCoordenada(), heladera.getCoordenada()) < tecnico.getAreaCobertura()){
+                heladerasCercanas.add(heladera);
+
+            }
+        }
+        return heladerasCercanas;
+
+
     }
 }

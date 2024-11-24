@@ -3,6 +3,9 @@ package ar.edu.utn.frba.dds.models.entities.tecnico;
 import ar.edu.utn.frba.dds.models.converters.MedioComunicacionAtributeConvertere;
 import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
+import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
+import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
+import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRegistrosVisita;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
@@ -26,6 +29,7 @@ public class Tecnico {
 
     @Column(name = "nombre", columnDefinition = "VARCHAR(255)", nullable = false)
     private String nombre;
+
     @Column(name = "apellido", columnDefinition = "VARCHAR(255)", nullable = false)
     private String apellido;
 
@@ -56,6 +60,10 @@ public class Tecnico {
     @OneToMany
     @JoinColumn(name = "tecnico_id")
     private List<Contacto> contactos;
+
+    @OneToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
     public Tecnico() {
         this.contactos = new ArrayList<>();

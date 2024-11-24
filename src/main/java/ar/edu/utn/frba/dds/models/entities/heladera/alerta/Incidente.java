@@ -48,6 +48,9 @@ public class Incidente {
     @JoinColumn(name = "colaborador_id")
     private Colaborador colaborador;
 
+    @Column(name = "estado")
+    private Boolean estado;
+
     public Incidente(TipoAlerta tipoAlerta) {
         this.fecha = new Date();
         this.tipoAlerta = tipoAlerta;

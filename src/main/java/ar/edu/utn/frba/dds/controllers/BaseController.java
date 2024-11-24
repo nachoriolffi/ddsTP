@@ -34,6 +34,9 @@ public abstract class BaseController {
             }else if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
                 model.put("noEsAdmin",true);
                 model.put("esJuridico", true);
+            }else if (usuario.getRol().equals(TipoRol.TECNICO)) {
+                model.put("noEsAdmin",true);
+                model.put("esTecnico", true);
             }
             return  usuario;
         } else {
@@ -101,6 +104,21 @@ public abstract class BaseController {
         if (usuario.getRol().equals(TipoRol.ADMIN)) {
             model.put("esAdmin", true);
             model.put("noEsAdmin",false);
+            return usuario;
+        } else {
+            model.put("inicioSesion", false);
+            model.put("noInicioSesion", true);
+            ctx.redirect("/error403");
+            return null;
+        }
+    }
+
+    protected Usuario verificarTecnico(Context ctx, Map<String, Object> model) {
+        Usuario usuario = usuarioLogueado(ctx);
+        verificarSesion(ctx, model);
+        if (usuario.getRol().equals(TipoRol.TECNICO)) {
+            model.put("esTecnico", true);
+            model.put("noEsAdmin",true);
             return usuario;
         } else {
             model.put("inicioSesion", false);

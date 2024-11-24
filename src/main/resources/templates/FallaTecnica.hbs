@@ -3,7 +3,7 @@
 {{/partial}}
 {{#partial "contenido"}}
     <div class="row">
-        <form class="row needs-validation" method="POST" action="/fallaTecnica" novalidate>
+        <form class="row needs-validation" action="/fallaTecnica" method="POST"  novalidate>
             <div class="col-md-12 col-lg-6">
                 <div class="mb-3 d-flex justify-content-center">
                     <div class="w-100">
@@ -11,7 +11,7 @@
                         <select class="form-select" id="heladera-averiada" name="heladeraAveriada" required>
                             <option value="" disabled selected>Seleccione una Heladera</option>
                             {{#each heladeras}}
-                                <option name="idHeladera" value="{{this.id}}">{{this.nombre}}</option>
+                                <option value="{{this.id}}">{{this.nombre}}</option>
                             {{/each}}
                         </select>
                     </div>

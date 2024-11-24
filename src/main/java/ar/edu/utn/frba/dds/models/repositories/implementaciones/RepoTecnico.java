@@ -14,4 +14,13 @@ public class RepoTecnico extends RepoGenerico<Tecnico> {
         super(Tecnico.class);
     }
 
+    public Tecnico buscarPorUsuario(Long id){
+
+        return entityManager.createQuery(
+                        "SELECT t FROM Tecnico t WHERE t.usuario.id = :usuarioId", Tecnico.class)
+                .setParameter("usuarioId", id)
+                .getSingleResult();
+
+    }
+
 }

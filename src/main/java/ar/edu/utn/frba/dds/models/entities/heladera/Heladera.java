@@ -74,7 +74,7 @@ public class Heladera implements IObservableColaborador {
     private List<RegistroApertura> aperturas; // es una lista de registros de aperturas que se hicieron
 
     @Column(name = "activa")
-    @Setter(AccessLevel.NONE)//pongo esto para yo definir el setter
+    //@Setter(AccessLevel.NONE)//pongo esto para yo definir el setter
     private Boolean estaActiva;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -85,7 +85,8 @@ public class Heladera implements IObservableColaborador {
     private Double tempActual;
 
     @Column(name = "dadaDeBaja")
-    private Boolean dadaDeBaja;
+    private Boolean
+            dadaDeBaja;
 
     @OneToMany
     @JoinColumn(name = "heladera_id")
@@ -196,7 +197,7 @@ public class Heladera implements IObservableColaborador {
     @SuppressWarnings("all")// pongo esto porque me dice que puede estar definido por loombok, pero ya lo excluí
     public void setEstaActiva(Boolean activada) {
         this.estaActiva = activada;
-        this.notificar();
+       // this.notificar();
     }
 
     @Override

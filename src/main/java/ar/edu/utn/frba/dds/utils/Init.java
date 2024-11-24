@@ -9,8 +9,15 @@ import ar.edu.utn.frba.dds.models.entities.cuestionario.TipoPregunta;
 import ar.edu.utn.frba.dds.models.entities.generadorCodigo.GeneradorDeCodigo;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
+import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
+import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
+import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoIncidente;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
+import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Calle;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
@@ -165,7 +172,47 @@ public class Init implements WithSimplePersistenceUnit {
 
         /*--------------HELADERAS--------------*/
 
+        Coordenada coordenadaHeladera1 = new Coordenada();
+        coordenadaHeladera1.setLatitud(-34.615803);
+        coordenadaHeladera1.setLongitud(-58.433298);
+        RepoCoordenada.INSTANCE.agregar(coordenadaHeladera1);
+
+        Calle calleHeladera1 = new Calle();
+        calleHeladera1.setCalle("Medrano");
+        RepoCalle.INSTANCE.agregar(calleHeladera1);
+
+        Direccion direccionHeladera1 = new Direccion();
+        direccionHeladera1.setCalle(calleHeladera1);
+        direccionHeladera1.setAltura(1234);
+        direccionHeladera1.setPiso(1);
+        RepoDireccion.INSTANCE.agregar(direccionHeladera1);
+
         RepoHeladeras repoHeladera = RepoHeladeras.INSTANCE;
+
+        Heladera heladera1 = new Heladera();
+        heladera1.setNombre("Heladera 1");
+        heladera1.setCoordenada(coordenadaHeladera1);
+        heladera1.setDadaDeBaja(true);
+        heladera1.setEstaActiva(false);
+        heladera1.setDireccion(direccionHeladera1);
+        heladera1.setViandasDisponibles(0);
+        heladera1.setFechaPuestaFunc(new Date());
+
+
+        heladera1.setModelo(modeloHeladera1);
+        repoHeladera.agregar(heladera1);
+
+        Incidente incidente1 = new Incidente();
+        incidente1.setDescripcion("Incidente 1");
+        incidente1.setFecha(new Date());
+        incidente1.setTipoIncidente(TipoIncidente.FALLA);
+        incidente1.setTipoAlerta(null); // Ensure this is allowed to be null
+        incidente1.setPathFoto("incidente.jpeg");
+        incidente1.setEstado(false);
+        incidente1.setHeladera(heladera1);
+        RepoIncidente.INSTANCE.agregar(incidente1);
+        heladera1.agregarRegistroDeAlerta(incidente1);
+        repoHeladera.modificar(heladera1);
 
         /*--------------USUARIOS--------------*/
 
@@ -197,6 +244,15 @@ public class Init implements WithSimplePersistenceUnit {
         usuarioJuridico.setCorreoElectronico("ts@gmail.com");
         usuarioJuridico.setRol(TipoRol.COLABORADOR_JURIDICO);
         repoUsuario.agregar(usuarioJuridico);
+
+        // TECNICO
+        Usuario usuarioTecnico = new Usuario();
+        usuarioTecnico.setNombre("Primo re loco");
+        usuarioTecnico.setContrasenia("1234");
+        usuarioTecnico.setCuentaEliminada(false);
+        usuarioTecnico.setCorreoElectronico("fede@gmail.com");
+        usuarioTecnico.setRol(TipoRol.TECNICO);
+        repoUsuario.agregar(usuarioTecnico);
 
         /*--------------TARJETAS--------------*/
 
@@ -350,6 +406,34 @@ public class Init implements WithSimplePersistenceUnit {
         cuestionarioHumano.agregarPregunta(fechaPregunta);
 
         RepoCuestionario.INSTANCE.agregar(cuestionarioHumano);*/
+
+
+        //---------TECNICO---------
+
+
+
+        Coordenada coordenadaTecnico = new Coordenada();
+        coordenadaTecnico.setLatitud(-34.615803);
+        coordenadaTecnico.setLongitud(-58.433298);
+
+        RepoCoordenada.INSTANCE.agregar(coordenadaTecnico);
+
+
+        Tecnico tecnico = new Tecnico();
+        tecnico.setNombre("Tecnico1");
+        tecnico.setApellido("Apellido1");
+        tecnico.setCoordenada(coordenadaTecnico);
+        tecnico.setAreaCobertura((int) 10.0);
+        tecnico.setDni(Integer.valueOf("12345678"));
+        tecnico.setCuil(Integer.valueOf("12345678"));
+        tecnico.setTipoDocumento(TipoDocumento.DNI);
+        tecnico.setDisponible(true);
+        tecnico.setUsuario(usuarioTecnico);
+        //tecnico.agregarMedioDeComunicacion(correo);
+        RepoTecnico.INSTANCE.agregar(tecnico);
+
+
+        //-------------------------
 
         Cuestionario cuestionario1 = new Cuestionario();
         Pregunta nombrePregunta = new Pregunta();

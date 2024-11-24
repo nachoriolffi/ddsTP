@@ -10,4 +10,14 @@ public class RepoIncidente extends RepoGenerico<Incidente> {
     public RepoIncidente() {
         super(Incidente.class);
     }
+
+    public List<Incidente> getIncidentesPorHeladera(Long idHeladera){
+        List<Incidente> incidentes = new ArrayList<>();
+        for (Incidente incidente : this.buscarTodos()) {
+            if (incidente.getHeladera().getId().equals(idHeladera)) {
+                incidentes.add(incidente);
+            }
+        }
+        return incidentes;
+    }
 }
