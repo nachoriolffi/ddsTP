@@ -73,6 +73,8 @@ public class InicioSesionController extends BaseController implements ICrudViews
                 ctx.redirect("/verPerfil");
             } else if (usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)) {
                 ctx.redirect("/verPerfil");
+            }else if(usuario.getRol().equals(TipoRol.TECNICO)){
+                ctx.redirect("/perfilTecnico");
             }
         }
     }

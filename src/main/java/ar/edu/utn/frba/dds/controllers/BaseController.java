@@ -81,6 +81,21 @@ public abstract class BaseController {
         return verificarRol(ctx, modelo, TipoRol.COLABORADOR_JURIDICO);
     }
 
+    protected Usuario verificarTecnico(Context ctx, Map<String, Object> model) {
+        Usuario usuario = usuarioLogueado(ctx);
+        verificarSesion(ctx, model);
+        if (usuario.getRol().equals(TipoRol.TECNICO)) {
+            model.put("esTecnico", true);
+            model.put("noEsAdmin",true);
+            return usuario;
+        } else {
+            model.put("inicioSesion", false);
+            model.put("noInicioSesion", true);
+            ctx.redirect("/error403");
+            return null;
+        }
+    }
+
     protected Usuario verificarAdmin(Context ctx, Map<String, Object> modelo) {
         return verificarRol(ctx, modelo, TipoRol.ADMIN);
     }

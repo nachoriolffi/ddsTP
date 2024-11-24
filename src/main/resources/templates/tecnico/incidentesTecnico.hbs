@@ -1,0 +1,29 @@
+{{#partial "contenido"}}
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="h1">Incidentes Cercanos</h1>
+                <hr class="border-1">
+                {{#each incidentes}}
+                    <a href="/IncidentesTecnico/{{this.id}}" class="text-decoration-none">
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">Incidente #{{this.id}}</h5>
+                                <p class="card-text">Descripción: {{this.descripcion}}</p>
+                                <p class="card-text">Fecha: {{this.fecha}}</p>
+                                <p class="card-text">Ubicación: {{this.ubicacion}}</p>
+                            </div>
+                        </div>
+                    </a>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+{{/partial}}
+
+{{#partial "agregarScript"}}
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="/js/ubicacion.js"></script>
+{{/partial}}
+
+{{> templates/base}}
