@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.controllers;
 
+import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
 import ar.edu.utn.frba.dds.dtos.outputs.DonacionViandaOutputDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
@@ -12,6 +13,8 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoDonacionVianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoViandas;
+import ar.edu.utn.frba.dds.services.HeladeraService;
+import ar.edu.utn.frba.dds.services.UserService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import io.javalin.http.Context;
@@ -30,20 +33,23 @@ public class DonacionViandaController extends BaseController implements ICrudVie
     RepoViandas repoViandas = RepoViandas.INSTANCE;
     RepoColaborador repoColaborador = RepoColaborador.INSTANCE;
     RepoHeladeras repoHeladeras = RepoHeladeras.INSTANCE;
-
+    UserService userService = new UserService();
+    HeladeraService heladeraService = new HeladeraService();
     @Override
     public void index(Context context) {
 
         Map<String, Object> model = new HashMap<>();
 
         Usuario usuario = verificarHumano(context, model);
+        UsuarioDTO usuarioDTO = userService.obtenerUsuarioDTO(usuario);
+        model.put("usuario", usuarioDTO);
         Colaborador colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
 
         List<DonacionVianda> donacionesViandas = colaborador.getColaboracionesRealizadas().stream()
                 .filter(c -> c instanceof DonacionVianda)
                 .map(c -> (DonacionVianda) c)
                 .toList();
-        List<Heladera> heladeras = repoHeladeras.buscarTodos();
+        List<Heladera> heladeras = heladeraService.buscarHeladeras();
 
         List<Vianda> viandas = donacionesViandas.stream()
                 .map(DonacionVianda::getVianda)

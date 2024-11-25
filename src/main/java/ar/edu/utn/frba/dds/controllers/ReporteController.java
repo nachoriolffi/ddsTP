@@ -1,8 +1,10 @@
 package ar.edu.utn.frba.dds.controllers;
 
+import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
 import ar.edu.utn.frba.dds.models.entities.exportadorPDF.Reporte;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoReporte;
+import ar.edu.utn.frba.dds.services.UserService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 import java.nio.file.Paths;
@@ -11,7 +13,7 @@ import java.util.*;
 public class ReporteController extends BaseController implements ICrudViewsHandler {
 
     private RepoReporte repoReporte = RepoReporte.INSTANCE;
-
+    UserService userService = new UserService();
     @Override
     public void index(Context context) {
 
@@ -21,6 +23,8 @@ public class ReporteController extends BaseController implements ICrudViewsHandl
             List<Reporte> reportes = this.repoReporte.buscarTodos();
             model.put("pdfs", reportes);
             model.put("title", "Reportes PDFs");
+            UsuarioDTO usuarioDTO = userService.obtenerUsuarioDTO(usuario);
+            model.put("usuario", usuarioDTO);
             context.render("visualizarReportes.hbs", model);
         } else {
             context.status(403);

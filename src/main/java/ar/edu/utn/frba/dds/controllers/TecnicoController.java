@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.controllers;
 
+import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
 import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.factory.MedioComunicacionFactory;
@@ -14,6 +15,7 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoContacto;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoIncidente;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoTecnico;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoUsuario;
+import ar.edu.utn.frba.dds.services.UserService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import com.sun.mail.util.MailLogger;
@@ -26,6 +28,8 @@ import java.util.Map;
 
 public class TecnicoController extends BaseController implements ICrudViewsHandler {
 
+    UserService userService = new UserService();
+
     @Override
     public void index(Context context) {
         Map<String, Object> model = new HashMap<>();
@@ -34,7 +38,8 @@ public class TecnicoController extends BaseController implements ICrudViewsHandl
             model.put("title", "Cargar Tecnico");
             List<TipoDocumento> tipoDocumentos = List.of(TipoDocumento.values());
             List<TipoContacto> tipoContactos = List.of(TipoContacto.values());//le paso los medio de contacto y con esto puedo hacer algun tipo de facoptry despues o algho asi
-
+            UsuarioDTO usuarioDTO = userService.obtenerUsuarioDTO(usuario);
+            model.put("usuario", usuarioDTO);
             model.put("tipoContactos", tipoContactos);
             model.put("tipoDocumentos", tipoDocumentos);
             context.render("tecnico/cargaTecnico.hbs", model);

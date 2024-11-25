@@ -31,7 +31,7 @@ public class Server {
             Router router = new Router();
             //SchedulerMain.main(new String[]{});
             //Init.iniciar();
-            router.init(Server.app());
+            Router.init(Server.app());
 
 
         }

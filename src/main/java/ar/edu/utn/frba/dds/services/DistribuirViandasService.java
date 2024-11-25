@@ -13,10 +13,14 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoViandas;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DistribuirViandasService {
     public List<Heladera> buscarHeladeras() {
-        return RepoHeladeras.INSTANCE.buscarTodos();
+
+        return RepoHeladeras.INSTANCE.buscarTodos().stream().
+                filter(heladera -> heladera.getEstaActiva()
+                        && !heladera.getDadaDeBaja()).collect(Collectors.toList());
     }
 
     public Colaborador buscarColaborador(Usuario usuario) {

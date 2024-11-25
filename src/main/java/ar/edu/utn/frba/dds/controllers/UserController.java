@@ -22,7 +22,6 @@ public class UserController extends BaseController implements ICrudViewsHandler 
         Map<String, Object> model = new HashMap<>();
         Usuario usuario = verificarSesion(context, model);
         UsuarioDTO usuarioDTO = userService.obtenerUsuarioDTO(usuario);
-
         String clavesNoCoinciden = context.sessionAttribute("clavesNoCoinciden");
         String claveNoSegura = context.sessionAttribute("claveNoSegura");
         model.put("clavesNoCoinciden", clavesNoCoinciden);

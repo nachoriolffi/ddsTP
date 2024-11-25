@@ -1,9 +1,11 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.ModeloDTO;
+import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
 import ar.edu.utn.frba.dds.dtos.inputs.HeladeraInputDTO;
 import ar.edu.utn.frba.dds.dtos.outputs.HeladeraOutputDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.HacerseCargoDeHeladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.ObserverColaborador;
@@ -11,6 +13,7 @@ import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import ar.edu.utn.frba.dds.services.HeladeraService;
+import ar.edu.utn.frba.dds.services.UserService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
@@ -21,7 +24,7 @@ import java.util.Map;
 public class HeladeraController extends BaseController implements ICrudViewsHandler {
 
     HeladeraService heladeraService = new HeladeraService();
-
+    UserService userService = new UserService();
     @Override
     public void index(Context context) {
 
@@ -34,6 +37,8 @@ public class HeladeraController extends BaseController implements ICrudViewsHand
             if (usuario.getRol().equals(TipoRol.ADMIN)) {
                 model.put("esAdmin", true);
             }
+            UsuarioDTO usuarioDTO = userService.obtenerUsuarioDTO(usuario);
+            model.put("usuario", usuarioDTO);
             model.put("title", "Heladeras");
             model.put("heladeras", heladeras);
             model.put("modelos", modelos);
@@ -58,6 +63,7 @@ public class HeladeraController extends BaseController implements ICrudViewsHand
     @Override
     public void create(Context context) {
         context.sessionAttribute("yaExisteConEseNombre", null);
+
         HeladeraInputDTO heladeraInputDTO = new HeladeraInputDTO();
         heladeraInputDTO.setPiso(context.formParam("piso"));
         heladeraInputDTO.setCalle(context.formParam("calle"));

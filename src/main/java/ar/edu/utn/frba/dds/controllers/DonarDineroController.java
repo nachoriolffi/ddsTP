@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.controllers;
 
+import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
 import ar.edu.utn.frba.dds.dtos.outputs.DonacionDineroOutputDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DistribucionVianda;
@@ -9,6 +10,7 @@ import ar.edu.utn.frba.dds.models.entities.multiplicador.config.ConfiguracionMul
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoDonacionDinero;
+import ar.edu.utn.frba.dds.services.UserService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
@@ -20,14 +22,16 @@ public class DonarDineroController extends BaseController implements ICrudViewsH
 
     RepoDonacionDinero repoDonacionDinero = RepoDonacionDinero.INSTANCE;
     RepoColaborador repoColaborador = RepoColaborador.INSTANCE;
-
+    UserService userService = new UserService();
     @Override
     public void index(Context context) {
 
         Map<String, Object> model = new HashMap<>();
         Usuario usuario = verificarJuridicoOHumano(context, model);
-        if(usuario == null) usuario= verificarAdmin(context, model);
 
+        if(usuario == null) usuario= verificarAdmin(context, model);
+        UsuarioDTO usuarioDTO = userService.obtenerUsuarioDTO(usuario);
+        model.put("usuario", usuarioDTO);
         Colaborador colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
         List<DonacionDinero> donacionesDineroNormal = colaborador.getColaboracionesRealizadas().stream()
                 .filter(c -> c instanceof DonacionDinero)

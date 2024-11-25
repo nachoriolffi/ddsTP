@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.controllers;
 
+import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
 import ar.edu.utn.frba.dds.dtos.outputs.DistribucionViandaOutputDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DistribucionVianda;
@@ -11,6 +12,7 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoDistribucionVianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import ar.edu.utn.frba.dds.services.DistribuirViandasService;
+import ar.edu.utn.frba.dds.services.UserService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
@@ -22,12 +24,14 @@ import java.text.ParseException;
 public class DistribuirViandasController extends BaseController implements ICrudViewsHandler {
 
     DistribuirViandasService distribuirViandasService = new DistribuirViandasService();
-
+    UserService userService = new UserService();
     @Override
     public void index(Context context) {
 
         Map<String, Object> model = new HashMap<>();
         Usuario usuario = verificarHumano(context, model);
+        UsuarioDTO usuarioDTO = userService.obtenerUsuarioDTO(usuario);
+        model.put("usuario", usuarioDTO);
         List<Heladera> heladeras = distribuirViandasService.buscarHeladeras();
         List<DistribucionViandaOutputDTO> distribucionViandaOutputDTOS = distribuirViandasService.buscarDistribucionesVianda(usuario);
         model.put("heladeras", heladeras);

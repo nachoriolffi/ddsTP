@@ -11,22 +11,19 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "hacerse_cargo_de_heladera")
 public class HacerseCargoDeHeladera extends FormaDeColaboracion {
 
-    //@ManyToOne
-    //@JoinColumn(name = "id",referencedColumnName = "id_Local",nullable = false)
     @Transient
     private Local local;
 
-    @Getter
     @OneToOne
     @JoinColumn(name = "id", referencedColumnName = "id_Heladera", nullable = false)
     private Heladera heladera;
 
-    @Getter
-    @Setter
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TipoColaboracion tipoColaboracion;

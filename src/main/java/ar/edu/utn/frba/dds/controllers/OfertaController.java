@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.OfertaDTO;
+import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.Oferta;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.OfertaCanje;
@@ -10,6 +11,7 @@ import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoOferta;
 import ar.edu.utn.frba.dds.services.OfertaService;
+import ar.edu.utn.frba.dds.services.UserService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 import io.javalin.http.UploadedFile;
@@ -22,7 +24,7 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
 
     RepoOferta repositorioOferta = RepoOferta.INSTANCE;
     OfertaService ofertaService = new OfertaService();
-
+    UserService userService = new UserService();
     @Override
     public void index(Context ctx) {
 
@@ -48,6 +50,8 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
                     model.put("rubros", Rubro.values());
                     break;
             }
+            UsuarioDTO usuarioDTO = userService.obtenerUsuarioDTO(usuario);
+            model.put("usuario", usuarioDTO);
             ofertas = repositorioOferta.buscarTodos();
             List<Oferta> ofertasConStock = new ArrayList<>();
             for (Oferta oferta : ofertas) {

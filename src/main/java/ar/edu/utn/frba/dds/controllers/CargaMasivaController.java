@@ -1,7 +1,9 @@
 package ar.edu.utn.frba.dds.controllers;
 
+import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.services.CargaMasivaService;
+import ar.edu.utn.frba.dds.services.UserService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 import io.javalin.http.UploadedFile;
@@ -13,12 +15,14 @@ import java.util.concurrent.CompletableFuture;
 public class CargaMasivaController extends BaseController implements ICrudViewsHandler {
 
     CargaMasivaService cargaMasivaService = new CargaMasivaService();
-
+    UserService userService = new UserService();
     @Override
     public void index(Context context) {
 
         Map<String, Object> model = new HashMap<>();
         Usuario usuario = verificarAdmin(context, model);
+        UsuarioDTO usuarioDTO = userService.obtenerUsuarioDTO(usuario);
+        model.put("usuario", usuarioDTO);
         if (usuario != null) {
             model.put("title", "Carga Masiva CSV");
             context.render("cargaMasiva/cargaMasiva.hbs", model);

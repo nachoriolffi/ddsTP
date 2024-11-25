@@ -15,6 +15,7 @@ import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class HeladeraService {
 
@@ -27,6 +28,13 @@ public class HeladeraService {
 
     public List<ModeloHeladera> obtenerModelosHeladera() {
         return repoModelo.buscarTodos();
+    }
+
+    public List<Heladera> buscarHeladeras() {
+
+        return RepoHeladeras.INSTANCE.buscarTodos().stream().
+                filter(heladera -> heladera.getEstaActiva()
+                        && !heladera.getDadaDeBaja()).collect(Collectors.toList());
     }
 
     public List<HeladeraOutputDTO> obtenerHeladeras() {
@@ -48,7 +56,7 @@ public class HeladeraService {
         return heladerasDTO;
     }
 
-    public void darDeAltaHeladera(HeladeraInputDTO heladeraInputDTO) {
+    public Heladera darDeAltaHeladera(HeladeraInputDTO heladeraInputDTO) {
         ModeloHeladera modelo = this.repoModelo.buscar(Long.valueOf(heladeraInputDTO.getModelo()));
         Heladera heladera = new Heladera();
         heladera.setNombre(heladeraInputDTO.getNombre());
@@ -74,6 +82,7 @@ public class HeladeraService {
         heladera.setReceptorTemperatura(new ReceptorTemperatura());
         heladera.setReceptorMovimiento(new ReceptorMovimiento());
         repoHeladeras.agregar(heladera);
+        return heladera;
     }
 
     public void cargarModelo(ModeloDTO modeloDTO) {

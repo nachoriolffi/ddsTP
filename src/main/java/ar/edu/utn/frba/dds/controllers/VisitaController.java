@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.controllers;
 
+import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.models.entities.tecnico.RegistroVisita;
@@ -9,6 +10,7 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoIncidente;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRegistrosVisita;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoTecnico;
+import ar.edu.utn.frba.dds.services.UserService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 import io.javalin.http.UploadedFile;
@@ -23,6 +25,9 @@ import java.util.Map;
 import java.util.Objects;
 
 public class VisitaController extends BaseController implements ICrudViewsHandler {
+
+    UserService userService = new UserService();
+
     @Override
     public void index(Context context) {
         //vamos a la visa para la carga de la visita necesitamos el id del incidente y el id del tecnico que lo tenemos en la sesion
@@ -30,7 +35,8 @@ public class VisitaController extends BaseController implements ICrudViewsHandle
         Usuario usuario = verificarSesion(context,model);
 
         Tecnico tecnico = RepoTecnico.INSTANCE.buscarPorUsuario(usuario.getId());
-
+        UsuarioDTO usuarioDTO = userService.obtenerUsuarioDTO(usuario);
+        model.put("usuario", usuarioDTO);
         // ya conozco al tecnico ahora necesito el incidenteç
         String incidenteIdStr = context.queryParam("id");
         String id = context.formParam("id");

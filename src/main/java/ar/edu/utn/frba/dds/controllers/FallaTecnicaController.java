@@ -1,10 +1,12 @@
 package ar.edu.utn.frba.dds.controllers;
 
+import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoIncidente;
+import ar.edu.utn.frba.dds.services.UserService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 import io.javalin.http.UploadedFile;
@@ -25,7 +27,7 @@ public class FallaTecnicaController extends BaseController implements ICrudViews
 
     private static final String UPLOAD_DIR = "src/main/resources/public/imagenes/";
     private final RepoIncidente repositorioIncidentes = RepoIncidente.INSTANCE;
-
+    private UserService userService = new UserService();
     public static Date convertToDate(String dateTimeString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         LocalDateTime localDateTime = LocalDateTime.parse(dateTimeString, formatter);
@@ -41,6 +43,8 @@ public class FallaTecnicaController extends BaseController implements ICrudViews
             model.put("title", "Reportar Falla Tecnica");
             List<Heladera> heladeras = RepoHeladeras.INSTANCE.buscarTodos();
             model.put("heladeras", heladeras);
+            UsuarioDTO usuarioDTO = userService.obtenerUsuarioDTO(usuario);
+            model.put("usuario", usuarioDTO);
             context.render("/FallaTecnica.hbs", model);
         } else {
             context.status(403);

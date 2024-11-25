@@ -8,13 +8,13 @@
             <div class="col-md-2 text-md-end">
                 <a class="btn btn-outline-primary" href="/mapaHeladeras">Ver Mapa</a>
             </div>
-            <div class="col-md-2 text-md-end">
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
-                        data-bs-target="#cargarHeladeraModal">
-                    Cargar Heladera
-                </button>
-            </div>
             {{#if esAdmin}}
+                <div class="col-md-2 text-md-end">
+                    <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                            data-bs-target="#cargarHeladeraModal">
+                        Cargar Heladera
+                    </button>
+                </div>
                 <div class="col-md-4 text-md-end">
                     <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
                             data-bs-target="#cargarModeloModal">
@@ -49,7 +49,7 @@
                             <td>{{this.viandasRestantes}}</td>
                             <!-- BOTON DE SUSCRIPCION DE HELADERA-->
                             <td>
-                                <button class="btn btn-sm" data-bs-toggle="modal" data-heladera-id="{{id}}" data-bs-target="#subscribeModal-{{id}}">
+                                <button class="btn btn-sm" data-bs-toggle="modal" data-heladera-id="{{this.id}}" data-bs-target="#subscribeModal-{{this.id}}">
                                 <i class="fa-solid fa-check-circle fa-lg"></i>
                                 </button>
                             </td>
