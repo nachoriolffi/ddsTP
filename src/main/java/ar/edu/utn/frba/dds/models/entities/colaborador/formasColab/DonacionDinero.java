@@ -11,7 +11,7 @@ import java.util.Date;
 @Setter
 @Getter
 @Entity
-@Table(name="doancion_dinero")
+@Table(name="donacion_dinero")
 public class DonacionDinero extends FormaDeColaboracion {
 
     @Id

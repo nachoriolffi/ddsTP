@@ -3,7 +3,6 @@ package ar.edu.utn.frba.dds.controllers;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoGenerico;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoIncidente;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
@@ -19,13 +18,19 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 import static ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoIncidente.FALLA;
 
 public class FallaTecnicaController extends BaseController implements ICrudViewsHandler {
 
-    private RepoIncidente repositorioIncidentes = RepoIncidente.INSTANCE;
+    private static final String UPLOAD_DIR = "src/main/resources/public/imagenes/";
+    private final RepoIncidente repositorioIncidentes = RepoIncidente.INSTANCE;
+
+    public static Date convertToDate(String dateTimeString) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        LocalDateTime localDateTime = LocalDateTime.parse(dateTimeString, formatter);
+        return Date.valueOf(localDateTime.toLocalDate());
+    }
 
     @Override
     public void index(Context context) {
@@ -42,8 +47,6 @@ public class FallaTecnicaController extends BaseController implements ICrudViews
         }
     }
 
-    private static final String UPLOAD_DIR = "src/main/resources/public/imagenes/";
-
     @Override
     public void save(Context context) {
         Incidente nuevoIncidente = new Incidente();
@@ -54,7 +57,6 @@ public class FallaTecnicaController extends BaseController implements ICrudViews
         nuevoIncidente.setTipoIncidente(FALLA);
         nuevoIncidente.setDescripcion(context.formParam("descripcionFalla"));
         String fecha = context.formParam("diaYHora");
-
 
         // Handle file upload
         UploadedFile uploadedFile = context.uploadedFile("pathFoto");
@@ -72,14 +74,12 @@ public class FallaTecnicaController extends BaseController implements ICrudViews
             }
         }
 
-
         nuevoIncidente.setFecha(Date.valueOf(convertToDate(fecha).toLocalDate()));
         nuevoIncidente.setPathFoto(context.formParam("fotoFalla"));
         heladera.setDadaDeBaja(true);
         heladera.setEstaActiva(false);
 
         nuevoIncidente.setEstado(false);
-
         this.repositorioIncidentes.agregar(nuevoIncidente);
         RepoHeladeras.INSTANCE.modificar(heladera);
         context.redirect("fallaTecnica");
@@ -99,6 +99,7 @@ public class FallaTecnicaController extends BaseController implements ICrudViews
     public void delete(Context context) {
 
     }
+
     @Override
     public void show(Context context) {
 
@@ -107,12 +108,6 @@ public class FallaTecnicaController extends BaseController implements ICrudViews
     @Override
     public void create(Context context) {
 
-    }
-
-    public static Date convertToDate(String dateTimeString) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
-        LocalDateTime localDateTime = LocalDateTime.parse(dateTimeString, formatter);
-        return Date.valueOf(localDateTime.toLocalDate());
     }
 
 

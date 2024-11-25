@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.services;
 
 import ar.edu.utn.frba.dds.dtos.ModeloDTO;
+import ar.edu.utn.frba.dds.dtos.ViandaDTO;
 import ar.edu.utn.frba.dds.dtos.inputs.HeladeraInputDTO;
 import ar.edu.utn.frba.dds.dtos.outputs.HeladeraOutputDTO;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
@@ -10,8 +11,7 @@ import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Calle;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.Georef;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases.GeorefInitializer;
+import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 
 import java.util.*;
@@ -55,7 +55,7 @@ public class HeladeraService {
         heladera.setModelo(modelo);
         //Georef georef = GeorefInitializer.initializeGeoref();
         //Coordenada coordenada = georef.obtenerCoordenadasPorDireccion(heladeraInputDTO.getCalle() + heladeraInputDTO.getAltura());
-        Coordenada coordenada = new Coordenada(Double.valueOf(heladeraInputDTO.getLatitud()),Double.valueOf(heladeraInputDTO.getLongitud()));
+        Coordenada coordenada = new Coordenada(Double.valueOf(heladeraInputDTO.getLatitud()), Double.valueOf(heladeraInputDTO.getLongitud()));
         repoCoordenada.agregar(coordenada);
         heladera.setCoordenada(coordenada);
         heladera.setViandasDisponibles(0);
@@ -95,13 +95,21 @@ public class HeladeraService {
         model.put("nombre", heladera.getNombre());
         model.put("direccion", heladera.getDireccion().getCalle().getCalle() + " " +
                 " " + heladera.getDireccion().getAltura().toString() +
-                " Piso: " + heladera.getDireccion().getPiso().toString());
+                ", Piso: " + heladera.getDireccion().getPiso().toString());
         model.put("latitud", heladera.getCoordenada().getLatitud());
         model.put("longitud", heladera.getCoordenada().getLongitud());
-        model.put("viandas", repoViandas.buscarViandasPorHeladeraId(heladera.getId()));
+        List<ViandaDTO> viandaDTOS = new ArrayList<>();
+        List<Vianda> viandas = repoViandas.buscarViandasPorHeladeraId(heladera.getId());
+        for (Vianda vianda : viandas) {
+            ViandaDTO viandaDTO = new ViandaDTO();
+            viandaDTO.setComida(vianda.getComida());
+            viandaDTO.setPeso(String.valueOf(vianda.getPeso()));
+            viandaDTO.setCalorias(String.valueOf(vianda.getCalorias()));
+            viandaDTO.setFechaCaducidad(String.valueOf(vianda.getFechaCaducidad()));
+            viandaDTOS.add(viandaDTO);
+        }
+        model.put("viandas", viandaDTOS);
         model.put("aperturas", heladera.getAperturas());
-        // model.put("alertas", heladera.getAlertas());
-
         return model;
     }
 

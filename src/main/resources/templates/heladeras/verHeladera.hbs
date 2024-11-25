@@ -1,46 +1,52 @@
 {{#partial "contenido"}}
     <section class="container">
-        <h1>{{nombre}}</h1>
-        <p>Dirección: {{direccion}}</p>
-        <div id="map" style="height: 400px;" class="border"></div>
-        <h2>Viandas</h2>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Calorías</th>
-                <th>Peso (En Gramos)</th>
-                <th>Fecha de Caducidad</th>
-            </tr>
-            </thead>
-            <tbody>
-            {{#each viandas}}
-                <tr>
-                    <td>{{this.nombre}}</td>
-                    <td>{{this.calorias}}</td>
-                    <td>{{this.peso}}</td>
-                    <td>{{this.caducidad}}</td>
-                </tr>
-            {{/each}}
-            </tbody>
-        </table>
-        <h2>Aperturas</h2>
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Fecha Apertura</th>
-                <th>Colaborador</th>
-            </tr>
-            </thead>
-            <tbody>
-            {{#each aperturas}}
-                <tr>
-                    <td>{{this.fecha}}</td>
-                    <td>{{this.colaborador}}</td>
-                </tr>
-            {{/each}}
-            </tbody>
-        </table>
+        <div class="row">
+            <div class="col-6 col-md-12">
+                <h1>{{nombre}}</h1>
+                <p>Dirección: {{direccion}}</p>
+                <div id="map" style="height: 400px;" class="figure-img border rounded"></div>
+            </div>
+            <div class="col-6 col-md-12">
+                <h2>Viandas</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Calorías</th>
+                        <th>Peso (En Gramos)</th>
+                        <th>Fecha de Caducidad</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each viandas}}
+                        <tr>
+                            <td>{{this.comida}}</td>
+                            <td>{{this.calorias}}</td>
+                            <td>{{this.peso}}</td>
+                            <td>{{this.fechaCaducidad}}</td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+                <h2>Aperturas</h2>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Fecha Apertura</th>
+                        <th>Colaborador</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each aperturas}}
+                        <tr>
+                            <td>{{this.fecha}}</td>
+                            <td>{{this.colaborador}}</td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
         <div class="text-end">
             <button type="button" class="btn btn-primary" onclick="window.history.back();">Cerrar</button>
         </div>
@@ -69,7 +75,7 @@
                 boxZoom: false, // Desactiva el zoom por selección de área
                 keyboard: false, // Desactiva el control del mapa con teclado
                 zoomControl: false, // Desactiva los controles de zoom del mapa
-            }).setView([lat, lng], 18); // Ubicación inicial
+            }).setView([lat, lng], 16); // Ubicación inicial
 
             // Cargar los tiles de OpenStreetMap
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

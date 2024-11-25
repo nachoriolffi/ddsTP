@@ -9,15 +9,10 @@ import ar.edu.utn.frba.dds.models.entities.cuestionario.TipoPregunta;
 import ar.edu.utn.frba.dds.models.entities.generadorCodigo.GeneradorDeCodigo;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
-import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
-import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
-import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoIncidente;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Calle;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
@@ -32,7 +27,7 @@ public class Init implements WithSimplePersistenceUnit {
 
         /*--------------MODELOS--------------*/
 
-        RepoModelo repoModelo = new RepoModelo();
+        //RepoModelo repoModelo = new RepoModelo();
 
         ModeloHeladera modeloHeladera1 = new ModeloHeladera();
         modeloHeladera1.setNombreModelo("Heladera Industrial X500");
@@ -84,7 +79,7 @@ public class Init implements WithSimplePersistenceUnit {
 
         /*--------------HELADERAS--------------*/
 
-        Coordenada coordenadaHeladera1 = new Coordenada();
+       /* Coordenada coordenadaHeladera1 = new Coordenada();
         coordenadaHeladera1.setLatitud(-34.615803);
         coordenadaHeladera1.setLongitud(-58.433298);
         RepoCoordenada.INSTANCE.agregar(coordenadaHeladera1);
@@ -124,11 +119,11 @@ public class Init implements WithSimplePersistenceUnit {
         incidente1.setHeladera(heladera1);
         RepoIncidente.INSTANCE.agregar(incidente1);
         heladera1.agregarRegistroDeAlerta(incidente1);
-        repoHeladera.modificar(heladera1);
+        repoHeladera.modificar(heladera1);*/
 
         /*--------------USUARIOS--------------*/
 
-        RepoUsuario repoUsuario = RepoUsuario.INSTANCE;
+        //RepoUsuario repoUsuario = RepoUsuario.INSTANCE;
 
         // ADMIN
         Usuario usuarioAdmin = new Usuario();
@@ -178,7 +173,7 @@ public class Init implements WithSimplePersistenceUnit {
         /*--------------COLABORADORES--------------*/
 
         // COLABORADOR HUMANO
-        List<TipoColaboracion> formaDeColaboraciones = new ArrayList<>();
+        /*List<TipoColaboracion> formaDeColaboraciones = new ArrayList<>();
         formaDeColaboraciones.add(TipoColaboracion.DONACION_VIANDAS);
         formaDeColaboraciones.add(TipoColaboracion.DINERO);
         formaDeColaboraciones.add(TipoColaboracion.REDISTRIBUCION_VIANDAS);
@@ -192,9 +187,9 @@ public class Init implements WithSimplePersistenceUnit {
         colaboradorHumano.setFechaDeNacimiento(LocalDate.now());
         colaboradorHumano.setFormasDeColaboracion(formaDeColaboraciones);
         colaboradorHumano.setFueCargaMasiva(false);
-        //RepoColaborador.INSTANCE.agregar(colaboradorHumano);
+        RepoColaborador.INSTANCE.agregar(colaboradorHumano);
         // Asigno Tarjetas al colaborador para registrar vulnerables
-        /*List<Tarjeta> tarjetas = repoTarjeta.buscarTodos();
+        List<Tarjeta> tarjetas = repoTarjeta.buscarTodos();
         for (int i = 0; i < 10; i++) {
             Tarjeta tarjeta = tarjetas.get(i);
             if (tarjeta.getColaboradorAsignador() == null) {
@@ -223,7 +218,7 @@ public class Init implements WithSimplePersistenceUnit {
         formasColaboracion.add(TipoColaboracion.HACERSE_CARGO_HELADERA);
         formasColaboracion.add(TipoColaboracion.DINERO);
         colaboradorJuridico.setFormasDeColaboracion(formasColaboracion);
-        //RepoColaborador.INSTANCE.agregar(colaboradorJuridico);
+        RepoColaborador.INSTANCE.agregar(colaboradorJuridico);*/
 
         /*--------------CUESTIONARIOS--------------*/
 
@@ -322,12 +317,11 @@ public class Init implements WithSimplePersistenceUnit {
 
         //---------TECNICO---------
 
-        Coordenada coordenadaTecnico = new Coordenada();
+        /*Coordenada coordenadaTecnico = new Coordenada();
         coordenadaTecnico.setLatitud(-34.615803);
         coordenadaTecnico.setLongitud(-58.433298);
 
-        //RepoCoordenada.INSTANCE.agregar(coordenadaTecnico);
-
+        RepoCoordenada.INSTANCE.agregar(coordenadaTecnico);
 
         Tecnico tecnico = new Tecnico();
         tecnico.setNombre("Tecnico1");
@@ -338,9 +332,10 @@ public class Init implements WithSimplePersistenceUnit {
         tecnico.setCuil(Integer.valueOf("12345678"));
         tecnico.setTipoDocumento(TipoDocumento.DNI);
         tecnico.setDisponible(true);
-        tecnico.setUsuario(usuarioTecnico);
+        Usuario u = RepoUsuario.INSTANCE.buscar(4L);
+        tecnico.setUsuario(u);
         //tecnico.agregarMedioDeComunicacion(correo);
-        //RepoTecnico.INSTANCE.agregar(tecnico);
+        RepoTecnico.INSTANCE.agregar(tecnico);*/
 
 
         //-------------------------

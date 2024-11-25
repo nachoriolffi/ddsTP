@@ -22,9 +22,6 @@ public class IncidenteController extends BaseController  implements ICrudViewsHa
 
         model.put("incidente", incidente);
         context.render("incidentes/incidente.hbs", model);
-
-
-
     }
 
     @Override

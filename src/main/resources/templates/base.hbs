@@ -31,38 +31,45 @@
                 {{#if inicioSesion}}
                     <li class="nav-item dropdown">
                         {{#if noEsAdmin}}
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
-                               aria-expanded="false">Donaciones</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/donacionDinero">Donar Dinero</a></li>
-                                {{#if esJuridico}}
-                                    <li><a class="dropdown-item" href="/encargarseHeladera">Encargarse de Heladera</a>
-                                    </li>
-                                {{/if}}
-                                {{#if esHumano}}
-                                    <li><a class="dropdown-item" href="/donarViandas">Donar Viandas</a></li>
-                                    <li><a class="dropdown-item" href="/distribuirViandas">Distribuir Viandas</a></li>
-                                    <li><a class="dropdown-item" href="/registroVulnerable">Registrar Personas
-                                        Vulnerables</a></li>
-                                    <li>
-                                        <hr class="dropdown-divider">
-                                    </li>
-                                    <li><a class="dropdown-item" href="/misHeladeras">Suscripciones a Heladeras</a></li>
-                                {{/if}}
-
-                            </ul>
+                            {{#if noEsTecnico}}
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                   aria-expanded="false">Donaciones</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/donacionDinero">Donar Dinero</a></li>
+                                    {{#if esJuridico}}
+                                        <li><a class="dropdown-item" href="/encargarseHeladera">Encargarse de
+                                            Heladera</a>
+                                        </li>
+                                    {{/if}}
+                                    {{#if esHumano}}
+                                        <li><a class="dropdown-item" href="/donarViandas">Donar Viandas</a></li>
+                                        <li><a class="dropdown-item" href="/distribuirViandas">Distribuir Viandas</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="/registroVulnerable">Registrar Personas
+                                            Vulnerables</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" href="/misHeladeras">Suscripciones a Heladeras</a>
+                                        </li>
+                                    {{/if}}
+                                </ul>
+                            {{/if}}
                         {{/if}}
                     </li>
-                    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" role="button"
-                                                     aria-expanded="false" data-bs-toggle="dropdown" href="#">Canje
-                        Puntos/Servicios</a>
-                        <ul class="dropdown-menu">
-                            <li class="nav-item"><a class="dropdown-item" href="/canjeProductos">Tienda</a></li>
-                            {{#if esHumano}}
-                                <li><a class="dropdown-item" href="/ofertasCanjeadas">Ofertas Canjeadas</a></li>
-                            {{/if}}
-                        </ul>
-                    </li>
+                    {{#if noEsTecnico}}
+                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" role="button"
+                                                         aria-expanded="false" data-bs-toggle="dropdown" href="#">Canje
+                            Puntos/Servicios</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="dropdown-item" href="/canjeProductos">Tienda</a></li>
+                                {{#if esHumano}}
+                                    <li><a class="dropdown-item" href="/ofertasCanjeadas">Ofertas Canjeadas</a></li>
+                                {{/if}}
+                            </ul>
+                        </li>
+                    {{/if}}
+
                     <li class="nav-item"><a class="nav-link" href="/heladeras">Ver Heladeras</a></li>
                     {{#if esHumano}}
                         <li class="nav-item dropdown">
@@ -91,7 +98,8 @@
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                                aria-expanded="false">Herramientas</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/servicioUbicacion">Solicitar Puntos Colocacion</a></li>
+                                <li><a class="dropdown-item" href="/servicioUbicacion">Solicitar Puntos Colocacion</a>
+                                </li>
                             </ul>
                         </li>
                     {{/if}}
@@ -100,7 +108,8 @@
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                                aria-expanded="false">Herramientas</a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="/IncidentesTecnico">incidentes Tecnico</a></li>
+                                <li><a class="dropdown-item" href="/IncidentesTecnico">Incidentes/Fallas Tecnicas</a>
+                                </li>
                             </ul>
                         </li>
                     {{/if}}
@@ -114,7 +123,8 @@
                             </form>
                         </ul>
                     </li>
-                    <li class="nav-item"><a class="nav-link">Bienvenido, {{usuario.nombre}}</a></li>
+                    <li class="nav-item"><a class="nav-link">Bienvenido, {{usuario.nombre}} {{usuario.apellido}}</a>
+                    </li>
                 {{/if}}
                 {{#if noInicioSesion}}
                     <li class="nav-item">

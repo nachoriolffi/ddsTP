@@ -82,7 +82,7 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
             RepoTarjeta.INSTANCE.agregar(tarjeta);
         }
 
-        //context.redirect("/iniciarSesion");
+        context.redirect("/iniciarSesion");
     }
 
 
