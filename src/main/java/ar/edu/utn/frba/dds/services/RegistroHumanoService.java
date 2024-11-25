@@ -101,17 +101,20 @@ public class RegistroHumanoService {
 
 
         if (telefono != null && !telefono.isEmpty()) {
-            /*if (seleccionoWhatsApp) {
+            if (seleccionoWhatsApp) {
                 Contacto contactoWhatsApp = new Contacto(TipoContacto.WPP, telefono);
+                RepoContacto.INSTANCE.agregar(contactoWhatsApp);
                 contacto.add(contactoWhatsApp);
-            }*/ // lo dejo comentado para no enviar todavía notificaciones por whatsapp y no gastar recursos
+            } // lo dejo comentado para no enviar todavía notificaciones por whatsapp y no gastar recursos
             if (seleccionoTelegram) {
                 Contacto contactoTelegram = new Contacto(TipoContacto.TELEGRAM, telefono);
+                RepoContacto.INSTANCE.agregar(contactoTelegram);
                 contacto.add(contactoTelegram);
             }
         }
         if (correo != null && !correo.isEmpty()) {
             Contacto contactoCorreo = new Contacto(TipoContacto.MAIL, correo);
+            RepoContacto.INSTANCE.agregar(contactoCorreo);
             contacto.add(contactoCorreo);
         }
         colaborador.setContacto(contacto);

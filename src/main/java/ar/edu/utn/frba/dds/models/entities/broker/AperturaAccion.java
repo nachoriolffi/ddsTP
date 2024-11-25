@@ -4,6 +4,7 @@ import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.RegistroApertura;
 import ar.edu.utn.frba.dds.models.entities.heladera.RegistroSolicitud;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRegistroApertura;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRegistroSolicitud;
 
 import java.io.IOException;
@@ -35,8 +36,8 @@ public class AperturaAccion implements AccionTopico{
         registroApertura.setSolicitud(registroSolicitud.getSolicitud());
         registroApertura.setViandas(registroSolicitud.getCantidadViandas());
         registroApertura.setRetiroVianda(registroSolicitud.getRetiroVianda());
+        RepoRegistroApertura.INSTANCE.agregar(registroApertura); // AGREGADO DE UN TODO
         heladera.agregarApertura(registroApertura);
-        //TODO agregar el repo de registro de apertura
     }
 
 }

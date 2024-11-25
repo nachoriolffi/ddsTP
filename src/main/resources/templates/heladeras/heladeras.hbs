@@ -47,9 +47,10 @@
                             <td>{{this.direccion}}</td>
                             <td>{{this.capacidad}}</td>
                             <td>{{this.viandasRestantes}}</td>
+                            <!-- BOTON DE SUSCRIPCION DE HELADERA-->
                             <td>
-                                <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#susbscribeModal">
-                                    <i class="fa-solid fa-check-circle fa-lg"></i>
+                                <button class="btn btn-sm" data-bs-toggle="modal" data-heladera-id="{{id}}" data-bs-target="#subscribeModal-{{id}}">
+                                <i class="fa-solid fa-check-circle fa-lg"></i>
                                 </button>
                             </td>
                             {{#if esAdmin}}
@@ -225,6 +226,81 @@
             </div>
         </div>
     </div>
+
+    <!-- SUSCRIPCION A HELADERA MODAL -->
+    <div class="modal fade" id="subscribeModal-{{id}}" tabindex="-1" aria-labelledby="subscribeModalLabel-{{id}}" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="subscribeModalLabel-{{id}}">
+                        Suscribirse a "{{nombre}}"
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/subscribe" method="POST">
+                    <div class="modal-body">
+                        <!-- Opciones de Suscripción -->
+                        <ul class="nav nav-tabs" id="subscriptionOptions-{{id}}" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="option1-tab-{{id}}" data-bs-toggle="tab" data-bs-target="#option1-{{id}}" type="button" role="tab" aria-controls="option1-{{id}}" aria-selected="true">
+                                    Suscribirse como Colaborador
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="option2-tab-{{id}}" data-bs-toggle="tab" data-bs-target="#option2-{{id}}" type="button" role="tab" aria-controls="option2-{{id}}" aria-selected="false">
+                                    Suscripción por Capacidad
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="option3-tab-{{id}}" data-bs-toggle="tab" data-bs-target="#option3-{{id}}" type="button" role="tab" aria-controls="option3-{{id}}" aria-selected="false">
+                                    Reubicación por Desperfecto
+                                </button>
+                            </li>
+                        </ul>
+
+                        <!-- Contenido dinámico según la opción seleccionada -->
+                        <div class="tab-content mt-3" id="subscriptionContent-{{id}}">
+                            <!-- Opción 1 -->
+                            <div class="tab-pane fade show active" id="option1-{{id}}" role="tabpanel" aria-labelledby="option1-tab-{{id}}">
+                                <p>¿Cuántas viandas desea aportar?</p>
+                                <input type="number" class="form-control" name="viandasAportar" min="1" placeholder="Cantidad de viandas">
+                            </div>
+
+                            <!-- Opción 2 -->
+                            <div class="tab-pane fade" id="option2-{{id}}" role="tabpanel" aria-labelledby="option2-tab-{{id}}">
+                                <p>Ingrese la cantidad máxima de viandas que puede llevar:</p>
+                                <input type="number" class="form-control" name="viandasMaximas" min="1" placeholder="Máxima cantidad">
+                            </div>
+
+                            <!-- Opción 3 -->
+                            <div class="tab-pane fade" id="option3-{{id}}" role="tabpanel" aria-labelledby="option3-tab-{{id}}">
+                                <p>La heladera sufrió un desperfecto. Seleccione las heladeras de destino:</p>
+                                <ul>
+                                    {{#each heladerasSugeridas}}
+                                        <li>
+                                            <input type="checkbox" name="destinos" value="{{id}}" id="heladera-{{id}}">
+                                            <label for="heladera-{{id}}">{{nombre}} (Capacidad: {{capacidadDisponible}})</label>
+                                        </li>
+                                    {{/each}}
+                                </ul>
+                                <p>¿Cuántas viandas desea reubicar?</p>
+                                <input type="number" class="form-control" name="viandasReubicar" min="1" placeholder="Cantidad de viandas">
+                            </div>
+                        </div>
+
+                        <!-- Campo oculto para el ID de la heladera -->
+                        <input type="hidden" name="heladeraId" value="{{id}}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Confirmar Suscripción</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
 
     <!-- Modal para Editar Heladera -->
     <div class="modal modal-lg fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel"

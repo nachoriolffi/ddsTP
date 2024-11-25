@@ -3,12 +3,13 @@ package ar.edu.utn.frba.dds.controllers;
 import ar.edu.utn.frba.dds.dtos.ModeloDTO;
 import ar.edu.utn.frba.dds.dtos.inputs.HeladeraInputDTO;
 import ar.edu.utn.frba.dds.dtos.outputs.HeladeraOutputDTO;
+import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
+import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.ObserverColaborador;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoViandas;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import ar.edu.utn.frba.dds.services.HeladeraService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
@@ -123,6 +124,18 @@ public class HeladeraController extends BaseController implements ICrudViewsHand
         String heladeraId = context.formParam("heladeraId");
         heladeraService.darDeBajaHeladera(Long.parseLong(heladeraId));
         context.redirect("/heladeras");
+    }
+    public void subscribe(Context context){
+        Usuario usuario = RepoUsuario.INSTANCE.buscar(context.sessionAttribute("usuario_id"));
+        Long idHeladera = Long.valueOf(context.formParam("heladeraId"));
+        Colaborador colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
+        Heladera heladera = RepoHeladeras.INSTANCE.buscar(idHeladera);
+        ObserverColaborador observerColaborador = new ObserverColaborador();
+        observerColaborador.setSuscriptor(colaborador);
+        RepoSuscriptorHeladera.INSTANCE.agregar(observerColaborador);
+        heladera.agregarColaborador(observerColaborador);
+        RepoHeladeras.INSTANCE.modificar(heladera);
+
     }
 }
 

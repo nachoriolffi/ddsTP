@@ -17,9 +17,9 @@ public class UserService {
 
     public UsuarioDTO obtenerUsuarioDTO(Usuario usuario) {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
-        String[] partesNombre = usuario.getNombre().split(" ");
-        String nombre = String.join(" ", Arrays.copyOfRange(partesNombre, 0, partesNombre.length - 1));
-        String apellido = partesNombre[partesNombre.length - 1];
+
+        String nombre = usuario.getNombre();
+        String apellido = usuarioDTO.getApellido();
         Colaborador colaborador;
 
         switch (usuario.getRol()) {

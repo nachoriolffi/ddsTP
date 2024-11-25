@@ -110,6 +110,7 @@ public class Router {
         app.post("/cargarModelo", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::createModel);
         app.post("heladeras/modificar", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::edit);
         app.post("heladeras/darDeBaja", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::delete);
+        app.post("/suscribirse/{id}", Objects.requireNonNull(ServiceLocator.instanceOf(HeladeraController.class))::subscribe);
 
         app.get("/verPerfil", Objects.requireNonNull(ServiceLocator.instanceOf(UserController.class))::index);
         app.post("/guardarCambiosPerfil", Objects.requireNonNull(ServiceLocator.instanceOf(UserController.class))::edit);

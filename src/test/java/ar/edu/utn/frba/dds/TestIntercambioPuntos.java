@@ -53,7 +53,7 @@ public class TestIntercambioPuntos
         // Hace un intento de canje y no puede cambiar los productos que quiere
         assert canjeadorPuntos.CanjearPuntos(colaborador,ofertasACanjear3).equals(Boolean.FALSE);
         assert  colaborador.puntosActualesDisponibles().equals(0.0);
-        //assert  colaborador.getOfertasRegistradas().size() == 6;
+        assert  colaborador.getOfertasCanjeadasORegistradas().size() == 6;
 
     }
 }

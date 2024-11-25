@@ -52,11 +52,15 @@
                             <input class="form-control" type="text" id="nombreHeladera" name="nombreHeladera" required>
                         </div>
                         <div class="col-md-6">
-                            <label class="form-label" for="modelo">Modelo Heladera</label>
-                            <select class="form-select" id="modelo" name="modeloHeladera" required>
-                                <option value="" disabled selected>Seleccione un Modelo</option>
+                            <label for="validationCustom05" class="form-label">Modelo</label>
+                            <select class="form-select" id="validationCustom05" name="modelo" required>
+                                <option value="" disabled selected>Modelo</option>
                                 {{#each modelos}}
-                                    <option value="{{this.id}}">{{this.nombreModelo}}</option>
+                                    <option value="{{this.id}}">{{this.nombreModelo}}
+                                        (Viandas:{{this.cantidadMaximaDeViandas}},
+                                        Max:{{this.temperaturaMaxima}},Min:{{this.temperaturaMinima}},
+                                        Peso:{{this.peso}})
+                                    </option>
                                 {{/each}}
                             </select>
                         </div>
@@ -66,17 +70,28 @@
                                 Solicitar Puntos de Colocación
                             </button>
                         </div>
-                        <div class="col-md-12">
-                            <label class="form-label" for="direccion">Calle</label>
-                            <input class="form-control" type="text" id="direccion" name="calle" required>
+                        <div class="col-3">
+                            <label class="form-label" for="provincia">Provincia</label>
+                            <select class="form-select" id="provincia" name="provincia" required>
+                                <option value="" disabled selected>Seleccion una provincia</option>
+                                <!-- Las opciones se llenarán mediante JavaScript-->
+                            </select>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="altura">Altura</label>
-                            <input class="form-control" type="text" id="altura" name="altura" required>
+                        <div class="col-7">
+                            <label class="form-label" for="calle">Dirección</label>
+                            <div class="autocomplete-container position-relative">
+                                <input type="text" id="calle" name="calle" class="form-control"
+                                       placeholder="Escribe una calle"
+                                       list="suggestions">
+                                <input type="hidden" id="latitud" name="latitud">
+                                <input type="hidden" id="longitud" name="longitud">
+                                <input type="hidden" id="altura" name="altura">
+                                <div class="list-group" id="suggestions"></div>
+                            </div>
                         </div>
-                        <div class="col-md-6">
-                            <label class="form-label" for="piso">Piso</label>
-                            <input class="form-control" value="0" type="text" id="piso" name="piso">
+                        <div class="col-2">
+                            <label for="validationCustom04" class="form-label">Piso</label>
+                            <input type="text" class="form-control" id="piso" name="piso">
                         </div>
                         <div class="modal-footer col-md-12">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -173,6 +188,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
           integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
           crossorigin=""/>
+    <script src="/js/ubicacion.js"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
             crossorigin=""></script>
