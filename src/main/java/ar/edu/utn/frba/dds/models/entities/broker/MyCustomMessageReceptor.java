@@ -1,21 +1,15 @@
 package ar.edu.utn.frba.dds.models.entities.broker;
 
-import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
-import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoAlerta;
-import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
-import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import org.eclipse.paho.client.mqttv3.IMqttMessageListener;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 
 public class MyCustomMessageReceptor implements IMqttMessageListener {
 
-    private Map<String, AccionTopico> topicActions = new HashMap<>();
+    private final Map<String, AccionTopico> topicActions = new HashMap<>();
 
     public MyCustomMessageReceptor() {
         topicActions.put("temperatura", new TemperaturaAccion());
@@ -38,7 +32,6 @@ public class MyCustomMessageReceptor implements IMqttMessageListener {
         //heladeras/+/aperturaRealizada
         //"heladeras/heladeraCasa/alerta"
 
-
         String[] topicEnPartes = topic.split("/");
 
         String Id = topicEnPartes[1];
@@ -51,10 +44,6 @@ public class MyCustomMessageReceptor implements IMqttMessageListener {
         if (action != null) {
             action.evaluarMensaje(Id,content);
         }
-
-
-
-
 
        /* if(topicEnPartes[1].equals("heladera")){
                 String nombreHeladera = topicEnPartes[2];

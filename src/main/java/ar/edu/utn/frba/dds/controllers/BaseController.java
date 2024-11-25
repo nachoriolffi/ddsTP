@@ -36,17 +36,24 @@ public abstract class BaseController {
         }
     }
 
-    private void configurarUsuarioLogueado(Map<String, Object> modelo, Usuario usuario) {
-        modelo.put("inicioSesion", true);
-        modelo.put("noInicioSesion", false);
+    private void configurarUsuarioLogueado(Map<String, Object> model, Usuario usuario) {
+        model.put("inicioSesion", true);
+        model.put("noInicioSesion", false);
         if (usuario.getRol().equals(TipoRol.ADMIN)) {
-            modelo.put("esAdmin", true);
+            model.put("esAdmin", true);
+            model.put("noEsTecnico", true);
         } else if (usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)) {
-            modelo.put("esHumano", true);
-            modelo.put("noEsAdmin", true);
+            model.put("esHumano", true);
+            model.put("noEsTecnico", true);
+            model.put("noEsAdmin", true);
         } else if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
-            modelo.put("esJuridico", true);
-            modelo.put("noEsAdmin", true);
+            model.put("esJuridico", true);
+            model.put("noEsTecnico", true);
+            model.put("noEsAdmin", true);
+        }else if (usuario.getRol().equals(TipoRol.TECNICO)){
+            model.put("esTecnico", true);
+            model.put("noEsTecnico", false);
+            model.put("noEsAdmin", true);
         }
     }
 
@@ -82,18 +89,7 @@ public abstract class BaseController {
     }
 
     protected Usuario verificarTecnico(Context ctx, Map<String, Object> model) {
-        Usuario usuario = usuarioLogueado(ctx);
-        verificarSesion(ctx, model);
-        if (usuario.getRol().equals(TipoRol.TECNICO)) {
-            model.put("esTecnico", true);
-            model.put("noEsAdmin",true);
-            return usuario;
-        } else {
-            model.put("inicioSesion", false);
-            model.put("noInicioSesion", true);
-            ctx.redirect("/error403");
-            return null;
-        }
+        return verificarRol(ctx, model, TipoRol.TECNICO);
     }
 
     protected Usuario verificarAdmin(Context ctx, Map<String, Object> modelo) {

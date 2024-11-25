@@ -20,6 +20,7 @@ public class HacerseCargoDeHeladera extends FormaDeColaboracion {
     @Transient
     private Local local;
 
+    @Getter
     @OneToOne
     @JoinColumn(name = "id", referencedColumnName = "id_Heladera", nullable = false)
     private Heladera heladera;

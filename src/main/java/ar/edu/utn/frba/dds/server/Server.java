@@ -30,7 +30,7 @@ public class Server {
             app = Javalin.create(config()).start(port);
             Router router = new Router();
             //SchedulerMain.main(new String[]{});
-            Init.iniciar();
+            //Init.iniciar();
             router.init(Server.app());
 
 

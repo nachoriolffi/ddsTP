@@ -75,7 +75,6 @@ public class FallaTecnicaController extends BaseController implements ICrudViews
 
         nuevoIncidente.setFecha(Date.valueOf(convertToDate(fecha).toLocalDate()));
         nuevoIncidente.setPathFoto(context.formParam("fotoFalla"));
-        heladera.setDadaDeBaja(true);
         heladera.setEstaActiva(false);
 
         nuevoIncidente.setEstado(false);

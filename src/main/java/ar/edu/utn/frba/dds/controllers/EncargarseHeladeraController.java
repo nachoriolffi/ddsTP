@@ -2,6 +2,9 @@ package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.PuntoRecomendadoDTO;
 import ar.edu.utn.frba.dds.dtos.outputs.HeladeraOutputDTO;
+import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DonacionDinero;
+import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.HacerseCargoDeHeladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
@@ -35,8 +38,12 @@ public class EncargarseHeladeraController extends BaseController implements ICru
     public void index(Context context) {
         Map<String, Object> model = new HashMap<>();
         Usuario usuario = verificarJuridico(context, model);
-        List<Heladera> heladeras = this.repoHeladeras.buscarTodos();
+        Colaborador colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
         List<HeladeraOutputDTO> heladeraOutputDTOS = new ArrayList<>();
+        List<Heladera> heladeras = colaborador.getColaboracionesRealizadas().stream()
+                .filter(c -> c instanceof HacerseCargoDeHeladera)
+                .map(c -> ((HacerseCargoDeHeladera) c).getHeladera())
+                .toList();
         if (heladeras != null) {
             for (Heladera heladera : heladeras) {
                 HeladeraOutputDTO heladeraOutputDTO = new HeladeraOutputDTO();

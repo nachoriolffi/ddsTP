@@ -1,15 +1,22 @@
 package ar.edu.utn.frba.dds.controllers;
 
+import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
+import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
+import ar.edu.utn.frba.dds.models.entities.contacto.factory.MedioComunicacionFactory;
 import ar.edu.utn.frba.dds.models.entities.distancias.CalculadorDistancias;
 import ar.edu.utn.frba.dds.models.entities.distancias.CalculadorDistanciasTecnicoHeladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
+import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoContacto;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoIncidente;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoTecnico;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoUsuario;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
+import com.sun.mail.util.MailLogger;
 import io.javalin.http.Context;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -22,11 +29,13 @@ public class TecnicoController extends BaseController implements ICrudViewsHandl
     @Override
     public void index(Context context) {
         Map<String, Object> model = new HashMap<>();
-        verificarSesion(context, model);
-        Usuario usuario = verificarTecnico(context,model);
+        Usuario usuario = verificarAdmin(context,model);
         if (usuario != null) {
             model.put("title", "Cargar Tecnico");
             List<TipoDocumento> tipoDocumentos = List.of(TipoDocumento.values());
+            List<TipoContacto> tipoContactos = List.of(TipoContacto.values());//le paso los medio de contacto y con esto puedo hacer algun tipo de facoptry despues o algho asi
+
+            model.put("tipoContactos", tipoContactos);
             model.put("tipoDocumentos", tipoDocumentos);
             context.render("tecnico/cargaTecnico.hbs", model);
         }
@@ -43,8 +52,45 @@ public class TecnicoController extends BaseController implements ICrudViewsHandl
         tecnico.setCuil(Integer.valueOf(context.formParam("cuil")));
         tecnico.setAreaCobertura(Integer.valueOf(context.formParam("areaCobertura")));
         // TODO falta ingresar medio de contacto
-        RepoTecnico.INSTANCE.agregar(tecnico);
 
+        List<String> contactos = context.formParams("contactos");
+
+        String telefono = context.formParam("telefono");
+        String mail = context.formParam("correo");
+
+        Usuario nuevoUsuario = new Usuario();
+        nuevoUsuario.setNombre(context.formParam("nombre"));
+        nuevoUsuario.setRol(TipoRol.TECNICO);
+        nuevoUsuario.setContrasenia("1234");
+        RepoUsuario.INSTANCE.agregar(nuevoUsuario);
+
+        tecnico.setUsuario(nuevoUsuario);
+
+        for (String contacto : contactos) {
+
+            tecnico.agregarMedioDeComunicacion(MedioComunicacionFactory.createMedioDeComunicacion(contacto));
+
+            //perdon mama por esto pero no me queda otra porq no voy a hacer un cambio por este enum no van a agregar un nuevo medio de contacto en la entrega
+
+            if (contacto.equals("WPP") && telefono != null) {
+                Contacto contactoTelefono = new Contacto(TipoContacto.WPP, telefono);
+                RepoContacto.INSTANCE.agregar(contactoTelefono);
+                tecnico.agregarContacto(contactoTelefono);
+            }
+            if (contacto.equals("MAIL") && mail != null) {
+                Contacto contactoMail = new Contacto(TipoContacto.MAIL, mail);
+                RepoContacto.INSTANCE.agregar(contactoMail);
+                tecnico.agregarContacto(contactoMail);
+            }
+            if (contacto.equals("TELEGRAM") && telefono != null) {
+                Contacto contactoTelefono = new Contacto(TipoContacto.TELEGRAM, telefono);
+                RepoContacto.INSTANCE.agregar(contactoTelefono);
+                tecnico.agregarContacto(contactoTelefono);
+            }
+
+            RepoTecnico.INSTANCE.agregar(tecnico);
+
+        }
     }
     @Override
     public void show(Context context) { // va a mostrar los incidentes del tecnico

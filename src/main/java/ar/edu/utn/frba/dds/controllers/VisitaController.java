@@ -96,7 +96,6 @@ public class VisitaController extends BaseController implements ICrudViewsHandle
         if (solucionado) {
             Heladera heladera = incidente.getHeladera();
             heladera.setEstaActiva(true);
-            heladera.setDadaDeBaja(false);
             incidente.setEstado(solucionado);
             RepoIncidente.INSTANCE.modificar(incidente);
             RepoHeladeras.INSTANCE.modificar( heladera  );
@@ -105,6 +104,8 @@ public class VisitaController extends BaseController implements ICrudViewsHandle
 
 
         RepoRegistrosVisita.INSTANCE.agregar(registroVisita);
+
+        context.redirect("/IncidentesTecnico");
     }
     // Other methods...
 

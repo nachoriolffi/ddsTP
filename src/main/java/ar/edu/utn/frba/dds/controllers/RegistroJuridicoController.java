@@ -84,6 +84,7 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
 
         repoUsuario.agregar(nuevoUsuario);
         repoColaborador.agregar(colaboradorJuridico);
+
         context.redirect("/iniciarSesion");
     }
 

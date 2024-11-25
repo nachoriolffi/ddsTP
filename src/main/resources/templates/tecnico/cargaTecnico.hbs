@@ -41,6 +41,18 @@
                         <input type="number" class="form-control" id="areaCobertura" name="areaCobertura" required>
                     </div>
 
+
+                    <h4 class="h4">Ingrese al menos un Medio de Contacto</h4>
+                    <hr class="d-none d-md-block">
+                    {{#each tipoContactos}}
+                        <div class="col-lg-6 col-md-12">
+                            <label class="form-label" for="{{this}}">
+                                <input type="checkbox" id="{{this}}" name="contactos" value="{{this}}">
+                                {{this}}
+                            </label>
+                        </div>
+                    {{/each}}
+
                     <h4 class="h4">Ingrese al menos un Medio de Contacto</h4>
                     <hr class="d-none d-md-block">
                     <div class="col-lg-6 col-md-12">
