@@ -2,6 +2,8 @@ package ar.edu.utn.frba.dds.utils;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoJuridiccion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.*;
+import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
+import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Cuestionario;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Opcion;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
@@ -10,6 +12,12 @@ import ar.edu.utn.frba.dds.models.entities.generadorCodigo.GeneradorDeCodigo;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
+<<<<<<< HEAD
+=======
+import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
+import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoIncidente;
+import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
+>>>>>>> E6-obs
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
@@ -52,6 +60,77 @@ public class Init implements WithSimplePersistenceUnit {
         modeloHeladera3.setTemperaturaMaxima(8D);
         modeloHeladera3.setTemperaturaMinima(-5D);
         repoModelo.agregar(modeloHeladera3);
+<<<<<<< HEAD
+=======
+
+        ModeloHeladera modeloHeladera4 = new ModeloHeladera();
+        modeloHeladera4.setNombreModelo("Heladera Portátil VíaFresh");
+        modeloHeladera4.setPeso(15D);
+        modeloHeladera4.setCantidadMaximaDeViandas(20);
+        modeloHeladera4.setTemperaturaMaxima(6D);
+        modeloHeladera4.setTemperaturaMinima(-10D);
+        repoModelo.agregar(modeloHeladera4);
+
+        ModeloHeladera modeloHeladera5 = new ModeloHeladera();
+        modeloHeladera5.setNombreModelo("Heladera Doméstica EcoCool 250");
+        modeloHeladera5.setPeso(55D);
+        modeloHeladera5.setCantidadMaximaDeViandas(40);
+        modeloHeladera5.setTemperaturaMaxima(5D);
+        modeloHeladera5.setTemperaturaMinima(-15D);
+        repoModelo.agregar(modeloHeladera5);
+
+        ModeloHeladera modeloHeladera6 = new ModeloHeladera();
+        modeloHeladera6.setNombreModelo("Congeladora Vertical FrostMaster");
+        modeloHeladera6.setPeso(120D);
+        modeloHeladera6.setCantidadMaximaDeViandas(120);
+        modeloHeladera6.setTemperaturaMaxima(-10D);
+        modeloHeladera6.setTemperaturaMinima(-25D);
+        repoModelo.agregar(modeloHeladera6);
+
+        /*--------------HELADERAS--------------*/
+
+        Coordenada coordenadaHeladera1 = new Coordenada();
+        coordenadaHeladera1.setLatitud(-34.615803);
+        coordenadaHeladera1.setLongitud(-58.433298);
+        RepoCoordenada.INSTANCE.agregar(coordenadaHeladera1);
+
+        Calle calleHeladera1 = new Calle();
+        calleHeladera1.setCalle("Medrano");
+        RepoCalle.INSTANCE.agregar(calleHeladera1);
+
+        Direccion direccionHeladera1 = new Direccion();
+        direccionHeladera1.setCalle(calleHeladera1);
+        direccionHeladera1.setAltura(1234);
+        direccionHeladera1.setPiso(1);
+        RepoDireccion.INSTANCE.agregar(direccionHeladera1);
+
+        RepoHeladeras repoHeladera = RepoHeladeras.INSTANCE;
+
+        Heladera heladera1 = new Heladera();
+        heladera1.setNombre("Heladera 1");
+        heladera1.setCoordenada(coordenadaHeladera1);
+        heladera1.setDadaDeBaja(true);
+        heladera1.setEstaActiva(false);
+        heladera1.setDireccion(direccionHeladera1);
+        heladera1.setViandasDisponibles(0);
+        heladera1.setFechaPuestaFunc(new Date());
+
+
+        heladera1.setModelo(modeloHeladera1);
+        repoHeladera.agregar(heladera1);
+
+        Incidente incidente1 = new Incidente();
+        incidente1.setDescripcion("Incidente 1");
+        incidente1.setFecha(new Date());
+        incidente1.setTipoIncidente(TipoIncidente.FALLA);
+        incidente1.setTipoAlerta(null); // Ensure this is allowed to be null
+        incidente1.setPathFoto("incidente.jpeg");
+        incidente1.setEstado(false);
+        incidente1.setHeladera(heladera1);
+        RepoIncidente.INSTANCE.agregar(incidente1);
+        heladera1.agregarRegistroDeAlerta(incidente1);
+        repoHeladera.modificar(heladera1);
+>>>>>>> E6-obs
 
         /*--------------USUARIOS--------------*/
 
@@ -75,7 +154,7 @@ public class Init implements WithSimplePersistenceUnit {
         usuarioHumano.setCuentaEliminada(false);
         usuarioHumano.setCorreoElectronico("mati@gmail.com");
         usuarioHumano.setRol(TipoRol.COLABORADOR_HUMANO);
-        //repoUsuario.agregar(usuarioHumano);
+        repoUsuario.agregar(usuarioHumano);
 
         // JURIDICO
         Usuario usuarioJuridico = new Usuario();
@@ -84,7 +163,7 @@ public class Init implements WithSimplePersistenceUnit {
         usuarioJuridico.setCuentaEliminada(false);
         usuarioJuridico.setCorreoElectronico("samsung@gmail.com");
         usuarioJuridico.setRol(TipoRol.COLABORADOR_JURIDICO);
-        //repoUsuario.agregar(usuarioJuridico);
+        repoUsuario.agregar(usuarioJuridico);
 
         // TECNICO
         Usuario usuarioTecnico = new Usuario();
@@ -94,7 +173,7 @@ public class Init implements WithSimplePersistenceUnit {
         usuarioTecnico.setCuentaEliminada(false);
         usuarioTecnico.setCorreoElectronico("fede@gmail.com");
         usuarioTecnico.setRol(TipoRol.TECNICO);
-        //repoUsuario.agregar(usuarioTecnico);
+        repoUsuario.agregar(usuarioTecnico);
 
         /*--------------TARJETAS--------------*/
 
@@ -153,7 +232,11 @@ public class Init implements WithSimplePersistenceUnit {
         formasColaboracion.add(TipoColaboracion.HACERSE_CARGO_HELADERA);
         formasColaboracion.add(TipoColaboracion.DINERO);
         colaboradorJuridico.setFormasDeColaboracion(formasColaboracion);
+<<<<<<< HEAD
         RepoColaborador.INSTANCE.agregar(colaboradorJuridico);*/
+=======
+        RepoColaborador.INSTANCE.agregar(colaboradorJuridico);
+>>>>>>> E6-obs
 
         /*--------------CUESTIONARIOS--------------*/
 
@@ -161,7 +244,7 @@ public class Init implements WithSimplePersistenceUnit {
         RepoCuestionario repoCuestionario = RepoCuestionario.INSTANCE;
         RepoOpcion repoOpcion = RepoOpcion.INSTANCE;
 
-     /*   // JURIDICO
+        // JURIDICO
 
         Cuestionario cuestionarioJuridico = new Cuestionario();
         cuestionarioJuridico.setDescripcion("Cuestionario Juridico");
@@ -214,11 +297,11 @@ public class Init implements WithSimplePersistenceUnit {
         cuestionarioJuridico.agregarPregunta(preguntaRazonSocial);
         cuestionarioJuridico.agregarPregunta(preguntaTipoRazon);
 
-        repoCuestionario.agregar(cuestionarioJuridico);*/
+        repoCuestionario.agregar(cuestionarioJuridico);
 
         //HUMANO
 
-       /* Cuestionario cuestionarioHumano = new Cuestionario();
+        Cuestionario cuestionarioHumano = new Cuestionario();
         cuestionarioHumano.setNombreCuestionario("Cuestionario Humano");
         cuestionarioHumano.setDescripcion("Este es el cuestionario para registrar colaboradores humanos");
 
@@ -247,7 +330,7 @@ public class Init implements WithSimplePersistenceUnit {
         RepoPregunta.INSTANCE.agregar(fechaPregunta);
         cuestionarioHumano.agregarPregunta(fechaPregunta);
 
-        RepoCuestionario.INSTANCE.agregar(cuestionarioHumano);*/
+        RepoCuestionario.INSTANCE.agregar(cuestionarioHumano);
 
 
         //---------TECNICO---------
@@ -257,6 +340,10 @@ public class Init implements WithSimplePersistenceUnit {
         coordenadaTecnico.setLongitud(-58.433298);
 
         RepoCoordenada.INSTANCE.agregar(coordenadaTecnico);
+<<<<<<< HEAD
+=======
+
+>>>>>>> E6-obs
 
         Tecnico tecnico = new Tecnico();
         tecnico.setNombre("Tecnico1");
@@ -270,7 +357,11 @@ public class Init implements WithSimplePersistenceUnit {
         Usuario u = RepoUsuario.INSTANCE.buscar(4L);
         tecnico.setUsuario(u);
         //tecnico.agregarMedioDeComunicacion(correo);
+<<<<<<< HEAD
         RepoTecnico.INSTANCE.agregar(tecnico);*/
+=======
+        RepoTecnico.INSTANCE.agregar(tecnico);
+>>>>>>> E6-obs
 
 
         //-------------------------
@@ -305,12 +396,12 @@ public class Init implements WithSimplePersistenceUnit {
         RepoOpcion.INSTANCE.agregar(opcion2);
         RepoOpcion.INSTANCE.agregar(opcion3);
         cuestionario1.agregarPregunta(multipleChoicePregunta);
-        Pregunta fechaPregunta = new Pregunta();
-        fechaPregunta.setNombre("fechaDeNacimiento");
-        fechaPregunta.setDescripcionPregunta("Ingrese su fecha de nacimiento");
-        fechaPregunta.setTipoPregunta(TipoPregunta.FECHA);
-        RepoPregunta.INSTANCE.agregar(fechaPregunta);
-        cuestionario1.agregarPregunta(fechaPregunta);
+        Pregunta fechaPregunta1 = new Pregunta();
+        fechaPregunta1.setNombre("fechaDeNacimiento");
+        fechaPregunta1.setDescripcionPregunta("Ingrese su fecha de nacimiento");
+        fechaPregunta1.setTipoPregunta(TipoPregunta.FECHA);
+        RepoPregunta.INSTANCE.agregar(fechaPregunta1);
+        cuestionario1.agregarPregunta(fechaPregunta1);
         RepoCuestionario.INSTANCE.agregar(cuestionario1);
 
         RubroColaborador rubroGastronomia = new RubroColaborador();
@@ -391,11 +482,14 @@ public class Init implements WithSimplePersistenceUnit {
             RepoOpcion.INSTANCE.agregar(opcion);
         }
     }
+
 }
+
+
 
 /*
         ReceptorTemperatura receptorTemperatura = new ReceptorTemperatura();
-             RepoReceptorTemperatura.INSTANCE.agregar(receptorTemperatura);
+        RepoReceptorTemperatura.INSTANCE.agregar(receptorTemperatura);
 
         Coordenada coordenadaHeladera = new Coordenada();
         coordenadaHeladera.setLatitud(-34.603722);
@@ -403,9 +497,9 @@ public class Init implements WithSimplePersistenceUnit {
         // Save the coordenadaHeladera if necessary
 
         Contacto contacto = new Contacto();
-        contacto.setTipoContacto(TipoContacto.MAIL);
-        contacto.setDescripcion("federperez@frba.utn.edu.ar");
-            RepoContacto.INSTANCE.agregar(contacto);
+        Contacto.setTipoContacto(TipoContacto.MAIL);
+        Contacto.setDescripcion("federperez@frba.utn.edu.ar");
+        RepoContacto.INSTANCE.agregar(contacto);
 
         Tecnico tecnico = new Tecnico();
         tecnico.setNombre("Tecnico1");
@@ -474,5 +568,7 @@ public class Init implements WithSimplePersistenceUnit {
         distribucionVianda.setTipoColaboracion(TipoColaboracion.REDISTRIBUCION_VIANDAS);
         distribucionVianda.setColaborador(colaborador3);
         RepoDistribucionVianda.INSTANCE.agregar(distribucionVianda);
-    }
-*/
+
+
+}
+ */

@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.controllers;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoUsuario;
+import ar.edu.utn.frba.dds.server.Server;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
@@ -65,16 +66,21 @@ public class InicioSesionController extends BaseController implements ICrudViews
         if (usuario == null || !usuario.getContrasenia().equals(password)) {
             ctx.sessionAttribute("loginError", "Usuario o Clave Incorrectas");
             ctx.redirect("/iniciarSesion");
+            Server.registry.counter("tpdds.inicioSesion","status","usuarioOClaveIncorrectas").increment();
         } else {
             ctx.sessionAttribute("usuario_id", usuario.getId());
             if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
                 ctx.redirect("/verPerfil");
+                Server.registry.counter("tpdds.inicioSesion","status","colabJuridico").increment();
             } else if (usuario.getRol().equals(TipoRol.ADMIN)) {
                 ctx.redirect("/verPerfil");
+                Server.registry.counter("tpdds.inicioSesion","status","admin").increment();
             } else if (usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)) {
                 ctx.redirect("/verPerfil");
+                Server.registry.counter("tpdds.inicioSesion","status","colabHumano").increment();
             }else if(usuario.getRol().equals(TipoRol.TECNICO)){
                 ctx.redirect("/perfilTecnico");
+                Server.registry.counter("tpdds.inicioSesion","status","tecnico").increment();
             }
         }
     }

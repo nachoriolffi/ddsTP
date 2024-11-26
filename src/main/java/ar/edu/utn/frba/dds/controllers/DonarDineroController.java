@@ -10,7 +10,11 @@ import ar.edu.utn.frba.dds.models.entities.multiplicador.config.ConfiguracionMul
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoDonacionDinero;
+<<<<<<< HEAD
 import ar.edu.utn.frba.dds.services.UserService;
+=======
+import ar.edu.utn.frba.dds.server.Server;
+>>>>>>> E6-obs
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
@@ -83,6 +87,7 @@ public class DonarDineroController extends BaseController implements ICrudViewsH
             // Guardar la donación
             repoDonacionDinero.agregar(donacionDinero);
             context.redirect("/donacionDinero");
+            Server.registry.counter("tpdds.colaboraciones","status","donacionesDinero").increment();
         } catch (ParseException e) {
             // Manejar el error de parseo de fecha
             context.status(400).result("Formato de fecha inválido");
