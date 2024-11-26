@@ -8,4 +8,7 @@ public class ViandaDTO {
     String calorias;
     String peso;
     String fechaCaducidad;
+    String heladeraId;
+    String id;
+
 }

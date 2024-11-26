@@ -10,6 +10,7 @@ public class HeladeraOutputDTO {
     private String nombre;
     private String direccion;
     private Integer capacidad;
+    private Integer lugarDisponible;
     private String viandasRestantes;
     private String fechaPuestaFunc;
 }

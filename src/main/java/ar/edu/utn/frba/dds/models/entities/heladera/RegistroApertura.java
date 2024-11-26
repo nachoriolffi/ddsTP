@@ -3,7 +3,6 @@ import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +23,10 @@ public class RegistroApertura {
     @JoinColumn ( name = "tarjeta_id")
     private Tarjeta tarjeta;
 
+    @ManyToOne
+    @JoinColumn(name = "heladera_id")
+    private Heladera heladera;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "tipoSolicitud")
     private TipoSolicitud solicitud;
@@ -37,5 +40,5 @@ public class RegistroApertura {
     private List<Vianda> viandas;
 
     @Column(name = "retiroVianda", columnDefinition = "BOOLEAN")
-    private Boolean retiroVianda; // para la redistribucion de viandas
+    private Boolean retiroVianda; // para la redistribucion de viandas (destino u origen)
 }

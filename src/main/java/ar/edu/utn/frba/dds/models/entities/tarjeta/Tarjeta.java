@@ -36,7 +36,7 @@ public class Tarjeta {
     @JoinColumn(name = "vulnerable_id")
     private Vulnerable personaAsociada;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "colaborador_id")
     private Colaborador colaboradorAsociado;
 

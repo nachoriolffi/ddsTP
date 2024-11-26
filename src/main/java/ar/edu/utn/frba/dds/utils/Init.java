@@ -27,7 +27,7 @@ public class Init implements WithSimplePersistenceUnit {
 
         /*--------------MODELOS--------------*/
 
-        //RepoModelo repoModelo = new RepoModelo();
+        RepoModelo repoModelo = new RepoModelo();
 
         ModeloHeladera modeloHeladera1 = new ModeloHeladera();
         modeloHeladera1.setNombreModelo("Heladera Industrial X500");
@@ -35,126 +35,61 @@ public class Init implements WithSimplePersistenceUnit {
         modeloHeladera1.setCantidadMaximaDeViandas(100);
         modeloHeladera1.setTemperaturaMaxima(10D);
         modeloHeladera1.setTemperaturaMinima(-18D);
-        //repoModelo.agregar(modeloHeladera1);
+        repoModelo.agregar(modeloHeladera1);
 
         ModeloHeladera modeloHeladera2 = new ModeloHeladera();
         modeloHeladera2.setNombreModelo("Heladera Comercial C300");
         modeloHeladera2.setPeso(80D);
-        modeloHeladera2.setCantidadMaximaDeViandas(60);
+        modeloHeladera2.setCantidadMaximaDeViandas(50);
         modeloHeladera2.setTemperaturaMaxima(7D);
         modeloHeladera2.setTemperaturaMinima(-12D);
-        //repoModelo.agregar(modeloHeladera2);
+        repoModelo.agregar(modeloHeladera2);
 
         ModeloHeladera modeloHeladera3 = new ModeloHeladera();
         modeloHeladera3.setNombreModelo("Heladera de Oficina MiniCool");
         modeloHeladera3.setPeso(40D);
-        modeloHeladera3.setCantidadMaximaDeViandas(30);
+        modeloHeladera3.setCantidadMaximaDeViandas(25);
         modeloHeladera3.setTemperaturaMaxima(8D);
         modeloHeladera3.setTemperaturaMinima(-5D);
-        //repoModelo.agregar(modeloHeladera3);
-
-        ModeloHeladera modeloHeladera4 = new ModeloHeladera();
-        modeloHeladera4.setNombreModelo("Heladera Portátil VíaFresh");
-        modeloHeladera4.setPeso(15D);
-        modeloHeladera4.setCantidadMaximaDeViandas(20);
-        modeloHeladera4.setTemperaturaMaxima(6D);
-        modeloHeladera4.setTemperaturaMinima(-10D);
-        //repoModelo.agregar(modeloHeladera4);
-
-        ModeloHeladera modeloHeladera5 = new ModeloHeladera();
-        modeloHeladera5.setNombreModelo("Heladera Doméstica EcoCool 250");
-        modeloHeladera5.setPeso(55D);
-        modeloHeladera5.setCantidadMaximaDeViandas(40);
-        modeloHeladera5.setTemperaturaMaxima(5D);
-        modeloHeladera5.setTemperaturaMinima(-15D);
-        //repoModelo.agregar(modeloHeladera5);
-
-        ModeloHeladera modeloHeladera6 = new ModeloHeladera();
-        modeloHeladera6.setNombreModelo("Congeladora Vertical FrostMaster");
-        modeloHeladera6.setPeso(120D);
-        modeloHeladera6.setCantidadMaximaDeViandas(120);
-        modeloHeladera6.setTemperaturaMaxima(-10D);
-        modeloHeladera6.setTemperaturaMinima(-25D);
-        //repoModelo.agregar(modeloHeladera6);
-
-        /*--------------HELADERAS--------------*/
-
-       /* Coordenada coordenadaHeladera1 = new Coordenada();
-        coordenadaHeladera1.setLatitud(-34.615803);
-        coordenadaHeladera1.setLongitud(-58.433298);
-        RepoCoordenada.INSTANCE.agregar(coordenadaHeladera1);
-
-        Calle calleHeladera1 = new Calle();
-        calleHeladera1.setCalle("Medrano");
-        RepoCalle.INSTANCE.agregar(calleHeladera1);
-
-        Direccion direccionHeladera1 = new Direccion();
-        direccionHeladera1.setCalle(calleHeladera1);
-        direccionHeladera1.setAltura(1234);
-        direccionHeladera1.setPiso(1);
-        RepoDireccion.INSTANCE.agregar(direccionHeladera1);
-
-        RepoHeladeras repoHeladera = RepoHeladeras.INSTANCE;
-
-        Heladera heladera1 = new Heladera();
-        heladera1.setNombre("Heladera 1");
-        heladera1.setCoordenada(coordenadaHeladera1);
-        heladera1.setDadaDeBaja(true);
-        heladera1.setEstaActiva(false);
-        heladera1.setDireccion(direccionHeladera1);
-        heladera1.setViandasDisponibles(0);
-        heladera1.setFechaPuestaFunc(new Date());
-
-
-        heladera1.setModelo(modeloHeladera1);
-        repoHeladera.agregar(heladera1);
-
-        Incidente incidente1 = new Incidente();
-        incidente1.setDescripcion("Incidente 1");
-        incidente1.setFecha(new Date());
-        incidente1.setTipoIncidente(TipoIncidente.FALLA);
-        incidente1.setTipoAlerta(null); // Ensure this is allowed to be null
-        incidente1.setPathFoto("incidente.jpeg");
-        incidente1.setEstado(false);
-        incidente1.setHeladera(heladera1);
-        RepoIncidente.INSTANCE.agregar(incidente1);
-        heladera1.agregarRegistroDeAlerta(incidente1);
-        repoHeladera.modificar(heladera1);*/
+        repoModelo.agregar(modeloHeladera3);
 
         /*--------------USUARIOS--------------*/
 
-        //RepoUsuario repoUsuario = RepoUsuario.INSTANCE;
+        RepoUsuario repoUsuario = RepoUsuario.INSTANCE;
 
         // ADMIN
         Usuario usuarioAdmin = new Usuario();
-        usuarioAdmin.setNombre("Ignacio Joaquin Riolffi");
-        usuarioAdmin.setContrasenia("1234");
+        usuarioAdmin.setNombre("Ignacio Joaquin");
+        usuarioAdmin.setApellido("Riolffi");
+        usuarioAdmin.setContrasenia("Nacho_2024_ADMIN_DDS");
         usuarioAdmin.setCuentaEliminada(false);
         usuarioAdmin.setCorreoElectronico("iriolffi@gmail.com");
         usuarioAdmin.setRol(TipoRol.ADMIN);
-        //repoUsuario.agregar(usuarioAdmin);
+        repoUsuario.agregar(usuarioAdmin);
 
         // HUMANO
         Usuario usuarioHumano = new Usuario();
-        usuarioHumano.setNombre("Ignacio Joaquin Riolffi");
+        usuarioHumano.setNombre("Matias");
+        usuarioHumano.setApellido("Tisco");
         usuarioHumano.setContrasenia("1234");
         usuarioHumano.setCuentaEliminada(false);
-        usuarioHumano.setCorreoElectronico("nacho@gmail.com");
+        usuarioHumano.setCorreoElectronico("mati@gmail.com");
         usuarioHumano.setRol(TipoRol.COLABORADOR_HUMANO);
         //repoUsuario.agregar(usuarioHumano);
 
         // JURIDICO
         Usuario usuarioJuridico = new Usuario();
-        usuarioJuridico.setNombre("Taylor Alison Swift");
+        usuarioJuridico.setNombre("Samsung");
         usuarioJuridico.setContrasenia("1234");
         usuarioJuridico.setCuentaEliminada(false);
-        usuarioJuridico.setCorreoElectronico("ts@gmail.com");
+        usuarioJuridico.setCorreoElectronico("samsung@gmail.com");
         usuarioJuridico.setRol(TipoRol.COLABORADOR_JURIDICO);
         //repoUsuario.agregar(usuarioJuridico);
 
         // TECNICO
         Usuario usuarioTecnico = new Usuario();
-        usuarioTecnico.setNombre("Primo re loco");
+        usuarioTecnico.setNombre("Federico");
+        usuarioTecnico.setApellido("Perez");
         usuarioTecnico.setContrasenia("1234");
         usuarioTecnico.setCuentaEliminada(false);
         usuarioTecnico.setCorreoElectronico("fede@gmail.com");
@@ -164,7 +99,7 @@ public class Init implements WithSimplePersistenceUnit {
         /*--------------TARJETAS--------------*/
 
         RepoTarjeta repoTarjeta = new RepoTarjeta();
-        for (int i = 0; i < 200; i++) {
+        for (int i = 0; i < 50; i++) {
             Tarjeta tarjeta = new Tarjeta();
             tarjeta.setCodigo(GeneradorDeCodigo.getInstance().generarCodigoUnico());
             repoTarjeta.agregar(tarjeta);

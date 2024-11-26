@@ -121,6 +121,8 @@ public class DonacionViandaController extends BaseController implements ICrudVie
         colaborador.agregarColaboracionRealizada(donacionVianda);
         RepoColaborador.INSTANCE.modificar(colaborador);
 
+
+
         context.redirect("/donarViandas");
 
     }

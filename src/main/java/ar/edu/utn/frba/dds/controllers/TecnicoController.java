@@ -54,7 +54,8 @@ public class TecnicoController extends BaseController implements ICrudViewsHandl
         tecnico.setApellido(context.formParam("apellido"));
         tecnico.setTipoDocumento(TipoDocumento.valueOf(context.formParam("tipoDocumento")));
         tecnico.setDni(Integer.valueOf(context.formParam("numeroDeDocumento")));
-        tecnico.setCuil(Integer.valueOf(context.formParam("cuil")));
+        Long cuil = Long.valueOf(context.formParam("cuil"));
+        tecnico.setCuil(cuil.intValue());
         tecnico.setAreaCobertura(Integer.valueOf(context.formParam("areaCobertura")));
         // TODO falta ingresar medio de contacto
 
@@ -64,9 +65,11 @@ public class TecnicoController extends BaseController implements ICrudViewsHandl
         String mail = context.formParam("correo");
 
         Usuario nuevoUsuario = new Usuario();
+        nuevoUsuario.setApellido(context.formParam("apellido"));
+        nuevoUsuario.setCorreoElectronico(mail);
         nuevoUsuario.setNombre(context.formParam("nombre"));
         nuevoUsuario.setRol(TipoRol.TECNICO);
-        nuevoUsuario.setContrasenia("1234");
+        nuevoUsuario.setContrasenia(tecnico.getNombre()+"_"+ tecnico.getCuil());
         RepoUsuario.INSTANCE.agregar(nuevoUsuario);
 
         tecnico.setUsuario(nuevoUsuario);
@@ -96,6 +99,7 @@ public class TecnicoController extends BaseController implements ICrudViewsHandl
             RepoTecnico.INSTANCE.agregar(tecnico);
 
         }
+        context.redirect("/cargaTecnico");
     }
 
     @Override

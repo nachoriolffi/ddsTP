@@ -46,7 +46,6 @@ public class Heladera implements IObservableColaborador {
     @JoinColumn(name = "direccion")
     private Direccion direccion;
 
-
     @Column(name = "viandasDisponibles")
     private Integer viandasDisponibles;
 
