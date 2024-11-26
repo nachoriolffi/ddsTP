@@ -10,6 +10,7 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoMenorACargo;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoTarjeta;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoVulnerable;
+import ar.edu.utn.frba.dds.server.Server;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import io.javalin.http.Context;
@@ -75,6 +76,7 @@ public class RegistroVulnerableController extends BaseController implements ICru
         RepoVulnerable.INSTANCE.agregar(vulnerable);
         RepoTarjeta.INSTANCE.modificar(tarjeta);
         context.redirect("/registroVulnerable");
+        Server.registry.counter("tpdds.colaboraciones","status","registrarVulnerable").increment();
     }
 
     @Override

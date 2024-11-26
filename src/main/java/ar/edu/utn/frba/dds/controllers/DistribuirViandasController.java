@@ -10,6 +10,7 @@ import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoDistribucionVianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
+import ar.edu.utn.frba.dds.server.Server;
 import ar.edu.utn.frba.dds.services.DistribuirViandasService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
@@ -62,6 +63,7 @@ public class DistribuirViandasController extends BaseController implements ICrud
         RepoColaborador.INSTANCE.modificar(colaborador);
 
         context.redirect("/distribuirViandas");
+        Server.registry.counter("tpdds.colaboraciones","status","distribuirViandas").increment();
     }
 
     public void obtenerViandasOrigen(Context context){

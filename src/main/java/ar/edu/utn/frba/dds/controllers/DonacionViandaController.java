@@ -12,6 +12,7 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoDonacionVianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoViandas;
+import ar.edu.utn.frba.dds.server.Server;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import io.javalin.http.Context;
@@ -116,6 +117,7 @@ public class DonacionViandaController extends BaseController implements ICrudVie
         RepoColaborador.INSTANCE.modificar(colaborador);
 
         context.redirect("/donarViandas");
+        Server.registry.counter("tpdds.colaboraciones","status","donacionesVianda").increment();
 
     }
 
