@@ -1,17 +1,16 @@
 package ar.edu.utn.frba.dds.controllers;
 
-import ar.edu.utn.frba.dds.dtos.RespuestaDTO;
-import ar.edu.utn.frba.dds.dtos.PreguntaDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.TipoColaboracion;
 import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
-import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Cuestionario;
-import ar.edu.utn.frba.dds.models.entities.cuestionario.CuestionarioRespondido;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
-import ar.edu.utn.frba.dds.models.entities.cuestionario.Respuesta;
+import ar.edu.utn.frba.dds.models.entities.generadorCodigo.GeneradorDeCodigo;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Calle;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
+import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import ar.edu.utn.frba.dds.services.RegistroHumanoService;
@@ -40,15 +39,14 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
             }
             Map<String, List<Pregunta>> categorizedQuestions = cuestionario.getPreguntas().stream()
                     .collect(Collectors.groupingBy(Pregunta::getTipoPregunta));
-
             List<TipoColaboracion> formasDeColaboracion = Arrays.asList(TipoColaboracion.values());
-
             Map<String, Object> model = new HashMap<>();
             model.put("formasDeColaboracion", formasDeColaboracion);
             model.put("title", "Registro Humano");
             model.put("usuario", nuevoUsuario);
             model.put("cuestionario", cuestionario);
             model.put("preguntas", categorizedQuestions);
+            model.put("noInicioSesion", true);
             context.render("logs/registroHumano.hbs", model);
         } catch (Exception e) {
             e.printStackTrace();
@@ -63,20 +61,34 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
 
     @Override
     public void create(Context context) {
-
+        Usuario nuevoUsuario = context.sessionAttribute("nuevoUsuario");
         RegistroHumanoService registroHumanosService = new RegistroHumanoService();
         Colaborador colaborador = registroHumanosService.processAndSaveResponses(context);
         colaborador.setTipoPersona(TipoPersona.HUMANA);
-
+        colaborador.getUsuario().setNombre(colaborador.getNombre());
+        colaborador.getUsuario().setApellido(colaborador.getApellido());
+        colaborador.getUsuario().setCuentaEliminada(false);
+        colaborador.getUsuario().setRol(TipoRol.COLABORADOR_HUMANO);
+        Direccion direccion = new Direccion();
+        direccion.setPiso(Integer.valueOf(context.formParam("piso")));
+        Calle calle = new Calle();
+        calle.setCalle(context.formParam("calle"));
+        RepoCalle.INSTANCE.agregar(calle);
+        direccion.setCalle(calle);
+        direccion.setAltura(Integer.valueOf(context.formParam("altura")));
+        RepoDireccion.INSTANCE.agregar(direccion);
+        colaborador.setDireccion(direccion);
         String[] formasDeColaboracion = context.formParams("colaboraciones").toArray(new String[0]);
         for (String forma : formasDeColaboracion) {
             colaborador.agregarFormaColaboracion(TipoColaboracion.valueOf(forma));
         }
-        
+        RepoUsuario.INSTANCE.agregar(nuevoUsuario);
         RepoColaborador.INSTANCE.agregar(colaborador);
 
-        if(colaborador.getFormasDeColaboracion().contains(TipoColaboracion.DONACION_VIANDAS) || colaborador.getFormasDeColaboracion().contains(TipoColaboracion.REDISTRIBUCION_VIANDAS)){
+        if (colaborador.getFormasDeColaboracion().contains(TipoColaboracion.DONACION_VIANDAS) || colaborador.getFormasDeColaboracion().contains(TipoColaboracion.REDISTRIBUCION_VIANDAS)) {
             Tarjeta tarjeta = new Tarjeta();
+            String codigo = GeneradorDeCodigo.getInstance().generarCodigoUnico();
+            tarjeta.setCodigo(codigo);
             tarjeta.setColaboradorAsignador(colaborador);
             tarjeta.setFechaRegistro(new Date());
             RepoTarjeta.INSTANCE.agregar(tarjeta);
@@ -84,7 +96,6 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
 
         context.redirect("/iniciarSesion");
     }
-
 
 
     @Override

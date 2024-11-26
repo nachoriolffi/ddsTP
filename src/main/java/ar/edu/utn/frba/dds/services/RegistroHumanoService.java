@@ -30,7 +30,6 @@ public class RegistroHumanoService {
         Usuario nuevoUsuario = context.sessionAttribute("nuevoUsuario");
         Colaborador colaborador = new Colaborador();
         colaborador.setUsuario(nuevoUsuario);
-        repoUsuario.agregar(nuevoUsuario);
         Map<String, String> params = context.formParamMap().entrySet().stream()
                 .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().get(0)));
 
@@ -91,7 +90,7 @@ public class RegistroHumanoService {
                 });
 
         String telefono = context.formParam("telefono");
-        String correo = context.formParam("correo");
+        String correo = nuevoUsuario.getCorreoElectronico();
         List<Contacto> contacto = new ArrayList<>();
 
         List<String> mediosContacto = context.formParams("medios-contacto");

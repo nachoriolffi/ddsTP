@@ -19,7 +19,7 @@ public class ColaboradorService {
         List<Colaborador> colaboradores = repoColaborador.buscarTodos();
         List<ColaboradorDTO> colaboradorDTOS = new ArrayList<>();
         for (Colaborador c : colaboradores) {
-            if (!c.getUsuario().getCuentaEliminada()) {
+            if (c.getUsuario().getCuentaEliminada() == null || !c.getUsuario().getCuentaEliminada()) {
                 ColaboradorDTO cDTO = new ColaboradorDTO();
                 cDTO.setID(String.valueOf(c.getId()));
                 cDTO.setNombreYApellido(c.getNombre() + " " + c.getApellido());
@@ -35,6 +35,7 @@ public class ColaboradorService {
             }
         }
         return colaboradorDTOS;
+
     }
 
     public void darDeBaja(Long idColaborador) {

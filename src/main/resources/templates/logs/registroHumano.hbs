@@ -2,25 +2,24 @@
     <div class="container">
         <hr class="my-3 border-0">
         <div class="row">
-            <figure class="col-md-4 figure">
+            <figure class="col-md-5 figure">
                 <img class="figure-img img-fluid rounded mx-auto d-none d-md-block"
                      src="/img/colaborador_humano.svg" alt="Imagen colaborador">
             </figure>
             <div class="col-md-7">
                 <h1 class="h1">Registrar Colaborador Humano</h1>
                 <hr class="border-1">
-
                 <form class="row g-3 needs-validation" method="POST" action="/registroHumano" novalidate>
                     {{#each preguntas.RESPUESTAUNICA}}
-                        <div class="form-group">
-                            <label for="pregunta-{{id}}">{{nombre}}</label>
-                            <input type="text" class="form-control" id="pregunta-{{id}}" name="respuesta-{{id}}" required="{{esObligatoria}}">
+                        <div  class="col-4 form-group">
+                            <label class="form-label" for="pregunta-{{id}}">{{nombre}}</label>
+                            <input type="text" class="form-control" id="pregunta-{{id}}" name="respuesta-{{id}}"
+                                   required="{{esObligatoria}}">
                         </div>
                     {{/each}}
-
                     {{#each preguntas.MULTIPLECHOICE}}
-                        <div class="form-group">
-                            <label for="pregunta-{{id}}">{{nombre}}</label>
+                        <div class="col-4 form-group">
+                            <label class="form-label" for="pregunta-{{id}}">{{nombre}}</label>
                             <select class="form-control" id="pregunta-{{id}}" name="opcion-{{id}}">
                                 {{#each opciones}}
                                     <option value="{{this.id}}">{{this.texto}}</option>
@@ -28,36 +27,34 @@
                             </select>
                         </div>
                     {{/each}}
-
                     {{#each preguntas.VERDADEROFALSO}}
-                        <div class="form-group">
-                            <label for="pregunta-{{id}}">{{nombre}}</label>
+                        <div class="col-4 form-group">
+                            <label class="form-label" for="pregunta-{{id}}">{{nombre}}</label>
                             <select class="form-control" id="pregunta-{{id}}" name="verdaderoFalso-{{id}}">
                                 <option value="true">Verdadero</option>
                                 <option value="false">Falso</option>
                             </select>
                         </div>
                     {{/each}}
-
                     {{#each preguntas.STRING}}
-                        <div class="form-group">
-                            <label for="pregunta-{{id}}">{{descripcionPregunta}}</label>
-                            <input type="text" class="form-control" id="pregunta-{{id}}" name="respuesta-{{id}}" required="{{esObligatoria}}">
+                        <div class="col-4 form-group">
+                            <label class="form-label" for="pregunta-{{id}}">{{descripcionPregunta}}</label>
+                            <input type="text" class="form-control" id="pregunta-{{id}}" name="respuesta-{{id}}"
+                                   required="{{esObligatoria}}">
                         </div>
                     {{/each}}
-
                     {{#each preguntas.FECHA}}
-                        <div class="form-group">
-                            <label for="pregunta-{{id}}">{{descripcionPregunta}}</label>
-                            <input type="date" class="form-control" id="pregunta-{{id}}" name="fecha-{{id}}" required="{{esObligatoria}}">
+                        <div class="col-4 form-group">
+                            <label class="form-label" for="pregunta-{{id}}">{{descripcionPregunta}}</label>
+                            <input type="date" class="form-control" id="pregunta-{{id}}" name="fecha-{{id}}"
+                                   required="{{esObligatoria}}">
                         </div>
                     {{/each}}
-
                     <div class="col-3">
-                        <label class="form-label" for="provincia">Provincia</label>
+                        <label class="form-label" class="form-label" for="provincia">Provincia</label>
                         <select class="form-select" id="provincia" name="provincia" required>
                             <option value="" disabled selected>Seleccion una provincia</option>
-                            <!-- Las opciones se llenarán mediante JavaScript-->
+                            <!--Aca aparecen las provincias usando JS-->
                         </select>
                     </div>
                     <div class="col-7">
@@ -76,37 +73,28 @@
                         <label for="validationCustom04" class="form-label">Piso</label>
                         <input type="text" class="form-control" id="piso" name="piso">
                     </div>
-
-                    <h4 class="h4">Ingrese al menos un Medio de Contacto</h4>
-                    <hr class="d-none d-md-block">
                     <div class="col-lg-6 col-md-12">
                         <label class="form-label" for="telefono">Número de Teléfono</label>
-                        <input class="form-control" type="text" id="telefono" name="telefono" >
+                        <input class="form-control" type="text" id="telefono" name="telefono">
                     </div>
-                    <div class="col-lg-6 col-md-12">
-                        <label class="form-label" for="correo">Correo Electrónico</label>
-                        <input class="form-control" type="email" id="correo" name="correo" >
-                    </div>
-
-                    <div class="col-lg-12 col-md-12">
-                        <label for="whatsapp">
-                            <input type="checkbox" id="whatsapp" name="medios-contacto" value="whatsapp">
+                    <div class="col-lg-3 col-md-3">
+                        <label class="form-check-label" for="whatsapp">
+                            <input class="form-check-input" type="checkbox" id="whatsapp" name="medios-contacto" value="whatsapp">
                             WhatsApp
                         </label>
                     </div>
-
-                    <div class="col-lg-12 col-md-12">
-                        <label for="telegram">
-                            <input type="checkbox" id="telegram" name="medios-contacto" value="telegram">
+                    <div class="col-lg-3 col-md-3">
+                        <label class="form-check-label" for="telegram">
+                            <input class="form-check-input" type="checkbox" id="telegram" name="medios-contacto" value="telegram">
                             Telegram
                         </label>
                     </div>
-
                     <h4 class="h4">Formas de Colaboración</h4>
                     <hr class="d-none d-md-block">
                     {{#each formasDeColaboracion}}
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" id="colaboracion-{{this}}" name="colaboraciones" value="{{this}}">
+                        <div class="col-6 form-check">
+                            <input class="form-check-input" type="checkbox" id="colaboracion-{{this}}"
+                                   name="colaboraciones" value="{{this}}">
                             <label class="form-check-label" for="colaboracion-{{this}}">
                                 {{this}}
                             </label>

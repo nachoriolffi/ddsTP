@@ -1,0 +1,32 @@
+{{#partial "contenido"}}
+    <div class="row mb-4">
+        <div class="col-6">
+            <h1 class="h1">Fallas Tecnicas</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 table-responsive">
+            <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                <thead>
+                <tr class="align-middle">
+                    <th scope="col">Falla</th>
+                    <th scope="col">Heladera</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Fue Solucionado</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                {{#each incidentes}}
+                    <tr>
+                        <td>{{this.tipoIncidente}}</td>
+                        <td>{{this.heladera}}</td>
+                        <td>{{this.fecha}}</td>
+                        <td>{{this.estado}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{{/partial}}
+{{> templates/base}}

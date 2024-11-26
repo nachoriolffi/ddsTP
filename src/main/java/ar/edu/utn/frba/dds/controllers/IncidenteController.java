@@ -3,21 +3,21 @@ package ar.edu.utn.frba.dds.controllers;
 import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoGenerico;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoIncidente;
 import ar.edu.utn.frba.dds.services.UserService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
-import javax.ws.rs.PathParam;
 import java.text.ParseException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class IncidenteController extends BaseController  implements ICrudViewsHandler {
+public class IncidenteController extends BaseController implements ICrudViewsHandler {
 
     UserService userService = new UserService();
+
     @Override
     public void index(Context context) {
 
@@ -29,6 +29,15 @@ public class IncidenteController extends BaseController  implements ICrudViewsHa
 
         model.put("incidente", incidente);
         context.render("incidentes/incidente.hbs", model);
+    }
+
+    public void fallasTecnicas(Context context) {
+        Map<String, Object> model = new HashMap<>();
+        Usuario usuario = verificarAdmin(context, model);
+        List<Incidente> incidentes = RepoIncidente.INSTANCE.buscarTodos();
+        model.put("incidentes", incidentes);
+        model.put("usuario", usuario);
+        context.render("incidentes/verFallas.hbs", model);
     }
 
     @Override

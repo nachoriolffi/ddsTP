@@ -3,12 +3,14 @@ package ar.edu.utn.frba.dds.services;
 import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoJuridiccion;
+import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
+import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.entities.validador.ValidadorDeContrasenia;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoUsuario;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class UserService {
 
@@ -19,7 +21,7 @@ public class UserService {
         UsuarioDTO usuarioDTO = new UsuarioDTO();
 
         String nombre = usuario.getNombre();
-        String apellido = usuarioDTO.getApellido();
+        String apellido = usuario.getApellido();
         Colaborador colaborador;
 
         switch (usuario.getRol()) {
@@ -41,12 +43,14 @@ public class UserService {
                     usuarioDTO.setEmail(usuario.getCorreoElectronico());
                     usuarioDTO.setClave(usuario.getContrasenia());
                     if (colaborador.getDireccion() != null) {
-                        usuarioDTO.setProvincia(colaborador.getDireccion().getUbicacion().getProvincia().toString());
-                        usuarioDTO.setLocalidad(colaborador.getDireccion().getUbicacion().getLocalidad().toString());
+                        //usuarioDTO.setProvincia(colaborador.getDireccion().getUbicacion().getProvincia().toString());
+                        //usuarioDTO.setLocalidad(colaborador.getDireccion().getUbicacion().getLocalidad().toString());
                         usuarioDTO.setDireccion(colaborador.obtenerDireccion());
                     }
-                    //TODO como setear el telefono
-                    //usuarioDTO.setTelefono(colaborador.get);
+                    List<Contacto> contactosConTelefono = colaborador.getContacto().stream().filter(contacto -> !contacto.getTipoContacto().equals(TipoContacto.MAIL)).toList();
+                    if (contactosConTelefono.size() > 0) {
+                        usuarioDTO.setTelefono(contactosConTelefono.get(0).getDescripcion());
+                    }
                 }
                 break;
             case COLABORADOR_JURIDICO:
@@ -57,12 +61,14 @@ public class UserService {
                     usuarioDTO.setEmail(usuario.getCorreoElectronico());
                     usuarioDTO.setClave(usuario.getContrasenia());
                     if (colaborador.getDireccion() != null) {
-                        usuarioDTO.setProvincia(colaborador.getDireccion().getUbicacion().getProvincia().toString());
-                        usuarioDTO.setLocalidad(colaborador.getDireccion().getUbicacion().getLocalidad().toString());
+                        //usuarioDTO.setProvincia(colaborador.getDireccion().getUbicacion().getProvincia().toString());
+                        //usuarioDTO.setLocalidad(colaborador.getDireccion().getUbicacion().getLocalidad().toString());
                         usuarioDTO.setDireccion(colaborador.obtenerDireccion());
                     }
-                    //TODO como setear el telefono
-                    //usuarioDTO.setTelefono(colaborador.get);
+                    List<Contacto> contactosConTelefono = colaborador.getContacto().stream().filter(contacto -> !contacto.getTipoContacto().equals(TipoContacto.MAIL)).toList();
+                    if (contactosConTelefono.size() > 0) {
+                        usuarioDTO.setTelefono(contactosConTelefono.get(0).getDescripcion());
+                    }
                 }
                 break;
             default:

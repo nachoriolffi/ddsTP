@@ -25,14 +25,13 @@
         <div class="row mb-4">
             <div class="col-md-12">
                 <form id="profileForm">
-                    <div class="row">
                     <div class="row mb-3">
-                    <div class="col-lg-6">
                         {{#if esAdmin}}
-                            <label for="firstName" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="firstName" value="{{usuario.nombre}}"
-                                   readonly>
-                        </div>
+                            <div class="col-lg-6">
+                                <label for="firstName" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="firstName" value="{{usuario.nombre}}"
+                                       readonly>
+                            </div>
                             <div class="col-lg-6">
                                 <label for="lastName" class="form-label">Apellido</label>
                                 <input type="text" class="form-control" id="lastName" value="{{usuario.apellido}}"
@@ -40,10 +39,11 @@
                             </div>
                         {{/if}}
                         {{#if esHumano}}
-                            <label for="firstName" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" id="firstName" value="{{usuario.nombre}}"
-                                   readonly>
-                        </div>
+                            <div class="col-lg-6">
+                                <label for="firstName" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="firstName" value="{{usuario.nombre}}"
+                                       readonly>
+                            </div>
                             <div class="col-lg-6">
                                 <label for="lastName" class="form-label">Apellido</label>
                                 <input type="text" class="form-control" id="lastName" value="{{usuario.apellido}}"
@@ -77,7 +77,7 @@
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-lg-5">
+                        <!--<div class="col-lg-5">
                             <label for="provincia" class="form-label">Provincia</label>
                             <input type="text" class="form-control" id="provincia" value="{{usuario.provincia}}"
                                    readonly>
@@ -86,8 +86,8 @@
                             <label for="barrio" class="form-label">Localidad/Barrio</label>
                             <input type="text" class="form-control" id="barrio" value="{{usuario.localidad}}"
                                    readonly>
-                        </div>
-                        <div class="col-lg-3">
+                        </div>-->
+                        <div class="col-lg-12">
                             <label for="direccion" class="form-label">Direccion</label>
                             <input type="text" class="form-control" id="direccion" value="{{usuario.direccion}}"
                                    readonly>
@@ -104,8 +104,8 @@
                         </div>
                     </div>
 
-            </form>
-        </div>
+                </form>
+            </div>
         </div>
     </section>
 

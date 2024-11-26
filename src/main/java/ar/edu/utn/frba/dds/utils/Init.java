@@ -141,20 +141,6 @@ public class Init implements WithSimplePersistenceUnit {
             }
         }
 
-        // COLABORADOR JURIDICO
-        usuarioJuridico = repoUsuario.buscar(3L);
-        Colaborador colaboradorJuridico = new Colaborador();
-        colaboradorJuridico.setRazonSocial("Taylor Nation");
-        colaboradorJuridico.setUsuario(usuarioJuridico);
-        colaboradorJuridico.setTipoPersona(TipoPersona.JURIDICA);
-        colaboradorJuridico.setFueCargaMasiva(false);
-        colaboradorJuridico.setTipoJuridiccion(TipoJuridiccion.EMPRESA);
-        List<TipoColaboracion> formasColaboracion = new ArrayList<>();
-        formasColaboracion.add(TipoColaboracion.HACERSE_CARGO_HELADERA);
-        formasColaboracion.add(TipoColaboracion.DINERO);
-        colaboradorJuridico.setFormasDeColaboracion(formasColaboracion);
-        RepoColaborador.INSTANCE.agregar(colaboradorJuridico);*/
-
         /*--------------CUESTIONARIOS--------------*/
 
         RepoPregunta repoPregunta = RepoPregunta.INSTANCE;
@@ -288,23 +274,6 @@ public class Init implements WithSimplePersistenceUnit {
         RepoPregunta.INSTANCE.agregar(apellidoPregunta);
         cuestionario1.agregarPregunta(nombrePregunta);
         cuestionario1.agregarPregunta(apellidoPregunta);
-        Pregunta multipleChoicePregunta = new Pregunta();
-        multipleChoicePregunta.setNombre("Pregunta de opción múltiple");
-        multipleChoicePregunta.setTipoPregunta(TipoPregunta.MULTIPLECHOICE);
-        RepoPregunta.INSTANCE.agregar(multipleChoicePregunta);
-        Opcion opcion1 = new Opcion("Opción 1");
-        Opcion opcion2 = new Opcion("Opción 2");
-        Opcion opcion3 = new Opcion("Opción 3");
-        opcion1.setPregunta(multipleChoicePregunta);
-        opcion2.setPregunta(multipleChoicePregunta);
-        opcion3.setPregunta(multipleChoicePregunta);
-        multipleChoicePregunta.getOpciones().add(opcion1);
-        multipleChoicePregunta.getOpciones().add(opcion2);
-        multipleChoicePregunta.getOpciones().add(opcion3);
-        RepoOpcion.INSTANCE.agregar(opcion1);
-        RepoOpcion.INSTANCE.agregar(opcion2);
-        RepoOpcion.INSTANCE.agregar(opcion3);
-        cuestionario1.agregarPregunta(multipleChoicePregunta);
         Pregunta fechaPregunta = new Pregunta();
         fechaPregunta.setNombre("fechaDeNacimiento");
         fechaPregunta.setDescripcionPregunta("Ingrese su fecha de nacimiento");

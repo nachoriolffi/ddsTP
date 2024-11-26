@@ -12,14 +12,14 @@
 
                 <form class="row g-3 needs-validation" method="POST" action="/registroJuridico" novalidate>
                     {{#each preguntas.RESPUESTAUNICA}}
-                        <div class="form-group">
+                        <div  class="col-4 form-group">
                             <label for="pregunta-{{id}}">{{nombre}}</label>
                             <input type="text" class="form-control" id="pregunta-{{id}}" name="respuesta-{{id}}" required="{{esObligatoria}}">
                         </div>
                     {{/each}}
 
                     {{#each preguntas.MULTIPLECHOICE}}
-                        <div class="form-group">
+                        <div class="col-4 form-group">
                             <label for="pregunta-{{id}}">{{nombre}}</label>
                             <select class="form-control" id="pregunta-{{id}}" name="opcion-{{id}}">
                                 {{#each opciones}}
@@ -30,7 +30,7 @@
                     {{/each}}
 
                     {{#each preguntas.VERDADEROFALSO}}
-                        <div class="form-group">
+                        <div class="col-4 form-group">
                             <label for="pregunta-{{id}}">{{nombre}}</label>
                             <select class="form-control" id="pregunta-{{id}}" name="verdaderoFalso-{{id}}">
                                 <option value="true">Verdadero</option>
@@ -40,14 +40,14 @@
                     {{/each}}
 
                     {{#each preguntas.STRING}}
-                        <div class="form-group">
+                        <div class="col-4 form-group">
                             <label for="pregunta-{{id}}">{{nombre}}</label>
                             <input type="text" class="form-control" id="pregunta-{{id}}" name="respuesta-{{id}}" required="{{esObligatoria}}">
                         </div>
                     {{/each}}
 
                     {{#each preguntas.FECHA}}
-                        <div class="form-group">
+                        <div class="col-4 form-group">
                             <label for="pregunta-{{id}}">{{nombre}}</label>
                             <input type="date" class="form-control" id="pregunta-{{id}}" name="fecha-{{id}}" required="{{esObligatoria}}">
                         </div>
@@ -76,31 +76,19 @@
                         <label for="validationCustom04" class="form-label">Piso</label>
                         <input type="text" class="form-control" id="piso" name="piso">
                     </div>
-
-
-                    <h4 class="h4">Ingrese al menos un Medio de Contacto</h4>
-                    <hr class="d-none d-md-block">
                     <div class="col-lg-6 col-md-12">
                         <label class="form-label" for="telefono">Número de Teléfono</label>
                         <input class="form-control" type="text" id="telefono" name="telefono" >
                     </div>
-                    <div class="col-lg-6 col-md-12">
-                        <label class="form-label" for="correo">Correo Electrónico</label>
-                        <input class="form-control" type="email" id="correo" name="correo" >
-                    </div>
-
-
-
                     <div class="col-lg-12 col-md-12">
-                        <label for="whatsapp">
-                            <input type="checkbox" id="whatsapp" name="medios-contacto" value="whatsapp">
+                        <label  class="form-check-label" for="whatsapp">
+                            <input class="form-check-input" type="checkbox" id="whatsapp" name="medios-contacto" value="whatsapp">
                             WhatsApp
                         </label>
                     </div>
-
                     <div class="col-lg-12 col-md-12">
-                        <label for="telegram">
-                            <input type="checkbox" id="telegram" name="medios-contacto" value="telegram">
+                        <label  class="form-check-label" for="telegram">
+                            <input class="form-check-input" type="checkbox" id="telegram" name="medios-contacto" value="telegram">
                             Telegram
                         </label>
                     </div>

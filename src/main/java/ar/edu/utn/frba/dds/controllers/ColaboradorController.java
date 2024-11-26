@@ -17,6 +17,7 @@ public class ColaboradorController extends BaseController implements ICrudViewsH
 
     private final ColaboradorService colaboradorService = new ColaboradorService();
     UserService userService = new UserService();
+
     public void index(Context context) {
         Map<String, Object> model = new HashMap<>();
         Usuario usuario = verificarAdmin(context, model);
@@ -24,7 +25,7 @@ public class ColaboradorController extends BaseController implements ICrudViewsH
         model.put("usuario", usuarioDTO);
         List<ColaboradorDTO> colaboradorDTOS = colaboradorService.obtenerColaboradores();
         model.put("colaboradores", colaboradorDTOS);
-        model.put("title","Colaboradores");
+        model.put("title", "Colaboradores");
         context.render("colaboradores.hbs", model);
     }
 
@@ -38,13 +39,22 @@ public class ColaboradorController extends BaseController implements ICrudViewsH
     }
 
     @Override
-    public void show(Context context) {}
+    public void show(Context context) {
+    }
+
     @Override
-    public void create(Context context) {}
+    public void create(Context context) {
+    }
+
     @Override
-    public void save(Context context) throws ParseException {}
+    public void save(Context context) throws ParseException {
+    }
+
     @Override
-    public void edit(Context context) {}
+    public void edit(Context context) {
+    }
+
     @Override
-    public void update(Context context) {}
+    public void update(Context context) {
+    }
 }

@@ -236,7 +236,7 @@ public class Colaborador implements IObserverColaborador {
     }
 
     public String obtenerDireccion() {
-        return this.getDireccion().getCalle().toString() + " " + this.getDireccion().getAltura().toString() + " Piso:" + this.getDireccion().getPiso().toString();
+        return this.getDireccion().getCalle().getCalle() + " " + this.getDireccion().getAltura().toString() + " Piso: " + this.getDireccion().getPiso().toString();
     }
 
     public void agregarFormaColaboracion(TipoColaboracion tipoColaboracion) {

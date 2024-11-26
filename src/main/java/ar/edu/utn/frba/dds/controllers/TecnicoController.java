@@ -57,7 +57,6 @@ public class TecnicoController extends BaseController implements ICrudViewsHandl
         Long cuil = Long.valueOf(context.formParam("cuil"));
         tecnico.setCuil(cuil.intValue());
         tecnico.setAreaCobertura(Integer.valueOf(context.formParam("areaCobertura")));
-        // TODO falta ingresar medio de contacto
 
         List<String> contactos = context.formParams("contactos");
 

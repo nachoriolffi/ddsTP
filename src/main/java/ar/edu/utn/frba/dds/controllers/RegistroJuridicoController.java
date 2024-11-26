@@ -1,38 +1,29 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.models.entities.colaborador.TipoJuridiccion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.TipoColaboracion;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Cuestionario;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Calle;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
-import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoCuestionario;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoDireccion;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoUsuario;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import ar.edu.utn.frba.dds.services.RegistroHumanoService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
-import ar.edu.utn.frba.dds.models.entities.contacto.*;
-
 import java.text.ParseException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class RegistroJuridicoController extends BaseController implements ICrudViewsHandler {
 
-    RepoColaborador repoColaborador = RepoColaborador.INSTANCE;
-    RepoDireccion repoDireccion = RepoDireccion.INSTANCE;
-    RepoUsuario repoUsuario = RepoUsuario.INSTANCE;
-
     @Override
     public void index(Context context) {
-
         Usuario nuevoUsuario = context.sessionAttribute("nuevoUsuario");
         if (nuevoUsuario == null) {
             context.redirect("/crearCuenta");
@@ -54,6 +45,7 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
             model.put("usuario", nuevoUsuario);
             model.put("cuestionario", cuestionario);
             model.put("preguntas", categorizedQuestions);
+            model.put("noInicioSesion", true);
             context.render("logs/registroJuridico.hbs", model);
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,22 +54,58 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
     }
 
     @Override
+    public void create(Context context) { // ESTE ES EL POSTA QUE USAMOS PARA LOS COLABORADORES
+        Usuario nuevoUsuario = context.sessionAttribute("nuevoUsuario");
+        RegistroHumanoService registroHumanosService = new RegistroHumanoService();
+        Colaborador colaborador = registroHumanosService.processAndSaveResponses(context);
+        colaborador.getUsuario().setNombre(colaborador.getRazonSocial());
+        colaborador.getUsuario().setCuentaEliminada(false);
+        colaborador.setTipoPersona(TipoPersona.JURIDICA);
+        Direccion direccion = new Direccion();
+        direccion.setPiso(Integer.valueOf(context.formParam("piso")));
+        Calle calle = new Calle();
+        calle.setCalle(context.formParam("calle"));
+        RepoCalle.INSTANCE.agregar(calle);
+        direccion.setCalle(calle);
+        direccion.setAltura(Integer.valueOf(context.formParam("altura")));
+        RepoDireccion.INSTANCE.agregar(direccion);
+        colaborador.setDireccion(direccion);
+        String[] formasDeColaboracion = context.formParams("colaboraciones").toArray(new String[0]);
+        for (String forma : formasDeColaboracion) {
+            colaborador.agregarFormaColaboracion(TipoColaboracion.valueOf(forma));
+        }
+        RepoUsuario.INSTANCE.agregar(nuevoUsuario);
+        RepoColaborador.INSTANCE.agregar(colaborador);
+        context.redirect("/iniciarSesion");
+    }
+
+    @Override
     public void save(Context context) throws ParseException {
-       Usuario nuevoUsuario = context.sessionAttribute("nuevoUsuario");
+
+        // ESTE METODO NO LO USAMOS, USAMOS EL QUE ESTA MAS ARRIBA
+        /*Usuario nuevoUsuario = context.sessionAttribute("nuevoUsuario");
         if (nuevoUsuario == null) {
             context.redirect("/crearCuenta");
             return;
         }
 
-        String razonSocial = context.formParam("respuesta-1" ); //"razon-social"
+        String razonSocial = context.formParam("respuesta-1"); //"razon-social"
         String tipoRazonSocial = context.formParam("opcion-2").toUpperCase(); //"tipo-razon-social"
-
 
         nuevoUsuario.setNombre(razonSocial);
 
         Colaborador colaboradorJuridico = new Colaborador();
         colaboradorJuridico.setRazonSocial(razonSocial);
         colaboradorJuridico.setTipoPersona(TipoPersona.JURIDICA);
+        colaboradorJuridico.setFueCargaMasiva(false);
+        Direccion direccion = new Direccion();
+        direccion.setAltura(Integer.valueOf(context.formParam("altura")));
+        Calle calle = new Calle(context.formParam("calle"));
+        RepoCalle.INSTANCE.agregar(calle);
+        direccion.setCalle(calle);
+        direccion.setPiso(Integer.valueOf(context.formParam("piso")));
+
+        RepoDireccion.INSTANCE.agregar(direccion);
 
         int tRazonSocialIndex = Integer.parseInt(tipoRazonSocial);
         colaboradorJuridico.setTipoJuridiccion(TipoJuridiccion.values()[tRazonSocialIndex]);
@@ -85,7 +113,7 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
         repoUsuario.agregar(nuevoUsuario);
         repoColaborador.agregar(colaboradorJuridico);
 
-        context.redirect("/iniciarSesion");
+        context.redirect("/iniciarSesion");*/
     }
 
     @Override
@@ -106,19 +134,5 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
     @Override
     public void show(Context context) {
 
-    }
-
-    @Override
-    public void create(Context context) {
-        RegistroHumanoService registroHumanosService = new RegistroHumanoService();
-        Colaborador colaborador = registroHumanosService.processAndSaveResponses(context);
-        colaborador.setTipoPersona(TipoPersona.JURIDICA);
-
-        String[] formasDeColaboracion = context.formParams("colaboraciones").toArray(new String[0]);
-        for (String forma : formasDeColaboracion) {
-            colaborador.agregarFormaColaboracion(TipoColaboracion.valueOf(forma));
-        }
-
-        RepoColaborador.INSTANCE.agregar(colaborador);
     }
 }
