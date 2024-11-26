@@ -443,5 +443,5 @@ public class Init implements WithSimplePersistenceUnit {
         distribucionVianda.setTipoColaboracion(TipoColaboracion.REDISTRIBUCION_VIANDAS);
         distribucionVianda.setColaborador(colaborador3);
         RepoDistribucionVianda.INSTANCE.agregar(distribucionVianda);
-    }
-*/
+}
+ */
