@@ -22,15 +22,15 @@ public class Server {
     private static Javalin app = null;
 
     //observabilidad
-    public static final DDMetricsUtils metricsUtils = new DDMetricsUtils("tpdds");
-    @Getter
-    public static final StepMeterRegistry registry = metricsUtils.getRegistry();
+    //public static final DDMetricsUtils metricsUtils = new DDMetricsUtils("tpdds");
+    //@Getter
+    //public static final StepMeterRegistry registry = metricsUtils.getRegistry();
 
     // Metricas
     //final var myGauge = registry.gauge("dds.unGauge", new AtomicInteger(0));
 
     // Config
-    private static final MicrometerPlugin micrometerPlugin = new MicrometerPlugin(config -> config.registry = registry);
+    //private static final MicrometerPlugin micrometerPlugin = new MicrometerPlugin(config -> config.registry = registry);
 
     public static Javalin app() {
         if (app == null)
@@ -48,7 +48,7 @@ public class Server {
                     .start(port);
             Router router = new Router();
             //SchedulerMain.main(new String[]{});
-            //Init.iniciar();
+            Init.iniciar();
             Router.init(Server.app());
 
         }

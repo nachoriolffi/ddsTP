@@ -85,7 +85,7 @@ public class RegistroVulnerableController extends BaseController implements ICru
         RepoVulnerable.INSTANCE.agregar(vulnerable);
         RepoTarjeta.INSTANCE.modificar(tarjeta);
         context.redirect("/registroVulnerable");
-        Server.registry.counter("tpdds.colaboraciones","status","registrarVulnerable").increment();
+        //Server.registry.counter("tpdds.colaboraciones","status","registrarVulnerable").increment();
     }
 
     @Override

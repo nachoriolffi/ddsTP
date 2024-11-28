@@ -1,6 +1,7 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
+import ar.edu.utn.frba.dds.dtos.outputs.IncidenteOutputDTO;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoIncidente;
@@ -9,10 +10,7 @@ import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
 
 import java.text.ParseException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class IncidenteController extends BaseController implements ICrudViewsHandler {
 
@@ -35,6 +33,14 @@ public class IncidenteController extends BaseController implements ICrudViewsHan
         Map<String, Object> model = new HashMap<>();
         Usuario usuario = verificarAdmin(context, model);
         List<Incidente> incidentes = RepoIncidente.INSTANCE.buscarTodos();
+        List<IncidenteOutputDTO> incidenteOutputDTOList = new ArrayList<>();
+        for (Incidente incidente : incidentes) {
+            IncidenteOutputDTO incidenteOutputDTO = new IncidenteOutputDTO();
+            incidenteOutputDTO.setTipoIncidente(incidente.getTipoIncidente().ordinal());
+            incidenteOutputDTO.setHeladera(incidente.getHeladera().getNombre());
+            incidenteOutputDTO.setEstado(String.valueOf(incidente.getEstado()));
+            incidenteOutputDTO.setFecha(incidente.getFecha().toString());
+        }
         model.put("incidentes", incidentes);
         model.put("usuario", usuario);
         context.render("incidentes/verFallas.hbs", model);

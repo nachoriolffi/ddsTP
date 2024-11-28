@@ -14,14 +14,11 @@ import ar.edu.utn.frba.dds.models.entities.heladera.TipoSolicitud;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
-<<<<<<< HEAD
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
-=======
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoDistribucionVianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import ar.edu.utn.frba.dds.server.Server;
->>>>>>> E6-obs
 import ar.edu.utn.frba.dds.services.DistribuirViandasService;
 import ar.edu.utn.frba.dds.services.UserService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
@@ -133,7 +130,7 @@ public class DistribuirViandasController extends BaseController implements ICrud
         colaborador.agregarColaboracionRealizada(distribucionVianda);
         RepoColaborador.INSTANCE.modificar(colaborador);
         context.redirect("/distribuirViandas");
-        Server.registry.counter("tpdds.colaboraciones","status","distribuirViandas").increment();
+        //Server.registry.counter("tpdds.colaboraciones","status","distribuirViandas").increment();
     }
 
     public void obtenerViandasOrigen(Context context) {

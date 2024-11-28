@@ -14,4 +14,8 @@ public class IncidenteOutputDTO {
     private Integer tipoAlerta;
     private String descripcion;
     private String pathFoto;
+    private String estado;
+    private String heladera;
+    private String fecha;
+
 }

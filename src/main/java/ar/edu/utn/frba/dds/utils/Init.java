@@ -67,7 +67,9 @@ public class Init implements WithSimplePersistenceUnit {
         usuarioAdmin.setRol(TipoRol.ADMIN);
         repoUsuario.agregar(usuarioAdmin);
 
-        // HUMANO
+        // NO USAR MAS ESTOS, CARGARLOS DESDE LA PAGINA QUE LES CREA EL USUARIO SOLO
+
+        /* // HUMANO
         Usuario usuarioHumano = new Usuario();
         usuarioHumano.setNombre("Matias");
         usuarioHumano.setApellido("Tisco");
@@ -75,26 +77,16 @@ public class Init implements WithSimplePersistenceUnit {
         usuarioHumano.setCuentaEliminada(false);
         usuarioHumano.setCorreoElectronico("mati@gmail.com");
         usuarioHumano.setRol(TipoRol.COLABORADOR_HUMANO);
-        //repoUsuario.agregar(usuarioHumano);
+        //repoUsuario.agregar(usuarioHumano);*/
 
-        // JURIDICO
+        /*// JURIDICO
         Usuario usuarioJuridico = new Usuario();
         usuarioJuridico.setNombre("Samsung");
         usuarioJuridico.setContrasenia("1234");
         usuarioJuridico.setCuentaEliminada(false);
         usuarioJuridico.setCorreoElectronico("samsung@gmail.com");
         usuarioJuridico.setRol(TipoRol.COLABORADOR_JURIDICO);
-        //repoUsuario.agregar(usuarioJuridico);
-
-        // TECNICO
-        Usuario usuarioTecnico = new Usuario();
-        usuarioTecnico.setNombre("Federico");
-        usuarioTecnico.setApellido("Perez");
-        usuarioTecnico.setContrasenia("1234");
-        usuarioTecnico.setCuentaEliminada(false);
-        usuarioTecnico.setCorreoElectronico("fede@gmail.com");
-        usuarioTecnico.setRol(TipoRol.TECNICO);
-        //repoUsuario.agregar(usuarioTecnico);
+        //repoUsuario.agregar(usuarioJuridico);*/
 
         /*--------------TARJETAS--------------*/
 
@@ -236,31 +228,6 @@ public class Init implements WithSimplePersistenceUnit {
         RepoCuestionario.INSTANCE.agregar(cuestionarioHumano);*/
 
 
-        //---------TECNICO---------
-
-        /*Coordenada coordenadaTecnico = new Coordenada();
-        coordenadaTecnico.setLatitud(-34.615803);
-        coordenadaTecnico.setLongitud(-58.433298);
-
-        RepoCoordenada.INSTANCE.agregar(coordenadaTecnico);
-
-        Tecnico tecnico = new Tecnico();
-        tecnico.setNombre("Tecnico1");
-        tecnico.setApellido("Apellido1");
-        tecnico.setCoordenada(coordenadaTecnico);
-        tecnico.setAreaCobertura((int) 10.0);
-        tecnico.setDni(Integer.valueOf("12345678"));
-        tecnico.setCuil(Integer.valueOf("12345678"));
-        tecnico.setTipoDocumento(TipoDocumento.DNI);
-        tecnico.setDisponible(true);
-        Usuario u = RepoUsuario.INSTANCE.buscar(4L);
-        tecnico.setUsuario(u);
-        //tecnico.agregarMedioDeComunicacion(correo);
-        RepoTecnico.INSTANCE.agregar(tecnico);*/
-
-
-        //-------------------------
-
         Cuestionario cuestionario1 = new Cuestionario();
         Pregunta nombrePregunta = new Pregunta();
         nombrePregunta.setNombre("nombre");
@@ -361,87 +328,3 @@ public class Init implements WithSimplePersistenceUnit {
         }
     }
 }
-
-/*
-        ReceptorTemperatura receptorTemperatura = new ReceptorTemperatura();
-             RepoReceptorTemperatura.INSTANCE.agregar(receptorTemperatura);
-
-        Coordenada coordenadaHeladera = new Coordenada();
-        coordenadaHeladera.setLatitud(-34.603722);
-        coordenadaHeladera.setLongitud(-58.381592);
-        // Save the coordenadaHeladera if necessary
-
-        Contacto contacto = new Contacto();
-        contacto.setTipoContacto(TipoContacto.MAIL);
-        contacto.setDescripcion("federperez@frba.utn.edu.ar");
-            RepoContacto.INSTANCE.agregar(contacto);
-
-        Tecnico tecnico = new Tecnico();
-        tecnico.setNombre("Tecnico1");
-        tecnico.setApellido("Apellido1");
-        tecnico.setCoordenada(coordenadaTecnico);
-        tecnico.setAreaCobertura((int) 10.0);
-        tecnico.setDni(Integer.valueOf("12345678"));
-        tecnico.setCuil(Integer.valueOf("12345678"));
-        tecnico.setTipoDocumento(TipoDocumento.DNI);
-        tecnico.setDisponible(true);
-        tecnico.agregarContacto(contacto);
-        tecnico.agregarMedioDeComunicacion(correo);
-              RepoTecnico.INSTANCE.agregar(tecnico);
-
-        Heladera heladera = new Heladera();
-        heladera.setNombre("heladeraFede");
-        heladera.setEstaActiva(true);
-        heladera.setModelo(modeloHeladera);
-        heladera.setReceptorTemperatura(receptorTemperatura);
-        heladera.setCoordenada(coordenadaHeladera);
-        RepoHeladeras.INSTANCE.agregar(heladera);
-
-        RegistroTemperatura registroTemperatura = new RegistroTemperatura();
-        registroTemperatura.setLectura(5.0F);
-        registroTemperatura.setFechaHora(new Date());
-          RepoRegistroTemperatura.INSTANCE.agregar(registroTemperatura);
-
-        receptorTemperatura.agregarRegistro(registroTemperatura);
-            RepoReceptorTemperatura.INSTANCE.modificar(receptorTemperatura);
-
-
-        RegistroApertura registroAperturaSACAR = new RegistroApertura();
-        registroAperturaSACAR.setFechaApertura(new Date());
-        registroAperturaSACAR.setSolicitud(TipoSolicitud.REDISTRIBUCION_VIANDAS);
-        registroAperturaSACAR.setRetiroVianda(Boolean.TRUE);
-        registroAperturaSACAR.setViandas(Collections.singletonList(vianda3));
-           RepoRegistroApertura.INSTANCE.agregar(registroAperturaSACAR);
-
-        RegistroApertura registroAperturaPONER = new RegistroApertura();
-        registroAperturaPONER.setFechaApertura(new Date());
-        registroAperturaPONER.setSolicitud(TipoSolicitud.REDISTRIBUCION_VIANDAS);
-        registroAperturaPONER.setRetiroVianda(Boolean.FALSE);
-        registroAperturaPONER.setViandas(Collections.singletonList(vianda4));
-           RepoRegistroApertura.INSTANCE.agregar(registroAperturaPONER);
-
-        Incidente incidente3 = new Incidente();
-        incidente3.setDescripcion("Incidente de prueba 1");
-        incidente3.setPathFoto(null);
-        incidente3.setTipoIncidente(TipoIncidente.FALLA);
-        incidente3.setTipoAlerta(null);
-
-
-        Heladera heladera4 = new Heladera();
-        heladera4.setNombre("Heladera de Fede");
-        heladera4.setEstaActiva(true);
-        heladera4.setModelo(modeloPDF);
-        heladera4.agregarApertura(registroAperturaPONER);
-        RepoHeladeras.INSTANCE.agregar(heladera4);
-
-        DistribucionVianda distribucionVianda = new DistribucionVianda();
-        distribucionVianda.setFechaColaboracion(new Date());
-        distribucionVianda.setCantidadViandas(10);
-        distribucionVianda.setMotivo(MotivoDistribucion.FALTA_VIANDAS_H_DESTINO);
-        distribucionVianda.setHeladeraOrigen(heladera3);
-        distribucionVianda.setHeladeraDestino(heladera4);
-        distribucionVianda.setTipoColaboracion(TipoColaboracion.REDISTRIBUCION_VIANDAS);
-        distribucionVianda.setColaborador(colaborador3);
-        RepoDistribucionVianda.INSTANCE.agregar(distribucionVianda);
-}
- */
