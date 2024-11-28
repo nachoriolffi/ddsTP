@@ -22,7 +22,7 @@ import java.util.Map;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 
-public class AdapterPDF extends IOException implements InterfaceAdapterPDF {
+public class AdapterPDF implements InterfaceAdapterPDF {
 
     List<String> secciones = new ArrayList<>();
 
