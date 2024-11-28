@@ -268,9 +268,6 @@
             <artifactId>logback-classic</artifactId>
             <version>1.2.11</version> <!-- O la versión más reciente -->
         </dependency>
-
-
-
     </dependencies>
 
     <build>
@@ -350,7 +347,7 @@
                     </execution>
                 </executions>
             </plugin>-->
-            <plugin>
+            <!--<plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.8</version>
@@ -387,6 +384,7 @@
                     </execution>
                 </executions>
             </plugin>
+            -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
