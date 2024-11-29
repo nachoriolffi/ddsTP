@@ -11,7 +11,7 @@ public class CronJobReporte {
     public static void main(String[] args) {
         // Create an instance of CronJobReporte and call ejecutarReporte
         CronJobReporte cronJobReporte = new CronJobReporte();
-        //cronJobReporte.ejecutarReporte();
+        cronJobReporte.ejecutarReporte();
     }
 
     public void ejecutarReporte() {
