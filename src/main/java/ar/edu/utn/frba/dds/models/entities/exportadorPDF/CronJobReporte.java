@@ -10,8 +10,8 @@ public class CronJobReporte {
     // Add the main method to allow running CronJobReporte as a standalone application
     public static void main(String[] args) {
         // Create an instance of CronJobReporte and call ejecutarReporte
-      //  CronJobReporte cronJobReporte = new CronJobReporte();
-     //   cronJobReporte.ejecutarReporte();
+        CronJobReporte cronJobReporte = new CronJobReporte();
+        //cronJobReporte.ejecutarReporte();
     }
 
     public void ejecutarReporte() {
