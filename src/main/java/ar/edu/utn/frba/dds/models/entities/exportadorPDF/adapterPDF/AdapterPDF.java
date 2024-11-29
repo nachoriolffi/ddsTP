@@ -33,6 +33,14 @@ public class AdapterPDF implements InterfaceAdapterPDF {
 
     Path pathToPdf = projectBasePath.resolve("src/main/resources/public/pdfs/reporte_" + formattedDate + ".pdf");
 
+    @Override
+    public Reporte exportar(Exportable... exportables) throws IOException {
+        exportToPdf(pathToPdf.toString(), List.of(exportables));
+        Reporte reporte = new Reporte(pathToPdf.toString());
+        RepoReporte.INSTANCE.agregar(reporte);
+        return reporte;
+    }
+
     public void exportToPdf(String dest, List<Exportable> exportables) throws IOException {
 
         File file = new File(dest);
@@ -105,13 +113,7 @@ public class AdapterPDF implements InterfaceAdapterPDF {
         document.add(table); // Agregar la tabla al documento después de llenar todas las filas
     }
 
-    @Override
-    public Reporte exportar(Exportable... exportables) throws IOException {
-        exportToPdf(pathToPdf.toString(), List.of(exportables));
-        Reporte reporte = new Reporte(pathToPdf.toString());
-        RepoReporte.INSTANCE.agregar(reporte);
-        return reporte;
-    }
+
 }
 
 

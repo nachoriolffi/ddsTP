@@ -12,9 +12,10 @@ public class SchedulerMain {
 
         // Crea el ScheduledExecutorService con un solo hilo
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(8);
-
-        // CRONJOB GENERACION REPORTES CADA UNA SEMANA
         CronJobReporte jobReporte = new CronJobReporte();
+        CronjobTemperatura jobTemperatura = new CronjobTemperatura();
+        // CRONJOB GENERACION REPORTES CADA UNA SEMANA
+
         long initialDelay = 0;  // Tiempo de espera inicial antes de la primera ejecución
         long period = 7;        // Intervalo de ejecución en días (1 semana)
 
@@ -30,7 +31,7 @@ public class SchedulerMain {
         long initialDelayTemperatura = 0;  // Tiempo de espera inicial antes de la primera ejecución
         long periodTemperatura = 5;        // Intervalo de ejecución en minutos (5 minutos)
 
-        CronjobTemperatura jobTemperatura = new CronjobTemperatura();
+
 
         scheduler.scheduleAtFixedRate(
                 jobTemperatura::ejecutarTemperatura,
