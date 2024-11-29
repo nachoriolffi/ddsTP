@@ -32,7 +32,7 @@ public class suscripcionesAHeladerasController extends BaseController implements
         Usuario usuario = verificarHumano(context, model);
         UsuarioDTO usuarioDTO = userService.obtenerUsuarioDTO(usuario);
         model.put("usuario", usuarioDTO);
-        //List<Heladera> heladeras = suscripcionesAHeladerasService.buscarHeladeras();
+        List<Heladera> heladeras = suscripcionesAHeladerasService.buscarHeladeras(usuario);
 
         try {
             verificarJuridicoOHumano(context, model);

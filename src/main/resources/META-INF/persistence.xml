@@ -28,7 +28,6 @@
       <!-- CONFIGURACION CUENTA BDD -->
       <property name="hibernate.connection.username" value="admin" />
       <property name="hibernate.connection.password" value="Nacho1125253216" />
-
       <!-- CLAVES
       Nacho2004_MySQL!
 

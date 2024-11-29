@@ -14,7 +14,7 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import java.util.List;
 
 public class SuscripcionesAHeladerasService {
-    public List<Heladera> buscarHeladeras() {
+    public List<Heladera> buscarHeladeras(Usuario usuario) {
         return RepoHeladeras.INSTANCE.buscarTodos();
     }
 

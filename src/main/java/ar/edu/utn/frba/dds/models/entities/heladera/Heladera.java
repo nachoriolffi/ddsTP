@@ -87,13 +87,10 @@ public class Heladera implements IObservableColaborador {
     private Boolean
             dadaDeBaja;
 
-    @ManyToMany
-    @JoinTable(
-            name = "suscriptoresHeladeras",
-            joinColumns = @JoinColumn(name = "heladera_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
-    )
+    @OneToMany
+    @JoinColumn(name = "heladera_id")
     private List<ObserverColaborador> observers;
+
 
     @Transient
     private List<NotificacionColaborador> notificaciones;

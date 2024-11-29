@@ -367,7 +367,7 @@ public class Init implements WithSimplePersistenceUnit {
         heladera1.setFechaPuestaFunc(new Date());
         heladera1.setEstaActiva(Boolean.TRUE);
         heladera1.setModelo(modeloHeladera1);
-        repoHeladeras.agregar(heladera1);
+
 
 
         ObserverColaborador observer = new ObserverColaborador();
@@ -376,9 +376,7 @@ public class Init implements WithSimplePersistenceUnit {
         RepoSuscriptorHeladera.INSTANCE.agregar(observer);
 
         heladera1.agregarColaborador(observer);
-
-
-
+        repoHeladeras.agregar(heladera1);
     }
 
     public static void agregarRubrosAPreguntaComoOpciones(Pregunta pregunta, List<RubroColaborador> rubros) {
