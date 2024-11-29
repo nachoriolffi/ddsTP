@@ -2,14 +2,8 @@ package ar.edu.utn.frba.dds.server;
 
 import ar.edu.utn.frba.dds.congif.ServiceLocator;
 import ar.edu.utn.frba.dds.controllers.*;
-import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoOferta;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoReporte;
 import io.javalin.Javalin;
-import io.javalin.http.HttpStatus;
-import javassist.NotFoundException;
 
 import javax.transaction.SystemException;
 import java.util.Objects;
@@ -87,8 +81,8 @@ public class Router {
         app.get("/donarViandas", Objects.requireNonNull(ServiceLocator.instanceOf(DonacionViandaController.class))::index);
         app.post("/donarViandas", Objects.requireNonNull(ServiceLocator.instanceOf(DonacionViandaController.class))::save);
 
-        app.get("/misHeladeras", Objects.requireNonNull(ServiceLocator.instanceOf(MisHeladerasController.class))::index, TipoRol.COLABORADOR_HUMANO, TipoRol.COLABORADOR_JURIDICO);
-        app.post("/misHeladeras", Objects.requireNonNull(ServiceLocator.instanceOf(MisHeladerasController.class))::save);
+        app.get("/suscripcionesAHeladeras", Objects.requireNonNull(ServiceLocator.instanceOf(suscripcionesAHeladerasController.class))::index, TipoRol.COLABORADOR_HUMANO, TipoRol.COLABORADOR_JURIDICO);
+        app.post("/suscripcionesAHeladeras", Objects.requireNonNull(ServiceLocator.instanceOf(suscripcionesAHeladerasController.class))::save);
 
         app.get("/registroJuridico", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroJuridicoController.class))::index);
         app.post("/registroJuridico", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroJuridicoController.class))::create);

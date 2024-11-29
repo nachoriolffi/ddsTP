@@ -88,9 +88,11 @@ public class Heladera implements IObservableColaborador {
             dadaDeBaja;
 
     @ManyToMany
-    @JoinTable(name = "suscriptoresHeladeras",joinColumns =
-    @JoinColumn(name = "heladera_id",referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "colaborador_id",referencedColumnName = "id"))
+    @JoinTable(
+            name = "suscriptoresHeladeras",
+            joinColumns = @JoinColumn(name = "heladera_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "colaborador_id", referencedColumnName = "id")
+    )
     private List<ObserverColaborador> observers;
 
     @Transient

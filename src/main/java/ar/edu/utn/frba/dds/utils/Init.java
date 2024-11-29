@@ -2,6 +2,13 @@ package ar.edu.utn.frba.dds.utils;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoJuridiccion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.*;
+import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
+import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.AdapterCorreo;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.CorreoElectronico;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
+import ar.edu.utn.frba.dds.models.entities.contacto.telegram.AdapterTelegram;
+import ar.edu.utn.frba.dds.models.entities.contacto.telegram.Telegram;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Cuestionario;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Opcion;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
@@ -9,10 +16,14 @@ import ar.edu.utn.frba.dds.models.entities.cuestionario.TipoPregunta;
 import ar.edu.utn.frba.dds.models.entities.generadorCodigo.GeneradorDeCodigo;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
+import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
+import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.ObserverColaborador;
+import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.TipoSuscripcion;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
@@ -316,6 +327,57 @@ public class Init implements WithSimplePersistenceUnit {
         cuestionarioJuridico2.agregarPregunta(preguntaRubro);
 
         RepoCuestionario.INSTANCE.agregar(cuestionarioJuridico2);
+
+
+
+        //Suscripciones
+        Usuario usuarioSuscripcion = new Usuario();
+        usuarioSuscripcion.setNombre("Nahuel");
+        usuarioSuscripcion.setApellido("Lazarte");
+        usuarioSuscripcion.setContrasenia("1234");
+        usuarioSuscripcion.setCuentaEliminada(false);
+        usuarioSuscripcion.setCorreoElectronico("clazarte@frba.utn.edu.ar");
+        usuarioSuscripcion.setRol(TipoRol.COLABORADOR_HUMANO);
+        repoUsuario.agregar(usuarioSuscripcion);
+
+        Colaborador colaborador1 = new Colaborador();
+        colaborador1.setNombre("Martin");
+        colaborador1.setApellido("Fierro");
+        colaborador1.setTipoDocumento(TipoDocumento.DNI);
+        colaborador1.setNumeroDocumento(12345845);
+        colaborador1.setTipoPersona(TipoPersona.HUMANA);
+
+        List<Contacto> contactos = new ArrayList<>();
+        contactos.add(new Contacto(TipoContacto.MAIL, "clazarte@frba.utn.edu.ar"));
+        contactos.add(new Contacto(TipoContacto.TELEGRAM, "7166927758"));
+        colaborador1.setContacto(contactos);
+
+        List<MedioDeComunicacion> mediosDeComunicacion = new ArrayList<>();
+        mediosDeComunicacion.add(new CorreoElectronico(new AdapterCorreo()));
+        mediosDeComunicacion.add(new Telegram(new AdapterTelegram()));
+        colaborador1.setMediosDeComunicacion(mediosDeComunicacion);
+        colaborador1.setUsuario(usuarioSuscripcion);
+        RepoColaborador.INSTANCE.agregar(colaborador1);
+
+
+
+        RepoHeladeras repoHeladeras = RepoHeladeras.INSTANCE;
+        Heladera heladera1 = new Heladera();
+        heladera1.setNombre("UTN MEDRANO");
+        heladera1.setFechaPuestaFunc(new Date());
+        heladera1.setEstaActiva(Boolean.TRUE);
+        heladera1.setModelo(modeloHeladera1);
+        repoHeladeras.agregar(heladera1);
+
+
+        ObserverColaborador observer = new ObserverColaborador();
+        observer.setTipoSuscripcion(TipoSuscripcion.DESPERFECTO);
+        observer.setSuscriptor(colaborador1);
+        RepoSuscriptorHeladera.INSTANCE.agregar(observer);
+
+        heladera1.agregarColaborador(observer);
+
+
 
     }
 
