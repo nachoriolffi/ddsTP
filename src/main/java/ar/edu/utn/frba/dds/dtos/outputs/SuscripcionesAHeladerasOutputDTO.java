@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class SuscripcionesAHeladerasOutputDTO {
+    private Long id;
     private String nombre;
     private String direccion;
-    //Motivo
+    private String motivo;
     private Integer cantidadDeViandas;
-    //private Boolean notificación;
     //Heladeras sugeridas
-    private Boolean Desuscribirme;
+    //private Boolean Desuscribirme;
 }

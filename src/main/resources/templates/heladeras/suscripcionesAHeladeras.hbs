@@ -6,7 +6,8 @@
                 <h1 class="h1">Suscripciones a Heladeras</h1>
             </div>
             <div class="col-md-4 text-md-end">
-                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#sucribirseModal">
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                        data-bs-target="#sucribirseModal">
                     Suscribirse a Heladera
                 </button>
             </div>
@@ -22,42 +23,32 @@
                         <th scope="col">Cantidad de viandas notificación</th>
                         <th scope="col">Heladeras sugeridas</th>
                         <th scope="col">Desuscribirme</th>
-
                     </tr>
                     </thead>
                     <tbody class="table-group-divider">
-                    <tr>
-                        <td><a href="#" data-bs-toggle="modal" data-bs-target="#heladeraModal">Heladera del Centro</a></td>
-                        <td>Calle Falsa 123</td>
-                        <td>Queda lugar para almacenar n viandas</td>
-                        <td>5</td>
-                        <td></td>
-                        <td><button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#unsubscribeModal">
-                            <i class="fa-solid fa-xmark fa-lg"></i>
-                        </button></td>
-                    </tr>
-                    <tr>
-                        <td><a href="">Heladera del Norte</a></td>
-                        <td>Avenida Principal 456</td>
-                        <td>Desperfecto</td>
-                        <td></td>
-                        <td>
-                            <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#sugerenciasModal">Ver Sugerencias</button>
-                        </td>
-                        <td>
-                            <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#unsubscribeModal">
-                                <i class="fa-solid fa-xmark fa-lg"></i>
-                            </button>
-                        </td>
-                    </tr>
+                    {{#each suscripciones}}
+                        <tr>
+                            <td>{{this.nombre}}</td>
+                            <td>{{this.direccion}}</td>
+                            <td>{{this.motivo}}</td>
+                            <td>{{this.cantidadDeViandas}}</td>
+                            <td></td>
+                            <td>
+                                <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#unsubscribeModal"
+                                        data-suscripcion-id="{{this.id}}">
+                                    <i class="fa-solid fa-xmark fa-lg"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    {{/each}}
                     </tbody>
-
                 </table>
             </div>
         </div>
 
         <!--Modal Suscribirse-->
-        <div class="modal fade" id="sucribirseModal" tabindex="-1" aria-labelledby="donationModalLabel" aria-hidden="true">
+        <div class="modal fade" id="sucribirseModal" tabindex="-1" aria-labelledby="donationModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -66,12 +57,13 @@
                     </div>
                     <div class="modal-body">
                         <!-- Formulario de suscripción -->
-                        <form id="subscriptionForm" class="row g-3 needs-validation" novalidate method="POST" action="/misHeladeras">
-
+                        <form id="subscriptionForm" class="row g-3 needs-validation" novalidate method="POST"
+                              action="/misHeladeras">
                             <div class="modal-footer col-md-12">
-                                <button class="btn btn-primary w-100" type="button" data-bs-toggle="modal" data-bs-target="#confirmModalHacer">Seleccionar Heladera</button>
+                                <button class="btn btn-primary w-100" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#confirmModalHacer">Seleccionar Heladera
+                                </button>
                             </div>
-
                             <div class="col-md-6">
                                 <label class="form-label" for="modelo">Motivo Suscripción</label>
                                 <select class="form-select" id="modelo" name="motivo" required>
@@ -84,18 +76,21 @@
                                 <label class="form-label" for="input3">Cantidad de viandas</label>
                                 <input class="form-control" type="text" id="input3" name="cantidad-viandas" required>
                             </div>
-
                             <div class="modal-footer col-md-12">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                <button class="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#confirmModal">Suscribirse</button>
+                                <button class="btn btn-primary" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#confirmModal">Suscribirse
+                                </button>
                             </div>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
+
         <!--Modal Desuscribirse-->
-        <div class="modal fade" id="unsubscribeModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal fade" id="unsubscribeModal" tabindex="-1" aria-labelledby="confirmModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -106,9 +101,11 @@
                         ¿Está seguro de que desea anular la suscripción a esta heladera?
                     </div>
                     <div class="modal-footer">
-                        <!-- Botón de Cancelar que cierra el modal de confirmación y vuelve al modal de suscripción -->
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#donationModal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" onclick="document.getElementById('donationForm').submit();">Sí, anular la suscripción</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        <form id="deleteSuscripcionForm" method="POST" action="/suscripcionesAHeladeras/delete">
+                            <input type="hidden" name="suscripcionId" id="suscripcionIdToDelete">
+                            <button type="submit" class="btn btn-primary">Sí, anular la suscripción</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -126,16 +123,20 @@
                         ¿Está seguro de que desea suscribirse a esta heladera?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#donationModal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" onclick="document.getElementById('subscriptionForm').submit();">Sí, realizar suscripción</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal"
+                                data-bs-target="#donationModal">Cancelar
+                        </button>
+                        <button type="button" class="btn btn-primary"
+                                onclick="document.getElementById('subscriptionForm').submit();">Sí, realizar suscripción
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
 
-
         <!-- Modal de información heladera-->
-        <div class="modal fade" id="heladeraModal" tabindex="-1" aria-labelledby="heladeraModalLabel" aria-hidden="true">
+        <div class="modal fade" id="heladeraModal" tabindex="-1" aria-labelledby="heladeraModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -143,7 +144,6 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-
                         <div class="modal-footer">
                             <button class="btn btn-outline-primary" data-bs-dismiss="modal">Cerrar</button>
                         </div>
@@ -151,7 +151,20 @@
                 </div>
             </div>
         </div>
-
     </section>
 {{/partial}}
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var unsubscribeModal = document.getElementById('unsubscribeModal');
+        var suscripcionIdInput = document.getElementById('suscripcionIdToDelete');
+
+        unsubscribeModal.addEventListener('show.bs.modal', function (event) {
+            var button = event.relatedTarget;
+            var suscripcionId = button.getAttribute('data-suscripcion-id');
+            suscripcionIdInput.value = suscripcionId;
+        });
+    });
+</script>
+
 {{> templates/base}}

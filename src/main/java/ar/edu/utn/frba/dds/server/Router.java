@@ -83,6 +83,7 @@ public class Router {
 
         app.get("/suscripcionesAHeladeras", Objects.requireNonNull(ServiceLocator.instanceOf(suscripcionesAHeladerasController.class))::index, TipoRol.COLABORADOR_HUMANO, TipoRol.COLABORADOR_JURIDICO);
         app.post("/suscripcionesAHeladeras", Objects.requireNonNull(ServiceLocator.instanceOf(suscripcionesAHeladerasController.class))::save);
+        app.post("/suscripcionesAHeladeras/delete", Objects.requireNonNull(ServiceLocator.instanceOf(suscripcionesAHeladerasController.class))::delete);
 
         app.get("/registroJuridico", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroJuridicoController.class))::index);
         app.post("/registroJuridico", Objects.requireNonNull(ServiceLocator.instanceOf(RegistroJuridicoController.class))::create);

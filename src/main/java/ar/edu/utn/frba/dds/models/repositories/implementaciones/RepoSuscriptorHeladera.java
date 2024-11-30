@@ -20,4 +20,13 @@ public class RepoSuscriptorHeladera extends RepoGenerico<ObserverColaborador> {
         Colaborador colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
         return RepoHeladeras.INSTANCE.findBySuscriptorId(colaborador.getId());
     }
+
+    public boolean eliminarSuscripcionPorId(Long suscripcionId) {
+        ObserverColaborador suscripcion = buscar(suscripcionId);
+        if (suscripcion != null) {
+            eliminar(suscripcion);
+            return true;
+        }
+        return false;
+    }
 }

@@ -362,7 +362,10 @@ public class Init implements WithSimplePersistenceUnit {
 
 
         RepoHeladeras repoHeladeras = RepoHeladeras.INSTANCE;
+        Direccion direccion1 = new Direccion("Medrano", 951, 1);
+        RepoDireccion.INSTANCE.agregar(direccion1);
         Heladera heladera1 = new Heladera();
+        heladera1.setDireccion(direccion1);
         heladera1.setNombre("UTN MEDRANO");
         heladera1.setFechaPuestaFunc(new Date());
         heladera1.setEstaActiva(Boolean.TRUE);
@@ -375,7 +378,21 @@ public class Init implements WithSimplePersistenceUnit {
         observer.setSuscriptor(colaborador1);
         RepoSuscriptorHeladera.INSTANCE.agregar(observer);
 
+        ObserverColaborador observer2 = new ObserverColaborador();
+        observer2.setTipoSuscripcion(TipoSuscripcion.MUCHAS_VIANDAS);
+        observer2.setCantidadViandas(8);
+        observer2.setSuscriptor(colaborador1);
+        RepoSuscriptorHeladera.INSTANCE.agregar(observer2);
+
+        ObserverColaborador observer3 = new ObserverColaborador();
+        observer3.setTipoSuscripcion(TipoSuscripcion.VIANDAS_DISPONIBLES);
+        observer3.setCantidadViandas(2);
+        observer3.setSuscriptor(colaborador1);
+        RepoSuscriptorHeladera.INSTANCE.agregar(observer3);
+
         heladera1.agregarColaborador(observer);
+        heladera1.agregarColaborador(observer2);
+        heladera1.agregarColaborador(observer3);
         repoHeladeras.agregar(heladera1);
     }
 
