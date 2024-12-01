@@ -10,8 +10,7 @@ import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.HttpStatus;
 import io.javalin.http.staticfiles.Location;
-import io.javalin.micrometer.MicrometerPlugin;
-import io.micrometer.core.instrument.step.StepMeterRegistry;
+
 import lombok.Getter;
 
 import java.io.IOException;
