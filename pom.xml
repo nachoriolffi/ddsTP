@@ -242,8 +242,8 @@
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>2.0.16</version>
+            <artifactId>slf4j-reload4j</artifactId>
+            <version>2.0.13</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-csv -->
@@ -254,17 +254,9 @@
         </dependency>
 
         <!-- Javalin Micrometer -->
-        <dependency>
-            <groupId>io.javalin</groupId>
-            <artifactId>javalin</artifactId>
-            <version>6.3.0</version>
-        </dependency>
 
-        <dependency>
-            <groupId>io.javalin</groupId>
-            <artifactId>javalin-rendering</artifactId>
-            <version>6.3.0</version>
-        </dependency>
+
+
 
         <dependency>
             <groupId>io.javalin</groupId>
