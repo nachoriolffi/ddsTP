@@ -43,9 +43,8 @@ public class Server {
 //            app = Javalin.create( config -> { config.registerPlugin(micrometerPlugin); })
 //                    .start(port);
 //            Router router = new Router();
-            app = Javalin.create(config())
-                    .start(port);
-            Router router = new Router();
+            app = Javalin.create(config()).start(port);
+
   // SchedulerMain.main(new String[]{});
             Init.iniciar();
             Router.init(Server.app());
