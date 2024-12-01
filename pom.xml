@@ -55,7 +55,7 @@
             <version>5.5.13.4</version>
         </dependency>
 
-        
+
             <!-- iText Core -->
             <dependency>
                 <groupId>com.itextpdf</groupId>
@@ -243,6 +243,31 @@
             <artifactId>slf4j-simple</artifactId>
             <version>2.0.16</version>
         </dependency>
+
+        <!-- Javalin Micrometer -->
+        <dependency>
+            <groupId>io.javalin</groupId>
+            <artifactId>javalin-micrometer</artifactId>
+            <version>5.6.0</version>
+        </dependency>
+
+        <!-- Micrometer Core -->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-core</artifactId>
+            <version>1.11.4</version>
+        </dependency>
+
+        <!-- Micrometer Datadog Registry -->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-datadog</artifactId>
+            <version>1.11.4</version>
+        </dependency>
+
+        <!-- Micrometer JVM Metrics -->
+    
+
     </dependencies>
 
     <build>
