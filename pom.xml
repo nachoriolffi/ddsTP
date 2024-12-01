@@ -19,6 +19,7 @@
     </properties>
 
     <dependencies>
+        <!-- JUnit -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
@@ -32,16 +33,14 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Needed by junit -->
-        <!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest -->
+        <!-- Hamcrest -->
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest</artifactId>
             <version>2.2</version>
-            <scope>test</scope>
         </dependency>
 
-
+        <!-- Lombok -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -50,36 +49,20 @@
         </dependency>
 
         <!-- iText PDF -->
-        <!-- https://mvnrepository.com/artifact/com.itextpdf/itext-core -->
         <dependency>
             <groupId>com.itextpdf</groupId>
-            <artifactId>itext-core</artifactId>
-            <version>9.0.0</version>
-            <type>pom</type>
-    </dependency>
+            <artifactId>itextpdf</artifactId>
+            <version>5.5.13.4</version>
+        </dependency>
 
-    <dependency>
-    <groupId>com.itextpdf</groupId>
-    <artifactId>kernel</artifactId>
-    <version>9.0.0</version>
-    <scope>compile</scope>
-</dependency>
-<dependency>
-    <groupId>com.itextpdf</groupId>
-    <artifactId>layout</artifactId>
-    <version>9.0.0</version>
-    <scope>compile</scope>
-</dependency>
-        <!-- https://mvnrepository.com/artifact/org.telegram/telegrambots -->
+        <!-- Telegram Bots -->
         <dependency>
             <groupId>org.telegram</groupId>
             <artifactId>telegrambots</artifactId>
             <version>6.1.0</version>
         </dependency>
 
-
-
-        <!-- BOUNCY CASTLE -->
+        <!-- Bouncy Castle -->
         <dependency>
             <groupId>org.bouncycastle</groupId>
             <artifactId>bcprov-jdk15on</artifactId>
@@ -91,18 +74,21 @@
             <version>1.68</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
+        <!-- OpenCSV -->
         <dependency>
             <groupId>com.opencsv</groupId>
             <artifactId>opencsv</artifactId>
             <version>5.9</version>
         </dependency>
+
+        <!-- JavaMail -->
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
             <version>1.6.2</version>
         </dependency>
 
+        <!-- Mockito -->
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
@@ -110,19 +96,21 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Twilio SDK -->
         <dependency>
             <groupId>com.twilio.sdk</groupId>
             <artifactId>twilio</artifactId>
             <version>9.7.0</version>
         </dependency>
 
-
+        <!-- Logback -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
             <version>1.4.12</version>
         </dependency>
 
+        <!-- GreenMail -->
         <dependency>
             <groupId>com.icegreen</groupId>
             <artifactId>greenmail</artifactId>
@@ -130,92 +118,76 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- JSON Simple -->
         <dependency>
             <groupId>com.googlecode.json-simple</groupId>
             <artifactId>json-simple</artifactId>
-            <version>1.1.1</version> <!-- Cambia a la última versión disponible -->
+            <version>1.1.1</version>
         </dependency>
-        <!-- DEPENDENCIAS API REST -->
-        <!-- https://mvnrepository.com/artifact/com.squareup.retrofit2/retrofit -->
+
+        <!-- Retrofit -->
         <dependency>
             <groupId>com.squareup.retrofit2</groupId>
             <artifactId>retrofit</artifactId>
             <version>2.11.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.squareup.retrofit2/converter-gson -->
         <dependency>
             <groupId>com.squareup.retrofit2</groupId>
             <artifactId>converter-gson</artifactId>
             <version>2.11.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.testng/testng -->
+
+        <!-- TestNG -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>7.10.2</version>
             <scope>test</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.eclipse.paho/org.eclipse.paho.client.mqttv3 -->
+
+        <!-- MQTT -->
         <dependency>
             <groupId>org.eclipse.paho</groupId>
             <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
             <version>1.2.5</version>
         </dependency>
 
+        <!-- Commons CLI -->
         <dependency>
             <groupId>commons-cli</groupId>
             <artifactId>commons-cli</artifactId>
             <version>1.5.0</version>
-            <scope>provided</scope>
         </dependency>
-        <!--  JPA Persistence Dependencies  -->
+
+        <!-- Hibernate -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>5.6.12.Final</version>
+        </dependency>
+
+        <!-- JPA Extras -->
         <dependency>
             <groupId>io.github.flbulgarelli</groupId>
             <artifactId>jpa-extras</artifactId>
             <version>1.0.0-rc1</version>
         </dependency>
-        <!--  drivers jdbc  -->
-        <!--  mysql  -->
+
+        <!-- MySQL Driver -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.29</version>
-    </dependency>
-    <dependency>
-    <groupId>org.hibernate</groupId>
-    <artifactId>hibernate-core</artifactId>
-    <version>5.6.12.Final</version>
-</dependency>
-<dependency>
-    <groupId>junit</groupId>
-    <artifactId>junit</artifactId>
-    <version>4.13</version>
-    <scope>test</scope>
-</dependency>
-<dependency>
-    <groupId>org.slf4j</groupId>
-    <artifactId>slf4j-api</artifactId>
-    <version>2.0.16</version>
-</dependency>
-<dependency>
-    <groupId>org.jboss.spec.javax.transaction</groupId>
-    <artifactId>jboss-transaction-api_1.2_spec</artifactId>
-    <version>1.1.1.Final</version>
-</dependency>
-        <!--  hsqldb  -->
+        </dependency>
+
+        <!-- HSQLDB -->
         <dependency>
             <groupId>org.hsqldb</groupId>
             <artifactId>hsqldb</artifactId>
             <version>2.7.1</version>
-            <scope>provided</scope>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>5.11.3</version>
-            <scope>test</scope>
-        </dependency>
+
+        <!-- Javalin -->
         <dependency>
             <groupId>io.javalin</groupId>
             <artifactId>javalin</artifactId>
@@ -226,70 +198,36 @@
             <artifactId>javalin-rendering</artifactId>
             <version>6.3.0</version>
         </dependency>
+
+        <!-- Jackson -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-core</artifactId>
             <version>2.12.3</version>
         </dependency>
-
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
             <version>2.12.3</version>
         </dependency>
 
+        <!-- Handlebars -->
         <dependency>
             <groupId>com.github.jknack</groupId>
             <artifactId>handlebars</artifactId>
             <version>4.0.0</version>
         </dependency>
+
+        <!-- SLF4J -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>2.0.16</version>
+        </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>2.0.16</version>
-        </dependency>
-        <!-- SSO DEPENDENCIAS -->
-        <!-- https://mvnrepository.com/artifact/com.nimbusds/oauth2-oidc-sdk -->
-        <dependency>
-            <groupId>com.nimbusds</groupId>
-            <artifactId>oauth2-oidc-sdk</artifactId>
-            <version>11.20.1</version>
-            <scope>runtime</scope>
-        </dependency>
-        <!-- https://mvnrepository.com/artifact/com.nimbusds/nimbus-jose-jwt -->
-        <dependency>
-            <groupId>com.nimbusds</groupId>
-            <artifactId>nimbus-jose-jwt</artifactId>
-            <version>9.47</version>
-        </dependency>
-
-        <!-- SAST -->
-        <!-- https://mvnrepository.com/artifact/org.sonarsource.api.plugin/sonar-plugin-api -->
-        <dependency>
-            <groupId>org.sonarsource.api.plugin</groupId>
-            <artifactId>sonar-plugin-api</artifactId>
-            <version>10.14.0.2599</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>io.javalin</groupId>
-            <artifactId>javalin-micrometer</artifactId>
-            <version>6.3.0</version>
-        </dependency>
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-core</artifactId>
-            <version>1.14.1</version>
-        </dependency>
-        <dependency>
-            <groupId>io.micrometer</groupId>
-            <artifactId>micrometer-registry-datadog</artifactId>
-            <version>1.14.1</version>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.16.1</version>
         </dependency>
     </dependencies>
 
@@ -311,21 +249,21 @@
                 </configuration>
 	</plugin>
 
-	<plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.11.0</version>
-        <configuration>
-          <source>17</source>
-          <target>17</target>
-        </configuration>
-</plugin>
+            <!--	<plugin>
+                   <groupId>org.apache.maven.plugins</groupId>
+                   <artifactId>maven-compiler-plugin</artifactId>
+                   <version>3.11.0</version>
+                   <configuration>
+                     <source>17</source>
+                     <target>17</target>
+                   </configuration>
+           </plugin> -->
 
-	    <!--<plugin>
-                <groupId>org.sonarsource.scanner.maven</groupId>
-                <artifactId>sonar-maven-plugin</artifactId>
-                <version>4.0.0.4121</version>
-            </plugin>-->
+                   <!--<plugin>
+                           <groupId>org.sonarsource.scanner.maven</groupId>
+                           <artifactId>sonar-maven-plugin</artifactId>
+                           <version>4.0.0.4121</version>
+                       </plugin>-->
 	    <!--<plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
