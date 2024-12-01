@@ -19,9 +19,6 @@ public abstract class  LectorDeCSV {
     public static void realizarCargaMasivaDatos(String path) throws FileNotFoundException {
         try (CSVReader csvReader = new CSVReader(new FileReader(path))) {
             List<String[]> records = csvReader.readAll();
-
-            // Impresión de registros
-            // habria que usar constructor colaborador
         } catch (IOException | CsvException e) {
             throw new RuntimeException(e);
         }
