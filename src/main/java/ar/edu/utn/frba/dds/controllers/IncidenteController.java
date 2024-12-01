@@ -31,7 +31,8 @@ public class IncidenteController extends BaseController implements ICrudViewsHan
 
     public void fallasTecnicas(Context context) {
         Map<String, Object> model = new HashMap<>();
-        Usuario usuario = verificarAdmin(context, model);
+        Usuario usuario = verificarAdminOJuridico(context, model);
+
         List<Incidente> incidentes = RepoIncidente.INSTANCE.buscarTodos();
         List<IncidenteOutputDTO> incidenteOutputDTOList = new ArrayList<>();
         for (Incidente incidente : incidentes) {

@@ -47,7 +47,7 @@ public class Server {
             rutinaBrokerApertura brokerAperturaRoutine = new rutinaBrokerApertura();
             Thread hiloRecepcionApertura = new Thread(brokerAperturaRoutine);
             hiloRecepcionApertura.start();
-            Init.iniciar();
+            //Init.iniciar();
             Router.init(Server.app());
         }
     }
