@@ -32,7 +32,11 @@
                             <td>{{this.direccion}}</td>
                             <td>{{this.motivo}}</td>
                             <td>{{this.cantidadDeViandas}}</td>
-                            <td></td>
+                            <td>
+                                {{#if this.desperfecto}}
+                                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#sugerenciasModal">Ver Sugerencias</button>
+                                {{/if}}
+                            </td>
                             <td>
                                 <button class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#unsubscribeModal"
                                         data-suscripcion-id="{{this.id}}">
@@ -58,15 +62,22 @@
                     <div class="modal-body">
                         <!-- Formulario de suscripción -->
                         <form id="subscriptionForm" class="row g-3 needs-validation" novalidate method="POST"
-                              action="/misHeladeras">
-                            <div class="modal-footer col-md-12">
-                                <button class="btn btn-primary w-100" type="button" data-bs-toggle="modal"
-                                        data-bs-target="#confirmModalHacer">Seleccionar Heladera
-                                </button>
+                              action="/suscripcionesAHeladeras">
+
+                            <div class="col-md-6">
+                                <label class="form-label" for="input1">Heladera</label>
+                                <select class="form-select" id="input4" name="idHeladera" required>
+                                    <option value="" disabled selected>Seleccione una Heladera</option>
+                                    {{#each heladeras}}
+                                        <option value="{{this.id}}">{{this.nombre}}</option>
+                                    {{/each}}
+                                </select>
                             </div>
+
                             <div class="col-md-6">
                                 <label class="form-label" for="modelo">Motivo Suscripción</label>
                                 <select class="form-select" id="modelo" name="motivo" required>
+                                    <option value="" disabled selected>Indique el motivo</option>
                                     <option value="VIANDAS_DISPONIBLES">Hay n viandas disponibles</option>
                                     <option value="MUCHAS_VIANDAS">Queda lugar para almacenar n viandas</option>
                                     <option value="DESPERFECTO">Desperfecto</option>

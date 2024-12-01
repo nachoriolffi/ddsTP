@@ -9,6 +9,5 @@ public class SuscripcionesAHeladerasOutputDTO {
     private String direccion;
     private String motivo;
     private Integer cantidadDeViandas;
-    //Heladeras sugeridas
-    //private Boolean Desuscribirme;
+    private Boolean desperfecto;
 }

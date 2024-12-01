@@ -76,7 +76,6 @@ public class JavalinRenderer implements FileRenderer {
             }
         });
 
-
         return handlebars;
     }
 

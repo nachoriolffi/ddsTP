@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class RepoHeladeras extends RepoGenerico<Heladera> {
 
@@ -37,6 +38,13 @@ public class RepoHeladeras extends RepoGenerico<Heladera> {
                     .add(observerColaborador);
         }
         return heladerasAndSuscripciones;
+    }
+
+    public List<Heladera> buscarHeladeras() {
+
+        return RepoHeladeras.INSTANCE.buscarTodos().stream().
+                filter(heladera -> heladera.getEstaActiva()
+                        && !heladera.getDadaDeBaja()).collect(Collectors.toList());
     }
 
 }
