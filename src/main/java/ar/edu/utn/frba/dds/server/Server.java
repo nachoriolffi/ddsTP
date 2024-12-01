@@ -46,7 +46,7 @@ public class Server {
             app = Javalin.create(config())
                     .start(port);
             Router router = new Router();
- //           SchedulerMain.main(new String[]{});
+  // SchedulerMain.main(new String[]{});
             Init.iniciar();
             Router.init(Server.app());
         }
