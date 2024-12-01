@@ -19,7 +19,7 @@
       <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/tp?createDatabaseIfNotExist=true" />
       <!-- CONFIGURACION CUENTA BDD -->
       <property name="hibernate.connection.username" value="root" />
-      <property name="hibernate.connection.password" value="1234" />
+      <property name="hibernate.connection.password" value="Nacho2004_MySQL!" />
       <!-- CLAVES
       Nacho2004_MySQL!
 
@@ -33,7 +33,7 @@
       <property name="hibernate.show_sql" value="true"/>
       <property name="hibernate.format_sql" value="true"/>
       <property name="use_sql_comments" value="true"/>
-      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
     </properties>
   </persistence-unit>
 </persistence>
