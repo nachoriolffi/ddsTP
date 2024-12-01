@@ -2,6 +2,8 @@ package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
+import ar.edu.utn.frba.dds.models.entities.colaborador.calculoPuntos.CalculadorPuntos;
+import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RegistroVulnerable;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Calle;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
@@ -65,7 +67,14 @@ public class RegistroVulnerableController extends BaseController implements ICru
         Direccion direccion = new Direccion();
         direccion.setCalle(new Calle(context.formParam("calle")));
         direccion.setPiso(Integer.valueOf(context.formParam("piso")));
-        direccion.setAltura(Integer.valueOf(context.formParam("altura")));
+        //direccion.setAltura(Integer.valueOf(context.formParam("altura")));
+        String alturaParam = context.formParam("altura");
+        if (alturaParam != null && !alturaParam.isEmpty()) {
+            direccion.setAltura(Integer.valueOf(alturaParam));
+        } else {
+            direccion.setAltura(0);
+        }
+
         RepoDireccion.INSTANCE.agregar(direccion);
         vulnerable.setDireccion(direccion);
 
@@ -84,6 +93,20 @@ public class RegistroVulnerableController extends BaseController implements ICru
         RepoMenorACargo.INSTANCE.agregar(menorACargo);
         RepoVulnerable.INSTANCE.agregar(vulnerable);
         RepoTarjeta.INSTANCE.modificar(tarjeta);
+
+        //le agrego una colabracion realizada y sumo puntos al colaborador
+        Usuario usuario = verificarHumano(context, new HashMap<>());
+        Colaborador colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
+
+        RegistroVulnerable registroVulnerable = new RegistroVulnerable();
+        registroVulnerable.setCantidadTarjetas((registroVulnerable.getCantidadTarjetas() == null ? 0 : registroVulnerable.getCantidadTarjetas()) + 1);
+        registroVulnerable.setFechaColaboracion(new java.sql.Date(System.currentTimeMillis()));
+        colaborador.agregarColaboracionRealizada(registroVulnerable);
+
+        //CalculadorPuntos calculadorPuntos = CalculadorPuntos.getInstancia();
+        //calculadorPuntos.sumarPuntosA(colaborador);
+        RepoColaborador.INSTANCE.modificar(colaborador);
+
         context.redirect("/registroVulnerable");
         //Server.registry.counter("tpdds.colaboraciones","status","registrarVulnerable").increment();
     }

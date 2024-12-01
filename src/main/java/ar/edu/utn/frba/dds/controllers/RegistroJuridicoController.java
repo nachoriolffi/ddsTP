@@ -67,7 +67,14 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
         calle.setCalle(context.formParam("calle"));
         RepoCalle.INSTANCE.agregar(calle);
         direccion.setCalle(calle);
-        direccion.setAltura(Integer.valueOf(context.formParam("altura")));
+        //direccion.setAltura(Integer.valueOf(context.formParam("altura")));
+        String alturaParam = context.formParam("altura");
+        if (alturaParam != null && !alturaParam.isEmpty()) {
+            direccion.setAltura(Integer.valueOf(alturaParam));
+        } else {
+            direccion.setAltura(0);
+        }
+
         RepoDireccion.INSTANCE.agregar(direccion);
         colaborador.setDireccion(direccion);
         String[] formasDeColaboracion = context.formParams("colaboraciones").toArray(new String[0]);

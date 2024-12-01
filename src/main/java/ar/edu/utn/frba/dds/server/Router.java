@@ -21,7 +21,7 @@ public class Router {
         });
 
         app.error(500, ctx -> {
-            throw new SystemException("f");
+            throw new SystemException("f algo rompimos");
         });
 
         // error403
