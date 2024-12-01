@@ -6,15 +6,17 @@ import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DistribucionVianda;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DonacionVianda;
+import ar.edu.utn.frba.dds.models.entities.generadorCodigo.GeneradorDeCodigo;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
+import ar.edu.utn.frba.dds.models.entities.heladera.RegistroSolicitud;
+import ar.edu.utn.frba.dds.models.entities.heladera.TipoSolicitud;
+import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoDonacionVianda;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoViandas;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 
 import ar.edu.utn.frba.dds.services.HeladeraService;
+import ar.edu.utn.frba.dds.services.RegistroSolicitudService;
 import ar.edu.utn.frba.dds.services.UserService;
 
 import ar.edu.utn.frba.dds.server.Server;
@@ -39,6 +41,10 @@ public class DonacionViandaController extends BaseController implements ICrudVie
     RepoHeladeras repoHeladeras = RepoHeladeras.INSTANCE;
     UserService userService = new UserService();
     HeladeraService heladeraService = new HeladeraService();
+
+    RegistroSolicitudService registroSolicitudService = new RegistroSolicitudService();
+
+
     @Override
     public void index(Context context) {
 
@@ -95,7 +101,7 @@ public class DonacionViandaController extends BaseController implements ICrudVie
     }
 
     @Override
-    public void save(Context context) throws ParseException {
+    public void save(Context context) throws Exception {
 
         Long usuarioID = context.sessionAttribute("usuario_id");
 
@@ -125,7 +131,18 @@ public class DonacionViandaController extends BaseController implements ICrudVie
         colaborador.agregarColaboracionRealizada(donacionVianda);
         RepoColaborador.INSTANCE.modificar(colaborador);
 
+        RegistroSolicitud solicutud = new RegistroSolicitud();
 
+        //List<Tarjeta> tarjetas = RepoTarjeta.INSTANCE.buscarTarjetasColaborador(colaborador.getId());
+        //Tarjeta tarjeta = tarjetas.isEmpty() ? null : tarjetas.get(0);
+
+        Tarjeta tarjeta = new Tarjeta();
+        tarjeta.setCodigo(GeneradorDeCodigo.getInstance().generarCodigoUnico());
+        tarjeta.setColaboradorAsociado(colaborador);
+        RepoTarjeta.INSTANCE.agregar(tarjeta);
+
+
+        registroSolicitudService.registrarSolicitud(TipoSolicitud.DONACION_VIANDA, tarjeta, heladera, nuevaVianda);
 
         context.redirect("/donarViandas");
         //Server.registry.counter("tpdds.colaboraciones","status","donacionesVianda").increment();
