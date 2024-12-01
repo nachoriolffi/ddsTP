@@ -42,19 +42,13 @@ public class Server {
     public static void init() {
         if (app == null) {
             int port = Integer.parseInt(System.getProperty("port", "8081"));
-//            app = Javalin.create( config -> { config.registerPlugin(micrometerPlugin); })
-//                    .start(port);
-            Router router = new Router();
+//            app = Javalin.create( config -> { config.registerPlugin(micrometerPlugin); }).start(port);
             app = Javalin.create(config()).start(port);
-            //SchedulerMain.main(new String[]{});
-
             rutinaBrokerApertura brokerAperturaRoutine = new rutinaBrokerApertura();
             Thread hiloRecepcionApertura = new Thread(brokerAperturaRoutine);
             hiloRecepcionApertura.start();
-
             Init.iniciar();
             Router.init(Server.app());
-
         }
     }
 
@@ -66,8 +60,6 @@ public class Server {
             });
 
             config.fileRenderer(new JavalinRenderer().register("hbs", (path, model, context) -> {
-
-                //Handlebars handlebars = new Handlebars();
                 Handlebars handlebars = JavalinRenderer.configureHandlebars();
                 Template template = null;
                 try {
