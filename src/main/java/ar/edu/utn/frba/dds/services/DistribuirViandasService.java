@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class gitDistribuirViandasService {
+public class DistribuirViandasService {
     public List<Heladera> buscarHeladeras() {
 
         return RepoHeladeras.INSTANCE.buscarTodos().stream().
