@@ -44,11 +44,9 @@ public class Server {
             int port = Integer.parseInt(System.getProperty("port", "8081"));
 //            app = Javalin.create( config -> { config.registerPlugin(micrometerPlugin); })
 //                    .start(port);
-//            Router router = new Router();
-            app = Javalin.create(config())
-                    .start(port);
             Router router = new Router();
-            SchedulerMain.main(new String[]{});
+            app = Javalin.create(config()).start(port);
+            //SchedulerMain.main(new String[]{});
 
             rutinaBrokerApertura brokerAperturaRoutine = new rutinaBrokerApertura();
             Thread hiloRecepcionApertura = new Thread(brokerAperturaRoutine);
@@ -59,7 +57,6 @@ public class Server {
 
         }
     }
-
 
     private static Consumer<JavalinConfig> config() {
         return config -> {

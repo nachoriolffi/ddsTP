@@ -21,7 +21,7 @@ public class Init implements WithSimplePersistenceUnit {
 
         /*--------------MODELOS--------------*/
 
-        RepoModelo repoModelo = new RepoModelo();
+        /*RepoModelo repoModelo = new RepoModelo();
 
         ModeloHeladera modeloHeladera1 = new ModeloHeladera();
         modeloHeladera1.setNombreModelo("Heladera Industrial X500");
@@ -45,21 +45,21 @@ public class Init implements WithSimplePersistenceUnit {
         modeloHeladera3.setCantidadMaximaDeViandas(25);
         modeloHeladera3.setTemperaturaMaxima(8D);
         modeloHeladera3.setTemperaturaMinima(-5D);
-        repoModelo.agregar(modeloHeladera3);
+        repoModelo.agregar(modeloHeladera3);*/
 
         /*--------------USUARIOS--------------*/
 
         RepoUsuario repoUsuario = RepoUsuario.INSTANCE;
 
         // ADMIN
-        Usuario usuarioAdmin = new Usuario();
+        /*Usuario usuarioAdmin = new Usuario();
         usuarioAdmin.setNombre("Ignacio Joaquin");
         usuarioAdmin.setApellido("Riolffi");
         usuarioAdmin.setContrasenia("Nacho_2024_ADMIN_DDS");
         usuarioAdmin.setCuentaEliminada(false);
         usuarioAdmin.setCorreoElectronico("iriolffi@gmail.com");
         usuarioAdmin.setRol(TipoRol.ADMIN);
-        repoUsuario.agregar(usuarioAdmin);
+        repoUsuario.agregar(usuarioAdmin);*/
 
         /*--------------TARJETAS--------------*/
 
