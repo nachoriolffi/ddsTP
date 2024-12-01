@@ -14,7 +14,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>ar/edu/utn/frba/dds/App</mainClass>
+              <mainClass>ar/edu/utn/frba/dds/server/App</mainClass>
             </manifest>
           </archive>
         </configuration>
