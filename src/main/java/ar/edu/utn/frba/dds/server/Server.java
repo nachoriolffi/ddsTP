@@ -39,7 +39,7 @@ public class Server {
 
     public static void init() {
         if (app == null) {
-            int port = Integer.parseInt(System.getProperty("port", "3306"));
+            int port = Integer.parseInt(System.getProperty("port", "8080"));
 //            app = Javalin.create( config -> { config.registerPlugin(micrometerPlugin); })
 //                    .start(port);
 //            Router router = new Router();
