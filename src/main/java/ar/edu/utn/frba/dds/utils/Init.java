@@ -38,6 +38,8 @@ public class Init implements WithSimplePersistenceUnit {
 
         /*--------------MODELOS--------------*/
 
+
+
         RepoModelo repoModelo = new RepoModelo();
 
         ModeloHeladera modeloHeladera1 = new ModeloHeladera();
@@ -370,6 +372,11 @@ public class Init implements WithSimplePersistenceUnit {
         heladera1.setFechaPuestaFunc(new Date());
         heladera1.setEstaActiva(Boolean.TRUE);
         heladera1.setModelo(modeloHeladera1);
+        heladera1.setDadaDeBaja(Boolean.FALSE);
+        heladera1.setViandasDisponibles(modeloHeladera1.getCantidadMaximaDeViandas());
+        heladera1.agregarVianda();
+        heladera1.agregarVianda();
+
 
 
 
@@ -394,6 +401,23 @@ public class Init implements WithSimplePersistenceUnit {
         heladera1.agregarColaborador(observer2);
         heladera1.agregarColaborador(observer3);
         repoHeladeras.agregar(heladera1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     }
 
     public static void agregarRubrosAPreguntaComoOpciones(Pregunta pregunta, List<RubroColaborador> rubros) {

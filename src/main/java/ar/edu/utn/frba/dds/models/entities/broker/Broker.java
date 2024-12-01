@@ -1,14 +1,18 @@
 package ar.edu.utn.frba.dds.models.entities.broker;
 
+import lombok.Setter;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 public class Broker {
 
-    private String broker = "tcp://broker.hivemq.com:1883";
+    private String broker = "tcp://broker.emqx.io:1883"; //"tcp://broker.hivemq.com:1883";
     IMqttClient client;
 
     private static Broker instancia = null;
+
+    @Setter
+    private MqttCallback callback;
 
     public static Broker getInstance(){
         if(instancia==null){
@@ -29,6 +33,7 @@ public class Broker {
 
             client.connect(connectOptions);
             System.out.println("Conectando al broker " + broker);
+            client.setCallback(this.callback);
         } catch (MqttException e) {
             e.printStackTrace();
         }

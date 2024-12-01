@@ -14,6 +14,7 @@ public class MyCustomMessageReceptor implements IMqttMessageListener {
     public MyCustomMessageReceptor() {
         topicActions.put("temperatura", new TemperaturaAccion());
         topicActions.put("alerta", new AlertaAccion());
+        topicActions.put("aperturaRealizadas", new AperturaAccion());
     }
 
    // private RepoHeladeras repoHeladeras = RepoHeladeras.getInstancia();
@@ -29,7 +30,7 @@ public class MyCustomMessageReceptor implements IMqttMessageListener {
 
         //heladeras/heladeraCasa/temperatura
         //heladeras/+/temperatura
-        //heladeras/+/aperturaRealizada
+        //heladeras/+/aperturaRealizadas
         //"heladeras/heladeraCasa/alerta"
 
         String[] topicEnPartes = topic.split("/");
