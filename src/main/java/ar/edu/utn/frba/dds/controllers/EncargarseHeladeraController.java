@@ -65,8 +65,6 @@ public class EncargarseHeladeraController extends BaseController implements ICru
 
         model.put("title", "Encargarse De Heladera");
         context.render("donaciones/encargarseDeHeladera.hbs", model);
-
-
     }
 
     @Override

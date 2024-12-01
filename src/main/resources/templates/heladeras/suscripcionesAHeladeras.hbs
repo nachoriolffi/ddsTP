@@ -145,23 +145,45 @@
             </div>
         </div>
 
-        <!-- Modal de información heladera-->
-        <div class="modal fade" id="heladeraModal" tabindex="-1" aria-labelledby="heladeraModalLabel"
+
+        <!--Modal Sugerencias-->
+        <div class="modal fade" id="sugerenciasModal" tabindex="-1" aria-labelledby="donationModalLabel"
              aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen">
+            <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="heladeraModalLabel">Información de la Heladera</h5>
+                        <h5 class="modal-title" id="donationModalLabel">Heladeras sugeridas</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <div class="modal-footer">
-                            <button class="btn btn-outline-primary" data-bs-dismiss="modal">Cerrar</button>
-                        </div>
+                        <!-- Formulario de suscripción -->
+                        <form id="subscriptionForm" class="row g-3 needs-validation" novalidate method="POST"
+                              action="/suscripcionesAHeladeras">
+
+                            <div class="col-md-12">
+                                <label class="form-label" for="input1">Heladera</label>
+                                <select class="form-select" id="input4" name="idHeladera" required>
+                                    <option value="" disabled selected>Heladeras sugeridas</option>
+                                    {{#each heladeras}}
+                                        <option value="{{this.id}}">{{this.nombre}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+
+                            <div class="modal-footer col-md-12">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button class="btn btn-primary" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#confirmModal">Aceptar sugerencia
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+
+
+
     </section>
 {{/partial}}
 
