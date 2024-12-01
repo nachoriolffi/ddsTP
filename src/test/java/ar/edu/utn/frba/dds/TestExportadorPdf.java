@@ -209,6 +209,6 @@ public class TestExportadorPdf {
             e.printStackTrace();
         }*/
         /*CronJobReporte cronJobReporte = new CronJobReporte();
-        cronJobReporte.main(new String[0]);
+        //cronJobReporte.main(new String[0]);
     }*/
 }
