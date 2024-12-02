@@ -43,6 +43,7 @@ public class Server {
     public static void init() {
         if (app == null) {
             int port = Integer.parseInt(System.getProperty("port", "8081"));
+
 //            app = Javalin.create( config -> { config.registerPlugin(micrometerPlugin); })
 //                    .start(port);
 //            Router router = new Router();
@@ -59,12 +60,11 @@ public class Server {
             Thread hiloRecepcionApertura2 = new Thread(brokerTemperatura);
             hiloRecepcionApertura2.start();
 
+
             //Init.iniciar();
             Router.init(Server.app());
-
         }
     }
-
 
     private static Consumer<JavalinConfig> config() {
         return config -> {
@@ -74,8 +74,6 @@ public class Server {
             });
 
             config.fileRenderer(new JavalinRenderer().register("hbs", (path, model, context) -> {
-
-                //Handlebars handlebars = new Handlebars();
                 Handlebars handlebars = JavalinRenderer.configureHandlebars();
                 Template template = null;
                 try {

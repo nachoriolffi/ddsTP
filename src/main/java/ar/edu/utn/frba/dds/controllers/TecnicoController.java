@@ -4,7 +4,6 @@ import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
 import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.factory.MedioComunicacionFactory;
-import ar.edu.utn.frba.dds.models.entities.distancias.CalculadorDistancias;
 import ar.edu.utn.frba.dds.models.entities.distancias.CalculadorDistanciasTecnicoHeladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
@@ -16,8 +15,8 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import ar.edu.utn.frba.dds.services.UserService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
-import com.sun.mail.util.MailLogger;
 import io.javalin.http.Context;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +30,7 @@ public class TecnicoController extends BaseController implements ICrudViewsHandl
     @Override
     public void index(Context context) {
         Map<String, Object> model = new HashMap<>();
-        Usuario usuario = verificarAdmin(context,model);
+        Usuario usuario = verificarAdmin(context, model);
         if (usuario != null) {
             model.put("title", "Cargar Tecnico");
             List<TipoDocumento> tipoDocumentos = List.of(TipoDocumento.values());
@@ -59,6 +58,9 @@ public class TecnicoController extends BaseController implements ICrudViewsHandl
         tecnico.setDni(Integer.valueOf(context.formParam("numeroDeDocumento")));
         Long cuil = Long.valueOf(context.formParam("cuil"));
         tecnico.setCuil(cuil.intValue());
+        Coordenada coordenada = new Coordenada(Double.valueOf(context.formParam("latitud")), Double.valueOf(context.formParam("longitud")));
+        RepoCoordenada.INSTANCE.agregar(coordenada);
+        tecnico.setCoordenada(coordenada);
         tecnico.setAreaCobertura(Integer.valueOf(context.formParam("areaCobertura")));
 
         List<String> contactos = context.formParams("contactos");
@@ -71,7 +73,7 @@ public class TecnicoController extends BaseController implements ICrudViewsHandl
         nuevoUsuario.setCorreoElectronico(mail);
         nuevoUsuario.setNombre(context.formParam("nombre"));
         nuevoUsuario.setRol(TipoRol.TECNICO);
-        nuevoUsuario.setContrasenia(tecnico.getNombre()+"_"+ tecnico.getCuil());
+        nuevoUsuario.setContrasenia(tecnico.getNombre() + "_" + tecnico.getCuil());
         RepoUsuario.INSTANCE.agregar(nuevoUsuario);
 
         tecnico.setUsuario(nuevoUsuario);

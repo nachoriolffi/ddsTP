@@ -44,8 +44,12 @@ public class EncargarseHeladeraController extends BaseController implements ICru
         Usuario usuario = verificarJuridico(context, model);
         UsuarioDTO usuarioDTO = userService.obtenerUsuarioDTO(usuario);
         model.put("usuario", usuarioDTO);
-        Colaborador colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
+        //Colaborador colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId()); // buscar(usuario.getId());
+        Colaborador colaborador = RepoColaborador.INSTANCE.buscarTodos().stream().filter(c -> c.getUsuario().getId() == usuario.getId()).findFirst().orElse(null);;
+        //buscar todos lo colaborador y te quedas con el que tiene el mismo id de usuario
+
         List<HeladeraOutputDTO> heladeraOutputDTOS = new ArrayList<>();
+
         List<Heladera> heladeras = colaborador.getColaboracionesRealizadas().stream()
                 .filter(c -> c instanceof HacerseCargoDeHeladera)
                 .map(c -> ((HacerseCargoDeHeladera) c).getHeladera())
@@ -65,8 +69,6 @@ public class EncargarseHeladeraController extends BaseController implements ICru
 
         model.put("title", "Encargarse De Heladera");
         context.render("donaciones/encargarseDeHeladera.hbs", model);
-
-
     }
 
     @Override
@@ -94,6 +96,7 @@ public class EncargarseHeladeraController extends BaseController implements ICru
         RepoColaborador.INSTANCE.modificar(colaborador);
         context.redirect("/encargarseHeladera");
     }
+
 
     public void searchPoints(Context context) throws IOException {
         String direccion = context.formParam("direccion");

@@ -1,38 +1,26 @@
 package ar.edu.utn.frba.dds.utils;
 
-import ar.edu.utn.frba.dds.models.entities.colaborador.TipoJuridiccion;
-import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.*;
-import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
-import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
-import ar.edu.utn.frba.dds.models.entities.contacto.correo.AdapterCorreo;
-import ar.edu.utn.frba.dds.models.entities.contacto.correo.CorreoElectronico;
-import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
-import ar.edu.utn.frba.dds.models.entities.contacto.telegram.AdapterTelegram;
-import ar.edu.utn.frba.dds.models.entities.contacto.telegram.Telegram;
+import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Cuestionario;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Opcion;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.TipoPregunta;
 import ar.edu.utn.frba.dds.models.entities.generadorCodigo.GeneradorDeCodigo;
-import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
-import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
+<<<<<<< HEAD
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
 import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
 import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.ObserverColaborador;
 import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.TipoSuscripcion;
+=======
+>>>>>>> 4f9c085fc6ebc55a61e790fec35a161d59c87a3e
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
-import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
 
-import java.time.LocalDate;
-import java.util.*;
+import java.util.List;
 
 public class Init implements WithSimplePersistenceUnit {
 
@@ -40,9 +28,7 @@ public class Init implements WithSimplePersistenceUnit {
 
         /*--------------MODELOS--------------*/
 
-
-
-        RepoModelo repoModelo = new RepoModelo();
+        /*RepoModelo repoModelo = new RepoModelo();
 
         ModeloHeladera modeloHeladera1 = new ModeloHeladera();
         modeloHeladera1.setNombreModelo("Heladera Industrial X500");
@@ -66,7 +52,7 @@ public class Init implements WithSimplePersistenceUnit {
         modeloHeladera3.setCantidadMaximaDeViandas(25);
         modeloHeladera3.setTemperaturaMaxima(8D);
         modeloHeladera3.setTemperaturaMinima(-5D);
-        repoModelo.agregar(modeloHeladera3);
+        repoModelo.agregar(modeloHeladera3);*/
 
         /*--------------USUARIOS--------------*/
 
@@ -82,27 +68,6 @@ public class Init implements WithSimplePersistenceUnit {
         usuarioAdmin.setRol(TipoRol.ADMIN);
         repoUsuario.agregar(usuarioAdmin);
 
-        // NO USAR MAS ESTOS, CARGARLOS DESDE LA PAGINA QUE LES CREA EL USUARIO SOLO
-
-        /* // HUMANO
-        Usuario usuarioHumano = new Usuario();
-        usuarioHumano.setNombre("Matias");
-        usuarioHumano.setApellido("Tisco");
-        usuarioHumano.setContrasenia("1234");
-        usuarioHumano.setCuentaEliminada(false);
-        usuarioHumano.setCorreoElectronico("mati@gmail.com");
-        usuarioHumano.setRol(TipoRol.COLABORADOR_HUMANO);
-        //repoUsuario.agregar(usuarioHumano);*/
-
-        /*// JURIDICO
-        Usuario usuarioJuridico = new Usuario();
-        usuarioJuridico.setNombre("Samsung");
-        usuarioJuridico.setContrasenia("1234");
-        usuarioJuridico.setCuentaEliminada(false);
-        usuarioJuridico.setCorreoElectronico("samsung@gmail.com");
-        usuarioJuridico.setRol(TipoRol.COLABORADOR_JURIDICO);
-        //repoUsuario.agregar(usuarioJuridico);*/
-
         /*--------------TARJETAS--------------*/
 
         RepoTarjeta repoTarjeta = new RepoTarjeta();
@@ -110,42 +75,6 @@ public class Init implements WithSimplePersistenceUnit {
             Tarjeta tarjeta = new Tarjeta();
             tarjeta.setCodigo(GeneradorDeCodigo.getInstance().generarCodigoUnico());
             repoTarjeta.agregar(tarjeta);
-        }
-
-        /*--------------COLABORADORES--------------*/
-
-        // COLABORADOR HUMANO
-        /*List<TipoColaboracion> formaDeColaboraciones = new ArrayList<>();
-        formaDeColaboraciones.add(TipoColaboracion.DONACION_VIANDAS);
-        formaDeColaboraciones.add(TipoColaboracion.DINERO);
-        formaDeColaboraciones.add(TipoColaboracion.REDISTRIBUCION_VIANDAS);
-        formaDeColaboraciones.add(TipoColaboracion.ENTREGA_TARJETAS);
-        usuarioHumano = repoUsuario.buscar(2L);
-        Colaborador colaboradorHumano = new Colaborador();
-        colaboradorHumano.setNombre("Ignacio Joaquin");
-        colaboradorHumano.setApellido("Riolffi");
-        colaboradorHumano.setUsuario(usuarioHumano);
-        colaboradorHumano.setTipoPersona(TipoPersona.HUMANA);
-        colaboradorHumano.setFechaDeNacimiento(LocalDate.now());
-        colaboradorHumano.setFormasDeColaboracion(formaDeColaboraciones);
-        colaboradorHumano.setFueCargaMasiva(false);
-        RepoColaborador.INSTANCE.agregar(colaboradorHumano);
-        // Asigno Tarjetas al colaborador para registrar vulnerables
-        List<Tarjeta> tarjetas = repoTarjeta.buscarTodos();
-        for (int i = 0; i < 10; i++) {
-            Tarjeta tarjeta = tarjetas.get(i);
-            if (tarjeta.getColaboradorAsignador() == null) {
-                tarjeta.setColaboradorAsignador(colaboradorHumano);
-                repoTarjeta.modificar(tarjeta);
-            }
-        }
-        // Asigno tarjeta al colaborador para que pueda realizar donaciones y distribuciones
-        for (Tarjeta tarjeta : tarjetas) {
-            if (tarjeta.getColaboradorAsignador() == null && tarjeta.getColaboradorAsociado() == null) {
-                tarjeta.setColaboradorAsociado(colaboradorHumano);
-                repoTarjeta.modificar(tarjeta);
-                break;
-            }
         }
 
         /*--------------CUESTIONARIOS--------------*/
@@ -332,10 +261,8 @@ public class Init implements WithSimplePersistenceUnit {
 
         RepoCuestionario.INSTANCE.agregar(cuestionarioJuridico2);
 
-
-
         //Suscripciones
-        Usuario usuarioSuscripcion = new Usuario();
+       /* Usuario usuarioSuscripcion = new Usuario();
         usuarioSuscripcion.setNombre("Nahuel");
         usuarioSuscripcion.setApellido("Lazarte");
         usuarioSuscripcion.setContrasenia("1234");
@@ -392,8 +319,6 @@ public class Init implements WithSimplePersistenceUnit {
         heladera1.agregarVianda();
 
 
-
-
         ObserverColaborador observer = new ObserverColaborador();
         observer.setTipoSuscripcion(TipoSuscripcion.DESPERFECTO);
         observer.setSuscriptor(colaborador1);
@@ -414,23 +339,7 @@ public class Init implements WithSimplePersistenceUnit {
         heladera1.agregarColaborador(observer);
         heladera1.agregarColaborador(observer2);
         heladera1.agregarColaborador(observer3);
-        repoHeladeras.agregar(heladera1);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        repoHeladeras.agregar(heladera1);*/
 
     }
 

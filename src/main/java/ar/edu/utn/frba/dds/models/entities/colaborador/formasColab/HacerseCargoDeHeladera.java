@@ -21,7 +21,7 @@ public class HacerseCargoDeHeladera extends FormaDeColaboracion {
     private Local local;
 
     @OneToOne
-    @JoinColumn(name = "id", referencedColumnName = "id_Heladera", nullable = false)
+    @JoinColumn(name = "id_heladera", nullable = false)
     private Heladera heladera;
 
     @Enumerated(EnumType.STRING)
