@@ -6,14 +6,6 @@ import ar.edu.utn.frba.dds.models.entities.cuestionario.Opcion;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.TipoPregunta;
 import ar.edu.utn.frba.dds.models.entities.generadorCodigo.GeneradorDeCodigo;
-import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
-<<<<<<< HEAD
-import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
-import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
-import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.ObserverColaborador;
-import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.TipoSuscripcion;
-=======
->>>>>>> 4f9c085fc6ebc55a61e790fec35a161d59c87a3e
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;

@@ -58,7 +58,6 @@ public class TecnicoController extends BaseController implements ICrudViewsHandl
         tecnico.setDni(Integer.valueOf(context.formParam("numeroDeDocumento")));
         Long cuil = Long.valueOf(context.formParam("cuil"));
         tecnico.setCuil(cuil.intValue());
-        Coordenada coordenada = new Coordenada(Double.valueOf(context.formParam("latitud")), Double.valueOf(context.formParam("longitud")));
         RepoCoordenada.INSTANCE.agregar(coordenada);
         tecnico.setCoordenada(coordenada);
         tecnico.setAreaCobertura(Integer.valueOf(context.formParam("areaCobertura")));
