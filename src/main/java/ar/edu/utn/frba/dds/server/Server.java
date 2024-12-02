@@ -2,6 +2,7 @@ package ar.edu.utn.frba.dds.server;
 
 import ar.edu.utn.frba.dds.observability.DDMetricsUtils;
 import ar.edu.utn.frba.dds.runnable.rutinaBrokerApertura;
+import ar.edu.utn.frba.dds.runnable.rutinaBrokerTemperatura;
 import ar.edu.utn.frba.dds.server.crons.SchedulerMain;
 import ar.edu.utn.frba.dds.utils.Init;
 import ar.edu.utn.frba.dds.utils.JavalinRenderer;
@@ -48,13 +49,17 @@ public class Server {
             app = Javalin.create(config())
                     .start(port);
             Router router = new Router();
-            SchedulerMain.main(new String[]{});
+
 
             rutinaBrokerApertura brokerAperturaRoutine = new rutinaBrokerApertura();
             Thread hiloRecepcionApertura = new Thread(brokerAperturaRoutine);
             hiloRecepcionApertura.start();
 
-            Init.iniciar();
+            rutinaBrokerTemperatura brokerTemperatura = new rutinaBrokerTemperatura();
+            Thread hiloRecepcionApertura2 = new Thread(brokerTemperatura);
+            hiloRecepcionApertura2.start();
+
+            //Init.iniciar();
             Router.init(Server.app());
 
         }

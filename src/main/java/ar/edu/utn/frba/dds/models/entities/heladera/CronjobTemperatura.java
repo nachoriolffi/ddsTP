@@ -26,7 +26,7 @@ public class CronjobTemperatura {
 
         List<Heladera> todasLasHeladeras = RepoHeladeras.INSTANCE.buscarTodos();
 
-        controlarUltimasLecturasHeladeras(todasLasHeladeras, 1);
+        controlarUltimasLecturasHeladeras(todasLasHeladeras, 1);// es el tiempo tope en el que si lo supera hay un problema
 
         todasLasHeladeras.forEach(heladera ->
         {

@@ -18,6 +18,8 @@ import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
+import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
+import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
 import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.ObserverColaborador;
 import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.TipoSuscripcion;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
@@ -361,15 +363,27 @@ public class Init implements WithSimplePersistenceUnit {
         colaborador1.setUsuario(usuarioSuscripcion);
         RepoColaborador.INSTANCE.agregar(colaborador1);
 
+        Coordenada coordenada = new Coordenada();
+        coordenada.setLatitud(-34.603722);
+        coordenada.setLongitud(-58.381592);
+        RepoCoordenada.INSTANCE.agregar(coordenada);
 
+        ReceptorTemperatura receptorTemperatura = new ReceptorTemperatura();
+        RepoReceptorTemperatura.INSTANCE.agregar(receptorTemperatura);
+
+        ReceptorMovimiento receptorMovimiento = new ReceptorMovimiento();
+        RepoRegistroMovimiento.INSTANCE.agregar(receptorMovimiento);
 
         RepoHeladeras repoHeladeras = RepoHeladeras.INSTANCE;
         Direccion direccion1 = new Direccion("Medrano", 951, 1);
         RepoDireccion.INSTANCE.agregar(direccion1);
         Heladera heladera1 = new Heladera();
         heladera1.setDireccion(direccion1);
+        heladera1.setReceptorTemperatura(receptorTemperatura);
+        heladera1.setReceptorMovimiento(receptorMovimiento);
         heladera1.setNombre("UTN MEDRANO");
         heladera1.setFechaPuestaFunc(new Date());
+        heladera1.setCoordenada(coordenada);
         heladera1.setEstaActiva(Boolean.TRUE);
         heladera1.setModelo(modeloHeladera1);
         heladera1.setDadaDeBaja(Boolean.FALSE);

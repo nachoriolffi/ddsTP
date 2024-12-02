@@ -10,7 +10,10 @@ public class TemperaturaAccion implements AccionTopico {
     public void evaluarMensaje (String id , String messageContent) {
         System.out.println("Temperatura: " + messageContent);
 
-        Heladera heladera = RepoHeladeras.INSTANCE.buscar(Long.parseLong(id));
+        Long idHeladera = Long.parseLong(id);
+
+        Heladera heladera = RepoHeladeras.INSTANCE.buscar(idHeladera);
+
         heladera.getReceptorTemperatura().evaluarTemperatura(messageContent, heladera);
 
     }

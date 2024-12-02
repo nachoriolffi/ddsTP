@@ -9,12 +9,10 @@ import ar.edu.utn.frba.dds.models.entities.distancias.CalculadorDistanciasTecnic
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoContacto;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoIncidente;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoTecnico;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoUsuario;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import ar.edu.utn.frba.dds.services.UserService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
@@ -50,6 +48,11 @@ public class TecnicoController extends BaseController implements ICrudViewsHandl
     public void save(Context context) throws ParseException {
 
         Tecnico tecnico = new Tecnico();
+        Coordenada coordenada = new Coordenada();
+        coordenada.setLatitud(-34.603722);
+        coordenada.setLongitud(-58.381592);
+        RepoCoordenada.INSTANCE.agregar(coordenada);
+        tecnico.setCoordenada(coordenada);
         tecnico.setNombre(context.formParam("nombre"));
         tecnico.setApellido(context.formParam("apellido"));
         tecnico.setTipoDocumento(TipoDocumento.valueOf(context.formParam("tipoDocumento")));

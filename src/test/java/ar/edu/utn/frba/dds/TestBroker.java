@@ -66,11 +66,11 @@ public class TestBroker {
     @Test
     public void probamosHeladeraYBroker(){
         broker.subscribe("heladeras/+/temperatura");
-        String topic = "heladeras/"+heladera.getId().toString()+"/temperatura";
+        String topic = "heladeras/"+"1"+"/temperatura";
         String temperatureValue = "22.5";
         broker.publish(topic,temperatureValue);
         //receptorMovimiento.evaluarDatosSensor("1",heladera);
         //receptorTemperatura.evaluarTemperatura("1",heladera);
-        broker.disconnect();
+       // broker.disconnect();
     }
 }

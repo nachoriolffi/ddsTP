@@ -29,7 +29,7 @@ public class SchedulerMain {
         // CRONJOB CHEQUEO TEMPERATURA POR HELADERA CADA 5 MINUTOS
 
         long initialDelayTemperatura = 0;  // Tiempo de espera inicial antes de la primera ejecución
-        long periodTemperatura = 5;        // Intervalo de ejecución en minutos (5 minutos)
+        long periodTemperatura = 30;        // Intervalo de ejecución en minutos (5 minutos)
 
 
 
@@ -37,7 +37,7 @@ public class SchedulerMain {
                 jobTemperatura::ejecutarTemperatura,
                 initialDelayTemperatura,
                 periodTemperatura,
-                TimeUnit.MINUTES
+                TimeUnit.SECONDS
         );
         System.out.println("Scheduler iniciado para la generación de reportes cada semana y para revisar la temperatura de una heladera cada 5 minutos.");
     }
