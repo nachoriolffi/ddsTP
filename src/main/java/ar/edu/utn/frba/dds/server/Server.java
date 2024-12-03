@@ -1,20 +1,14 @@
 package ar.edu.utn.frba.dds.server;
 
-import ar.edu.utn.frba.dds.observability.DDMetricsUtils;
-import ar.edu.utn.frba.dds.runnable.rutinaBrokerApertura;
-import ar.edu.utn.frba.dds.runnable.rutinaBrokerTemperatura;
-import ar.edu.utn.frba.dds.server.crons.SchedulerMain;
-import ar.edu.utn.frba.dds.utils.Init;
+import ar.edu.utn.frba.dds.runnable.RutinaBrokerApertura;
+import ar.edu.utn.frba.dds.runnable.RutinaBrokerMovimiento;
+import ar.edu.utn.frba.dds.runnable.RutinaBrokerTemperatura;
 import ar.edu.utn.frba.dds.utils.JavalinRenderer;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.HttpStatus;
-import io.javalin.http.staticfiles.Location;
-import io.javalin.micrometer.MicrometerPlugin;
-import io.micrometer.core.instrument.step.StepMeterRegistry;
-import lombok.Getter;
 
 import java.io.IOException;
 import java.util.function.Consumer;
@@ -52,13 +46,17 @@ public class Server {
             Router router = new Router();
 
 
-            rutinaBrokerApertura brokerAperturaRoutine = new rutinaBrokerApertura();
+            RutinaBrokerApertura brokerAperturaRoutine = new RutinaBrokerApertura();
             Thread hiloRecepcionApertura = new Thread(brokerAperturaRoutine);
             hiloRecepcionApertura.start();
 
-            rutinaBrokerTemperatura brokerTemperatura = new rutinaBrokerTemperatura();
-            Thread hiloRecepcionApertura2 = new Thread(brokerTemperatura);
-            hiloRecepcionApertura2.start();
+            RutinaBrokerTemperatura brokerTemperatura = new RutinaBrokerTemperatura();
+            Thread hiloRecepcionTemperatura = new Thread(brokerTemperatura);
+            hiloRecepcionTemperatura.start();
+
+            RutinaBrokerMovimiento brokerMovimiento = new RutinaBrokerMovimiento();
+            Thread hiloRecepcionMovimiento = new Thread(brokerMovimiento);
+            hiloRecepcionMovimiento.start();
 
 
             //Init.iniciar();

@@ -21,7 +21,7 @@
       <property name="hibernate.connection.password" value="dds2023" />-->
 
       <property name="hibernate.connection.username" value="root" />
-      <property name="hibernate.connection.password" value="dds2023" />
+      <property name="hibernate.connection.password" value="1234" />
       <!-- CLAVES
       Nacho2004_MySQL!
 
