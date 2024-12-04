@@ -7,6 +7,10 @@ import java.io.IOException;
 
 public class FormaValidar10MilPeoresContrasenias implements FormaValidar {
 
+
+    public FormaValidar10MilPeoresContrasenias() {
+    }
+    
     private static final String path = "/src/main/java/ar/edu/utn/frba/dds/10000Peores.txt";
 
     public boolean validar(String contrasenia, Usuario usuario) {
