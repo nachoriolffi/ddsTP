@@ -18,10 +18,7 @@ import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import io.javalin.http.Context;
 
 import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class TecnicoController extends BaseController implements ICrudViewsHandler {
 
@@ -55,8 +52,8 @@ public class TecnicoController extends BaseController implements ICrudViewsHandl
         tecnico.setNombre(context.formParam("nombre"));
         tecnico.setApellido(context.formParam("apellido"));
         tecnico.setTipoDocumento(TipoDocumento.valueOf(context.formParam("tipoDocumento")));
-        tecnico.setDni(Integer.valueOf(context.formParam("numeroDeDocumento")));
-        Long cuil = Long.valueOf(context.formParam("cuil"));
+        tecnico.setDni(Integer.valueOf(Objects.requireNonNull(context.formParam("numeroDeDocumento"))));
+        Long cuil = Long.valueOf(Objects.requireNonNull(context.formParam("cuil")));
         tecnico.setCuil(cuil.intValue());
         RepoCoordenada.INSTANCE.agregar(coordenada);
         tecnico.setCoordenada(coordenada);
@@ -135,7 +132,7 @@ public class TecnicoController extends BaseController implements ICrudViewsHandl
             model.put("title", "Perfil Tecnico");
             Tecnico tecnico = RepoTecnico.INSTANCE.buscarPorUsuario(usuario.getId());
             model.put("tecnico", tecnico);
-            context.render("tecnico/perfilTecnico.hbs", model);
+            context.render("tecnico/PerfilTecnico.hbs", model);
         }
     }
 

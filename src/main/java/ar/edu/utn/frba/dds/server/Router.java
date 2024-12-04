@@ -120,7 +120,7 @@ public class Router {
         app.get("/IncidentesTecnico", Objects.requireNonNull(ServiceLocator.instanceOf(TecnicoController.class))::show);
         app.get("/IncidentesTecnico/{id}", Objects.requireNonNull(ServiceLocator.instanceOf(IncidenteController.class))::index);
         app.get("/verFallasTecnicas", Objects.requireNonNull(ServiceLocator.instanceOf(IncidenteController.class))::fallasTecnicas);
-        app.get("/PerfilTecnico", Objects.requireNonNull(ServiceLocator.instanceOf(TecnicoController.class))::perfil);
+        app.get("/perfilTecnico", Objects.requireNonNull(ServiceLocator.instanceOf(TecnicoController.class))::perfil);
 
         app.get("/visita", Objects.requireNonNull(ServiceLocator.instanceOf(VisitaController.class))::index);
         app.post("/visita", Objects.requireNonNull(ServiceLocator.instanceOf(VisitaController.class))::create);
