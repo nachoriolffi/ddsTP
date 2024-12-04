@@ -42,6 +42,8 @@ public class Router {
             ctx.render("errors/error401.hbs");
         });
 
+        app.get("/", Objects.requireNonNull(ServiceLocator.instanceOf(IndexController.class))::index);
+
         // iniciarSesion
         app.get("/iniciarSesion", Objects.requireNonNull(ServiceLocator.instanceOf(InicioSesionController.class))::index);
         app.post("/iniciarSesion", Objects.requireNonNull(ServiceLocator.instanceOf(InicioSesionController.class))::login);
