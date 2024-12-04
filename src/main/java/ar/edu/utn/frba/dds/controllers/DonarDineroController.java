@@ -69,9 +69,9 @@ public class DonarDineroController extends BaseController implements ICrudViewsH
         donacionDinero.setMonto(Float.valueOf(Objects.requireNonNull(context.formParam("monto"))));
 
         String fechaStr = Objects.requireNonNull(context.formParam("fechaDonacion"));
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); // Formato para la fecha
         try {
-            Date fechaDonacion = formatter.parse(fechaStr);
+            Date fechaDonacion = dateFormat.parse(fechaStr);
             donacionDinero.setFechaColaboracion(fechaDonacion);
 
             // Verificar si la donación es periódica
