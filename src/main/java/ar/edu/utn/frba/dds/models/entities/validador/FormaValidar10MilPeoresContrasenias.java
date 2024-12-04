@@ -7,13 +7,13 @@ import java.io.IOException;
 
 public class FormaValidar10MilPeoresContrasenias implements FormaValidar {
 
-    private static final String path = "src/main/java/ar/edu/utn/frba/dds/10000Peores.txt";
+    private static final String path = "/src/main/java/ar/edu/utn/frba/dds/10000Peores.txt";
 
     public boolean validar(String contrasenia, Usuario usuario) {
         String workingDirectory = System.getProperty("user.dir");
         System.out.println("Working Directory = " + workingDirectory);
         System.out.println("WD + path = " + workingDirectory + path);
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(workingDirectory + path))) {
             String line;
             while ((line = br.readLine()) != null) {
                 int cmp = line.compareTo(contrasenia);
