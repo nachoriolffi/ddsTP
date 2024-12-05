@@ -7,6 +7,7 @@ import ar.edu.utn.frba.dds.dtos.outputs.HeladeraOutputDTO;
 import ar.edu.utn.frba.dds.dtos.outputs.SuscripcionesAHeladerasOutputDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.MotivoDistribucion;
+import ar.edu.utn.frba.dds.models.entities.distancias.CalculadorDistanciasHeladeraHeladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.ObserverColaborador;
 import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.TipoSuscripcion;
@@ -19,13 +20,17 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoSuscriptorHe
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoViandas;
 import ar.edu.utn.frba.dds.services.UserService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.http.Context;
 
+import java.io.StringWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import ar.edu.utn.frba.dds.services.SuscripcionesAHeladerasService;
 
@@ -92,7 +97,32 @@ public class suscripcionesAHeladerasController extends BaseController implements
 
     @Override
     public void show(Context context) {
+        String suscripcionId = context.pathParam("id");
+        try {
+            Heladera heladeraSuscripcion = RepoSuscriptorHeladera.INSTANCE.findHeladeraBySuscripcionId(Long.parseLong(suscripcionId));
 
+            List<Heladera> heladerasSugeridas = CalculadorDistanciasHeladeraHeladera.getInstance().heladerasCercanas(heladeraSuscripcion,5);
+            List<HeladeraOutputDTO> heladeraOutputDTOS = new ArrayList<>();
+            for (Heladera heladera : heladerasSugeridas) {
+                HeladeraOutputDTO h = new HeladeraOutputDTO();
+                h.setId(String.valueOf(heladera.getId()));
+                h.setNombre(heladera.getNombre());
+
+                Direccion direccion = heladera.getDireccion();
+                String calle = direccion.getCalle().getCalle();
+                String altura = direccion.getAltura().toString();
+                h.setDireccion(calle + " " + altura);
+
+                h.setLugarDisponible(heladera.getModelo().getCantidadMaximaDeViandas() - heladera.getViandasDisponibles());
+                heladeraOutputDTOS.add(h);
+            }
+
+            Map<String, Object> model = new HashMap<>();
+            model.put("heladerasSugeridas", heladeraOutputDTOS);
+            context.render("heladeras/sugerencias.hbs", model);
+        } catch (Exception e) {
+            context.status(500).result("Error al obtener heladeras sugeridas");
+        }
     }
 
     @Override

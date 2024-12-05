@@ -21,15 +21,15 @@ public class CalculadorDistanciasHeladeraHeladera {
         return instancia;
     }
 
-    public List<Heladera> healderasCercanas(Heladera heladera, double rango){
+    public List<Heladera> heladerasCercanas(Heladera heladera, double rango){
 
         List<Heladera> heladerasCercanas = new ArrayList<>();
         List<Heladera> heladeras = RepoHeladeras.INSTANCE.buscarTodos();
 
         for(Heladera h : heladeras){
-            if(instanciaCalculadorDistancias.calcularDistancia(heladera.getCoordenada(), h.getCoordenada()) < rango){
+            if (!h.getId().equals(heladera.getId()) &&
+                    instanciaCalculadorDistancias.calcularDistancia(heladera.getCoordenada(), h.getCoordenada()) < rango) {
                 heladerasCercanas.add(h);
-
             }
         }
         return heladerasCercanas;

@@ -29,4 +29,11 @@ public class RepoSuscriptorHeladera extends RepoGenerico<ObserverColaborador> {
         }
         return false;
     }
+
+    public Heladera findHeladeraBySuscripcionId(Long suscripcionId) {
+        TypedQuery<Heladera> query = entityManager.createQuery(
+                "SELECT h FROM Heladera h JOIN h.observers o WHERE o.id = :suscripcionId", Heladera.class);
+        query.setParameter("suscripcionId", suscripcionId);
+        return query.getSingleResult();
+    }
 }
