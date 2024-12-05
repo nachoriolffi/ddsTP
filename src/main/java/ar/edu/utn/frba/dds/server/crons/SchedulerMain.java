@@ -17,21 +17,19 @@ public class SchedulerMain {
         // CRONJOB GENERACION REPORTES CADA UNA SEMANA
 
         long initialDelay = 0;  // Tiempo de espera inicial antes de la primera ejecución
-        long period = 7;        // Intervalo de ejecución en días (1 semana)
+        long period = 5;        // Intervalo de ejecución en días (1 semana)
 
         scheduler.scheduleAtFixedRate(
                 jobReporte::ejecutarReporte,
                 initialDelay,
                 period,
-                TimeUnit.DAYS
+                TimeUnit.MINUTES
         );
 
         // CRONJOB CHEQUEO TEMPERATURA POR HELADERA CADA 5 MINUTOS
 
         long initialDelayTemperatura = 0;  // Tiempo de espera inicial antes de la primera ejecución
         long periodTemperatura = 30;        // Intervalo de ejecución en minutos (5 minutos)
-
-
 
         scheduler.scheduleAtFixedRate(
                 jobTemperatura::ejecutarTemperatura,

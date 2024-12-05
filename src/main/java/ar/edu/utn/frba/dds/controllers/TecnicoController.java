@@ -3,7 +3,12 @@ package ar.edu.utn.frba.dds.controllers;
 import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
 import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.AdapterCorreo;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.CorreoElectronico;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
 import ar.edu.utn.frba.dds.models.entities.contacto.factory.MedioComunicacionFactory;
+import ar.edu.utn.frba.dds.models.entities.contacto.telegram.Telegram;
+import ar.edu.utn.frba.dds.models.entities.contacto.wpp.NotifcarPorWpp;
 import ar.edu.utn.frba.dds.models.entities.distancias.CalculadorDistanciasTecnicoHeladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
@@ -76,9 +81,10 @@ public class TecnicoController extends BaseController implements ICrudViewsHandl
 
         for (String contacto : contactos) {
 
-            tecnico.agregarMedioDeComunicacion(MedioComunicacionFactory.createMedioDeComunicacion(contacto));
+            //tecnico.agregarMedioDeComunicacion(MedioComunicacionFactory.createMedioDeComunicacion(contacto));
 
             //perdon mama por esto pero no me queda otra porq no voy a hacer un cambio por este enum no van a agregar un nuevo medio de contacto en la entrega
+            List<MedioDeComunicacion> mediosDeComunicacion = new ArrayList<>();
 
             if (contacto.equals("WPP") && telefono != null) {
                 Contacto contactoTelefono = new Contacto(TipoContacto.WPP, telefono);
@@ -89,13 +95,16 @@ public class TecnicoController extends BaseController implements ICrudViewsHandl
                 Contacto contactoMail = new Contacto(TipoContacto.MAIL, mail);
                 RepoContacto.INSTANCE.agregar(contactoMail);
                 tecnico.agregarContacto(contactoMail);
+                mediosDeComunicacion.add(new CorreoElectronico(new AdapterCorreo()));
             }
             if (contacto.equals("TELEGRAM") && telefono != null) {
                 Contacto contactoTelefono = new Contacto(TipoContacto.TELEGRAM, telefono);
                 RepoContacto.INSTANCE.agregar(contactoTelefono);
                 tecnico.agregarContacto(contactoTelefono);
-            }
 
+            }
+            tecnico.setDisponible(true);
+            tecnico.setMediosDeComunicacion(mediosDeComunicacion);
             RepoTecnico.INSTANCE.agregar(tecnico);
 
         }

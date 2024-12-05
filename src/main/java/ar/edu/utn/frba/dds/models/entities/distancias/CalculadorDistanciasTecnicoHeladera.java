@@ -5,9 +5,7 @@ import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoIncidente;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoTecnico;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoUsuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +13,8 @@ import java.util.List;
 
 public class CalculadorDistanciasTecnicoHeladera {
 
-    private static CalculadorDistanciasTecnicoHeladera instancia = null;
     private static final CalculadorDistancias instanciaCalculadorDistancias = CalculadorDistancias.getInstance();
+    private static CalculadorDistanciasTecnicoHeladera instancia = null;
 
     public static CalculadorDistanciasTecnicoHeladera getInstance() {
         if (instancia == null) {
@@ -38,7 +36,7 @@ public class CalculadorDistanciasTecnicoHeladera {
 
         // obtengo los tecnicos disponibles
         for (Tecnico tecnico : tecnicos) {
-            if (tecnico.getDisponible()) {
+            if (tecnico.getDisponible() || tecnico.getDisponible() != null) {
                 tecnicosDisponibles.add(tecnico);
             }
         }
@@ -61,20 +59,19 @@ public class CalculadorDistanciasTecnicoHeladera {
         return tecnicoMasCercano;
     }
 
-    public List<Heladera> healderasCercanasATecnico(Usuario usuario){
+    public List<Heladera> healderasCercanasATecnico(Usuario usuario) {
 
         List<Heladera> heladerasCercanas = new ArrayList<>();
         List<Heladera> heladeras = RepoHeladeras.INSTANCE.buscarTodos();
 
         Tecnico tecnico = RepoTecnico.INSTANCE.buscarPorUsuario(usuario.getId());
-        System.out.println("TECNICO: "+ tecnico.getNombre() + " " + tecnico.getApellido());
+        System.out.println("TECNICO: " + tecnico.getNombre() + " " + tecnico.getApellido());
 
-        for(Heladera heladera : heladeras){
-            if(instanciaCalculadorDistancias.calcularDistancia(tecnico.getCoordenada(), heladera.getCoordenada()) < tecnico.getAreaCobertura()){
+        for (Heladera heladera : heladeras) {
+            if (instanciaCalculadorDistancias.calcularDistancia(tecnico.getCoordenada(), heladera.getCoordenada()) < tecnico.getAreaCobertura()) {
                 System.out.println("Distancia correcta ");
                 heladerasCercanas.add(heladera);
-            }
-            else {
+            } else {
                 System.out.println("No entro ");
             }
         }
