@@ -3,11 +3,8 @@ package ar.edu.utn.frba.dds.models.entities.multiplicador.config;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.util.Observable;
-import java.io.FileReader;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -25,8 +22,8 @@ public class ConfiguracionMultiplicador extends Observable {
     private Double multiplicadorDinero;
     private static ConfiguracionMultiplicador instancia = null;
 
-    //private String path = "src/main/java/ar/edu/utn/frba/dds/models/entities/multiplicador/config/configuracionMultiplicadores.json";
-    private String path = "configuracionMultiplicadores.json";
+    private String path = "src/main/java/ar/edu/utn/frba/dds/models/entities/multiplicador/config/configuracionMultiplicadores.json";
+    //private String path = "configuracionMultiplicadores.json";
 
 
     public ConfiguracionMultiplicador() {
@@ -41,21 +38,33 @@ public class ConfiguracionMultiplicador extends Observable {
         return instancia;
     }
 
-    private void cargarConfiguracion(String resourcePath) {
+    private void cargarConfiguracion(String path) {
+        // Obtener la ruta absoluta del archivo
+        File file = new File(path);
+        String absolutePath = file.getAbsolutePath();
+        System.out.println("Ruta absoluta del archivo de configuración: " + absolutePath);
+
+        // Verificar si el archivo existe
+        if (!file.exists()) {
+            throw new RuntimeException("El archivo de configuración no existe: " + absolutePath);
+        }
+
         JSONParser parser = new JSONParser();
-        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(resourcePath)) {
-            if (inputStream == null) {
-                throw new RuntimeException("Archivo de configuración no encontrado: " + resourcePath);
-            }
-            InputStreamReader reader = new InputStreamReader(inputStream);
+        try (FileReader reader = new FileReader(file)) {
+            System.out.println("Archivo de configuración encontrado. Leyendo contenido desde: " + absolutePath);
+
+            // Parsear el contenido del archivo
             Object obj = parser.parse(reader);
             JSONObject jsonObject = (JSONObject) obj;
             JSONObject configuracion = (JSONObject) jsonObject.get("configuracion");
+
+            // Asignar valores a las variables
             this.multiplicadorViandasDistribuidas = Double.parseDouble(configuracion.get("multiplicadorViandasDistribuidas").toString());
             this.multiplicadorViandasDonadas = Double.parseDouble(configuracion.get("multiplicadorViandasDonadas").toString());
             this.multiplicadorRegistroVulnerables = Double.parseDouble(configuracion.get("multiplicadorRegistroVulnerables").toString());
             this.multiplicadorHeladeraActiva = Double.parseDouble(configuracion.get("multiplicadorHeladeraActiva").toString());
             this.multiplicadorDinero = Double.parseDouble(configuracion.get("multiplicadorDinero").toString());
+
         } catch (IOException | ParseException e) {
             e.printStackTrace();
             throw new RuntimeException("Error al cargar la configuración de multiplicadores", e);
