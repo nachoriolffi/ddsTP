@@ -3,8 +3,6 @@ package ar.edu.utn.frba.dds.controllers;
 import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
 import ar.edu.utn.frba.dds.dtos.outputs.DonacionViandaOutputDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
-import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DistribucionVianda;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DonacionVianda;
 import ar.edu.utn.frba.dds.models.entities.generadorCodigo.GeneradorDeCodigo;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
@@ -14,17 +12,11 @@ import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
-
 import ar.edu.utn.frba.dds.services.HeladeraService;
 import ar.edu.utn.frba.dds.services.RegistroSolicitudService;
 import ar.edu.utn.frba.dds.services.UserService;
-
-import ar.edu.utn.frba.dds.server.Server;
-
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
-import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import io.javalin.http.Context;
-import org.jetbrains.annotations.NotNull;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -102,51 +94,60 @@ public class DonacionViandaController extends BaseController implements ICrudVie
 
     @Override
     public void save(Context context) throws Exception {
+        try {
+            Long usuarioID = context.sessionAttribute("usuario_id");
 
-        Long usuarioID = context.sessionAttribute("usuario_id");
+            DonacionVianda donacionVianda = new DonacionVianda();
+            Vianda nuevaVianda = new Vianda();
 
-        DonacionVianda donacionVianda = new DonacionVianda();
-        Vianda nuevaVianda = new Vianda();
+            nuevaVianda.setComida(context.formParam("comida"));
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+            nuevaVianda.setFechaCaducidad(formatter.parse(context.formParam("fechaCaducidad")));
+            nuevaVianda.setCalorias(Double.valueOf(Objects.requireNonNull(context.formParam("calorias"))));
+            nuevaVianda.setPeso(Double.valueOf(Objects.requireNonNull(context.formParam("peso"))));
+            nuevaVianda.setFechaDonacion(new Date());
 
-        nuevaVianda.setComida(context.formParam("comida"));
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        nuevaVianda.setFechaCaducidad(formatter.parse(context.formParam("fechaCaducidad")));
-        nuevaVianda.setCalorias(Double.valueOf(Objects.requireNonNull(context.formParam("calorias"))));
-        nuevaVianda.setPeso(Double.valueOf(Objects.requireNonNull(context.formParam("peso"))));
-        nuevaVianda.setFechaDonacion(new Date());
+            Heladera heladera = repoHeladeras.buscar(Long.parseLong(context.formParam("nombreHeladera")));
 
-        Heladera heladera = repoHeladeras.buscar(Long.parseLong(context.formParam("nombreHeladera")));
+            Colaborador colaborador = repoColaborador.buscarPorIdUsuario(usuarioID);
 
-        Colaborador colaborador = repoColaborador.buscarPorIdUsuario(usuarioID);
+            nuevaVianda.setColaborador(colaborador);
+            nuevaVianda.setFueEntregada(false);
+            nuevaVianda.setHeladera(heladera);
+            repoViandas.agregar(nuevaVianda);
 
-        nuevaVianda.setColaborador(colaborador);
-        nuevaVianda.setFueEntregada(false);
-        nuevaVianda.setHeladera(heladera);
-        repoViandas.agregar(nuevaVianda);
+            donacionVianda.setVianda(nuevaVianda);
+            donacionVianda.setFechaColaboracion(new Date());
+            donacionVianda.setTipoColaboracion(DONACION_VIANDAS);
+            repoDonacionVianda.agregar(donacionVianda);
+            colaborador.agregarColaboracionRealizada(donacionVianda);
+            RepoColaborador.INSTANCE.modificar(colaborador);
 
-        donacionVianda.setVianda(nuevaVianda);
-        donacionVianda.setFechaColaboracion(new Date());
-        donacionVianda.setTipoColaboracion(DONACION_VIANDAS);
-        repoDonacionVianda.agregar(donacionVianda);
-        colaborador.agregarColaboracionRealizada(donacionVianda);
-        RepoColaborador.INSTANCE.modificar(colaborador);
+            RegistroSolicitud solicutud = new RegistroSolicitud();
+            Tarjeta tarjeta = null;
+            List<Tarjeta> tarjetas = RepoTarjeta.INSTANCE.buscarTarjetasColaborador(colaborador.getId());
+            for (Tarjeta t : tarjetas) {
+                if (t.getColaboradorAsignador() == null && t.getPersonaAsociada() == null) {
+                    tarjeta = t;
+                    break;
+                }
+            }
+            if (tarjeta == null) {
+                tarjeta = new Tarjeta();
+                tarjeta.setCodigo(GeneradorDeCodigo.getInstance().generarCodigoUnico());
+                tarjeta.setColaboradorAsociado(colaborador);
+                RepoTarjeta.INSTANCE.agregar(tarjeta);
+            }
+            registroSolicitudService.registrarSolicitud(TipoSolicitud.DONACION_VIANDA, tarjeta, heladera, nuevaVianda);
 
-        RegistroSolicitud solicutud = new RegistroSolicitud();
-
-        //List<Tarjeta> tarjetas = RepoTarjeta.INSTANCE.buscarTarjetasColaborador(colaborador.getId());
-        //Tarjeta tarjeta = tarjetas.isEmpty() ? null : tarjetas.get(0);
-
-        Tarjeta tarjeta = new Tarjeta();
-        tarjeta.setCodigo(GeneradorDeCodigo.getInstance().generarCodigoUnico());
-        tarjeta.setColaboradorAsociado(colaborador);
-        RepoTarjeta.INSTANCE.agregar(tarjeta);
-
-
-        registroSolicitudService.registrarSolicitud(TipoSolicitud.DONACION_VIANDA, tarjeta, heladera, nuevaVianda);
-
-        context.redirect("/donarViandas");
-        //Server.registry.counter("tpdds.colaboraciones","status","donacionesVianda").increment();
-
+            context.redirect("/donarViandas");
+            //Server.registry.counter("tpdds.colaboraciones","status","donacionesVianda").increment();
+        } catch (ParseException e) {
+            context.status(400).result("Formato de fecha inválido.");
+        } catch (Exception e) {
+            context.status(500).result("Error interno del servidor: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @Override

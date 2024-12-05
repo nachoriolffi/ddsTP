@@ -16,8 +16,8 @@ public class RepoTarjeta extends RepoGenerico<Tarjeta> {
     public List<Tarjeta> buscarTarjetasColaborador(Long idColaborador){
 
         return entityManager()
-                .createQuery("SELECT t FROM Tarjeta t WHERE t.colaboradorAsignador.id = :idColaborador", Tarjeta.class)
-                .setParameter("idColaborador", idColaborador)
+                .createQuery("SELECT t FROM Tarjeta t WHERE t.colaboradorAsignador.id = :colaborador_id", Tarjeta.class)
+                .setParameter("colaborador_id", idColaborador)
                 .getResultList();
 
     }
