@@ -28,7 +28,6 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
 
     @Override
     public void index(Context ctx) {
-        // Crear un mapa para pasar al modelo de la vista
         Map<String, Object> model = new HashMap<>();
         try {
             // Verificar la sesión y obtener el usuario

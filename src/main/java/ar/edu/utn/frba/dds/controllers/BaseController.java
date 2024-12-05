@@ -90,7 +90,6 @@ public abstract class BaseController {
         return verificarRol(ctx, modelo, TipoRol.COLABORADOR_JURIDICO, TipoRol.ADMIN);
     }
 
-
     protected Usuario verificarJuridico(Context ctx, Map<String, Object> modelo) {
         return verificarRol(ctx, modelo, TipoRol.COLABORADOR_JURIDICO);
     }
