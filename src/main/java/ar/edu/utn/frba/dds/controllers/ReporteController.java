@@ -45,6 +45,7 @@ public class ReporteController extends BaseController implements ICrudViewsHandl
 
                 String fileName = Paths.get(reporte.getPathDocumento()).getFileName().toString();
                 String pdfUrl = "/pdfs/" + fileName;
+                System.out.println("RUTA PFS: "+ pdfUrl);
 
                 model.put("pdfs", reportes);
                 model.put("reporte", reporte);
