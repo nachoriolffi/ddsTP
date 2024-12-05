@@ -124,8 +124,8 @@ public class DonacionViandaController extends BaseController implements ICrudVie
             nuevaVianda.setComida(context.formParam("comida"));
             System.out.println("Comida: " + nuevaVianda.getComida());
 
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-            nuevaVianda.setFechaCaducidad(formatter.parse(context.formParam("fechaCaducidad")));
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            nuevaVianda.setFechaCaducidad(dateFormat.parse(context.formParam("fechaCaducidad")));
             System.out.println("Fecha de caducidad: " + nuevaVianda.getFechaCaducidad());
 
             nuevaVianda.setCalorias(Double.valueOf(Objects.requireNonNull(context.formParam("calorias"))));
