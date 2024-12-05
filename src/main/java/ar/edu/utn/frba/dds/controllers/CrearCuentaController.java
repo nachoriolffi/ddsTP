@@ -57,17 +57,17 @@ public class CrearCuentaController extends BaseController implements ICrudViewsH
         if (tipoUsuario == null || tipoUsuario.isEmpty()) {
             context.sessionAttribute("tipoNoSeleccionado", "Debe seleccionar un tipo de Colaborador (Juridico o Humano)");
             context.redirect("/crearCuenta");
-            //Server.registry.counter("tpdds.cuentasCreadas","status","noSeleccionoColaborador").increment();
+            Server.registry.counter("tpdds.cuentasCreadas","status","noSeleccionoColaborador").increment();
             return;
         } else if (correoElectronico == null || password == null || confirmPassword == null) {
             context.sessionAttribute("faltaRellenar", "Algun campo no fue completado");
             context.redirect("/crearCuenta");
-            //Server.registry.counter("tpdds.cuentasCreadas","status","camposIncompletos").increment();
+            Server.registry.counter("tpdds.cuentasCreadas","status","camposIncompletos").increment();
             return;
         } else if (!password.equals(confirmPassword)) {
             context.sessionAttribute("clavesNoCoinciden", "Las claves no coinciden. Intente de nuevo");
             context.redirect("/crearCuenta");
-            //Server.registry.counter("tpdds.cuentasCreadas","status","clavesNoCoinciden").increment();
+            Server.registry.counter("tpdds.cuentasCreadas","status","clavesNoCoinciden").increment();
             return;
         } else {
             ValidadorDeContrasenia validadorDeContrasenia = new ValidadorDeContrasenia();
@@ -76,7 +76,7 @@ public class CrearCuentaController extends BaseController implements ICrudViewsH
             if (!respuesta) {
                 context.sessionAttribute("claveNoSegura", "La contraseña debe tener entre 8 y 64 caracteres y no debe estar entre las peores 10000");
                 context.redirect("/crearCuenta");
-                //Server.registry.counter("tpdds.cuentasCreadas","status","contraseñaInsegura").increment();
+                Server.registry.counter("tpdds.cuentasCreadas","status","contraseñaInsegura").increment();
                 return;
             }
 
@@ -87,13 +87,13 @@ public class CrearCuentaController extends BaseController implements ICrudViewsH
             context.sessionAttribute("nuevoUsuario", nuevoUsuario);
             context.sessionAttribute("usuario_id", nuevoUsuario.getId());
             context.redirect("/registroJuridico");
-            //Server.registry.counter("tpdds.cuentasCreadas","status","Juridico").increment();
+            Server.registry.counter("tpdds.cuentasCreadas","status","Juridico").increment();
         } else {
             nuevoUsuario.setRol(TipoRol.COLABORADOR_HUMANO);
             context.sessionAttribute("nuevoUsuario", nuevoUsuario);
             context.sessionAttribute("usuario_id", nuevoUsuario.getId());
             context.redirect("/registroHumano");
-            //Server.registry.counter("tpdds.cuentasCreadas","status","Humano").increment();
+            Server.registry.counter("tpdds.cuentasCreadas","status","Humano").increment();
         }
     }
 

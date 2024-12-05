@@ -12,6 +12,7 @@ import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
+import ar.edu.utn.frba.dds.server.Server;
 import ar.edu.utn.frba.dds.services.HeladeraService;
 import ar.edu.utn.frba.dds.services.RegistroSolicitudService;
 import ar.edu.utn.frba.dds.services.UserService;
@@ -193,7 +194,7 @@ public class DonacionViandaController extends BaseController implements ICrudVie
             context.redirect("/donarViandas");
 
             // Uncomment the counter increment if needed.
-            // Server.registry.counter("tpdds.colaboraciones", "status", "donacionesVianda").increment();
+            Server.registry.counter("tpdds.colaboraciones", "status", "donacionesVianda").increment();
         } catch (ParseException e) {
             System.out.println("Error de formato de fecha: " + e.getMessage());
             context.status(400).result("Formato de fecha inválido.");

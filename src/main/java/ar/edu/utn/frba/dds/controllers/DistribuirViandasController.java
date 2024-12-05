@@ -152,7 +152,7 @@ public class DistribuirViandasController extends BaseController implements ICrud
         colaborador.agregarColaboracionRealizada(distribucionVianda);
         RepoColaborador.INSTANCE.modificar(colaborador);
         context.redirect("/distribuirViandas");
-        //Server.registry.counter("tpdds.colaboraciones","status","distribuirViandas").increment();
+        Server.registry.counter("tpdds.colaboraciones","status","distribuirViandas").increment();
     }
 
     public void obtenerViandasOrigen(Context context) {

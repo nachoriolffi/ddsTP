@@ -66,21 +66,21 @@ public class InicioSesionController extends BaseController implements ICrudViews
         if (usuario == null || !usuario.getContrasenia().equals(password)) {
             ctx.sessionAttribute("loginError", "Usuario o Clave Incorrectas");
             ctx.redirect("/iniciarSesion");
-            //Server.registry.counter("tpdds.inicioSesion","status","usuarioOClaveIncorrectas").increment();
+            Server.registry.counter("tpdds.inicioSesion","status","usuarioOClaveIncorrectas").increment();
         } else {
             ctx.sessionAttribute("usuario_id", usuario.getId());
             if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
                 ctx.redirect("/verPerfil");
-                //Server.registry.counter("tpdds.inicioSesion","status","colabJuridico").increment();
+                Server.registry.counter("tpdds.inicioSesion","status","colabJuridico").increment();
             } else if (usuario.getRol().equals(TipoRol.ADMIN)) {
                 ctx.redirect("/verPerfil");
-                //Server.registry.counter("tpdds.inicioSesion","status","admin").increment();
+                Server.registry.counter("tpdds.inicioSesion","status","admin").increment();
             } else if (usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)) {
                 ctx.redirect("/verPerfil");
-                //Server.registry.counter("tpdds.inicioSesion","status","colabHumano").increment();
+                Server.registry.counter("tpdds.inicioSesion","status","colabHumano").increment();
             }else if(usuario.getRol().equals(TipoRol.TECNICO)){
                 ctx.redirect("/perfilTecnico");
-                //Server.registry.counter("tpdds.inicioSesion","status","tecnico").increment();
+                Server.registry.counter("tpdds.inicioSesion","status","tecnico").increment();
             }
         }
     }

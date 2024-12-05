@@ -1,5 +1,6 @@
 package ar.edu.utn.frba.dds.server;
 
+import ar.edu.utn.frba.dds.observability.DDMetricsUtils;
 import ar.edu.utn.frba.dds.runnable.RutinaBrokerApertura;
 import ar.edu.utn.frba.dds.runnable.RutinaBrokerMovimiento;
 import ar.edu.utn.frba.dds.runnable.RutinaBrokerTemperatura;
@@ -10,8 +11,10 @@ import com.github.jknack.handlebars.Template;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.HttpStatus;
-
+import io.javalin.micrometer.MicrometerPlugin;
+import io.micrometer.core.instrument.step.StepMeterRegistry;
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 
 public class Server {
@@ -19,15 +22,15 @@ public class Server {
     private static Javalin app = null;
 
     //observabilidad
-    //public static final DDMetricsUtils metricsUtils = new DDMetricsUtils("tpdds");
+    public static final DDMetricsUtils metricsUtils = new DDMetricsUtils("tpdds");
     //@Getter
-    //public static final StepMeterRegistry registry = metricsUtils.getRegistry();
+    public static final StepMeterRegistry registry = metricsUtils.getRegistry();
 
     // Metricas
     //final var myGauge = registry.gauge("dds.unGauge", new AtomicInteger(0));
 
     // Config
-    //private static final MicrometerPlugin micrometerPlugin = new MicrometerPlugin(config -> config.registry = registry);
+    private static final MicrometerPlugin micrometerPlugin = new MicrometerPlugin(config -> config.registry = registry);
 
     public static Javalin app() {
         if (app == null)
@@ -39,11 +42,8 @@ public class Server {
         if (app == null) {
             int port = Integer.parseInt(System.getProperty("port", "8080"));
 
-//            app = Javalin.create( config -> { config.registerPlugin(micrometerPlugin); })
-//                    .start(port);
-//            Router router = new Router();
-            app = Javalin.create(config())
-                    .start(port);
+            app = Javalin.create( config -> { config.registerPlugin(micrometerPlugin); }).start(port);
+            //app = Javalin.create(config()).start(port);
             Router router = new Router();
 
 
@@ -58,7 +58,6 @@ public class Server {
             RutinaBrokerMovimiento brokerMovimiento = new RutinaBrokerMovimiento();
             Thread hiloRecepcionMovimiento = new Thread(brokerMovimiento);
             hiloRecepcionMovimiento.start();
-
 
             //Init.iniciar();
             Router.init(Server.app());
