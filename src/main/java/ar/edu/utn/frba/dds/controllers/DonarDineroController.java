@@ -106,10 +106,10 @@ public class DonarDineroController extends BaseController implements ICrudViewsH
 
             // Configurar el tipo de colaboración y multiplicador
             donacionDinero.setTipoColaboracion(TipoColaboracion.DINERO);
-            double multiplicador = ConfiguracionMultiplicador.getInstance().getMultiplicadorDinero();
-            donacionDinero.setMultiplicador(multiplicador);
+            //double multiplicador = ConfiguracionMultiplicador.getInstance().getMultiplicadorDinero();
+            donacionDinero.setMultiplicador(1.0);
             System.out.println("Tipo de colaboración: " + donacionDinero.getTipoColaboracion());
-            System.out.println("Multiplicador configurado: " + multiplicador);
+            System.out.println("Multiplicador configurado: " + 1.0);/**/
 
             // Asociar la donación al colaborador
             colaborador.agregarColaboracionRealizada(donacionDinero);
