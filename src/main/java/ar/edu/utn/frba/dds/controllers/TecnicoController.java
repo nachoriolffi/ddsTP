@@ -1,14 +1,12 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
+import ar.edu.utn.frba.dds.dtos.outputs.IncidenteOutputDTO;
 import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.AdapterCorreo;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.CorreoElectronico;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
-import ar.edu.utn.frba.dds.models.entities.contacto.factory.MedioComunicacionFactory;
-import ar.edu.utn.frba.dds.models.entities.contacto.telegram.Telegram;
-import ar.edu.utn.frba.dds.models.entities.contacto.wpp.NotifcarPorWpp;
 import ar.edu.utn.frba.dds.models.entities.distancias.CalculadorDistanciasTecnicoHeladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
@@ -23,6 +21,7 @@ import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import io.javalin.http.Context;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class TecnicoController extends BaseController implements ICrudViewsHandler {
@@ -113,23 +112,36 @@ public class TecnicoController extends BaseController implements ICrudViewsHandl
 
     @Override
     public void show(Context context) { // va a mostrar los incidentes del tecnico
-
+        List<IncidenteOutputDTO> incidentesTecnicoDTO = new ArrayList<>();
         List<Incidente> incidentesTecnico = new ArrayList<>();
         Map<String, Object> model = new HashMap<>();
         Usuario tecnico = verificarTecnico(context, model);
         List<Heladera> heladerasCercanas = CalculadorDistanciasTecnicoHeladera.getInstance().healderasCercanasATecnico(tecnico);
         for (Heladera heladera : heladerasCercanas) {
             List<Incidente> incidentes = RepoIncidente.INSTANCE.getIncidentesPorHeladera(heladera.getId());
+
+
             for (Incidente incidente : incidentes) {
-                if (incidente.getEstado() == false) { //osea no estan resueltos
-                    incidentesTecnico.add(incidente);
+                if (incidente.getEstado() == Boolean.FALSE) { // Solo los no resueltos
+                    IncidenteOutputDTO dto = new IncidenteOutputDTO();
+
+                    dto.setId(incidente.getId().intValue()); // Convertimos Long a Integer
+                    dto.setTipoIncidente(incidente.getTipoIncidente() != null ? incidente.getTipoIncidente().ordinal() : null);
+                    dto.setTipoAlerta(incidente.getTipoAlerta() != null ? incidente.getTipoAlerta().ordinal() : null);
+                    dto.setDescripcion(incidente.getDescripcion() != null ? incidente.getDescripcion() : "");
+                    dto.setPathFoto(incidente.getPathFoto() != null ? incidente.getPathFoto() : "");
+                    dto.setEstado(incidente.getEstado() ? "Resuelto" : "No resuelto");
+                    dto.setHeladera(incidente.getHeladera() != null ? incidente.getHeladera().getNombre() : "");
+
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                    dto.setFecha(incidente.getFecha() != null ? sdf.format(incidente.getFecha()) : "");
+
+                    incidentesTecnicoDTO.add(dto);
                 }
             }
-            //incidentesTecnico.addAll(incidentes);
         }
 
-
-        model.put("incidentes", incidentesTecnico);
+        model.put("incidentes", incidentesTecnicoDTO);
         context.render("tecnico/incidentesTecnico.hbs", model);
 
     }

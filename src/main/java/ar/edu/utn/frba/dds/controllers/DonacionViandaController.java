@@ -112,35 +112,61 @@ public class DonacionViandaController extends BaseController implements ICrudVie
     @Override
     public void save(Context context) throws Exception {
         try {
+            System.out.println("Inicio del método save");
+
             Long usuarioID = context.sessionAttribute("usuario_id");
+            System.out.println("Usuario ID obtenido: " + usuarioID);
 
             DonacionVianda donacionVianda = new DonacionVianda();
             Vianda nuevaVianda = new Vianda();
 
+            System.out.println("Comenzando a setear los datos de la nueva vianda");
             nuevaVianda.setComida(context.formParam("comida"));
+            System.out.println("Comida: " + nuevaVianda.getComida());
+
             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
             nuevaVianda.setFechaCaducidad(formatter.parse(context.formParam("fechaCaducidad")));
+            System.out.println("Fecha de caducidad: " + nuevaVianda.getFechaCaducidad());
+
             nuevaVianda.setCalorias(Double.valueOf(Objects.requireNonNull(context.formParam("calorias"))));
+            System.out.println("Calorías: " + nuevaVianda.getCalorias());
+
             nuevaVianda.setPeso(Double.valueOf(Objects.requireNonNull(context.formParam("peso"))));
+            System.out.println("Peso: " + nuevaVianda.getPeso());
+
             nuevaVianda.setFechaDonacion(new Date());
+            System.out.println("Fecha de donación: " + nuevaVianda.getFechaDonacion());
 
+            System.out.println("Buscando heladera...");
             Heladera heladera = repoHeladeras.buscar(Long.parseLong(context.formParam("nombreHeladera")));
+            System.out.println("Heladera encontrada: " + heladera);
 
+            System.out.println("Buscando colaborador...");
             Colaborador colaborador = repoColaborador.buscarPorIdUsuario(usuarioID);
+            System.out.println("Colaborador encontrado: " + colaborador);
 
             nuevaVianda.setColaborador(colaborador);
             nuevaVianda.setFueEntregada(false);
             nuevaVianda.setHeladera(heladera);
+
+            System.out.println("Agregando nueva vianda al repositorio...");
             repoViandas.agregar(nuevaVianda);
+            System.out.println("Vianda agregada: " + nuevaVianda);
 
             donacionVianda.setVianda(nuevaVianda);
             donacionVianda.setFechaColaboracion(new Date());
             donacionVianda.setTipoColaboracion(DONACION_VIANDAS);
-            repoDonacionVianda.agregar(donacionVianda);
-            colaborador.agregarColaboracionRealizada(donacionVianda);
-            RepoColaborador.INSTANCE.modificar(colaborador);
 
-            RegistroSolicitud solicutud = new RegistroSolicitud();
+            System.out.println("Agregando donación de vianda al repositorio...");
+            repoDonacionVianda.agregar(donacionVianda);
+            System.out.println("Donación de vianda agregada: " + donacionVianda);
+
+            colaborador.agregarColaboracionRealizada(donacionVianda);
+            System.out.println("Actualizando colaborador con la nueva colaboración...");
+            RepoColaborador.INSTANCE.modificar(colaborador);
+            System.out.println("Colaborador actualizado.");
+
+            System.out.println("Buscando tarjeta...");
             Tarjeta tarjeta = null;
             List<Tarjeta> tarjetas = RepoTarjeta.INSTANCE.buscarTarjetasColaborador(colaborador.getId());
             for (Tarjeta t : tarjetas) {
@@ -149,23 +175,35 @@ public class DonacionViandaController extends BaseController implements ICrudVie
                     break;
                 }
             }
+
             if (tarjeta == null) {
+                System.out.println("No se encontró una tarjeta disponible, creando una nueva...");
                 tarjeta = new Tarjeta();
                 tarjeta.setCodigo(GeneradorDeCodigo.getInstance().generarCodigoUnico());
                 tarjeta.setColaboradorAsociado(colaborador);
                 RepoTarjeta.INSTANCE.agregar(tarjeta);
+                System.out.println("Nueva tarjeta creada: " + tarjeta);
             }
-            registroSolicitudService.registrarSolicitud(TipoSolicitud.DONACION_VIANDA, tarjeta, heladera, nuevaVianda);
 
+            System.out.println("Registrando solicitud...");
+            registroSolicitudService.registrarSolicitud(TipoSolicitud.DONACION_VIANDA, tarjeta, heladera, nuevaVianda);
+            System.out.println("Solicitud registrada.");
+
+            System.out.println("Redirigiendo al usuario...");
             context.redirect("/donarViandas");
-            //Server.registry.counter("tpdds.colaboraciones","status","donacionesVianda").increment();
+
+            // Uncomment the counter increment if needed.
+            // Server.registry.counter("tpdds.colaboraciones", "status", "donacionesVianda").increment();
         } catch (ParseException e) {
+            System.out.println("Error de formato de fecha: " + e.getMessage());
             context.status(400).result("Formato de fecha inválido.");
         } catch (Exception e) {
-            context.status(500).result("Error interno del servidor: " + e.getMessage());
+            System.out.println("Error interno del servidor: " + e.getMessage());
             e.printStackTrace();
+            context.status(500).result("Error interno del servidor: " + e.getMessage());
         }
     }
+
 
     @Override
     public void edit(Context context) {
