@@ -46,13 +46,24 @@ public class DonarDineroController extends BaseController implements ICrudViewsH
         for (DonacionDinero donacion : donacionesDineroNormal) {
             DonacionDineroOutputDTO dto = new DonacionDineroOutputDTO();
 
-            dto.setId(donacion.getId());
-            dto.setFechaDonacion(dateFormat.format(donacion.getFechaColaboracion()));
-            dto.setMonto(String.format("%.2f", donacion.getMonto()));
-            dto.setEsPeriodica(donacion.getEsDonacionMensual() ? "Sí" : "No");
-            dto.setRenovacion(donacion.getEsDonacionMensual());
+            // Comprobar si donacion.getId() es null, en cuyo caso asignar ""
+            dto.setId(Long.valueOf(donacion.getId() != null ? String.valueOf(donacion.getId()) : ""));
+
+            // Comprobar si donacion.getFechaColaboracion() es null, en cuyo caso asignar ""
+            dto.setFechaDonacion(donacion.getFechaColaboracion() != null ? dateFormat.format(donacion.getFechaColaboracion()) : "");
+
+            // Comprobar si donacion.getMonto() es null, en cuyo caso asignar "0.00"
+            dto.setMonto(donacion.getMonto() != null ? String.format("%.2f", donacion.getMonto()) : "0.00");
+
+            // Comprobar si donacion.getEsDonacionMensual() es null, en cuyo caso asignar "No"
+            dto.setEsPeriodica(donacion.getEsDonacionMensual() != null ? (donacion.getEsDonacionMensual() ? "Sí" : "No") : "No");
+
+            // Comprobar si donacion.getEsDonacionMensual() es null, en cuyo caso asignar false
+            dto.setRenovacion(donacion.getEsDonacionMensual() != null ? donacion.getEsDonacionMensual() : false);
+
             donacionesDinero.add(dto);
         }
+
 
         model.put("donacionesDinero", donacionesDinero);
         model.put("title", "Donar dinero");

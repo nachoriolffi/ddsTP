@@ -71,17 +71,34 @@ public class DonacionViandaController extends BaseController implements ICrudVie
 
     private DonacionViandaOutputDTO getDonacionViandaOutputDTO(Vianda vianda) {
         DonacionViandaOutputDTO donacionViandaOutputDTO = new DonacionViandaOutputDTO();
-        donacionViandaOutputDTO.setCalorias(String.valueOf(vianda.getCalorias()));
-        donacionViandaOutputDTO.setComida(vianda.getComida());
+
+        // Comprobar si vianda.getCalorias() es null, en cuyo caso asignar ""
+        donacionViandaOutputDTO.setCalorias(vianda.getCalorias() != null ? String.valueOf(vianda.getCalorias()) : "");
+
+        // Comprobar si vianda.getComida() es null, en cuyo caso asignar ""
+        donacionViandaOutputDTO.setComida(vianda.getComida() != null ? vianda.getComida() : "");
+
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+        // Comprobar si vianda.getFechaDonacion() es null, en cuyo caso asignar ""
         Date fechaDonacion = vianda.getFechaDonacion();
-        donacionViandaOutputDTO.setFechaDonacion(sdf.format(fechaDonacion));
-        donacionViandaOutputDTO.setHeladera(vianda.getHeladera().getNombre());
-        donacionViandaOutputDTO.setFueEntregada(String.valueOf(vianda.getFueEntregada() ? "Si" : "No"));
-        donacionViandaOutputDTO.setFechaCaducidad(sdf.format((vianda.getFechaCaducidad())));
-        donacionViandaOutputDTO.setPesoEnGramos(vianda.getPeso().toString());
+        donacionViandaOutputDTO.setFechaDonacion(fechaDonacion != null ? sdf.format(fechaDonacion) : "");
+
+        // Comprobar si vianda.getHeladera() es null o vianda.getHeladera().getNombre() es null, en cuyo caso asignar ""
+        donacionViandaOutputDTO.setHeladera(vianda.getHeladera() != null && vianda.getHeladera().getNombre() != null ? vianda.getHeladera().getNombre() : "");
+
+        // Comprobar si vianda.getFueEntregada() es null, en cuyo caso asignar ""
+        donacionViandaOutputDTO.setFueEntregada(vianda.getFueEntregada() != null ? String.valueOf(vianda.getFueEntregada() ? "Si" : "No") : "");
+
+        // Comprobar si vianda.getFechaCaducidad() es null, en cuyo caso asignar ""
+        donacionViandaOutputDTO.setFechaCaducidad(vianda.getFechaCaducidad() != null ? sdf.format(vianda.getFechaCaducidad()) : "");
+
+        // Comprobar si vianda.getPeso() es null, en cuyo caso asignar ""
+        donacionViandaOutputDTO.setPesoEnGramos(vianda.getPeso() != null ? vianda.getPeso().toString() : "");
+
         return donacionViandaOutputDTO;
     }
+
 
     @Override
     public void show(Context context) {

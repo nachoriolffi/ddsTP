@@ -48,20 +48,42 @@ public class DistribuirViandasController extends BaseController implements ICrud
         List<HeladeraOutputDTO> heladeraOutputDTOS = new ArrayList<>();
         for (Heladera heladera : heladeras) {
             HeladeraOutputDTO h = new HeladeraOutputDTO();
-            h.setId(String.valueOf(heladera.getId()));
-            h.setNombre(heladera.getNombre());
-            h.setViandasRestantes(String.valueOf(heladera.getViandasDisponibles()));
-            h.setCapacidad(heladera.getModelo().getCantidadMaximaDeViandas());
-            h.setLugarDisponible(heladera.getModelo().getCantidadMaximaDeViandas() - heladera.getViandasDisponibles());
+
+            // Comprobar si heladera.getId() es null, en cuyo caso asignar ""
+            h.setId(heladera.getId() != null ? String.valueOf(heladera.getId()) : "");
+
+            // Comprobar si heladera.getNombre() es null, en cuyo caso asignar ""
+            h.setNombre(heladera.getNombre() != null ? heladera.getNombre() : "");
+
+            // Comprobar si heladera.getViandasDisponibles() es null, en cuyo caso asignar ""
+            h.setViandasRestantes(heladera.getViandasDisponibles() != null ? String.valueOf(heladera.getViandasDisponibles()) : "");
+
+            // Comprobar si heladera.getModelo() o heladera.getModelo().getCantidadMaximaDeViandas() son null
+            h.setCapacidad(Integer.valueOf(heladera.getModelo() != null && heladera.getModelo().getCantidadMaximaDeViandas() != null ?
+                    String.valueOf(heladera.getModelo().getCantidadMaximaDeViandas()) : ""));
+
+            // Comprobar si heladera.getModelo() o heladera.getModelo().getCantidadMaximaDeViandas() o heladera.getViandasDisponibles() son null
+            h.setLugarDisponible(Integer.valueOf(heladera.getModelo() != null && heladera.getModelo().getCantidadMaximaDeViandas() != null &&
+                    heladera.getViandasDisponibles() != null ?
+                    String.valueOf(heladera.getModelo().getCantidadMaximaDeViandas() - heladera.getViandasDisponibles()) : ""));
+
             heladeraOutputDTOS.add(h);
         }
         List<Vianda> viandas = RepoViandas.INSTANCE.buscarTodos();
         List<ViandaDTO> viandaDTOS = new ArrayList<>();
         for (Vianda vianda : viandas) {
             ViandaDTO dto = new ViandaDTO();
-            dto.setId(String.valueOf(vianda.getId()));
-            dto.setComida(vianda.getComida());
-            dto.setHeladeraId(String.valueOf(vianda.getHeladera().getId()));
+
+            // Comprobar si vianda.getId() es null, en cuyo caso asignar ""
+            dto.setId(vianda.getId() != null ? String.valueOf(vianda.getId()) : "");
+
+            // Comprobar si vianda.getComida() es null, en cuyo caso asignar ""
+            dto.setComida(vianda.getComida() != null ? vianda.getComida() : "");
+
+            // Comprobar si vianda.getHeladera() o vianda.getHeladera().getId() son null
+            dto.setHeladeraId(vianda.getHeladera() != null && vianda.getHeladera().getId() != null ?
+                    String.valueOf(vianda.getHeladera().getId()) : "");
+
             viandaDTOS.add(dto);
         }
         List<DistribucionViandaOutputDTO> distribucionViandaOutputDTOS = distribuirViandasService.buscarDistribucionesVianda(usuario);
