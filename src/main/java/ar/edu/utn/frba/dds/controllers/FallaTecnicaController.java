@@ -1,9 +1,12 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
+import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
+import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoIncidente;
 import ar.edu.utn.frba.dds.services.UserService;
@@ -38,7 +41,11 @@ public class FallaTecnicaController extends BaseController implements ICrudViews
     public void index(Context context) {
 
         Map<String, Object> model = new HashMap<>();
-        Usuario usuario = verificarHumano(context, model);
+        Usuario usuario = verificarRol(context, model, TipoRol.COLABORADOR_HUMANO);
+        System.out.println(usuario.getNombre());
+        System.out.println(usuario.getApellido());
+        System.out.println(usuario.getId());
+        System.out.println(usuario.getCorreoElectronico());
         if (usuario != null) {
             model.put("title", "Reportar Falla Tecnica");
             List<Heladera> heladeras = RepoHeladeras.INSTANCE.buscarTodos();

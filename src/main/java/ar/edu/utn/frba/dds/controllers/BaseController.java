@@ -24,6 +24,8 @@ public abstract class BaseController {
             return null;
         }
         return RepoUsuario.INSTANCE.buscar(usuarioId);
+
+
     }
 
     protected Usuario verificarSesion(Context ctx, Map<String, Object> model) {

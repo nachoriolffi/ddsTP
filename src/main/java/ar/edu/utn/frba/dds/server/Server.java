@@ -60,7 +60,7 @@ public class Server {
             hiloRecepcionMovimiento.start();
 
 
-            Init.iniciar();
+            //Init.iniciar();
             Router.init(Server.app());
         }
     }
