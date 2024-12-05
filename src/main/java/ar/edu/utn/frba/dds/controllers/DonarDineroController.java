@@ -61,37 +61,80 @@ public class DonarDineroController extends BaseController implements ICrudViewsH
 
     @Override
     public void save(Context context) {
+        System.out.println("Inicio del método save");
 
+        // Obtener el usuario logueado
         Long idUsuario = context.sessionAttribute("usuario_id");
+        System.out.println("ID del usuario en la sesión: " + idUsuario);
+
         Colaborador colaborador = repoColaborador.buscarPorIdUsuario(idUsuario);
+        System.out.println("Colaborador encontrado: " + colaborador);
 
+        // Crear nueva donación de dinero
         DonacionDinero donacionDinero = new DonacionDinero();
-        donacionDinero.setMonto(Float.valueOf(Objects.requireNonNull(context.formParam("monto"))));
 
-        String fechaStr = Objects.requireNonNull(context.formParam("fechaDonacion"));
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy"); // Formato para la fecha
         try {
+            // Obtener el monto de la donación
+            String montoStr = context.formParam("monto");
+            System.out.println("Monto recibido del formulario: " + montoStr);
+
+            Float monto = Float.valueOf(Objects.requireNonNull(montoStr));
+            donacionDinero.setMonto(monto);
+            System.out.println("Monto configurado: " + donacionDinero.getMonto());
+
+            // Obtener y formatear la fecha de la donación
+            String fechaStr = Objects.requireNonNull(context.formParam("fechaDonacion"));
+            System.out.println("Fecha recibida del formulario: " + fechaStr);
+
+            // Cambiar el formato de fecha si es necesario (ejemplo: yyyy-MM-dd para formularios HTML)
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date fechaDonacion = dateFormat.parse(fechaStr);
             donacionDinero.setFechaColaboracion(fechaDonacion);
+            System.out.println("Fecha de colaboración configurada: " + fechaDonacion);
 
             // Verificar si la donación es periódica
-            donacionDinero.setEsDonacionMensual("true".equals(context.formParam("esPeriodica")));
-            if (donacionDinero.getEsDonacionMensual()) {
-                // la fechaPeriodica es la que va a ir cambiando cuando se crean nuevas instancias, usando la cronJob
+            String esPeriodicaStr = context.formParam("esPeriodica");
+            System.out.println("¿Es donación periódica?: " + esPeriodicaStr);
+
+            boolean esPeriodica = "true".equals(esPeriodicaStr);
+            donacionDinero.setEsDonacionMensual(esPeriodica);
+
+            if (esPeriodica) {
+                System.out.println("La donación es periódica. Configurando fecha periódica...");
                 donacionDinero.setFechaColaboracion(fechaDonacion);
             }
+
+            // Configurar el tipo de colaboración y multiplicador
             donacionDinero.setTipoColaboracion(TipoColaboracion.DINERO);
-            donacionDinero.setMultiplicador(ConfiguracionMultiplicador.getInstance().getMultiplicadorDinero());
+            float multiplicador = ConfiguracionMultiplicador.getInstance().getMultiplicadorDinero();
+            donacionDinero.setMultiplicador(multiplicador);
+            System.out.println("Tipo de colaboración: " + donacionDinero.getTipoColaboracion());
+            System.out.println("Multiplicador configurado: " + multiplicador);
+
+            // Asociar la donación al colaborador
             colaborador.agregarColaboracionRealizada(donacionDinero);
+            System.out.println("Donación asociada al colaborador: " + colaborador);
+
             // Guardar la donación
             repoDonacionDinero.agregar(donacionDinero);
+            System.out.println("Donación guardada en el repositorio");
+
+            // Redirigir después de guardar
             context.redirect("/donacionDinero");
-            //Server.registry.counter("tpdds.colaboraciones","status","donacionesDinero").increment();
+            System.out.println("Redirección exitosa a /donacionDinero");
+
         } catch (ParseException e) {
-            // Manejar el error de parseo de fecha
+            // Manejo de error de parseo de fecha
+            System.err.println("Error al parsear la fecha: " + e.getMessage());
             context.status(400).result("Formato de fecha inválido");
+        } catch (Exception e) {
+            // Manejo de errores generales
+            System.err.println("Error en el método save: " + e.getMessage());
+            e.printStackTrace();
+            context.status(500).result("Ocurrió un error al guardar la donación");
         }
     }
+
 
     public void cancelar(Context context) {
         Optional<DonacionDinero> donacionDinero = Optional.ofNullable(repoDonacionDinero.buscar(Long.valueOf(context.pathParam("id"))));
