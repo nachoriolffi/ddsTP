@@ -7,13 +7,17 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoReporte;
 import ar.edu.utn.frba.dds.services.UserService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
+
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ReporteController extends BaseController implements ICrudViewsHandler {
 
-    private RepoReporte repoReporte = RepoReporte.INSTANCE;
     UserService userService = new UserService();
+    private RepoReporte repoReporte = RepoReporte.INSTANCE;
+
     @Override
     public void index(Context context) {
 
@@ -44,8 +48,8 @@ public class ReporteController extends BaseController implements ICrudViewsHandl
             if (reporte != null) {
 
                 String fileName = Paths.get(reporte.getPathDocumento()).getFileName().toString();
-                String pdfUrl = "/pdfs/" + fileName;
-                System.out.println("RUTA PFS: "+ pdfUrl);
+                String pdfUrl = "src/main/resources/public/pdfs/" + fileName;
+                System.out.println("RUTA PFS: " + pdfUrl);
 
                 model.put("pdfs", reportes);
                 model.put("reporte", reporte);
