@@ -33,20 +33,32 @@ public class DistribuirViandasService {
                 .filter(c -> c instanceof DistribucionVianda)
                 .map(c -> (DistribucionVianda) c)
                 .toList();
+
         List<DistribucionViandaOutputDTO> distribucionViandaOutputDTOS = new ArrayList<>();
+
         for (DistribucionVianda distribucion : distribuciones) {
             DistribucionViandaOutputDTO distribucionViandaOutputDTO = new DistribucionViandaOutputDTO();
-            distribucionViandaOutputDTO.setViandasMovidas(String.valueOf(distribucion.getCantidadViandas()));
-            distribucionViandaOutputDTO.setMotivo(distribucion.getMotivo().toString());
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            distribucionViandaOutputDTO.setFechaDistribucion(sdf.format(distribucion.getFechaDistribucion()));
-            distribucionViandaOutputDTO.setHeladeraOrigen(distribucion.getHeladeraOrigen().getNombre());
-            distribucionViandaOutputDTO.setHeladeraDestino(distribucion.getHeladeraDestino().getNombre());
-            distribucionViandaOutputDTOS.add(distribucionViandaOutputDTO);
 
+            // Comprobar si distribucion.getCantidadViandas() es null, en cuyo caso asignar "0"
+            distribucionViandaOutputDTO.setViandasMovidas(distribucion.getCantidadViandas() != null ? String.valueOf(distribucion.getCantidadViandas()) : "0");
+
+            // Comprobar si distribucion.getMotivo() es null, en cuyo caso asignar ""
+            distribucionViandaOutputDTO.setMotivo(distribucion.getMotivo() != null ? distribucion.getMotivo().toString() : "");
+
+            // Comprobar si distribucion.getFechaDistribucion() es null, en cuyo caso asignar ""
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            distribucionViandaOutputDTO.setFechaDistribucion(distribucion.getFechaDistribucion() != null ? sdf.format(distribucion.getFechaDistribucion()) : "");
+
+            // Comprobar si distribucion.getHeladeraOrigen() o distribucion.getHeladeraDestino() es null, en cuyo caso asignar ""
+            distribucionViandaOutputDTO.setHeladeraOrigen(distribucion.getHeladeraOrigen() != null && distribucion.getHeladeraOrigen().getNombre() != null ? distribucion.getHeladeraOrigen().getNombre() : "");
+            distribucionViandaOutputDTO.setHeladeraDestino(distribucion.getHeladeraDestino() != null && distribucion.getHeladeraDestino().getNombre() != null ? distribucion.getHeladeraDestino().getNombre() : "");
+
+            distribucionViandaOutputDTOS.add(distribucionViandaOutputDTO);
         }
+
         return distribucionViandaOutputDTOS;
     }
+
 
     public List<Vianda> buscarViandas(long heladeraId) {
         return RepoViandas.INSTANCE.buscarViandasPorHeladeraId(heladeraId);
