@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Observable;
 import java.io.FileReader;
 
@@ -23,7 +25,9 @@ public class ConfiguracionMultiplicador extends Observable {
     private Double multiplicadorDinero;
     private static ConfiguracionMultiplicador instancia = null;
 
-    private String path = "src/main/java/ar/edu/utn/frba/dds/models/entities/multiplicador/config/configuracionMultiplicadores.json";
+    //private String path = "src/main/java/ar/edu/utn/frba/dds/models/entities/multiplicador/config/configuracionMultiplicadores.json";
+    private String path = "configuracionMultiplicadores.json";
+
 
     public ConfiguracionMultiplicador() {
         // Constructor privado para el patrón Singleton
@@ -37,9 +41,13 @@ public class ConfiguracionMultiplicador extends Observable {
         return instancia;
     }
 
-    private void cargarConfiguracion(String path) {
+    private void cargarConfiguracion(String resourcePath) {
         JSONParser parser = new JSONParser();
-        try (FileReader reader = new FileReader(path)) {
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(resourcePath)) {
+            if (inputStream == null) {
+                throw new RuntimeException("Archivo de configuración no encontrado: " + resourcePath);
+            }
+            InputStreamReader reader = new InputStreamReader(inputStream);
             Object obj = parser.parse(reader);
             JSONObject jsonObject = (JSONObject) obj;
             JSONObject configuracion = (JSONObject) jsonObject.get("configuracion");
@@ -50,10 +58,10 @@ public class ConfiguracionMultiplicador extends Observable {
             this.multiplicadorDinero = Double.parseDouble(configuracion.get("multiplicadorDinero").toString());
         } catch (IOException | ParseException e) {
             e.printStackTrace();
-            // Valores por defecto si hay un error al cargar el archivo
-            throw new RuntimeException("Error al cargar la configuración de multiplicadores");
+            throw new RuntimeException("Error al cargar la configuración de multiplicadores", e);
         }
     }
+
 
     public void setMultiplicadorDinero(double nuevoValor) {
         this.multiplicadorDinero = nuevoValor;
