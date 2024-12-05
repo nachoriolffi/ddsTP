@@ -3,6 +3,7 @@ package ar.edu.utn.frba.dds.server;
 import ar.edu.utn.frba.dds.runnable.RutinaBrokerApertura;
 import ar.edu.utn.frba.dds.runnable.RutinaBrokerMovimiento;
 import ar.edu.utn.frba.dds.runnable.RutinaBrokerTemperatura;
+import ar.edu.utn.frba.dds.utils.Init;
 import ar.edu.utn.frba.dds.utils.JavalinRenderer;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
@@ -59,7 +60,7 @@ public class Server {
             hiloRecepcionMovimiento.start();
 
 
-            //Init.iniciar();
+            Init.iniciar();
             Router.init(Server.app());
         }
     }
