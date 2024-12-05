@@ -52,7 +52,7 @@ public class FallaTecnicaController extends BaseController implements ICrudViews
             model.put("heladeras", heladeras);
             UsuarioDTO usuarioDTO = userService.obtenerUsuarioDTO(usuario);
             model.put("usuario", usuarioDTO);
-            context.render("/FallaTecnica.hbs", model);
+            context.render("FallaTecnica.hbs", model);
         } else {
             context.status(403);
         }
