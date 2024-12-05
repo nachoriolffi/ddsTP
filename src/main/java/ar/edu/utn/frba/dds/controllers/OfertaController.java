@@ -25,6 +25,7 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
     RepoOferta repositorioOferta = RepoOferta.INSTANCE;
     OfertaService ofertaService = new OfertaService();
     UserService userService = new UserService();
+
     @Override
     public void index(Context ctx) {
 
@@ -35,17 +36,17 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
             List<Oferta> ofertas;
             switch (usuario.getRol()) {
                 case ADMIN:
-                    verificarAdmin(ctx, model);
+                    usuario = verificarAdmin(ctx, model);
                     model.put("darDeBajaOferta", true);
                     break;
                 case COLABORADOR_HUMANO:
-                    verificarHumano(ctx, model);
+                    usuario = verificarHumano(ctx, model);
                     colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
                     Double puntos = colaborador.puntosActualesDisponibles();
                     model.put("PuntosTotales", puntos);
                     break;
                 case COLABORADOR_JURIDICO:
-                    verificarJuridico(ctx, model);
+                    usuario = verificarJuridico(ctx, model);
                     RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
                     model.put("rubros", Rubro.values());
                     break;
