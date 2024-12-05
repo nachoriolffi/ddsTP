@@ -48,7 +48,7 @@ public class FallaTecnicaController extends BaseController implements ICrudViews
         System.out.println(usuario.getCorreoElectronico());
         if (usuario != null) {
             model.put("title", "Reportar Falla Tecnica");
-            List<Heladera> heladeras = RepoHeladeras.INSTANCE.buscarTodos();
+            List<Heladera> heladeras = (List<Heladera>) RepoHeladeras.INSTANCE.buscarTodos().stream().filter(heladera -> heladera.getEstaActiva());
             model.put("heladeras", heladeras);
             UsuarioDTO usuarioDTO = userService.obtenerUsuarioDTO(usuario);
             model.put("usuario", usuarioDTO);

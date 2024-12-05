@@ -67,11 +67,15 @@ public class CalculadorDistanciasTecnicoHeladera {
         List<Heladera> heladeras = RepoHeladeras.INSTANCE.buscarTodos();
 
         Tecnico tecnico = RepoTecnico.INSTANCE.buscarPorUsuario(usuario.getId());
+        System.out.println("TECNICO: "+ tecnico.getNombre() + " " + tecnico.getApellido());
 
         for(Heladera heladera : heladeras){
             if(instanciaCalculadorDistancias.calcularDistancia(tecnico.getCoordenada(), heladera.getCoordenada()) < tecnico.getAreaCobertura()){
+                System.out.println("Distancia correcta ");
                 heladerasCercanas.add(heladera);
-
+            }
+            else {
+                System.out.println("No entro ");
             }
         }
         return heladerasCercanas;
