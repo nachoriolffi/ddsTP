@@ -28,45 +28,77 @@ public class OfertaController extends BaseController implements ICrudViewsHandle
 
     @Override
     public void index(Context ctx) {
-
+        // Crear un mapa para pasar al modelo de la vista
         Map<String, Object> model = new HashMap<>();
         try {
+            // Verificar la sesión y obtener el usuario
+            System.out.println("Verificando sesión...");
             Usuario usuario = verificarSesion(ctx, model);
+            System.out.println("Usuario obtenido de la sesión: " + usuario);
+
+            // Declaración de variables
             Colaborador colaborador;
             List<Oferta> ofertas;
+
+            // Comprobando el rol del usuario
             switch (usuario.getRol()) {
                 case ADMIN:
+                    System.out.println("Rol de usuario: ADMIN");
                     usuario = verificarAdmin(ctx, model);
                     model.put("darDeBajaOferta", true);
                     break;
                 case COLABORADOR_HUMANO:
+                    System.out.println("Rol de usuario: COLABORADOR_HUMANO");
                     usuario = verificarHumano(ctx, model);
                     colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
                     Double puntos = colaborador.puntosActualesDisponibles();
+                    System.out.println("Puntos actuales disponibles para el colaborador: " + puntos);
                     model.put("PuntosTotales", puntos);
                     break;
                 case COLABORADOR_JURIDICO:
+                    System.out.println("Rol de usuario: COLABORADOR_JURIDICO");
                     usuario = verificarJuridico(ctx, model);
                     RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
                     model.put("rubros", Rubro.values());
                     break;
+                default:
+                    System.out.println("Rol desconocido: " + usuario.getRol());
+                    break;
             }
+
+            // Convertir el usuario a un DTO y agregar al modelo
             UsuarioDTO usuarioDTO = userService.obtenerUsuarioDTO(usuario);
             model.put("usuario", usuarioDTO);
+            System.out.println("UsuarioDTO agregado al modelo: " + usuarioDTO);
+
+            // Obtener las ofertas
             ofertas = repositorioOferta.buscarTodos();
+            System.out.println("Cantidad de ofertas obtenidas: " + ofertas.size());
+
+            // Filtrar ofertas con stock
             List<Oferta> ofertasConStock = new ArrayList<>();
             for (Oferta oferta : ofertas) {
                 if (oferta.getStockInicial() != 0) {
                     ofertasConStock.add(oferta);
                 }
             }
+            System.out.println("Cantidad de ofertas con stock: " + ofertasConStock.size());
+
+            // Agregar las ofertas al modelo
             model.put("ofertas", ofertasConStock);
             model.put("title", "Tienda Productos/Servicios");
+
+            // Renderizar la vista
+            System.out.println("Renderizando la vista de ofertas...");
             ctx.render("ofertas/ofertas.hbs", model);
         } catch (Exception e) {
+            // En caso de error, redirigir a la página de inicio de sesión
+            System.out.println("Error al procesar la solicitud: " + e.getMessage());
+            e.printStackTrace();
             ctx.redirect("/iniciarSesion");
         }
     }
+
 
     public void canjear(Context context) {
 
