@@ -59,7 +59,7 @@ public class Server {
             Thread hiloRecepcionMovimiento = new Thread(brokerMovimiento);
             hiloRecepcionMovimiento.start();
 
-            //Init.iniciar();
+            Init.iniciar();
             Router.init(Server.app());
         }
     }
