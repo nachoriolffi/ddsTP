@@ -13,6 +13,7 @@ import io.javalin.config.JavalinConfig;
 import io.javalin.http.HttpStatus;
 import io.javalin.micrometer.MicrometerPlugin;
 import io.micrometer.core.instrument.step.StepMeterRegistry;
+
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
@@ -27,9 +28,9 @@ public class Server {
     public static final StepMeterRegistry registry = metricsUtils.getRegistry();
 
     // Metricas
-    //final var myGauge = registry.gauge("dds.unGauge", new AtomicInteger(0));
+    final AtomicInteger myGauge = registry.gauge("dds.unGauge", new AtomicInteger(0));
 
-    // Config
+    // ConfigD
     private static final MicrometerPlugin micrometerPlugin = new MicrometerPlugin(config -> config.registry = registry);
 
     public static Javalin app() {
@@ -42,10 +43,9 @@ public class Server {
         if (app == null) {
             int port = Integer.parseInt(System.getProperty("port", "8080"));
 
-            app = Javalin.create( config -> { config.registerPlugin(micrometerPlugin); }).start(port);
-            //app = Javalin.create(config()).start(port);
+            //app = Javalin.create( config -> { config.registerPlugin(micrometerPlugin); }).start(port);
+            app = Javalin.create(config()).start(port);
             Router router = new Router();
-
 
             RutinaBrokerApertura brokerAperturaRoutine = new RutinaBrokerApertura();
             Thread hiloRecepcionApertura = new Thread(brokerAperturaRoutine);

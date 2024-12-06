@@ -29,7 +29,7 @@ public class DDMetricsUtils {
 
             @Override
             public String apiKey() {
-                return System.getenv("DATADOG_API_KEY");
+                return "19fcbb0aa0aab7bc6025365ea4c792fd";
             }
 
             @Override
@@ -43,8 +43,8 @@ public class DDMetricsUtils {
             }
         };
         registry = new DatadogMeterRegistry(config, Clock.SYSTEM);
-        registry.config().commonTags("app", appTag );
-        initInfraMonitoring() ;
+        registry.config().commonTags("app", appTag);
+        initInfraMonitoring();
     }
 
     private void initInfraMonitoring() {
