@@ -49,16 +49,16 @@ public class Init implements WithSimplePersistenceUnit {
 
         /*--------------USUARIOS--------------*/
 
-        RepoUsuario repoUsuario = RepoUsuario.INSTANCE;
-
-        Usuario usuarioAdmin = new Usuario();
-        usuarioAdmin.setNombre("Ignacio Joaquin");
-        usuarioAdmin.setApellido("Riolffi");
-        usuarioAdmin.setContrasenia("DDS25_2024");
-        usuarioAdmin.setCuentaEliminada(false);
-        usuarioAdmin.setCorreoElectronico("iriolffi@gmail.com");
-        usuarioAdmin.setRol(TipoRol.ADMIN);
-        repoUsuario.agregar(usuarioAdmin);
+//        RepoUsuario repoUsuario = RepoUsuario.INSTANCE;
+//
+//        Usuario usuarioAdmin = new Usuario();
+//        usuarioAdmin.setNombre("Ignacio Joaquin");
+//        usuarioAdmin.setApellido("Riolffi");
+//        usuarioAdmin.setContrasenia("DDS25_2024");
+//        usuarioAdmin.setCuentaEliminada(false);
+//        usuarioAdmin.setCorreoElectronico("iriolffi@gmail.com");
+//        usuarioAdmin.setRol(TipoRol.ADMIN);
+//        repoUsuario.agregar(usuarioAdmin);
 
         /*--------------TARJETAS--------------*/
 

@@ -22,11 +22,11 @@ public class ConfiguracionMultiplicador extends Observable {
     private Double multiplicadorDinero;
     private static ConfiguracionMultiplicador instancia = null;
 
-    private String path = "../src/main/resources/configuracionMultiplicadores.json";
+    private final String filePath = "configuracionMultiplicadores.json";
 
-    public ConfiguracionMultiplicador() {
+    private ConfiguracionMultiplicador() {
         // Constructor privado para el patrón Singleton
-        cargarConfiguracion(path);
+        cargarConfiguracion(filePath);
     }
 
     public static ConfiguracionMultiplicador getInstance() {
@@ -36,24 +36,18 @@ public class ConfiguracionMultiplicador extends Observable {
         return instancia;
     }
 
-    private void cargarConfiguracion(String path) {
-        // Obtener la ruta absoluta del archivo
-        File file = new File(path);
-        String absolutePath = file.getAbsolutePath();
-        System.out.println("Ruta absoluta del archivo de configuración: " + absolutePath);
+    private void cargarConfiguracion(String filePath) {
+        // Cargar archivo desde el classpath
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
 
-        // Verificar si el archivo existe
-        if (!file.exists()) {
-            throw new RuntimeException("El archivo de configuración no existe: " + absolutePath);
-        }
+            if (inputStream == null) {
+                throw new RuntimeException("El archivo de configuración no se encontró en el classpath: " + filePath);
+            }
 
-        JSONParser parser = new JSONParser();
-        try (FileReader reader = new FileReader(file)) {
-            System.out.println("Archivo de configuración encontrado. Leyendo contenido desde: " + absolutePath);
-
-            // Parsear el contenido del archivo
-            Object obj = parser.parse(reader);
-            JSONObject jsonObject = (JSONObject) obj;
+            // Parsear el archivo JSON
+            JSONParser parser = new JSONParser();
+            InputStreamReader reader = new InputStreamReader(inputStream);
+            JSONObject jsonObject = (JSONObject) parser.parse(reader);
             JSONObject configuracion = (JSONObject) jsonObject.get("configuracion");
 
             // Asignar valores a las variables
@@ -63,18 +57,20 @@ public class ConfiguracionMultiplicador extends Observable {
             this.multiplicadorHeladeraActiva = Double.parseDouble(configuracion.get("multiplicadorHeladeraActiva").toString());
             this.multiplicadorDinero = Double.parseDouble(configuracion.get("multiplicadorDinero").toString());
 
+            System.out.println("Archivo de configuración cargado correctamente.");
+
         } catch (IOException | ParseException e) {
             e.printStackTrace();
             throw new RuntimeException("Error al cargar la configuración de multiplicadores", e);
         }
     }
 
-
     public void setMultiplicadorDinero(double nuevoValor) {
         this.multiplicadorDinero = nuevoValor;
         setChanged();
         notifyObservers();
     }
+
     public double getMultiplicadorDinero() {
         return this.multiplicadorDinero;
     }
