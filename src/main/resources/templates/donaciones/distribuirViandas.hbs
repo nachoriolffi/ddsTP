@@ -1,0 +1,286 @@
+{{#partial "contenido"}}
+    <hr class="my-3 border-0">
+    <section class="container mt-1">
+        <div class="row mb-4">
+            <div class="col-md-8">
+                <h1 class="h1">Distribucion de Viandas</h1>
+            </div>
+            <div class="col-md-4 text-md-end">
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                        data-bs-target="#donationModal">
+                    Distribuir Vianda/s
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 table-responsive">
+                <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                    <thead>
+                    <tr class="align-middle">
+                        <th>Heladera de origen</th>
+                        <th>Heladera destino</th>
+                        <th>Cantidad de Viandas Movidas</th>
+                        <th>Motivo</th>
+                        <th>Fecha de Distribución</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                    <!-- Tengo que leer esto de la base de datos -->
+                    {{#each distribuciones}}
+                        <tr>
+                            <td>{{this.heladeraOrigen}}</td>
+                            <td>{{this.heladeraDestino}}</td>
+                            <td>{{this.viandasMovidas}}</td>
+                            <td>{{this.motivo}}</td>
+                            <td>{{this.fechaDistribucion}}</td>
+                        </tr>
+                    {{/each}}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- Modal de Donación -->
+        <div class="modal fade" id="donationModal" tabindex="-1" aria-labelledby="donationModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="donationModalLabel">Mover Viandas</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Formulario de Donación -->
+                        <form id="donationForm" class="row g-3 needs-validation" novalidate method="POST"
+                              action="/distribuirViandas">
+                            <div class="col-md-6">
+                                <label class="form-label" for="input1">Heladera Origen</label>
+                                <select class="form-select" id="input4" name="nombreHeladeraOrigen" required>
+                                    <option value="" disabled selected>Seleccione una Heladera</option>
+                                    {{#each heladeras}}
+                                        <option value="{{this.id}}">{{this.nombre}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="input3">Heladera Destino</label>
+                                <select class="form-select" id="heladeraDestino" name="nombreHeladeraDestino" required>
+                                    <option value="" disabled selected>Seleccione una Heladera</option>
+                                    {{#each heladeras}}
+                                        <option value="{{this.id}}" data-capacidad="{{this.lugarDisponible}}">
+                                            {{this.nombre}}
+                                        </option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label" for="modelo">Motivo Distribucion Viandas</label>
+                                <select class="form-select" id="modelo" name="motivo" required>
+                                    <option value="" disabled selected>Seleccione un Motivo</option>
+                                    <option value="DESPERFECTO_H_ORIGEN">Desperfecto en Heladera Origen</option>
+                                    <option value="FALTA_VIANDAS_H_DESTINO">Faltan Viandas en Heladera Destino</option>
+                                </select>
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-label" for="viandasDisponibles">Viandas Disponibles en Heladera
+                                    Origen</label>
+                                {{#each viandas}}
+                                    <div class="form-check" data-heladera-id="{{this.heladeraId}}">
+                                        <input class="form-check-input vianda-checkbox" type="checkbox" name="viandas[]"
+                                               value="{{this.id}}" id="vianda-{{this.id}}">
+                                        <label class="form-check-label" for="vianda-{{this.id}}">
+                                            {{this.comida}}
+                                        </label>
+                                    </div>
+                                {{/each}}
+                            </div>
+                            <div class="col-md-12 mt-3">
+                                <input type="text" id="cantidadViandasInput" class="form-control text-center"
+                                       value="Cantidad de Viandas a Mover: 0" name="cantidadViandasTexto" readonly>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label class="form-label" for="input6">Fecha Distribucion</label>
+                                <input class="form-control" type="date" id="input6" name="fechaDistribucion" required>
+                            </div>
+                            <div class="modal-footer col-md-12">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button class="btn btn-primary" type="button" data-bs-toggle="modal"
+                                        data-bs-target="#confirmModal">¡Realizar Donación!
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal de Confirmación Donacion-->
+        <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmModalLabel">Confirmación</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        ¿Está seguro de que desea realizar esta donación?
+                    </div>
+                    <div class="modal-footer">
+                        <!-- Botón de Cancelar que cierra el modal de confirmación y vuelve al modal de donación -->
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal"
+                                data-bs-target="#donationModal">Cancelar
+                        </button>
+                        <button type="button" class="btn btn-primary"
+                                onclick="document.getElementById('donationForm').submit();">Sí, realizar donación
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{{/partial}}
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="/js/validacionDatos.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const checkboxes = document.querySelectorAll('.vianda-checkbox');
+        const cantidadInput = document.getElementById('cantidadViandasInput');  // Input con texto
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                // Contar cuántas checkboxes están marcadas
+                const cantidadSeleccionadas = document.querySelectorAll('.vianda-checkbox:checked').length;
+
+                // Actualizar el texto visible en el input
+                cantidadInput.value = "Cantidad de Viandas a Mover: " + cantidadSeleccionadas;
+
+                // Asegurarte de enviar solo el número en el formulario (sin el texto completo)
+                const form = document.getElementById('donationForm');
+                const cantidadHiddenInput = document.createElement('input');
+                cantidadHiddenInput.type = 'hidden';
+                cantidadHiddenInput.name = 'cantidadViandas';  // Enviar solo el número
+                cantidadHiddenInput.value = cantidadSeleccionadas;
+
+                // Si el input ya existe, lo eliminamos para reemplazarlo
+                const existingInput = form.querySelector('input[name="cantidadViandas"]');
+                if (existingInput) {
+                    form.removeChild(existingInput);
+                }
+
+                // Añadir el campo hidden al formulario para enviar solo el número
+                form.appendChild(cantidadHiddenInput);
+            });
+        });
+
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const heladeraOrigenSelect = document.getElementById("input4"); // Dropdown de heladera origen
+        const heladeraDestinoSelect = document.getElementById("heladeraDestino"); // Dropdown de heladera destino
+        const viandasCheckboxes = document.querySelectorAll(".vianda-checkbox"); // Todos los checkboxes de viandas
+
+        let maxSeleccion = 0; // Variable para almacenar la capacidad disponible
+
+        // Actualiza la capacidad máxima según la heladera destino seleccionada
+        heladeraDestinoSelect.addEventListener("change", function () {
+            const selectedOption = heladeraDestinoSelect.options[heladeraDestinoSelect.selectedIndex];
+            maxSeleccion = parseInt(selectedOption.getAttribute("data-capacidad")) || 0;
+
+            // Si ya hay más checkboxes seleccionados que la capacidad permitida, desmarca los extras
+            const seleccionados = Array.from(viandasCheckboxes).filter(cb => cb.checked);
+            if (seleccionados.length > maxSeleccion) {
+                seleccionados.slice(maxSeleccion).forEach(cb => cb.checked = false);
+            }
+
+            // Actualiza la disponibilidad de las checkboxes
+            actualizarCheckboxes();
+        });
+
+        // Muestra solo las viandas de la heladera seleccionada como origen
+        heladeraOrigenSelect.addEventListener("change", function () {
+            const selectedHeladeraId = heladeraOrigenSelect.value;
+
+            if (!selectedHeladeraId) {
+                viandasCheckboxes.forEach(checkbox => {
+                    checkbox.closest(".form-check").style.display = "none";
+                    checkbox.checked = false;
+                });
+                return;
+            }
+
+            viandasCheckboxes.forEach(checkbox => {
+                const heladeraId = checkbox.closest(".form-check").dataset.heladeraId;
+                if (heladeraId === selectedHeladeraId) {
+                    checkbox.closest(".form-check").style.display = "block";
+                } else {
+                    checkbox.closest(".form-check").style.display = "none";
+                    checkbox.checked = false;
+                }
+            });
+
+            actualizarCheckboxes();
+        });
+
+        // Controla cuántos checkboxes pueden marcarse
+        function actualizarCheckboxes() {
+            const seleccionados = Array.from(viandasCheckboxes).filter(cb => cb.checked);
+            const restantes = maxSeleccion - seleccionados.length;
+
+            viandasCheckboxes.forEach(checkbox => {
+                if (!checkbox.checked) {
+                    checkbox.disabled = restantes <= 0;
+                }
+            });
+        }
+
+        // Añade evento para controlar el cambio en los checkboxes
+        viandasCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener("change", actualizarCheckboxes);
+        });
+
+        // Oculta todas las checkboxes al cargar la página
+        viandasCheckboxes.forEach(checkbox => {
+            checkbox.closest(".form-check").style.display = "none";
+        });
+    });
+</script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const heladeraOrigenSelect = document.getElementById("input4");
+        const viandasContainer = document.getElementById("viandasDisponibles");
+
+        heladeraOrigenSelect.addEventListener("change", function () {
+            const heladeraId = heladeraOrigenSelect.value;
+
+            // Hacer la solicitud AJAX al endpoint de Javalin
+            fetch(`/obtenerViandas?heladeraId=${heladeraId}`)
+                    .then(response => response.json())
+                    .then(viandas => {
+                        // Limpia las viandas actuales
+                        viandasContainer.innerHTML = "";
+
+                        // Genera las opciones de viandas obtenidas
+                        viandas.forEach(vianda => {
+                            const checkbox = document.createElement("div");
+                            checkbox.classList.add("form-check");
+                            checkbox.innerHTML = `
+                        <input class="form-check-input" type="checkbox" name="viandas[]"
+                               value="${vianda.id}" id="vianda-${vianda.id}">
+                        <label class="form-check-label" for="vianda-${vianda.id}">
+                            ${vianda.comida} - ${vianda.calorias} calorías
+                        </label>
+                    `;
+                            viandasContainer.appendChild(checkbox);
+                        });
+                    })
+                    .catch(error => console.error('Error al obtener las viandas:', error));
+        });
+    });
+</script>
+
+
+
+{{> templates/base}}

@@ -18,13 +18,13 @@ import java.util.List;
 public class RegistroVulnerable extends FormaDeColaboracion {
 
     @OneToMany
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "tarjetasDonadas_id")
     private List<Tarjeta> tarjetasDonadas;
 
     @Column(name="cantidadTarjetas", columnDefinition = "INT")
     private Integer cantidadTarjetas;
 
-    @Column(name="fechaColaboracion", columnDefinition = "DATE",nullable = false)
+    @Column(name="fechaColaboracion", columnDefinition = "DATE")
     private Date fechaColaboracion;
 
     @Enumerated(EnumType.STRING)

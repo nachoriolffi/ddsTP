@@ -1,0 +1,5 @@
+<configuration>
+    <root level="off">
+        <!-- No se agrega ningún appender -->
+    </root>
+</configuration>

@@ -1,0 +1,41 @@
+{{#partial "contenido"}}
+    <div class="row mb-4">
+        <div class="col-6">
+            <h1 class="h1">Ofertas Canjeadas</h1>
+        </div>
+        {{#if esHumano}}
+            <div class="col-6 text-end">
+                <div class="btn btn-outline-primary align-items-center">
+                    <strong class="col-12">Puntos:</strong> {{PuntosTotales}}
+                </div>
+            </div>
+        {{/if}}
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12 table-responsive">
+            <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                <thead>
+                <tr class="align-middle">
+                    <th scope="col">Oferta</th>
+                    <th scope="col">Cantidad De Puntos</th>
+                    <th scope="col">Fecha Canje</th>
+                    <th scope="col">Rubro</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                {{#each ofertasCanjeadas}}
+                    <tr>
+                        <td>{{this.oferta}}</td>
+                        <td>{{this.cantidadPuntos}}</td>
+                        <td>{{this.fecha}}</td>
+                        <td>{{this.rubro}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{{/partial}}
+{{> templates/base}}

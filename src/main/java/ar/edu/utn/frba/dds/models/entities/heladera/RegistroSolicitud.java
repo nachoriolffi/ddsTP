@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "registro_solicitud")
 public class RegistroSolicitud {
@@ -29,9 +31,10 @@ public class RegistroSolicitud {
     @Enumerated(EnumType.STRING)
     @Getter
     @Setter
-    private TipoSolicitud solicitud;
+    private TipoSolicitud solicitud; // auditoria para saber que solicitud se pidio
+
     @Column(name = "realizada")
-    private Boolean realizada;
+    private Boolean realizada; // sirve para saber si llego o no dentro del lapso de tiempo
 
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -47,7 +50,7 @@ public class RegistroSolicitud {
     @Column(name = "retiroVianda")
     @Getter
     @Setter
-    private Boolean retiroVianda;
+    private Boolean retiroVianda; // sirve para saber si es la heladera que le saco o la que le meto en la redistribucion
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "heladera_id")

@@ -1,0 +1,52 @@
+{{#partial "contenido"}}
+    <div class="row align-items-center">
+        <div class="col-md-6">
+            <h1 class="mb-4 text-center">¡Bienvenido!</h1>
+
+            {{#if loginError}}
+                <div class="text-center alert alert-primary" role="alert">
+                    {{loginError}}
+                </div>
+            {{/if}}
+
+            <form method="POST" class="text-center needs-validation" action="/iniciarSesion" novalidate>
+                <div class="mb-3">
+                    <input required type="email" class="form-control" id="email" name="correoElectronico" placeholder="Ingresa tu correo">
+                    <div class="invalid-feedback">Por favor, ingresa un correo válido.</div>
+                </div>
+
+                <div class="mb-3 password-container position-relative">
+                    <input required type="password" name="clave" class="form-control" id="password" placeholder="Ingresa tu contraseña">
+                    <div class="invalid-feedback">Por favor, ingresa tu contraseña.</div>
+                    <i class="bi bi-eye position-absolute" id="togglePassword" style="cursor: pointer; top: 50%; right: 10px; transform: translateY(-50%);"></i>
+                </div>
+
+                <button class="btn btn-primary w-75" type="submit">Iniciar Sesión</button>
+            </form>
+
+            <p class="mt-3 text-center">¿No tenés cuenta? <a href="/crearCuenta">¡Créate Una!</a></p>
+        </div>
+        <div class="col-md-6">
+            <img src="img/inicio_sesion.png" alt="Imagen de inicio de sesión" class="figure-img img-fluid rounded mx-auto d-none d-md-block">
+        </div>
+    </div>
+
+    <script>
+        // Selecciona el ícono de la contraseña y el campo de entrada de la contraseña
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+
+        // Añade un evento de clic al ícono
+        togglePassword.addEventListener('click', function() {
+            // Cambia el tipo del campo de contraseña
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+
+            // Cambia el ícono
+            this.classList.toggle('bi-eye');
+            this.classList.toggle('bi-eye-slash');
+        });
+    </script>
+
+{{/partial}}
+{{> templates/base}}

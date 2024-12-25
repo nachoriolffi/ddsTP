@@ -4,34 +4,41 @@ import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 public class FormaValidar10MilPeoresContrasenias implements FormaValidar {
 
-    private static final String path = "src/main/java/ar/edu/utn/frba/dds/10000Peores.txt";
+    private static List<String> contrasenias = new ArrayList<>();
+    private static final String RESOURCE_PATH = "10000Peores.txt"; // Nombre del archivo en src/main/resources
 
-    public boolean validar(String contrasenia, Usuario usuario) {
-        String workingDirectory = System.getProperty("user.dir");
-        System.out.println("Working Directory = " + workingDirectory);
-        System.out.println("WD + path = " + workingDirectory + path);
-        try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+    public FormaValidar10MilPeoresContrasenias() {
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(Objects.requireNonNull(getClass().getClassLoader().getResourceAsStream(RESOURCE_PATH)), StandardCharsets.UTF_8))) {
             String line;
-            while ((line = br.readLine()) != null) {
-                int cmp = line.compareTo(contrasenia);
-                if (cmp == 0) {
-                    // encontro la palabra
-                    return false;
-                } else if (cmp > 0) { //el true y false estan invertidos para conservar que si devuelve true es que paso la validacion
-                    // ya paso por el lugar en el que tendria que estar, por lo que se deja de buscar
-                    return true;
-                }
+            while ((line = reader.readLine()) != null) {
+                contrasenias.add(line);
             }
-            // termino el archivo y no la encontro todavia
-            return false;
-        } catch (IOException e) {
-            System.err.println("Error leyendo archivo: " + e.getMessage());
-            return false;
+            contrasenias.sort(String::compareTo); // Ordenar la lista para optimizar las búsquedas
+        } catch (IOException | NullPointerException e) {
+            throw new RuntimeException("Error cargando contraseñas comunes: " + e.getMessage(), e);
         }
     }
 
-
+    public boolean validar(String contrasenia, Usuario usuario) {
+        // Realizar búsqueda binaria para mayor eficiencia en listas ordenadas
+        return !contrasenias.contains(contrasenia); // Cambiar a binarySearch si deseas más eficiencia
+    }
 }
+
+
+
+
+
+
+

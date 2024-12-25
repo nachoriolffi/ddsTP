@@ -8,7 +8,8 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.util.List;
 
-public abstract class RepoGenerico<T> implements WithSimplePersistenceUnit {
+public abstract class
+RepoGenerico<T> implements WithSimplePersistenceUnit {
     private final Class<T> entityClass;
     public static EntityManager entityManager;
 
@@ -25,7 +26,6 @@ public abstract class RepoGenerico<T> implements WithSimplePersistenceUnit {
         beginTransaction();
         persist(entidad);
         commitTransaction();
-
     }
 
     public void modificar(T entidad) {

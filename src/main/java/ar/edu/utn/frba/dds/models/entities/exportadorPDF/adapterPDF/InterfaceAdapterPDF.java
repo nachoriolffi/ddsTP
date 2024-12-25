@@ -4,9 +4,10 @@ import ar.edu.utn.frba.dds.models.entities.exportadorPDF.Exportable;
 import ar.edu.utn.frba.dds.models.entities.exportadorPDF.Reporte;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public interface InterfaceAdapterPDF {
 
-    public Reporte exportar(Exportable... exportable) throws FileNotFoundException;
+    public Reporte exportar(Exportable... exportable) throws IOException;
 
 }

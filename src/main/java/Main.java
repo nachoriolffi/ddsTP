@@ -1,11 +1,3 @@
-import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
-import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
-import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
-import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
-
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 

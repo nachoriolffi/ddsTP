@@ -1,7 +1,11 @@
 package ar.edu.utn.frba.dds.models.entities.tecnico;
 
+import ar.edu.utn.frba.dds.models.converters.MedioComunicacionAtributeConvertere;
 import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
+import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
+import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
+import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRegistrosVisita;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
@@ -10,6 +14,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -24,6 +29,7 @@ public class Tecnico {
 
     @Column(name = "nombre", columnDefinition = "VARCHAR(255)", nullable = false)
     private String nombre;
+
     @Column(name = "apellido", columnDefinition = "VARCHAR(255)", nullable = false)
     private String apellido;
 
@@ -37,14 +43,15 @@ public class Tecnico {
     @Column(name = "cuil", nullable = false)
     private Integer cuil; // cambiar por string luego
 
-    @Transient
+    @Convert(converter = MedioComunicacionAtributeConvertere.class)
+    @ElementCollection(targetClass = String.class)
     private List<MedioDeComunicacion> mediosDeComunicacion;
 
     @Column(name = "areaCobertura", nullable = false)
     private Integer areaCobertura;
 
     @OneToOne
-    @JoinColumn(name = "coordenada_id", nullable = false)
+    @JoinColumn(name = "coordenada_id")
     private Coordenada coordenada;
 
     @Column(name = "disponible")
@@ -54,8 +61,13 @@ public class Tecnico {
     @JoinColumn(name = "tecnico_id")
     private List<Contacto> contactos;
 
-    public Tecnico() {
+    @OneToOne
+    @JoinColumn(name = "usuario_id")
+    private Usuario usuario;
 
+    public Tecnico() {
+        this.contactos = new ArrayList<>();
+        this.mediosDeComunicacion = new ArrayList<>();
     }
 
     public Tecnico(Long id, String nombre, String apellido, TipoDocumento tipoDocumento, Integer dni, Integer cuil, List<MedioDeComunicacion> mediosDeComunicacion, Integer areaCobertura) {
@@ -90,6 +102,14 @@ public class Tecnico {
 
     public void registrarVisita(RegistroVisita registro) {
         RepoRegistrosVisita.INSTANCE.agregar(registro);
+    }
+
+    public void agregarMedioDeComunicacion(MedioDeComunicacion medioDeComunicacion) {
+        this.mediosDeComunicacion.add(medioDeComunicacion);
+    }
+
+    public void agregarContacto(Contacto contacto) {
+        this.contactos.add(contacto);
     }
 
 }

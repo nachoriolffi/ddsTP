@@ -3,9 +3,8 @@ package ar.edu.utn.frba.dds.models.entities.multiplicador.config;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.Observable;
-import java.io.FileReader;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -23,11 +22,11 @@ public class ConfiguracionMultiplicador extends Observable {
     private Double multiplicadorDinero;
     private static ConfiguracionMultiplicador instancia = null;
 
-    private String path = "src/main/java/ar/edu/utn/frba/dds/models/entities/multiplicador/config/configuracionMultiplicadores.json";
+    private final String filePath = "configuracionMultiplicadores.json";
 
-    public ConfiguracionMultiplicador() {
+    private ConfiguracionMultiplicador() {
         // Constructor privado para el patrón Singleton
-        cargarConfiguracion(path);
+        cargarConfiguracion(filePath);
     }
 
     public static ConfiguracionMultiplicador getInstance() {
@@ -37,21 +36,32 @@ public class ConfiguracionMultiplicador extends Observable {
         return instancia;
     }
 
-    private void cargarConfiguracion(String path) {
-        JSONParser parser = new JSONParser();
-        try (FileReader reader = new FileReader(path)) {
-            Object obj = parser.parse(reader);
-            JSONObject jsonObject = (JSONObject) obj;
+    private void cargarConfiguracion(String filePath) {
+        // Cargar archivo desde el classpath
+        try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath)) {
+
+            if (inputStream == null) {
+                throw new RuntimeException("El archivo de configuración no se encontró en el classpath: " + filePath);
+            }
+
+            // Parsear el archivo JSON
+            JSONParser parser = new JSONParser();
+            InputStreamReader reader = new InputStreamReader(inputStream);
+            JSONObject jsonObject = (JSONObject) parser.parse(reader);
             JSONObject configuracion = (JSONObject) jsonObject.get("configuracion");
+
+            // Asignar valores a las variables
             this.multiplicadorViandasDistribuidas = Double.parseDouble(configuracion.get("multiplicadorViandasDistribuidas").toString());
             this.multiplicadorViandasDonadas = Double.parseDouble(configuracion.get("multiplicadorViandasDonadas").toString());
             this.multiplicadorRegistroVulnerables = Double.parseDouble(configuracion.get("multiplicadorRegistroVulnerables").toString());
             this.multiplicadorHeladeraActiva = Double.parseDouble(configuracion.get("multiplicadorHeladeraActiva").toString());
             this.multiplicadorDinero = Double.parseDouble(configuracion.get("multiplicadorDinero").toString());
+
+            System.out.println("Archivo de configuración cargado correctamente.");
+
         } catch (IOException | ParseException e) {
             e.printStackTrace();
-            // Valores por defecto si hay un error al cargar el archivo
-            throw new RuntimeException("Error al cargar la configuración de multiplicadores");
+            throw new RuntimeException("Error al cargar la configuración de multiplicadores", e);
         }
     }
 
@@ -60,6 +70,7 @@ public class ConfiguracionMultiplicador extends Observable {
         setChanged();
         notifyObservers();
     }
+
     public double getMultiplicadorDinero() {
         return this.multiplicadorDinero;
     }

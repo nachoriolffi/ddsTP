@@ -1,0 +1,271 @@
+{{#partial "contenido"}}
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="h1">Encargarse De Heladera/s</h1>
+        </div>
+        <div class="col-md-4 text-md-end">
+            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                    data-bs-target="#donationModal">
+                Agregar Heladera
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 table-responsive">
+            <table class="table caption-top table-hover table-bordered table-sm align-middle text-center">
+                <thead>
+                <tr class="align-middle">
+                    <th scope="col">Heladera</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Capacidad (viandas)</th>
+                    <th scope="col">Inicio de Operaciones</th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                {{#each heladeras}}
+                    <tr>
+                        <td>{{this.nombre}}</td>
+                        <td>{{this.direccion}}</td>
+                        <td>{{this.capacidad}}</td>
+                        <td>{{this.fechaPuestaFunc}}</td>
+                    </tr>
+                {{/each}}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal de Donación -->
+    <div class="modal fade" id="donationModal" tabindex="-1" aria-labelledby="donationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="donationModalLabel">Encargarse De Heladera</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulario de Donación -->
+                    <form action="/encargarseHeladera" method="POST" id="donationForm" class="row g-3 needs-validation"
+                          novalidate>
+                        <div class="col-md-6">
+                            <label class="form-label" for="nombreHeladera">Nombre Heladera</label>
+                            <input class="form-control" type="text" id="nombre" name="nombre" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="validationCustom05" class="form-label">Modelo</label>
+                            <select class="form-select" id="validationCustom05" name="modelo" required>
+                                <option value="" disabled selected>Modelo</option>
+                                {{#each modelos}}
+                                    <option value="{{this.id}}">{{this.nombreModelo}}
+                                        (Viandas:{{this.cantidadMaximaDeViandas}},
+                                        Max:{{this.temperaturaMaxima}},Min:{{this.temperaturaMinima}},
+                                        Peso:{{this.peso}})
+                                    </option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="col-md-12 flex-fill">
+                            <button type="button" id="submitPoints" data-bs-toggle="modal" data-bs-target="#pointsModal"
+                                    class="w-100 btn btn-outline-primary">
+                                Solicitar Puntos de Colocación
+                            </button>
+                        </div>
+                        <div class="col-3">
+                            <label class="form-label" for="provincia">Provincia</label>
+                            <select class="form-select" id="provincia" name="provincia" required>
+                                <option value="" disabled selected>Seleccion una provincia</option>
+                                <!-- Las opciones se llenarán mediante JavaScript-->
+                            </select>
+                        </div>
+                        <div class="col-7">
+                            <label class="form-label" for="calle">Dirección</label>
+                            <div class="autocomplete-container position-relative">
+                                <input type="text" id="calle" name="calle" class="form-control"
+                                       placeholder="Escribe una calle"
+                                       list="suggestions">
+                                <input type="hidden" id="latitud" name="latitud">
+                                <input type="hidden" id="longitud" name="longitud">
+                                <input type="hidden" id="altura" name="altura">
+                                <div class="list-group" id="suggestions"></div>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <label for="validationCustom04" class="form-label">Piso</label>
+                            <input type="text" class="form-control" id="piso" name="piso">
+                        </div>
+                        <div class="modal-footer col-md-12">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="button" id="submitDonation" class="btn btn-outline-primary">¡Realizar
+                                Donación!
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal Puntos de Recomendacion-->
+    <div class="modal fade" id="pointsModal" tabindex="-1" aria-labelledby="pointsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pointsModalLabel">Puntos De Recomendación De Heladera</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row" style="height: 100%;">
+                        <div class="col-md-6" style="height: 100%">
+                            <div class="container">
+                                <div class="row align-items-center justify-content-center">
+                                    <form action="/buscarPuntosRecomendacion" method="post">
+                                        <div class="col-md-4 mb-3 mb-sm-4">
+                                            <input class="form-control" type="text" id="direccion-1"
+                                                   placeholder="Direccion" name="direccion"
+                                                   required>
+                                        </div>
+                                        <div class="col-md-3 mb-3 mb-sm-4">
+                                            <input class="form-control" type="text" id="altura-1" placeholder="Altura"
+                                                   name="altura"
+                                                   required>
+                                        </div>
+                                        <div class="col-md-5 mb-sm-4">
+                                            <button type="submit" class="btn btn-outline-primary w-100">Buscar Puntos
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="row flex-grow-1 overflow-auto">
+                                    <div class="container">
+                                        <ul class="list-group">
+                                            {{#each direcciones}}
+                                                <li class="list-group-item">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <p>{{this.direccion}}</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            {{/each}}
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="container rounded" id="map" style="height: 100%"></div>
+                            <!--ACA DENTRO APARECE EL MAPA CON LOS PUNTOS A RECOMENDAR-->
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-outline-primary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal de Confirmación Donacion-->
+    <div class="modal fade" data-bs-keyboard="false" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-5" id="confirmModalLabel">Confirmación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Está seguro de que desea realizar esta donación?
+                </div>
+                <div class="modal-footer">
+                    <!-- Botón de Cancelar que cierra el modal de confirmación y vuelve al modal de donación -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="modal"
+                            data-bs-target="#donationModal">Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Sí, realizar donación</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+          crossorigin=""/>
+{{/partial}}
+{{#partial "agregarScript"}}
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="/js/ubicacion.js"></script>
+    <script src="/js/validacionDatos.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script>
+        document.getElementById('submitDonation').addEventListener('click', function () {
+            // Cierra el modal de donación
+            var donationModal = bootstrap.Modal.getInstance(document.getElementById('donationModal'));
+            if (donationModal) {
+                donationModal.hide();
+            }
+
+            // Muestra el modal de confirmación
+            var confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+            confirmModal.show();
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            let map;
+
+            const initMap = () => {
+                map = L.map('map').setView([-34.6037, -58.3816], 12); // Ubicación inicial (Buenos Aires)
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                }).addTo(map);
+
+                // Hacer una solicitud a la API de georreferenciación del Gobierno de Buenos Aires
+                fetch('https://apis.datos.gob.ar/georef/api/direcciones?direccion=Avenida Medrano 951, CABA&max=1')
+                        .then(response => response.json())
+                        .then(data => {
+                            // Obtener las coordenadas de longitud y latitud de la respuesta
+                            var lat = data.direcciones[0].ubicacion.lat;
+                            var lon = data.direcciones[0].ubicacion.lon;
+
+                            // Agregar marcador al mapa con las coordenadas obtenidas
+                            L.marker([lat, lon]).addTo(map)
+                                    .bindPopup('Avenida Medrano 951, CABA');
+                        })
+                        .catch(error => {
+                            console.error('Error al obtener la ubicación:', error);
+                        });
+            };
+
+            // Detectar cuando el modal está completamente visible
+            const pointsModal = document.getElementById('pointsModal');
+            pointsModal.addEventListener('shown.bs.modal', function () {
+                if (!map) {
+                    initMap();
+                } else {
+                    setTimeout(() => {
+                        map.invalidateSize(); // Solucionar posibles problemas de redimensionamiento
+                    }, 300); // Espera 300 ms para asegurarte de que el modal esté completamente visible
+                }
+            });
+        });
+        document.getElementById('confirmModal').addEventListener('click', function (event) {
+            if (event.target.matches('.btn-primary')) {
+                document.getElementById('donationForm').submit();
+            }
+        });
+        // Agregar un evento de clic al botón de cancelar
+        document.getElementById('confirmModal').addEventListener('click', function (event) {
+            if (event.target.matches('.btn-secondary')) {
+                // Cierra el modal de confirmación
+                var confirmModal = bootstrap.Modal.getInstance(document.getElementById('confirmModal'));
+                if (confirmModal) {
+                    confirmModal.hide();
+                }
+
+                // Abre el modal de donación
+                var donationModal = new bootstrap.Modal(document.getElementById('donationModal'));
+                donationModal.show();
+            }
+        });
+    </script>
+{{/partial}}
+{{> templates/base}}

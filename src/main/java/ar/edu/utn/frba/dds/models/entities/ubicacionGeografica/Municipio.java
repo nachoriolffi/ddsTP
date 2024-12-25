@@ -1,9 +1,12 @@
 package ar.edu.utn.frba.dds.models.entities.ubicacionGeografica;
 
+import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "municipio")
 public class Municipio {

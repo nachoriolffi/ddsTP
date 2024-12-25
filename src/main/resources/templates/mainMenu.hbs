@@ -1,0 +1,82 @@
+{{#partial "contenido"}}
+
+    <div class="container mt-4">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+            <!-- Donaciones Button -->
+            <div class="col">
+                <div class="card text-center shadow">
+                    <div class="card-body">
+                        <i class="bi bi-heart-fill display-4 text-danger"></i>
+                        <h5 class="card-title mt-2">Donaciones</h5>
+                        <p class="card-text">Realiza donaciones y ayuda a la comunidad.</p>
+                        <a href="/donacionDinero" class="btn btn-primary">Donar Dinero</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tienda Button -->
+            <div class="col">
+                <div class="card text-center shadow">
+                    <div class="card-body">
+                        <i class="fas fa-store display-4 text-primary"></i>
+                        <h5 class="card-title mt-2">Tienda</h5>
+                        <p class="card-text">Canjea productos en nuestra tienda.</p>
+                        <a href="/canjeProductos" class="btn btn-primary">Ir a Tienda</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ver Heladeras Button -->
+            <div class="col">
+                <div class="card text-center shadow">
+                    <div class="card-body">
+                        <i class="bi bi-geo-alt-fill display-4 text-success"></i>
+                        <h5 class="card-title mt-2">Heladeras</h5>
+                        <p class="card-text">Encuentra una heladera cercana.</p>
+                        <a href="/heladeras" class="btn btn-primary">Ver Heladeras</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Herramientas Button -->
+            <div class="col">
+                <div class="card text-center shadow">
+                    <div class="card-body">
+                        <i class="fas fa-tools display-4 text-warning"></i>
+                        <h5 class="card-title mt-2">Herramientas</h5>
+                        <p class="card-text">Accede a herramientas para colaborar.</p>
+                        <a href="/fallaTecnica" class="btn btn-primary">Reportar Incidente</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mi Perfil Button -->
+            <div class="col">
+                <div class="card text-center shadow">
+                    <div class="card-body">
+                        <i class="bi bi-person-fill display-4 text-info"></i>
+                        <h5 class="card-title mt-2">Mi Perfil</h5>
+                        <p class="card-text">Accede a tu perfil de usuario.</p>
+                        <a href="/verPerfil" class="btn btn-primary">Ver Perfil</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Iniciar Sesión / Registrarse Button (if not logged in) -->
+            <div class="col">
+                <div class="card text-center shadow">
+                    <div class="card-body">
+                        <i class="bi bi-box-arrow-in-right display-4 text-secondary"></i>
+                        <h5 class="card-title mt-2">Iniciar Sesión</h5>
+                        <p class="card-text">Accede a tu cuenta o regístrate.</p>
+                        <a href="/iniciarSesion" class="btn btn-primary">Iniciar Sesión</a>
+                        <a href="/crearCuenta" class="btn btn-secondary">Registrarse</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/validacionDatos.js"></script>
+{{/partial}}
+{{> templates/templateBase }}

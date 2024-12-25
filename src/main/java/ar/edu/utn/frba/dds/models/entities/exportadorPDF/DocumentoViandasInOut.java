@@ -45,8 +45,8 @@ public class DocumentoViandasInOut implements Exportable {
         }
 
         datos.put("Heladera", heladerasNombre);
-        datos.put("Ingresos", ingresos);
-        datos.put("Retiros", retiros);
+        datos.put("Cantidad Viandas Ingresadas", ingresos);
+        datos.put("Cantidad Viandas Retiradas", retiros);
     }
     public String contarIngresos (Heladera heladera){
         int contador_Ingresos = 0;

@@ -15,6 +15,9 @@ public class ModeloHeladera {
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "nombreModelo",columnDefinition = "VARCHAR(255)",unique = true)
+    private String nombreModelo;
+
     @Column(name = "tempMax")
     private Double temperaturaMaxima;
 

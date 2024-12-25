@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <!-- Referencia al archivo CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="icon" href="/img/iconHead.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+            crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css"
+          rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://kit.fontawesome.com/115c7ea5e6.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+                {{#if inicioSesion}}
+                    <li class="nav-item dropdown">
+                        {{#if noEsAdmin}}
+                            {{#if noEsTecnico}}
+                                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                                   aria-expanded="false">Donaciones</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/donacionDinero">Donar Dinero</a></li>
+                                    {{#if esJuridico}}
+                                        <li><a class="dropdown-item" href="/encargarseHeladera">Encargarse de
+                                            Heladera</a>
+                                        </li>
+                                    {{/if}}
+                                    {{#if esHumano}}
+                                        <li><a class="dropdown-item" href="/donarViandas">Donar Viandas</a></li>
+                                        <li><a class="dropdown-item" href="/distribuirViandas">Distribuir Viandas</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="/registroVulnerable">Registrar Personas
+                                            Vulnerables</a></li>
+                                        <li>
+                                            <hr class="dropdown-divider">
+                                        </li>
+                                        <li><a class="dropdown-item" href="/suscripcionesAHeladeras">Suscripciones a Heladeras</a>
+                                        </li>
+                                    {{/if}}
+                                </ul>
+                            {{/if}}
+                        {{/if}}
+                    </li>
+                    {{#if noEsTecnico}}
+                        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" role="button"
+                                                         aria-expanded="false" data-bs-toggle="dropdown" href="#">Canje
+                            Puntos/Servicios</a>
+                            <ul class="dropdown-menu">
+                                <li class="nav-item"><a class="dropdown-item" href="/canjeProductos">Tienda</a></li>
+                                {{#if esHumano}}
+                                    <li><a class="dropdown-item" href="/ofertasCanjeadas">Ofertas Canjeadas</a></li>
+                                {{/if}}
+                            </ul>
+                        </li>
+                    {{/if}}
+                    <li class="nav-item"><a class="nav-link" href="/heladeras">Ver Heladeras</a></li>
+                    {{#if esHumano}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                               aria-expanded="false">Herramientas</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/fallaTecnica">Reportar Fallas Tecnicas</a></li>
+                            </ul>
+                        </li>
+                    {{/if}}
+                    {{#if esAdmin}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                               aria-expanded="false">Herramientas</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/verColaboradores">Ver Colaboradores</a></li>
+                                <li><a class="dropdown-item" href="/cargaMasiva">Cargar Archivo CSV</a></li>
+                                <li><a class="dropdown-item" href="/reportes">Ver Reportes PDF</a></li>
+                                <li><a class="dropdown-item" href="/verFallasTecnicas">Ver Fallas Tecnicas</a></li>
+                                <li><a class="dropdown-item" href="/cargaTecnico">Cargar Tecnico</a></li>
+                            </ul>
+                        </li>
+                    {{/if}}
+                    {{#if esJuridico}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                               aria-expanded="false">Herramientas</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/servicioUbicacion">Solicitar Puntos Colocacion</a>
+                                </li>
+                                <li><a class="dropdown-item" href="/verFallasTecnicas">Ver Fallas Tecnicas</a></li>
+                            </ul>
+                        </li>
+                    {{/if}}
+                    {{#if esTecnico}}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                               aria-expanded="false">Herramientas</a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/IncidentesTecnico">Incidentes/Fallas Tecnicas</a>
+                                </li>
+                            </ul>
+                        </li>
+                    {{/if}}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                           aria-expanded="false">Mi Perfil</a>
+                        <ul class="dropdown-menu">
+                            <a class="dropdown-item" href="/verPerfil">Ver Perfil</a>
+                            <form id="logout-form" action="/cerrarSesion" method="POST">
+                                <button type="submit" class="dropdown-item">Cerrar Sesión</button>
+                            </form>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link">Bienvenido, {{usuario.nombre}} {{usuario.apellido}}</a>
+                    </li>
+                {{/if}}
+                {{#if noInicioSesion}}
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/iniciarSesion">Iniciar Sesión</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/crearCuenta">Registrarse</a>
+                    </li>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<hr class="my-3 border-0">
+
+<div class="container mt-1">
+    <!-- Contenido propio de cada página -->
+    {{#block "contenido"}}
+    {{/block}}
+</div>
+
+{{#block "agregarScript"}}
+{{/block}}
+<script src="/js/validacionDatos.js"></script>
+</body>
+</html>

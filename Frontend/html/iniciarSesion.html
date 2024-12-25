@@ -81,7 +81,9 @@
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                        aria-expanded="false">Mi Perfil</a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                        <form id="logout-form" action="/cerrarSesion" method="POST">
+                            <button type="submit" class="dropdown-item" >Cerrar Sesión</button>
+                        </form>
                     </ul>
                 </li>
                 <li class="nav-item">
@@ -115,7 +117,7 @@
             <p class="mt-3 text-center">¿No tenés cuenta? <a href="../html/crearCuenta.html">¡Créate Una!</a></p>
         </div>
         <div class="col-md-6">
-            <img src="../assets/inicio_sesion.png" alt="Imagen de inicio de sesión" class="figure-img img-fluid rounded mx-auto d-none d-md-block">
+            <img src="../../src/main/resources/public/img/inicio_sesion.png" alt="Imagen de inicio de sesión" class="figure-img img-fluid rounded mx-auto d-none d-md-block">
         </div>
     </div>
 </div>

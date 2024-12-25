@@ -6,6 +6,7 @@ import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.registro.RegistroTemperatura;
 
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoIncidente;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,13 +18,15 @@ import java.util.concurrent.TimeUnit;
 import static ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoIncidente.FALLA;
 
 public class CronjobTemperatura {
-    public static void main(String[] args) {
+    public void ejecutarTemperatura() {
+
+        System.out.println("Ejecutando cronjob de temperatura");
 
         RepoHeladeras repoHeladeras = RepoHeladeras.INSTANCE;
 
-        List<Heladera> todasLasHeladeras = repoHeladeras.INSTANCE.buscarTodos();
+        List<Heladera> todasLasHeladeras = RepoHeladeras.INSTANCE.buscarTodos();
 
-        controlarUltimasLecturasHeladeras(todasLasHeladeras, 5);
+        controlarUltimasLecturasHeladeras(todasLasHeladeras, 1);// es el tiempo tope en el que si lo supera hay un problema
 
         todasLasHeladeras.forEach(heladera ->
         {
@@ -51,8 +54,12 @@ public class CronjobTemperatura {
                 heladera.setEstaActiva(false);
 
                 Incidente incidente = new Incidente("CronjobTemeratura","",FALLA,null,null);
-
+                incidente.setHeladera(heladera);
+                incidente.setFecha(new Date());
+                incidente.setDescripcion("La heladera " + heladera.getNombre() + " no ha enviado lecturas de temperatura en los ultimos " + tiempoEnMinutos + " minutos");
+                RepoIncidente.INSTANCE.agregar(incidente);
                 heladera.agregarRegistroDeAlerta(incidente);
+                RepoHeladeras.INSTANCE.modificar(heladera);
                 incidente.notificarTecnicoMasCercano(heladera);
 
             }
@@ -75,6 +82,9 @@ public class CronjobTemperatura {
         for (Heladera heladera : heladeras) {
             controlarUltimaLectura(heladera, tiempoEnMinutos);
         }
+    }
+
+    public CronjobTemperatura() {
     }
 
 }

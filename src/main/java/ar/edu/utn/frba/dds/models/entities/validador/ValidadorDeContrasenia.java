@@ -11,6 +11,7 @@ public class ValidadorDeContrasenia {
 
     public ValidadorDeContrasenia(){
         this.validadores= new ArrayList<FormaValidar>();
+
     }
 
     public ValidadorDeContrasenia(List<FormaValidar> validadores){
@@ -19,6 +20,10 @@ public class ValidadorDeContrasenia {
 
     public boolean validarContrasenia (String contrasenia, Usuario usuario){
         return validadores.stream().allMatch(validador -> validador.validar(contrasenia, usuario)) && validarIgualdadContrasenia(contrasenia, usuario);
+    }
+
+    public boolean validarContraseniaModificar (String contrasenia, Usuario usuario){
+        return validadores.stream().allMatch(validador -> validador.validar(contrasenia, usuario)) && !validarIgualdadContrasenia(contrasenia, usuario);
     }
 
     public boolean validarIgualdadContrasenia (String contrasenia, Usuario usuario){
@@ -32,6 +37,11 @@ public class ValidadorDeContrasenia {
 
     public void agregarValidador(FormaValidar validador){
         validadores.add(validador);
+    }
+
+    public void instanciarFormaValidar(){
+        this.agregarValidador(new FormaValidarLongitud());
+        this.agregarValidador(new FormaValidar10MilPeoresContrasenias());
     }
 
 }

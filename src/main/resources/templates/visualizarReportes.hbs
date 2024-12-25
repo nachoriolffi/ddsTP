@@ -1,0 +1,29 @@
+{{#partial "contenido"}}
+    <div class="row">
+        <div class="col-md-3">
+            <div class="overflow-auto" style="max-height: 300px;">
+                <div id="pdf-list" class="d-grid gap-2">
+                    {{#each pdfs}}
+                        <ul class="list-group" id="pdf-list">
+                            <li class="list-group-item list-group-item-action" data-id="{{this.id}}"
+                                data-file="{{this.pathDocumento}}">
+                                {{this.mes}} {{this.anio}} - Semana {{this.semana}}
+                            </li>
+                        </ul>
+                    {{/each}}
+                </div>
+            </div>
+            <hr class="my-2 border-0">
+        </div>
+        <div class="col-md-9 rounded">
+            <iframe id="pdf-preview" src="{{this.pathDocumento}}" class="w-100 rounded-3"
+                    style="height: 75vh; border: none;"></iframe>
+        </div>
+    </div>
+
+    <script src="/js/pdfViewer.js"></script>
+
+{{/partial}}
+{{> templates/base}}
+
+

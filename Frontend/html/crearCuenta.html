@@ -80,13 +80,13 @@
         <div class="row">
             <div class="card-group col-md-8">
                 <div class="card card-clickable" id="option-humano" data-page="registroHumano.html">
-                    <img src="../assets/humano.svg" class="card-img-top" alt="Humano">
+                    <img src="../../src/main/resources/public/img/humano.svg" class="card-img-top" alt="Humano">
                     <div class="card-body">
                         <h5 class="card-title text-center">Humano</h5>
                     </div>
                 </div>
                 <div class="card card-clickable" id="option-juridico" data-page="registroJuridico.html">
-                    <img src="../assets/juridico.svg" class="card-img-top" alt="Jurídico">
+                    <img src="../../src/main/resources/public/img/juridico.svg" class="card-img-top" alt="Jurídico">
                     <div class="card-body">
                         <h5 class="card-title text-center">Jurídico</h5>
                     </div>
@@ -164,7 +164,7 @@
 
 <script>
     //Agregar a un JS
-
+/*
     function selectOption(option) {
         // Desmarcar todas las tarjetas
         document.querySelectorAll('.card-option').forEach(card => card.classList.remove('selected'));
@@ -183,7 +183,7 @@
             input.type = "password";
         }
     }
-
+*/
     document.getElementById('option-juridico').addEventListener('click', function () {
         this.style.border = '1px solid #f38630';
         document.getElementById('option-humano').style.border = 'none';
@@ -194,7 +194,7 @@
         document.getElementById('option-juridico').style.border = 'none';
     });
 </script>
-<script src="../js/validacionDatos.js"></script>
+<script src="../../src/main/resources/public/js/validacionDatos.js"></script>
 </body>
 </html>
        
