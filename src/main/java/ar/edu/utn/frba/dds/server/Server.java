@@ -4,16 +4,13 @@ import ar.edu.utn.frba.dds.observability.DDMetricsUtils;
 import ar.edu.utn.frba.dds.runnable.RutinaBrokerApertura;
 import ar.edu.utn.frba.dds.runnable.RutinaBrokerMovimiento;
 import ar.edu.utn.frba.dds.runnable.RutinaBrokerTemperatura;
-import ar.edu.utn.frba.dds.utils.Init;
 import ar.edu.utn.frba.dds.utils.JavalinRenderer;
 import com.github.jknack.handlebars.Handlebars;
 import com.github.jknack.handlebars.Template;
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
 import io.javalin.http.HttpStatus;
-import io.javalin.micrometer.MicrometerPlugin;
 import io.micrometer.core.instrument.step.StepMeterRegistry;
-
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
@@ -31,8 +28,7 @@ public class Server {
     final AtomicInteger myGauge = registry.gauge("dds.unGauge", new AtomicInteger(0));
 
     // ConfigD
-    private static final MicrometerPlugin micrometerPlugin = new MicrometerPlugin(config -> config.registry = registry);
-
+    //private static final MicrometerPlugin micrometerPlugin = new MicrometerPlugin(config -> config.registry = registry);
     public static Javalin app() {
         if (app == null)
             throw new RuntimeException("Error Al Inicializar APP");
@@ -45,8 +41,6 @@ public class Server {
 
             //app = Javalin.create( config -> { config.registerPlugin(micrometerPlugin); }).start(port);
             app = Javalin.create(config()).start(port);
-            Router router = new Router();
-
             RutinaBrokerApertura brokerAperturaRoutine = new RutinaBrokerApertura();
             Thread hiloRecepcionApertura = new Thread(brokerAperturaRoutine);
             hiloRecepcionApertura.start();
@@ -79,7 +73,6 @@ public class Server {
                             "templates/" + path.replace(".hbs", ""));
                     return template.apply(model);
                 } catch (IOException e) {
-                    e.printStackTrace();
                     context.status(HttpStatus.NOT_FOUND);
                     return "No se encuentra la página indicada...";
                 }

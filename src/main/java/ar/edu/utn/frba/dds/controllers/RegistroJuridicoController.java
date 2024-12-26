@@ -48,7 +48,6 @@ public class RegistroJuridicoController extends BaseController implements ICrudV
             model.put("noInicioSesion", true);
             context.render("logs/registroJuridico.hbs", model);
         } catch (Exception e) {
-            e.printStackTrace();
             context.status(500).result("Server error");
         }
     }

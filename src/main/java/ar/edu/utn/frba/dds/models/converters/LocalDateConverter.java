@@ -5,22 +5,22 @@ import javax.persistence.Converter;
 import java.sql.Date;
 import java.time.LocalDate;
 
-@Converter(autoApply = true) // Indica que este conversor se aplicará automáticamente
+@Converter(autoApply = true)
 public class LocalDateConverter implements AttributeConverter<LocalDate, Date> {
 
     @Override
     public Date convertToDatabaseColumn(LocalDate localDate) {
         if (localDate == null) {
-            return null; // Maneja el caso nulo
+            return null;
         }
-        return Date.valueOf(localDate); // Convierte LocalDate a java.sql.Date
+        return Date.valueOf(localDate);
     }
 
     @Override
     public LocalDate convertToEntityAttribute(Date date) {
         if (date == null) {
-            return null; // Maneja el caso nulo
+            return null;
         }
-        return date.toLocalDate(); // Convierte java.sql.Date a LocalDate
+        return date.toLocalDate();
     }
 }

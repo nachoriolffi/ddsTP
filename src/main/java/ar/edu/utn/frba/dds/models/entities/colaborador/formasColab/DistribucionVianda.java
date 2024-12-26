@@ -6,7 +6,6 @@ import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import lombok.Getter;
 import lombok.Setter;
-import org.checkerframework.checker.units.qual.C;
 
 import javax.persistence.*;
 import java.util.ArrayList;

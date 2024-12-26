@@ -1,15 +1,10 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
-import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
-import ar.edu.utn.frba.dds.models.entities.validador.ValidadorDeContrasenia;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoUsuario;
 import ar.edu.utn.frba.dds.services.UserService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
-
-import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
 

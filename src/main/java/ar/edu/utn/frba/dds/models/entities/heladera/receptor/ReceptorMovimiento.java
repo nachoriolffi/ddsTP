@@ -6,8 +6,6 @@ import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoAlerta;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoIncidente;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoIncidente;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRegistroMovimiento;
-
 import javax.persistence.*;
 import java.util.Date;
 

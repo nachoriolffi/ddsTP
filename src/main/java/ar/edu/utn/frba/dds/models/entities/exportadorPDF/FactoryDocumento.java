@@ -1,7 +1,5 @@
 package ar.edu.utn.frba.dds.models.entities.exportadorPDF;
 
-import ar.edu.utn.frba.dds.models.entities.exportadorPDF.Exportable;
-
 public class FactoryDocumento {
     public Exportable crearDocumento(TipoDocumento tipo) {
         switch (tipo) {

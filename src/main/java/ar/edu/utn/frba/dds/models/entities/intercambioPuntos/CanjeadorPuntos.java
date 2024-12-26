@@ -22,8 +22,8 @@ public class CanjeadorPuntos {
         return validarPuntos(colaborador, (Oferta) ofertas);
     }
 
-    // la idea general es que l calulador de puntos de oferta sea una instancia unica que sea usada por todos que nos premita
-    // calcular los puntos de una lista de todas las ofertas que alguin quiera cambia y que de esta manera podamos
+    // la idea general es que el calculador de puntos de oferta sea una instancia singleton que sea usada por todos que nos premarital
+    // calcular los puntos de una lista de todas las ofertas que alguien quiera cambiar y que de esta manera podamos
     public Boolean validarPuntos(Colaborador colaborador, Oferta oferta) {
 
         if (colaborador.puntosActualesDisponibles() >= puntosTotalesOfertas((List<OfertaCanje>) oferta)) {
@@ -35,13 +35,13 @@ public class CanjeadorPuntos {
             ofertaCanje.setFechaCanje(new Date());
             colaborador.agregarOferta(ofertaCanje);
             RepoOfertaCanjeada.INSTANCE.agregar(ofertaCanje);
-            RepoColaborador.INSTANCE.modificar(colaborador); // agrego esto para que cada vez que un colaborador cambie los puntos me haga la modificacion de los puntos tambien tengo al duda que sea de la capa de controller.
+            RepoColaborador.INSTANCE.modificar(colaborador); // agrego esto para que cada vez que un colaborador cambie los puntos me haga la modification de los puntos también tengo al duda que sea de la capa de controller.
             return true;
         }
         return false;
     }
 
     public Double puntosTotalesOfertas(List<OfertaCanje> ofertas) {
-        return ofertas.stream().mapToDouble(OfertaCanje::getPuntosNecesarios).sum();
+        return ofertas.stream().mapToDouble(OfertaCanje::getPuntosUsados).sum();
     }
 }

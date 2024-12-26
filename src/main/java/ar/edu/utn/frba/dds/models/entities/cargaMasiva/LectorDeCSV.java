@@ -41,7 +41,6 @@ public abstract class  LectorDeCSV {
         try (Stream<String> streamFile = Files.lines(Paths.get(ruta))) {
             return streamFile.map(line -> line.split(",")).collect(Collectors.toList());
         } catch (IOException e) {
-            e.printStackTrace();
             return null;
         }
     }

@@ -1,11 +1,8 @@
 package ar.edu.utn.frba.dds.dtos;
 
-import ar.edu.utn.frba.dds.models.entities.cuestionario.Opcion;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Pregunta;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
 
 @Getter
 @Setter
@@ -20,7 +17,7 @@ public class PreguntaDTO {
         this.setId(pregunta.getId());
         this.setNombre(pregunta.getNombre());
         this.setEsObligatoria(pregunta.getEsObligatoria());
-        this.setTipoPregunta(pregunta.getTipoPregunta().toString()); // Convert enum to string
+        this.setTipoPregunta(pregunta.getTipoPregunta());
         //this.setOpciones(pregunta.getOpciones());
 
     }

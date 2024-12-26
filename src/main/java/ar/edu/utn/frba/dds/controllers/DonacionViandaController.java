@@ -6,7 +6,6 @@ import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DonacionVianda;
 import ar.edu.utn.frba.dds.models.entities.generadorCodigo.GeneradorDeCodigo;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
-import ar.edu.utn.frba.dds.models.entities.heladera.RegistroSolicitud;
 import ar.edu.utn.frba.dds.models.entities.heladera.TipoSolicitud;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
@@ -139,7 +138,7 @@ public class DonacionViandaController extends BaseController implements ICrudVie
             System.out.println("Fecha de donación: " + nuevaVianda.getFechaDonacion());
 
             System.out.println("Buscando heladera...");
-            Heladera heladera = repoHeladeras.buscar(Long.parseLong(context.formParam("nombreHeladera")));
+            Heladera heladera = repoHeladeras.buscar(Long.valueOf(context.formParam("nombreHeladera")));
             System.out.println("Heladera encontrada: " + heladera);
 
             System.out.println("Buscando colaborador...");
@@ -200,7 +199,6 @@ public class DonacionViandaController extends BaseController implements ICrudVie
             context.status(400).result("Formato de fecha inválido.");
         } catch (Exception e) {
             System.out.println("Error interno del servidor: " + e.getMessage());
-            e.printStackTrace();
             context.status(500).result("Error interno del servidor: " + e.getMessage());
         }
     }

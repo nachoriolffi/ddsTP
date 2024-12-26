@@ -49,7 +49,6 @@ public class RegistroHumanoController extends BaseController implements ICrudVie
             model.put("noInicioSesion", true);
             context.render("logs/registroHumano.hbs", model);
         } catch (Exception e) {
-            e.printStackTrace();
             context.status(500).result("Server error");
         }
     }

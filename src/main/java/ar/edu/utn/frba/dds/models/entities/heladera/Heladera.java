@@ -11,18 +11,16 @@ import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.TipoSuscripcion;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
-import lombok.AccessLevel;
+import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -135,7 +133,7 @@ public class Heladera implements IObservableColaborador {
         this.notificar();
     }
 
-    public void quitarVianda() {
+    public void quitarVianda(Vianda vianda) {
         this.viandasDisponibles--;
         this.notificar();
     }
@@ -186,7 +184,7 @@ public class Heladera implements IObservableColaborador {
 
     public RegistroSolicitud obtenerSolicitudApertura(int idSolicitud) {
         for (RegistroSolicitud solicitud : solicitudesApertura) {
-            if (solicitud.getId().equals(idSolicitud)) {
+            if (Objects.equals(solicitud.getId(), idSolicitud)) {
                 return solicitud;
             }
         }

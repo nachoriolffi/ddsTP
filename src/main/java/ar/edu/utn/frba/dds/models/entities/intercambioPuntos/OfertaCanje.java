@@ -1,19 +1,21 @@
 package ar.edu.utn.frba.dds.models.entities.intercambioPuntos;
 
+import ar.edu.utn.frba.dds.models.converters.LocalDateConverter;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "ofertaCanje")
 @Getter
 @Setter
 public class OfertaCanje {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
     @ManyToOne
@@ -24,13 +26,10 @@ public class OfertaCanje {
     @JoinColumn(name = "oferta_id")
     private Oferta oferta;
 
+    @Convert(converter = LocalDateConverter.class)
     @Column(name = "fechaCanje")
-    private Date fechaCanje;
+    private LocalDate fechaCanje;
 
     @Column(name = "puntosUsados")
-    private int puntosUsados;
-
-    public double getPuntosNecesarios() {
-        return this.oferta.getPuntosNecesarios();
-    }
+    private Double puntosUsados;
 }

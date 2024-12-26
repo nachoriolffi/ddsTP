@@ -1,51 +1,54 @@
 package ar.edu.utn.frba.dds.models.entities.tecnico;
 
-import ar.edu.utn.frba.dds.models.converters.MedioComunicacionAtributeConvertere;
+import ar.edu.utn.frba.dds.models.converters.LocalDateConverter;
+import ar.edu.utn.frba.dds.models.converters.MedioComunicacionConverter;
 import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
-import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
-import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
-import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioComunicacion;
+import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRegistrosVisita;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
-
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-@Table(name = "Tecnico")
+@Table(name = "tecnico")
 @Getter
 @Setter
 public class Tecnico {
 
     @Id
-    @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
-    @Column(name = "nombre", columnDefinition = "VARCHAR(255)", nullable = false)
+    @Column(name = "nombre")
     private String nombre;
 
-    @Column(name = "apellido", columnDefinition = "VARCHAR(255)", nullable = false)
+    @Column(name = "apellido")
     private String apellido;
 
+    @Convert(converter = LocalDateConverter.class)
+    @Column(name = "fechaNacimiento")
+    private LocalDate fechaNacimiento;
+
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "tipoDocumento")
     private TipoDocumento tipoDocumento;
 
-    @Column(name = "dni", nullable = false)
-    private Integer dni;
+    @Column(name = "dni", unique = true)
+    private String dni;
 
-    @Column(name = "cuil", nullable = false)
-    private Integer cuil; // cambiar por string luego
+    @Column(name = "cuil", unique = true)
+    private String cuil;
 
-    @Convert(converter = MedioComunicacionAtributeConvertere.class)
-    @ElementCollection(targetClass = String.class)
-    private List<MedioDeComunicacion> mediosDeComunicacion;
+    @ElementCollection
+    @CollectionTable(name = "medioComunicacion")
+    @Convert(converter = MedioComunicacionConverter.class)
+    @Column(name = "medio")
+    private List<MedioComunicacion> mediosComunicacion;
 
     @Column(name = "areaCobertura", nullable = false)
     private Integer areaCobertura;
@@ -65,47 +68,13 @@ public class Tecnico {
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
 
-    public Tecnico() {
-        this.contactos = new ArrayList<>();
-        this.mediosDeComunicacion = new ArrayList<>();
-    }
 
-    public Tecnico(Long id, String nombre, String apellido, TipoDocumento tipoDocumento, Integer dni, Integer cuil, List<MedioDeComunicacion> mediosDeComunicacion, Integer areaCobertura) {
-        this.id = id;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.tipoDocumento = tipoDocumento;
-        this.dni = dni;
-        this.cuil = cuil;
-        this.mediosDeComunicacion = mediosDeComunicacion;
-        this.areaCobertura = areaCobertura;
-    }
-
-    public Tecnico(String nombre, String apellido, Coordenada coordenada, Boolean disponible, Integer areaCobertura) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.coordenada = coordenada;
-        this.disponible = disponible;
-        this.areaCobertura = areaCobertura;
-    }
-
-    public Tecnico(Long id, String nombre, String apellido, TipoDocumento tipoDocumento, Integer dni, Integer cuil, List<MedioDeComunicacion> mediosDeComunicacion, Integer areaCobertura, Coordenada coordenada) {
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.tipoDocumento = tipoDocumento;
-        this.dni = dni;
-        this.cuil = cuil;
-        this.mediosDeComunicacion = mediosDeComunicacion;
-        this.areaCobertura = areaCobertura;
-        this.coordenada = coordenada;
-    }
-
-    public void registrarVisita(RegistroVisita registro) {
+    public void registrarVisita(RegistroIncidente registro) {
         RepoRegistrosVisita.INSTANCE.agregar(registro);
     }
 
-    public void agregarMedioDeComunicacion(MedioDeComunicacion medioDeComunicacion) {
-        this.mediosDeComunicacion.add(medioDeComunicacion);
+    public void agregarMedioDeComunicacion(MedioComunicacion medioComunicacion) {
+        this.mediosComunicacion.add(medioComunicacion);
     }
 
     public void agregarContacto(Contacto contacto) {

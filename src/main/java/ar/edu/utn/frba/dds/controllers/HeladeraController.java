@@ -5,7 +5,6 @@ import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
 import ar.edu.utn.frba.dds.dtos.inputs.HeladeraInputDTO;
 import ar.edu.utn.frba.dds.dtos.outputs.HeladeraOutputDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.HacerseCargoDeHeladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.ObserverColaborador;
@@ -81,7 +80,6 @@ public class HeladeraController extends BaseController implements ICrudViewsHand
     public void showMap(Context context) {
         context.sessionAttribute("yaExisteConEseNombre", null);
         Map<String, Object> model = new HashMap<>();
-        Usuario usuario = verificarSesion(context, model);
         List<HeladeraOutputDTO> heladeras = heladeraService.obtenerHeladeras();
         model.put("heladeras", heladeras);
         context.render("heladeras/mapaHeladeras.hbs", model);

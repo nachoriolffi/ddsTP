@@ -3,20 +3,14 @@ package ar.edu.utn.frba.dds.controllers;
 import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
 import ar.edu.utn.frba.dds.dtos.outputs.DonacionDineroOutputDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DistribucionVianda;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DonacionDinero;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.TipoColaboracion;
-import ar.edu.utn.frba.dds.models.entities.multiplicador.config.ConfiguracionMultiplicador;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoDonacionDinero;
 import ar.edu.utn.frba.dds.services.UserService;
-
-import ar.edu.utn.frba.dds.server.Server;
-
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -139,9 +133,6 @@ public class DonarDineroController extends BaseController implements ICrudViewsH
             System.err.println("Error al parsear la fecha: " + e.getMessage());
             context.status(400).result("Formato de fecha inválido");
         } catch (Exception e) {
-            // Manejo de errores generales
-            System.err.println("Error en el método save: " + e.getMessage());
-            e.printStackTrace();
             context.status(500).result("Ocurrió un error al guardar la donación");
         }
     }

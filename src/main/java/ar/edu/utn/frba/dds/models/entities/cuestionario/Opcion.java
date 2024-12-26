@@ -33,7 +33,6 @@ public class Opcion {
 
     public Opcion(String texto) {
         this.texto = texto;
-        this.esCorrecta = esCorrecta;
         this.respuestas = new ArrayList<>();
     }
 }

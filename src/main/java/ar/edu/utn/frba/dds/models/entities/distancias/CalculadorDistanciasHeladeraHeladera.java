@@ -1,11 +1,7 @@
 package ar.edu.utn.frba.dds.models.entities.distancias;
 
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
-import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
-import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoTecnico;
 
 import java.util.ArrayList;
 import java.util.List;

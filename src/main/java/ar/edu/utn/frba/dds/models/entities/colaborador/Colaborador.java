@@ -1,7 +1,7 @@
 package ar.edu.utn.frba.dds.models.entities.colaborador;
 
 import ar.edu.utn.frba.dds.models.converters.FormaDeColaboracionConverter;
-import ar.edu.utn.frba.dds.models.converters.MedioComunicacionAtributeConvertere;
+import ar.edu.utn.frba.dds.models.converters.MedioComunicacionConverter;
 import ar.edu.utn.frba.dds.models.entities.colaborador.calculoPuntos.CalculadorPuntos;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.FormaDeColaboracion;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
@@ -10,17 +10,15 @@ import ar.edu.utn.frba.dds.models.entities.colaborador.observer.IObserverColabor
 import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.Mensaje;
 import ar.edu.utn.frba.dds.models.entities.contacto.Notificacion;
-import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioComunicacion;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.CuestionarioRespondido;
 import ar.edu.utn.frba.dds.models.entities.intercambioPuntos.OfertaCanje;
 import ar.edu.utn.frba.dds.models.entities.recomendacionPuntos.AServicioRecomendacionPuntos;
 import ar.edu.utn.frba.dds.models.entities.recomendacionPuntos.IRecomendacionPuntos;
-import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoTarjeta;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import lombok.Data;
 import lombok.Getter;
@@ -35,7 +33,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 @Data
 @Setter
@@ -54,9 +51,9 @@ public class Colaborador implements IObserverColaborador {
     @Column(name = "apellido", columnDefinition = "VARCHAR(255)")
     private String apellido;
 
-    @Convert(converter = MedioComunicacionAtributeConvertere.class)
+    @Convert(converter = MedioComunicacionConverter.class)
     @ElementCollection(targetClass = String.class)
-    private List<MedioDeComunicacion> mediosDeComunicacion;
+    private List<MedioComunicacion> mediosDeComunicacion;
 
     @Column(name = "fechaDeNacimiento")
     private LocalDate fechaDeNacimiento;
@@ -141,7 +138,7 @@ public class Colaborador implements IObserverColaborador {
         this.puntosTotalesUsados = (double) 0;
     }
 
-    public Colaborador(Integer numeroDocumento, TipoDocumento tipoDocumento, String nombre, String apellido, List<MedioDeComunicacion> mediosDeComunicacion) {
+    public Colaborador(Integer numeroDocumento, TipoDocumento tipoDocumento, String nombre, String apellido, List<MedioComunicacion> mediosDeComunicacion) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.mediosDeComunicacion = mediosDeComunicacion;
@@ -155,8 +152,8 @@ public class Colaborador implements IObserverColaborador {
         super();
     }
 
-    public void agregarMedioDeComunicacion(MedioDeComunicacion medioDeComunicacion) {
-        this.mediosDeComunicacion.add(medioDeComunicacion);
+    public void agregarMedioDeComunicacion(MedioComunicacion medioComunicacion) {
+        this.mediosDeComunicacion.add(medioComunicacion);
     }
 
     public void agregarFormaDeColaboracion(TipoColaboracion formaDeColaboracion) {

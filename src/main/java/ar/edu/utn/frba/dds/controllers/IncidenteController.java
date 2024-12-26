@@ -23,7 +23,7 @@ public class IncidenteController extends BaseController implements ICrudViewsHan
         Usuario usuario = verificarTecnico(context, model);
         UsuarioDTO usuarioDTO = userService.obtenerUsuarioDTO(usuario);
         model.put("usuario", usuarioDTO);
-        Incidente incidente = RepoIncidente.INSTANCE.buscar(Long.parseLong(Objects.requireNonNull(context.pathParam("id"))));
+        Incidente incidente = RepoIncidente.INSTANCE.buscar(Long.valueOf(Objects.requireNonNull(context.pathParam("id"))));
 
         model.put("incidente", incidente);
         context.render("incidentes/incidente.hbs", model);
@@ -34,7 +34,6 @@ public class IncidenteController extends BaseController implements ICrudViewsHan
         Usuario usuario = verificarAdminOJuridico(context, model);
 
         List<Incidente> incidentes = RepoIncidente.INSTANCE.buscarTodos();
-        List<IncidenteOutputDTO> incidenteOutputDTOList = new ArrayList<>();
         for (Incidente incidente : incidentes) {
             IncidenteOutputDTO incidenteOutputDTO = new IncidenteOutputDTO();
             incidenteOutputDTO.setTipoIncidente(incidente.getTipoIncidente().ordinal());

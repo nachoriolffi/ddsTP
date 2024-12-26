@@ -2,13 +2,12 @@ package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.models.entities.colaborador.calculoPuntos.CalculadorPuntos;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RegistroVulnerable;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Calle;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
-import ar.edu.utn.frba.dds.models.entities.vulnerable.RegistroMenorACargo;
+import ar.edu.utn.frba.dds.models.entities.vulnerable.MenorACargo;
 import ar.edu.utn.frba.dds.models.entities.vulnerable.Vulnerable;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import ar.edu.utn.frba.dds.services.UserService;
@@ -16,11 +15,9 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoMenorACargo;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoTarjeta;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoVulnerable;
-import ar.edu.utn.frba.dds.server.Server;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import ar.edu.utn.frba.dds.utils.TipoDocumento;
 import io.javalin.http.Context;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,7 +53,7 @@ public class RegistroVulnerableController extends BaseController implements ICru
     public void create(Context context) {
 
         Vulnerable vulnerable = new Vulnerable();
-        RegistroMenorACargo menorACargo = new RegistroMenorACargo();
+        MenorACargo menorACargo = new MenorACargo();
         vulnerable.setNombre(context.formParam("nombre"));
         vulnerable.setApellido(context.formParam("apellido"));
         vulnerable.setTipoDocumento(TipoDocumento.valueOf(context.formParam("tipoDocumento")));

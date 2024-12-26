@@ -1,19 +1,14 @@
 package ar.edu.utn.frba.dds.services;
 
-import ar.edu.utn.frba.dds.dtos.outputs.DistribucionViandaOutputDTO;
-import ar.edu.utn.frba.dds.dtos.outputs.SuscripcionesAHeladerasOutputDTO;
-import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
+import java.util.List;
+import java.util.Map;
 
+import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.ObserverColaborador;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
-
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
-
-
-import java.util.List;
-import java.util.Map;
 
 public class SuscripcionesAHeladerasService {
     public List<Heladera> buscarHeladeras(Usuario usuario) {

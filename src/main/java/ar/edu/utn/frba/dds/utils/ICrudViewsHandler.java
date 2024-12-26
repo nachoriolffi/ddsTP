@@ -1,9 +1,6 @@
 package ar.edu.utn.frba.dds.utils;
 
 import io.javalin.http.Context;
-
-import java.text.ParseException;
-
 public interface ICrudViewsHandler {
     void index(Context context);
     void show(Context context);

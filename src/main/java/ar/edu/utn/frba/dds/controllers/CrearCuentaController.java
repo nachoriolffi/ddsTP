@@ -1,25 +1,15 @@
 package ar.edu.utn.frba.dds.controllers;
 
-import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.models.entities.colaborador.TipoPersona;
-import ar.edu.utn.frba.dds.models.entities.usuario.Permiso;
-import ar.edu.utn.frba.dds.models.entities.usuario.Rol;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.entities.validador.ValidadorDeContrasenia;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoUsuario;
 import ar.edu.utn.frba.dds.server.Server;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
 import io.javalin.http.Context;
-
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class CrearCuentaController extends BaseController implements ICrudViewsHandler {
-
-    RepoUsuario repoUsuario = RepoUsuario.INSTANCE;
 
     @Override
     public void index(Context context) {

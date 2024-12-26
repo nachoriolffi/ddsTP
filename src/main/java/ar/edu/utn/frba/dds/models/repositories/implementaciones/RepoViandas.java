@@ -1,8 +1,5 @@
 package ar.edu.utn.frba.dds.models.repositories.implementaciones;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 

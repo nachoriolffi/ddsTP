@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.Date;
 
 
 @Entity
@@ -14,54 +13,34 @@ import java.util.Date;
 public class Oferta {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
-    @Column(name = "imagen", columnDefinition = "VARCHAR(255)")
-    private String imagen;
+    @Column(name = "pathFoto")
+    private String pathFoto;
 
-    @Column(name = "nombreOferta", columnDefinition = "VARCHAR(255)", nullable = false)
+    @Column(name = "nombreOferta")
     private String nombre;
 
-    @Getter
-    @Column(name = "puntosNecesarios", nullable = false)
-    private Integer puntosNecesarios;
+    @Column(name = "puntosNecesarios")
+    private Double puntosNecesarios;
 
-    @Column(name = "fechaInicio", nullable = false,columnDefinition = "DATE")
-    private Date fechaInicio;
-
-    @Column(name = "fechaFin",columnDefinition = "DATE")
-    private Date fechaFin;
-
-    @Column(name = "stockInicial", nullable = false)
+    @Column(name = "stockInicial")
     private Integer stockInicial;
 
-    @Column(name = "stockUsado", nullable = false)
+    @Column(name = "stockUsado")
     private Integer stockUsado;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "rubroOferta", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "rubro_id")
     private Rubro rubro;
-
-    public Oferta(String nombre, Integer puntosNecesarios, Rubro rubro, Integer stockInicial) {
-        this.nombre = nombre;
-        this.puntosNecesarios = puntosNecesarios;
-        this.rubro = rubro;
-        this.stockInicial = stockInicial;
-    }
-
-    public Oferta(String imagen, String nombre, Integer puntosNecesarios, Rubro rubro, Integer stockInicial, Date fechaInicio, Date fechaFin) {
-        this.imagen = imagen;
-        this.nombre = nombre;
-        this.puntosNecesarios = puntosNecesarios;
-        this.rubro = rubro;
-        this.stockInicial = stockInicial;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
-    }
 
     public Oferta() {
 
+    }
+
+    public Integer stockRestante() {
+        return this.stockInicial - this.stockUsado;
     }
 
 }

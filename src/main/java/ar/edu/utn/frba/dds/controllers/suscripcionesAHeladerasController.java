@@ -1,36 +1,26 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
-import ar.edu.utn.frba.dds.dtos.ViandaDTO;
-import ar.edu.utn.frba.dds.dtos.outputs.DistribucionViandaOutputDTO;
 import ar.edu.utn.frba.dds.dtos.outputs.HeladeraOutputDTO;
 import ar.edu.utn.frba.dds.dtos.outputs.SuscripcionesAHeladerasOutputDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.MotivoDistribucion;
 import ar.edu.utn.frba.dds.models.entities.distancias.CalculadorDistanciasHeladeraHeladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.ObserverColaborador;
 import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.TipoSuscripcion;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
-import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoSuscriptorHeladera;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoViandas;
 import ar.edu.utn.frba.dds.services.UserService;
 import ar.edu.utn.frba.dds.utils.ICrudViewsHandler;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.javalin.http.Context;
-
-import java.io.StringWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import ar.edu.utn.frba.dds.services.SuscripcionesAHeladerasService;
 

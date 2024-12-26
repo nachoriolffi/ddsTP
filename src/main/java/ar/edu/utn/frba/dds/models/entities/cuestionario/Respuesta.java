@@ -38,7 +38,7 @@ public class Respuesta {
     )
     private List<Opcion> opciones;
 
-    public Respuesta(Pregunta pregunta,String r123espuestaAbierta){
+    public Respuesta(Pregunta pregunta,String respuestaAbierta){
         this.pregunta = pregunta;
         this.respuestaAbierta = respuestaAbierta;
     }

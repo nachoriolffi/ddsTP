@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.models.repositories.implementaciones;
-import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
 
-import javax.persistence.EntityManager;
+import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
 import javax.persistence.TypedQuery;
 
 public class RepoRubroColaborador extends RepoGenerico<RubroColaborador>{

@@ -1,11 +1,9 @@
 package ar.edu.utn.frba.dds.models.entities.heladera.suscripcion;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.models.entities.colaborador.observer.IObserverColaborador;
 import jdk.jfr.Enabled;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
 
 @Getter

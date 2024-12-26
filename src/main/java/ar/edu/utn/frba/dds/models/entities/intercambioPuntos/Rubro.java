@@ -1,32 +1,23 @@
 package ar.edu.utn.frba.dds.models.entities.intercambioPuntos;
 
-public enum Rubro {
-    SALUD("Salud"),
-    EDUCACION("Educacion"),
-    GASTRONOMIA("Gastronomia"),
-    HOGAR("Hogar"),
-    ELECTRONICA("Electronica"),
-    BIENESTAR("Bienestar"),
-    INTERIOR("Interior"),
-    TECNOLOGIA("Tecnologia");
+import lombok.Getter;
+import lombok.Setter;
 
-    private final String descripcion;
+import javax.persistence.*;
 
-    Rubro(String descripcion) {
-        this.descripcion = descripcion;
-    }
+@Table(name = "rubro")
+@Entity
+@Setter
+@Getter
+public class Rubro {
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-    // Método para obtener el Rubro basado en la descripción
-    public static Rubro fromDescripcion(String descripcion) {
-        for (Rubro rubro : Rubro.values()) {
-            if (rubro.getDescripcion().equalsIgnoreCase(descripcion)) {
-                return rubro; // Devuelve el Rubro que coincide
-            }
-        }
-        return null; // Devuelve null si no hay coincidencias
-    }
+    @Id
+    @GeneratedValue
+    private Long id;
 
+    @Column(name = "nombre")
+    private String nombre;
+
+    @Column(name = "descripcion")
+    private String descripcion;
 }

@@ -1,10 +1,7 @@
 package ar.edu.utn.frba.dds.dtos;
 
 import ar.edu.utn.frba.dds.models.entities.heladera.RegistroSolicitud;
-import ar.edu.utn.frba.dds.models.entities.heladera.TipoSolicitud;
 import lombok.Data;
-
-import java.util.Date;
 
 @Data
 public class RegistroSolicitudDTO {

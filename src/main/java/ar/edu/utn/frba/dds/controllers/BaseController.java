@@ -3,7 +3,6 @@ package ar.edu.utn.frba.dds.controllers;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoUsuario;
-import ar.edu.utn.frba.dds.services.UserService;
 import io.javalin.http.Context;
 
 import java.util.*;
@@ -42,21 +41,28 @@ public abstract class BaseController {
     private void configurarUsuarioLogueado(Map<String, Object> model, Usuario usuario) {
         model.put("inicioSesion", true);
         model.put("noInicioSesion", false);
-        if (usuario.getRol().equals(TipoRol.ADMIN)) {
-            model.put("esAdmin", true);
-            model.put("noEsTecnico", true);
-        } else if (usuario.getRol().equals(TipoRol.COLABORADOR_HUMANO)) {
-            model.put("esHumano", true);
-            model.put("noEsTecnico", true);
-            model.put("noEsAdmin", true);
-        } else if (usuario.getRol().equals(TipoRol.COLABORADOR_JURIDICO)) {
-            model.put("esJuridico", true);
-            model.put("noEsTecnico", true);
-            model.put("noEsAdmin", true);
-        }else if (usuario.getRol().equals(TipoRol.TECNICO)){
-            model.put("esTecnico", true);
-            model.put("noEsTecnico", false);
-            model.put("noEsAdmin", true);
+        switch (usuario.getRol()) {
+            case ADMIN:
+                model.put("esAdmin", true);
+                model.put("noEsTecnico", true);
+                break;
+            case COLABORADOR_HUMANO:
+                model.put("esHumano", true);
+                model.put("noEsTecnico", true);
+                model.put("noEsAdmin", true);
+                break;
+            case COLABORADOR_JURIDICO:
+                model.put("esJuridico", true);
+                model.put("noEsTecnico", true);
+                model.put("noEsAdmin", true);
+                break;
+            case TECNICO:
+                model.put("esTecnico", true);
+                model.put("noEsTecnico", false);
+                model.put("noEsAdmin", true);
+                break;
+            default:
+                break;
         }
     }
 

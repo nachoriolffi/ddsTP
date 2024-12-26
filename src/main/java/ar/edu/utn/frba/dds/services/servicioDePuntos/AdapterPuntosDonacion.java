@@ -1,7 +1,6 @@
 package ar.edu.utn.frba.dds.services.servicioDePuntos;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /*public class AdapterPuntosDonacion implements IAdapterPuntosDonacion {

@@ -5,20 +5,14 @@ import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
 import ar.edu.utn.frba.dds.dtos.inputs.HeladeraInputDTO;
 import ar.edu.utn.frba.dds.dtos.outputs.HeladeraOutputDTO;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DonacionDinero;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.HacerseCargoDeHeladera;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.TipoColaboracion;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
-import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorMovimiento;
-import ar.edu.utn.frba.dds.models.entities.heladera.receptor.ReceptorTemperatura;
 import ar.edu.utn.frba.dds.models.entities.recomendacionPuntos.AServicioRecomendacionPuntos;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Calle;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Direccion;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.Georef;
 import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.GeorefService;
-import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
 import ar.edu.utn.frba.dds.services.HeladeraService;
@@ -34,10 +28,9 @@ import java.util.*;
 
 public class EncargarseHeladeraController extends BaseController implements ICrudViewsHandler {
 
-    private RepoDireccion repoDireccion = RepoDireccion.INSTANCE;
-    private RepoCalle repoCalle = RepoCalle.INSTANCE;
-    private UserService userService = new UserService();
-    private HeladeraService heladeraService = new HeladeraService();
+    private final UserService userService = new UserService();
+    private final HeladeraService heladeraService = new HeladeraService();
+
     @Override
     public void index(Context context) {
         Map<String, Object> model = new HashMap<>();
@@ -45,7 +38,7 @@ public class EncargarseHeladeraController extends BaseController implements ICru
         UsuarioDTO usuarioDTO = userService.obtenerUsuarioDTO(usuario);
         model.put("usuario", usuarioDTO);
         //Colaborador colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId()); // buscar(usuario.getId());
-        Colaborador colaborador = RepoColaborador.INSTANCE.buscarTodos().stream().filter(c -> c.getUsuario().getId() == usuario.getId()).findFirst().orElse(null);;
+        Colaborador colaborador = RepoColaborador.INSTANCE.buscarTodos().stream().filter(c -> Objects.equals(c.getUsuario().getId(), usuario.getId())).findFirst().orElse(null);
         //buscar todos lo colaborador y te quedas con el que tiene el mismo id de usuario
 
         List<HeladeraOutputDTO> heladeraOutputDTOS = new ArrayList<>();
@@ -74,7 +67,7 @@ public class EncargarseHeladeraController extends BaseController implements ICru
     @Override
     public void save(Context context) {
         Map<String, Object> model = new HashMap<>();
-        Usuario usuario = verificarJuridico(context,model);
+        Usuario usuario = verificarJuridico(context, model);
         HeladeraInputDTO heladeraInputDTO = new HeladeraInputDTO();
         heladeraInputDTO.setPiso(context.formParam("piso"));
         heladeraInputDTO.setCalle(context.formParam("calle"));
@@ -84,7 +77,7 @@ public class EncargarseHeladeraController extends BaseController implements ICru
         heladeraInputDTO.setAltura(context.formParam("altura"));
         heladeraInputDTO.setModelo(context.formParam("modelo"));
 
-        Heladera heladera=heladeraService.darDeAltaHeladera(heladeraInputDTO);
+        Heladera heladera = heladeraService.darDeAltaHeladera(heladeraInputDTO);
         Colaborador colaborador = RepoColaborador.INSTANCE.buscarPorIdUsuario(usuario.getId());
         HacerseCargoDeHeladera hacerseCargoDeHeladera = new HacerseCargoDeHeladera();
         hacerseCargoDeHeladera.setFechaColaboracion(new Date());
@@ -96,7 +89,6 @@ public class EncargarseHeladeraController extends BaseController implements ICru
         RepoColaborador.INSTANCE.modificar(colaborador);
         context.redirect("/encargarseHeladera");
     }
-
 
     public void searchPoints(Context context) throws IOException {
         String direccion = context.formParam("direccion");
@@ -112,9 +104,10 @@ public class EncargarseHeladeraController extends BaseController implements ICru
         AServicioRecomendacionPuntos aServicioRecomendacionPuntos = new AServicioRecomendacionPuntos();
         List<Coordenada> coordenadas = aServicioRecomendacionPuntos.recomendarPuntos(coordenada.getLongitud(), coordenada.getLatitud(), Integer.valueOf(radio));
 
-        Map<String, Object> model = new HashMap<>();
-        // TODO List<PuntoRecomendadoDTO> direcciones = georef.obtenerCallesPorCoordenadas(coordenadas);
-        // TODO model.put("direcciones", direcciones);
+        Map<String, Object> model;
+        model = new HashMap<>();
+        List<PuntoRecomendadoDTO> direcciones = georef.obtenerCallesPorCoordenadas(coordenadas);
+        model.put("direcciones", direcciones);
 
     }
 
@@ -140,6 +133,5 @@ public class EncargarseHeladeraController extends BaseController implements ICru
     @Override
     public void create(Context context) {
     }
-
 
 }

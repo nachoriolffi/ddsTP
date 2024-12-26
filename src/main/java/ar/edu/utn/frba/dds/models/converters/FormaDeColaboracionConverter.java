@@ -11,9 +11,9 @@ import javax.persistence.Converter;
 public class FormaDeColaboracionConverter implements AttributeConverter<TipoColaboracion, String> {
 
     @Override
-    public String convertToDatabaseColumn(TipoColaboracion attribute) {
-        if (attribute == null) return null;
-        return attribute.name();
+    public String convertToDatabaseColumn(TipoColaboracion tipoColaboracion) {
+        if (tipoColaboracion == null) return null;
+        return tipoColaboracion.name();
     }
 
     @Override

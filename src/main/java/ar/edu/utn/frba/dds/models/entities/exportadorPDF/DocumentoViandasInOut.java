@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.models.entities.exportadorPDF;
 
-import ar.edu.utn.frba.dds.models.entities.exportadorPDF.Exportable;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.RegistroApertura;
 import ar.edu.utn.frba.dds.models.entities.heladera.TipoSolicitud;
@@ -13,8 +12,7 @@ import java.util.Map;
 
 public class DocumentoViandasInOut implements Exportable {
 
-
-    private  Map<String, List<String>>  datos;
+    private final Map<String, List<String>> datos;
 
     private RepoHeladeras repoHeladeras;
 
@@ -28,6 +26,7 @@ public class DocumentoViandasInOut implements Exportable {
         return this.datos;
     }
 
+    @Override
     public void generarDocumento() {
 
         List<String> heladerasNombre = new ArrayList<String>();
@@ -36,11 +35,11 @@ public class DocumentoViandasInOut implements Exportable {
 
         List<Heladera> heladeras = repoHeladeras.INSTANCE.buscarTodos();
         // ya tengo las heladeras necesito los registros de aperturas
-        for(Heladera heladera : heladeras){
-            if(!heladera.getAperturas().isEmpty()) {
+        for (Heladera heladera : heladeras) {
+            if (!heladera.getAperturas().isEmpty()) {
                 heladerasNombre.add(heladera.getNombre());
                 ingresos.add(contarIngresos(heladera));
-                 retiros.add(contadorRetiros(heladera));
+                retiros.add(contadorRetiros(heladera));
             }
         }
 
@@ -48,21 +47,23 @@ public class DocumentoViandasInOut implements Exportable {
         datos.put("Cantidad Viandas Ingresadas", ingresos);
         datos.put("Cantidad Viandas Retiradas", retiros);
     }
-    public String contarIngresos (Heladera heladera){
+
+    public String contarIngresos(Heladera heladera) {
         int contador_Ingresos = 0;
-        for(RegistroApertura registro : heladera.getAperturas()){
-            if(registro.getSolicitud() == TipoSolicitud.DONACION_VIANDA ||
-                    (registro.getSolicitud() ==TipoSolicitud.REDISTRIBUCION_VIANDAS && (registro.getRetiroVianda()== Boolean.FALSE))){
-                contador_Ingresos+=registro.getViandas().size();
+        for (RegistroApertura registro : heladera.getAperturas()) {
+            if (registro.getSolicitud() == TipoSolicitud.DONACION_VIANDA
+                    || (registro.getSolicitud() == TipoSolicitud.REDISTRIBUCION_VIANDAS && (registro.getRetiroVianda() == Boolean.FALSE))) {
+                contador_Ingresos += registro.getViandas().size();
             }
         }
         return String.valueOf(contador_Ingresos);
     }
-    public String contadorRetiros(Heladera heladera){
-        int contadorRetiros =0;
-        for (int i =0; i < heladera.getAperturas().size();i++){
+
+    public String contadorRetiros(Heladera heladera) {
+        int contadorRetiros = 0;
+        for (int i = 0; i < heladera.getAperturas().size(); i++) {
             RegistroApertura apertura = heladera.getAperturas().get(i);
-            if (apertura.getSolicitud() == TipoSolicitud.REDISTRIBUCION_VIANDAS && apertura.getRetiroVianda() ){
+            if (apertura.getSolicitud() == TipoSolicitud.REDISTRIBUCION_VIANDAS && apertura.getRetiroVianda()) {
                 contadorRetiros += apertura.getViandas().size();
             }
         }

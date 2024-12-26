@@ -1,10 +1,6 @@
 package ar.edu.utn.frba.dds.models.entities.contacto;
-
-import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
-import ar.edu.utn.frba.dds.models.entities.contacto.Mensaje;
 import lombok.Getter;
 import lombok.Setter;
-
 import java.util.List;
 
 @Getter

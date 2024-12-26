@@ -1,10 +1,8 @@
 package ar.edu.utn.frba.dds.models.repositories.implementaciones;
 
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import java.util.List;
 

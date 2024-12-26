@@ -3,9 +3,7 @@ package ar.edu.utn.frba.dds.models.entities.ubicacionGeografica;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Setter
 @Getter

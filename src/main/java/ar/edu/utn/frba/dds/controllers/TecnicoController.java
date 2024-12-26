@@ -6,7 +6,7 @@ import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.AdapterCorreo;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.CorreoElectronico;
-import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioComunicacion;
 import ar.edu.utn.frba.dds.models.entities.distancias.CalculadorDistanciasTecnicoHeladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
@@ -83,7 +83,7 @@ public class TecnicoController extends BaseController implements ICrudViewsHandl
             //tecnico.agregarMedioDeComunicacion(MedioComunicacionFactory.createMedioDeComunicacion(contacto));
 
             //perdon mama por esto pero no me queda otra porq no voy a hacer un cambio por este enum no van a agregar un nuevo medio de contacto en la entrega
-            List<MedioDeComunicacion> mediosDeComunicacion = new ArrayList<>();
+            List<MedioComunicacion> mediosDeComunicacion = new ArrayList<>();
 
             if (contacto.equals("WPP") && telefono != null) {
                 Contacto contactoTelefono = new Contacto(TipoContacto.WPP, telefono);
@@ -113,7 +113,6 @@ public class TecnicoController extends BaseController implements ICrudViewsHandl
     @Override
     public void show(Context context) { // va a mostrar los incidentes del tecnico
         List<IncidenteOutputDTO> incidentesTecnicoDTO = new ArrayList<>();
-        List<Incidente> incidentesTecnico = new ArrayList<>();
         Map<String, Object> model = new HashMap<>();
         Usuario tecnico = verificarTecnico(context, model);
         List<Heladera> heladerasCercanas = CalculadorDistanciasTecnicoHeladera.getInstance().healderasCercanasATecnico(tecnico);

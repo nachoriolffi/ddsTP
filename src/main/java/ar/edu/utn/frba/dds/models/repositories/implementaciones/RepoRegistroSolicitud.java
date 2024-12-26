@@ -1,10 +1,9 @@
 package ar.edu.utn.frba.dds.models.repositories.implementaciones;
 
+import java.util.List;
+
 import ar.edu.utn.frba.dds.models.entities.heladera.RegistroSolicitud;
 import lombok.Getter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class RepoRegistroSolicitud extends RepoGenerico<RegistroSolicitud> {
 

@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.georef.responseClases;
 
-import ar.edu.utn.frba.dds.models.entities.ubicacionGeografica.Coordenada;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

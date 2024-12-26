@@ -1,12 +1,10 @@
 package ar.edu.utn.frba.dds.controllers;
 
 import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
-import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoColaborador;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoIncidente;
 import ar.edu.utn.frba.dds.services.UserService;
@@ -30,7 +28,7 @@ public class FallaTecnicaController extends BaseController implements ICrudViews
 
     private static final String UPLOAD_DIR = "src/main/resources/public/imagenes/";
     private final RepoIncidente repositorioIncidentes = RepoIncidente.INSTANCE;
-    private UserService userService = new UserService();
+    private final UserService userService = new UserService();
     public static Date convertToDate(String dateTimeString) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         LocalDateTime localDateTime = LocalDateTime.parse(dateTimeString, formatter);
@@ -46,23 +44,19 @@ public class FallaTecnicaController extends BaseController implements ICrudViews
         System.out.println(usuario.getApellido());
         System.out.println(usuario.getId());
         System.out.println(usuario.getCorreoElectronico());
-        if (usuario != null) {
-            model.put("title", "Reportar Falla Tecnica");
-            List<Heladera> heladeras = (List<Heladera>) RepoHeladeras.INSTANCE.buscarTodos().stream().filter(heladera -> heladera.getEstaActiva());
-            model.put("heladeras", heladeras);
-            UsuarioDTO usuarioDTO = userService.obtenerUsuarioDTO(usuario);
-            model.put("usuario", usuarioDTO);
-            context.render("FallaTecnica.hbs", model);
-        } else {
-            context.status(403);
-        }
+        model.put("title", "Reportar Falla Tecnica");
+        List<Heladera> heladeras = RepoHeladeras.INSTANCE.buscarTodos().stream().filter(heladera -> heladera.getEstaActiva()).toList();
+        model.put("heladeras", heladeras);
+        UsuarioDTO usuarioDTO = userService.obtenerUsuarioDTO(usuario);
+        model.put("usuario", usuarioDTO);
+        context.render("FallaTecnica.hbs", model);
     }
 
     @Override
     public void save(Context context) {
         Incidente nuevoIncidente = new Incidente();
         String id = context.formParam("heladeraAveriada");
-        Long idLong = Long.parseLong(id);
+        Long idLong = Long.valueOf(id);
         Heladera heladera = RepoHeladeras.INSTANCE.buscar(idLong);
         nuevoIncidente.setHeladera(heladera);
         nuevoIncidente.setTipoIncidente(FALLA);
@@ -79,7 +73,6 @@ public class FallaTecnicaController extends BaseController implements ICrudViews
                 Files.write(Paths.get(filePath), uploadedFile.content().readAllBytes());
                 nuevoIncidente.setPathFoto(filePath);
             } catch (IOException e) {
-                e.printStackTrace();
                 context.status(500).result("File upload failed: " + e.getMessage());
                 return;
             }

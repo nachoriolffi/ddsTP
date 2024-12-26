@@ -9,7 +9,7 @@ import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.factoryFormas
 import ar.edu.utn.frba.dds.models.entities.contacto.Contacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.CorreoElectronico;
-import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioComunicacion;
 import ar.edu.utn.frba.dds.models.entities.contacto.correo.ServicioMail;
 import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
@@ -73,15 +73,15 @@ public class LectorColaborador extends LectorDeCSV {
                 Colaborador colaborador = new Colaborador(numeroDocumento, tipoDocumento, nombre, apellido, null);
                 colaborador.setFueCargaMasiva(true);
                 colaborador.setUsuario(usuario);
-                MedioDeComunicacion medioDeComunicacion = new CorreoElectronico();
+                MedioComunicacion medioComunicacion = new CorreoElectronico();
                 Contacto contactoCola = new Contacto();
                 contactoCola.setDescripcion(contacto);
                 contactoCola.setTipoContacto(TipoContacto.MAIL);
                 List<Contacto> setContactos = new ArrayList<>();
                 setContactos.add(contactoCola);
-                List<MedioDeComunicacion> medioDeComunicaciones = new ArrayList<>();
-                medioDeComunicaciones.add(medioDeComunicacion);
-                colaborador.setMediosDeComunicacion(medioDeComunicaciones);
+                List<MedioComunicacion> medioComunicaciones = new ArrayList<>();
+                medioComunicaciones.add(medioComunicacion);
+                colaborador.setMediosDeComunicacion(medioComunicaciones);
                 colaborador.setContacto(setContactos);
                 colaborador.setTipoPersona(TipoPersona.HUMANA);
                 colaboradorLeido.add(colaborador);

@@ -1,9 +1,7 @@
 package ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.factoryFormasDeColoaboracion;
 
-import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DonacionDinero;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.DonacionVianda;
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.FormaDeColaboracion;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoDonacionDinero;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoDonacionVianda;
 
 import java.util.Date;

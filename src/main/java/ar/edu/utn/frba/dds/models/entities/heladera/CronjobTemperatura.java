@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.models.entities.heladera;
 
-import ar.edu.utn.frba.dds.models.entities.broker.Broker;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.registro.RegistroTemperatura;
@@ -21,8 +20,6 @@ public class CronjobTemperatura {
     public void ejecutarTemperatura() {
 
         System.out.println("Ejecutando cronjob de temperatura");
-
-        RepoHeladeras repoHeladeras = RepoHeladeras.INSTANCE;
 
         List<Heladera> todasLasHeladeras = RepoHeladeras.INSTANCE.buscarTodos();
 

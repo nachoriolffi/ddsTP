@@ -1,8 +1,6 @@
 package ar.edu.utn.frba.dds.models.entities.exportadorPDF;
 
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoReporte;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 

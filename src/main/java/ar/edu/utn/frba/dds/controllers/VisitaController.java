@@ -3,7 +3,7 @@ package ar.edu.utn.frba.dds.controllers;
 import ar.edu.utn.frba.dds.dtos.UsuarioDTO;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
-import ar.edu.utn.frba.dds.models.entities.tecnico.RegistroVisita;
+import ar.edu.utn.frba.dds.models.entities.tecnico.RegistroIncidente;
 import ar.edu.utn.frba.dds.models.entities.tecnico.Tecnico;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoHeladeras;
@@ -17,12 +17,10 @@ import io.javalin.http.UploadedFile;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 public class VisitaController extends BaseController implements ICrudViewsHandler {
 
@@ -33,15 +31,12 @@ public class VisitaController extends BaseController implements ICrudViewsHandle
         //vamos a la visa para la carga de la visita necesitamos el id del incidente y el id del tecnico que lo tenemos en la sesion
         Map<String, Object> model = new HashMap<>();
         Usuario usuario = verificarSesion(context,model);
-
-        Tecnico tecnico = RepoTecnico.INSTANCE.buscarPorUsuario(usuario.getId());
         UsuarioDTO usuarioDTO = userService.obtenerUsuarioDTO(usuario);
         model.put("usuario", usuarioDTO);
         // ya conozco al tecnico ahora necesito el incidenteç
         String incidenteIdStr = context.queryParam("id");
-        String id = context.formParam("id");
 
-        Incidente incidente = RepoIncidente.INSTANCE.buscar(Long.parseLong( incidenteIdStr));
+        Incidente incidente = RepoIncidente.INSTANCE.buscar(Long.valueOf( incidenteIdStr));
 
         model.put("incidente", incidente);
 
@@ -69,13 +64,13 @@ public class VisitaController extends BaseController implements ICrudViewsHandle
             return;
         }
 
-        Long incidenteId = Long.parseLong(incidenteIdStr);
+        Long incidenteId = Long.valueOf(incidenteIdStr);
         Incidente incidente = RepoIncidente.INSTANCE.buscar(incidenteId);
 
-        RegistroVisita registroVisita = new RegistroVisita();
-        registroVisita.setTecnico(tecnico);
-        registroVisita.setIncidenteASolucionar(incidente);
-        registroVisita.setDescripcion(context.formParam("descripcion"));
+        RegistroIncidente registroIncidente = new RegistroIncidente();
+        registroIncidente.setTecnico(tecnico);
+        registroIncidente.setIncidenteASolucionar(incidente);
+        registroIncidente.setDescripcion(context.formParam("descripcion"));
 
         // Handle file upload
         UploadedFile uploadedFile = context.uploadedFile("pathFoto");
@@ -85,9 +80,8 @@ public class VisitaController extends BaseController implements ICrudViewsHandle
             try {
                 Files.createDirectories(Paths.get(UPLOAD_DIR));
                 Files.write(Paths.get(filePath), uploadedFile.content().readAllBytes());
-                registroVisita.setPathFoto(filePath);
+                registroIncidente.setPathFoto(filePath);
             } catch (IOException e) {
-                e.printStackTrace();
                 context.status(500).result("File upload failed: " + e.getMessage());
                 return;
             }
@@ -96,8 +90,8 @@ public class VisitaController extends BaseController implements ICrudViewsHandle
 
 
         Boolean solucionado = "true".equals(context.formParam("problemaSolucionado"));
-        registroVisita.setProblemaSolucionado(solucionado);
-        registroVisita.setFechaVisita(new java.util.Date());
+        registroIncidente.setProblemaSolucionado(solucionado);
+        registroIncidente.setFechaVisita(new java.util.Date());
 
         if (solucionado) {
             Heladera heladera = incidente.getHeladera();
@@ -109,7 +103,7 @@ public class VisitaController extends BaseController implements ICrudViewsHandle
 
 
 
-        RepoRegistrosVisita.INSTANCE.agregar(registroVisita);
+        RepoRegistrosVisita.INSTANCE.agregar(registroIncidente);
 
         context.redirect("/IncidentesTecnico");
     }

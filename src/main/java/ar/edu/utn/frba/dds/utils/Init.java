@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.dds.utils;
 
+import java.util.List;
+
 import ar.edu.utn.frba.dds.models.entities.colaborador.formasColab.RubroColaborador;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Cuestionario;
 import ar.edu.utn.frba.dds.models.entities.cuestionario.Opcion;
@@ -8,12 +10,13 @@ import ar.edu.utn.frba.dds.models.entities.cuestionario.TipoPregunta;
 import ar.edu.utn.frba.dds.models.entities.generadorCodigo.GeneradorDeCodigo;
 import ar.edu.utn.frba.dds.models.entities.heladera.ModeloHeladera;
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
-import ar.edu.utn.frba.dds.models.entities.usuario.TipoRol;
-import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
-import ar.edu.utn.frba.dds.models.repositories.implementaciones.*;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoCuestionario;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoModelo;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoOpcion;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoPregunta;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRubroColaborador;
+import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoTarjeta;
 import io.github.flbulgarelli.jpa.extras.simple.WithSimplePersistenceUnit;
-
-import java.util.List;
 
 public class Init implements WithSimplePersistenceUnit {
 
@@ -71,9 +74,9 @@ public class Init implements WithSimplePersistenceUnit {
 
         /*--------------CUESTIONARIOS--------------*/
 
-        RepoPregunta repoPregunta = RepoPregunta.INSTANCE;
-        RepoCuestionario repoCuestionario = RepoCuestionario.INSTANCE;
-        RepoOpcion repoOpcion = RepoOpcion.INSTANCE;
+        //RepoPregunta repoPregunta = RepoPregunta.INSTANCE;
+        //RepoCuestionario repoCuestionario = RepoCuestionario.INSTANCE;
+        //RepoOpcion repoOpcion = RepoOpcion.INSTANCE;
 
         Cuestionario cuestionario1 = new Cuestionario();
         Pregunta nombrePregunta = new Pregunta();

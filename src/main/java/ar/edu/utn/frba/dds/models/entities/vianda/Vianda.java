@@ -1,11 +1,13 @@
 package ar.edu.utn.frba.dds.models.entities.vianda;
 
+import ar.edu.utn.frba.dds.models.converters.LocalDateConverter;
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Getter
@@ -15,17 +17,19 @@ import java.util.Date;
 public class Vianda {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
-    @Column(name = "comida", columnDefinition = "VARCHAR (255)")
+    @Column(name = "comida")
     private String comida;
 
+    @Convert(converter = LocalDateConverter.class)
     @Column(name = "fechaCaducidad")
-    private Date fechaCaducidad;
+    private LocalDate fechaCaducidad;
 
+    @Convert(converter = LocalDateConverter.class)
     @Column(name = "fechaDonacion")
-    private Date fechaDonacion;
+    private LocalDate fechaDonacion;
 
     @ManyToOne
     @JoinColumn(name = "colaborador_id")
@@ -46,16 +50,5 @@ public class Vianda {
 
     public Vianda() {
 
-    }
-
-    public Vianda(Date fechaCaducidad, Date fechaDonacion) {
-        this.fechaCaducidad = fechaCaducidad;
-        this.fechaDonacion = fechaDonacion;
-    }
-
-    public Vianda(String comida, Colaborador colaborador, Boolean fueEntregada) {
-        this.comida = comida;
-        this.colaborador = colaborador;
-        this.fueEntregada = fueEntregada;
     }
 }

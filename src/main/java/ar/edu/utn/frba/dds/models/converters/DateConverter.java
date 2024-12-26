@@ -1,5 +1,7 @@
 package ar.edu.utn.frba.dds.models.converters;
 
+import ar.edu.utn.frba.dds.utils.Constant;
+
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import java.text.ParseException;
@@ -9,8 +11,7 @@ import java.util.Date;
 @Converter(autoApply = true)
 public class DateConverter implements AttributeConverter<Date, String> {
 
-    private static final String DATE_FORMAT = "yyyy-MM-dd";
-    private static final SimpleDateFormat formatter = new SimpleDateFormat(DATE_FORMAT);
+    private static final SimpleDateFormat formatter = new SimpleDateFormat(Constant.DATE_FORMAT);
 
     @Override
     public String convertToDatabaseColumn(Date date) {

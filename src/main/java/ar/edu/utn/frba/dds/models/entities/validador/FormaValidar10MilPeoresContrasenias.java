@@ -2,12 +2,9 @@ package ar.edu.utn.frba.dds.models.entities.validador;
 
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -29,7 +26,8 @@ public class FormaValidar10MilPeoresContrasenias implements FormaValidar {
             throw new RuntimeException("Error cargando contraseñas comunes: " + e.getMessage(), e);
         }
     }
-
+    
+    @Override
     public boolean validar(String contrasenia, Usuario usuario) {
         // Realizar búsqueda binaria para mayor eficiencia en listas ordenadas
         return !contrasenias.contains(contrasenia); // Cambiar a binarySearch si deseas más eficiencia

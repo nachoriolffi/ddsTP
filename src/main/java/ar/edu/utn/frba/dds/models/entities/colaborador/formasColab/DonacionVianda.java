@@ -7,12 +7,14 @@ import ar.edu.utn.frba.dds.models.entities.multiplicador.config.ConfiguracionMul
 import ar.edu.utn.frba.dds.models.entities.tarjeta.Tarjeta;
 import ar.edu.utn.frba.dds.models.entities.vianda.Vianda;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @Table(name = "donacion_vianda")

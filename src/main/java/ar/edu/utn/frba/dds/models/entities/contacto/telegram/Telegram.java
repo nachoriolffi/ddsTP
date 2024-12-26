@@ -1,12 +1,11 @@
 package ar.edu.utn.frba.dds.models.entities.contacto.telegram;
 
-import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
 import ar.edu.utn.frba.dds.models.entities.contacto.Mensaje;
 import ar.edu.utn.frba.dds.models.entities.contacto.Notificacion;
 import ar.edu.utn.frba.dds.models.entities.contacto.TipoContacto;
-import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioDeComunicacion;
+import ar.edu.utn.frba.dds.models.entities.contacto.correo.MedioComunicacion;
 
-public class Telegram extends Mensaje implements MedioDeComunicacion {
+public class Telegram extends Mensaje implements MedioComunicacion {
 
     private IAdapterTelegram adapterTelegram;
 

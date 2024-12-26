@@ -1,11 +1,9 @@
 package ar.edu.utn.frba.dds.models.repositories.implementaciones;
 
 import ar.edu.utn.frba.dds.models.entities.colaborador.Colaborador;
-import ar.edu.utn.frba.dds.models.entities.cuestionario.Respuesta;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.suscripcion.ObserverColaborador;
 import ar.edu.utn.frba.dds.models.entities.usuario.Usuario;
-
 import javax.persistence.TypedQuery;
 import java.util.List;
 

@@ -1,9 +1,6 @@
 package ar.edu.utn.frba.dds.models.entities.ubicacionGeografica;
 
-import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "local")

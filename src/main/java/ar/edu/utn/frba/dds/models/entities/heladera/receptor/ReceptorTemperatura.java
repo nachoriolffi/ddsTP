@@ -1,6 +1,5 @@
 package ar.edu.utn.frba.dds.models.entities.heladera.receptor;
 
-import ar.edu.utn.frba.dds.models.entities.broker.Broker;
 import ar.edu.utn.frba.dds.models.entities.heladera.Heladera;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.Incidente;
 import ar.edu.utn.frba.dds.models.entities.heladera.alerta.TipoAlerta;
@@ -12,8 +11,6 @@ import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoReceptorTemp
 import ar.edu.utn.frba.dds.models.repositories.implementaciones.RepoRegistroTemperatura;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.mapping.Join;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
